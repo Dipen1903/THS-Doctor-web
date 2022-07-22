@@ -42,7 +42,7 @@ function Setuppayment() {
      <img src="" alt="" />
      <div class="row text-center">
        <div class="col-md-12">
-      <center> <img src={require('../Assets/img/img_skip.png')} alt="Avatar" class="avatar3 mt_60"></img></center>
+      <center> <img src={require('../Assets/img/img_skip.png')} alt="Avatar" class="avatar3 mt_60 mb_30"></img></center>
          <h4 class="welcome-text mt_20 joincommnity">
          Join THS's Growing Doctors Community
          </h4>
@@ -51,15 +51,15 @@ function Setuppayment() {
      <div className="row mt_10">
        <div className="col-md-12">
          <center>
-           <h3 className="medical-text text-danger pleasefill">
+           <h3 className="medical-text  pleasefill">
            Please fill out your profile and verify your
            identity before starting. Thanks!
            </h3>
-           <h3 className="profile-bottom-text mt_10">
+           <h3 className="profile-bottom-text mt_10 mb_30">
              Once profile verificatin completed, you will get online
              consultaion requests.
            </h3>
-           <button class="profile_btn mt_10 mb_100">Set up Schedule & Payment</button>
+           <button class="profile_btn mt_30 mb_100">Set up Schedule & Payment</button>
          </center>
        </div>
      </div>

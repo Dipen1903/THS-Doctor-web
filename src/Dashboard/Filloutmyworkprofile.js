@@ -51,7 +51,7 @@ function Filloutmyworkprofile() {
      <div className="row mt_10">
        <div className="col-md-12">
          <center>
-           <h3 className="medical-text text-danger pleasefill">
+           <h3 className="medical-text  pleasefill">
            Please fill out your profile and verify your
            identity before starting. Thanks!
            </h3>

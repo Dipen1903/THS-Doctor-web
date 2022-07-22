@@ -1,9 +1,6 @@
 import React from "react";
 import "../Assets/css/style.css";
-<<<<<<< Updated upstream
-=======
 import "../Assets/css/responsive.css";
->>>>>>> Stashed changes
 import "../Assets/js/main.js";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';

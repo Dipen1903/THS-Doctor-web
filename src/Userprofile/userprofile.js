@@ -1,9 +1,6 @@
 import React from "react";
 import "../Assets/css/style.css";
-<<<<<<< Updated upstream
-=======
 import "../Assets/css/responsive.css";
->>>>>>> Stashed changes
 import "../Assets/js/main.js";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -16,13 +13,9 @@ import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import ProgressBar from '../Components/Progress bar/Progress_bar';
 import Modal from 'react-bootstrap/Modal';
-<<<<<<< Updated upstream
-import {Formik} from "formik"
-=======
 import {Formik} from "formik";
 
 
->>>>>>> Stashed changes
 export default function UserProfile(){
 
   const [modalShow, setModalShow] = useState(false);
@@ -95,28 +88,17 @@ export default function UserProfile(){
                         gender:"",
                         // date:Date.now()
                       }}
-<<<<<<< Updated upstream
-onSubmit={values=>{console.log("values",values)}}
-=======
                       onSubmit={values=>{console.log("values",values)}}
->>>>>>> Stashed changes
                       >
                       {({values,setFieldValue,handleSubmit})=>(
                          <form onSubmit={handleSubmit} id="myForm">
                           <div class="row">
                             <div class="col-md-3">
                               <center>
-<<<<<<< Updated upstream
-                                <img src={require('../Assets/img/profile.png')}></img>
-                              </center>
-                            </div>
-                            <div class="col-md-8">
-=======
                                 <img src={require('../Assets/img/profile.png')} class="upload_avatar_img"></img>
                               </center>
                             </div>
                             <div class="col-md-9">
->>>>>>> Stashed changes
                               <div class="wrapper">
                                 <label htmlFor="">
                                   <Button variant="contained" className="upload_avatar_btn">Upload Your Avatar</Button>                                  
@@ -129,11 +111,7 @@ onSubmit={values=>{console.log("values",values)}}
                           </div>
                           <div class="row mt_20">
                             <div class="col-md-12">
-<<<<<<< Updated upstream
-                              <label className="sign_title">Birthday</label>
-=======
                               <label className="sign_title form-label">Birthday</label>
->>>>>>> Stashed changes
                               <div class="input_box">
                                 <div class="form_group">
                                   <input type="date" name="date" placeholder="" required />

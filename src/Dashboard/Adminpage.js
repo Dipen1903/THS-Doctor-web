@@ -46,7 +46,7 @@ function Adminpage() {
           <div className="row mt_20"> 
             <div className="col-md-12">
               <center>
-                <h3 className="medical-text mt_21">
+                <h3 className="medical-text mt_20">
                   Our Medical Expert will check and confirm
                   <br />
                   about your profile within 2-3 business days.
