@@ -1,5 +1,9 @@
 import React from "react";
 import "../Assets/css/style.css";
+<<<<<<< Updated upstream
+=======
+import "../Assets/css/responsive.css";
+>>>>>>> Stashed changes
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import OwlCarousel from 'react-owl-carousel';
@@ -74,7 +78,11 @@ export default function SignUp(){
                       <div class="signin_box">
                         <Form>
                         	<div class="row">
+<<<<<<< Updated upstream
                         		<div class="col-md-6">
+=======
+                        		<div class="col-md-6 mt_20">
+>>>>>>> Stashed changes
                         			<label className="sign_title">First Name</label>
                               <div class="input_box">
                                 <div class="form_group">
@@ -82,7 +90,11 @@ export default function SignUp(){
                                 </div>
                               </div>
                         		</div>
+<<<<<<< Updated upstream
                         		<div class="col-md-6">
+=======
+                        		<div class="col-md-6 mt_20">
+>>>>>>> Stashed changes
                         			<label className="sign_title">Last Name</label>
                               <div class="input_box">
                                 <div class="form_group">

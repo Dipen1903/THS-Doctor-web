@@ -1,5 +1,9 @@
 import React from "react";
 import "../Assets/css/style.css";
+<<<<<<< Updated upstream
+=======
+import "../Assets/css/responsive.css";
+>>>>>>> Stashed changes
 import "../Assets/js/main.js";
 import "../Assets/js/slider_js.js";
 import Button from 'react-bootstrap/Button';
@@ -80,10 +84,17 @@ function SignIn() {
                           </div>
                         </Form>
                         <div className="row mt_30">
+<<<<<<< Updated upstream
                           <div className="col-md-6">
                             <a href="#" className="login_with_otp">Login with OTP</a>
                           </div>
                           <div className="col-md-6">
+=======
+                          <div className="col-md-6 col-6">
+                            <a href="#" className="login_with_otp">Login with OTP</a>
+                          </div>
+                          <div className="col-md-6 col-6">
+>>>>>>> Stashed changes
                             <a href="#" className="forgot_password">Forgot Password?</a>
                           </div>
                         </div>

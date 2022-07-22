@@ -1,0 +1,504 @@
+/*-------------------------------------------Mobile Media Query Start-----------------------------------------------------------------*/
+@media only screen and (min-width:320px) and (max-width: 374px)
+{
+}
+@media only screen and (min-width:375px) and (max-width: 405px)
+{
+  .sub_section_1 {
+    background: #fff;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    position: relative;
+    width: 100%;
+    float: left;
+  }
+  .sub_section_2 {
+    width: 100%;
+    float: right;
+    background: #F8FBFF;
+    border-radius: 60px 0px 0px 60px;
+  }
+  .logo_box {
+    padding: 50px 0 20px 0px;
+    margin-left: -10px;
+  }
+  .slider_1 {
+    padding: 40px 30px 40px 30px;
+  }
+  .login_box {
+    padding: 50px 30px;
+  }
+  .logo_title {
+    font-family: Mulish;
+    font-Weight: 800;
+    font-size: 24px;
+    color: #1D1929;
+    text-align: left;
+  }
+  .login_with_otp {
+    font-family: Mulish;
+    font-size: 13px;
+    color: #3093BB;
+    margin-top: 20px;
+    font-weight: 600;
+  }
+  .forgot_password {
+    font-family: Mulish;
+    font-size: 13px;
+    color: #3093BB;
+    margin-top: 0px;
+    font-weight: 600;
+    float: right;
+  }
+  .slider_text {
+    font-family: Mulish;
+    font-Weight: 800;
+    font-size: 17px;
+    color: #1E1F20;
+    line-height: 24px;
+  }
+  .by_clicking {
+    font-family: Mulish;
+    font-Weight: 600;
+    font-size: 12px;
+    color: #000;
+    line-height: 24px;
+    text-align: center;
+  }
+  .basic_info_box {
+    padding: 50px 30px;
+  }
+  .progress_box {
+    border: 1px dashed #24B2B2;
+    border-radius: 10px;
+    padding: 2px 0px 2px 5px;
+    width: -webkit-fill-available;
+  }
+  .profile_milestone {
+    font-family: 'Mulish';
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 24px;
+    margin-bottom: 10px;
+    margin-top: 5px;
+  }
+  .progress {
+    width: 82%;
+    background: #eee;
+    min-height: 1px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    margin-bottom: 20px;
+  }
+  .progress-info {
+    width: 30px;
+    padding-left: 10px;
+    font-family: 'Mulish';
+    font-weight: 600;
+    font-size: 14px;
+    color: #F8446C;
+    margin-top: -19px;
+    padding-top: 0;
+  }
+  .upload_avatar_img {
+    width: 50%;
+    margin-bottom: 20px;
+  }
+  .attach_certificate {
+    font-family: 'Mulish';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 24px;
+    text-align: center;
+    color: #FFFFFF;
+    background: #24B2B2;
+    border-radius: 12px;
+    padding: 15px 30px;
+    border: none;
+    width: 100%;
+  }
+  .id_proof_doc {
+    font-family: 'Mulish';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 26px;
+    color: #1E1F20;
+  }
+}
+@media only screen and (min-width:406px) and (max-width: 459px)
+{
+  .sub_section_1 {
+    background: #fff;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    position: relative;
+    width: 100%;
+    float: left;
+  }
+  .sub_section_2 {
+    width: 100%;
+    float: right;
+    background: #F8FBFF;
+    border-radius: 60px 0px 0px 60px;
+  }
+  .logo_box {
+    padding: 50px 0 20px 20px;
+    margin-left: -10px;
+  }
+  .slider_1 {
+    padding: 40px 30px 40px 30px;
+  }
+  .login_box {
+    padding: 50px 30px;
+  }
+  .logo_title {
+    font-family: Mulish;
+    font-Weight: 800;
+    font-size: 24px;
+    color: #1D1929;
+    text-align: left;
+  }
+  .login_with_otp {
+    font-family: Mulish;
+    font-size: 13px;
+    color: #3093BB;
+    margin-top: 20px;
+    font-weight: 600;
+  }
+  .forgot_password {
+    font-family: Mulish;
+    font-size: 13px;
+    color: #3093BB;
+    margin-top: 0px;
+    font-weight: 600;
+    float: right;
+  }
+  .slider_text {
+    font-family: Mulish;
+    font-Weight: 800;
+    font-size: 17px;
+    color: #1E1F20;
+    line-height: 27px;
+  }
+}
+@media only screen and (min-width: 460px) and (max-width: 540px)
+{
+  .sub_section_1 {
+    background: #fff;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    position: relative;
+    width: 100%;
+    float: left;
+  }
+  .sub_section_2 {
+    width: 100%;
+    float: right;
+    background: #F8FBFF;
+    border-radius: 60px 0px 0px 60px;
+  }
+  .logo_box {
+    padding: 50px 0 20px 0px;
+    margin-left: -10px;
+  }
+  .slider_1 {
+    padding: 40px 30px 40px 30px;
+  }
+  .login_box {
+    padding: 50px 30px;
+  }
+  .logo_title {
+    font-family: Mulish;
+    font-Weight: 800;
+    font-size: 24px;
+    color: #1D1929;
+    text-align: left;
+  }
+  .login_with_otp {
+    font-family: Mulish;
+    font-size: 13px;
+    color: #3093BB;
+    margin-top: 20px;
+    font-weight: 600;
+  }
+  .forgot_password {
+    font-family: Mulish;
+    font-size: 13px;
+    color: #3093BB;
+    margin-top: 0px;
+    font-weight: 600;
+    float: right;
+  }
+}
+@media only screen and (min-width: 541px)  and (max-width: 767px)
+{
+  .sub_section_1 {
+    background: #fff;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    position: relative;
+    width: 100%;
+    float: left;
+  }
+  .sub_section_2 {
+    width: 100%;
+    float: right;
+    background: #F8FBFF;
+    border-radius: 60px 0px 0px 60px;
+  }
+  .logo_box {
+    padding: 50px 0 20px 0px;
+    margin-left: -10px;
+  }
+  .slider_1 {
+    padding: 40px 30px 40px 30px;
+  }
+  .login_box {
+    padding: 50px 30px;
+  }
+  .logo_title {
+    font-family: Mulish;
+    font-Weight: 800;
+    font-size: 24px;
+    color: #1D1929;
+    text-align: left;
+  }
+  .login_with_otp {
+    font-family: Mulish;
+    font-size: 13px;
+    color: #3093BB;
+    margin-top: 20px;
+    font-weight: 600;
+  }
+  .forgot_password {
+    font-family: Mulish;
+    font-size: 13px;
+    color: #3093BB;
+    margin-top: 0px;
+    font-weight: 600;
+    float: right;
+  }
+}
+/*-----------------------------------------------Mobile Media Query End---------------------------------------------------------------*/
+/*-----------------------------------------------Desktop and Laptop Media Query Start-------------------------------------------------------------*/
+@media only screen and (min-width: 768px)  and (max-width: 870px)
+{
+}
+@media only screen and (min-width: 871px)  and (max-width: 991px)
+{
+}
+@media only screen and (min-width: 992px) and (max-width:1199px)
+{
+}
+@media only screen and (min-width: 1200px) and (max-width:1359px)
+{
+}
+@media only screen and (min-width: 1360px)  and (max-width: 1440px)
+{
+  .login_box {
+    padding: 113px 115px;
+  }
+  .basic_info_box {
+    padding: 75px 115px;
+  }
+  .upload_avatar_subtitle {
+    font-family: 'Mulish';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 22px;
+    color: #9393AA;
+    margin-top: 10px;
+  }
+  .progress_bar_subtext{
+    font-family: 'Mulish';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 11px;
+    line-height: 12px;
+    color: #9393AA;
+    margin-bottom: 13px;
+  }
+  .progress-info {
+    width: 30px;
+    padding-left: 20px;
+    font-family: 'Mulish';
+    font-weight: 600;
+    font-size: 16px;
+    color: #F8446C;
+    margin-top: 10px;
+    padding-top: 5px;
+  }
+  .profile_milestone {
+    font-family: 'Mulish';
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 24px;
+    margin-bottom: 0;
+    margin-top: 10px;
+    position: absolute;
+    margin-left: -8px;
+  }
+}
+@media only screen and (min-width: 1441px)  and (max-width: 1600px)
+{ 
+  .login_box {
+    padding: 113px 115px;
+  }
+  .basic_info_box {
+    padding: 75px 115px;
+  }
+}
+@media only screen and (min-width: 1601px)  and (max-width: 1919px)
+{
+  .login_box {
+    padding: 113px 115px;
+  }
+  .basic_info_box {
+    padding: 75px 115px;
+  }
+}
+@media only screen and (min-width: 1920px)  and (max-width:2020px)
+{
+}
+@media only screen and (min-width: 2021px)  and (max-width:2100px)
+{
+  .login_box {
+    padding: 113px 115px;
+  }
+  .basic_info_box {
+    padding: 75px 115px;
+  }
+}
+@media only screen and (min-width: 2101px)  and (max-width:2200px)
+{
+}
+@media only screen and (min-width: 2201px)  and (max-width:2300px)
+{
+}
+@media only screen and (min-width: 2301px)  and (max-width:2400px)
+{
+
+}
+@media only screen and (min-width: 2401px)  and (max-width:2560px)
+{
+}
+@media only screen and (min-width: 2561px)  and (max-width: 2660px)
+{
+}
+@media only screen and (min-width: 2661px)  and (max-width:2800px)
+{
+}
+/*-------------------------------remaining---------------------------------------*/
+@media only screen and (min-width: 2801px)  and (max-width:3000px)
+{
+}
+@media only screen and (min-width: 3001px)  and (max-width:3300px)
+{
+}
+@media only screen and (min-width: 3301px)  and (max-width:3500px)
+{
+}
+@media only screen and (min-width: 3501px)  and (max-width:3700px)
+{
+}
+@media only screen and (min-width: 3701px)  and (max-width:3900px)
+{
+}
+@media only screen and (min-width: 3901px)  and (max-width:4100px)
+{
+}
+@media only screen and (min-width: 4101px)  and (max-width:4200px)
+{
+}
+@media only screen and (min-width: 4201px)  and (max-width:4300px)
+{
+}
+@media only screen and (min-width: 4301px)  and (max-width:4400px)
+{
+}
+
+/*--------------------------------------------------------------------------------------------------*/
+@media only screen and (min-width: 4401px)  and (max-width:4500px)
+{
+}
+@media only screen and (min-width: 4501px)  and (max-width:4600px)
+{
+}
+@media only screen and (min-width: 4601px)  and (max-width:4700px)
+{
+}
+@media only screen and (min-width: 4701px)  and (max-width:4800px)
+{
+}
+@media only screen and (min-width: 4801px)  and (max-width:4900px)
+{
+}
+@media only screen and (min-width: 4901px)  and (max-width:5000px)
+{
+}
+@media only screen and (min-width: 5001px)  and (max-width:5400px)
+{
+}
+@media only screen and (min-width: 5401px)  and (max-width:5600px)
+{
+}
+@media only screen and (min-width: 5601px)  and (max-width:5800px)
+{
+}
+@media only screen and (min-width: 5801px)  and (max-width:6000px)
+{
+}
+@media only screen and (min-width: 6001px)  and (max-width:6200px)
+{
+}
+@media only screen and (min-width: 6201px)  and (max-width:6400px)
+{
+}
+@media only screen and (min-width: 6401px)  and (max-width:6600px)
+{
+}
+@media only screen and (min-width: 6601px)  and (max-width:6800px)
+{
+}
+@media only screen and (min-width: 6801px)  and (max-width:7000px)
+{
+}
+@media only screen and (min-width: 7001px)  and (max-width:7200px)
+{
+}
+@media only screen and (min-width: 7201px)  and (max-width:7400px)
+{
+}
+@media only screen and (min-width: 7401px)  and (max-width:7600px)
+{
+}
+@media only screen and (min-width: 7601px)  and (max-width:7800px)
+{
+}
+/*@media only screen and (min-width: 7801px)  and (max-width:8000px)
+{
+}
+@media only screen and (min-width: 8001px)  and (max-width:8200px)
+{
+}
+@media only screen and (min-width: 8201px)  and (max-width:8400px)
+{
+}
+@media only screen and (min-width: 8401px)  and (max-width:8600px)
+{
+}
+@media only screen and (min-width: 8601px)  and (max-width:8800px)
+{
+}
+@media only screen and (min-width: 8801px)  and (max-width:9000px)
+{
+}*/
+/*------------------------------------------------Desktop and Laptop Media Query End-------------------------------------------------------------*/
