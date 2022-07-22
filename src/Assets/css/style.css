@@ -1721,7 +1721,7 @@ input:checked + .slider:before {
   font-weight: 400;
   font-size: 15px;
   line-height: 24px;
-  color: #F8446C;
+  color: #f8446c;
 }
 .profile-bottom-text {
   font-family: "Mulish", sans-serif;
@@ -1757,7 +1757,6 @@ input:checked + .slider:before {
   border: none;
   border-radius: 12px;
   color: #fff;
-  margin-top: 50px;
 }
 
 /*---------------------------------------------Admin Body Css End---------------------------------------------*/
@@ -1799,4 +1798,35 @@ input:checked + .slider:before {
   height: 34px;
 }
 
-/*---------------------------------------------Admin Body Css End---------------------------------------------*/
+.tablehead {
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 24px;
+  color: #9393aa;
+}
+
+.tablebody {
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 24px;
+  color: #1e1f20;
+}
+
+.Tabs .nav {
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 32px;
+  color: #9393aa;
+}
+.Tabs .nav {
+  display: flex;
+  gap: 20px;
+}
+
+.Tabs li.active {
+   color: #24B2B2;
+   border-bottom: 2px solid #24B2B2;
+}
+.eye{
+  color: #007bed;
+}

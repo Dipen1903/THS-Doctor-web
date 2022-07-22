@@ -59,7 +59,7 @@ function Filloutmyworkprofile() {
              Once profile verificatin completed, you will get online
              consultaion requests.
            </h3>
-           <button class="profile_btn mt_10 mb_100">Fill Out My Profile</button>
+           <button class="profile_btn mb_40">Fill Out My Profile</button>
          </center>
        </div>
      </div>

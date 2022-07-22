@@ -286,6 +286,28 @@
     float: right;
   }
 }
+
+@media (max-width: 767px) {
+  .dashboard {
+    padding: 0px 30px !important;
+  }
+
+  .admin-bottom-content img {
+    margin-top: 30px;
+  }
+
+  .admin-bottom-content {
+    max-width: 100%;
+  }
+
+  .welcome-text {
+    font-size: 22px;
+    line-height: 28px;
+  }
+  .medical-text {
+    margin-top: 0px;
+  }
+}
 /*-----------------------------------------------Mobile Media Query End---------------------------------------------------------------*/
 /*-----------------------------------------------Desktop and Laptop Media Query Start-------------------------------------------------------------*/
 @media only screen and (min-width: 768px)  and (max-width: 870px)
@@ -293,6 +315,32 @@
 }
 @media only screen and (min-width: 871px)  and (max-width: 991px)
 {
+}
+
+@media only screen and (max-width: 1024px) {
+  .nav-link {
+    display: none;
+  }
+
+  #navbarScroll {
+    display: none !important;
+  }
+
+  .cards-layout {
+    flex-wrap: wrap;
+  }
+  .consultation {
+    padding: 0px 30px !important;
+  }
+  .consultation-header {
+    display: block !important;
+  }
+  .button-spaces {
+    margin-top: 30px;
+    justify-content: flex-start !important;
+    flex-wrap: wrap;
+  }
+
 }
 @media only screen and (min-width: 992px) and (max-width:1199px)
 {

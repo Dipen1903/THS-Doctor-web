@@ -59,7 +59,7 @@ function Setuppayment() {
              Once profile verificatin completed, you will get online
              consultaion requests.
            </h3>
-           <button class="profile_btn mt_30 mb_100">Set up Schedule & Payment</button>
+           <button class="profile_btn mb_40">Set up Schedule & Payment</button>
          </center>
        </div>
      </div>

@@ -29,29 +29,29 @@ function Header() {
       <img src={require('../Assets/img/profile.png')} alt="Avatar" class="avatar ml_40"></img>
       <span className="profile_name ml_10">Dr John Doe</span>
             <NavDropdown title="" id="navbarScrollingDropdown">
-              <NavDropdown.Item href="#action3"><img src={require('../Assets/img/My Profile.png')} alt="Avatar" class="avatar2 mr_10 "></img>My Profle</NavDropdown.Item>
+              <NavDropdown.Item href="#action3"><img src={require('../Assets/img/My Profile.png')} alt="Avatar" class=" mr_10 "></img>My Profle</NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item href="#"><img src={require('../Assets/img/Settings.png')} alt="Avatar" class="avatar2 mr_10"></img>
+              <NavDropdown.Item href="#"><img src={require('../Assets/img/Settings.png')} alt="Avatar" class=" mr_10"></img>
                 Settings
               </NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item href="#"><img src={require('../Assets/img/Change Password.png')} alt="Avatar" class="avatar2 mr_10"></img>
+              <NavDropdown.Item href="#"><img src={require('../Assets/img/Change Password.png')} alt="Avatar" class=" mr_10"></img>
               Share Yor Link
               </NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item href="#"><img src={require('../Assets/img/Privacy and Policy.png')} alt="Avatar" class="avatar2 mr_10"></img>
+              <NavDropdown.Item href="#"><img src={require('../Assets/img/Privacy and Policy.png')} alt="Avatar" class="mr_10"></img>
               Privacy Policy
             </NavDropdown.Item>
             <NavDropdown.Divider />
-            <NavDropdown.Item href="#"><img src={require('../Assets/img/Terms and Conditions.png')} alt="Avatar" class="avatar2 mr_10"></img>
+            <NavDropdown.Item href="#"><img src={require('../Assets/img/Terms and Conditions.png')} alt="Avatar" class=" mr_10"></img>
             Terms and Conditions
           </NavDropdown.Item>
           <NavDropdown.Divider />
-        <NavDropdown.Item href="#"><img src={require('../Assets/img/Help & Support.png')} alt="Avatar" class="avatar2 mr_10"></img>
+        <NavDropdown.Item href="#"><img src={require('../Assets/img/Help & Support.png')} alt="Avatar" class="mr_10"></img>
           Help and Support
         </NavDropdown.Item>
         <NavDropdown.Divider />
-        <NavDropdown.Item href="#"><img src={require('../Assets/img/logout.png')} alt="Avatar" class="avatar2 mr_10"></img>
+        <NavDropdown.Item href="#"><img src={require('../Assets/img/logout.png')} alt="Avatar" class="mr_10"></img>
           Logout
         </NavDropdown.Item>
 

@@ -51,7 +51,7 @@ function Adminpage() {
                   <br />
                   about your profile within 2-3 business days.
                 </h3>
-                <h3 className="profile-bottom-text mt_15">
+                <h3 className="profile-bottom-text mt_15 mb_20">
                   Once profile verificatin completed, you will get online
                   consultaion requests.
                 </h3>
