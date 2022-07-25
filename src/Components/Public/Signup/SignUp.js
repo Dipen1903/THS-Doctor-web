@@ -1,11 +1,7 @@
 import React from "react";
-import "../Assets/css/style.css";
-import "../Assets/css/responsive.css";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import OwlCarousel from "react-owl-carousel";
-import "owl.carousel/dist/assets/owl.carousel.css";
-import "owl.carousel/dist/assets/owl.theme.default.css";
 import Modal from "react-bootstrap/Modal";
 import { render } from "react-dom";
 import { Link } from "react-router-dom";
