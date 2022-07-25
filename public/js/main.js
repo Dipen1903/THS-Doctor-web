@@ -1,4 +1,4 @@
-import $ from 'jquery';
+import $ from "jquery";
 // ;(function () {
 // 	var isMobile = {
 // 			Android: function() {
@@ -31,7 +31,6 @@ import $ from 'jquery';
 // 		(navigator.platform.indexOf("iPod") !== -1)
 //     );
 // 	};
-	
 
 // 	var fullHeight = function() {
 // 		if ( !$().isMobile ) {
@@ -57,37 +56,12 @@ import $ from 'jquery';
 //   }
 // });
 
-$(".toggle-password").click(function() {
-  $(this).toggleClass("fa-eye fa-eye-slash");
-  var input = $(this).parent().find("input");
-
-  if (input.attr("type") === "password") {
-    input.attr("type", "text");
-  } else {
-    input.attr("type", "password");
+$("#myForm input").on("change", function () {
+  if ($("#male").prop("checked", true)) {
+    $(".male_icon").addClass("checked_radio");
+  } else if ($("#female").prop("checked", true)) {
+    $(".female_icon").addClass("checked_radio");
   }
-});
-
-$(".toggle_password_1").click(function() {
-  $(this).toggleClass("fa-eye fa-eye-slash");
-  var input = $(this).parent().find("input");
-
-  if (input.attr("type") === "password") {
-    input.attr("type", "text");
-  } else {
-    input.attr("type", "password");
-  }
-});
-
-$('#myForm input').on('change', function() {
-	if($("#male").prop("checked", true))
-	{
-		$(".male_icon").addClass("checked_radio");
-	}
-	else if($("#female").prop("checked", true))
-	{
-		$(".female_icon").addClass("checked_radio");
-	}
 });
 
 /*----------------------------------------------------------------------------------------------------------*/
