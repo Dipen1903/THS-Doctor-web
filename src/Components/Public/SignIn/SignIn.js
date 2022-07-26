@@ -9,9 +9,16 @@ import Button from "react-bootstrap/Button";
 import FormControl from "../../Common/Forms/FormControl";
 import { SignInEnum } from "../../../Utilities/Enums";
 import { SignInSchema } from "../../../Utilities/Schema";
-import { SignIn, toggleOTPModal } from "../../../Store/Reducers/AuthSlice";
+import {
+  OTPResendSignIn,
+  OTPSignIn,
+  OTPVerifySignIn,
+  SignIn,
+  toggleOTPModal,
+} from "../../../Store/Reducers/AuthSlice";
 import OTPInput from "../../Common/Layouts/OTPInput/OTPInput";
-import { isEmpty } from "../../../Utilities/Functions";
+import { isEmpty, padLeadingZeros } from "../../../Utilities/Functions";
+import { useTimer } from "../../../Utilities/Hooks";
 
 function SignInComponent() {
   const { otpModal } = useSelector(({ AuthSlice }) => AuthSlice);
@@ -97,7 +104,15 @@ function SignInComponent() {
                                       !isEmpty(values.email) &&
                                       !errors?.email
                                     ) {
-                                      dispatch(toggleOTPModal(true));
+                                      dispatch(
+                                        OTPSignIn({
+                                          mobile_number: values?.email,
+                                        })
+                                      ).then((res) => {
+                                        if (res?.payload?.success) {
+                                          dispatch(toggleOTPModal(true));
+                                        }
+                                      });
                                     } else {
                                       setTouched({ email: true });
                                     }
@@ -141,11 +156,10 @@ function SignInComponent() {
 }
 const OTPLogin = (props) => {
   const { values, ...rest } = props;
-  const [modalShow1, setModalShow1] = useState(false);
+  const { resetTimer, timer } = useTimer();
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log("renders");
-
     return () => {};
   }, []);
 
@@ -164,41 +178,66 @@ const OTPLogin = (props) => {
           Mobile Verification
         </Modal.Title>
       </Modal.Header>
-      <Modal.Body>
-        <p class="otp_sent">Enter the OTP sent on {values?.email}</p>
-        <center>
-          <div className="display_inline">
-            <OTPInput
-              autoFocus
-              length={4}
-              className="otpContainer"
-              inputClassName="otpInput"
-              onChangeOTP={(otp) => console.log("String OTP: ", otp)}
-            />
-          </div>
-          <center>
-            <Link to="/">
-              <p className="resend mb_10">Resend</p>
-            </Link>
-          </center>
-        </center>
-      </Modal.Body>
-      <Modal.Footer>
-        <div className="">
-          <Button className="close_btn" onClick={props.onHide}>
-            Cancel
-          </Button>
-          <Button
-            className="verify_btn"
-            variant="primary"
-            onClick={() => {
-              props.onHide(true);
-            }}
-          >
-            Verify
-          </Button>
-        </div>
-      </Modal.Footer>
+      <Formik
+        initialValues={{ mobile_number: values?.email, otp: "" }}
+        enableReinitialize
+        onSubmit={(values) => dispatch(OTPVerifySignIn(values))}
+      >
+        {({ values, setFieldValue, handleSubmit }) => (
+          <Form onSubmit={handleSubmit}>
+            <Modal.Body>
+              <p class="otp_sent">
+                Enter the OTP sent on {values?.mobile_number}
+              </p>
+              <center>
+                <div className="display_inline">
+                  <OTPInput
+                    autoFocus
+                    length={4}
+                    className="otpContainer"
+                    inputClassName="otpInput"
+                    onChangeOTP={(otp) => setFieldValue("otp", otp)}
+                  />
+                </div>
+                <center>
+                  {parseInt(timer) ? (
+                    <p className="resend mb_10">{`0:${padLeadingZeros(
+                      timer,
+                      2
+                    )}`}</p>
+                  ) : (
+                    <p
+                      className="resend mb_10"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        dispatch(
+                          OTPResendSignIn({
+                            mobile_number: values?.mobile_number,
+                          })
+                        ).then((res) => {
+                          if (res?.payload?.success) resetTimer(60);
+                        });
+                      }}
+                    >
+                      Resend
+                    </p>
+                  )}
+                </center>
+              </center>
+            </Modal.Body>
+            <Modal.Footer>
+              <div className="">
+                <Button className="close_btn" onClick={props.onHide}>
+                  Cancel
+                </Button>
+                <Button className="verify_btn" variant="primary" type="submit">
+                  Verify
+                </Button>
+              </div>
+            </Modal.Footer>
+          </Form>
+        )}
+      </Formik>
     </Modal>
   );
 };

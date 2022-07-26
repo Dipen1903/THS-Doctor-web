@@ -1,5 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { OTPSignInAPI, SignInAPI } from "../../Routes/Service";
+import {
+  OTPResendSignInAPI,
+  OTPSignInAPI,
+  OTPVerifySignInAPI,
+  SignInAPI,
+} from "../../Routes/Service";
 import { AlertEnum, SESSION, TOKEN } from "../../Utilities/Enums";
 import { setLoading, setMessage } from "./LayoutSlice";
 
@@ -17,6 +22,7 @@ export const SignIn = createAsyncThunk(
       const result = await SignInAPI(values);
       if (result?.success) {
         dispatch(setLoading(false));
+        dispatch(setSession(result?.data));
         return result?.data;
       } else {
         throw result;
@@ -37,12 +43,72 @@ export const OTPSignIn = createAsyncThunk(
   "SignIn",
   async (values, { dispatch }) => {
     try {
-      dispatch(setLoading(true));
-
       const result = await OTPSignInAPI(values);
       if (result?.success) {
-        dispatch(setLoading(false));
-        return result?.data;
+        dispatch(
+          setMessage({
+            text: result?.message,
+            type: AlertEnum.Success,
+          })
+        );
+        return result;
+      } else {
+        throw result;
+      }
+    } catch (error) {
+      dispatch(setLoading(false));
+      dispatch(
+        setMessage({
+          text: error?.message,
+          type: AlertEnum.Error,
+        })
+      );
+      return error;
+    }
+  }
+);
+export const OTPResendSignIn = createAsyncThunk(
+  "OTPResendSignIn",
+  async (values, { dispatch }) => {
+    try {
+      const result = await OTPResendSignInAPI(values);
+      if (result?.success) {
+        dispatch(
+          setMessage({
+            text: result?.message,
+            type: AlertEnum.Success,
+          })
+        );
+        return result;
+      } else {
+        throw result;
+      }
+    } catch (error) {
+      dispatch(setLoading(false));
+      dispatch(
+        setMessage({
+          text: error?.message,
+          type: AlertEnum.Error,
+        })
+      );
+      return error;
+    }
+  }
+);
+export const OTPVerifySignIn = createAsyncThunk(
+  "OTPVerifySignIn",
+  async (values, { dispatch }) => {
+    try {
+      const result = await OTPVerifySignInAPI(values);
+      if (result?.success) {
+        dispatch(
+          setMessage({
+            text: result?.message,
+            type: AlertEnum.Success,
+          })
+        );
+        dispatch(setSession(result?.data));
+        return result;
       } else {
         throw result;
       }
@@ -80,7 +146,7 @@ export const OTPSignIn = createAsyncThunk(
 //   }
 // );
 export const AuthSlice = createSlice({
-  name: "Authenticate",
+  name: "AuthSlice",
   initialState,
   reducers: {
     setSession: (state, action) => {

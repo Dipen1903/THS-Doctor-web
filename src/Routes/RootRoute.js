@@ -4,6 +4,7 @@ import PublicRoutes from "./PublicRoutes";
 import { Route, Routes } from "react-router-dom";
 import SignIn from "../Components/Public/SignIn/SignIn";
 import SignUp from "../Components/Public/Signup/SignUp";
+import Homepage from "../Components/Private/Dashboard/Homepage";
 // import UserProfile from "../Components/Public/Userprofile/userprofile";
 // import UserProfile2 from "../Components/Public/Userprofile/userprofile2";
 // import Homepage from "../Components/Private/Dashboard/Homepage";
@@ -33,16 +34,25 @@ function RootRoute() {
           </PublicRoutes>
         }
       />
+      {/*//* Profile Details fill */}
       <Route path="details">
         <Route
           path="work"
           element={
-            <PrivateRoutes>
+            <PrivateRoutes isBanner={true}>
               <SignUp />
             </PrivateRoutes>
           }
         />
       </Route>
+      <Route
+        path="/dashboard"
+        element={
+          <PrivateRoutes isHeader={true}>
+            <Homepage />
+          </PrivateRoutes>
+        }
+      />
       {/* 
       <Route
         path="/userprofile"

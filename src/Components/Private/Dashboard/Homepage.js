@@ -1,14 +1,12 @@
-import React from 'react'
-import Header from './Header'
-import Adminpage from './Adminpage'
+import React from "react";
+
+// import Adminpage from "./Adminpage";
 function Homepage() {
   return (
-   <>
-   <Header/>
-   <Adminpage/>
-   
-   </>
-  )
+    <div>
+      <h1>Dashboard</h1>
+    </div>
+  );
 }
 
-export default Homepage
+export default Homepage;
