@@ -9,43 +9,12 @@ export const AlertEnum = {
 };
 export const SignInEnum = { email: "", password: "" };
 export const SignUpEnum = {
-  step_one: {
-    email: "",
-    first_name: "",
-    last_name: "",
-    username: "",
-    password: "",
-    month: "",
-    day: "",
-    year: "",
-    country: "",
-    state: "",
-    city: "",
-  },
-  step_two: {
-    image: "",
-  },
-  step_three: {
-    linkedIn: "",
-    instagram: "",
-    twitter: "",
-  },
-  step_four: {
-    current_job: { title: "", company_name: "" },
-    past_jobs: [{ title: "", company_name: "" }],
-  },
-  step_five: [{ school_university: "", start_year: "", end_year: "" }],
-  step_six: [
-    { question_id: "What have you done?", answer: "" },
-    { question_id: "What will you be doing in the future?", answer: "" },
-    { question_id: "What hill are you 1000% willing to die on?", answer: "" },
-    { question_id: "Come to me for - what are you good at?", answer: "" },
-    { question_id: "What are you working on right now?", answer: "" },
-  ],
-  step_seven: {
-    additionalQuestion: "In 10 words, what should the world know about you?",
-    answer: "",
-  },
+  email: "",
+  first_name: "",
+  last_name: "",
+  mobile_number: "",
+  password: "",
+  confirm_password: "",
 };
 
 export const EditProfileEnum = {

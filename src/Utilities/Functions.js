@@ -40,41 +40,8 @@ export const isEmpty = (value) => {
   }
 };
 
-export function GetVideoDOM(url, quality) {
-  if (url) {
-    var video_id, thumbnail, src, result;
-    if ((result = url.match(/youtube\.com.*(\?v=|\/embed\/)(.{11})/))) {
-      video_id = result.pop();
-    } else if ((result = url.match(/youtu.be\/(.{11})/))) {
-      video_id = result.pop();
-    } else if (
-      (result = url.match(
-        /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/
-      ))
-    ) {
-      video_id = result.pop();
-    }
-
-    if (video_id) {
-      if (typeof quality == "undefined") {
-        quality = "high";
-      }
-
-      var quality_key = "maxresdefault"; // Max quality
-      if (quality == "low") {
-        quality_key = "sddefault";
-      } else if (quality == "medium") {
-        quality_key = "mqdefault";
-      } else if (quality == "high") {
-        quality_key = "hqdefault";
-      }
-
-      thumbnail =
-        "http://img.youtube.com/vi/" + video_id + "/" + quality_key + ".jpg";
-      src = "https://www.youtube.com/embed/" + video_id;
-
-      return { thumbnail, src };
-    }
-  }
-  return false;
+export function padLeadingZeros(num, size) {
+  var s = num + "";
+  while (s.length < size) s = "0" + s;
+  return s;
 }

@@ -1,9 +1,9 @@
 import React from "react";
-// import PrivateRoutes from "./PrivateRoutes";
+import PrivateRoutes from "./PrivateRoutes";
 import PublicRoutes from "./PublicRoutes";
 import { Route, Routes } from "react-router-dom";
 import SignIn from "../Components/Public/SignIn/SignIn";
-// import { SignUp } from "./Service";
+import SignUp from "../Components/Public/Signup/SignUp";
 // import UserProfile from "../Components/Public/Userprofile/userprofile";
 // import UserProfile2 from "../Components/Public/Userprofile/userprofile2";
 // import Homepage from "../Components/Private/Dashboard/Homepage";
@@ -17,21 +17,33 @@ function RootRoute() {
   return (
     <Routes>
       <Route
-        path="/"
+        path=""
+        index
         element={
           <PublicRoutes>
             <SignIn />
           </PublicRoutes>
         }
       />
-      {/* <Route
-        path="/signup"
+      <Route
+        path="signup"
         element={
           <PublicRoutes>
             <SignUp />
           </PublicRoutes>
         }
       />
+      <Route path="details">
+        <Route
+          path="work"
+          element={
+            <PrivateRoutes>
+              <SignUp />
+            </PrivateRoutes>
+          }
+        />
+      </Route>
+      {/* 
       <Route
         path="/userprofile"
         element={

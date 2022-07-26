@@ -1,15 +1,15 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import Header from "../Common/Layouts/Header";
+import Header from "../Components/Common/Layouts/Header";
 
-function PrivateRoutes({ children }) {
+function PrivateRoutes({ children, isHeader }) {
   useEffect(() => {
     return () => {};
   }, []);
   return (
     <>
-      <Header />
+      {isHeader && <Header />}
       {children}
     </>
   );

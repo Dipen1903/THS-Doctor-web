@@ -1132,6 +1132,7 @@ textarea:focus ~ label {
   font-size: 15px;
   line-height: 24px;
   color: #f8446c;
+  cursor: pointer;
 }
 .my_work_profile_btn {
   font-family: "Mulish";
@@ -1824,9 +1825,9 @@ input:checked + .slider:before {
 }
 
 .Tabs li.active {
-   color: #24B2B2;
-   border-bottom: 2px solid #24B2B2;
+  color: #24b2b2;
+  border-bottom: 2px solid #24b2b2;
 }
-.eye{
+.eye {
   color: #007bed;
 }

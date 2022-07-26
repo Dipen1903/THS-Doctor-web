@@ -54,3 +54,9 @@
   font-weight: 500;
   box-shadow: 0px 4px 4px 0px #e0416580;
 }
+.error {
+  color: #e04165;
+  font-size: 14px;
+  line-height: 14px;
+  font-weight: normal;
+}

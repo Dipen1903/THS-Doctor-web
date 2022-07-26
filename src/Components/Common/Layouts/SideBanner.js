@@ -41,7 +41,6 @@ function SideBanner() {
                   </center>
                 </div>
               </OwlCarousel>
-              ;
             </div>
           </div>
         </div>
