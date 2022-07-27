@@ -5,6 +5,8 @@ import { Route, Routes } from "react-router-dom";
 import SignIn from "../Components/Public/SignIn/SignIn";
 import SignUp from "../Components/Public/Signup/SignUp";
 import Homepage from "../Components/Private/Dashboard/Homepage";
+import BasicInformation from "../Components/Private/ProfileDetails/BasicInformation";
+import PersonalProfile from "../Components/Private/ProfileDetails/PersonalProfile";
 // import UserProfile from "../Components/Public/Userprofile/userprofile";
 // import UserProfile2 from "../Components/Public/Userprofile/userprofile2";
 // import Homepage from "../Components/Private/Dashboard/Homepage";
@@ -40,7 +42,7 @@ function RootRoute() {
           path="work"
           element={
             <PrivateRoutes isBanner={true}>
-              <SignUp />
+              <PersonalProfile />
             </PrivateRoutes>
           }
         />

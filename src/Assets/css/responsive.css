@@ -394,6 +394,58 @@
     position: absolute;
     margin-left: -8px;
   }
+  .fee_card {
+    font-family: 'Mulish';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 24px;
+    text-align: center;
+    color: #3093BB;
+    background: #FFFFFF;
+    border: 1px solid #3093BB;
+    border-radius: 8px;
+    padding: 8px 12px;
+    margin-top: 25px;
+  }
+  .watch_icon {
+    position: absolute;
+    margin-left: 82px;
+    margin-top: -47px;
+    background: #fff;
+    width: 15px;
+  }
+  .form-select {
+    background: none;
+    padding: 0.5rem 1.5rem 0.5rem 15px!important;
+    border-width: 0;
+    line-height: 1.9;
+    width: 100%;
+    color: transparent;
+    transition: all 0.28s ease;
+    box-shadow: none;
+    font-family: Mulish;
+    font-weight: 600;
+    font-size: 16px;
+    height: 48px!important;
+    color: #1D1929;
+    border: 1px solid #EDE8E9;
+    border-radius: 10px;
+    background-color: #fff;
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAGCAYAAAD68A/GAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAACNSURBVHgBbY3RCYNADIZzbSl9qb3HQmn4u4GPfe0k7SgdwQ3UDdzAEcQNDl3gdIEzEQ9E/CHhT/L9hEhkAfsAUtroDiD6g0JJoPootYbVnwM1T0au88k756+M1hhKF/ijB/X6TMpQbCpJFgJ/xfplZUOgsu/cbw5GcBx8ldzsS+C3jJc1tCtmZAz8t/sJ0TAl3Z9eur4AAAAASUVORK5CYII=);
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    appearance: none;
+    display: block;
+  }
+  .watch_icon_2{
+    position: absolute;
+    margin-left: 85px;
+    margin-top: -46px;
+    background: #fff;
+    width: 15px;
+  }
 }
 @media only screen and (min-width: 1441px)  and (max-width: 1600px)
 { 
@@ -402,6 +454,27 @@
   }
   .basic_info_box {
     padding: 75px 115px;
+  }
+  .fee_card {
+    font-family: 'Mulish';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 24px;
+    text-align: center;
+    color: #3093BB;
+    background: #FFFFFF;
+    border: 1px solid #3093BB;
+    border-radius: 8px;
+    padding: 8px 12px;
+    margin-top: 25px;
+  }
+  .watch_icon {
+    position: absolute;
+    margin-left: 87px;
+    margin-top: -47px;
+    background: #fff;
+    width: 15px;
   }
 }
 @media only screen and (min-width: 1601px)  and (max-width: 1919px)

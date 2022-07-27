@@ -17,17 +17,20 @@ export const SignUpEnum = {
   confirm_password: "",
 };
 
-export const EditProfileEnum = {
-  email: "",
+export const ProfileEnum = {
   first_name: "",
   last_name: "",
-  username: "",
-  country: "",
-  state: "",
-  city: "",
-  linkedIn: "",
-  instagram: "",
-  twitter: "",
+  email: "",
+  dob: "",
+  age: "",
+  gender: "",
+  city_id: "",
+  state_id: "",
+  speciality: "",
+  sub_speciality: "",
+  registration_number: "",
+  experience: "",
+  languages: "",
 };
 export const BankEnum = {
   bank_name: "",

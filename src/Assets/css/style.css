@@ -185,6 +185,192 @@
 .mt_400 {
   margin-top: 400px;
 }
+.mt_5 {
+  margin-top: 5px;
+}
+.mt_10 {
+  margin-top: 10px;
+}
+.mt_15 {
+  margin-top: 15px;
+}
+.mt_20 {
+  margin-top: 20px;
+}
+.mt_25 {
+  margin-top: 25px;
+}
+.mt_30 {
+  margin-top: 30px;
+}
+.mt_35 {
+  margin-top: 35px;
+}
+.mt_40 {
+  margin-top: 40px;
+}
+.mt_45 {
+  margin-top: 45px;
+}
+.mt_50 {
+  margin-top: 50px;
+}
+.mt_55 {
+  margin-top: 55px;
+}
+.mt_60 {
+  margin-top: 60px;
+}
+.mt_65 {
+  margin-top: 65px;
+}
+.mt_70 {
+  margin-top: 70px;
+}
+.mt_75 {
+  margin-top: 75px;
+}
+.mt_80 {
+  margin-top: 80px;
+}
+.mt_85 {
+  margin-top: 85px;
+}
+.mt_90 {
+  margin-top: 90px;
+}
+.mt_95 {
+  margin-top: 95px;
+}
+.mt_100 {
+  margin-top: 100px;
+}
+.mt_105 {
+  margin-top: 105px;
+}
+.mt_110 {
+  margin-top: 110px;
+}
+.mt_115 {
+  margin-top: 115px;
+}
+.mt_120 {
+  margin-top: 120px;
+}
+.mt_125 {
+  margin-top: 125px;
+}
+.mt_130 {
+  margin-top: 130px;
+}
+.mt_135 {
+  margin-top: 135px;
+}
+.mt_140 {
+  margin-top: 140px;
+}
+.mt_145 {
+  margin-top: 145px;
+}
+.mt_150 {
+  margin-top: 150px;
+}
+.mt_155 {
+  margin-top: 155px;
+}
+.mt_160 {
+  margin-top: 160px;
+}
+.mt_165 {
+  margin-top: 165px;
+}
+.mt_170 {
+  margin-top: 170px;
+}
+.mt_175 {
+  margin-top: 175px;
+}
+.mt_180 {
+  margin-top: 180px;
+}
+.mt_185 {
+  margin-top: 185px;
+}
+.mt_190 {
+  margin-top: 190px;
+}
+.mt_195 {
+  margin-top: 195px;
+}
+.mt_200 {
+  margin-top: 200px;
+}
+.mt_205 {
+  margin-top: 205px;
+}
+.mt_210 {
+  margin-top: 210px;
+}
+.mt_215 {
+  margin-top: 215px;
+}
+.mt_220 {
+  margin-top: 220px;
+}
+.mt_225 {
+  margin-top: 225px;
+}
+.mt_230 {
+  margin-top: 230px;
+}
+.mt_235 {
+  margin-top: 235px;
+}
+.mt_240 {
+  margin-top: 240px;
+}
+.mt_245 {
+  margin-top: 245px;
+}
+.mt_250 {
+  margin-top: 250px;
+}
+.mt_255 {
+  margin-top: 255px;
+}
+.mt_260 {
+  margin-top: 260px;
+}
+.mt_265 {
+  margin-top: 265px;
+}
+.mt_270 {
+  margin-top: 270px;
+}
+.mt_275 {
+  margin-top: 275px;
+}
+.mt_280 {
+  margin-top: 280px;
+}
+.mt_285 {
+  margin-top: 285px;
+}
+.mt_290 {
+  margin-top: 290px;
+}
+.mt_295 {
+  margin-top: 295px;
+}
+.mt_300 {
+  margin-top: 300px;
+}
+.mt_350 {
+  margin-top: 350px;
+}
+.mt_400 {
+  margin-top: 400px;
+}
 /*------------------------------------------Margin Top End--------------------------------------------------*/
 /*------------------------------------------Margin Bottom Start------------------------------------------------*/
 .mb_5 {
@@ -497,6 +683,438 @@
   padding-top: 200px;
 }
 /*------------------------------------------padding Top End--------------------------------------------------*/
+.mb_5 {
+  margin-bottom: 5px;
+}
+.mb_10 {
+  margin-bottom: 10px;
+}
+.mb_15 {
+  margin-bottom: 15px;
+}
+.mb_20 {
+  margin-bottom: 20px;
+}
+.mb_25 {
+  margin-bottom: 25px;
+}
+.mb_30 {
+  margin-bottom: 30px;
+}
+.mb_35 {
+  margin-bottom: 35px;
+}
+.mb_40 {
+  margin-bottom: 40px;
+}
+.mb_45 {
+  margin-bottom: 45px;
+}
+.mb_50 {
+  margin-bottom: 50px;
+}
+.mb_55 {
+  margin-bottom: 55px;
+}
+.mb_60 {
+  margin-bottom: 60px;
+}
+.mb_65 {
+  margin-bottom: 65px;
+}
+.mb_70 {
+  margin-bottom: 70px;
+}
+.mb_75 {
+  margin-bottom: 75px;
+}
+.mb_80 {
+  margin-bottom: 80px;
+}
+.mb_85 {
+  margin-bottom: 85px;
+}
+.mb_90 {
+  margin-bottom: 90px;
+}
+.mb_95 {
+  margin-bottom: 95px;
+}
+.mb_100 {
+  margin-bottom: 100px;
+}
+/*------------------------------------------Margin Bottom End--------------------------------------------------*/
+/*----------------------------------------------Margin Left Start------------------------------------------------------*/
+.ml_0 {
+  margin-left: 0px;
+}
+.ml_5 {
+  margin-left: 5px;
+}
+.ml_10 {
+  margin-left: 10px;
+}
+.ml_15 {
+  margin-left: 15px;
+}
+.ml_20 {
+  margin-left: 20px;
+}
+.ml_25 {
+  margin-left: 25px;
+}
+.ml_30 {
+  margin-left: 30px;
+}
+.ml_35 {
+  margin-left: 35px;
+}
+.ml_40 {
+  margin-left: 40px;
+}
+.ml_45 {
+  margin-left: 45px;
+}
+.ml_50 {
+  margin-left: 50px;
+}
+.ml_55 {
+  margin-left: 55px;
+}
+.ml_60 {
+  margin-left: 60px;
+}
+.ml_65 {
+  margin-left: 65px;
+}
+.ml_70 {
+  margin-left: 70px;
+}
+.ml_75 {
+  margin-left: 75px;
+}
+.ml_80 {
+  margin-left: 80px;
+}
+.ml_85 {
+  margin-left: 85px;
+}
+.ml_90 {
+  margin-left: 90px;
+}
+.ml_95 {
+  margin-left: 95px;
+}
+.ml_100 {
+  margin-left: 100px;
+}
+/*----------------------------------------------Margin Left end--------------------------------------------------------*/
+/*----------------------------------------------Margin right Start------------------------------------------------------*/
+.mr_5 {
+  margin-right: 5px;
+}
+.mr_10 {
+  margin-right: 10px;
+}
+.mr_15 {
+  margin-right: 15px;
+}
+.mr_20 {
+  margin-right: 10px;
+}
+.mr_25 {
+  margin-right: 25px;
+}
+.mr_30 {
+  margin-right: 30px;
+}
+.mr_35 {
+  margin-right: 35px;
+}
+.mr_40 {
+  margin-right: 40px;
+}
+.mr_45 {
+  margin-right: 45px;
+}
+.mr_50 {
+  margin-right: 50px;
+}
+.mr_55 {
+  margin-right: 55px;
+}
+.mr_60 {
+  margin-right: 60px;
+}
+.mr_65 {
+  margin-right: 65px;
+}
+.mr_70 {
+  margin-right: 70px;
+}
+.mr_75 {
+  margin-right: 75px;
+}
+.mr_80 {
+  margin-right: 80px;
+}
+.mr_85 {
+  margin-right: 85px;
+}
+.mr_90 {
+  margin-right: 90px;
+}
+.mr_95 {
+  margin-right: 95px;
+}
+.mr_100 {
+  margin-right: 100px;
+}
+/*----------------------------------------------Margin right end--------------------------------------------------------*/
+/*------------------------------------------Padding Top Start------------------------------------------------*/
+.pt_5 {
+  padding-top: 5px;
+}
+.pt_10 {
+  padding-top: 10px;
+}
+.pt_15 {
+  padding-top: 15px;
+}
+.pt_20 {
+  padding-top: 20px;
+}
+.pt_25 {
+  padding-top: 25px;
+}
+.pt_30 {
+  padding-top: 30px;
+}
+.pt_35 {
+  padding-top: 35px;
+}
+.pt_40 {
+  padding-top: 40px;
+}
+.pt_45 {
+  padding-top: 45px;
+}
+.pt_50 {
+  padding-top: 50px;
+}
+.pt_55 {
+  padding-top: 55px;
+}
+.pt_60 {
+  padding-top: 60px;
+}
+.pt_65 {
+  padding-top: 65px;
+}
+.pt_70 {
+  padding-top: 70px;
+}
+.pt_75 {
+  padding-top: 75px;
+}
+.pt_80 {
+  padding-top: 80px;
+}
+.pt_85 {
+  padding-top: 85px;
+}
+.pt_90 {
+  padding-top: 90px;
+}
+.pt_95 {
+  padding-top: 95px;
+}
+.pt_100 {
+  padding-top: 100px;
+}
+.pt_105 {
+  padding-top: 105px;
+}
+.pt_110 {
+  padding-top: 110px;
+}
+.pt_115 {
+  padding-top: 115px;
+}
+.pt_120 {
+  padding-top: 120px;
+}
+.pt_125 {
+  padding-top: 125px;
+}
+.pt_130 {
+  padding-top: 130px;
+}
+.pt_135 {
+  padding-top: 135px;
+}
+.pt_140 {
+  padding-top: 140px;
+}
+.pt_145 {
+  padding-top: 145px;
+}
+.pt_150 {
+  padding-top: 150px;
+}
+.pt_155 {
+  padding-top: 155px;
+}
+.pt_160 {
+  padding-top: 160px;
+}
+.pt_165 {
+  padding-top: 165px;
+}
+.pt_170 {
+  padding-top: 170px;
+}
+.pt_175 {
+  padding-top: 175px;
+}
+.pt_180 {
+  padding-top: 180px;
+}
+.pt_185 {
+  padding-top: 185px;
+}
+.pt_190 {
+  padding-top: 190px;
+}
+.pt_195 {
+  padding-top: 195px;
+}
+.pt_200 {
+  padding-top: 200px;
+}
+/*------------------------------------------padding Top End--------------------------------------------------*/
+/*------------------------------------------Padding Top Start------------------------------------------------*/
+.pl_5 {
+  padding-left: 5px;
+}
+.pl_10 {
+  padding-left: 10px;
+}
+.pl_15 {
+  padding-left: 15px;
+}
+.pl_20 {
+  padding-left: 20px;
+}
+.pl_25 {
+  padding-left: 25px;
+}
+.pl_30 {
+  padding-left: 30px;
+}
+.pl_35 {
+  padding-left: 35px;
+}
+.pl_40 {
+  padding-left: 40px;
+}
+.pl_45 {
+  padding-left: 45px;
+}
+.pl_50 {
+  padding-left: 50px;
+}
+.pl_55 {
+  padding-left: 55px;
+}
+.pl_60 {
+  padding-left: 60px;
+}
+.pl_65 {
+  padding-left: 65px;
+}
+.pl_70 {
+  padding-left: 70px;
+}
+.pl_75 {
+  padding-left: 75px;
+}
+.pl_80 {
+  padding-left: 80px;
+}
+.pl_85 {
+  padding-left: 85px;
+}
+.pl_90 {
+  padding-left: 90px;
+}
+.pl_95 {
+  padding-left: 95px;
+}
+.pl_100 {
+  padding-left: 100px;
+}
+.pl_105 {
+  padding-left: 105px;
+}
+.pl_110 {
+  padding-left: 110px;
+}
+.pl_115 {
+  padding-left: 115px;
+}
+.pl_120 {
+  padding-left: 120px;
+}
+.pl_125 {
+  padding-left: 125px;
+}
+.pl_130 {
+  padding-left: 130px;
+}
+.pl_135 {
+  padding-left: 135px;
+}
+.pl_140 {
+  padding-left: 140px;
+}
+.pl_145 {
+  padding-left: 145px;
+}
+.pl_150 {
+  padding-left: 150px;
+}
+.pl_155 {
+  padding-left: 155px;
+}
+.pl_160 {
+  padding-left: 160px;
+}
+.pl_165 {
+  padding-left: 165px;
+}
+.pl_170 {
+  padding-left: 170px;
+}
+.pt_175 {
+  padding-top: 175px;
+}
+.pt_18 {
+  padding-left: 180px;
+}
+.pl_185 {
+  padding-left: 185px;
+}
+.pl_190 {
+  padding-left: 190px;
+}
+.pl_195 {
+  padding-left: 195px;
+}
+.pl_200 {
+  padding-left: 200px;
+}
+/*------------------------------------------padding Top End--------------------------------------------------*/
 .display_inline {
   display: inline-flex;
 }
@@ -507,7 +1125,7 @@
   width: 100%;
 }
 form {
-  width: fit-content;
+  width: 100%;
 }
 .body-form {
   display: inline-grid;
@@ -546,6 +1164,7 @@ form {
   display: -moz-box;
   display: -ms-flexbox;
 }
+
 .sub_section_1 {
   /*background-image: url('img/sideimage.png');*/
   background: #fff;
@@ -592,6 +1211,28 @@ form {
   color: #1d1929;
   text-align: left;
 }
+.modal_150 {
+  width: 150px;
+}
+.modal_300 {
+  width: 300px;
+}
+.modal_350 {
+  width: 350px;
+}
+.modal_500 {
+  width: 500px;
+}
+/*------------------------------------------Login Form Start------------------------------------*/
+.signin_box {
+  padding: 50px 0;
+}
+.sign_title {
+  font-weight: 800;
+  font-size: 35px;
+  color: #1d1929;
+  text-align: left;
+}
 .login_box {
   padding: 113px 140px;
 }
@@ -611,7 +1252,7 @@ form {
 }
 /*------------------------------------------Login Form Start------------------------------------*/
 .signin_box {
-  padding: 50px 0;
+  padding: 30px 0;
 }
 .sign_title {
   font-family: Mulish;
@@ -647,6 +1288,7 @@ form {
   color: #3093bb;
   margin-top: 20px;
   font-weight: 600;
+  cursor: pointer;
 }
 .forgot_password {
   font-family: Mulish;
@@ -655,7 +1297,9 @@ form {
   margin-top: 0px;
   font-weight: 600;
   float: right;
+  cursor: pointer;
 }
+
 .dont_have_account {
   font-family: "Mulish";
   font-style: normal;
@@ -672,6 +1316,7 @@ form {
   color: #f8446c;
   text-decoration: none;
 }
+
 .input_box {
   border: 1px solid #ede8e9;
   height: 48px;
@@ -858,6 +1503,10 @@ label.field.focused {
 }
 label.field.focused .psuedo_select {
   border-color: #007bed;
+  color: #007bed;
+}
+label.field.focused .psuedo_select {
+  border-color: #007bed;
 }
 label.field.focused .psuedo_select ul {
   opacity: 1;
@@ -892,13 +1541,9 @@ textarea:focus ~ label {
   border-radius: 8px;
   position: relative;
   margin-bottom: 20px;
-  /*float: left;*/
-  /* float: left; */
   position: relative;
   font-weight: 300;
   border: solid 1px #ede8e9;
-  position: relative;
-  margin-bottom: 20px;
   height: 66px;
 }
 .styled-input label {
@@ -1053,6 +1698,15 @@ input:valid ~ label,
 textarea:valid ~ label,
 input:focus ~ label,
 textarea:focus ~ label {
+  font-size: 1.2rem !important;
+  color: gray;
+  top: 1.2rem !important;
+  left: 0;
+}
+input:valid ~ label,
+textarea:valid ~ label,
+input:focus ~ label,
+textarea:focus ~ label {
   font-size: 0.75em;
   top: -0.4rem;
 }
@@ -1070,6 +1724,44 @@ textarea:focus ~ label {
   margin-top: -34px;
   font-size: 18px;
 }
+.login_mobile_verification {
+  font-family: "Mulish";
+  font-size: 18px;
+  line-height: 32px;
+  font-weight: 700;
+}
+.forgot_password_title {
+  font-family: "Mulish";
+  font-size: 18px;
+  line-height: 32px;
+  font-weight: 700;
+}
+.forgot_password_subtext {
+  font-family: "Mulish";
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 24px;
+  margin-bottom: 20px;
+}
+.otp_verification_title {
+  font-family: "Mulish";
+  font-size: 18px;
+  line-height: 32px;
+  font-weight: 700;
+}
+.reset_password {
+  font-family: "Mulish";
+  font-size: 18px;
+  line-height: 32px;
+  font-weight: 700;
+}
+.reset_password_subtext {
+  font-family: "Mulish";
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 24px;
+  margin-bottom: 20px;
+}
 /*-------------------------------------------Login Form End-------------------------------------*/
 /*-------------------------------------------Slider Css Start--------------------------------------*/
 .owl-theme .owl-dots .owl-dot span {
@@ -1082,6 +1774,12 @@ textarea:focus ~ label {
   transition: opacity 200ms ease;
   border-radius: 30px;
 }
+.owl-theme .owl-dots .owl-dot.active span,
+.owl-theme .owl-dots .owl-dot:hover span {
+  background: #3093bb !important;
+}
+/*--------------------------------------------Slider Css End---------------------------------------*/
+/*-------------------------------------------OTP Css Start-------------------------------------------*/
 .owl-theme .owl-dots .owl-dot.active span,
 .owl-theme .owl-dots .owl-dot:hover span {
   background: #3093bb !important;
@@ -1132,7 +1830,6 @@ textarea:focus ~ label {
   font-size: 15px;
   line-height: 24px;
   color: #f8446c;
-  cursor: pointer;
 }
 .my_work_profile_btn {
   font-family: "Mulish";
@@ -1182,6 +1879,71 @@ input:focus {
   outline: none !important;
   border-color: #719ece;
 }
+.sendotp_btn {
+  font-family: "Mulish";
+  font-weight: 600;
+  font-size: 15px;
+  background: linear-gradient(45deg, #3093bb 0%, #82dbff 100%);
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  color: #fff;
+  padding: 10px 25px;
+  /*width: 50%;*/
+}
+.sendotp_btn:hover {
+  text-decoration: none;
+}
+.save_btn {
+  font-family: "Mulish";
+  font-weight: 600;
+  font-size: 15px;
+  background: linear-gradient(45deg, #3093bb 0%, #82dbff 100%);
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  color: #fff;
+  padding: 10px 70px;
+  /*width: 50%;*/
+}
+.save_btn:hover {
+  text-decoration: none;
+}
+.otp_verify_btn {
+  font-family: "Mulish";
+  font-weight: 600;
+  font-size: 15px;
+  background: linear-gradient(45deg, #3093bb 0%, #82dbff 100%);
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  color: #fff;
+  padding: 10px 40px;
+  /* width: 50%; */
+}
+.password_reset_success_title {
+  font-family: Mulish;
+  font-weight: 600;
+  font-size: 18px;
+  margin-top: 15px;
+  color: #1d1929;
+  margin-top: 30px;
+}
+.password_reset_success_subtitle {
+  font-family: "Mulish";
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 24px;
+  color: #f8446c;
+}
+.go_to_login {
+  font-family: "Mulish";
+  font-weight: 600;
+  font-size: 15px;
+  background: linear-gradient(45deg, #3093bb 0%, #82dbff 100%);
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  color: #fff;
+  padding: 10px 89px;
+  width: 100%;
+}
 /*--------------------------------------------OTP Css End--------------------------------------------*/
 /*--------------------------------------------User Profile Css Start--------------------------------------------*/
 .basic_box {
@@ -1207,6 +1969,7 @@ input:focus {
   font-weight: 500;
   line-height: 22px;
 }
+
 .upload_avatar_btn {
   font-family: Mulish;
   font-size: 16px;
@@ -1217,6 +1980,10 @@ input:focus {
   border-radius: 10px;
   width: 200px;
   padding: 15px 10px;
+  color: #fff;
+}
+.upload_avatar_btn:hover {
+  background: #24b2b2;
   color: #fff;
 }
 .upload_avatar_subtitle {
@@ -1246,7 +2013,7 @@ input:focus {
   font-family: "Mulish";
   font-style: normal;
   font-weight: 500;
-  font-size: 14px;
+  font-size: 11px;
   line-height: 12px;
   color: #9393aa;
   margin-bottom: 13px;
@@ -1309,27 +2076,12 @@ input:focus {
   display: inline-block;
   position: relative;
 }
-input[type="file"] {
-  opacity: 0;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-}
-/*
-input[type="file"] {
-  display: none;
-}
-.custom-file-upload {
-  border: 1px solid #ccc;
+
+.wrapper {
   display: inline-block;
-  padding: 6px 12px;
-  cursor: pointer;
+  position: relative;
 }
-.file-preview {
-  margin: 0 10px;
-}*/
+
 .form-select {
   background: none;
   padding: 0.5rem 1.5rem 0.5rem 20px !important;
@@ -1347,7 +2099,7 @@ input[type="file"] {
   border: 1px solid #ede8e9;
   border-radius: 10px;
   background-color: #fff;
-  background-image: url("../img/drop_arrow.png");
+  background-image: url("../img/png/drop_arrow.png");
   background-repeat: no-repeat;
   background-position: right 0.75rem center;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
@@ -1368,8 +2120,20 @@ input[type="radio"] {
   right: 0;
   bottom: 0;
 }
+.gender_wrapper {
+  display: inline-block;
+  position: relative;
+}
+input[type="radio"] {
+  opacity: 0;
+  /*position:absolute;*/
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
 .male_icon {
-  /*background-image: url('../img/ic_male.svg');*/
+  /*background-image: url('../img/png/ic_male.svg');*/
   background-repeat: no-repeat;
   height: 65px;
   width: 65px;
@@ -1397,13 +2161,59 @@ input[type="radio"] {
   border: none;
 }
 .female_icon {
-  /*background-image: url('../img/ic_female.svg');*/
+  border: 1px solid #f0f0f0;
+  border-radius: 20px;
+  --bs-btn-bg: #fff;
+}
+.male_icon:hover,
+.fill_svg:hover {
+  --bs-btn-hover-bg: #24b2b2 !important;
+  --bs-btn-active-bg: #24b2b2 !important;
+  --bs-btn-active-shadow: none !important;
+  --bs-btn-border-color: #24b2b2 !important;
+  --bs-btn-hover-color: #24b2b2 !important;
+  --bs-btn-hover-border-color: #24b2b2 !important;
+  --bs-btn-focus-shadow-rgb: #24b2b2 !important;
+  --bs-btn-active-color: #24b2b2 !important;
+  --bs-btn-active-border-color: #24b2b2 !important;
+  --bs-btn-disabled-color: #24b2b2 !important;
+  --bs-btn-disabled-bg: #24b2b2 !important;
+  --bs-btn-disabled-border-color: #24b2b2 !important;
+  border: none;
+}
+.female_icon {
+  /*background-image: url('../img/png/ic_female.svg');*/
   background-repeat: no-repeat;
   height: 65px;
   width: 65px;
   padding: 30px;
   background-position: center center;
   box-shadow: 0px 10px 20px rgb(29 161 242 / 30%);
+  border: 1px solid #f0f0f0;
+  border-radius: 20px;
+  --bs-btn-bg: #ffffff;
+}
+.female_icon:hover {
+  --bs-btn-hover-bg: #24b2b2 !important;
+  --bs-btn-active-bg: #24b2b2 !important;
+  --bs-btn-active-shadow: none !important;
+  --bs-btn-border-color: #24b2b2 !important;
+  --bs-btn-hover-color: #24b2b2 !important;
+  --bs-btn-hover-border-color: #24b2b2 !important;
+  --bs-btn-focus-shadow-rgb: #24b2b2 !important;
+  --bs-btn-active-color: #24b2b2 !important;
+  --bs-btn-active-border-color: #24b2b2 !important;
+  --bs-btn-disabled-color: #24b2b2 !important;
+  --bs-btn-disabled-bg: #24b2b2 !important;
+  --bs-btn-disabled-border-color: #24b2b2 !important;
+  border: none;
+}
+.male_title {
+  font-family: "Mulish";
+  font-size: 15px;
+  font-weight: 700;
+  text-align: center;
+  color: #1e1f20;
   border: 1px solid #f0f0f0;
   border-radius: 20px;
   --bs-btn-bg: #ffffff;
@@ -1452,6 +2262,10 @@ input[type="radio"] {
   margin-top: -23px;
   margin-left: -12px;
 }
+.svg_icon_1 {
+  margin-top: -30px;
+  margin-left: -12px;
+}
 input[type="radio"]:checked {
   background: #000;
   padding: 300px;
@@ -1474,6 +2288,7 @@ input[type="radio"]:checked {
   --bs-btn-bg: #2ee2ae;
   background: #000;
 }
+
 .skip_btn {
   font-family: "Mulish";
   font-weight: 600;
@@ -1597,6 +2412,7 @@ input[type="radio"]:checked {
   display: inline-block;
   width: 46px;
   height: 26px;
+  margin-top: -8px;
 }
 
 .switch input {
@@ -1660,17 +2476,21 @@ input:checked + .slider:before {
 }
 
 .go_online {
+  font-family: "Mulish";
   font-weight: 600;
   font-size: 14px;
   line-height: 24px;
   color: #24b2b2;
 }
 .profile_name {
+  font-family: "Mulish";
   font-weight: 600;
-  font-size: 15px;
-  line-height: 24px;
+  font-size: 16px;
+  line-height: 20px;
   color: #1e1f20;
+  margin-right: 4px;
 }
+
 /*---------------------------------------------Homepage Header Css End---------------------------------------------*/
 
 /*---------------------------------------------Admin Body Css Start---------------------------------------------*/
@@ -1679,9 +2499,9 @@ input:checked + .slider:before {
 }
 .cards-layout {
   display: flex;
-  flex-direction: row !important;
+  flex-direction: row;
   gap: 50px;
-  border: none !important;
+  border: none;
   font-family: "Mulish", sans-serif;
 }
 
@@ -1733,8 +2553,8 @@ input:checked + .slider:before {
   color: #9393aa;
 }
 .avatar2 {
-  width: 136px;
-  height: 136px;
+  width: 100%;
+  height: 100%;
 }
 .joincommnity {
   font-family: "Mulish", sans-serif;
@@ -1758,10 +2578,1008 @@ input:checked + .slider:before {
   border: none;
   border-radius: 12px;
   color: #fff;
+  margin-top: 50px;
 }
 
 /*---------------------------------------------Admin Body Css End---------------------------------------------*/
-/*---------------------------------------------Datatable Css Start---------------------------------------------*/
+
+.tag_name_box {
+  background: #24b2b2;
+  border-radius: 4px;
+  padding: 5px 5px 8px 10px;
+  color: #fff;
+}
+.form_bottom {
+  margin-bottom: 15px !important;
+}
+.close_icon {
+  padding: 0 5px 0 10px;
+  margin-top: -3px;
+}
+.added_qualifications {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 16px;
+  color: #9393aa;
+}
+.qualification_text {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 24px;
+  color: #1e1f20;
+}
+.remove_title {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 16px;
+  color: #f8446c;
+}
+.certificate_name {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  color: #1e1f20;
+  margin-top: 5px;
+  margin-bottom: 0px;
+}
+.delete_photo {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 16px;
+  text-decoration-line: underline;
+  color: #9393aa;
+  margin-top: 5px;
+}
+.attach_certificate {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 24px;
+  text-align: center;
+  color: #ffffff;
+  background: #24b2b2;
+  border-radius: 12px;
+  padding: 15px 30px;
+  border: none;
+  width: 100%;
+}
+.attach_icon {
+  padding-right: 5px;
+}
+.bottom_border {
+  border: 1px solid #3093bb !important;
+}
+.id_proof_doc {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 26px;
+  color: #1e1f20;
+}
+.aadhar_text {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 24px;
+  color: #1e1f20;
+  margin-top: 15px;
+}
+.upload_signature {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 24px;
+  color: #1e1f20;
+  margin-top: 15px;
+}
+.submit_btn {
+  font-family: Mulish;
+  font-weight: 700;
+  font-size: 16px;
+  background: linear-gradient(45deg, #3093bb 0%, #82dbff 100%);
+  width: 100%;
+  padding: 15px 20px;
+  border: none;
+  border-radius: 12px;
+  color: #fff;
+}
+.submit_profile {
+  font-family: Mulish;
+  font-weight: 600;
+  font-size: 18px;
+  margin-top: 15px;
+  color: #1d1929;
+}
+.modal_header {
+  border-bottom: none !important;
+}
+.preferred_schedule {
+  font-family: "Mulish";
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 24px;
+  color: #f8446c;
+}
+.set_up_btn {
+  font-family: "Mulish";
+  font-weight: 600;
+  font-size: 15px;
+  background: linear-gradient(45deg, #3093bb 0%, #82dbff 100%);
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  color: #fff;
+  padding: 10px 30px;
+}
+.upload_avatar_img {
+  width: -webkit-fill-available;
+  max-width: 75px;
+  max-height: 75px;
+  border-radius: 12px;
+  object-fit: cover;
+}
+/*---------------------------------------------User Profile Css End---------------------------------------------*/
+/*---------------------------------------------Doctor Appointment Css Start---------------------------------------------*/
+.doc_appointment_head {
+  font-family: Mulish;
+  font-size: 24px;
+  font-weight: 800;
+  color: #1e1f20;
+  margin-top: 15px;
+  margin-bottom: 20px;
+}
+.doc_appointment_title {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 26px;
+  color: #1e1f20;
+}
+.doc_appointment_form_title {
+  font-family: Mulish;
+  font-size: 16px;
+  color: #000;
+  line-height: 20px;
+  font-weight: 600;
+}
+.fee_card {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 24px;
+  text-align: center;
+  color: #3093bb;
+  background: #ffffff;
+  border: 1px solid #3093bb;
+  border-radius: 8px;
+  padding: 8px 34px;
+  margin-top: 28px;
+}
+.consult_fee_subtext {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 16px;
+  color: #f8446c;
+}
+.time_slot {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 26px;
+  color: #1e1f20;
+}
+/*---------------------------Tabs Section-------------------------*/
+
+.nav-tabs .nav-link {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 32px;
+  color: #9393aa;
+  border: none;
+}
+.nav-tabs {
+  border: none;
+}
+.nav-tabs .nav-item.show .nav-link,
+.nav-tabs .nav-link.active {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 32px;
+  color: #24b2b2;
+}
+.nav-tabs .nav-item.show .nav-link,
+.nav-tabs .nav-link.active:after {
+  content: "";
+  border-bottom: 3px solid #24b2b2;
+  width: 30px;
+  transform: rotate(180deg);
+  position: absolute;
+  margin-top: 35px;
+  margin-left: -85px;
+}
+.tab_inner_box {
+  padding: 20px 0px;
+}
+/*---------------------------Tabs Section-------------------------*/
+.day_box {
+  display: inline-flex;
+  column-gap: 15px;
+}
+.days_bg {
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  padding: 8px;
+  border-radius: 50px;
+  height: 45px;
+  width: 45px;
+}
+.days_bg_2 {
+  background: linear-gradient(45deg, #3093bb 0%, #82dbff 100%);
+  border: 1px solid #e0e0e0;
+  padding: 8px;
+  border-radius: 50px;
+  height: 45px;
+  width: 45px;
+}
+.days_bg_3 {
+  background: #24b2b2;
+  border: 1px solid #e0e0e0;
+  padding: 8px;
+  border-radius: 50px;
+  height: 45px;
+  width: 45px;
+}
+.day_label {
+  width: 50px;
+}
+.hide_radio_btn {
+  margin-top: -65px;
+  position: relative;
+  width: 44px;
+  height: 33px;
+  right: 0;
+  margin-left: 0px;
+  border-radius: 45px;
+}
+.accordion-button::after {
+  flex-shrink: 0;
+  width: var(--bs-accordion-btn-icon-width);
+  height: var(--bs-accordion-btn-icon-width);
+  margin-left: auto;
+  content: "";
+  background-image: url("../img/svg/accordien_plus.svg");
+  background-repeat: no-repeat;
+  background-size: var(--bs-accordion-btn-icon-width);
+}
+.accordion-button:not(.collapsed)::after {
+  background-image: url("../img/svg/accordien_minus.svg");
+  transform: none;
+  margin-top: 2px;
+  margin-bottom: -15px;
+}
+.accordion {
+  --bs-accordion-border-color: none !important;
+  --bs-accordion-bg: transparent;
+}
+.accordion-button:not(.collapsed) {
+  background: transparent !important;
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 17px;
+  line-height: 24px;
+  color: #1e1f20;
+}
+.accordion-button {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 17px;
+  line-height: 24px;
+  color: #1e1f20;
+}
+.start_at {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 16px;
+  color: #1e1f20;
+}
+.end_at {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 16px;
+  color: #1e1f20;
+}
+.watch_icon {
+  position: absolute;
+  margin-left: 140px;
+  margin-top: -50px;
+  background: #fff;
+}
+.watch_icon_2 {
+  position: absolute;
+  margin-left: 140px;
+  margin-top: -50px;
+  background: #fff;
+}
+.emergency_call_text {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 24px;
+  color: #1e1f20;
+  margin-left: 15px;
+  margin-top: -4px;
+  position: absolute;
+}
+.checkbox_icon {
+  width: 18px;
+  height: 18px;
+}
+.weekdays_box {
+  padding: 10px 10px 10px 10px;
+}
+.weekends_box {
+  padding: 10px 10px 10px 10px;
+}
+.fee_card_modal {
+  width: 700px;
+}
+.fee_card_title {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 32px;
+  color: #1e1f20;
+}
+.fee_card_table_head {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 24px;
+  color: #24b2b2;
+}
+.modal-header .btn-close {
+  padding: calc(var(--bs-modal-header-padding-y) * 0.5)
+    calc(var(--bs-modal-header-padding-x) * 0.5);
+  margin: calc(var(--bs-modal-header-padding-y) * -0.5)
+    calc(var(--bs-modal-header-padding-x) * -0.5)
+    calc(var(--bs-modal-header-padding-y) * -0.5) auto;
+  border: 1px solid #e0e0e0;
+}
+.table_text {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 24px;
+  color: #1e1f20;
+  padding: 10px 0;
+}
+.modal-content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  color: var(--bs-modal-color);
+  pointer-events: auto;
+  background-color: var(--bs-modal-bg);
+  background-clip: padding-box;
+  border: var(--bs-modal-border-width) solid var(--bs-modal-border-color);
+  border-radius: var(--bs-modal-border-radius);
+  outline: 0;
+  border-radius: 16px;
+}
+.upi_title {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 26px;
+  color: #1e1f20;
+}
+.details_submitted {
+  font-family: Mulish;
+  font-weight: 600;
+  font-size: 18px;
+  margin-top: 15px;
+  color: #1d1929;
+}
+.go_to_home {
+  font-family: "Mulish";
+  font-weight: 600;
+  font-size: 15px;
+  background: linear-gradient(45deg, #3093bb 0%, #82dbff 100%);
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  color: #fff;
+  padding: 10px 30px;
+  width: -webkit-fill-available;
+}
+.submit_successfully_text {
+  font-family: "Mulish";
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 24px;
+  color: #f8446c;
+}
+/*----------------------------------------------Doctor Appointment Css End----------------------------------------------*/
+/*----------------------------------------------Navbar Css Start----------------------------------------------*/
+.tablehead {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 40px;
+  color: #9393aa;
+  padding-left: 20px !important;
+}
+.nav_links {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 24px;
+  color: #9393aa;
+  margin-left: 6px;
+}
+.nav_links_icon {
+  margin-top: -4px;
+}
+.nav_links_active {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 24px;
+  color: #3093bb;
+  margin-left: 6px;
+}
+.dropdown-toggle::after {
+  border: none !important;
+  background-image: url("../img/png/dropdown_arrow.png");
+  width: 20px;
+  height: 9px;
+  background-repeat: no-repeat;
+  background-position: center center;
+  margin-top: 12px;
+}
+.online_toggle_text {
+  font-family: "Mulish";
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  color: #24b2b2;
+  margin-left: 12px;
+}
+.userprofile_name {
+  font-family: "Mulish";
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 24px;
+  color: #1e1f20;
+  margin-right: 4px;
+}
+.userprofile_subtext {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 16px;
+  color: #9393aa;
+}
+.dropdown_icon {
+  width: auto;
+}
+/*-----------------------------------------------Navbar Css End-----------------------------------------------*/
+/*----------------------------------------------Payout Css Start----------------------------------------------*/
+.payout_container {
+  background: #f8fbff;
+  padding: 30px 100px;
+}
+.payout_card_box {
+  background: #ffffff;
+  box-shadow: 0px 5px 10px rgb(0 64 128 / 4%);
+  border-radius: 12px 12px 0px 0px;
+  padding: 24px 20px;
+  height: 650px;
+}
+.payout_table {
+  border: none !important;
+  border-bottom-width: 0px !important;
+}
+.payout_table_head {
+  background: #f8fbff;
+  border-radius: 12px;
+  padding: 16px;
+  height: 56px;
+}
+.payout_table_body_row {
+  height: 56px;
+  border-bottom: 1px solid #eceff4;
+}
+.payout_table_head_text {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 40px;
+  color: #9393aa;
+  padding-left: 20px !important;
+}
+.payout_table_body_text {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 40px;
+  color: #1e1f20;
+  padding-left: 20px !important;
+}
+.table > :not(caption) > * > * {
+  padding: 0.5rem 0.5rem;
+  background-color: var(--bs-table-bg);
+  border-bottom-width: 0px !important;
+  box-shadow: inset 0 0 0 9999px var(--bs-table-accent-bg);
+}
+.paid_tag {
+  background: rgba(47, 192, 139, 0.15);
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 24px;
+  color: #2fc08b;
+}
+.failed_tag {
+  background: rgba(228, 75, 65, 0.15);
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 24px;
+  color: #e44b41;
+}
+.in_prcoess {
+  background: rgba(83, 121, 219, 0.15);
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 24px;
+  color: #5379db;
+}
+.completed {
+  background: rgba(47, 192, 139, 0.15);
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 24px;
+  color: #2fc08b;
+}
+.withdraw_btn {
+  background: linear-gradient(45deg, #3093bb 0%, #82dbff 100%);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+  border: none;
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 24px;
+  color: #ffffff;
+  padding: 10px 30px;
+}
+.withdraw_balance_card {
+  background: #ffffff;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+  padding: 10px 16px;
+}
+.withdraw_balance_text {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 24px;
+  color: #1e1f20;
+  margin-bottom: 0;
+}
+.withdraw_balance_amount {
+  color: #f6587b;
+}
+.payout_search_box {
+  background: #ffffff;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+  padding: 3px;
+  width: 300px;
+}
+.payout_search {
+  width: 15px;
+  margin-left: 15px;
+  margin-top: 1px;
+  position: absolute;
+}
+.payout_title {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 800;
+  font-size: 24px;
+  line-height: 40px;
+  color: #1e1f20;
+}
+.pagination_result_text {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 16px;
+  display: flex;
+  align-items: center;
+  color: #9393aa;
+  margin-bottom: 0px;
+  margin-top: 10px;
+}
+.pagination_card {
+  background: #ffffff;
+  box-shadow: 0px 5px 10px rgb(0 64 128 / 4%);
+  border-radius: 0px 0px 12px 12px;
+  padding: 20px 20px;
+  border: 1px solid #eceff4;
+}
+.page_item_list {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 22px;
+  display: flex;
+  align-items: center;
+  color: #9393aa;
+  margin-right: 15px;
+  margin-bottom: 0px;
+  margin-top: 10px;
+}
+.item_list_box {
+  height: 40px;
+  margin-top: -5px;
+}
+.item_drop_box {
+  height: 40px !important;
+}
+.pagination_content {
+  justify-content: center;
+  --bs-pagination-border-width: 0;
+  column-gap: 10px;
+  margin-bottom: 3px;
+}
+.page-item:first-child .page-link {
+  background-image: url("../img/png/left_pagination.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+.page-item:last-child .page-link {
+  background-image: url("../img/png/right_pagination.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+.page-link {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 24px;
+  display: flex;
+  align-items: center;
+  color: #1e1f20 !important;
+}
+.active > .page-link,
+.page-link.active {
+  color: #3093bb !important;
+  background: #fff;
+}
+.requiest_btn {
+  background: #f0f0f0;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+  padding: 10px 30px 10px 30px;
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 12px;
+  color: #9393aa;
+  border: none;
+  text-align: left;
+}
+.payout_date {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
+  color: #9393aa;
+}
+.payout_back_btn {
+  background: #ffffff;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 24px;
+  color: #1e1f20;
+  padding: 10px 25px;
+  border: none;
+}
+.back_btn_icon {
+  width: 13px;
+  margin-left: -5px;
+  margin-top: -5px;
+  margin-right: 8px;
+}
+/*-----------------------------------------------Payout Css End-----------------------------------------------*/
+/*-----------------------------------------------Profile Css Start-----------------------------------------------*/
+.profile_container {
+  background: #f8fbff;
+  padding: 30px 100px;
+}
+.profile_title {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 800;
+  font-size: 24px;
+  line-height: 40px;
+  color: #1e1f20;
+}
+.profile_tab_card {
+  background: #ffffff;
+  padding: 20px 16px 20px 16px;
+}
+.profile_tab_option_active_bg {
+  background: #f8fbff;
+  border-radius: 12px;
+  padding: 13px 15px;
+}
+.profile_tab_option_bg {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 13px 15px;
+}
+.profile_option_icon {
+  margin-top: -7px;
+}
+.profile_option_icon_active {
+  margin-top: -7px;
+}
+.profile_ul {
+  padding: 0px;
+}
+.profile_option_text_active {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 24px;
+  color: #3093bb;
+  margin-left: 20px;
+}
+.profile_arrow_active {
+  margin-top: 5px;
+  float: right;
+}
+.profile_option_text {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 24px;
+  color: #9393aa;
+  margin-left: 20px;
+}
+.personal_profile_card_head {
+  background: #ffffff;
+  box-shadow: 0px 5px 10px rgba(0, 64, 128, 0.04);
+  border-radius: 12px 12px 0 0;
+  padding: 15px 20px;
+  border-bottom: 1px solid #eceff4;
+}
+.personal_profile_card_body {
+  background: #ffffff;
+  box-shadow: 0px 5px 10px rgba(0, 64, 128, 0.04);
+  border-radius: 0 0 12px 12px;
+  padding: 25px;
+}
+.personal_profile_title {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 32px;
+  color: #1e1f20;
+  margin-top: 5px;
+  margin-bottom: 0;
+}
+.personal_profile_btn {
+  background: #ffffff;
+  border: 1px solid #eceff4;
+  border-radius: 8px;
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  color: #1e1f20;
+  padding: 8px 15px;
+}
+.personal_profile_btn_icon {
+  margin-right: 15px;
+  width: 18px;
+  margin-top: -5px;
+}
+.personal_profile_title::before {
+  content: "";
+  background: #fc9875;
+  border: 1px solid #fc9875;
+  padding: 3px;
+  border-radius: 10px;
+  margin-right: 10px;
+}
+.profile_gender_btn_text {
+  font-family: "Mulish";
+  font-size: 15px;
+  font-weight: 700;
+  text-align: center;
+  color: #1e1f20;
+  margin-top: 15px;
+  position: absolute;
+  margin-left: -18px;
+}
+.edit_profile_save_btn {
+  font-family: "Mulish";
+  font-weight: 700;
+  font-size: 16px;
+  background: linear-gradient(45deg, #3093bb 0%, #82dbff 100%);
+  width: 22%;
+  padding: 15px 20px;
+  border: none;
+  border-radius: 12px;
+  color: #fff;
+  margin-top: 50px;
+}
+.work_profile_title {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 32px;
+  color: #1e1f20;
+  margin-top: 5px;
+  margin-bottom: 0;
+}
+.work_profile_title::before {
+  content: "";
+  background: #f8446c;
+  border: 1px solid #f8446c;
+  padding: 3px;
+  border-radius: 10px;
+  margin-right: 10px;
+}
+.work_profile_tag_box {
+  background: #24b2b2;
+  border-radius: 4px;
+  padding: 5px 10px 8px 10px;
+  color: #fff;
+}
+.work_profile_card_head {
+  background: #fff;
+  box-shadow: 0px 5px 10px rgba(0, 64, 128, 0.04);
+  border-radius: 12px 12px 0 0;
+  padding: 15px 20px;
+  border-bottom: 1px solid #eceff4;
+}
+.work_profile_card_body {
+  background: #fff;
+  box-shadow: 0px 5px 10px rgba(0, 64, 128, 0.04);
+  border-radius: 0 0 0 0px;
+  padding: 25px;
+}
+.work_profile_bottom_border {
+  border-bottom: 1px solid #eceff4;
+}
+.work_profile_card_body_1 {
+  background: #fff;
+  box-shadow: 0px 5px 10px rgba(0, 64, 128, 0.04);
+  border-radius: 0 0 0px 0px;
+  padding: 25px 25px 25px 25px;
+  border-top: 1px solid #eceff4;
+}
+.work_profile_title_qualification {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 32px;
+  color: #1e1f20;
+  margin-top: 5px;
+  margin-bottom: 0;
+}
+.work_profile_title_qualification::before {
+  content: "";
+  background: #fc9875;
+  border: 1px solid #fc9875;
+  padding: 3px;
+  border-radius: 10px;
+  margin-right: 10px;
+}
+.qualification_title {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 24px;
+  color: #1e1f20;
+}
+.work_profile_title_upload_id {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 32px;
+  color: #1e1f20;
+  margin-top: 5px;
+  margin-bottom: 0;
+}
+.work_profile_title_upload_id::before {
+  content: "";
+  background: #24b2b2;
+  border: 1px solid #24b2b2;
+  padding: 3px;
+  border-radius: 10px;
+  margin-right: 10px;
+}
+/*------------------------------------------------Profile Css End------------------------------------------------*/
+/*---------------------------------------------Datatable one two modal Css Start---------------------------------------------*/
 .button-spaces {
   gap: 20px;
 }
@@ -1773,7 +3591,7 @@ input:checked + .slider:before {
   border-radius: 8px;
 }
 
-.cancel-button {
+.cancel-button .btn {
   font-style: normal;
   font-weight: 600;
   font-size: 14px;
@@ -1781,13 +3599,7 @@ input:checked + .slider:before {
   color: #f8446c;
 }
 .search {
-  width: 306px;
-}
-.crud-datatable {
-  background: #ffffff;
-  box-shadow: 0px 5px 10px rgba(0, 64, 128, 0.04);
-  border-radius: 12px;
-  padding: 24px 16px;
+  width: 300px;
 }
 
 .custom-select {
@@ -1799,18 +3611,90 @@ input:checked + .slider:before {
   height: 34px;
 }
 
-.tablehead {
+.consultation-modal-body .modal-content {
+  margin: auto;
+  max-width: 350px;
+  width: 100%;
+}
+.consultation-modal-text {
+  font-family: "Mulish";
+  font-size: 18px;
+  line-height: 32px;
+  font-weight: 700;
+}
+.consultation-modal-header {
+  border: none;
+  padding-bottom: 0;
+}
+.checkbox_input span {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 24px;
+  color: #1e1f20;
+}
+.checkbox_input {
+  display: flex;
+  justify-content: flex-start;
+  gap: 20px;
+  padding: 10px 15px;
+}
+.optional-note {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 16px;
+  color: #1e1f20;
+}
+.optional-note p {
+  margin-bottom: 8px;
+  margin-left: 10px;
+}
+.optional-note-text {
+  background: #ffffff;
+  border: 1px solid #f0f0f0;
+  border-radius: 8px;
+  width: 95%;
+  margin-left: 10px;
+  margin-right: 10px;
+  padding: 10px;
+}
+.consultation-modal-footer {
+  justify-content: space-around;
+  border: none;
+  width: 100%;
+}
+.appoinment_input {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 10px;
+  border-bottom: 1px solid #eceff4;
+}
+.appoinment_input .left_text {
+  font-family: "Mulish";
+  font-style: normal;
   font-weight: 700;
   font-size: 15px;
   line-height: 24px;
   color: #9393aa;
 }
-
-.tablebody {
-  font-weight: 500;
+.appoinment_input .right-text {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 600;
   font-size: 15px;
   line-height: 24px;
-  color: #1e1f20;
+  margin-bottom: 0;
+}
+.appoinment_input span {
+  text-align: right;
+}
+.consultation-modal-body-two .modal-content {
+  margin: auto;
+  max-width: 450px;
+  width: 100%;
 }
 
 .Tabs .nav {
@@ -1824,10 +3708,105 @@ input:checked + .slider:before {
   gap: 20px;
 }
 
+.Tabs .nav li {
+  cursor: pointer;
+}
+
 .Tabs li.active {
   color: #24b2b2;
   border-bottom: 2px solid #24b2b2;
 }
-.eye {
-  color: #007bed;
+.cancel-button .active {
+  display: none;
 }
+
+.consultation-heading {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 800;
+  font-size: 24px;
+  line-height: 40px;
+  color: #1e1f20;
+}
+.consultation_card_box {
+  background: #ffffff;
+  box-shadow: 0px 5px 10px rgb(0 64 128 / 4%);
+  border-radius: 12px 12px 0px 0px;
+  padding: 24px 20px;
+  height: 650px;
+}
+.consultation_table {
+  border: none !important;
+  border-bottom-width: 0px !important;
+}
+.consultation_table_head {
+  background: #f8fbff;
+  border-radius: 12px;
+  padding: 16px;
+  height: 56px;
+}
+.consultation_table_head_text {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 40px;
+  color: #9393aa;
+  padding-left: 20px !important;
+}
+.consultation_table_body_row {
+  height: 56px;
+  border-bottom: 1px solid #eceff4;
+}
+.consultation_table_body_text {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 40px;
+  color: #1e1f20;
+  padding-left: 20px !important;
+}
+
+/*------------------------------------------------Datatable one two modal css end -----------------------------------------------*/
+/*------------------------------------------------Prescription one css Start -----------------------------------------------*/
+/* SideNAv */
+
+.nav_container {
+  display: flex;
+  gap: 10px;
+}
+
+.pro-sidebar {
+  background: #ffffff;
+  box-shadow: 0px 5px 10px rgba(0, 64, 128, 0.04);
+  border-radius: 12px;
+  width: 245px;
+  height: 734px;
+}
+.sidebar_nav {
+  display: flex;
+  gap: 20px;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 24px;
+  padding: 15px;
+}
+.pro-menu ul a {
+  text-decoration: none;
+}
+
+.nav_text.active {
+}
+
+/* medicine css */
+
+.medicine_card_box {
+  background: #ffffff;
+  box-shadow: 0px 5px 10px rgb(0 64 128 / 4%);
+  border-radius: 12px 12px 0px 0px;
+  padding: 24px 20px;
+  height: 650px;
+}
+
+/*------------------------------------------------Prescription one css end -----------------------------------------------*/

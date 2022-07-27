@@ -19,7 +19,6 @@ function PrivateRoutes({ children, isHeader, isBanner }) {
           text: "Logged in",
         })
       );
-      navigate("/dashboard");
     } else {
       navigate("/");
       dispatch(

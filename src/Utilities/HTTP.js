@@ -2,21 +2,11 @@ import axios from "axios";
 import { SESSION } from "./Enums";
 import { JSONToFormData } from "./Functions";
 // const USER = process.env.REACT_APP_VENDOR || process.env.REACT_APP_MANAGER;
+
 export const BASE_URL = process.env.REACT_APP_BASE_URL;
-export const PEER_BOARD_BASE_URL = process.env.REACT_APP_PEER_BOARD_BASE_URL;
-const PEER_BOARDE_API_KEY = process.env.REACT_APP_PEER_BOARD_API_KEY;
+
 let SessionData;
-// async function processFormData(data) {
-//   try {
-//     var form_data = new FormData();
-//     for (var key in data) {
-//       form_data.append(key, data[key]);
-//     }
-//     return form_data;
-//   } catch (error) {
-//     return error;
-//   }
-// }
+
 export async function POST(url, data) {
   let formData = [];
   try {
