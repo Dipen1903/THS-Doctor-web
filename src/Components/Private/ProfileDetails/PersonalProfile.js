@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import BasicInformation from "./BasicInformation";
@@ -6,12 +6,13 @@ import WorkProfile from "./WorkProfile";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import EducationalProfile from "./EducationalProfile";
-import { SignUpEnum } from "../../../Utilities/Enums";
-import { SignUpSchema } from "../../../Utilities/Schema";
+import { ProfileEnum, SignUpEnum } from "../../../Utilities/Enums";
+import { ProfileSchema, SignUpSchema } from "../../../Utilities/Schema";
 import { Formik } from "formik";
 import ProgressBar from "../../Common/Layouts/Progress_bar";
 import { BackGround } from "../../../Utilities/Icons";
 import { nextStep, prevStep } from "../../../Store/Reducers/ProfileReducer";
+import { CityList, StateList } from "../../../Store/Reducers/CommonReducer";
 
 function PersonalProfile() {
   const dispatch = useDispatch();
@@ -21,6 +22,12 @@ function PersonalProfile() {
   function submit(values) {
     console.log(values);
   }
+  useEffect(() => {
+    dispatch(StateList());
+    dispatch(CityList());
+    return () => {};
+  }, []);
+
   return (
     <div class="sub_section_2">
       <SkipCaution show={modalShow} onHide={() => setModalShow(false)} />
@@ -38,8 +45,16 @@ function PersonalProfile() {
                       </span>
                     </div>
                   </div>
-                  <h5 class="steps mt_50">Step 1 of 3</h5>
-                  <h3 class="info_title">Basic Information</h3>
+                  <h5 class="steps mt_50">Step {profileStep} of 3</h5>
+                  <h3 class="info_title">
+                    {profileStep == 1
+                      ? "Basic Information"
+                      : profileStep == 2
+                      ? "Your Work Profile"
+                      : profileStep == 3
+                      ? "Your Qualifications and ID Proof"
+                      : ""}
+                  </h3>
                   <div class="progress_box">
                     <div class="row">
                       <div class="col-md-3">
@@ -60,14 +75,15 @@ function PersonalProfile() {
                   </div>
 
                   <Formik
-                    initialValues={SignUpEnum}
-                    validationSchema={SignUpSchema}
+                    initialValues={ProfileEnum}
+                    validationSchema={ProfileSchema}
                     onSubmit={(values) => submit(values)}
                   >
-                    {({ handleSubmit }) => (
+                    {({ values, errors, handleSubmit, validateField }) => (
                       <form onSubmit={handleSubmit}>
                         <WizardForm />
-                        <div class="row mt_80">
+                        {/* {console.log(errors)} */}
+                        <div class="row mt_10">
                           <div className="display_inline">
                             {profileStep > 1 ? (
                               <button
@@ -86,7 +102,8 @@ function PersonalProfile() {
                               <button
                                 class="continue_btn"
                                 variant="primary"
-                                onClick={() => {
+                                onClick={(e) => {
+                                  handleSubmit(e);
                                   dispatch(nextStep());
                                 }}
                               >

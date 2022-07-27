@@ -1,13 +1,20 @@
 //LOGOS
 
 //ICONS
-
+import FEMALEGRAY from "../Assets/svg/Female_grey.svg";
+import FEMALEWHITE from "../Assets/svg/Female_white.svg";
+import MALEWHITE from "../Assets/svg/Male_white.svg";
+import MALEGREY from "../Assets/svg/Male_grey.svg";
 //BACKGROUND IMAGES
 
 export const Logo = {
   THS: require("../Assets/img/logo.png"),
 };
 export const Icon = {
+  FemaleGray: FEMALEGRAY,
+  FemaleWhite: FEMALEWHITE,
+  MaleWhite: MALEWHITE,
+  MaleGrey: MALEGREY,
   Attach: require("../Assets/img/ic_attach.png"),
   Cross: require("../Assets/img/cross.png"),
   User: require("../Assets/img/My Profile.png"),

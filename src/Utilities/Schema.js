@@ -3,8 +3,7 @@ const FILE_SIZE = 5e8;
 const SUPPORTED_FORMATS = "image/jpeg image/png image/gif";
 
 export const SignInSchema = Yup.object({
-  email: Yup.string()
-  .required("Please enter your mobile/email"),
+  email: Yup.string().required("Please enter your mobile/email"),
   password: Yup.string()
     .min(6, "Please enter minimum 6 letter")
     .required("Please enter your password"),
@@ -30,4 +29,7 @@ export const OTPSchema = Yup.object({
     .min(4, "Please enter valid OTP")
     .max(4, "Please enter valid OTP")
     .required("Please enter your OTP"),
+});
+export const ProfileSchema = Yup.object({
+  gender: Yup.string().required("Please select your gender"),
 });
