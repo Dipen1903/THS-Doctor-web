@@ -21,16 +21,19 @@ export const ProfileEnum = {
   first_name: "",
   last_name: "",
   email: "",
+  //first step
   dob: "",
   age: "",
   gender: "",
   city_id: "",
   state_id: "",
+  image: "",
+  //second step
   speciality: "",
   sub_speciality: "",
   registration_number: "",
   experience: "",
-  languages: "",
+  languages: [],
 };
 export const BankEnum = {
   bank_name: "",

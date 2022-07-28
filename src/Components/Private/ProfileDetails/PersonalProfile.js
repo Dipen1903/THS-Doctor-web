@@ -11,26 +11,77 @@ import { ProfileSchema, SignUpSchema } from "../../../Utilities/Schema";
 import { Formik } from "formik";
 import ProgressBar from "../../Common/Layouts/Progress_bar";
 import { BackGround } from "../../../Utilities/Icons";
-import { nextStep, prevStep } from "../../../Store/Reducers/ProfileReducer";
-import { CityList, StateList } from "../../../Store/Reducers/CommonReducer";
+import {
+  EditUserProfile,
+  nextStep,
+  prevStep,
+  toggleSkip,
+} from "../../../Store/Reducers/ProfileReducer";
+import {
+  CityList,
+  LanguageList,
+  SpecialityList,
+  StateList,
+  SubSpecialityList,
+} from "../../../Store/Reducers/CommonReducer";
+import { isEmpty } from "../../../Utilities/Functions";
 
 function PersonalProfile() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [modalShow, setModalShow] = useState(false);
-  const { profileStep } = useSelector(({ ProfileSlice }) => ProfileSlice);
-  function submit(values) {
-    console.log(values);
-  }
+  const [profileData, setProfileData] = useState(ProfileEnum);
+  const { profileStep, skipModal, userProfile } = useSelector(
+    ({ ProfileSlice }) => ProfileSlice
+  );
+  const intialSetup = () => {
+    let tempProfile = { ...profileData };
+    tempProfile.dob = userProfile?.birthdate;
+    tempProfile.gender = userProfile?.gender;
+    tempProfile.image = userProfile?.image;
+    tempProfile.city_id = userProfile?.city_id;
+    tempProfile.speciality = userProfile?.speciality;
+    tempProfile.sub_speciality = userProfile?.sub_speciality;
+    tempProfile.registration_number = userProfile?.registration_number;
+    tempProfile.qualification = userProfile?.qualification;
+    tempProfile.state_id = userProfile?.state_id;
+    tempProfile.experience = userProfile?.experience;
+    tempProfile.languages = userProfile?.languages?.split(",");
+    setProfileData(tempProfile);
+  };
+  const submit = (values) => {
+    let tempData = { ...values };
+    tempData.languages = values?.languages?.toString();
+    dispatch(EditUserProfile(tempData)).then((res) => {
+      if (res?.payload?.success) {
+        if (profileStep === 3) {
+          navigate("/dashboard");
+        } else {
+          dispatch(nextStep());
+        }
+      }
+    });
+  };
+  useEffect(() => {
+    intialSetup();
+    return () => {};
+  }, [userProfile]);
+
   useEffect(() => {
     dispatch(StateList());
     dispatch(CityList());
+    dispatch(SpecialityList());
+    dispatch(SubSpecialityList());
+    dispatch(LanguageList());
+
     return () => {};
   }, []);
 
   return (
     <div class="sub_section_2">
-      <SkipCaution show={modalShow} onHide={() => setModalShow(false)} />
+      <SkipCaution
+        show={skipModal}
+        onHide={() => dispatch(toggleSkip(false))}
+      />
       <div class="row">
         <div class="col-md-12">
           <div class="display_t js-fullheight">
@@ -40,7 +91,10 @@ function PersonalProfile() {
                   <div class="row">
                     <div class="col-md-6"></div>
                     <div class="col-md-6">
-                      <span className="skip" onClick={() => setModalShow(true)}>
+                      <span
+                        className="skip"
+                        onClick={() => dispatch(toggleSkip(true))}
+                      >
                         SKIP
                       </span>
                     </div>
@@ -75,60 +129,89 @@ function PersonalProfile() {
                   </div>
 
                   <Formik
-                    initialValues={ProfileEnum}
-                    validationSchema={ProfileSchema}
-                    onSubmit={(values) => submit(values)}
+                    initialValues={profileData}
+                    enableReinitialize
+                    onSubmit={submit}
                   >
-                    {({ values, errors, handleSubmit, validateField }) => (
-                      <form onSubmit={handleSubmit}>
-                        <WizardForm />
-                        {/* {console.log(errors)} */}
-                        <div class="row mt_10">
-                          <div className="display_inline">
-                            {profileStep > 1 ? (
-                              <button
-                                class="back_btn"
-                                variant="primary"
-                                onClick={() => {
-                                  dispatch(prevStep());
-                                }}
-                              >
-                                Back
-                              </button>
-                            ) : (
-                              <></>
-                            )}
-                            {profileStep < 3 ? (
-                              <button
-                                class="continue_btn"
-                                variant="primary"
-                                onClick={(e) => {
-                                  handleSubmit(e);
-                                  dispatch(nextStep());
-                                }}
-                              >
-                                Continue
-                              </button>
-                            ) : (
-                              <></>
-                            )}
-                            {profileStep === 3 ? (
-                              <button
-                                class="continue_btn"
-                                variant="primary"
-                                onClick={() => {
-                                  dispatch(nextStep());
-                                }}
-                              >
-                                Submit
-                              </button>
-                            ) : (
-                              <></>
-                            )}
+                    {({
+                      values,
+                      touched,
+                      errors,
+                      handleSubmit,
+                      validateForm,
+                    }) => {
+                      const isStepTwoValid = () =>
+                        !isEmpty(values?.speciality) &&
+                        touched?.speciality &&
+                        !isEmpty(values?.sub_speciality) &&
+                        touched?.sub_speciality &&
+                        !isEmpty(values?.experience) &&
+                        touched?.experience
+                          ? true
+                          : false;
+
+                      const handleNext = (e) => {
+                        let isNext = false;
+                        if (profileStep == 2) {
+                          isNext = true;
+                        } else {
+                          isNext = true;
+                        }
+                        if (isNext) {
+                          handleSubmit(e);
+                        } else {
+                          validateForm();
+                        }
+                      };
+                      return (
+                        <form onSubmit={() => {}}>
+                          <WizardForm />
+                          {/* {console.log(errors)} */}
+                          <div class="row mt_10">
+                            <div className="display_inline">
+                              {profileStep > 1 ? (
+                                <button
+                                  class="back_btn"
+                                  variant="primary"
+                                  onClick={() => {
+                                    dispatch(prevStep());
+                                  }}
+                                >
+                                  Back
+                                </button>
+                              ) : (
+                                <></>
+                              )}
+                              {profileStep < 3 ? (
+                                <button
+                                  class="continue_btn"
+                                  variant="primary"
+                                  type="button"
+                                  onClick={handleNext}
+                                >
+                                  Continue
+                                </button>
+                              ) : (
+                                <></>
+                              )}
+                              {profileStep === 3 ? (
+                                <button
+                                  class="continue_btn"
+                                  variant="primary"
+                                  onClick={() => {
+                                    dispatch(nextStep());
+                                  }}
+                                >
+                                  Submit
+                                </button>
+                              ) : (
+                                <></>
+                              )}
+                            </div>
                           </div>
-                        </div>
-                      </form>
-                    )}
+                        </form>
+                      );
+                    }}
                   </Formik>
                 </div>
               </div>
@@ -155,6 +238,9 @@ function WizardForm({ formData }) {
 }
 
 const SkipCaution = (props) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { profileStep } = useSelector(({ ProfileSlice }) => ProfileSlice);
   return (
     <Modal
       {...props}
@@ -179,7 +265,18 @@ const SkipCaution = (props) => {
           <Button className="close_btn_1" onClick={props.onHide}>
             Cancel
           </Button>
-          <Button className="skip_btn" variant="primary">
+          <Button
+            className="skip_btn"
+            variant="primary"
+            onClick={() => {
+              if (profileStep < 3) {
+                dispatch(nextStep());
+              } else {
+                navigate("/dashboard");
+              }
+              props.onHide();
+            }}
+          >
             Skip Anyway
           </Button>
         </div>

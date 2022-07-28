@@ -30,6 +30,3 @@ export const OTPSchema = Yup.object({
     .max(4, "Please enter valid OTP")
     .required("Please enter your OTP"),
 });
-export const ProfileSchema = Yup.object({
-  gender: Yup.string().required("Please select your gender"),
-});

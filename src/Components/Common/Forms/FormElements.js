@@ -26,8 +26,15 @@ const CustomOption = (props) => {
 const DropdownIndicator = (props) => {
   return (
     <components.DropdownIndicator {...props}>
-      <img alt="myimg" src={Icon.CiverDown} />
+      <img alt="myimg" src={Icon.Search} />
     </components.DropdownIndicator>
+  );
+};
+const MultiValueRemove = (props) => {
+  return (
+    <components.MultiValueRemove {...props}>
+      <img src={Icon.Cross} alt="" />
+    </components.MultiValueRemove>
   );
 };
 
@@ -136,7 +143,7 @@ function Select(props) {
   return (
     <>
       <div className={`form-group ${outerClass}`}>
-        <label>{label}</label>
+        <label className="sign_title">{label}</label>
         <ReactSelect
           closeMenuOnSelect={true}
           className={`${className}`}
@@ -149,6 +156,7 @@ function Select(props) {
           setFieldValue={setFieldValue}
           value={selectedValue()}
           name={name}
+          isMulti={isMulti}
           id={id || ""}
           onChange={(values) => {
             handleChange(values);
@@ -156,18 +164,41 @@ function Select(props) {
           styles={{
             menu: (base) => ({
               ...base,
-              // maxWidth: 365,
+            }),
+            multiValue: (base) => ({
+              ...base,
+              marginRight: 6,
+              color: "#FFFFFF",
+              background: "#3DA496",
+              borderRadius: "10px",
+              display: "flex",
+              paddingTop: 5,
+              paddingBottom: 5,
+              paddingLeft: 11,
+              paddingRight: 6,
+              fontFamily: "Nunito Sans Bold",
+              fontStyle: "normal",
+              fontSize: "14px",
+            }),
+            multiValueLabel: () => ({
+              color: "#fff",
+            }),
+            multiValueRemove: () => ({
+              background: "none",
+              marginLeft: 10,
+              marginRight: 2,
             }),
           }}
           components={{
             Option: CustomOption,
             DropdownIndicator,
+            MultiValueRemove,
           }}
         />
       </div>
-      <div className="error">
+      {/* <div className="error">
         <ErrorMessage name={name} />
-      </div>
+      </div> */}
     </>
   );
 }

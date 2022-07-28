@@ -5,6 +5,7 @@ import FEMALEGRAY from "../Assets/svg/Female_grey.svg";
 import FEMALEWHITE from "../Assets/svg/Female_white.svg";
 import MALEWHITE from "../Assets/svg/Male_white.svg";
 import MALEGREY from "../Assets/svg/Male_grey.svg";
+import SEARCH from "../Assets/svg/Search.svg";
 //BACKGROUND IMAGES
 
 export const Logo = {
@@ -15,6 +16,7 @@ export const Icon = {
   FemaleWhite: FEMALEWHITE,
   MaleWhite: MALEWHITE,
   MaleGrey: MALEGREY,
+  Search: SEARCH,
   Attach: require("../Assets/img/ic_attach.png"),
   Cross: require("../Assets/img/cross.png"),
   User: require("../Assets/img/My Profile.png"),

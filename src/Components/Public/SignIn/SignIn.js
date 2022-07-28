@@ -181,7 +181,10 @@ const OTPLogin = (props) => {
       <Formik
         initialValues={{ mobile_number: values?.email, otp: "" }}
         enableReinitialize
-        onSubmit={(values) => dispatch(OTPVerifySignIn(values))}
+        onSubmit={(values) => {
+          dispatch(OTPVerifySignIn(values));
+          props.onHide();
+        }}
       >
         {({ values, setFieldValue, handleSubmit }) => (
           <Form onSubmit={handleSubmit}>

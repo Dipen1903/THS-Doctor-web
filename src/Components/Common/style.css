@@ -60,3 +60,32 @@
   line-height: 14px;
   font-weight: normal;
 }
+
+.my-select__indicator-separator {
+  display: none;
+}
+.my-select__control {
+  align-items: flex-start;
+  background: none !important;
+  line-height: 1.9;
+  width: 100%;
+  color: transparent;
+  transition: all 0.28s ease;
+  box-shadow: none;
+  font-family: Mulish;
+  font-weight: 600;
+  font-size: 16px;
+  height: 48px !important;
+  color: #1d1929;
+  border: 1px solid #ede8e9 !important;
+  height: 48px;
+  padding: 0.5rem !important;
+  border-radius: 10px !important;
+}
+.my-select__multi-value {
+  background: #24b2b2 !important;
+  border-radius: 4px !important;
+  padding: 5px 5px 8px 10px !important;
+  color: #fff !important;
+  font-family: "Mulish" !important;
+}

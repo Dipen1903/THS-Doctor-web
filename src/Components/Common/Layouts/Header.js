@@ -58,7 +58,7 @@ function Header() {
               title={<span className="profile_name ml_10">Dr John Doe</span>}
               id="navbarScrollingDropdown"
             >
-              <NavDropdown.Item href="#action3">
+              <NavDropdown.Item href="details/work">
                 <img src={Icon.User} alt="Avatar" class=" mr_10 "></img>My
                 Profle
               </NavDropdown.Item>

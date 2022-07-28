@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
-import { useFormikContext } from "formik";
+import { ErrorMessage, useFormikContext } from "formik";
 import ProgressBar from "../../Common/Layouts/Progress_bar";
 import { BackGround, Icon, Logo } from "../../../Utilities/Icons";
 import FileUpload from "../../Common/Layouts/FileUpload";
@@ -11,10 +11,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { CityList } from "../../../Store/Reducers/CommonReducer";
 
 export default function BasicInformation() {
-  const { values, errors, setFieldValue, handleBlur, handleChange } =
+  const { values, setFieldValue, handleBlur, handleChange } =
     useFormikContext();
-  const dispatch = useDispatch();
-  const { stateList, cityList } = useSelector(({ CommonSlice }) => CommonSlice);
+  const { CommonSlice, ProfileSlice } = useSelector((state) => state);
+  const { stateList, cityList } = CommonSlice;
+  const { userProfile } = ProfileSlice;
   const [localImage, setLocalImage] = useState();
 
   const handleImage = (e, setFieldValue) => {
@@ -33,9 +34,9 @@ export default function BasicInformation() {
             <center>
               <img
                 src={
-                  localImage
-                    ? URL.createObjectURL(localImage)
-                    : BackGround.Profile
+                  (localImage && URL.createObjectURL(localImage)) ||
+                  values?.image ||
+                  BackGround.Profile
                 }
                 class="upload_avatar_img"
               ></img>
@@ -47,6 +48,7 @@ export default function BasicInformation() {
                 className="upload_avatar_btn"
                 label="Upload Your Avatar"
                 id="upload_avatar"
+                name="image"
                 onChange={(e) => {
                   handleImage(e, setFieldValue);
                 }}
@@ -61,6 +63,10 @@ export default function BasicInformation() {
               indentifiable as you.
             </p>
           </div>
+          <ErrorMessage
+            name="image"
+            render={(error) => <div className="error">{error}</div>}
+          />
         </div>
         <div class="row mt_20">
           <div class="col-md-12">
@@ -82,16 +88,23 @@ export default function BasicInformation() {
               <Form.Label className="sign_title">State</Form.Label>
               <Form.Select
                 name="state_id"
+                value={values.state_id}
                 onChange={handleChange}
                 onBlur={handleBlur}
               >
                 <option>Select</option>
-                {stateList?.map((item) => (
-                  <option key={item?.value} value={item?.value}>
-                    {item?.label}
-                  </option>
-                ))}
+
+                {stateList?.length &&
+                  stateList?.map((item) => (
+                    <option key={item?.value} value={item?.value}>
+                      {item?.label}
+                    </option>
+                  ))}
               </Form.Select>
+              <ErrorMessage
+                name="state_id"
+                render={(error) => <div className="error">{error}</div>}
+              />
             </Form.Group>
           </div>
           <div class="col-md-6">
@@ -99,16 +112,22 @@ export default function BasicInformation() {
               <Form.Label className="sign_title">City</Form.Label>
               <Form.Select
                 name="city_id"
+                value={values.city_id}
                 onChange={handleChange}
                 onBlur={handleBlur}
               >
                 <option>Select</option>
-                {cityList?.map((item) => (
-                  <option key={item?.value} value={item?.value}>
-                    {item?.label}
-                  </option>
-                ))}
+                {cityList?.length &&
+                  cityList?.map((item) => (
+                    <option key={item?.value} value={item?.value}>
+                      {item?.label}
+                    </option>
+                  ))}
               </Form.Select>
+              <ErrorMessage
+                name="city_id"
+                render={(error) => <div className="error">{error}</div>}
+              />
             </Form.Group>
           </div>
         </div>
@@ -168,6 +187,10 @@ export default function BasicInformation() {
                   />
                 </div>
               </div>
+              <ErrorMessage
+                name="gender"
+                render={(error) => <div className="error">{error}</div>}
+              />
             </div>
           </div>
         </div>

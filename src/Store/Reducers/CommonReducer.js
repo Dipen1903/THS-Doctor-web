@@ -4,6 +4,7 @@ import {
   CityListAPI,
   SpecialityListAPI,
   SubSpecialityListAPI,
+  LanguageListAPI,
 } from "../../Components/Common/Service";
 
 import { AlertEnum } from "../../Utilities/Enums";
@@ -14,12 +15,14 @@ const initialState = {
   stateList: [],
   specialityList: [],
   subSpecialityList: [],
+  languageList: [],
 };
 export const StateList = createAsyncThunk(
   "StateList",
   async (values, { dispatch }) => {
     try {
       const result = await StateListAPI(values);
+
       if (result?.success) {
         let stateArr = result?.data?.map((item) => ({
           label: item?.name,
@@ -74,7 +77,7 @@ export const SpecialityList = createAsyncThunk(
       const result = await SpecialityListAPI(values);
       if (result?.success) {
         let specialtyArr = result?.data?.map((item) => ({
-          label: item?.name,
+          label: item?.speciality,
           value: item?.id,
         }));
         return specialtyArr;
@@ -100,10 +103,36 @@ export const SubSpecialityList = createAsyncThunk(
       const result = await SubSpecialityListAPI(values);
       if (result?.success) {
         let specialtyArr = result?.data?.map((item) => ({
-          label: item?.name,
+          label: item?.sub_speciality,
           value: item?.id,
         }));
         return specialtyArr;
+      } else {
+        throw result;
+      }
+    } catch (error) {
+      dispatch(setLoading(false));
+      dispatch(
+        setMessage({
+          text: error?.message,
+          type: AlertEnum.Error,
+        })
+      );
+      return error;
+    }
+  }
+);
+export const LanguageList = createAsyncThunk(
+  "LanguageList",
+  async (values, { dispatch }) => {
+    try {
+      const result = await LanguageListAPI(values);
+      if (result?.success) {
+        let languageArr = result?.data?.map((item) => ({
+          label: item?.name,
+          value: item?.id,
+        }));
+        return languageArr;
       } else {
         throw result;
       }
@@ -135,6 +164,9 @@ export const CommonSlice = createSlice({
     });
     builder.addCase(SubSpecialityList.fulfilled, (state, action) => {
       state.subSpecialityList = action.payload;
+    });
+    builder.addCase(LanguageList.fulfilled, (state, action) => {
+      state.languageList = action.payload;
     });
   },
 });
