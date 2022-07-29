@@ -17,6 +17,10 @@ export const Icon = {
   MaleWhite: MALEWHITE,
   MaleGrey: MALEGREY,
   Search: SEARCH,
+  Face: require("../Assets/img/totalconsultations.png"),
+  CalenderCross: require("../Assets/img/cancelconsultaion.png"),
+  Dollor: require("../Assets/img/cureentmonthrevenue.png"),
+  Chart: require("../Assets/img/totalrevenue.png"),
   Attach: require("../Assets/img/ic_attach.png"),
   Cross: require("../Assets/img/cross.png"),
   User: require("../Assets/img/My Profile.png"),
@@ -29,6 +33,7 @@ export const Icon = {
 };
 export const BackGround = {
   Banner: require("../Assets/img/slider_1.png"),
+  Email: require("../Assets/img/messageicon.png"),
   Succcess: require("../Assets/img/img_success.png"),
   Profile: require("../Assets/img/png/photo_3.png"),
   Caution: require("../Assets/img/img_skip.png"),

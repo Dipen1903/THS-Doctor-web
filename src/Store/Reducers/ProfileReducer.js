@@ -7,6 +7,7 @@ import { setLoading, setMessage } from "./LayoutSlice";
 const initialState = {
   profileStep: 1,
   skipModal: false,
+  successModal: false,
   userProfile: "",
 };
 
@@ -77,6 +78,9 @@ export const ProfileSlice = createSlice({
     toggleSkip: (state, action) => {
       state.skipModal = action.payload;
     },
+    toggleSuccess: (state, action) => {
+      state.successModal = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(EditUserProfile.fulfilled, (state, action) => {
@@ -88,6 +92,7 @@ export const ProfileSlice = createSlice({
   },
 });
 
-export const { nextStep, prevStep, toggleSkip } = ProfileSlice.actions;
+export const { nextStep, prevStep, toggleSuccess, toggleSkip } =
+  ProfileSlice.actions;
 
 export default ProfileSlice.reducer;

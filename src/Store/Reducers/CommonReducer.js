@@ -5,6 +5,8 @@ import {
   SpecialityListAPI,
   SubSpecialityListAPI,
   LanguageListAPI,
+  QualificationListAPI,
+  DocumentListAPI,
 } from "../../Components/Common/Service";
 
 import { AlertEnum } from "../../Utilities/Enums";
@@ -16,6 +18,8 @@ const initialState = {
   specialityList: [],
   subSpecialityList: [],
   languageList: [],
+  qualifications: [],
+  documentList: [],
 };
 export const StateList = createAsyncThunk(
   "StateList",
@@ -148,6 +152,58 @@ export const LanguageList = createAsyncThunk(
     }
   }
 );
+export const QualificationList = createAsyncThunk(
+  "QualificationList",
+  async (values, { dispatch }) => {
+    try {
+      const result = await QualificationListAPI(values);
+      if (result?.success) {
+        let qualificationArr = result?.data?.map((item) => ({
+          label: item?.name,
+          value: item?.id,
+        }));
+        return qualificationArr;
+      } else {
+        throw result;
+      }
+    } catch (error) {
+      dispatch(setLoading(false));
+      dispatch(
+        setMessage({
+          text: error?.message,
+          type: AlertEnum.Error,
+        })
+      );
+      return error;
+    }
+  }
+);
+export const DocumentList = createAsyncThunk(
+  "DocumentList",
+  async (values, { dispatch }) => {
+    try {
+      const result = await DocumentListAPI(values);
+      if (result?.success) {
+        let documentArr = result?.data?.map((item) => ({
+          label: item?.name,
+          value: item?.id,
+        }));
+        return documentArr;
+      } else {
+        throw result;
+      }
+    } catch (error) {
+      dispatch(setLoading(false));
+      dispatch(
+        setMessage({
+          text: error?.message,
+          type: AlertEnum.Error,
+        })
+      );
+      return error;
+    }
+  }
+);
 export const CommonSlice = createSlice({
   name: "CommonSlice",
   initialState,
@@ -167,6 +223,12 @@ export const CommonSlice = createSlice({
     });
     builder.addCase(LanguageList.fulfilled, (state, action) => {
       state.languageList = action.payload;
+    });
+    builder.addCase(QualificationList.fulfilled, (state, action) => {
+      state.qualifications = action.payload;
+    });
+    builder.addCase(DocumentList.fulfilled, (state, action) => {
+      state.documentList = action.payload;
     });
   },
 });

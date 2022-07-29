@@ -96,7 +96,8 @@ export default function WorkProfile() {
             options={languageList?.length ? languageList : []}
             isMulti={true}
             placeholder="Search"
-            // onChange={(value) => console.log(value)}
+            isSearchable={true}
+            onChange={() => {}}
             name="languages"
             id="languages"
             className="mb-4"

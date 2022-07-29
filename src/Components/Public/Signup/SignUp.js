@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import { Formik, ErrorMessage } from "formik";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import OTPInput from "../../Common/Layouts/OTPInput/OTPInput";
-import { BackGround, Icon } from "../../../Utilities/Icons";
+import { BackGround } from "../../../Utilities/Icons";
 import { SignUpEnum } from "../../../Utilities/Enums";
 import FormControl from "../../Common/Forms/FormControl";
 import { OTPSchema, SignUpSchema } from "../../../Utilities/Schema";
@@ -16,20 +16,30 @@ import {
   OTPVerifySignUp,
   SignUp,
   toggleOTPverify,
+  toggleSuccess,
 } from "../../../Store/Reducers/RegiserSlice";
 import { useTimer } from "../../../Utilities/Hooks";
 import { padLeadingZeros } from "../../../Utilities/Functions";
 
 export default function SignUpComponent() {
   const dispatch = useDispatch();
-  const { otpVerify } = useSelector(({ RegisterSlice }) => RegisterSlice);
-  const [modalShow1, setModalShow1] = useState(false);
+  const navigate = useNavigate();
+  const { otpVerify, success } = useSelector(
+    ({ RegisterSlice }) => RegisterSlice
+  );
+
   useEffect(() => {
     return () => {};
   }, []);
   return (
     <>
-      <MyModal_1 show={modalShow1} onHide={() => setModalShow1(false)} />
+      <SuccessModal
+        show={success}
+        onHide={() => {
+          dispatch(toggleSuccess(false));
+          navigate("/dashboard");
+        }}
+      />
 
       <div class="sub_section_2">
         <div class="row">
@@ -142,7 +152,7 @@ export default function SignUpComponent() {
                               <OTPVerify
                                 show={otpVerify}
                                 onHide={(e) => {
-                                  toggleOTPverify(false);
+                                  dispatch(toggleOTPverify(false));
                                 }}
                                 values={values}
                               />
@@ -217,7 +227,14 @@ const OTPVerify = (props) => {
         initialValues={{ mobile_number: values?.mobile_number, otp: "" }}
         enableReinitialize
         validationSchema={OTPSchema}
-        onSubmit={(values) => dispatch(OTPVerifySignUp(values))}
+        onSubmit={(values) => {
+          dispatch(OTPVerifySignUp(values)).then((res) => {
+            if (res.payload.success) {
+              dispatch(toggleOTPverify(false));
+              dispatch(toggleSuccess(true));
+            }
+          });
+        }}
       >
         {({ values, setFieldValue, handleSubmit }) => (
           <Form onSubmit={handleSubmit}>
@@ -252,7 +269,12 @@ const OTPVerify = (props) => {
             </Modal.Body>
             <Modal.Footer>
               <div className="">
-                <Button className="close_btn" onClick={props.onHide}>
+                <Button
+                  className="close_btn"
+                  onClick={() => {
+                    props.onHide();
+                  }}
+                >
                   Cancel
                 </Button>
                 <Button className="verify_btn" variant="primary" type="submit">
@@ -267,10 +289,12 @@ const OTPVerify = (props) => {
   );
 };
 
-const MyModal_1 = (props1) => {
+const SuccessModal = (props) => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   return (
     <Modal
-      {...props1}
+      {...props}
       size="sm"
       aria-labelledby="contained-modal-title-vcenter"
       centered
@@ -288,7 +312,13 @@ const MyModal_1 = (props1) => {
       </Modal.Body>
       <Modal.Footer>
         <div>
-          <Button className="my_work_profile_btn" onClick={props1.onHide}>
+          <Button
+            className="my_work_profile_btn"
+            onClick={() => {
+              navigate("/details/work");
+              dispatch(toggleSuccess(false));
+            }}
+          >
             Fill Out My Work Profile
           </Button>
         </div>

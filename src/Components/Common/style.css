@@ -75,11 +75,10 @@
   font-family: Mulish;
   font-weight: 600;
   font-size: 16px;
-  height: 48px !important;
+  min-height: 48px !important;
   color: #1d1929;
   border: 1px solid #ede8e9 !important;
-  height: 48px;
-  padding: 0.5rem !important;
+  padding: 0.3rem !important;
   border-radius: 10px !important;
 }
 .my-select__multi-value {
@@ -88,4 +87,13 @@
   padding: 5px 5px 8px 10px !important;
   color: #fff !important;
   font-family: "Mulish" !important;
+}
+.loader-item {
+  background: #ffffff;
+  border-radius: 12px;
+  height: 150px;
+  width: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

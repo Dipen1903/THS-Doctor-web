@@ -9,3 +9,7 @@ export const SubSpecialityListAPI = (data) =>
   POST(`${BASE_URL}/sub-speciality`, data);
 export const LanguageListAPI = (data) =>
   POST(`${BASE_URL}/language-list`, data);
+export const QualificationListAPI = (data) =>
+  POST(`${BASE_URL}/qualification-list`, data);
+export const DocumentListAPI = (data) =>
+  POST(`${BASE_URL}/document-list`, data);

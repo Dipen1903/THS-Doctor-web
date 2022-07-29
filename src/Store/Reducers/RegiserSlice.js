@@ -10,6 +10,7 @@ import { setLoading, setMessage } from "./LayoutSlice";
 
 const initialState = {
   otpVerify: false,
+  success: false,
 };
 export const SignUp = createAsyncThunk(
   "SignUp",
@@ -84,7 +85,7 @@ export const OTPVerifySignUp = createAsyncThunk(
           })
         );
         dispatch(setSession(result?.data));
-        return result?.data;
+        return result;
       } else {
         throw result;
       }
@@ -108,10 +109,13 @@ export const RegisterSlice = createSlice({
     toggleOTPverify: (state, action) => {
       state.otpVerify = action.payload;
     },
+    toggleSuccess: (state, action) => {
+      state.success = action.payload;
+    },
   },
   extraReducers: (builder) => {},
 });
 
-export const { toggleOTPverify } = RegisterSlice.actions;
+export const { toggleOTPverify, toggleSuccess } = RegisterSlice.actions;
 
 export default RegisterSlice.reducer;

@@ -16,10 +16,13 @@ import {
   nextStep,
   prevStep,
   toggleSkip,
+  toggleSuccess,
 } from "../../../Store/Reducers/ProfileReducer";
 import {
   CityList,
+  DocumentList,
   LanguageList,
+  QualificationList,
   SpecialityList,
   StateList,
   SubSpecialityList,
@@ -30,7 +33,7 @@ function PersonalProfile() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [profileData, setProfileData] = useState(ProfileEnum);
-  const { profileStep, skipModal, userProfile } = useSelector(
+  const { profileStep, successModal, skipModal, userProfile } = useSelector(
     ({ ProfileSlice }) => ProfileSlice
   );
   const intialSetup = () => {
@@ -54,7 +57,7 @@ function PersonalProfile() {
     dispatch(EditUserProfile(tempData)).then((res) => {
       if (res?.payload?.success) {
         if (profileStep === 3) {
-          navigate("/dashboard");
+          dispatch(toggleSuccess(true));
         } else {
           dispatch(nextStep());
         }
@@ -72,6 +75,8 @@ function PersonalProfile() {
     dispatch(SpecialityList());
     dispatch(SubSpecialityList());
     dispatch(LanguageList());
+    dispatch(QualificationList());
+    dispatch(DocumentList());
 
     return () => {};
   }, []);
@@ -81,6 +86,13 @@ function PersonalProfile() {
       <SkipCaution
         show={skipModal}
         onHide={() => dispatch(toggleSkip(false))}
+      />
+      <ProfileSubmitted
+        show={successModal}
+        onHide={() => {
+          dispatch(toggleSuccess(false));
+          navigate("/dashboard");
+        }}
       />
       <div class="row">
         <div class="col-md-12">
@@ -198,8 +210,8 @@ function PersonalProfile() {
                                 <button
                                   class="continue_btn"
                                   variant="primary"
-                                  onClick={() => {
-                                    dispatch(nextStep());
+                                  onClick={(e) => {
+                                    handleSubmit(e);
                                   }}
                                 >
                                   Submit
@@ -308,7 +320,9 @@ const ProfileSubmitted = (props) => {
           <Button
             className="set_up_btn"
             variant="primary"
-            onClick={props.onHide}
+            onClick={() => {
+              props.onHide();
+            }}
           >
             Set up Schedule & Payment
           </Button>

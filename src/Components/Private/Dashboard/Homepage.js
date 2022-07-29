@@ -1,12 +1,8 @@
 import React from "react";
+import Adminpage from "./Adminpage";
 
-// import Adminpage from "./Adminpage";
 function Homepage() {
-  return (
-    <div>
-      <h1>Dashboard</h1>
-    </div>
-  );
+  return <Adminpage />;
 }
 
 export default Homepage;

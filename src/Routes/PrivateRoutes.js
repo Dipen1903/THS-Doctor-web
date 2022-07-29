@@ -15,12 +15,6 @@ function PrivateRoutes({ children, isHeader, isBanner }) {
   useEffect(() => {
     if (token) {
       dispatch(GetUserProfile());
-      dispatch(
-        setMessage({
-          type: AlertEnum.Info,
-          text: "Logged in",
-        })
-      );
     } else {
       navigate("/");
       dispatch(

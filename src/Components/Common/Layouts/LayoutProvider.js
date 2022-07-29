@@ -2,7 +2,8 @@ import React, { createContext, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setMessage } from "../../../Store/Reducers/LayoutSlice";
 import { AlertEnum } from "../../../Utilities/Enums";
-
+import Lottie from "react-lottie";
+import animationData from "../../../Assets/json/loader.json";
 const LayoutContext = createContext({ isLoading: false });
 
 function LayoutProvider({ children }) {
@@ -17,34 +18,16 @@ function LayoutProvider({ children }) {
 
 export function Loader() {
   const { isLoading } = useSelector(({ LayoutSlice }) => LayoutSlice);
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: animationData,
+    renderer: "svg",
+  };
   return isLoading ? (
     <div className="loader-container">
-      <div>
-        <div className="cssload-dots">
-          <div className="cssload-dot"></div>
-          <div className="cssload-dot"></div>
-          <div className="cssload-dot"></div>
-          <div className="cssload-dot"></div>
-          <div className="cssload-dot"></div>
-        </div>
-
-        <svg version="1.1" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <filter id="goo">
-              <feGaussianBlur
-                in="SourceGraphic"
-                result="blur"
-                stdDeviation="12"
-              ></feGaussianBlur>
-              <feColorMatrix
-                in="blur"
-                mode="matrix"
-                values="1 0 0 0 0	0 1 0 0 0	0 0 1 0 0	0 0 0 18 -7"
-                result="goo"
-              ></feColorMatrix>
-            </filter>
-          </defs>
-        </svg>
+      <div className="loader-item">
+        <Lottie options={defaultOptions} />
       </div>
     </div>
   ) : (

@@ -2,7 +2,17 @@ import axios from "axios";
 import { SESSION } from "./Enums";
 import { JSONToFormData } from "./Functions";
 // const USER = process.env.REACT_APP_VENDOR || process.env.REACT_APP_MANAGER;
-
+async function processFormData(data) {
+  try {
+    var form_data = new FormData();
+    for (var key in data) {
+      form_data.append(key, data[key]);
+    }
+    return form_data;
+  } catch (error) {
+    return error;
+  }
+}
 export const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 let SessionData;
@@ -11,7 +21,7 @@ export async function POST(url, data) {
   let formData = [];
   try {
     if (data) {
-      formData = await JSONToFormData(data);
+      formData = await processFormData(data);
     }
     SessionData = JSON.parse(localStorage.getItem(SESSION));
     let config = {
