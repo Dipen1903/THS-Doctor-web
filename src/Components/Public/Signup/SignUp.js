@@ -305,8 +305,8 @@ const SuccessModal = (props) => {
           <img src={BackGround.Succcess}></img>
           <h3 className="welcome_ths">Welcome to Doctor THS!</h3>
           <p className="please_fill_out_profile">
-            Please fill out your work profile and verify your identity before
-            starting. Thanks!
+            Please fill out your personal-work profile and verify your identity
+            before starting. Thanks!
           </p>
         </center>
       </Modal.Body>
@@ -315,7 +315,7 @@ const SuccessModal = (props) => {
           <Button
             className="my_work_profile_btn"
             onClick={() => {
-              navigate("/details/work");
+              navigate("/details/personal-work");
               dispatch(toggleSuccess(false));
             }}
           >

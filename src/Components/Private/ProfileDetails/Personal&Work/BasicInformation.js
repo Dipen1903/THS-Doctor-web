@@ -1,21 +1,18 @@
-import React, { useEffect, useState } from "react";
-import Button from "react-bootstrap/Button";
+import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
-import Modal from "react-bootstrap/Modal";
 import { ErrorMessage, useFormikContext } from "formik";
-import ProgressBar from "../../Common/Layouts/Progress_bar";
-import { BackGround, Icon, Logo } from "../../../Utilities/Icons";
-import FileUpload from "../../Common/Layouts/FileUpload";
-import FormControl from "../../Common/Forms/FormControl";
-import { useDispatch, useSelector } from "react-redux";
-import { CityList } from "../../../Store/Reducers/CommonReducer";
+import { useSelector } from "react-redux";
+
+import { BackGround, Icon } from "../../../../Utilities/Icons";
+import FileUpload from "../../../Common/Layouts/FileUpload";
+import FormControl from "../../../Common/Forms/FormControl";
 
 export default function BasicInformation() {
   const { values, setFieldValue, handleBlur, handleChange } =
     useFormikContext();
-  const { CommonSlice, ProfileSlice } = useSelector((state) => state);
+  const { CommonSlice } = useSelector((state) => state);
   const { stateList, cityList } = CommonSlice;
-  const { userProfile } = ProfileSlice;
+
   const [localImage, setLocalImage] = useState();
 
   const handleImage = (e, setFieldValue) => {

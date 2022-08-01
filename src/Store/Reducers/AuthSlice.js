@@ -7,6 +7,7 @@ import {
 } from "../../Routes/Service";
 import { AlertEnum, SESSION, TOKEN } from "../../Utilities/Enums";
 import { setLoading, setMessage } from "./LayoutSlice";
+import { GetUserProfile } from "./ProfileReducer";
 
 const initialState = {
   token: `${localStorage.getItem(TOKEN) || ""}`,
@@ -23,7 +24,8 @@ export const SignIn = createAsyncThunk(
       if (result?.success) {
         dispatch(setLoading(false));
         dispatch(setSession(result?.data));
-        return result?.data;
+        dispatch(GetUserProfile());
+        return result;
       } else {
         throw result;
       }

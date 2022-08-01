@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Formik, Form } from "formik";
 import Modal from "react-bootstrap/Modal";
 // import Form from "react-bootstrap/Form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 
 import FormControl from "../../Common/Forms/FormControl";
@@ -22,6 +22,7 @@ import { useTimer } from "../../../Utilities/Hooks";
 
 function SignInComponent() {
   const { otpModal } = useSelector(({ AuthSlice }) => AuthSlice);
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   return (
     <>
@@ -39,7 +40,11 @@ function SignInComponent() {
                         initialValues={SignInEnum}
                         validationSchema={SignInSchema}
                         onSubmit={(values) => {
-                          dispatch(SignIn(values));
+                          dispatch(SignIn(values)).then((res) => {
+                            if (res.payload?.success) {
+                              navigate("/dashboard");
+                            }
+                          });
                         }}
                       >
                         {({

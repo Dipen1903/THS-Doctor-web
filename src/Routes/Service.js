@@ -21,3 +21,9 @@ export const GetUserProfileAPI = (data) =>
   POST(`${BASE_URL}/profile-details`, data);
 export const EditUserProfileAPI = (data) =>
   POST(`${BASE_URL}/edit-profile`, data);
+
+//* BANK-DETAILS/SCHEDULE API REQUEST
+export const EditBankAPI = (data) =>
+  POST(`${BASE_URL}/bank-account-create`, data);
+export const EditScheduleAPI = (data) =>
+  POST(`${BASE_URL}/availibility-create`, data);

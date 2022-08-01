@@ -5,8 +5,10 @@ import { Route, Routes } from "react-router-dom";
 import SignIn from "../Components/Public/SignIn/SignIn";
 import SignUp from "../Components/Public/Signup/SignUp";
 import Homepage from "../Components/Private/Dashboard/Homepage";
-import BasicInformation from "../Components/Private/ProfileDetails/BasicInformation";
-import PersonalProfile from "../Components/Private/ProfileDetails/PersonalProfile";
+import {
+  SetUpProfile,
+  SetUpSetting,
+} from "../Components/Private/ProfileDetails/SetUpProfile";
 // import UserProfile from "../Components/Public/Userprofile/userprofile";
 // import UserProfile2 from "../Components/Public/Userprofile/userprofile2";
 // import Homepage from "../Components/Private/Dashboard/Homepage";
@@ -39,10 +41,18 @@ function RootRoute() {
       {/*//* Profile Details fill */}
       <Route path="details">
         <Route
-          path="work"
+          path="personal-work"
           element={
             <PrivateRoutes isBanner={true}>
-              <PersonalProfile />
+              <SetUpProfile />
+            </PrivateRoutes>
+          }
+        />
+        <Route
+          path="schedule-payment"
+          element={
+            <PrivateRoutes isBanner={true}>
+              <SetUpSetting />
             </PrivateRoutes>
           }
         />

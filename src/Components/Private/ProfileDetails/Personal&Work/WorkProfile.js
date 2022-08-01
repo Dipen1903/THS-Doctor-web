@@ -1,10 +1,10 @@
+import React from "react";
 import { useFormikContext } from "formik";
-import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import { useDispatch, useSelector } from "react-redux";
-import { SubSpecialityList } from "../../../Store/Reducers/CommonReducer";
-import { Icon } from "../../../Utilities/Icons";
-import FormControl from "../../Common/Forms/FormControl";
+
+import { SubSpecialityList } from "../../../../Store/Reducers/CommonReducer";
+import FormControl from "../../../Common/Forms/FormControl";
 
 export default function WorkProfile() {
   const { values, errors, touched, setFieldValue, handleBlur, handleChange } =

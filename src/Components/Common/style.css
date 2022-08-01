@@ -97,3 +97,38 @@
   align-items: center;
   justify-content: center;
 }
+.nav-tabs .nav-link.active {
+  background: none !important;
+}
+.accordion-button:focus {
+  border: none !important;
+  box-shadow: none !important;
+}
+.day_box input[type="checkbox"] {
+  display: none;
+}
+.day_box input[type="checkbox"] + label {
+  background: #ffffff;
+  color: #9393aa;
+  border: 1px solid #e0e0e0;
+  padding: 7px;
+  border-radius: 50px;
+  height: 45px;
+  width: 45px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 18px !important;
+  opacity: 1 !important;
+}
+.day_box input[type="checkbox"]:checked + label {
+  background: linear-gradient(45deg, #3093bb 0%, #82dbff 100%);
+  color: #fff;
+  border: 1px solid #e0e0e0;
+  padding: 7px;
+  border-radius: 50px;
+  height: 45px;
+  width: 45px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 18px !important;
+}

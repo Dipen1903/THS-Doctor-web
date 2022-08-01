@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import Header from "../Components/Common/Layouts/Header";
 import SideBanner from "../Components/Common/Layouts/SideBanner";
 import { setMessage } from "../Store/Reducers/LayoutSlice";
-import { GetUserProfile } from "../Store/Reducers/ProfileReducer";
 import { AlertEnum } from "../Utilities/Enums";
 
 function PrivateRoutes({ children, isHeader, isBanner }) {
@@ -13,9 +12,7 @@ function PrivateRoutes({ children, isHeader, isBanner }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (token) {
-      dispatch(GetUserProfile());
-    } else {
+    if (!token) {
       navigate("/");
       dispatch(
         setMessage({

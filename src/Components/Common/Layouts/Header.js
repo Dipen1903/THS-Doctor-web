@@ -1,14 +1,23 @@
 import Container from "react-bootstrap/Container";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 
 import { BackGround, Icon, Logo } from "../../../Utilities/Icons";
 import { removeSession } from "../../../Store/Reducers/AuthSlice";
+import { NavLink } from "react-router-dom";
+import { useEffect } from "react";
+import { GetUserProfile } from "../../../Store/Reducers/ProfileReducer";
 
 function Header() {
   const dispatch = useDispatch();
+  const { userProfile } = useSelector(({ ProfileSlice }) => ProfileSlice);
+  useEffect(() => {
+    if (!userProfile) dispatch(GetUserProfile());
+    return () => {};
+  }, [userProfile]);
+
   return (
     <Navbar className="headerNav pt_10 pb_15  " expand="lg">
       <Container fluid>
@@ -58,10 +67,11 @@ function Header() {
               title={<span className="profile_name ml_10">Dr John Doe</span>}
               id="navbarScrollingDropdown"
             >
-              <NavDropdown.Item href="details/work">
+              <NavLink to="/details/personal-work">
                 <img src={Icon.User} alt="Avatar" class=" mr_10 "></img>My
                 Profle
-              </NavDropdown.Item>
+              </NavLink>
+
               <NavDropdown.Divider />
               <NavDropdown.Item href="#">
                 <img src={Icon.Setting} alt="Avatar" class=" mr_10"></img>

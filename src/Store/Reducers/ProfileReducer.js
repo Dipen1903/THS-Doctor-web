@@ -1,5 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { EditUserProfileAPI, GetUserProfileAPI } from "../../Routes/Service";
+import {
+  EditBankAPI,
+  EditScheduleAPI,
+  EditUserProfileAPI,
+  GetUserProfileAPI,
+} from "../../Routes/Service";
 
 import { AlertEnum } from "../../Utilities/Enums";
 import { setLoading, setMessage } from "./LayoutSlice";
@@ -8,6 +13,7 @@ const initialState = {
   profileStep: 1,
   skipModal: false,
   successModal: false,
+  feeModal: false,
   userProfile: "",
 };
 
@@ -65,21 +71,92 @@ export const EditUserProfile = createAsyncThunk(
     }
   }
 );
+export const EditBankDetails = createAsyncThunk(
+  "EditBankDetails",
+  async (values, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const result = await EditBankAPI(values);
+      if (result?.success) {
+        dispatch(setLoading(false));
+        dispatch(
+          setMessage({
+            text: result?.message,
+            type: AlertEnum.Success,
+          })
+        );
+        return result;
+      } else {
+        throw result;
+      }
+    } catch (error) {
+      dispatch(setLoading(false));
+      dispatch(
+        setMessage({
+          text: error?.message,
+          type: AlertEnum.Error,
+        })
+      );
+      return error;
+    }
+  }
+);
+export const EditSchedule = createAsyncThunk(
+  "EditSchedule",
+  async (values, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const result = await EditScheduleAPI(values);
+      if (result?.success) {
+        dispatch(setLoading(false));
+        dispatch(
+          setMessage({
+            text: result?.message,
+            type: AlertEnum.Success,
+          })
+        );
+        return result;
+      } else {
+        throw result;
+      }
+    } catch (error) {
+      dispatch(setLoading(false));
+      dispatch(
+        setMessage({
+          text: error?.message,
+          type: AlertEnum.Error,
+        })
+      );
+      return error;
+    }
+  }
+);
 export const ProfileSlice = createSlice({
   name: "ProfileSlice",
   initialState,
   reducers: {
-    nextStep: (state) => {
-      state.profileStep++;
+    nextStep: (state, action) => {
+      if (action.payload) {
+        state.profileStep = action.payload;
+      } else {
+        state.profileStep++;
+      }
     },
-    prevStep: (state) => {
-      state.profileStep--;
+    prevStep: (state, action) => {
+      if (action.payload) {
+        state.profileStep = action.payload;
+      } else {
+        state.profileStep--;
+      }
     },
     toggleSkip: (state, action) => {
       state.skipModal = action.payload;
     },
     toggleSuccess: (state, action) => {
       state.successModal = action.payload;
+    },
+    toggleFee: (state, action) => {
+      state.feeModal = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -92,7 +169,7 @@ export const ProfileSlice = createSlice({
   },
 });
 
-export const { nextStep, prevStep, toggleSuccess, toggleSkip } =
+export const { nextStep, prevStep, toggleSuccess, toggleSkip, toggleFee } =
   ProfileSlice.actions;
 
 export default ProfileSlice.reducer;

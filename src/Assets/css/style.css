@@ -2894,6 +2894,7 @@ input:checked + .slider:before {
   font-size: 17px;
   line-height: 24px;
   color: #1e1f20;
+  text-transform: capitalize;
 }
 .start_at {
   font-family: "Mulish";

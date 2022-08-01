@@ -18,7 +18,7 @@ const initialState = {
   specialityList: [],
   subSpecialityList: [],
   languageList: [],
-  qualifications: [],
+  qualification: [],
   documentList: [],
 };
 export const StateList = createAsyncThunk(
@@ -106,6 +106,9 @@ export const SubSpecialityList = createAsyncThunk(
     try {
       const result = await SubSpecialityListAPI(values);
       if (result?.success) {
+        if (values?.isFeeCard) {
+          return result?.data;
+        }
         let specialtyArr = result?.data?.map((item) => ({
           label: item?.sub_speciality,
           value: item?.id,
@@ -225,7 +228,7 @@ export const CommonSlice = createSlice({
       state.languageList = action.payload;
     });
     builder.addCase(QualificationList.fulfilled, (state, action) => {
-      state.qualifications = action.payload;
+      state.qualification = action.payload;
     });
     builder.addCase(DocumentList.fulfilled, (state, action) => {
       state.documentList = action.payload;

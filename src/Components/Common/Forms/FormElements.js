@@ -254,20 +254,22 @@ function CheckBoxes(rest) {
               <div className={`form-group ${outerClass}`} key={tag.value}>
                 <input
                   name={name}
+                  id={tag.value}
                   type="checkbox"
                   className={`form-check-input ${className}`}
-                  value={tag}
-                  checked={values[name].includes(tag.value)}
+                  value={tag.value}
+                  checked={[...values].includes(tag.value)}
+                  disabled={tag.disabled || false}
                   onChange={(e) => {
                     if (e.target.checked) {
                       arrayHelpers.push(tag.value);
                     } else {
-                      const idx = values[name].indexOf(tag.value);
+                      const idx = [...values].indexOf(tag.value);
                       arrayHelpers.remove(idx);
                     }
                   }}
                 />
-                <label className="form-check-label" htmlFor={tag.key}>
+                <label className="form-check-label" htmlFor={tag.value}>
                   {tag.key}
                 </label>
               </div>

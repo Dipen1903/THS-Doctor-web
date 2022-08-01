@@ -31,8 +31,8 @@ export const ProfileEnum = {
   //second step
   speciality: "",
   sub_speciality: "",
-  tempQualifications: [],
-  qualifications: [],
+  tempQualification: [],
+  qualification: [],
   tempProof: [],
   proof: [],
   signature: "",
@@ -40,13 +40,59 @@ export const ProfileEnum = {
   experience: "",
   languages: [],
 };
+
+export const ScheduleEnum = {
+  weekdays: {
+    days: [], //"monday","tuesday"
+    time_period: {
+      morning: {
+        start_time: "",
+        end_time: "",
+      },
+      afternoon: {
+        start_time: "",
+        end_time: "",
+      },
+      evening: {
+        start_time: "",
+        end_time: "",
+      },
+      night: {
+        start_time: "",
+        end_time: "",
+      },
+    },
+  },
+  weekends: {
+    days: [], //"saturday","sunday"
+    time_period: {
+      morning: {
+        start_time: "",
+        end_time: "",
+      },
+      afternoon: {
+        start_time: "",
+        end_time: "",
+      },
+      evening: {
+        start_time: "",
+        end_time: "",
+      },
+      night: {
+        start_time: "",
+        end_time: "",
+      },
+    },
+  },
+  emergency_call: 1,
+};
+
 export const BankEnum = {
-  bank_name: "",
-  account_name: "",
+  account_holder_name: "",
   account_number: "",
-  routing_number: "",
-  bank_address: "",
-  save_as: "",
+  confirm_account_number: "",
+  ifsc_code: "",
+  upi_id: "",
 };
 export const VideoPostEnum = {
   embeded_code: "",

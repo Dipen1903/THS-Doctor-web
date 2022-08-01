@@ -2,15 +2,15 @@ import React from "react";
 import Form from "react-bootstrap/Form";
 import { useSelector, useDispatch } from "react-redux";
 import { useFormikContext, FieldArray } from "formik";
-import { BackGround, Icon } from "../../../Utilities/Icons";
-import FormControl from "../../Common/Forms/FormControl";
-import FileUpload from "../../Common/Layouts/FileUpload";
+import { BackGround, Icon } from "../../../../Utilities/Icons";
+import FormControl from "../../../Common/Forms/FormControl";
+import FileUpload from "../../../Common/Layouts/FileUpload";
 
 export default function EducationalProfile() {
   const { values, errors, touched, setFieldValue, handleBlur, handleChange } =
     useFormikContext();
   const dispatch = useDispatch();
-  const { qualifications, documentList } = useSelector(
+  const { qualification, documentList } = useSelector(
     ({ CommonSlice }) => CommonSlice
   );
   const handleSignature = (e) => {
@@ -56,10 +56,10 @@ export default function EducationalProfile() {
                     <FormControl
                       control="select"
                       label="Qualification"
-                      options={qualifications?.length ? qualifications : []}
+                      options={qualification?.length ? qualification : []}
                       isMulti={true}
                       displayTag={false}
-                      onChange={(value) => selecteValue(value, qualifications)}
+                      onChange={(value) => selecteValue(value, qualification)}
                       placeholder="Search"
                       name="tempQualifications"
                       id="tempQualifications"
@@ -76,7 +76,7 @@ export default function EducationalProfile() {
                 {values?.qualification?.length ? (
                   <>
                     <div class="row mt_20">
-                      <h3 class="added_qualifications">Added Qualifications</h3>
+                      <h3 class="added_qualifications">Added qualification</h3>
                     </div>
                     {values?.qualification?.map((item, index) => (
                       <div class="row mt_20">
