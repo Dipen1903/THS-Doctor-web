@@ -81,51 +81,28 @@ export default function BasicInformation() {
         </div>
         <div class="row mt_20">
           <div class="col-md-6">
-            <Form.Group className="mb-3">
-              <Form.Label className="sign_title">State</Form.Label>
-              <Form.Select
-                name="state_id"
-                value={values.state_id}
-                onChange={handleChange}
-                onBlur={handleBlur}
-              >
-                <option>Select</option>
-
-                {stateList?.length &&
-                  stateList?.map((item) => (
-                    <option key={item?.value} value={item?.value}>
-                      {item?.label}
-                    </option>
-                  ))}
-              </Form.Select>
-              <ErrorMessage
-                name="state_id"
-                render={(error) => <div className="error">{error}</div>}
-              />
-            </Form.Group>
+            <FormControl
+              control="select"
+              options={[{ value: "", label: "Select" }, ...stateList]}
+              setFieldValue={setFieldValue}
+              name="state_id"
+              onChange={() => {}}
+              value={values.state_id}
+              label="State"
+              outerClass="mb-3"
+            />
           </div>
           <div class="col-md-6">
-            <Form.Group className="mb-3">
-              <Form.Label className="sign_title">City</Form.Label>
-              <Form.Select
-                name="city_id"
-                value={values.city_id}
-                onChange={handleChange}
-                onBlur={handleBlur}
-              >
-                <option>Select</option>
-                {cityList?.length &&
-                  cityList?.map((item) => (
-                    <option key={item?.value} value={item?.value}>
-                      {item?.label}
-                    </option>
-                  ))}
-              </Form.Select>
-              <ErrorMessage
-                name="city_id"
-                render={(error) => <div className="error">{error}</div>}
-              />
-            </Form.Group>
+            <FormControl
+              control="select"
+              options={[{ value: "", label: "Select" }, ...cityList]}
+              setFieldValue={setFieldValue}
+              value={values.city_id}
+              name="city_id"
+              onChange={() => {}}
+              label="City"
+              outerClass="mb-3"
+            />
           </div>
         </div>
         <div class="row mt_20">

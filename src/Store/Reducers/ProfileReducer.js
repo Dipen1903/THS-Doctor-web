@@ -13,6 +13,7 @@ const initialState = {
   profileStep: 1,
   skipModal: false,
   successModal: false,
+  submittedModal: false,
   feeModal: false,
   userProfile: "",
 };
@@ -155,6 +156,9 @@ export const ProfileSlice = createSlice({
     toggleSuccess: (state, action) => {
       state.successModal = action.payload;
     },
+    toggleSubmitted: (state, action) => {
+      state.submittedModal = action.payload;
+    },
     toggleFee: (state, action) => {
       state.feeModal = action.payload;
     },
@@ -169,7 +173,13 @@ export const ProfileSlice = createSlice({
   },
 });
 
-export const { nextStep, prevStep, toggleSuccess, toggleSkip, toggleFee } =
-  ProfileSlice.actions;
+export const {
+  nextStep,
+  prevStep,
+  toggleSubmitted,
+  toggleSuccess,
+  toggleSkip,
+  toggleFee,
+} = ProfileSlice.actions;
 
 export default ProfileSlice.reducer;

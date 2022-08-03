@@ -1,8 +1,13 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { VerifySessionAPI } from "../../Components/Common/Service";
 import {
+  ForgotPasswordAPI,
+  OTPResendForgotAPI,
   OTPResendSignInAPI,
   OTPSignInAPI,
+  OTPVerifyForgotAPI,
   OTPVerifySignInAPI,
+  ResetPasswordAPI,
   SignInAPI,
 } from "../../Routes/Service";
 import { AlertEnum, SESSION, TOKEN } from "../../Utilities/Enums";
@@ -13,6 +18,10 @@ const initialState = {
   token: `${localStorage.getItem(TOKEN) || ""}`,
   session: JSON.parse(localStorage.getItem(SESSION)) || "",
   otpModal: false,
+  forgotModal: false,
+  verifyForgot: false,
+  resetModal: false,
+  successModal: false,
 };
 export const SignIn = createAsyncThunk(
   "SignIn",
@@ -126,27 +135,146 @@ export const OTPVerifySignIn = createAsyncThunk(
     }
   }
 );
-// export const VerifySession = createAsyncThunk(
-//   "VerifySession",
-//   async (values, { dispatch }) => {
-//     try {
-//       const result = await AuthenticateAPI(values);
-//       if (result?.success) {
-//         return result?.data;
-//       } else {
-//         throw result;
-//       }
-//     } catch (error) {
-//       dispatch(
-//         setMessage({
-//           text: error?.message,
-//           type: AlertEnum.Error,
-//         })
-//       );
-//       return error;
-//     }
-//   }
-// );
+export const ForgotPassword = createAsyncThunk(
+  "ForgotPassword",
+  async (values, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const result = await ForgotPasswordAPI(values);
+      if (result?.success) {
+        dispatch(
+          setMessage({
+            text: result?.message,
+            type: AlertEnum.Success,
+          })
+        );
+        dispatch(toggleVerifyForgotModal(true));
+        dispatch(setLoading(false));
+        return result;
+      } else {
+        throw result;
+      }
+    } catch (error) {
+      dispatch(setLoading(false));
+      dispatch(
+        setMessage({
+          text: error?.message,
+          type: AlertEnum.Error,
+        })
+      );
+      return error;
+    }
+  }
+);
+export const OTPResendForgot = createAsyncThunk(
+  "OTPResendForgot",
+  async (values, { dispatch }) => {
+    try {
+      const result = await OTPResendForgotAPI(values);
+      if (result?.success) {
+        dispatch(
+          setMessage({
+            text: result?.message,
+            type: AlertEnum.Success,
+          })
+        );
+        return result;
+      } else {
+        throw result;
+      }
+    } catch (error) {
+      dispatch(setLoading(false));
+      dispatch(
+        setMessage({
+          text: error?.message,
+          type: AlertEnum.Error,
+        })
+      );
+      return error;
+    }
+  }
+);
+export const OTPVerifyForgot = createAsyncThunk(
+  "OTPVerifyForgot",
+  async (values, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const result = await OTPVerifyForgotAPI(values);
+      if (result?.success) {
+        dispatch(setLoading(false));
+        dispatch(toggleVerifyForgotModal(false));
+        dispatch(toggleResetModal(true));
+        return result;
+      } else {
+        throw result;
+      }
+    } catch (error) {
+      dispatch(setLoading(false));
+      dispatch(
+        setMessage({
+          text: error?.message,
+          type: AlertEnum.Error,
+        })
+      );
+      return error;
+    }
+  }
+);
+export const ResetPassword = createAsyncThunk(
+  "ResetPassword",
+  async (values, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const result = await ResetPasswordAPI(values);
+      if (result?.success) {
+        dispatch(setLoading(false));
+        dispatch(
+          setMessage({
+            text: result?.message,
+            type: AlertEnum.Success,
+          })
+        );
+        dispatch(toggleForgotModal(false));
+        dispatch(toggleVerifyForgotModal(false));
+        dispatch(toggleResetModal(false));
+        dispatch(toggleSuccessModal(true));
+        return result;
+      } else {
+        throw result;
+      }
+    } catch (error) {
+      dispatch(setLoading(false));
+      dispatch(
+        setMessage({
+          text: error?.message,
+          type: AlertEnum.Error,
+        })
+      );
+      return error;
+    }
+  }
+);
+export const VerifySession = createAsyncThunk(
+  "VerifySession",
+  async (values, { dispatch }) => {
+    try {
+      const result = await VerifySessionAPI(values);
+      if (result?.success) {
+        return result;
+      } else {
+        throw result;
+      }
+    } catch (error) {
+      dispatch(
+        setMessage({
+          text: error?.message,
+          type: AlertEnum.Error,
+        })
+      );
+      return error;
+    }
+  }
+);
 export const AuthSlice = createSlice({
   name: "AuthSlice",
   initialState,
@@ -166,6 +294,18 @@ export const AuthSlice = createSlice({
     toggleOTPModal: (state, action) => {
       state.otpModal = action.payload;
     },
+    toggleForgotModal: (state, action) => {
+      state.forgotModal = action.payload;
+    },
+    toggleVerifyForgotModal: (state, action) => {
+      state.verifyForgot = action.payload;
+    },
+    toggleResetModal: (state, action) => {
+      state.resetModal = action.payload;
+    },
+    toggleSuccessModal: (state, action) => {
+      state.successModal = action.payload;
+    },
   },
   extraReducers: (builder) => {},
 });
@@ -173,6 +313,14 @@ export const AuthSlice = createSlice({
 export const GetToken = (state) => {
   return state?.Authenticate?.token;
 };
-export const { setSession, removeSession, toggleOTPModal } = AuthSlice.actions;
+export const {
+  setSession,
+  removeSession,
+  toggleVerifyForgotModal,
+  toggleForgotModal,
+  toggleOTPModal,
+  toggleResetModal,
+  toggleSuccessModal,
+} = AuthSlice.actions;
 
 export default AuthSlice.reducer;

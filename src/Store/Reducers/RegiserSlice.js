@@ -5,7 +5,7 @@ import {
   SignUpAPI,
 } from "../../Routes/Service";
 import { AlertEnum, SESSION, TOKEN } from "../../Utilities/Enums";
-import { setSession } from "./AuthSlice";
+import { removeSession, setSession } from "./AuthSlice";
 import { setLoading, setMessage } from "./LayoutSlice";
 
 const initialState = {
@@ -84,6 +84,7 @@ export const OTPVerifySignUp = createAsyncThunk(
             type: AlertEnum.Success,
           })
         );
+        dispatch(removeSession());
         dispatch(setSession(result?.data));
         return result;
       } else {

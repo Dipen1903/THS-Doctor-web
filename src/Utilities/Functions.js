@@ -31,7 +31,9 @@ export const isEmpty = (value) => {
   if (
     value === "" ||
     value === null ||
+    value === "null" ||
     value === undefined ||
+    value === "undefined" ||
     value?.length === 0
   ) {
     return true;

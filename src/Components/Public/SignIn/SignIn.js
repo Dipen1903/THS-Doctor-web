@@ -8,20 +8,36 @@ import Button from "react-bootstrap/Button";
 
 import FormControl from "../../Common/Forms/FormControl";
 import { SignInEnum } from "../../../Utilities/Enums";
-import { SignInSchema } from "../../../Utilities/Schema";
 import {
+  ForgotSchema,
+  ResetPasswordSchema,
+  SignInSchema,
+  validatePhone,
+} from "../../../Utilities/Schema";
+import {
+  ForgotPassword,
+  OTPResendForgot,
   OTPResendSignIn,
   OTPSignIn,
+  OTPVerifyForgot,
   OTPVerifySignIn,
+  ResetPassword,
   SignIn,
+  toggleForgotModal,
   toggleOTPModal,
+  toggleResetModal,
+  toggleSuccessModal,
+  toggleVerifyForgotModal,
 } from "../../../Store/Reducers/AuthSlice";
 import OTPInput from "../../Common/Layouts/OTPInput/OTPInput";
 import { isEmpty, padLeadingZeros } from "../../../Utilities/Functions";
 import { useTimer } from "../../../Utilities/Hooks";
+import { BackGround } from "../../../Utilities/Icons";
 
 function SignInComponent() {
-  const { otpModal } = useSelector(({ AuthSlice }) => AuthSlice);
+  const { otpModal, forgotModal, successModal } = useSelector(
+    ({ AuthSlice }) => AuthSlice
+  );
   const navigate = useNavigate();
   const dispatch = useDispatch();
   return (
@@ -128,7 +144,14 @@ function SignInComponent() {
                                 </a>
                               </div>
                               <div className="col-md-6 col-6">
-                                <a href="#!" className="forgot_password">
+                                <a
+                                  href="#!"
+                                  className="forgot_password"
+                                  onClick={(e) => {
+                                    e.preventDefault();
+                                    dispatch(toggleForgotModal(true));
+                                  }}
+                                >
                                   Forgot Password?
                                 </a>
                               </div>
@@ -136,6 +159,7 @@ function SignInComponent() {
                           </>
                         )}
                       </Formik>
+
                       <div className="row mt_50">
                         <div className="col-md-12">
                           <center>
@@ -156,6 +180,18 @@ function SignInComponent() {
           </div>
         </div>
       </div>
+      <ForgotModal
+        show={forgotModal}
+        onHide={() => {
+          dispatch(toggleForgotModal(false));
+        }}
+      />
+      <SuccessModal
+        show={successModal}
+        onHide={() => {
+          dispatch(toggleSuccessModal(false));
+        }}
+      />
     </>
   );
 }
@@ -246,6 +282,281 @@ const OTPLogin = (props) => {
           </Form>
         )}
       </Formik>
+    </Modal>
+  );
+};
+const ForgotModal = (props) => {
+  const dispatch = useDispatch();
+  const { verifyForgot, resetModal } = useSelector(
+    ({ AuthSlice }) => AuthSlice
+  );
+  const submit = (values) => {
+    if (validatePhone(parseInt(values?.value ?? "0"))) {
+      values["type"] = 0;
+    } else {
+      values["type"] = 1;
+    }
+    dispatch(ForgotPassword(values));
+  };
+  return (
+    <Modal
+      {...props}
+      size="sm"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+    >
+      <Modal.Header>
+        <Modal.Title
+          id="contained-modal-title-vcenter"
+          className="forgot_password_title"
+        >
+          Forgot Password
+        </Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <p class="forgot_password_subtext">
+          Please enter registered Mobile / email below to receive verification
+          code.
+        </p>
+        <Formik
+          initialValues={{ value: "", type: "" }}
+          validationSchema={ForgotSchema}
+          onSubmit={(values) => submit(values)}
+        >
+          {({ values, handleChange, handleBlur, handleSubmit }) => (
+            <Form onSubmit={handleSubmit}>
+              <div class="row">
+                <div class="col-md-12">
+                  <FormControl
+                    control="input"
+                    type="text"
+                    name="value"
+                    id="value"
+                    label="Mobile / Email"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.value}
+                  />
+                </div>
+              </div>
+              <div className="mt_40">
+                <Button className="close_btn" onClick={props.onHide}>
+                  Cancel
+                </Button>
+                <Button className="sendotp_btn" variant="primary" type="submit">
+                  Send OTP
+                </Button>
+              </div>
+              <OTPForgot
+                show={verifyForgot}
+                onHide={() => {
+                  dispatch(toggleVerifyForgotModal(false));
+                  props.onHide();
+                }}
+                values={values}
+              />
+              <ResetPasswordModal
+                show={resetModal}
+                onHide={() => {
+                  dispatch(toggleResetModal(false));
+                  props.onHide();
+                }}
+                values={values}
+              />
+            </Form>
+          )}
+        </Formik>
+      </Modal.Body>
+    </Modal>
+  );
+};
+const OTPForgot = (props) => {
+  const { values, ...rest } = props;
+
+  const { resetTimer, timer } = useTimer();
+  const dispatch = useDispatch();
+
+  const otpResend = (e) => {
+    e.preventDefault();
+    dispatch(
+      OTPResendForgot({ value: values?.value, type: values?.type })
+    ).then((res) => {
+      if (res?.payload?.success) resetTimer(60);
+    });
+  };
+
+  useEffect(() => {
+    return () => {};
+  }, []);
+
+  return (
+    <Modal
+      {...rest}
+      size="sm"
+      backdrop="static"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+    >
+      <Modal.Header>
+        <Modal.Title
+          id="contained-modal-title-vcenter"
+          className="mobile_verification"
+        >
+          OTP Verification
+        </Modal.Title>
+      </Modal.Header>
+      <Formik
+        initialValues={{ value: values?.value, type: values?.type, otp: "" }}
+        enableReinitialize
+        onSubmit={(values) => {
+          dispatch(OTPVerifyForgot(values));
+        }}
+      >
+        {({ values, setFieldValue, handleSubmit }) => (
+          <Form onSubmit={handleSubmit}>
+            <Modal.Body>
+              <p class="otp_sent">Enter the OTP sent on {values?.value}</p>
+              <center>
+                <div className="display_inline">
+                  <OTPInput
+                    autoFocus
+                    length={4}
+                    className="otpContainer"
+                    inputClassName="otpInput"
+                    onChangeOTP={(otp) => setFieldValue("otp", otp)}
+                  />
+                </div>
+                <center>
+                  {parseInt(timer) ? (
+                    <p className="resend mb_10">{`0:${padLeadingZeros(
+                      timer,
+                      2
+                    )}`}</p>
+                  ) : (
+                    <p className="resend mb_10" onClick={otpResend}>
+                      Resend
+                    </p>
+                  )}
+                </center>
+              </center>
+            </Modal.Body>
+            <Modal.Footer>
+              <div className="">
+                <Button className="close_btn" onClick={() => props.onHide()}>
+                  Cancel
+                </Button>
+                <Button className="verify_btn" variant="primary" type="submit">
+                  Verify
+                </Button>
+              </div>
+            </Modal.Footer>
+          </Form>
+        )}
+      </Formik>
+    </Modal>
+  );
+};
+const ResetPasswordModal = (props) => {
+  const { values, ...rest } = props;
+  const dispatch = useDispatch();
+  return (
+    <Modal
+      {...rest}
+      dialogClassName="modal_350"
+      backdrop="static"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+    >
+      <Modal.Header>
+        <Modal.Title
+          id="contained-modal-title-vcenter"
+          className="reset_password"
+        >
+          Reset Password
+        </Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <p class="reset_password_subtext">
+          Create new password for your account.
+        </p>
+        <Formik
+          initialValues={{
+            ...values,
+            password: "",
+            confirm_password: "",
+          }}
+          validationSchema={ResetPasswordSchema}
+          onSubmit={(values) => dispatch(ResetPassword(values))}
+        >
+          {({ values, handleBlur, handleChange, handleSubmit }) => (
+            <Form onSubmit={handleSubmit}>
+              <div class="row">
+                <div class="col-md-12 mt_20">
+                  <FormControl
+                    control="input"
+                    type="password"
+                    name="password"
+                    id="password"
+                    label="New Password"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.password}
+                  />
+                </div>
+                <div class="col-md-12 mt_20">
+                  <FormControl
+                    control="input"
+                    type="password"
+                    name="confirm_password"
+                    id="confirm_password"
+                    label="Repeat New Password"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.confirm_password}
+                  />
+                </div>
+              </div>
+              <div className="mt_40">
+                <Button className="close_btn" onClick={props.onHide}>
+                  Cancel
+                </Button>
+                <Button className="save_btn" variant="primary" type="submit">
+                  Save
+                </Button>
+              </div>
+            </Form>
+          )}
+        </Formik>
+      </Modal.Body>
+    </Modal>
+  );
+};
+
+const SuccessModal = (props) => {
+  return (
+    <Modal
+      {...props}
+      size="sm"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+    >
+      <Modal.Header closeButton></Modal.Header>
+      <Modal.Body>
+        <center>
+          <img src={BackGround.Succcess}></img>
+          <h3 className="password_reset_success_title">Done</h3>
+          <p className="password_reset_subtitle">
+            Password reset successfully done!
+          </p>
+        </center>
+      </Modal.Body>
+      <Modal.Footer>
+        <div>
+          <Button className="go_to_login" onClick={props.onHide}>
+            Go to Log In
+          </Button>
+        </div>
+      </Modal.Footer>
     </Modal>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Modal from "react-bootstrap/Modal";
@@ -17,9 +17,11 @@ import {
   EditBankDetails,
   EditSchedule,
   EditUserProfile,
+  GetUserProfile,
   nextStep,
   prevStep,
   toggleSkip,
+  toggleSubmitted,
   toggleSuccess,
 } from "../../../Store/Reducers/ProfileReducer";
 import {
@@ -33,6 +35,24 @@ import {
 } from "../../../Store/Reducers/CommonReducer";
 import { isEmpty } from "../../../Utilities/Functions";
 
+const calculatePercentage = (values) => {
+  let percent = 0;
+  try {
+    const tempObj = { ...ProfileEnum, ...ScheduleEnum, ...BankEnum };
+    const total = Object.keys(tempObj).length;
+    let currentFilled = 0;
+    Object.keys(tempObj).map((key) => {
+      if (!isEmpty(values[key])) {
+        currentFilled++;
+      }
+    });
+
+    percent = (100 * currentFilled) / total;
+    return parseInt(percent);
+  } catch (error) {
+    return 0;
+  }
+};
 export function SetUpProfile() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -40,46 +60,45 @@ export function SetUpProfile() {
   const { profileStep, successModal, skipModal, userProfile } = useSelector(
     ({ ProfileSlice }) => ProfileSlice
   );
+
   const intialSetup = () => {
     let tempProfile = { ...profileData };
+    let tempProofs = [];
+    let tempQualification = [];
     tempProfile.dob = userProfile?.birthdate;
     tempProfile.gender = userProfile?.gender;
     tempProfile.image = userProfile?.image;
     tempProfile.city_id = userProfile?.city_id;
     tempProfile.state_id = userProfile?.state_id;
-    if (
-      tempProfile.dob &&
-      tempProfile.gender &&
-      tempProfile.image &&
-      tempProfile.city_id &&
-      tempProfile.state_id
-    ) {
-      dispatch(nextStep(2));
-    }
     tempProfile.speciality = userProfile?.speciality;
     tempProfile.sub_speciality = userProfile?.sub_speciality;
     tempProfile.experience = userProfile?.experience;
     tempProfile.registration_number = userProfile?.registration_number;
     tempProfile.languages = userProfile?.languages?.split(",");
-    if (
-      tempProfile.speciality &&
-      tempProfile.sub_speciality &&
-      tempProfile.experience &&
-      tempProfile.registration_number &&
-      tempProfile.languages
-    ) {
-      dispatch(nextStep(3));
-    }
 
-    tempProfile.qualification = userProfile?.qualification;
+    userProfile?.qualifications?.map((item) => {
+      tempQualification.push({
+        type: item?.id_proof,
+        file: item?.document,
+      });
+    });
+    userProfile?.id_proofs?.map((item) => {
+      tempProofs.push({
+        type: item?.id_proof,
+        file: item?.document,
+      });
+    });
+    tempProfile.qualification = tempQualification;
+    tempProfile.proof = tempProofs;
+    tempProfile.signature = userProfile?.signature;
     setProfileData(tempProfile);
   };
   const submit = (values) => {
     let tempData = { ...values };
-    tempData.languages = values?.languages?.toString();
-    tempData.qualification = values?.qualification.map((item) =>
-      JSON.stringify(item)
-    );
+    if (values?.languages) {
+      tempData.languages = values?.languages?.toString();
+    }
+    tempData["deepIntegrate"] = true;
     dispatch(EditUserProfile(tempData)).then((res) => {
       if (res?.payload?.success) {
         if (profileStep === 3) {
@@ -91,7 +110,9 @@ export function SetUpProfile() {
     });
   };
   useEffect(() => {
-    intialSetup();
+    if (profileStep === 1) {
+      intialSetup();
+    }
     return () => {};
   }, [userProfile]);
 
@@ -119,7 +140,7 @@ export function SetUpProfile() {
         show={successModal}
         onHide={() => {
           dispatch(toggleSuccess(false));
-          navigate("/dashboard");
+          // navigate("/dashboard");
         }}
       />
       <div class="row">
@@ -149,27 +170,9 @@ export function SetUpProfile() {
                       ? "Your qualification and ID Proof"
                       : ""}
                   </h3>
-                  <div class="progress_box">
-                    <div class="row">
-                      <div class="col-md-3">
-                        <h5 class="profile_milestone">Profile Milestone</h5>
-                      </div>
-                      <div class="col-md-8">
-                        <ProgressBar
-                          isLoading={false}
-                          percent={10}
-                          size={"large"}
-                          showInfo={true}
-                        />
-                        <h6 class="progress_bar_subtext">
-                          Complete your profile for connect with patients{" "}
-                        </h6>
-                      </div>
-                    </div>
-                  </div>
 
                   <Formik
-                    initialValues={profileData}
+                    initialValues={{ ...profileData }}
                     enableReinitialize
                     onSubmit={submit}
                   >
@@ -180,75 +183,97 @@ export function SetUpProfile() {
                       handleSubmit,
                       validateForm,
                     }) => {
-                      const isStepTwoValid = () =>
-                        !isEmpty(values?.speciality) &&
-                        touched?.speciality &&
-                        !isEmpty(values?.sub_speciality) &&
-                        touched?.sub_speciality &&
-                        !isEmpty(values?.experience) &&
-                        touched?.experience
-                          ? true
-                          : false;
-                      const handleNext = (e) => {
-                        let isNext = false;
-                        if (profileStep == 2) {
-                          isNext = true;
-                        } else {
-                          isNext = true;
-                        }
-                        if (isNext) {
-                          handleSubmit(e);
-                        } else {
-                          validateForm();
-                        }
-                      };
+                      // const isStepTwoValid = () =>
+                      //   !isEmpty(values?.speciality) &&
+                      //   touched?.speciality &&
+                      //   !isEmpty(values?.sub_speciality) &&
+                      //   touched?.sub_speciality &&
+                      //   !isEmpty(values?.experience) &&
+                      //   touched?.experience
+                      //     ? true
+                      //     : false;
+                      // const handleNext = (e) => {
+                      //   let isNext = false;
+                      //   if (profileStep == 2) {
+                      //     isNext = true;
+                      //   } else {
+                      //     isNext = true;
+                      //   }
+                      //   if (isNext) {
+                      //     handleSubmit(e);
+                      //   } else {
+                      //     validateForm();
+                      //   }
+                      // };
                       return (
-                        <form onSubmit={() => {}}>
-                          <ProfileWizardForm />
-                          {/* {console.log(errors)} */}
-                          <div class="row mt_10">
-                            <div className="display_inline">
-                              {profileStep > 1 ? (
-                                <button
-                                  class="back_btn"
-                                  variant="primary"
-                                  onClick={() => {
-                                    dispatch(prevStep());
-                                  }}
-                                >
-                                  Back
-                                </button>
-                              ) : (
-                                <></>
-                              )}
-                              {profileStep < 3 ? (
-                                <button
-                                  class="continue_btn"
-                                  variant="primary"
-                                  type="button"
-                                  onClick={handleNext}
-                                >
-                                  Continue
-                                </button>
-                              ) : (
-                                <></>
-                              )}
-                              {profileStep === 3 ? (
-                                <button
-                                  class="continue_btn"
-                                  variant="primary"
-                                  onClick={(e) => {
-                                    handleSubmit(e);
-                                  }}
-                                >
-                                  Submit
-                                </button>
-                              ) : (
-                                <></>
-                              )}
+                        <>
+                          <div class="progress_box">
+                            <div class="row">
+                              <div class="col-md-3">
+                                <h5 class="profile_milestone">
+                                  Profile Milestone
+                                </h5>
+                              </div>
+                              <div class="col-md-8">
+                                <ProgressBar
+                                  isLoading={false}
+                                  percent={calculatePercentage(values)}
+                                  size={"large"}
+                                  showInfo={true}
+                                />
+                                <h6 class="progress_bar_subtext">
+                                  Complete your profile for connect with
+                                  patients{" "}
+                                </h6>
+                              </div>
                             </div>
                           </div>
-                        </form>
+
+                          <form onSubmit={() => {}}>
+                            <ProfileWizardForm />
+
+                            <div class="row mt_10">
+                              <div className="display_inline">
+                                {profileStep > 1 ? (
+                                  <button
+                                    class="back_btn"
+                                    variant="primary"
+                                    onClick={() => {
+                                      dispatch(prevStep());
+                                    }}
+                                  >
+                                    Back
+                                  </button>
+                                ) : (
+                                  <></>
+                                )}
+                                {profileStep < 3 ? (
+                                  <button
+                                    class="continue_btn"
+                                    variant="primary"
+                                    type="button"
+                                    onClick={handleSubmit}
+                                  >
+                                    Continue
+                                  </button>
+                                ) : (
+                                  <></>
+                                )}
+                                {profileStep === 3 ? (
+                                  <button
+                                    class="continue_btn"
+                                    variant="primary"
+                                    onClick={handleSubmit}
+                                  >
+                                    Submit
+                                  </button>
+                                ) : (
+                                  <></>
+                                )}
+                              </div>
+                            </div>
+                          </form>
+                        </>
                       );
                     }}
                   </Formik>
@@ -264,12 +289,98 @@ export function SetUpProfile() {
 export function SetUpSetting() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [profileData, setProfileData] = useState(ProfileEnum);
-  const { profileStep, successModal, skipModal, userProfile } = useSelector(
+  const [scheduleData, setScheduleData] = useState({
+    ...ScheduleEnum,
+    ...BankEnum,
+  });
+  const { profileStep, skipModal, submittedModal, userProfile } = useSelector(
     ({ ProfileSlice }) => ProfileSlice
   );
+  const calculate = (values) => {
+    let tempProfile = { ...ProfileEnum };
+    tempProfile.dob = userProfile?.birthdate;
+    tempProfile.gender = userProfile?.gender;
+    tempProfile.image = userProfile?.image;
+    tempProfile.city_id = userProfile?.city_id;
+    tempProfile.state_id = userProfile?.state_id;
+    tempProfile.speciality = userProfile?.speciality;
+    tempProfile.sub_speciality = userProfile?.sub_speciality;
+    tempProfile.experience = userProfile?.experience;
+    tempProfile.registration_number = userProfile?.registration_number;
+    tempProfile.languages = userProfile?.languages?.split(",");
+    tempProfile.qualification = userProfile?.qualifications;
+    tempProfile.proof = userProfile?.id_proofs;
+    tempProfile.signature = userProfile?.signature;
+    return calculatePercentage({ ...tempProfile, ...values });
+  };
+
+  const submit = (values) => {
+    if (profileStep == 1) {
+      let tempValues = { ...values };
+      tempValues.weekdays = JSON.stringify(values.weekdays);
+      tempValues.weekends = JSON.stringify(values.weekends);
+      tempValues.emergency_call = values?.emergency_call ? 1 : 0;
+      dispatch(EditSchedule(tempValues)).then((res) => {
+        if (res?.payload?.success) {
+          dispatch(nextStep());
+        }
+      });
+    } else if (profileStep == 2) {
+      dispatch(EditBankDetails(values)).then((res) => {
+        if (res?.payload?.success) {
+          dispatch(toggleSubmitted(true));
+        }
+      });
+    }
+  };
+  const initialLoad = () => {
+    let tempData = { ...scheduleData };
+    tempData.account_holder_name =
+      userProfile?.bank_details?.account_holder_name;
+    tempData.account_number = userProfile?.bank_details?.account_number;
+    tempData.confirm_account_number = userProfile?.bank_details?.account_number;
+    tempData.ifsc_code = userProfile?.bank_details?.ifsc_code;
+    tempData.upi_id = userProfile?.bank_details?.upi_id;
+
+    if (userProfile?.availibility) {
+      tempData.weekdays.days = Object.keys(userProfile?.availibility).filter(
+        (item) =>
+          item === "monday" ||
+          item === "tuesday" ||
+          item === "wednsday" ||
+          item === "thursday" ||
+          item === "friday"
+      );
+      if (tempData?.weekdays?.days.length) {
+        userProfile?.availibility[tempData?.weekdays?.days[0]]?.map((item) => {
+          tempData.weekdays.time_period[item?.time_period] = {
+            start_time: item?.start_time,
+            end_time: item?.end_time,
+            min: tempData.weekdays.time_period[item?.time_period].min,
+            max: tempData.weekdays.time_period[item?.time_period].max,
+          };
+        });
+      }
+      tempData.weekends.days = Object.keys(userProfile?.availibility).filter(
+        (item) => item === "sunday" || item === "saturday"
+      );
+      if (tempData?.weekends?.days.length) {
+        userProfile?.availibility[tempData?.weekends?.days[0]]?.map((item) => {
+          tempData.weekends.time_period[item?.time_period] = {
+            start_time: item?.start_time,
+            end_time: item?.end_time,
+            min: tempData.weekends.time_period[item?.time_period].min,
+            max: tempData.weekends.time_period[item?.time_period].max,
+          };
+        });
+      }
+    }
+    setScheduleData(tempData);
+  };
 
   useEffect(() => {
+    dispatch(GetUserProfile());
+    initialLoad();
     return () => {};
   }, []);
 
@@ -278,6 +389,13 @@ export function SetUpSetting() {
       <SkipCaution
         show={skipModal}
         onHide={() => dispatch(toggleSkip(false))}
+      />
+      <ScheduleSubmitted
+        show={submittedModal}
+        onHide={() => {
+          dispatch(toggleSubmitted(false));
+          navigate("/dashboard");
+        }}
       />
       <div class="row">
         <div class="col-md-12">
@@ -302,38 +420,34 @@ export function SetUpSetting() {
                       ? "Doctor Availbility and Fees"
                       : "Bank Details"}
                   </h3>
-                  <div class="progress_box">
-                    <div class="row">
-                      <div class="col-md-3">
-                        <h5 class="profile_milestone">Profile Milestone</h5>
-                      </div>
-                      <div class="col-md-8">
-                        <ProgressBar
-                          isLoading={false}
-                          percent={10}
-                          size={"large"}
-                          showInfo={true}
-                        />
-                        <h6 class="progress_bar_subtext">
-                          Complete your profile for connect with patients
-                        </h6>
-                      </div>
-                    </div>
-                  </div>
+
                   <Formik
-                    initialValues={{ ...ScheduleEnum, ...BankEnum }}
-                    onSubmit={(values) => {
-                      console.log(values);
-                      navigate("/dashboard");
-                      if (profileStep == 1) {
-                        // dispatch(EditSchedule(values));
-                      } else if (profileStep == 2) {
-                        // dispatch(EditBankDetails(values));
-                      }
-                    }}
+                    initialValues={scheduleData}
+                    enableReinitialize
+                    onSubmit={submit}
                   >
-                    {({ handleSubmit }) => (
+                    {({ values, handleSubmit }) => (
                       <>
+                        <div class="progress_box">
+                          <div class="row">
+                            <div class="col-md-3">
+                              <h5 class="profile_milestone">
+                                Profile Milestone
+                              </h5>
+                            </div>
+                            <div class="col-md-8">
+                              <ProgressBar
+                                isLoading={false}
+                                percent={calculate(values)}
+                                size={"large"}
+                                showInfo={true}
+                              />
+                              <h6 class="progress_bar_subtext">
+                                Complete your profile for connect with patients
+                              </h6>
+                            </div>
+                          </div>
+                        </div>
                         <ScheduleWizardForm />
                         <div class="row mt_10">
                           <div className="display_inline">
@@ -355,7 +469,7 @@ export function SetUpSetting() {
                                 class="continue_btn"
                                 variant="primary"
                                 type="button"
-                                onClick={() => dispatch(nextStep())}
+                                onClick={(e) => handleSubmit(e)}
                               >
                                 Continue
                               </button>
@@ -465,6 +579,7 @@ const SkipCaution = (props) => {
 };
 
 const ProfileSubmitted = (props) => {
+  const navigate = useNavigate();
   return (
     <Modal
       {...props}
@@ -489,12 +604,48 @@ const ProfileSubmitted = (props) => {
             className="set_up_btn"
             variant="primary"
             onClick={() => {
+              navigate("/details/schedule-payment");
               props.onHide();
             }}
           >
             Set up Schedule & Payment
           </Button>
         </div>
+      </Modal.Footer>
+    </Modal>
+  );
+};
+const ScheduleSubmitted = (props) => {
+  const navigate = useNavigate();
+  return (
+    <Modal
+      {...props}
+      dialogClassName="modal_350"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+    >
+      <Modal.Header class="modal_header" closeButton></Modal.Header>
+      <Modal.Body>
+        <center>
+          <img src={BackGround.Sent}></img>
+          <h3 className="details_submitted">Detials Submitted Successfully!</h3>
+          <p className="submit_successfully_text">
+            Our team will analyse the details and revert back in up to 3
+            business days.
+          </p>
+        </center>
+      </Modal.Body>
+      <Modal.Footer>
+        <Button
+          className="go_to_home"
+          variant="primary"
+          onClick={() => {
+            navigate("/dashboard");
+            props.onHide();
+          }}
+        >
+          Go to Home Dashboard
+        </Button>
       </Modal.Footer>
     </Modal>
   );

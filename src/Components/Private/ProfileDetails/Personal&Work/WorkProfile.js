@@ -17,47 +17,33 @@ export default function WorkProfile() {
     <div class="basic_info_form_box">
       <div class="row mt_20">
         <div class="col-md-12">
-          <Form.Group className="mb-3">
-            <Form.Label className="sign_title">Your Speciality*</Form.Label>
-            <Form.Select
-              name="speciality"
-              value={values?.speciality}
-              onChange={(e) => {
-                handleChange(e);
-                dispatch(
-                  SubSpecialityList({ speciality_id: e?.target?.value })
-                );
-              }}
-            >
-              <option>Select</option>
-              {specialityList?.length &&
-                specialityList?.map((item) => (
-                  <option key={item?.value} value={item?.value}>
-                    {item?.label}
-                  </option>
-                ))}
-            </Form.Select>
-          </Form.Group>
+          <FormControl
+            control="select"
+            options={[{ value: "", label: "Select" }, ...specialityList]}
+            setFieldValue={setFieldValue}
+            value={values.speciality}
+            name="speciality"
+            onChange={(value) => {
+              setFieldValue("sub_speciality", "");
+              dispatch(SubSpecialityList({ speciality_id: value }));
+            }}
+            label="Your Speciality"
+            outerClass="mb-3"
+          />
         </div>
       </div>
       <div class="row mt_20">
         <div class="col-md-12">
-          <Form.Group className="mb-3">
-            <Form.Label className="sign_title">Sub Speciality*</Form.Label>
-            <Form.Select
-              name="sub_speciality"
-              value={values?.sub_speciality}
-              onChange={handleChange}
-            >
-              <option>Select</option>
-              {subSpecialityList?.length &&
-                subSpecialityList?.map((item) => (
-                  <option key={item?.value} value={item?.value}>
-                    {item?.label}
-                  </option>
-                ))}
-            </Form.Select>
-          </Form.Group>
+          <FormControl
+            control="select"
+            options={[{ value: "", label: "Select" }, ...subSpecialityList]}
+            setFieldValue={setFieldValue}
+            value={values.sub_speciality}
+            name="sub_speciality"
+            onChange={() => {}}
+            label="Sub Speciality"
+            outerClass="mb-3"
+          />
         </div>
       </div>
       <div class="row mt_20">

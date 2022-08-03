@@ -15,8 +15,10 @@ import FormControl from "../../../Common/Forms/FormControl.js";
 function SheduleInformation() {
   const { values, setFieldValue, handleBlur, handleChange } =
     useFormikContext();
+  const { CommonSlice, ProfileSlice } = useSelector((state) => state);
   const dispatch = useDispatch();
-  const { feeModal } = useSelector(({ ProfileSlice }) => ProfileSlice);
+  const { subSpecialityList } = CommonSlice;
+  const { feeModal, userProfile } = ProfileSlice;
   return (
     <>
       <FeeCardModal show={feeModal} onHide={() => dispatch(toggleFee(false))} />
@@ -26,7 +28,20 @@ function SheduleInformation() {
             <label className="sign_title">Consultation Fee (Rs)</label>
             <div class="input_box">
               <div class="form_group">
-                <input type="text" disabled name="" placeholder="" required />
+                <input
+                  type="text"
+                  disabled
+                  name=""
+                  value={
+                    subSpecialityList?.find(
+                      (item) =>
+                        parseInt(item?.id) ===
+                        parseInt(userProfile?.sub_speciality)
+                    )?.consulting_fee
+                  }
+                  placeholder=""
+                  required
+                />
               </div>
             </div>
           </div>
@@ -74,9 +89,9 @@ function SheduleInformation() {
                         />
                       </div>
                       <Accordion defaultActiveKey={["1"]} alwaysOpen>
-                        {Object.keys(values.weekdays.time_period).map(
+                        {Object.keys(values?.weekdays?.time_period)?.map(
                           (item, index) => (
-                            <Accordion.Item eventKey={index}>
+                            <Accordion.Item key={index} eventKey={index}>
                               <Accordion.Header>{item}</Accordion.Header>
                               <Accordion.Body>
                                 <div class="row">
@@ -90,6 +105,12 @@ function SheduleInformation() {
                                       value={
                                         values.weekdays.time_period[item]
                                           .start_time
+                                      }
+                                      min={
+                                        values.weekdays.time_period[item].min
+                                      }
+                                      max={
+                                        values.weekdays.time_period[item].max
                                       }
                                       onChange={handleChange}
                                       onBlur={handleBlur}
@@ -194,13 +215,12 @@ function SheduleInformation() {
                 <FormControl
                   control="checkbox"
                   name="emergency_call"
+                  label=""
                   options={[
                     { value: "emergency_call", key: "Emergency calls" },
                   ]}
-                  value={values.emergency_call}
+                  value={values}
                   className="checkbox_icon"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
                 />
               </div>
             </div>

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import SideBanner from "../Components/Common/Layouts/SideBanner";
-import { GetUserProfile } from "../Store/Reducers/ProfileReducer";
+import { VerifySession } from "../Store/Reducers/AuthSlice";
 
 function PublicRoutes({ children }) {
   const { token } = useSelector(({ AuthSlice }) => AuthSlice);
@@ -11,8 +11,8 @@ function PublicRoutes({ children }) {
   const navigate = useNavigate();
   useEffect(() => {
     if (token) {
-      dispatch(GetUserProfile()).then((res) => {
-        if (res?.payload) {
+      dispatch(VerifySession()).then((res) => {
+        if (res?.payload?.success) {
           navigate("/dashboard");
         }
       });

@@ -19,6 +19,7 @@ export default function EducationalProfile() {
       setFieldValue(`signature`, file);
     }
   };
+
   return (
     <>
       <div class="basic_info_form_box">
@@ -99,9 +100,14 @@ export default function EducationalProfile() {
                               <div class="col-md-6">
                                 <img
                                   src={
-                                    URL.createObjectURL(
-                                      values.qualification[index]?.file
-                                    ) || BackGround.Profile
+                                    values.qualification[index]?.file
+                                      ? typeof values.qualification[index]
+                                          ?.file === "object"
+                                        ? URL.createObjectURL(
+                                            values.qualification[index]?.file
+                                          )
+                                        : values.qualification[index]?.file
+                                      : BackGround.Profile
                                   }
                                   class="upload_avatar_img"
                                 ></img>
@@ -227,9 +233,14 @@ export default function EducationalProfile() {
                               <div class="col-md-6">
                                 <img
                                   src={
-                                    URL.createObjectURL(
-                                      values.proof[index]?.file
-                                    ) || BackGround.Profile
+                                    values.proof[index]?.file
+                                      ? typeof values.proof[index]?.file ===
+                                        "object"
+                                        ? URL.createObjectURL(
+                                            values.proof[index]?.file
+                                          )
+                                        : values.proof[index]?.file
+                                      : BackGround.Profile
                                   }
                                   class="upload_avatar_img"
                                 ></img>
@@ -282,8 +293,11 @@ export default function EducationalProfile() {
                 <div class="col-md-6">
                   <img
                     src={
-                      URL.createObjectURL(values.signature) ||
-                      BackGround.Profile
+                      typeof values.signature === "object"
+                        ? URL.createObjectURL(values.signature)
+                        : values.signature
+                        ? values.signature
+                        : BackGround.Profile
                     }
                     class="upload_avatar_img"
                   ></img>

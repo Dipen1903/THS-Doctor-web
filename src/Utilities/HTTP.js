@@ -20,13 +20,15 @@ let SessionData;
 export async function POST(url, data) {
   let formData = [];
   try {
-    if (data) {
+    if (data?.deepIntegrate) {
+      formData = await JSONToFormData(data);
+    } else {
       formData = await processFormData(data);
     }
     SessionData = JSON.parse(localStorage.getItem(SESSION));
     let config = {
       headers: {
-        "content-type": "multipart/form-data",
+        "Content-Type": "multipart/form-data",
         Authorization: `Bearer ${SessionData?.token}`,
       },
     };

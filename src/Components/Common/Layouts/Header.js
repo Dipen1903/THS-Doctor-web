@@ -58,7 +58,7 @@ function Header() {
             </label>
             <span className="go_online ml_10 mt_5">Go online</span>
             <img
-              src={BackGround.Profile}
+              src={userProfile?.image || BackGround.Profile}
               alt="Avatar"
               class="avatar ml_40"
             ></img>

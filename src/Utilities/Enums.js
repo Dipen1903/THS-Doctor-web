@@ -43,48 +43,64 @@ export const ProfileEnum = {
 
 export const ScheduleEnum = {
   weekdays: {
-    days: [], //"monday","tuesday"
+    days: ["monday", "tuesday", "wednsday", "thursday", "friday"], //"monday","tuesday"
     time_period: {
       morning: {
         start_time: "",
         end_time: "",
+        min: "08:00",
+        max: "11:00",
       },
       afternoon: {
         start_time: "",
         end_time: "",
+        min: "08:00",
+        max: "11:00",
       },
       evening: {
         start_time: "",
         end_time: "",
+        min: "08:00",
+        max: "11:00",
       },
       night: {
         start_time: "",
         end_time: "",
+        min: "08:00",
+        max: "11:00",
       },
     },
   },
   weekends: {
-    days: [], //"saturday","sunday"
+    days: ["saturday", "sunday"], //"saturday","sunday"
     time_period: {
       morning: {
         start_time: "",
         end_time: "",
+        min: "08:00",
+        max: "11:00",
       },
       afternoon: {
         start_time: "",
         end_time: "",
+        min: "08:00",
+        max: "11:00",
       },
       evening: {
         start_time: "",
         end_time: "",
+        min: "08:00",
+        max: "11:00",
       },
       night: {
         start_time: "",
         end_time: "",
+        min: "08:00",
+        max: "11:00",
       },
     },
   },
-  emergency_call: 1,
+  emergency_call: false,
 };
 
 export const BankEnum = {

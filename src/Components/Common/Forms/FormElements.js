@@ -23,10 +23,10 @@ const CustomOption = (props) => {
     </div>
   ) : null;
 };
-const DropdownIndicator = (props) => {
+const DropdownIndicator = ({ isSearchable, ...props }) => {
   return (
     <components.DropdownIndicator {...props}>
-      <img alt="myimg" src={Icon.Search} />
+      <img alt="myimg" src={isSearchable ? Icon.Search : Icon.CiverDown} />
     </components.DropdownIndicator>
   );
 };
@@ -192,7 +192,9 @@ function Select(props) {
           }}
           components={{
             Option: CustomOption,
-            DropdownIndicator,
+            DropdownIndicator: (props) => (
+              <DropdownIndicator isSearchable={isSearchable} {...props} />
+            ),
             MultiValueRemove,
           }}
         />
@@ -277,26 +279,12 @@ function CheckBoxes(rest) {
           }
         />
       ) : (
-        <Field name={name} className="row">
-          {(formik) => {
-            const { field } = formik;
-            return options?.map((option) => {
-              return (
-                <div key={option.key} className={`form-group ${outerClass}`}>
-                  <input
-                    type="checkbox"
-                    id={option.value || ""}
-                    {...field}
-                    {...rest}
-                    value={option.value}
-                    checked={field.value}
-                  />
-                  <label htmlFor={option.value || ""}>{option.key}</label>
-                </div>
-              );
-            });
-          }}
-        </Field>
+        <label className="ml_20" htmlFor={name}>
+          <Field type="checkbox" name={name} class="checkbox_icon" />
+          <span class="emergency_call_text">
+            {options?.length && options[0].key}
+          </span>
+        </label>
       )}
       <ErrorMessage
         component={({ children }) => <div className="error">{children}</div>}

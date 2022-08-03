@@ -6,6 +6,7 @@ import FEMALEWHITE from "../Assets/svg/Female_white.svg";
 import MALEWHITE from "../Assets/svg/Male_white.svg";
 import MALEGREY from "../Assets/svg/Male_grey.svg";
 import SEARCH from "../Assets/svg/Search.svg";
+import CIVERDOWN from "../Assets/svg/CiverDown.svg";
 //BACKGROUND IMAGES
 
 export const Logo = {
@@ -17,6 +18,7 @@ export const Icon = {
   MaleWhite: MALEWHITE,
   MaleGrey: MALEGREY,
   Search: SEARCH,
+  CiverDown: CIVERDOWN,
   Face: require("../Assets/img/totalconsultations.png"),
   CalenderCross: require("../Assets/img/cancelconsultaion.png"),
   Dollor: require("../Assets/img/cureentmonthrevenue.png"),
@@ -35,6 +37,8 @@ export const BackGround = {
   Banner: require("../Assets/img/slider_1.png"),
   Email: require("../Assets/img/messageicon.png"),
   Succcess: require("../Assets/img/img_success.png"),
+  Sent: require("../Assets/img/png/submitted_successfully.png"),
   Profile: require("../Assets/img/png/photo_3.png"),
   Caution: require("../Assets/img/img_skip.png"),
+  Stop: require("../Assets/img/png/verificationfailed.png"),
 };

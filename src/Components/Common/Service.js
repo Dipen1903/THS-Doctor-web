@@ -1,5 +1,7 @@
 import { BASE_URL, POST } from "../../Utilities/HTTP";
 //* AUTHENTICATE USER SESSION API REQUEST
+export const VerifySessionAPI = (data) =>
+  POST(`${BASE_URL}/check-auth-token`, data);
 
 //* NONAUTHENTICATED APIS
 export const StateListAPI = (data) => POST(`${BASE_URL}/state-list`, data);

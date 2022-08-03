@@ -14,7 +14,16 @@ export const OTPResendSignUpAPI = (data) =>
   POST(`${BASE_URL}/doctor-resend-otp`, data);
 export const OTPVerifySignUpAPI = (data) =>
   POST(`${BASE_URL}/doctor-verify-otp`, data);
-export const Forgot = (data) => POST(`${BASE_URL}/forgot-password`, data);
+
+//* FORGOT/RESET PASSWORD API REQUEST
+export const ForgotPasswordAPI = (data) =>
+  POST(`${BASE_URL}/forgot-password`, data);
+export const ResetPasswordAPI = (data) =>
+  POST(`${BASE_URL}/reset-password`, data);
+export const OTPResendForgotAPI = (data) =>
+  POST(`${BASE_URL}/forgot-password-resend-otp`, data);
+export const OTPVerifyForgotAPI = (data) =>
+  POST(`${BASE_URL}/check-forgot-password-otp`, data);
 
 //* PROFILE API REQUEST
 export const GetUserProfileAPI = (data) =>

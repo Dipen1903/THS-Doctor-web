@@ -1,8 +1,8 @@
 import React from "react";
 import Container from "react-bootstrap/Container";
 import Card from "react-bootstrap/Card";
-import { Link } from "react-router-dom";
 import { BackGround, Icon } from "../../../Utilities/Icons";
+import DoctorStatus from "./DoctorStatus";
 
 function Adminpage() {
   return (
@@ -60,34 +60,7 @@ function Adminpage() {
           </Card.Body>
         </Card>
 
-        <div className="admin-bottom-content">
-          <div class="d-block justify-content-center text-center">
-            <img
-              src={BackGround.Email}
-              alt="Avatar"
-              class="avatar2 mt_100 mb_5"
-            ></img>
-            <h4 class="welcome-text mt_20">
-              Welcome to <br />
-              THS’s growing Doctors Community
-            </h4>
-          </div>
-          <div className="row mt_20">
-            <div className="col-md-12">
-              <center>
-                <h3 className="medical-text mt_20">
-                  Our Medical Expert will check and confirm
-                  <br />
-                  about your profile within 2-3 business days.
-                </h3>
-                <h3 className="profile-bottom-text mt_15 mb_20">
-                  Once profile verificatin completed, you will get online
-                  consultaion requests.
-                </h3>
-              </center>
-            </div>
-          </div>
-        </div>
+        <DoctorStatus />
       </Container>
     </>
   );
