@@ -23,10 +23,10 @@ const CustomOption = (props) => {
     </div>
   ) : null;
 };
-const DropdownIndicator = ({ isSearchable, ...props }) => {
+const DropdownIndicator = ({ iconHide, ...props }) => {
   return (
     <components.DropdownIndicator {...props}>
-      <img alt="myimg" src={isSearchable ? Icon.Search : Icon.CiverDown} />
+      {iconHide ? <></> : <img alt="myimg" src={Icon.Search} />}
     </components.DropdownIndicator>
   );
 };
@@ -102,6 +102,7 @@ function Select(props) {
     id,
     value,
     placeholder,
+    iconHide,
     isSearchable = false,
     displayTag = true,
     outerClass,
@@ -193,7 +194,7 @@ function Select(props) {
           components={{
             Option: CustomOption,
             DropdownIndicator: (props) => (
-              <DropdownIndicator isSearchable={isSearchable} {...props} />
+              <DropdownIndicator iconHide={iconHide} {...props} />
             ),
             MultiValueRemove,
           }}

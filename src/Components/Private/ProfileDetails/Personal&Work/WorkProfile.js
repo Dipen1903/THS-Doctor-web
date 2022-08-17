@@ -22,6 +22,8 @@ export default function WorkProfile() {
             options={[{ value: "", label: "Select" }, ...specialityList]}
             setFieldValue={setFieldValue}
             value={values.speciality}
+            iconHide={true}
+            isSearchable={true}
             name="speciality"
             onChange={(value) => {
               setFieldValue("sub_speciality", "");
@@ -39,6 +41,8 @@ export default function WorkProfile() {
             options={[{ value: "", label: "Select" }, ...subSpecialityList]}
             setFieldValue={setFieldValue}
             value={values.sub_speciality}
+            iconHide={true}
+            isSearchable={true}
             name="sub_speciality"
             onChange={() => {}}
             label="Sub Speciality"
