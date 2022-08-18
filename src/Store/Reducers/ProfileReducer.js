@@ -49,6 +49,7 @@ export const EditUserProfile = createAsyncThunk(
       dispatch(setLoading(true));
       const result = await EditUserProfileAPI(values);
       if (result?.success) {
+        dispatch(GetUserProfile());
         dispatch(setLoading(false));
         dispatch(
           setMessage({

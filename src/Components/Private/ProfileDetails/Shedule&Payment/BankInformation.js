@@ -4,6 +4,27 @@ import FormControl from "../../../Common/Forms/FormControl";
 
 function BankInformation() {
   const { values, handleBlur, handleChange } = useFormikContext();
+  const validateIFSC = (value) => {
+    let errorMessage;
+    if (!/^(?=.*?[A-Z])(?=.*?[0-9]).{14,}$/i.test(value)) {
+      errorMessage = "Please enter valid IFSC code";
+    }
+    return errorMessage;
+  };
+  const validateAcccountNumber = (value) => {
+    let errorMessage;
+    if (!/^\d{9,18}$/i.test(value)) {
+      errorMessage = "Please enter valid account number";
+    }
+    return errorMessage;
+  };
+  const validateConfirmAcccountNumber = (value) => {
+    let errorMessage;
+    if (value !== values?.account_number) {
+      errorMessage = "Account number not matched";
+    }
+    return errorMessage;
+  };
   return (
     <div class="basic_info_form_box">
       <div class="row">
@@ -24,12 +45,14 @@ function BankInformation() {
         <div class="col-md-12 mt_20">
           <FormControl
             control="input"
-            type="text"
+            type="password"
+            iconHide={true}
             label="Account Number*"
             name="account_number"
             id="account_number"
             value={values?.account_number}
             onChange={handleChange}
+            validate={validateAcccountNumber}
             onBlur={handleBlur}
           />
         </div>
@@ -44,6 +67,7 @@ function BankInformation() {
             id="confirm_account_number"
             value={values?.confirm_account_number}
             onChange={handleChange}
+            validate={validateConfirmAcccountNumber}
             onBlur={handleBlur}
           />
         </div>
@@ -57,6 +81,7 @@ function BankInformation() {
             name="ifsc_code"
             id="ifsc_code"
             value={values?.ifsc_code}
+            validate={validateIFSC}
             onChange={handleChange}
             onBlur={handleBlur}
           />

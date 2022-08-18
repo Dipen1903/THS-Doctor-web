@@ -15,10 +15,29 @@ import FormControl from "../../../Common/Forms/FormControl.js";
 function SheduleInformation() {
   const { values, setFieldValue, handleBlur, handleChange } =
     useFormikContext();
-  const { CommonSlice, ProfileSlice } = useSelector((state) => state);
   const dispatch = useDispatch();
-  const { subSpecialityList } = CommonSlice;
-  const { feeModal, userProfile } = ProfileSlice;
+  const { feeModal, userProfile } = useSelector(
+    ({ ProfileSlice }) => ProfileSlice
+  );
+  const { subSpecialityList } = useSelector(({ CommonSlice }) => CommonSlice);
+
+  const getFee = () => {
+    return (
+      subSpecialityList?.length &&
+      subSpecialityList?.find(
+        (item) => item?.id === userProfile?.sub_speciality_id
+      )?.consulting_fee
+    );
+  };
+  const compareTime = (time1, time2) => {
+    const [hours1, minutes1, seconds1] = time1.split(":");
+    const [hours2, minutes2, seconds2] = time2.split(":");
+
+    const date1 = new Date(2022, 0, 1, +hours1, +minutes1, +seconds1 || "00");
+    const date2 = new Date(2022, 0, 1, +hours2, +minutes2, +seconds2 || "00");
+
+    return date1.getTime() > date2.getTime();
+  };
   return (
     <>
       <FeeCardModal show={feeModal} onHide={() => dispatch(toggleFee(false))} />
@@ -32,14 +51,8 @@ function SheduleInformation() {
                   type="text"
                   disabled
                   name=""
-                  value={
-                    subSpecialityList?.find(
-                      (item) =>
-                        parseInt(item?.id) ===
-                        parseInt(userProfile?.sub_speciality)
-                    )?.consulting_fee
-                  }
                   placeholder=""
+                  value={userProfile?.consultation_fee?.consulting_fee}
                   required
                 />
               </div>
@@ -89,45 +102,55 @@ function SheduleInformation() {
                         />
                       </div>
                       <Accordion defaultActiveKey={["1"]} alwaysOpen>
-                        {Object.keys(values?.weekdays?.time_period)?.map(
+                        {Object.keys(values.weekdays.time_period).map(
                           (item, index) => (
-                            <Accordion.Item key={index} eventKey={index}>
+                            <Accordion.Item eventKey={index}>
                               <Accordion.Header>{item}</Accordion.Header>
                               <Accordion.Body>
                                 <div class="row">
-                                  <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12">
+                                  <div class=" col-md-6">
                                     <h5 class="start_at">Start at</h5>
                                     <FormControl
-                                      control="input"
-                                      type="time"
+                                      control="select"
+                                      options={
+                                        values.weekdays.time_period[item].slots
+                                      }
                                       name={`weekdays.time_period[${item}].start_time`}
                                       id={`weekdays.time_period[${item}].start_time`}
                                       value={
                                         values.weekdays.time_period[item]
                                           .start_time
                                       }
-                                      min={
-                                        values.weekdays.time_period[item].min
-                                      }
-                                      max={
-                                        values.weekdays.time_period[item].max
-                                      }
-                                      onChange={handleChange}
+                                      isSearchable={false}
+                                      iconHide={true}
+                                      setFieldValue={setFieldValue}
+                                      onChange={() => {}}
                                       onBlur={handleBlur}
                                     />
                                   </div>
-                                  <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12">
+                                  <div class=" col-md-6">
                                     <h5 class="end_at">End at</h5>
                                     <FormControl
-                                      control="input"
-                                      type="time"
+                                      control="select"
+                                      options={values.weekdays.time_period[
+                                        item
+                                      ].slots?.filter((s) =>
+                                        compareTime(
+                                          s.value,
+                                          values.weekdays.time_period[item]
+                                            .start_time
+                                        )
+                                      )}
                                       name={`weekdays.time_period[${item}].end_time`}
                                       id={`weekdays.time_period[${item}].end_time`}
                                       value={
                                         values.weekdays.time_period[item]
                                           .end_time
                                       }
-                                      onChange={handleChange}
+                                      isSearchable={false}
+                                      iconHide={true}
+                                      setFieldValue={setFieldValue}
+                                      onChange={() => {}}
                                       onBlur={handleBlur}
                                     />
                                   </div>
@@ -168,33 +191,49 @@ function SheduleInformation() {
                               <Accordion.Header>{item}</Accordion.Header>
                               <Accordion.Body>
                                 <div class="row">
-                                  <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12">
+                                  <div class="col-md-6">
                                     <h5 class="start_at">Start at</h5>
                                     <FormControl
-                                      control="input"
-                                      type="time"
+                                      control="select"
+                                      options={
+                                        values.weekends.time_period[item].slots
+                                      }
+                                      isSearchable={false}
+                                      iconHide={true}
                                       name={`weekends.time_period[${item}].start_time`}
                                       id={`weekends.time_period[${item}].start_time`}
                                       value={
                                         values.weekends.time_period[item]
                                           .start_time
                                       }
-                                      onChange={handleChange}
+                                      setFieldValue={setFieldValue}
+                                      onChange={() => {}}
                                       onBlur={handleBlur}
                                     />
                                   </div>
-                                  <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12">
+                                  <div class="col-md-6">
                                     <h5 class="end_at">End at</h5>
                                     <FormControl
-                                      control="input"
-                                      type="time"
+                                      control="select"
+                                      options={values.weekends.time_period[
+                                        item
+                                      ].slots?.filter((s) =>
+                                        compareTime(
+                                          s.value,
+                                          values.weekends.time_period[item]
+                                            .start_time
+                                        )
+                                      )}
                                       name={`weekends.time_period[${item}].end_time`}
                                       id={`weekends.time_period[${item}].end_time`}
                                       value={
                                         values.weekends.time_period[item]
                                           .end_time
                                       }
-                                      onChange={handleChange}
+                                      isSearchable={false}
+                                      iconHide={true}
+                                      setFieldValue={setFieldValue}
+                                      onChange={() => {}}
                                       onBlur={handleBlur}
                                     />
                                   </div>
@@ -215,11 +254,10 @@ function SheduleInformation() {
                 <FormControl
                   control="checkbox"
                   name="emergency_call"
-                  label=""
                   options={[
                     { value: "emergency_call", key: "Emergency calls" },
                   ]}
-                  value={values}
+                  value={values.emergency_call}
                   className="checkbox_icon"
                 />
               </div>

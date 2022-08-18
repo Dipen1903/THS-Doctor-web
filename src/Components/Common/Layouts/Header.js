@@ -21,7 +21,7 @@ function Header() {
   return (
     <Navbar className="headerNav pt_10 pb_15  " expand="lg">
       <Container fluid>
-        <img src={Logo.THS} class="logo ml_10"></img>
+        <img src={Logo.THS_SHORT} class="logo ml_10"></img>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse
           className="d-flex justify-content-between"
@@ -64,42 +64,44 @@ function Header() {
             ></img>
 
             <NavDropdown
-              title={<span className="profile_name ml_10">Dr John Doe</span>}
+              title={
+                <span className="profile_name ml_10">{userProfile?.name}</span>
+              }
               id="navbarScrollingDropdown"
             >
-              <NavLink to="/details/personal-work">
+              <NavLink className="dropdown-item" to="/details/personal-work">
                 <img src={Icon.User} alt="Avatar" class=" mr_10 "></img>My
                 Profle
               </NavLink>
-
               <NavDropdown.Divider />
-              <NavDropdown.Item href="#">
+              <NavLink className="dropdown-item" to="settings">
                 <img src={Icon.Setting} alt="Avatar" class=" mr_10"></img>
                 Settings
-              </NavDropdown.Item>
+              </NavLink>
               <NavDropdown.Divider />
-              <NavDropdown.Item href="#">
+              <NavLink className="dropdown-item" to="share">
                 <img src={Icon.Share} alt="Avatar" class=" mr_10"></img>
                 Share Yor Link
-              </NavDropdown.Item>
+              </NavLink>
               <NavDropdown.Divider />
-              <NavDropdown.Item href="#">
+              <NavLink className="dropdown-item" to="privacy">
                 <img src={Icon.Notes} alt="Avatar" class="mr_10"></img>
                 Privacy Policy
-              </NavDropdown.Item>
+              </NavLink>
               <NavDropdown.Divider />
-              <NavDropdown.Item href="#">
+              <NavLink className="dropdown-item" to="terms">
                 <img src={Icon.Document} alt="Avatar" class=" mr_10"></img>
                 Terms and Conditions
-              </NavDropdown.Item>
+              </NavLink>
               <NavDropdown.Divider />
-              <NavDropdown.Item href="#">
+              <NavLink className="dropdown-item" to="help">
                 <img src={Icon.Help} alt="Avatar" class="mr_10"></img>
                 Help and Support
-              </NavDropdown.Item>
+              </NavLink>
               <NavDropdown.Divider />
-              <NavDropdown.Item
-                href="#!"
+              <NavLink
+                className="dropdown-item"
+                to="logout"
                 onClick={(e) => {
                   e.preventDefault();
                   dispatch(removeSession());
@@ -107,7 +109,7 @@ function Header() {
               >
                 <img src={Icon.Logout} alt="Avatar" class="mr_10"></img>
                 Logout
-              </NavDropdown.Item>
+              </NavLink>
             </NavDropdown>
           </div>
         </Navbar.Collapse>

@@ -1,5 +1,5 @@
 //LOGOS
-
+import LogoShort from "../Assets/svg/LogoShort.svg";
 //ICONS
 import FEMALEGRAY from "../Assets/svg/Female_grey.svg";
 import FEMALEWHITE from "../Assets/svg/Female_white.svg";
@@ -7,10 +7,14 @@ import MALEWHITE from "../Assets/svg/Male_white.svg";
 import MALEGREY from "../Assets/svg/Male_grey.svg";
 import SEARCH from "../Assets/svg/Search.svg";
 import CIVERDOWN from "../Assets/svg/CiverDown.svg";
+import FACE from "../Assets/img/svg/totalconsultations.svg";
+import CalendarBlue from "../Assets/img/svg/CalendarBlue.svg";
+import CHARTROUND from "../Assets/img/svg/ChartRound.svg";
 //BACKGROUND IMAGES
 
 export const Logo = {
   THS: require("../Assets/img/logo.png"),
+  THS_SHORT: LogoShort,
 };
 export const Icon = {
   FemaleGray: FEMALEGRAY,
@@ -19,9 +23,9 @@ export const Icon = {
   MaleGrey: MALEGREY,
   Search: SEARCH,
   CiverDown: CIVERDOWN,
-  Face: require("../Assets/img/totalconsultations.png"),
-  CalenderCross: require("../Assets/img/cancelconsultaion.png"),
-  Dollor: require("../Assets/img/cureentmonthrevenue.png"),
+  Face: FACE,
+  CalenderCross: CalendarBlue,
+  Dollor: CHARTROUND,
   Chart: require("../Assets/img/totalrevenue.png"),
   Attach: require("../Assets/img/ic_attach.png"),
   Cross: require("../Assets/img/cross.png"),

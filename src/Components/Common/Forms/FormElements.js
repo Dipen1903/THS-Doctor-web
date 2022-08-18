@@ -39,8 +39,17 @@ const MultiValueRemove = (props) => {
 };
 
 function Input(props) {
-  const { name, label, outerClass, labelclass, icon, type, id, ...rest } =
-    props;
+  const {
+    name,
+    label,
+    iconHide,
+    outerClass,
+    labelclass,
+    icon,
+    type,
+    id,
+    ...rest
+  } = props;
   const [visible, setVisible] = useState(undefined);
   return (
     <>
@@ -54,7 +63,7 @@ function Input(props) {
       <div className={`input_box form_group ${outerClass || ""}`}>
         {icon ? <img src={icon} alt="icon" /> : <></>}
         <Field name={name} type={visible || type} id={id || ""} {...rest} />
-        {type === "password" ? (
+        {type === "password" && !iconHide ? (
           <i
             onClick={() => setVisible(visible ? undefined : "text")}
             className={`toggle-password fa fa-fw ${
@@ -281,7 +290,7 @@ function CheckBoxes(rest) {
         />
       ) : (
         <label className="ml_20" htmlFor={name}>
-          <Field type="checkbox" name={name} class="checkbox_icon" />
+          <Field type="checkbox" id={name} name={name} class="checkbox_icon" />
           <span class="emergency_call_text">
             {options?.length && options[0].key}
           </span>

@@ -10,11 +10,7 @@ export const validatePhone = (phone) => {
     .integer()
     .positive()
     .test((phone) => {
-      return phone &&
-        phone.toString().length >= 8 &&
-        phone.toString().length <= 14
-        ? true
-        : false;
+      return phone && phone.toString().length === 10 ? true : false;
     })
     .isValidSync(phone);
 };
@@ -38,7 +34,10 @@ export const ForgotSchema = Yup.object({
 });
 export const ResetPasswordSchema = Yup.object({
   password: Yup.string()
-    .min(6, "Please enter minimum 6 letter")
+    .matches(
+      /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-])$/,
+      "Password must contain minimum eight characters, both uppercase and lowercase letter and one number"
+    )
     .required("Please enter your password"),
   confirm_password: Yup.string().oneOf(
     [Yup.ref("password"), null],
@@ -50,11 +49,23 @@ export const SignUpSchema = Yup.object({
   email: Yup.string()
     .email("Please enter valid email")
     .required("Please enter your email"),
-  first_name: Yup.string().required("Please enter your first name"),
-  last_name: Yup.string().required("Please enter your last name"),
-  mobile_number: Yup.string().required("Please enter your mobile number"),
+  first_name: Yup.string()
+    .max(32, "First name should be less than 32 characters")
+    .required("Please enter your first name"),
+  last_name: Yup.string()
+    .max(32, "Last name should be less than 32 characters")
+    .required("Please enter your last name"),
+  mobile_number: Yup.string()
+    .matches(
+      /^([6-9]{1})([0-9]{1})([0-9]{8})$/,
+      "Please enter valid mobile number"
+    )
+    .required("Please enter your mobile number"),
   password: Yup.string()
-    .min(6, "Please enter minimum 6 letter")
+    .matches(
+      /(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/,
+      "Password must be eight characters and contain uppercase, lowercase, number and speacial character."
+    )
     .required("Please enter your password"),
   confirm_password: Yup.string().oneOf(
     [Yup.ref("password"), null],

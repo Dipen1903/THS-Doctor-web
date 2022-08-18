@@ -1,6 +1,6 @@
 import React, { useEffect, useLayoutEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import { Formik } from "formik";
@@ -70,26 +70,35 @@ export function SetUpProfile() {
     tempProfile.image = userProfile?.image;
     tempProfile.city_id = userProfile?.city_id;
     tempProfile.state_id = userProfile?.state_id;
-    tempProfile.speciality = userProfile?.speciality;
-    tempProfile.sub_speciality = userProfile?.sub_speciality;
+    tempProfile.speciality = userProfile?.speciality_id;
+    dispatch(SubSpecialityList({ speciality_id: userProfile?.speciality_id }));
+    tempProfile.sub_speciality = userProfile?.sub_speciality_id;
     tempProfile.experience = userProfile?.experience;
     tempProfile.registration_number = userProfile?.registration_number;
     tempProfile.languages = userProfile?.languages?.split(",");
+    tempProfile.qualification = "";
+    tempProfile.id_proofs = "";
 
-    userProfile?.qualifications?.map((item) => {
-      tempQualification.push({
-        type: item?.id_proof,
-        file: item?.document,
+    if (userProfile?.qualifications?.length) {
+      userProfile?.qualifications?.map((item) => {
+        tempQualification.push({
+          type: item?.id_proof,
+          file: item?.document,
+        });
       });
-    });
-    userProfile?.id_proofs?.map((item) => {
-      tempProofs.push({
-        type: item?.id_proof,
-        file: item?.document,
+      if (!isEmpty(tempQualification))
+        tempProfile.qualification = tempQualification;
+    }
+    if (userProfile?.id_proofs?.length) {
+      userProfile?.id_proofs?.map((item) => {
+        tempProofs.push({
+          type: item?.id_proof,
+          file: item?.document,
+        });
       });
-    });
-    tempProfile.qualification = tempQualification;
-    tempProfile.proof = tempProofs;
+      if (!isEmpty(tempProofs)) tempProfile.proof = tempProofs;
+    }
+
     tempProfile.signature = userProfile?.signature;
     setProfileData(tempProfile);
   };
@@ -98,7 +107,7 @@ export function SetUpProfile() {
     if (values?.languages) {
       tempData.languages = values?.languages?.toString();
     }
-    tempData["deepIntegrate"] = true;
+    if (values) tempData["deepIntegrate"] = true;
     dispatch(EditUserProfile(tempData)).then((res) => {
       if (res?.payload?.success) {
         if (profileStep === 3) {
@@ -110,9 +119,7 @@ export function SetUpProfile() {
     });
   };
   useEffect(() => {
-    if (profileStep === 1) {
-      intialSetup();
-    }
+    intialSetup();
     return () => {};
   }, [userProfile]);
 
@@ -120,13 +127,13 @@ export function SetUpProfile() {
     dispatch(StateList());
     dispatch(CityList());
     dispatch(SpecialityList());
-    dispatch(SubSpecialityList());
+    // dispatch(SubSpecialityList());
     dispatch(LanguageList());
     dispatch(QualificationList());
     dispatch(DocumentList());
 
     return () => {
-      dispatch(nextStep(1));
+      // dispatch(nextStep(1));
     };
   }, []);
 
@@ -140,6 +147,7 @@ export function SetUpProfile() {
         show={successModal}
         onHide={() => {
           dispatch(toggleSuccess(false));
+          dispatch(nextStep(1));
           // navigate("/dashboard");
         }}
       />
@@ -237,8 +245,9 @@ export function SetUpProfile() {
                                 {profileStep > 1 ? (
                                   <button
                                     class="back_btn"
-                                    variant="primary"
-                                    onClick={() => {
+                                    // variant="primary"
+                                    onClick={(e) => {
+                                      e.preventDefault();
                                       dispatch(prevStep());
                                     }}
                                   >
@@ -342,8 +351,8 @@ export function SetUpSetting() {
     tempData.ifsc_code = userProfile?.bank_details?.ifsc_code;
     tempData.upi_id = userProfile?.bank_details?.upi_id;
 
-    if (userProfile?.availibility) {
-      tempData.weekdays.days = Object.keys(userProfile?.availibility).filter(
+    if (userProfile?.availibility?.length) {
+      let weekDays = Object.keys(userProfile?.availibility).filter(
         (item) =>
           item === "monday" ||
           item === "tuesday" ||
@@ -351,6 +360,7 @@ export function SetUpSetting() {
           item === "thursday" ||
           item === "friday"
       );
+      if (weekDays) tempData.weekdays.days = weekDays;
       if (tempData?.weekdays?.days.length) {
         userProfile?.availibility[tempData?.weekdays?.days[0]]?.map((item) => {
           tempData.weekdays.time_period[item?.time_period] = {
@@ -361,9 +371,10 @@ export function SetUpSetting() {
           };
         });
       }
-      tempData.weekends.days = Object.keys(userProfile?.availibility).filter(
+      let weekEnds = Object.keys(userProfile?.availibility).filter(
         (item) => item === "sunday" || item === "saturday"
       );
+      if (weekEnds) tempData.weekends.days = weekEnds;
       if (tempData?.weekends?.days.length) {
         userProfile?.availibility[tempData?.weekends?.days[0]]?.map((item) => {
           tempData.weekends.time_period[item?.time_period] = {
@@ -533,6 +544,7 @@ function ScheduleWizardForm(props) {
 const SkipCaution = (props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
   const { profileStep } = useSelector(({ ProfileSlice }) => ProfileSlice);
   return (
     <Modal
@@ -562,11 +574,7 @@ const SkipCaution = (props) => {
             className="skip_btn"
             variant="primary"
             onClick={() => {
-              if (profileStep < 3) {
-                dispatch(nextStep());
-              } else {
-                navigate("/dashboard");
-              }
+              navigate("/dashboard");
               props.onHide();
             }}
           >

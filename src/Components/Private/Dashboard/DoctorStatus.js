@@ -1,38 +1,40 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { nextStep } from "../../../Store/Reducers/ProfileReducer";
 import { isEmpty } from "../../../Utilities/Functions";
 import { BackGround } from "../../../Utilities/Icons";
 
 function DoctorStatus() {
   const { userProfile } = useSelector(({ ProfileSlice }) => ProfileSlice);
-
-  const isProfileCompleted = () => {
-    return (
-      isEmpty(userProfile?.birthdate) &&
-      isEmpty(userProfile?.gender) &&
-      isEmpty(userProfile?.image) &&
-      isEmpty(userProfile?.city_id) &&
-      isEmpty(userProfile?.state_id) &&
-      isEmpty(userProfile?.speciality) &&
-      isEmpty(userProfile?.sub_speciality) &&
-      isEmpty(userProfile?.experience) &&
-      isEmpty(userProfile?.registration_number) &&
-      isEmpty(userProfile?.languages) &&
-      isEmpty(userProfile?.qualifications) &&
-      isEmpty(userProfile?.id_proofs) &&
-      isEmpty(userProfile?.signature)
-    );
-  };
+  const dispatch = useDispatch();
+  const isProfileNotCompleted = () =>
+    !isEmpty(userProfile?.birthdate) &&
+    !isEmpty(userProfile?.gender) &&
+    !isEmpty(userProfile?.image) &&
+    !isEmpty(userProfile?.city_id) &&
+    !isEmpty(userProfile?.state_id) &&
+    !isEmpty(userProfile?.speciality_id) &&
+    !isEmpty(userProfile?.sub_speciality_id) &&
+    !isEmpty(userProfile?.experience) &&
+    !isEmpty(userProfile?.registration_number) &&
+    !isEmpty(userProfile?.languages) &&
+    !isEmpty(userProfile?.qualifications) &&
+    !isEmpty(userProfile?.id_proofs) &&
+    !isEmpty(userProfile?.signature);
   const isSchedulePaymentCompleted = () => {
     return (
-      isEmpty(userProfile?.bank_details) && isEmpty(userProfile?.availibility)
+      !isEmpty(userProfile?.bank_details) && !isEmpty(userProfile?.availibility)
     );
   };
+  useEffect(() => {
+    return () => {};
+  }, [userProfile]);
   return (
     <>
       {/* Payment and Schedule Profile not submitted */}
-      {!isProfileCompleted() ? (
+
+      {!isProfileNotCompleted() ? (
         //Personal and Work Profile not submitted
         <div className="admin-bottom-content">
           <img src="" alt="" />
@@ -63,7 +65,13 @@ function DoctorStatus() {
                   consultaion requests.
                 </h3>
                 <Link to="/details/personal-work">
-                  <button className="profile_btn mb_40">
+                  <button
+                    className="profile_btn mb_40"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      dispatch(nextStep(1));
+                    }}
+                  >
                     Fill Out My Profile
                   </button>
                 </Link>
@@ -101,7 +109,13 @@ function DoctorStatus() {
                   consultaion requests.
                 </h3>
                 <Link to="/details/schedule-payment">
-                  <button className="profile_btn mb_40">
+                  <button
+                    className="profile_btn mb_40"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      dispatch(nextStep(1));
+                    }}
+                  >
                     Set up Schedule & Payment
                   </button>
                 </Link>

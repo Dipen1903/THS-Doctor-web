@@ -134,6 +134,8 @@
 }
 .my-select__menu-list {
   padding-bottom: 0px;
+  border: none;
+  /* box-shadow: none; */
 }
 .my-select__option:last-child {
   border-bottom: none !important;

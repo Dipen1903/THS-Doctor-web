@@ -87,6 +87,7 @@ export default function BasicInformation() {
               setFieldValue={setFieldValue}
               name="state_id"
               onChange={() => {}}
+              iconHide={true}
               value={values.state_id}
               label="State"
               outerClass="mb-3"
@@ -99,6 +100,7 @@ export default function BasicInformation() {
               setFieldValue={setFieldValue}
               value={values.city_id}
               name="city_id"
+              iconHide={true}
               onChange={() => {}}
               label="City"
               outerClass="mb-3"

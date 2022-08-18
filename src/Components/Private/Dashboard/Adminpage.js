@@ -12,7 +12,7 @@ function Adminpage() {
         style={{ background: "#f8fbff", padding: "0px 100px" }}
         className="dashboard"
       >
-        <h4 className="mt_30 mb_20">Dashboard</h4>
+        <h4 className="pt_30 mb_20">Dashboard</h4>
         <Card className="cards-layout" style={{ background: "#f8fbff" }}>
           <Card.Body className="card-body">
             <i
@@ -44,7 +44,7 @@ function Adminpage() {
               style={{ color: "#ABB7C9" }}
               aria-hidden="true"
             ></i>
-            <img src={Icon.Chart} alt="Avatar" class="ml_15 mt_15 mb_5"></img>
+            <img src={Icon.Dollor} alt="Avatar" class="ml_15 mt_15 mb_5"></img>
             <Card.Title className="card_dynamicnum pt_10">0</Card.Title>
             <Card.Text className="texts">Total Revenue</Card.Text>
           </Card.Body>

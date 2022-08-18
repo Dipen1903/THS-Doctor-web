@@ -23,7 +23,7 @@ export const SignUp = createAsyncThunk(
         dispatch(toggleOTPverify(true));
         dispatch(
           setMessage({
-            text: result?.message,
+            text: "",
             type: AlertEnum.Success,
           })
         );
@@ -80,7 +80,7 @@ export const OTPVerifySignUp = createAsyncThunk(
         dispatch(setLoading(false));
         dispatch(
           setMessage({
-            text: result?.message,
+            text: "Registration completed succesfully",
             type: AlertEnum.Success,
           })
         );

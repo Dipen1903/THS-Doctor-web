@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { SubSpecialityList } from "../../../../Store/Reducers/CommonReducer";
 import FormControl from "../../../Common/Forms/FormControl";
+import { isEmpty } from "../../../../Utilities/Functions";
 
 export default function WorkProfile() {
   const { values, errors, touched, setFieldValue, handleBlur, handleChange } =
@@ -13,13 +14,34 @@ export default function WorkProfile() {
   const { specialityList, subSpecialityList, languageList } = useSelector(
     ({ CommonSlice }) => CommonSlice
   );
+
+  const validateExperience = (value) => {
+    let errorMessage;
+    if (isEmpty(value)) {
+      errorMessage = "Please enter experience";
+    }
+  };
+  const validateRegistrationNumber = (value) => {
+    let errorMessage;
+    if (
+      !/^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9!@#$%^&*]{6,32}$/i.test(
+        value
+      )
+    ) {
+      errorMessage = "Please enter valid registration number";
+    }
+    return errorMessage;
+  };
   return (
     <div class="basic_info_form_box">
       <div class="row mt_20">
         <div class="col-md-12">
           <FormControl
             control="select"
-            options={[{ value: "", label: "Select" }, ...specialityList]}
+            options={[
+              { value: "", label: "Your speciality" },
+              ...specialityList,
+            ]}
             setFieldValue={setFieldValue}
             value={values.speciality}
             iconHide={true}
@@ -34,22 +56,29 @@ export default function WorkProfile() {
           />
         </div>
       </div>
-      <div class="row mt_20">
-        <div class="col-md-12">
-          <FormControl
-            control="select"
-            options={[{ value: "", label: "Select" }, ...subSpecialityList]}
-            setFieldValue={setFieldValue}
-            value={values.sub_speciality}
-            iconHide={true}
-            isSearchable={true}
-            name="sub_speciality"
-            onChange={() => {}}
-            label="Sub Speciality"
-            outerClass="mb-3"
-          />
+      {subSpecialityList?.length ? (
+        <div class="row mt_20">
+          <div class="col-md-12">
+            <FormControl
+              control="select"
+              options={[
+                { value: "", label: "Your sub speciality" },
+                ...subSpecialityList,
+              ]}
+              setFieldValue={setFieldValue}
+              value={values.sub_speciality}
+              iconHide={true}
+              isSearchable={true}
+              name="sub_speciality"
+              onChange={() => {}}
+              label="Sub Speciality"
+              outerClass="mb-3"
+            />
+          </div>
         </div>
-      </div>
+      ) : (
+        <></>
+      )}
       <div class="row mt_20">
         <div class="col-md-12">
           <FormControl
@@ -58,7 +87,13 @@ export default function WorkProfile() {
             label="Year Experience*"
             id="experience"
             name="experience"
-            onChange={handleChange}
+            validate={validateExperience}
+            min={0}
+            max={99}
+            onChange={(e) => {
+              let num = e.target.value;
+              if (num < 99 && num > 0) setFieldValue("experience", num);
+            }}
             onBlur={handleBlur}
             value={values?.experience}
           />
@@ -75,6 +110,7 @@ export default function WorkProfile() {
             onChange={handleChange}
             onBlur={handleBlur}
             value={values?.registration_number}
+            validate={validateRegistrationNumber}
           />
         </div>
       </div>
