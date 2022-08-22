@@ -6,7 +6,7 @@ function BankInformation() {
   const { values, handleBlur, handleChange } = useFormikContext();
   const validateIFSC = (value) => {
     let errorMessage;
-    if (!/^(?=.*?[A-Z])(?=.*?[0-9]).{14,}$/i.test(value)) {
+    if (!/^[A-Z]{4}0[A-Z0-9]{6}$/i.test(value)) {
       errorMessage = "Please enter valid IFSC code";
     }
     return errorMessage;

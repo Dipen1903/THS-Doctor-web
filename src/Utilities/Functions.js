@@ -30,6 +30,7 @@ export function ArrayRange(start, end) {
 export const isEmpty = (value) => {
   if (
     value === "" ||
+    value === 0 ||
     value === null ||
     value === "null" ||
     value === undefined ||

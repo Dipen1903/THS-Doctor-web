@@ -1,5 +1,5 @@
 import React from "react";
-import { useFormikContext } from "formik";
+import { ErrorMessage, Field, useFormikContext } from "formik";
 import Form from "react-bootstrap/Form";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -14,24 +14,6 @@ export default function WorkProfile() {
   const { specialityList, subSpecialityList, languageList } = useSelector(
     ({ CommonSlice }) => CommonSlice
   );
-
-  const validateExperience = (value) => {
-    let errorMessage;
-    if (isEmpty(value)) {
-      errorMessage = "Please enter experience";
-    }
-  };
-  const validateRegistrationNumber = (value) => {
-    let errorMessage;
-    if (
-      !/^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9!@#$%^&*]{6,32}$/i.test(
-        value
-      )
-    ) {
-      errorMessage = "Please enter valid registration number";
-    }
-    return errorMessage;
-  };
   return (
     <div class="basic_info_form_box">
       <div class="row mt_20">
@@ -46,6 +28,7 @@ export default function WorkProfile() {
             value={values.speciality}
             iconHide={true}
             isSearchable={true}
+            defaultValue=""
             name="speciality"
             onChange={(value) => {
               setFieldValue("sub_speciality", "");
@@ -53,6 +36,12 @@ export default function WorkProfile() {
             }}
             label="Your Speciality"
             outerClass="mb-3"
+          />
+          <ErrorMessage
+            component={({ children }) => (
+              <div className="error">{children}</div>
+            )}
+            name={"speciality"}
           />
         </div>
       </div>
@@ -84,15 +73,15 @@ export default function WorkProfile() {
           <FormControl
             control="input"
             type="number"
+            key="experience"
             label="Year Experience*"
             id="experience"
             name="experience"
-            validate={validateExperience}
             min={0}
             max={99}
             onChange={(e) => {
               let num = e.target.value;
-              if (num < 99 && num > 0) setFieldValue("experience", num);
+              if (num < 99 && num > -1) setFieldValue("experience", num);
             }}
             onBlur={handleBlur}
             value={values?.experience}
@@ -104,13 +93,13 @@ export default function WorkProfile() {
           <FormControl
             control="input"
             type="text"
+            key="registration_number"
             label="Registration Number"
             id="registration_number"
             name="registration_number"
             onChange={handleChange}
             onBlur={handleBlur}
             value={values?.registration_number}
-            validate={validateRegistrationNumber}
           />
         </div>
       </div>
@@ -132,6 +121,12 @@ export default function WorkProfile() {
             onBlur={handleBlur}
             errors={errors}
             touched={touched}
+          />
+          <ErrorMessage
+            component={({ children }) => (
+              <div className="error">{children}</div>
+            )}
+            name={"speciality"}
           />
         </div>
       </div>

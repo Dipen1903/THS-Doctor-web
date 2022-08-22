@@ -1,12 +1,12 @@
 import React from "react";
 import Form from "react-bootstrap/Form";
 import { useSelector, useDispatch } from "react-redux";
-import { useFormikContext, FieldArray } from "formik";
+import { useFormikContext, FieldArray, ErrorMessage } from "formik";
 import { BackGround, Icon } from "../../../../Utilities/Icons";
 import FormControl from "../../../Common/Forms/FormControl";
 import FileUpload from "../../../Common/Layouts/FileUpload";
 
-export default function EducationalProfile() {
+export default function EducationalProfile({ formProps }) {
   const { values, errors, touched, setFieldValue, handleBlur, handleChange } =
     useFormikContext();
   const dispatch = useDispatch();
@@ -152,6 +152,10 @@ export default function EducationalProfile() {
             );
           }}
         />
+        <ErrorMessage
+          component={({ children }) => <div className="error">{children}</div>}
+          name="qualification"
+        />
 
         <hr className="bottom_border mt_50 mb_50" />
         {/*//* DOCUMENT SECTION */}
@@ -164,16 +168,29 @@ export default function EducationalProfile() {
           name="proof"
           render={(arrayHelpers) => {
             const selecteValue = (value, options) => {
-              let outerItem = value[value?.length - 1];
+              let outerItem = value;
               let tempObj = options?.find(
                 (item) => item.value.toString() === outerItem.toString()
               );
               if (tempObj) {
-                arrayHelpers.push({
-                  id: tempObj?.value,
-                  type: tempObj?.label,
-                  file: "",
-                });
+                if (tempObj.isBackSide) {
+                  arrayHelpers.push({
+                    id: tempObj?.value,
+                    type: tempObj?.label + " Front",
+                    file: "",
+                  });
+                  arrayHelpers.push({
+                    id: tempObj?.value,
+                    type: tempObj?.label + " Back",
+                    file: "",
+                  });
+                } else {
+                  arrayHelpers.push({
+                    id: tempObj?.value,
+                    type: tempObj?.label,
+                    file: "",
+                  });
+                }
               }
             };
             const handleImage = (e, i) => {
@@ -183,8 +200,8 @@ export default function EducationalProfile() {
               }
             };
             const removeValue = (i) => {
-              let tempValues = values?.tempProof;
-              tempValues?.splice(i, 1);
+              setFieldValue("proof", "");
+              setFieldValue("tempProof", "");
             };
             return (
               <>
@@ -193,11 +210,21 @@ export default function EducationalProfile() {
                     <FormControl
                       control="select"
                       label="Select Document"
-                      options={documentList?.length ? documentList : []}
+                      options={
+                        documentList?.length
+                          ? [
+                              { value: "", label: "Select document" },
+                              ...documentList,
+                            ]
+                          : []
+                      }
                       isSearchable={true}
                       displayTag={false}
-                      isMulti={true}
-                      onChange={(value) => selecteValue(value, documentList)}
+                      isMulti={false}
+                      onChange={(value) => {
+                        setFieldValue("proof", "");
+                        selecteValue(value, documentList);
+                      }}
                       placeholder="Select document"
                       name="tempProof"
                       id="tempProof"
@@ -210,6 +237,7 @@ export default function EducationalProfile() {
                     />
                   </div>
                 </div>
+
                 {values?.proof?.length ? (
                   <>
                     {values?.proof?.map((item, index) => (
@@ -282,6 +310,10 @@ export default function EducationalProfile() {
             );
           }}
         />
+        <ErrorMessage
+          component={({ children }) => <div className="error">{children}</div>}
+          name="proof"
+        />
         <hr className="bottom_border mt_50 mb_50" />
         <div class="row">
           <div class="col-md-6">
@@ -327,6 +359,12 @@ export default function EducationalProfile() {
               />
             )}
           </div>
+          <ErrorMessage
+            component={({ children }) => (
+              <div className="error">{children}</div>
+            )}
+            name="signature"
+          />
         </div>
       </div>
     </>

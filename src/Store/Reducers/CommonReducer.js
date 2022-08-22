@@ -189,6 +189,7 @@ export const DocumentList = createAsyncThunk(
       if (result?.success) {
         let documentArr = result?.data?.map((item) => ({
           label: item?.name,
+          isBackSide: item?.is_back_side,
           value: item?.id,
         }));
         return documentArr;

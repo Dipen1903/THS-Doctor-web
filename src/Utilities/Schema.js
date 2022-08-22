@@ -35,8 +35,8 @@ export const ForgotSchema = Yup.object({
 export const ResetPasswordSchema = Yup.object({
   password: Yup.string()
     .matches(
-      /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-])$/,
-      "Password must contain minimum eight characters, both uppercase and lowercase letter and one number"
+      /(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/,
+      "Password must be eight characters and contain uppercase, lowercase, number and speacial character."
     )
     .required("Please enter your password"),
   confirm_password: Yup.string().oneOf(
@@ -77,4 +77,44 @@ export const OTPSchema = Yup.object({
     .min(4, "Please enter valid OTP")
     .max(4, "Please enter valid OTP")
     .required("Please enter your OTP"),
+});
+export const BasicInformationSchema = Yup.object({
+  image: Yup.mixed().required("Please upload any image"),
+  dob: Yup.string().required("Please enter your date of birth"),
+  gender: Yup.string().required("Please select your gender").nullable(),
+  city_id: Yup.string().required("Please select your city"),
+  state_id: Yup.string().required("Please select your state"),
+});
+export const WorkProfileSchema = Yup.object({
+  speciality: Yup.string()
+    .min(1, "Please select your speaciality")
+    .required("Please select your speaciality")
+    .nullable(),
+  sub_speciality: Yup.string().notRequired(),
+  experience: Yup.string()
+    .matches(/^\d/)
+    .required("Please enter your experience")
+    .nullable(),
+  registration_number: Yup.string()
+    .matches(
+      /^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9!@#$%^&*]{6,32}$/,
+      "Please enter valid registration number"
+    )
+    .required("Please enter your registration number")
+    .nullable(),
+  languages: Yup.array()
+    .of(Yup.string())
+    .required("Please select any one language"),
+});
+export const EducationalProfileSchema = Yup.object({
+  qualification: Yup.array()
+    .of(Yup.object())
+    .min(1, "Please select any qualification")
+    .required("Please select any qualification")
+    .nullable(),
+  proof: Yup.array()
+    .of(Yup.object())
+    .required("Please select any proof")
+    .nullable(),
+  signature: Yup.mixed().required("Please upload signature").nullable(),
 });

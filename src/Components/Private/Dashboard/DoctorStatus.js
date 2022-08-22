@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import { nextStep } from "../../../Store/Reducers/ProfileReducer";
+import { Link, useNavigate } from "react-router-dom";
+import {
+  GetUserProfile,
+  nextStep,
+} from "../../../Store/Reducers/ProfileReducer";
 import { isEmpty } from "../../../Utilities/Functions";
 import { BackGround } from "../../../Utilities/Icons";
 
 function DoctorStatus() {
   const { userProfile } = useSelector(({ ProfileSlice }) => ProfileSlice);
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const isProfileNotCompleted = () =>
     !isEmpty(userProfile?.birthdate) &&
@@ -28,8 +32,9 @@ function DoctorStatus() {
     );
   };
   useEffect(() => {
+    dispatch(GetUserProfile());
     return () => {};
-  }, [userProfile]);
+  }, []);
   return (
     <>
       {/* Payment and Schedule Profile not submitted */}
@@ -64,17 +69,16 @@ function DoctorStatus() {
                   Once profile verificatin completed, you will get online
                   consultaion requests.
                 </h3>
-                <Link to="/details/personal-work">
-                  <button
-                    className="profile_btn mb_40"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      dispatch(nextStep(1));
-                    }}
-                  >
-                    Fill Out My Profile
-                  </button>
-                </Link>
+                <button
+                  className="profile_btn mb_40"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    navigate("/details/personal-work");
+                    dispatch(nextStep(1));
+                  }}
+                >
+                  Fill Out My Profile
+                </button>
               </center>
             </div>
           </div>
@@ -108,17 +112,17 @@ function DoctorStatus() {
                   Once profile verificatin completed, you will get online
                   consultaion requests.
                 </h3>
-                <Link to="/details/schedule-payment">
-                  <button
-                    className="profile_btn mb_40"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      dispatch(nextStep(1));
-                    }}
-                  >
-                    Set up Schedule & Payment
-                  </button>
-                </Link>
+
+                <button
+                  className="profile_btn mb_40"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    navigate("/details/schedule-payment");
+                    dispatch(nextStep(1));
+                  }}
+                >
+                  Set up Schedule & Payment
+                </button>
               </center>
             </div>
           </div>

@@ -117,6 +117,7 @@ function Select(props) {
     outerClass,
     className,
     onChange,
+    validate,
     isDisabled,
   } = props;
 
@@ -155,6 +156,7 @@ function Select(props) {
     <>
       <div className={`form-group ${outerClass}`}>
         <label className="sign_title">{label}</label>
+
         <ReactSelect
           closeMenuOnSelect={true}
           className={`${className}`}
@@ -164,7 +166,6 @@ function Select(props) {
           options={options}
           placeholder={placeholder || ""}
           isClearable={false}
-          setFieldValue={setFieldValue}
           value={selectedValue()}
           name={name}
           isMulti={isMulti}
@@ -209,9 +210,10 @@ function Select(props) {
           }}
         />
       </div>
-      {/* <div className="error">
-        <ErrorMessage name={name} />
-      </div> */}
+      {/* <ErrorMessage
+        component={({ children }) => <div className="error">{children}</div>}
+        name={name}
+      /> */}
     </>
   );
 }
@@ -245,10 +247,10 @@ function RadioButtons(props) {
         }}
       </Field>
 
-      <ErrorMessage
+      {/* <ErrorMessage
         component={({ children }) => <div className="error">{children}</div>}
         name={name}
-      />
+      /> */}
     </>
   );
 }

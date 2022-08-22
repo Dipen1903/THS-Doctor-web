@@ -1,5 +1,5 @@
+import { Field } from "formik";
 import React, { useRef } from "react";
-import Button from "react-bootstrap/Button";
 
 function FileUpload({ label, icon, className, ...rest }) {
   const fileRef = useRef();
@@ -15,6 +15,7 @@ function FileUpload({ label, icon, className, ...rest }) {
         {icon && <img src={icon} class="attach_icon"></img>}
         {label}
       </button>
+      <Field name={rest?.name} validate={rest?.validate} hidden />
       <input
         ref={fileRef}
         type="file"

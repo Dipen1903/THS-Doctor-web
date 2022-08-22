@@ -1,15 +1,17 @@
 import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
-import { ErrorMessage, useFormikContext } from "formik";
+import { ErrorMessage, Field, useFormikContext } from "formik";
 import { useSelector } from "react-redux";
 
 import { BackGround, Icon } from "../../../../Utilities/Icons";
 import FileUpload from "../../../Common/Layouts/FileUpload";
 import FormControl from "../../../Common/Forms/FormControl";
+import { isEmpty } from "../../../../Utilities/Functions";
 
 export default function BasicInformation() {
-  const { values, setFieldValue, handleBlur, handleChange } =
+  const { values, errors, setFieldValue, handleBlur, handleChange } =
     useFormikContext();
+
   const { CommonSlice } = useSelector((state) => state);
   const { stateList, cityList } = CommonSlice;
 
@@ -21,6 +23,14 @@ export default function BasicInformation() {
       setFieldValue("image", file);
       setLocalImage(file);
     }
+  };
+
+  const validateImage = (value) => {
+    let errorMessage;
+    if (isEmpty(value)) {
+      errorMessage = "Please upload your image";
+    }
+    return errorMessage;
   };
 
   return (
@@ -49,6 +59,7 @@ export default function BasicInformation() {
                 onChange={(e) => {
                   handleImage(e, setFieldValue);
                 }}
+                validate={validateImage}
               />
             </div>
             <div
@@ -88,7 +99,7 @@ export default function BasicInformation() {
               name="state_id"
               onChange={() => {}}
               iconHide={true}
-              value={values.state_id}
+              value={values?.state_id}
               label="State"
               outerClass="mb-3"
             />
@@ -98,7 +109,7 @@ export default function BasicInformation() {
               control="select"
               options={[{ value: "", label: "Select" }, ...cityList]}
               setFieldValue={setFieldValue}
-              value={values.city_id}
+              value={values?.city_id}
               name="city_id"
               iconHide={true}
               onChange={() => {}}
@@ -111,6 +122,7 @@ export default function BasicInformation() {
           <div class="row">
             <div class="col-md-12">
               <h5 className="sign_title">Gender</h5>
+              {/* <Field name="gender" validate={validateGender} hidden /> */}
               <div class="col-md-3 radio-container mt_20 mb_20">
                 <div
                   className={`radio_box ${

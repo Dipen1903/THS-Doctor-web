@@ -21,12 +21,7 @@ export const SignUp = createAsyncThunk(
       if (result?.success) {
         dispatch(setLoading(false));
         dispatch(toggleOTPverify(true));
-        dispatch(
-          setMessage({
-            text: "",
-            type: AlertEnum.Success,
-          })
-        );
+
         return result?.data;
       } else {
         throw result;

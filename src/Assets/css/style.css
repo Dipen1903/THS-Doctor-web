@@ -2623,6 +2623,8 @@ input:checked + .slider:before {
   color: #1e1f20;
   margin-top: 5px;
   margin-bottom: 0px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .delete_photo {
   font-family: "Mulish";
