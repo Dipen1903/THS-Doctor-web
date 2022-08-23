@@ -10,6 +10,13 @@ import CIVERDOWN from "../Assets/svg/CiverDown.svg";
 import FACE from "../Assets/img/svg/totalconsultations.svg";
 import CalendarBlue from "../Assets/img/svg/CalendarBlue.svg";
 import CHARTROUND from "../Assets/img/svg/ChartRound.svg";
+import USERBLUE from "../Assets/svg/UserBlue.svg";
+import USERGREY from "../Assets/svg/UserGrey.svg";
+import FIRSTAIDBLUE from "../Assets/svg/FirstAidKitBlue.svg";
+import FIRSTAIDGREY from "../Assets/svg/FirstAidKitGrey.svg";
+import CIVERRIGHTBLUE from "../Assets/svg/CiverRightBlue.svg";
+import CIVERRIGHTGREY from "../Assets/svg/CiverRightGrey.svg";
+import PENCIL from "../Assets/svg/Pencil.svg";
 //BACKGROUND IMAGES
 
 export const Logo = {
@@ -24,12 +31,19 @@ export const Icon = {
   Search: SEARCH,
   CiverDown: CIVERDOWN,
   Face: FACE,
+  Pencil: PENCIL,
   CalenderCross: CalendarBlue,
   Dollor: CHARTROUND,
   Chart: require("../Assets/img/totalrevenue.png"),
   Attach: require("../Assets/img/ic_attach.png"),
   Cross: require("../Assets/img/cross.png"),
   User: require("../Assets/img/My Profile.png"),
+  UserBlue: USERBLUE,
+  UserGrey: USERGREY,
+  FirstAidBlue: FIRSTAIDBLUE,
+  FirstAidGrey: FIRSTAIDGREY,
+  CiverRightBlue: CIVERRIGHTBLUE,
+  CiverRightGrey: CIVERRIGHTGREY,
   Setting: require("../Assets/img/Settings.png"),
   Share: require("../Assets/img/Change Password.png"),
   Notes: require("../Assets/img/Privacy and Policy.png"),

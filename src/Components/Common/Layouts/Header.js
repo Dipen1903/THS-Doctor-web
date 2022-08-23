@@ -69,7 +69,7 @@ function Header() {
               }
               id="navbarScrollingDropdown"
             >
-              <NavLink className="dropdown-item" to="/details/personal-work">
+              <NavLink className="dropdown-item" to="/profile">
                 <img src={Icon.User} alt="Avatar" class=" mr_10 "></img>My
                 Profle
               </NavLink>

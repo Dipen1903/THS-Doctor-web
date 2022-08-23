@@ -2,6 +2,7 @@ import { BASE_URL, POST } from "../Utilities/HTTP";
 
 //* SIGNIN API REQUEST
 export const SignInAPI = (data) => POST(`${BASE_URL}/login`, data);
+export const MobileSignInAPI = (data) => POST(`${BASE_URL}/login-mobile`, data);
 export const OTPSignInAPI = (data) => POST(`${BASE_URL}/login-mobile`, data);
 export const OTPResendSignInAPI = (data) =>
   POST(`${BASE_URL}/resend-otp`, data);
@@ -30,6 +31,8 @@ export const GetUserProfileAPI = (data) =>
   POST(`${BASE_URL}/profile-details`, data);
 export const EditUserProfileAPI = (data) =>
   POST(`${BASE_URL}/edit-profile`, data);
+export const RejectionDetailsAPI = (data) =>
+  POST(`${BASE_URL}/rejection-details`, data);
 
 //* BANK-DETAILS/SCHEDULE API REQUEST
 export const EditBankAPI = (data) =>

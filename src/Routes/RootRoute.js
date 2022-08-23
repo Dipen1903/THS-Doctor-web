@@ -8,7 +8,8 @@ import Homepage from "../Components/Private/Dashboard/Homepage";
 import {
   SetUpProfile,
   SetUpSetting,
-} from "../Components/Private/ProfileDetails/SetUpProfile";
+} from "../Components/Private/SetupProfile/SetUpProfile";
+import MyProfile from "../Components/Private/MyProfile/MyProfile";
 // import UserProfile from "../Components/Public/Userprofile/userprofile";
 // import UserProfile2 from "../Components/Public/Userprofile/userprofile2";
 // import Homepage from "../Components/Private/Dashboard/Homepage";
@@ -62,6 +63,14 @@ function RootRoute() {
         element={
           <PrivateRoutes isHeader={true}>
             <Homepage />
+          </PrivateRoutes>
+        }
+      />
+      <Route
+        path="/profile"
+        element={
+          <PrivateRoutes isHeader={true}>
+            <MyProfile />
           </PrivateRoutes>
         }
       />

@@ -10,12 +10,14 @@ import FormControl from "../../Common/Forms/FormControl";
 import { SignInEnum } from "../../../Utilities/Enums";
 import {
   ForgotSchema,
+  MobileSignInSchema,
   ResetPasswordSchema,
   SignInSchema,
   validatePhone,
 } from "../../../Utilities/Schema";
 import {
   ForgotPassword,
+  MobileSignIn,
   OTPResendForgot,
   OTPResendSignIn,
   OTPSignIn,
@@ -77,7 +79,7 @@ function SignInComponent() {
                                 <div class="col-md-12">
                                   <FormControl
                                     control="input"
-                                    type="email"
+                                    type="text"
                                     name="email"
                                     id="email"
                                     label="Mobile / Email"
@@ -121,22 +123,7 @@ function SignInComponent() {
                                   href="#!"
                                   onClick={(e) => {
                                     e.preventDefault();
-                                    if (
-                                      !isEmpty(values.email) &&
-                                      !errors?.email
-                                    ) {
-                                      dispatch(
-                                        OTPSignIn({
-                                          mobile_number: values?.email,
-                                        })
-                                      ).then((res) => {
-                                        if (res?.payload?.success) {
-                                          dispatch(toggleOTPModal(true));
-                                        }
-                                      });
-                                    } else {
-                                      setTouched({ email: true });
-                                    }
+                                    dispatch(toggleOTPModal(true));
                                   }}
                                   className="login_with_otp"
                                 >
@@ -197,9 +184,10 @@ function SignInComponent() {
 }
 const OTPLogin = (props) => {
   const { values, ...rest } = props;
+  const [verified, setVerified] = useState(false);
   const { resetTimer, timer } = useTimer();
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   useEffect(() => {
     return () => {};
   }, []);
@@ -207,81 +195,145 @@ const OTPLogin = (props) => {
   return (
     <Modal
       {...rest}
-      size="sm"
+      className="modal-mobile"
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
-      <Modal.Header>
-        <Modal.Title
-          id="contained-modal-title-vcenter"
-          className="mobile_verification"
-        >
-          Mobile Verification
-        </Modal.Title>
-      </Modal.Header>
-      <Formik
-        initialValues={{ mobile_number: values?.email, otp: "" }}
-        enableReinitialize
-        onSubmit={(values) => {
-          dispatch(OTPVerifySignIn(values));
-          props.onHide();
-        }}
-      >
-        {({ values, setFieldValue, handleSubmit }) => (
-          <Form onSubmit={handleSubmit}>
-            <Modal.Body>
-              <p class="otp_sent">
-                Enter the OTP sent on {values?.mobile_number}
-              </p>
-              <center>
-                <div className="display_inline">
-                  <OTPInput
-                    autoFocus
-                    length={4}
-                    className="otpContainer"
-                    inputClassName="otpInput"
-                    onChangeOTP={(otp) => setFieldValue("otp", otp)}
+      {!verified ? (
+        <>
+          <Modal.Header>
+            <Modal.Title
+              id="contained-modal-title-vcenter"
+              className="mobile_verification"
+            >
+              Login with OTP
+            </Modal.Title>
+          </Modal.Header>
+          <Formik
+            initialValues={{ mobile_number: "" }}
+            enableReinitialize
+            validationSchema={MobileSignInSchema}
+            onSubmit={(values) => {
+              dispatch(MobileSignIn(values)).then((res) => {
+                if (res.payload.success) {
+                  setVerified(values.mobile_number);
+                  resetTimer(60);
+                }
+              });
+            }}
+          >
+            {({ values, handleChange, handleBlur, handleSubmit }) => (
+              <Form onSubmit={handleSubmit}>
+                <Modal.Body>
+                  <p class="otp_sent">
+                    Please enter registered Mobile to receive verification code.
+                  </p>
+
+                  <FormControl
+                    control="input"
+                    type="phone"
+                    label="Mobile"
+                    name="mobile_number"
+                    id="mobile_number"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.mobile_number}
                   />
-                </div>
-                <center>
-                  {parseInt(timer) ? (
-                    <p className="resend mb_10">{`0:${padLeadingZeros(
-                      timer,
-                      2
-                    )}`}</p>
-                  ) : (
-                    <p
-                      className="resend mb_10"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        dispatch(
-                          OTPResendSignIn({
-                            mobile_number: values?.mobile_number,
-                          })
-                        ).then((res) => {
-                          if (res?.payload?.success) resetTimer(60);
-                        });
-                      }}
+                </Modal.Body>
+                <Modal.Footer>
+                  <Button className="close_btn" onClick={props.onHide}>
+                    Cancel
+                  </Button>
+                  <Button
+                    className="verify_btn"
+                    variant="primary"
+                    type="submit"
+                  >
+                    Send OTP
+                  </Button>
+                </Modal.Footer>
+              </Form>
+            )}
+          </Formik>
+        </>
+      ) : (
+        <>
+          <Modal.Header>
+            <Modal.Title
+              id="contained-modal-title-vcenter"
+              className="mobile_verification"
+            >
+              Mobile Verification
+            </Modal.Title>
+          </Modal.Header>
+          <Formik
+            initialValues={{ mobile_number: verified, otp: "" }}
+            enableReinitialize
+            onSubmit={(values) => {
+              dispatch(OTPVerifySignIn(values));
+              navigate("/dashboard");
+              props.onHide();
+            }}
+          >
+            {({ values, setFieldValue, handleSubmit }) => (
+              <Form onSubmit={handleSubmit}>
+                <Modal.Body>
+                  <p class="otp_sent">Enter the OTP sent on {verified}</p>
+                  <center>
+                    <div className="display_inline">
+                      <OTPInput
+                        autoFocus
+                        length={4}
+                        className="otpContainer"
+                        inputClassName="otpInput"
+                        onChangeOTP={(otp) => setFieldValue("otp", otp)}
+                      />
+                    </div>
+                    <center>
+                      {parseInt(timer) ? (
+                        <p className="resend mb_10">{`0:${padLeadingZeros(
+                          timer,
+                          2
+                        )}`}</p>
+                      ) : (
+                        <p
+                          className="resend mb_10"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            dispatch(
+                              OTPResendSignIn({
+                                mobile_number: values?.mobile_number,
+                              })
+                            ).then((res) => {
+                              if (res?.payload?.success) resetTimer(60);
+                            });
+                          }}
+                        >
+                          Resend
+                        </p>
+                      )}
+                    </center>
+                  </center>
+                </Modal.Body>
+                <Modal.Footer>
+                  <div className="">
+                    <Button className="close_btn" onClick={props.onHide}>
+                      Cancel
+                    </Button>
+                    <Button
+                      className="verify_btn"
+                      variant="primary"
+                      type="submit"
                     >
-                      Resend
-                    </p>
-                  )}
-                </center>
-              </center>
-            </Modal.Body>
-            <Modal.Footer>
-              <div className="">
-                <Button className="close_btn" onClick={props.onHide}>
-                  Cancel
-                </Button>
-                <Button className="verify_btn" variant="primary" type="submit">
-                  Verify
-                </Button>
-              </div>
-            </Modal.Footer>
-          </Form>
-        )}
-      </Formik>
+                      Verify
+                    </Button>
+                  </div>
+                </Modal.Footer>
+              </Form>
+            )}
+          </Formik>
+        </>
+      )}
     </Modal>
   );
 };

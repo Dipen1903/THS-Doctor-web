@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import {
+  GetRejectionDetails,
   GetUserProfile,
   nextStep,
 } from "../../../Store/Reducers/ProfileReducer";
@@ -9,7 +10,9 @@ import { isEmpty } from "../../../Utilities/Functions";
 import { BackGround } from "../../../Utilities/Icons";
 
 function DoctorStatus() {
-  const { userProfile } = useSelector(({ ProfileSlice }) => ProfileSlice);
+  const { userProfile, rejectionDetails } = useSelector(
+    ({ ProfileSlice }) => ProfileSlice
+  );
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const isProfileNotCompleted = () =>
@@ -32,7 +35,11 @@ function DoctorStatus() {
     );
   };
   useEffect(() => {
-    dispatch(GetUserProfile());
+    dispatch(GetUserProfile()).then((res) => {
+      if (parseInt(res?.payload?.is_active) === 2) {
+        dispatch(GetRejectionDetails());
+      }
+    });
     return () => {};
   }, []);
   return (
@@ -152,7 +159,7 @@ function DoctorStatus() {
                 <h3 className="medical-text  pleasefill">
                   Please fill out required detail again. Thanks!
                 </h3>
-                <h3 className="id_proof">Note: ID proof photo is not clear</h3>
+                <h3 className="id_proof">Note: {rejectionDetails?.reason}</h3>
 
                 <h3 className="profile-bottom-text mt_10">
                   Please fill Profile details to get verified and start

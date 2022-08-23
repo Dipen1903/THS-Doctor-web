@@ -4,6 +4,7 @@ import {
   EditScheduleAPI,
   EditUserProfileAPI,
   GetUserProfileAPI,
+  RejectionDetailsAPI,
 } from "../../Routes/Service";
 
 import { AlertEnum } from "../../Utilities/Enums";
@@ -16,6 +17,7 @@ const initialState = {
   submittedModal: false,
   feeModal: false,
   userProfile: "",
+  rejectionDetails: "",
 };
 
 export const GetUserProfile = createAsyncThunk(
@@ -24,6 +26,30 @@ export const GetUserProfile = createAsyncThunk(
     try {
       dispatch(setLoading(true));
       const result = await GetUserProfileAPI(values);
+      if (result?.success) {
+        dispatch(setLoading(false));
+        return result?.data;
+      } else {
+        throw result;
+      }
+    } catch (error) {
+      dispatch(setLoading(false));
+      dispatch(
+        setMessage({
+          text: error?.message,
+          type: AlertEnum.Error,
+        })
+      );
+      return error;
+    }
+  }
+);
+export const GetRejectionDetails = createAsyncThunk(
+  "GetRejectionDetails",
+  async (values, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const result = await RejectionDetailsAPI(values);
       if (result?.success) {
         dispatch(setLoading(false));
         return result?.data;
@@ -170,6 +196,9 @@ export const ProfileSlice = createSlice({
     });
     builder.addCase(GetUserProfile.fulfilled, (state, action) => {
       state.userProfile = action.payload;
+    });
+    builder.addCase(GetRejectionDetails.fulfilled, (state, action) => {
+      state.rejectionDetails = action.payload;
     });
   },
 });

@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { VerifySessionAPI } from "../../Components/Common/Service";
 import {
   ForgotPasswordAPI,
+  MobileSignInAPI,
   OTPResendForgotAPI,
   OTPResendSignInAPI,
   OTPSignInAPI,
@@ -50,6 +51,31 @@ export const SignIn = createAsyncThunk(
     }
   }
 );
+export const MobileSignIn = createAsyncThunk(
+  "MobileSignIn",
+  async (values, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+
+      const result = await MobileSignInAPI(values);
+      if (result?.success) {
+        dispatch(setLoading(false));
+        return result;
+      } else {
+        throw result;
+      }
+    } catch (error) {
+      dispatch(setLoading(false));
+      dispatch(
+        setMessage({
+          text: error?.message,
+          type: AlertEnum.Error,
+        })
+      );
+      return error;
+    }
+  }
+);
 export const OTPSignIn = createAsyncThunk(
   "SignIn",
   async (values, { dispatch }) => {
@@ -62,6 +88,9 @@ export const OTPSignIn = createAsyncThunk(
             type: AlertEnum.Success,
           })
         );
+        dispatch(setLoading(false));
+        dispatch(setSession(result?.data));
+        dispatch(GetUserProfile());
         return result;
       } else {
         throw result;

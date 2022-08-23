@@ -25,6 +25,13 @@ export const SignInSchema = Yup.object({
     .min(6, "Please enter minimum 6 letter")
     .required("Please enter your password"),
 });
+export const MobileSignInSchema = Yup.object({
+  mobile_number: Yup.string()
+    .required("Please enter your mobile number")
+    .test("mobile_number", "Please enter valid mobile number", (value) => {
+      return validatePhone(parseInt(value ?? "0"));
+    }),
+});
 export const ForgotSchema = Yup.object({
   value: Yup.string()
     .required("Please enter your mobile/email")
@@ -77,6 +84,20 @@ export const OTPSchema = Yup.object({
     .min(4, "Please enter valid OTP")
     .max(4, "Please enter valid OTP")
     .required("Please enter your OTP"),
+});
+export const PersonalProfileSchema = Yup.object({
+  email: Yup.string()
+    .email("Please enter valid email")
+    .required("Please enter your email"),
+  first_name: Yup.string()
+    .max(32, "First name should be less than 32 characters")
+    .required("Please enter your first name"),
+  last_name: Yup.string()
+    .max(32, "Last name should be less than 32 characters")
+    .required("Please enter your last name"),
+  image: Yup.mixed().required("Please upload any image"),
+  dob: Yup.string().required("Please enter your date of birth"),
+  gender: Yup.string().required("Please select your gender").nullable(),
 });
 export const BasicInformationSchema = Yup.object({
   image: Yup.mixed().required("Please upload any image"),
