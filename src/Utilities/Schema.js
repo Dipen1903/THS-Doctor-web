@@ -42,8 +42,8 @@ export const ForgotSchema = Yup.object({
 export const ResetPasswordSchema = Yup.object({
   password: Yup.string()
     .matches(
-      /(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/,
-      "Password must be eight characters and contain uppercase, lowercase, number and speacial character."
+      /(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/,
+      "Password must be eight characters and contain uppercase, lowercase, number."
     )
     .required("Please enter your password"),
   confirm_password: Yup.string().oneOf(
@@ -70,8 +70,8 @@ export const SignUpSchema = Yup.object({
     .required("Please enter your mobile number"),
   password: Yup.string()
     .matches(
-      /(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/,
-      "Password must be eight characters and contain uppercase, lowercase, number and speacial character."
+      /(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/,
+      "Password must be eight characters and contain uppercase, lowercase, number."
     )
     .required("Please enter your password"),
   confirm_password: Yup.string().oneOf(
