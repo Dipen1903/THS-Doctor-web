@@ -33,22 +33,30 @@ function Header() {
             style={{ maxHeight: "100px" }}
             navbarScroll
           >
-            <Nav.Link className="active" href="#action1">
-              <i class="fa fa-tachometer" aria-hidden="true"></i>
-              &nbsp;&nbsp;&nbsp;Dashboard
+            <Nav.Link>
+              <NavLink to="/dashboard">
+                <i class="fa fa-tachometer" aria-hidden="true"></i>
+                &nbsp;&nbsp;&nbsp;Dashboard
+              </NavLink>
             </Nav.Link>
-            <Nav.Link href="#action2">
-              <i class="fa fa-phone" aria-hidden="true"></i>
-              &nbsp;&nbsp;&nbsp;Consultations
+            <Nav.Link>
+              <NavLink to="/consultations">
+                <i class="fa fa-phone" aria-hidden="true"></i>
+                &nbsp;&nbsp;&nbsp;Consultations
+              </NavLink>
             </Nav.Link>
-            <Nav.Link href="#action2">
-              {" "}
-              <i class="fa fa-usd" aria-hidden="true"></i>
-              &nbsp;&nbsp;&nbsp;Payouts
+            <Nav.Link>
+              <NavLink to="/payout">
+                {" "}
+                <i class="fa fa-usd" aria-hidden="true"></i>
+                &nbsp;&nbsp;&nbsp;Payouts
+              </NavLink>
             </Nav.Link>
-            <Nav.Link href="#action2">
-              <i class="fa fa-commenting-o" aria-hidden="true"></i>
-              &nbsp;&nbsp;&nbsp;Chats
+            <Nav.Link>
+              <NavLink to="/chat">
+                <i class="fa fa-commenting-o" aria-hidden="true"></i>
+                &nbsp;&nbsp;&nbsp;Chats
+              </NavLink>
             </Nav.Link>
           </Nav>
           <div className="d-flex justify-content-between align-items-center">
