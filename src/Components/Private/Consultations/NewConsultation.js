@@ -1,18 +1,120 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Form, Pagination } from "react-bootstrap";
 import { useState } from "react";
 import { BackGround, Icon, Logo } from "../../../Utilities/Icons";
 import { Modal, Button } from "react-bootstrap";
+import Table from "../../Common/Layouts/Table";
+import { useDispatch, useSelector } from "react-redux";
+import { GetNewConsults } from "../../../Store/Reducers/ConsultationsReducer";
 function NewConsultation() {
+  const dispatch = useDispatch();
+  const { upcomingConsults } = useSelector(({ ConsultSlice }) => ConsultSlice);
   const [showModal, setShow] = useState(false);
-
+  const [filteredData, setFilteredData] = useState([]);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const columns = [
+    {
+      Header: "Appointment ID",
+      accessor: "id", // accessor is the "key" in the data
+    },
+    {
+      Header: "Patient",
+      accessor: "full_name", // accessor is the "key" in the data
+    },
+    {
+      Header: "Age",
+      accessor: "age",
+    },
+    {
+      Header: "Gender",
+      accessor: "gender",
+    },
+    {
+      Header: "Date-Time",
+      accessor: "birthdate",
+    },
+    {
+      Header: "Time Left",
+      accessor: "time",
+      Cell: ({
+        cell: {
+          value = 0,
+          row: { original },
+        },
+      }) => {
+        {
+          original.varients.map(
+            (item) => (value = parseInt(value) + parseInt(item.stock))
+          );
+        }
+        return <p>{value}</p>;
+      },
+    },
+    {
+      Header: "Mark Delay",
+      accessor: "delay",
+      Cell: ({
+        cell: {
+          value = 0,
+          row: { original },
+        },
+      }) => {
+        return (
+          <select className="custom-select">
+            <option value="0">No delay</option>
+            <option value="1">5 min</option>
+            <option value="2">10 min</option>
+            <option value="3">15 min</option>
+          </select>
+        );
+      },
+    },
+    {
+      Header: "Type",
+      accessor: "type",
+    },
+    {
+      Header: "Chat",
+      accessor: "chat",
+      Cell: ({
+        cell: {
+          value,
+          row: { original },
+        },
+      }) => {
+        return <img src={Icon.Chat} alt="Avatar" className="chat-icon"></img>;
+      },
+    },
+    {
+      Header: "Cancel",
+      accessor: "action",
+      Cell: ({
+        cell: {
+          row: { original },
+        },
+      }) => (
+        <img
+          src={Icon.Cross}
+          alt="Avatar"
+          className="cross-icon"
+          // onClick={handleShow}
+        ></img>
+      ),
+    },
+  ];
+  useEffect(() => {
+    dispatch(GetNewConsults());
+
+    return () => {};
+  }, []);
+
   return (
     <>
       <div className="consultation_card_box mt_20">
         <div class="table-responsive">
-          <table class="table consultation_table">
+          <Table data={filteredData} columns={columns} pagination={true} />
+          {/* <table class="table consultation_table">
             <thead>
               <tr className="consultation_table_head">
                 <th className="consultation_table_head_text">
@@ -65,112 +167,11 @@ function NewConsultation() {
                 </td>
               </tr>
 
-              <tr className="consultation_table_body_row">
-                <td className="consultation_table_body_text">13215841</td>
-                <td className="consultation_table_body_text">John Doe</td>
-                <td className="consultation_table_body_text">23</td>
-                <td className="consultation_table_body_text">M</td>
-                <td className="consultation_table_body_text">11 Apr 1:15pm</td>
-                <td className="consultation_table_body_text">
-                  <span class="failed_tag">10 mint left</span>
-                </td>
-                <td className="consultation_table_body_text">New Cases</td>
-                <td className="consultation_table_body_text">
-                  <select className="custom-select">
-                    <option value="0">No delay</option>
-                    <option value="1">5 min</option>
-                    <option value="2">10 min</option>
-                    <option value="3">15 min</option>
-                  </select>
-                </td>
-                <td className="consultation_table_body_text">
-                  <img
-                    src={BackGround.ChatImg}
-                    alt="Avatar"
-                    className="chat-icon"
-                  ></img>
-                </td>
-                <td className="consultation_table_body_text">
-                  <img
-                    src={BackGround.CrossImg}
-                    alt="Avatar"
-                    className="cross-icon"
-                  ></img>
-                </td>
-              </tr>
-
-              <tr className="consultation_table_body_row">
-                <td className="consultation_table_body_text">13215841</td>
-                <td className="consultation_table_body_text">John Doe</td>
-                <td className="consultation_table_body_text">23</td>
-                <td className="consultation_table_body_text">M</td>
-                <td className="consultation_table_body_text">11 Apr 1:15pm</td>
-                <td className="consultation_table_body_text">
-                  <span class="failed_tag">10 mint left</span>
-                </td>
-                <td className="consultation_table_body_text">New Cases</td>
-                <td className="consultation_table_body_text">
-                  <select className="custom-select">
-                    <option value="0">No delay</option>
-                    <option value="1">5 min</option>
-                    <option value="2">10 min</option>
-                    <option value="3">15 min</option>
-                  </select>
-                </td>
-                <td className="consultation_table_body_text">
-                  <img
-                    src={BackGround.ChatImg}
-                    alt="Avatar"
-                    className="chat-icon"
-                  ></img>
-                </td>
-                <td className="consultation_table_body_text">
-                  <img
-                    src={BackGround.CrossImg}
-                    alt="Avatar"
-                    className="cross-icon"
-                  ></img>
-                </td>
-              </tr>
-
-              <tr className="consultation_table_body_row">
-                <td className="consultation_table_body_text">13215841</td>
-                <td className="consultation_table_body_text">John Doe</td>
-                <td className="consultation_table_body_text">23</td>
-                <td className="consultation_table_body_text">M</td>
-                <td className="consultation_table_body_text">11 Apr 1:15pm</td>
-                <td className="consultation_table_body_text">
-                  <span class="failed_tag">10 mint left</span>
-                </td>
-                <td className="consultation_table_body_text">New Cases</td>
-                <td className="consultation_table_body_text">
-                  <select className="custom-select">
-                    <option value="0">No delay</option>
-                    <option value="1">5 min</option>
-                    <option value="2">10 min</option>
-                    <option value="3">15 min</option>
-                  </select>
-                </td>
-                <td className="consultation_table_body_text">
-                  <img
-                    src={BackGround.ChatImg}
-                    alt="Avatar"
-                    className="chat-icon"
-                  ></img>
-                </td>
-                <td className="consultation_table_body_text">
-                  <img
-                    src={BackGround.CrossImg}
-                    alt="Avatar"
-                    className="cross-icon"
-                  ></img>
-                </td>
-              </tr>
             </tbody>
-          </table>
+          </table> */}
         </div>
       </div>
-      <div className="pagination_card">
+      {/* <div className="pagination_card">
         <div className="row">
           <div className="col-md-3">
             <h5 class="pagination_result_text">Showing 1 - 10 of 50 results</h5>
@@ -199,7 +200,7 @@ function NewConsultation() {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
 
       <Modal
         show={showModal}

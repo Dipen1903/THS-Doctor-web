@@ -17,6 +17,8 @@ import FIRSTAIDGREY from "../Assets/svg/FirstAidKitGrey.svg";
 import CIVERRIGHTBLUE from "../Assets/svg/CiverRightBlue.svg";
 import CIVERRIGHTGREY from "../Assets/svg/CiverRightGrey.svg";
 import PENCIL from "../Assets/svg/Pencil.svg";
+import CHAT from "../Assets/svg/Message.svg";
+import CROSS from "../Assets/svg/CrossRed.svg";
 
 //BACKGROUND IMAGES
 
@@ -35,6 +37,8 @@ export const Icon = {
   Pencil: PENCIL,
   CalenderCross: CalendarBlue,
   Dollor: CHARTROUND,
+  Chat: CHAT,
+  Cross: CROSS,
   Chart: require("../Assets/img/totalrevenue.png"),
   Attach: require("../Assets/img/ic_attach.png"),
   Cross: require("../Assets/img/cross.png"),
