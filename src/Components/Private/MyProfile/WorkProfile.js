@@ -9,6 +9,7 @@ import { Icon, BackGround } from "../../../Utilities/Icons";
 import FileUpload from "../../Common/Layouts/FileUpload";
 import { isEmpty } from "../../../Utilities/Functions";
 import { EditUserProfile } from "../../../Store/Reducers/ProfileReducer";
+import { WorkProfileSettingSchema } from "../../../Utilities/Schema";
 function WorkProfile() {
   const [isEdit, setIsEdit] = useState(false);
   const [profileData, setProfileData] = useState({
@@ -90,6 +91,7 @@ function WorkProfile() {
       <Formik
         initialValues={profileData}
         enableReinitialize
+        validationSchema={WorkProfileSettingSchema}
         onSubmit={(values) => {
           let tempData = { ...values };
           if (values?.languages) {
