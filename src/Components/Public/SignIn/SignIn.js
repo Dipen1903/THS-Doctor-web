@@ -40,8 +40,10 @@ function SignInComponent() {
   const { otpModal, forgotModal, successModal } = useSelector(
     ({ AuthSlice }) => AuthSlice
   );
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   return (
     <>
       <div class="sub_section_2">
@@ -54,6 +56,7 @@ function SignInComponent() {
                     <h3 class="logo_title">THS Doctor’s Sign In</h3>
                     <h5 class="welcome_title">Welcome back to THS!</h5>
                     <div class="signin_box">
+
                       <Formik
                         initialValues={SignInEnum}
                         validationSchema={SignInSchema}
@@ -62,13 +65,15 @@ function SignInComponent() {
                             if (res.payload?.success) {
                               navigate("/dashboard");
                             }
+                            console.log("login Response:::",res);
                           });
                         }}
                       >
+
                         {({
                           values,
                           errors,
-                          setTouched,
+                          setTouched, 
                           handleChange,
                           handleBlur,
                           handleSubmit,

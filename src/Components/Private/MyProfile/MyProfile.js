@@ -63,6 +63,7 @@ function MyProfile() {
                       </span>
                     </Nav.Link>
                   </Nav.Item>
+                  
                   <Nav.Item>
                     <Nav.Link
                       className="profile_tab_option_bg"
@@ -90,9 +91,6 @@ function MyProfile() {
                   </Nav.Item>
                 </Nav>
 
-                {/* <Col sm={9}>
-              
-            </Col> */}
               </ul>
             </div>
           </div>
