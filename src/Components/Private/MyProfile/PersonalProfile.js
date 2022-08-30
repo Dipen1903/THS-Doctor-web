@@ -42,10 +42,12 @@ function PersonalProfile() {
       setProfileData(tempData);
     } catch (error) {}
   };
+
   useEffect(() => {
     intialSetup();
     return () => {};
   }, [userProfile]);
+
 
   return (
     <>
@@ -78,8 +80,8 @@ function PersonalProfile() {
         onSubmit={(values) =>
           dispatch(EditUserProfile(values)).then((res) => {
             if (res.payload.success) {
-              setIsEdit(false);
-            }
+              setIsEdit(false);              
+            }         
           })
         }
       >
@@ -93,11 +95,11 @@ function PersonalProfile() {
           <form onSubmit={handleSubmit}>
             <div className="personal_profile_card_body">
               <div className="row">
-                <div class="col-md-6">
-                  <div class="row">
-                    <div class="col-md-12">
-                      <div class="row">
-                        <div class="col-md-3">
+                <div className="col-md-6">
+                  <div className="row">
+                    <div className="col-md-12">
+                      <div className="row">
+                        <div className="col-md-3">
                           <center>
                             <img
                               src={
@@ -106,14 +108,14 @@ function PersonalProfile() {
                                 values?.image ||
                                 BackGround.Profile
                               }
-                              class="upload_avatar_img"
+                              className="upload_avatar_img"
                             ></img>
                           </center>
                         </div>
                         {isEdit && (
                           <>
-                            <div class="col-md-9">
-                              <div class="wrapper">
+                            <div className="col-md-9">
+                              <div className="wrapper">
                                 <FileUpload
                                   className="upload_avatar_btn"
                                   label="Upload Your Avatar"

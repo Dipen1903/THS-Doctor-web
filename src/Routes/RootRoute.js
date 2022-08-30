@@ -10,6 +10,8 @@ import {
   SetUpSetting,
 } from "../Components/Private/SetupProfile/SetUpProfile";
 import MyProfile from "../Components/Private/MyProfile/MyProfile";
+import Settings from "../Components/Private/Settings/Settings";
+
 // import UserProfile from "../Components/Public/Userprofile/userprofile";
 // import UserProfile2 from "../Components/Public/Userprofile/userprofile2";
 // import Homepage from "../Components/Private/Dashboard/Homepage";
@@ -74,6 +76,17 @@ function RootRoute() {
           </PrivateRoutes>
         }
       />
+
+      <Route
+        path="/settings"
+        element={
+          <PrivateRoutes isHeader={true}>
+            <Settings />
+          </PrivateRoutes>
+        }
+      />
+
+
       {/* 
       <Route
         path="/userprofile"

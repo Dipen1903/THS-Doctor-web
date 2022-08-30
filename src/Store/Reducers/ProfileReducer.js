@@ -5,6 +5,8 @@ import {
   EditUserProfileAPI,
   GetUserProfileAPI,
   RejectionDetailsAPI,
+  ChangeMobileNumberAPI,
+  ChangePasswordAPI,
 } from "../../Routes/Service";
 
 import { AlertEnum } from "../../Utilities/Enums";
@@ -97,8 +99,9 @@ export const EditUserProfile = createAsyncThunk(
       );
       return error;
     }
-  }
+  } 
 );
+
 export const EditBankDetails = createAsyncThunk(
   "EditBankDetails",
   async (values, { dispatch }) => {
@@ -129,6 +132,73 @@ export const EditBankDetails = createAsyncThunk(
     }
   }
 );
+
+
+// Change mobile number in setting part
+
+export const ChangeMobileNumber = createAsyncThunk(
+  "ChangeMobileNumber",
+  async (values, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const result = await ChangeMobileNumberAPI(values);
+      if (result?.success) {
+        dispatch(setLoading(false));
+        dispatch(
+          setMessage({
+            text: result?.message,
+            type: AlertEnum.Success,
+          })
+        );
+        return result;
+      } else {
+        throw result;
+      }
+    } catch (error) {
+      dispatch(setLoading(false));
+      dispatch(
+        setMessage({
+          text: error?.message,
+          type: AlertEnum.Error,
+        })
+      );
+      return error;
+    }
+  }
+);
+
+export const ChangePassword = createAsyncThunk(
+  "ChangePassword",
+  async (values, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const result = await ChangePasswordAPI(values);
+      if (result?.success) {
+        dispatch(setLoading(false));
+        dispatch(
+          setMessage({
+            text: result?.message,
+            type: AlertEnum.Success,
+          })
+        );
+        return result;
+      } else {
+        throw result;
+      }
+    } catch (error) {
+      dispatch(setLoading(false));
+      dispatch(
+        setMessage({
+          text: error?.message,
+          type: AlertEnum.Error,
+        })
+      );
+      return error;
+    }
+  }
+);
+
+
 export const EditSchedule = createAsyncThunk(
   "EditSchedule",
   async (values, { dispatch }) => {

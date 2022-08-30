@@ -74,7 +74,7 @@ function Header() {
                 Profle
               </NavLink>
               <NavDropdown.Divider />
-              <NavLink className="dropdown-item" to="settings">
+              <NavLink className="dropdown-item" to="/settings">
                 <img src={Icon.Setting} alt="Avatar" class=" mr_10"></img>
                 Settings
               </NavLink>

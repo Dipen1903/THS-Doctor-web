@@ -3807,6 +3807,7 @@ button.personal_profile_btn.float_right.btn.btn-primary img {
 }
 
 .nav_text.active {
+  
 }
 
 /* medicine css */
@@ -3820,3 +3821,181 @@ button.personal_profile_btn.float_right.btn.btn-primary img {
 }
 
 /*------------------------------------------------Prescription one css end -----------------------------------------------*/
+
+
+/*-------------------------------------------------Setting Css start-------------------------------------------------*/
+.setting_profile_card_head .setting_bank_title {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 32px;
+  color: #1e1f20;
+  margin-top: 5px;
+  margin-bottom: 0;
+}
+.setting_profile_card_head .setting_bank_title::before {
+  content: "";
+  background: #fc9875;
+  border: 1px solid #fc9875;
+  padding: 3px;
+  border-radius: 10px;
+  margin-right: 10px;
+}
+.setting_profile_card_head .setting_change_password {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 32px;
+  color: #1e1f20;
+  margin-top: 5px;
+  margin-bottom: 0;
+}
+.setting_profile_card_head .setting_change_password::before {
+  content: "";
+  background: #3093bb;
+  border: 1px solid #3093bb;
+  padding: 3px;
+  border-radius: 10px;
+  margin-right: 10px;
+}
+.setting_profile_card_head .setting_change_mobile {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 32px;
+  color: #1e1f20;
+  margin-top: 5px;
+  margin-bottom: 0;
+}
+.setting_profile_card_head .setting_change_mobile::before {
+  content: "";
+  background: #f8446c;
+  border: 1px solid #f8446c;
+  padding: 3px;
+  border-radius: 10px;
+  margin-right: 10px;
+}
+.setting_profile_card_head .setting_profile_title {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 32px;
+  color: #1e1f20;
+  margin-top: 5px;
+  margin-bottom: 0;
+}
+.setting_profile_card_head .setting_profile_title::before {
+  content: "";
+  background: #f8446c;
+  border: 1px solid #f8446c;
+  padding: 3px;
+  border-radius: 10px;
+  margin-right: 10px;
+}
+.send_otp {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 16px;
+  color: #f8446c;
+  position: absolute;
+  float: right;
+  right: 20px;
+  margin-top: -33px;
+}
+.update_number {
+  font-family: "Mulish";
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 24px;
+  color: #f8446c;
+}
+.ok_btn {
+  font-family: "Mulish";
+  font-weight: 600;
+  font-size: 15px;
+  background: linear-gradient(45deg, #3093bb 0%, #82dbff 100%);
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  color: #fff;
+  width: 100%;
+  padding: 10px 30px;
+}
+
+.setting_profile_btn {
+  background: #ffffff;
+  border: 1px solid #eceff4;
+  border-radius: 8px;
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  color: #1e1f20;
+  padding: 8px 15px;
+}
+.setting_profile_btn_icon {
+  margin-right: 15px;
+  width: 18px;
+  margin-top: -5px;
+}
+
+.setting_form_title {
+  font-family: Mulish;
+  font-size: 16px;
+  color: #000;
+  line-height: 20px;
+  font-weight: 600;
+}
+.setting_consult_fee_subtext {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 16px;
+  color: #f8446c;
+}
+.setting_time_slot_title {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 26px;
+  color: #1e1f20;
+}
+.setting_time_slot_title::before {
+  content: "";
+  background: #24b2b2;
+  border: 1px solid #24b2b2;
+  padding: 3px;
+  border-radius: 10px;
+  margin-right: 6px;
+}
+.setting_profile_card_head {
+  background: #ffffff;
+  box-shadow: 0px 5px 10px rgb(0 64 128 / 4%);
+  border-radius: 12px 12px 0 0;
+  padding: 10px 20px;
+  border-bottom: 1px solid #eceff4;
+}
+
+.setting_profile_card_body {
+  background: #ffffff;
+  box-shadow: 0px 5px 10px rgba(0, 64, 128, 0.04);
+  border-radius: 0 0 12px 12px;
+  padding: 25px;
+}
+.setting_time_slot_day {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 17px;
+  line-height: 24px;
+  color: #1e1f20;
+}
+/*-------------------------------------------------Setting Css End-------------------------------------------------*/

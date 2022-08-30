@@ -17,6 +17,7 @@ import FIRSTAIDGREY from "../Assets/svg/FirstAidKitGrey.svg";
 import CIVERRIGHTBLUE from "../Assets/svg/CiverRightBlue.svg";
 import CIVERRIGHTGREY from "../Assets/svg/CiverRightGrey.svg";
 import PENCIL from "../Assets/svg/Pencil.svg";
+
 //BACKGROUND IMAGES
 
 export const Logo = {

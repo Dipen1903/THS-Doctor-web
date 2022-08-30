@@ -9,7 +9,9 @@ import { Link } from "react-router-dom";
 import PersonalProfile from "./PersonalProfile";
 import WorkProfile from "./WorkProfile";
 import { Icon } from "../../../Utilities/Icons";
+
 function MyProfile() {
+
   return (
     <Container fluid className="profile_container">
       <Tab.Container id="left-tabs-example" defaultActiveKey="first">
@@ -41,6 +43,7 @@ function MyProfile() {
                       </span>
                     </Nav.Link>
                   </Nav.Item>
+                  
                   <Nav.Item>
                     <Nav.Link
                       className="profile_tab_option_bg"
@@ -68,9 +71,6 @@ function MyProfile() {
                   </Nav.Item>
                 </Nav>
 
-                {/* <Col sm={9}>
-              
-            </Col> */}
               </ul>
             </div>
           </div>

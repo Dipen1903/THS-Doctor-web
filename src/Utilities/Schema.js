@@ -139,3 +139,12 @@ export const EducationalProfileSchema = Yup.object({
     .nullable(),
   signature: Yup.mixed().required("Please upload signature").nullable(),
 });
+
+export const ChangePasswordSchema = Yup.object({
+  password: Yup.string()
+    .required("Please enter your password"),
+  confirm_password: Yup.string().oneOf(
+    [Yup.ref("new_password"), null],
+    "Password does not match."
+  ),
+});

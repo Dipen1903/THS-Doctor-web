@@ -39,3 +39,11 @@ export const EditBankAPI = (data) =>
   POST(`${BASE_URL}/bank-account-create`, data);
 export const EditScheduleAPI = (data) =>
   POST(`${BASE_URL}/availibility-create`, data);
+
+
+//* CHANGE-MOBILENUMBER API REQEST in Setting page
+export const ChangeMobileNumberAPI = (data) =>
+  POST(`${BASE_URL}/verify-change-mobile-number`, data);
+
+export const ChangePasswordAPI = (data) =>
+  POST(`${BASE_URL}/change-password`, data);
