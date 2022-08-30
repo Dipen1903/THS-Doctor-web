@@ -33,31 +33,26 @@ function Header() {
             style={{ maxHeight: "100px" }}
             navbarScroll
           >
-            <Nav.Link>
-              <NavLink to="/dashboard">
-                <i class="fa fa-tachometer" aria-hidden="true"></i>
-                &nbsp;&nbsp;&nbsp;Dashboard
-              </NavLink>
-            </Nav.Link>
-            <Nav.Link>
-              <NavLink to="/consultations">
-                <i class="fa fa-phone" aria-hidden="true"></i>
-                &nbsp;&nbsp;&nbsp;Consultations
-              </NavLink>
-            </Nav.Link>
-            <Nav.Link>
-              <NavLink to="/payout">
-                {" "}
-                <i class="fa fa-usd" aria-hidden="true"></i>
-                &nbsp;&nbsp;&nbsp;Payouts
-              </NavLink>
-            </Nav.Link>
-            <Nav.Link>
-              <NavLink to="/chat">
-                <i class="fa fa-commenting-o" aria-hidden="true"></i>
-                &nbsp;&nbsp;&nbsp;Chats
-              </NavLink>
-            </Nav.Link>
+            <NavLink className="nav-link" to="/dashboard">
+              <i class="fa fa-tachometer" aria-hidden="true"></i>
+              &nbsp;&nbsp;&nbsp;Dashboard
+            </NavLink>
+
+            <NavLink className="nav-link" to="/consultation">
+              <i class="fa fa-phone" aria-hidden="true"></i>
+              &nbsp;&nbsp;&nbsp;Consultations
+            </NavLink>
+
+            <NavLink className="nav-link" to="/payout">
+              {" "}
+              <i class="fa fa-usd" aria-hidden="true"></i>
+              &nbsp;&nbsp;&nbsp;Payouts
+            </NavLink>
+
+            <NavLink className="nav-link" to="/chat">
+              <i class="fa fa-commenting-o" aria-hidden="true"></i>
+              &nbsp;&nbsp;&nbsp;Chats
+            </NavLink>
           </Nav>
           <div className="d-flex justify-content-between align-items-center">
             <label class="switch">

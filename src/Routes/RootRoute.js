@@ -10,6 +10,7 @@ import {
   SetUpSetting,
 } from "../Components/Private/SetupProfile/SetUpProfile";
 import MyProfile from "../Components/Private/MyProfile/MyProfile";
+import ConsultIndex from "../Components/Private/Consultations/ConsultIndex";
 // import UserProfile from "../Components/Public/Userprofile/userprofile";
 // import UserProfile2 from "../Components/Public/Userprofile/userprofile2";
 // import Homepage from "../Components/Private/Dashboard/Homepage";
@@ -71,6 +72,14 @@ function RootRoute() {
         element={
           <PrivateRoutes isHeader={true}>
             <MyProfile />
+          </PrivateRoutes>
+        }
+      />
+      <Route
+        path="/consultation"
+        element={
+          <PrivateRoutes isHeader={true}>
+            <ConsultIndex />
           </PrivateRoutes>
         }
       />

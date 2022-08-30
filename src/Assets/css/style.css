@@ -2380,6 +2380,8 @@ input[type="radio"]:checked {
   font-family: "Mulish", sans-serif;
 }
 .nav-link {
+  color: #9393aa !important;
+  text-decoration: none !important;
   font-style: normal;
   font-weight: 600;
   font-size: 14px;
@@ -2388,6 +2390,7 @@ input[type="radio"]:checked {
 
 .nav-link .active {
   color: #3093bb !important;
+  text-decoration: none;
 }
 
 .dropdown-menu.show {
@@ -2818,14 +2821,14 @@ button.personal_profile_btn.float_right.btn.btn-primary img {
   color: #24b2b2;
 }
 .nav-tabs .nav-item.show .nav-link,
-.nav-tabs .nav-link.active:after {
+.nav-tabs .nav-link.active:before {
   content: "";
   border-bottom: 3px solid #24b2b2;
   width: 30px;
   transform: rotate(180deg);
   position: absolute;
   margin-top: 35px;
-  margin-left: -85px;
+  /* margin-left: -40px; */
 }
 .tab_inner_box {
   padding: 20px 0px;
@@ -3725,9 +3728,9 @@ button.personal_profile_btn.float_right.btn.btn-primary img {
   cursor: pointer;
 }
 
-.Tabs li.active {
-  color: #24b2b2;
-  border-bottom: 2px solid #24b2b2;
+.Tabs .nav-link.active {
+  color: #24b2b2 !important;
+  /* border-bottom:3px solid #24b2b2; */
 }
 .cancel-button .active {
   display: none;
