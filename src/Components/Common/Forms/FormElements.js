@@ -320,7 +320,7 @@ function SearchBox(rest) {
     name,
     options,
   } = rest;
-  const dispatch = useDispatch();
+
   const [result, setResult] = useState([]);
   const [text, setText] = useState("");
   const [selectedUsers, setSelectedUser] = useState([]);
@@ -332,7 +332,7 @@ function SearchBox(rest) {
       setText(text);
       let tempResult = options?.filter(
         (item) =>
-          item[objectKey].toLowerCase().includes(text.toLowerCase()) == 1
+          item[objectKey].toUpperCase().includes(text.toUpperCase()) == 1
       );
       setResult(tempResult);
     } catch (error) {

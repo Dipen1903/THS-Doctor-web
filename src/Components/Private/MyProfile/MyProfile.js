@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Col from "react-bootstrap/Col";
 import Nav from "react-bootstrap/Nav";
 import Row from "react-bootstrap/Row";
@@ -9,8 +9,28 @@ import { Link } from "react-router-dom";
 import PersonalProfile from "./PersonalProfile";
 import WorkProfile from "./WorkProfile";
 import { Icon } from "../../../Utilities/Icons";
-
+import {
+  CityList,
+  DocumentList,
+  LanguageList,
+  QualificationList,
+  SpecialityList,
+  StateList,
+  SubSpecialityList,
+} from "../../../Store/Reducers/CommonReducer";
+import { useDispatch } from "react-redux";
 function MyProfile() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(StateList());
+    dispatch(CityList());
+    dispatch(SpecialityList());
+    // dispatch(SubSpecialityList());
+    dispatch(LanguageList());
+    dispatch(QualificationList());
+    dispatch(DocumentList());
+    return () => {};
+  }, []);
 
   return (
     <Container fluid className="profile_container">

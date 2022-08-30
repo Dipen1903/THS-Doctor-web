@@ -33,22 +33,30 @@ function Header() {
             style={{ maxHeight: "100px" }}
             navbarScroll
           >
-            <Nav.Link className="active" href="#action1">
-              <i class="fa fa-tachometer" aria-hidden="true"></i>
-              &nbsp;&nbsp;&nbsp;Dashboard
+            <Nav.Link>
+              <NavLink to="/dashboard">
+                <i class="fa fa-tachometer" aria-hidden="true"></i>
+                &nbsp;&nbsp;&nbsp;Dashboard
+              </NavLink>
             </Nav.Link>
-            <Nav.Link href="#action2">
-              <i class="fa fa-phone" aria-hidden="true"></i>
-              &nbsp;&nbsp;&nbsp;Consultations
+            <Nav.Link>
+              <NavLink to="/consultations">
+                <i class="fa fa-phone" aria-hidden="true"></i>
+                &nbsp;&nbsp;&nbsp;Consultations
+              </NavLink>
             </Nav.Link>
-            <Nav.Link href="#action2">
-              {" "}
-              <i class="fa fa-usd" aria-hidden="true"></i>
-              &nbsp;&nbsp;&nbsp;Payouts
+            <Nav.Link>
+              <NavLink to="/payout">
+                {" "}
+                <i class="fa fa-usd" aria-hidden="true"></i>
+                &nbsp;&nbsp;&nbsp;Payouts
+              </NavLink>
             </Nav.Link>
-            <Nav.Link href="#action2">
-              <i class="fa fa-commenting-o" aria-hidden="true"></i>
-              &nbsp;&nbsp;&nbsp;Chats
+            <Nav.Link>
+              <NavLink to="/chat">
+                <i class="fa fa-commenting-o" aria-hidden="true"></i>
+                &nbsp;&nbsp;&nbsp;Chats
+              </NavLink>
             </Nav.Link>
           </Nav>
           <div className="d-flex justify-content-between align-items-center">
@@ -69,47 +77,61 @@ function Header() {
               }
               id="navbarScrollingDropdown"
             >
-              <NavLink className="dropdown-item" to="/profile">
-                <img src={Icon.User} alt="Avatar" class=" mr_10 "></img>My
-                Profle
-              </NavLink>
+              <NavDropdown.Item>
+                <NavLink className="dropdown-item-link" to="/profile">
+                  <img src={Icon.User} alt="Avatar" class=" mr_10 "></img>My
+                  Profle
+                </NavLink>
+              </NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavLink className="dropdown-item" to="/settings">
-                <img src={Icon.Setting} alt="Avatar" class=" mr_10"></img>
-                Settings
-              </NavLink>
+              <NavDropdown.Item>
+                <NavLink className="dropdown-item-link" to="settings">
+                  <img src={Icon.Setting} alt="Avatar" class=" mr_10"></img>
+                  Settings
+                </NavLink>
+              </NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavLink className="dropdown-item" to="share">
-                <img src={Icon.Share} alt="Avatar" class=" mr_10"></img>
-                Share Yor Link
-              </NavLink>
+              <NavDropdown.Item>
+                <NavLink className="dropdown-item-link" to="share">
+                  <img src={Icon.Share} alt="Avatar" class=" mr_10"></img>
+                  Share Yor Link
+                </NavLink>
+              </NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavLink className="dropdown-item" to="privacy">
-                <img src={Icon.Notes} alt="Avatar" class="mr_10"></img>
-                Privacy Policy
-              </NavLink>
+              <NavDropdown.Item>
+                <NavLink className="dropdown-item-link" to="privacy">
+                  <img src={Icon.Notes} alt="Avatar" class="mr_10"></img>
+                  Privacy Policy
+                </NavLink>
+              </NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavLink className="dropdown-item" to="terms">
-                <img src={Icon.Document} alt="Avatar" class=" mr_10"></img>
-                Terms and Conditions
-              </NavLink>
+              <NavDropdown.Item>
+                <NavLink className="dropdown-item-link" to="terms">
+                  <img src={Icon.Document} alt="Avatar" class=" mr_10"></img>
+                  Terms and Conditions
+                </NavLink>
+              </NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavLink className="dropdown-item" to="help">
-                <img src={Icon.Help} alt="Avatar" class="mr_10"></img>
-                Help and Support
-              </NavLink>
+              <NavDropdown.Item>
+                <NavLink className="dropdown-item-link" to="help">
+                  <img src={Icon.Help} alt="Avatar" class="mr_10"></img>
+                  Help and Support
+                </NavLink>
+              </NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavLink
-                className="dropdown-item"
-                to="logout"
-                onClick={(e) => {
-                  e.preventDefault();
-                  dispatch(removeSession());
-                }}
-              >
-                <img src={Icon.Logout} alt="Avatar" class="mr_10"></img>
-                Logout
-              </NavLink>
+              <NavDropdown.Item>
+                <NavLink
+                  className="dropdown-item-link"
+                  to="logout"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    dispatch(removeSession());
+                  }}
+                >
+                  <img src={Icon.Logout} alt="Avatar" class="mr_10"></img>
+                  Logout
+                </NavLink>
+              </NavDropdown.Item>
             </NavDropdown>
           </div>
         </Navbar.Collapse>

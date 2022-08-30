@@ -99,6 +99,38 @@ export const PersonalProfileSchema = Yup.object({
   dob: Yup.string().required("Please enter your date of birth"),
   gender: Yup.string().required("Please select your gender").nullable(),
 });
+export const WorkProfileSettingSchema = Yup.object({
+  city_id: Yup.string().required("Please select your city"),
+  state_id: Yup.string().required("Please select your state"),
+  speciality: Yup.string()
+    .min(1, "Please select your speaciality")
+    .required("Please select your speaciality")
+    .nullable(),
+  sub_speciality: Yup.string().notRequired(),
+  experience: Yup.string()
+    .matches(/^\d/)
+    .required("Please enter your experience")
+    .nullable(),
+  registration_number: Yup.string()
+    .matches(
+      /^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9!@#$%^&*]{6,32}$/,
+      "Please enter valid registration number"
+    )
+    .required("Please enter your registration number")
+    .nullable(),
+  languages: Yup.array()
+    .of(Yup.string())
+    .required("Please select any one language"),
+  qualification: Yup.array()
+    .of(Yup.object())
+    .min(1, "Please select any qualification")
+    .required("Please select any qualification")
+    .nullable(),
+  proof: Yup.array()
+    .of(Yup.object())
+    .required("Please select any proof")
+    .nullable(),
+});
 export const BasicInformationSchema = Yup.object({
   image: Yup.mixed().required("Please upload any image"),
   dob: Yup.string().required("Please enter your date of birth"),
