@@ -2821,7 +2821,7 @@ button.personal_profile_btn.float_right.btn.btn-primary img {
   color: #24b2b2;
 }
 .nav-tabs .nav-item.show .nav-link,
-.nav-tabs .nav-link.active:before {
+.nav-tabs .nav-link.active:after {
   content: "";
   border-bottom: 3px solid #24b2b2;
   width: 30px;
@@ -3275,8 +3275,31 @@ button.personal_profile_btn.float_right.btn.btn-primary img {
   background: #ffffff;
   box-shadow: 0px 5px 10px rgb(0 64 128 / 4%);
   border-radius: 0px 0px 12px 12px;
-  padding: 20px 20px;
-  border: 1px solid #eceff4;
+  padding: 15px 20px;
+  border-top: 1px solid #eceff4;
+}
+.pagination_card .form-select {
+  background: none;
+  padding: 0px 20px !important;
+  border-width: 0;
+  width: 100%;
+  height: 40px !important;
+  color: transparent;
+  transition: all 0.28s ease;
+  box-shadow: none;
+  font-family: Mulish;
+  font-weight: 600;
+  font-size: 16px;
+  color: #1d1929;
+  border: 1px solid #ede8e9;
+  border-radius: 10px;
+  background-color: #fff;
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAGCAYAAAD68A/GAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAACNSURBVHgBbY3RCYNADIZzbSl9qb3HQmn4u4GPfe0k7SgdwQ3UDdzAEcQNDl3gdIEzEQ9E/CHhT/L9hEhkAfsAUtroDiD6g0JJoPootYbVnwM1T0au88k756+M1hhKF/ijB/X6TMpQbCpJFgJ/xfplZUOgsu/cbw5GcBx8ldzsS+C3jJc1tCtmZAz8t/sJ0TAl3Z9eur4AAAAASUVORK5CYII=);
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  appearance: none;
+  display: block;
 }
 .page_item_list {
   font-family: "Mulish";
@@ -3724,13 +3747,21 @@ button.personal_profile_btn.float_right.btn.btn-primary img {
   gap: 20px;
 }
 
-.Tabs .nav li {
+.Tabs .nav-item {
   cursor: pointer;
 }
 
-.Tabs .nav-link.active {
+.Tabs .nav-item .nav-link {
+  font-size: 18px;
+  line-height: 18px;
+  text-decoration: none;
+}
+.Tabs .nav-item .nav-link.active {
   color: #24b2b2 !important;
-  /* border-bottom:3px solid #24b2b2; */
+  border-bottom: 2px solid #24b2b2;
+  font-size: 18px;
+  line-height: 18px;
+  text-decoration: none;
 }
 .cancel-button .active {
   display: none;
@@ -3760,6 +3791,15 @@ button.personal_profile_btn.float_right.btn.btn-primary img {
   border-radius: 12px;
   padding: 16px;
   height: 56px;
+}
+.consultation_table_head th:first-child {
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
+}
+
+.consultation_table_head th:last-child {
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
 }
 .consultation_table_head_text {
   font-family: "Mulish";
@@ -3813,7 +3853,6 @@ button.personal_profile_btn.float_right.btn.btn-primary img {
 }
 
 .nav_text.active {
-  
 }
 
 /* medicine css */
@@ -3827,7 +3866,6 @@ button.personal_profile_btn.float_right.btn.btn-primary img {
 }
 
 /*------------------------------------------------Prescription one css end -----------------------------------------------*/
-
 
 /*-------------------------------------------------Setting Css start-------------------------------------------------*/
 .setting_profile_card_head .setting_bank_title {

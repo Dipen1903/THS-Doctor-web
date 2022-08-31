@@ -19,6 +19,7 @@ import CIVERRIGHTGREY from "../Assets/svg/CiverRightGrey.svg";
 import PENCIL from "../Assets/svg/Pencil.svg";
 import CHAT from "../Assets/svg/Message.svg";
 import CROSS from "../Assets/svg/CrossRed.svg";
+import EYE from "../Assets/svg/Eye.svg";
 
 //BACKGROUND IMAGES
 
@@ -32,13 +33,14 @@ export const Icon = {
   MaleWhite: MALEWHITE,
   MaleGrey: MALEGREY,
   Search: SEARCH,
+  Eye: EYE,
   CiverDown: CIVERDOWN,
   Face: FACE,
   Pencil: PENCIL,
   CalenderCross: CalendarBlue,
   Dollor: CHARTROUND,
   Chat: CHAT,
-  Cross: CROSS,
+  CrossRed: CROSS,
   Chart: require("../Assets/img/totalrevenue.png"),
   Attach: require("../Assets/img/ic_attach.png"),
   Cross: require("../Assets/img/cross.png"),
