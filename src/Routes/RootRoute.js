@@ -12,6 +12,7 @@ import {
 import MyProfile from "../Components/Private/MyProfile/MyProfile";
 import ConsultIndex from "../Components/Private/Consultations/ConsultIndex";
 import Settings from "../Components/Private/Settings/Settings";
+import PrescriptionIndex from "../Components/Private/Prescription/PrescriptionIndex";
 
 // import UserProfile from "../Components/Public/Userprofile/userprofile";
 // import UserProfile2 from "../Components/Public/Userprofile/userprofile2";
@@ -85,6 +86,24 @@ function RootRoute() {
           </PrivateRoutes>
         }
       />
+      <Route path="/prescription">
+        <Route
+          path=""
+          element={
+            <PrivateRoutes isHeader={true}>
+              <PrescriptionIndex />
+            </PrivateRoutes>
+          }
+        />
+        <Route
+          path=":id"
+          element={
+            <PrivateRoutes isHeader={true}>
+              <PrescriptionIndex />
+            </PrivateRoutes>
+          }
+        />
+      </Route>
 
       <Route
         path="/settings"

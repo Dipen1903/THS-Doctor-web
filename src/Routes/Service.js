@@ -29,6 +29,8 @@ export const OTPVerifyForgotAPI = (data) =>
 //* PROFILE API REQUEST
 export const GetUserProfileAPI = (data) =>
   POST(`${BASE_URL}/profile-details`, data);
+export const ToggleLiveStatusAPI = (data) =>
+  POST(`${BASE_URL}/online-offline-update`, data);
 export const EditUserProfileAPI = (data) =>
   POST(`${BASE_URL}/edit-profile`, data);
 export const RejectionDetailsAPI = (data) =>

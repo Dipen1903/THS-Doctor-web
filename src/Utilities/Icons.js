@@ -20,6 +20,14 @@ import PENCIL from "../Assets/svg/Pencil.svg";
 import CHAT from "../Assets/svg/Message.svg";
 import CROSS from "../Assets/svg/CrossRed.svg";
 import EYE from "../Assets/svg/Eye.svg";
+import MEDICINEGREY from "../Assets/svg/MedicineGrey.svg";
+import MEDICINEBLUE from "../Assets/svg/MedicineBlue.svg";
+import TESTTUBEGREY from "../Assets/svg/TestTubeGrey.svg";
+import TESTTUBEBLUE from "../Assets/svg/TestTubeBlue.svg";
+import STETHOSCOPEGREY from "../Assets/svg/StethoScopeGrey.svg";
+import STETHOSCOPEBLUE from "../Assets/svg/StethoScopeBlue.svg";
+import NOTEGREY from "../Assets/svg/NoteGrey.svg";
+import NOTEBLUE from "../Assets/svg/NoteBlue.svg";
 
 //BACKGROUND IMAGES
 
@@ -28,6 +36,14 @@ export const Logo = {
   THS_SHORT: LogoShort,
 };
 export const Icon = {
+  MedicineGrey: MEDICINEGREY,
+  MedicineBlue: MEDICINEBLUE,
+  TestTubeGrey: TESTTUBEGREY,
+  TestTubeBlue: TESTTUBEBLUE,
+  StethoScopeGrey: STETHOSCOPEGREY,
+  StethoScopeBlue: STETHOSCOPEBLUE,
+  NoteGrey: NOTEGREY,
+  NoteBlue: NOTEBLUE,
   FemaleGray: FEMALEGRAY,
   FemaleWhite: FEMALEWHITE,
   MaleWhite: MALEWHITE,

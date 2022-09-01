@@ -7,6 +7,7 @@ import {
   RejectionDetailsAPI,
   ChangeMobileNumberAPI,
   ChangePasswordAPI,
+  ToggleLiveStatusAPI,
 } from "../../Routes/Service";
 
 import { AlertEnum } from "../../Utilities/Enums";
@@ -99,7 +100,7 @@ export const EditUserProfile = createAsyncThunk(
       );
       return error;
     }
-  } 
+  }
 );
 
 export const EditBankDetails = createAsyncThunk(
@@ -132,9 +133,6 @@ export const EditBankDetails = createAsyncThunk(
     }
   }
 );
-
-
-// Change mobile number in setting part
 
 export const ChangeMobileNumber = createAsyncThunk(
   "ChangeMobileNumber",
@@ -198,7 +196,6 @@ export const ChangePassword = createAsyncThunk(
   }
 );
 
-
 export const EditSchedule = createAsyncThunk(
   "EditSchedule",
   async (values, { dispatch }) => {
@@ -229,6 +226,32 @@ export const EditSchedule = createAsyncThunk(
     }
   }
 );
+export const ToggleLiveStatus = createAsyncThunk(
+  "ToggleLiveStatus",
+  async (values, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const result = await ToggleLiveStatusAPI(values);
+      if (result?.success) {
+        dispatch(setLoading(false));
+        dispatch(GetUserProfile());
+        return result;
+      } else {
+        throw result;
+      }
+    } catch (error) {
+      dispatch(setLoading(false));
+      dispatch(
+        setMessage({
+          text: error?.message,
+          type: AlertEnum.Error,
+        })
+      );
+      return error;
+    }
+  }
+);
+
 export const ProfileSlice = createSlice({
   name: "ProfileSlice",
   initialState,

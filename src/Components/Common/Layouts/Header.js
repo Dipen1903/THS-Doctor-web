@@ -8,7 +8,10 @@ import { BackGround, Icon, Logo } from "../../../Utilities/Icons";
 import { removeSession } from "../../../Store/Reducers/AuthSlice";
 import { NavLink } from "react-router-dom";
 import { useEffect } from "react";
-import { GetUserProfile } from "../../../Store/Reducers/ProfileReducer";
+import {
+  GetUserProfile,
+  ToggleLiveStatus,
+} from "../../../Store/Reducers/ProfileReducer";
 
 function Header() {
   const dispatch = useDispatch();
@@ -56,7 +59,17 @@ function Header() {
           </Nav>
           <div className="d-flex justify-content-between align-items-center">
             <label class="switch">
-              <input type="checkbox" />
+              <input
+                type="checkbox"
+                checked={userProfile?.is_online}
+                onChange={() =>
+                  dispatch(
+                    ToggleLiveStatus({
+                      is_online: userProfile?.is_online ? 0 : 1,
+                    })
+                  )
+                }
+              />
               <span class="slider round"></span>
             </label>
             <span className="go_online ml_10 mt_5">Go online</span>

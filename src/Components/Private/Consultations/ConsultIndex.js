@@ -1,15 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  Button,
-  Container,
-  Form,
-  Modal,
-  Nav,
-  Tab,
-  Tabs,
-} from "react-bootstrap";
-
+import { Button, Container, Form, Modal, Nav, Tab } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import { Icon } from "../../../Utilities/Icons";
 import NewConsultation from "./NewConsultation";
 import PastConsultation from "./PastConsultation";
@@ -26,18 +18,9 @@ function ConsultIndex() {
   const [showModal, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleShow = () => {};
 
   const [activeTab, setActiveTab] = useState("upcoming");
-  //  Functions to handle Tab Switching
-  const handleTab1 = () => {
-    // update the state to tab1
-    setActiveTab("tab1");
-  };
-  const handleTab2 = () => {
-    // update the state to tab2
-    setActiveTab("tab2");
-  };
 
   useEffect(() => {
     dispatch(GetNewConsults());
@@ -103,13 +86,14 @@ function ConsultIndex() {
                 </div>
               </div>
               <div className="cancel-button">
-                <Button
-                  variant=""
-                  className={activeTab === "tab2" ? "active" : ""}
-                  onClick={handleShow}
-                >
-                  Cancel all
-                </Button>
+                <Link to={"/prescription"}>
+                  <Button
+                    variant=""
+                    className={activeTab === "tab2" ? "active" : ""}
+                  >
+                    Cancel all
+                  </Button>
+                </Link>
               </div>
             </div>
           </div>
@@ -128,31 +112,6 @@ function ConsultIndex() {
             </Tab.Pane>
           </Tab.Content>
         </Tab.Container>
-
-        {/* <div className="d-flex justify-content-between consultation-header">
-          <div className="Tabs">
-            <ul
-              className="nav
-        "
-            >
-              <li
-                className={activeTab === "tab1" ? "active" : ""}
-                onClick={handleTab1}
-              >
-                Upcoming
-              </li>
-              <li
-                className={activeTab === "tab2" ? "active" : ""}
-                onClick={handleTab2}
-              >
-                Past
-              </li>
-            </ul>
-          </div>
-          
-        </div> */}
-
-        {/* {activeTab === "tab1" ? <NewConsultation /> : <PastConsultation />} */}
       </Container>
 
       <Modal

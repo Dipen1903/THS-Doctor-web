@@ -33,7 +33,7 @@ function NewConsultation({ upcomingConsults = [] }) {
       Header: "Date-Time",
       accessor: "appointment_date_time",
       Cell: ({ cell: { value } }) => {
-        return <>{moment(value).format("DD mmm hh:mm A")}</>;
+        return <>{moment(value).format("DD MMM hh:mm A")}</>;
       },
     },
     {
