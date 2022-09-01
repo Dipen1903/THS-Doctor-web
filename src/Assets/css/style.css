@@ -3912,7 +3912,7 @@ button.personal_profile_btn.float_right.btn.btn-primary img {
   position: absolute;
   float: right;
   right: 20px;
-  margin-top: -33px;
+  margin-top: -42px;
 }
 .update_number {
   font-family: "Mulish";
@@ -4005,3 +4005,304 @@ button.personal_profile_btn.float_right.btn.btn-primary img {
   color: #1e1f20;
 }
 /*-------------------------------------------------Setting Css End-------------------------------------------------*/
+
+
+/* .......Help & Supports Start */
+
+support-paragraph::-webkit-scrollbar {
+  width: 6px;
+}
+
+/* Track */
+.support-paragraph::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+.support-paragraph::-webkit-scrollbar-thumb {
+  background: rgb(206, 202, 202);
+}
+
+/* Handle on hover */
+.support-paragraph::-webkit-scrollbar-thumb:hover {
+  background: rgb(185, 183, 183);
+}
+
+.support_container {
+  background: #f8fbff;
+  padding: 30px 100px;
+}
+.support_card_box {
+  background: #ffffff;
+  box-shadow: 0px 5px 10px rgb(0 64 128 / 4%);
+  border-radius: 12px 12px 0px 0px;
+  padding: 24px 20px;
+  padding-bottom: 0;
+  padding-left: 0;
+  padding-right: 0;
+  height: auto;
+}
+.support-paragraph {
+  padding-right: 20px;
+  height: 500px;
+  overflow-y: scroll;
+}
+.support_top_heading_card {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.support_bootom_card {
+  background: #ffffff;
+  box-shadow: 0px -5px 10px rgba(0, 64, 128, 0.04);
+  border-radius: 0px 0px 12px 12px;
+  padding: 10px 20px;
+}
+
+.support_content .date {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 24px;
+  text-align: right;
+  color: #1e1f20;
+}
+
+.support_bootom_card h5 {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 24px;
+  color: #1e1f20;
+  text-align: left;
+  margin-bottom: 0;
+  padding-top: 5px;
+}
+.support_bootom_card h6 {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 13px;
+  text-transform: uppercase;
+  color: #9393aa;
+  text-align: left;
+  margin-bottom: 0;
+  padding-top: 5px;
+}
+
+.support_content .faq-text {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  text-transform: uppercase;
+  color: #9393aa;
+  padding: 0px 20px;
+}
+.support-accordion-header button {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 500 !important;
+  font-size: 24px !important;
+  line-height: 40px !important;
+  color: #1e1f20 !important;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.support-accordion-header .bullets {
+  background: #24b2b2;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+}
+
+.accordion-collapse .support-accordion-body-text {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 26px;
+  margin: 5px 20px;
+  color: #1e1f20;
+}
+
+
+/* .......Help & Supports Start */
+
+
+
+/* ...Privacy & Polisy Start.......... */
+
+privacypolicy-paragraph::-webkit-scrollbar {
+  width: 6px;
+}
+
+/* Track */
+.privacypolicy-paragraph::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+.privacypolicy-paragraph::-webkit-scrollbar-thumb {
+  background: rgb(206, 202, 202);
+}
+
+/* Handle on hover */
+.privacypolicy-paragraph::-webkit-scrollbar-thumb:hover {
+  background: rgb(185, 183, 183);
+}
+
+.privacypolicy_container {
+  background: #f8fbff;
+  padding: 30px 100px;
+}
+.privacypolicy_card_box {
+  background: #ffffff;
+  box-shadow: 0px 5px 10px rgb(0 64 128 / 4%);
+  border-radius: 12px 12px 0px 0px;
+  padding: 24px 20px;
+  height: 650px;
+}
+.privacypolicy-paragraph {
+  padding-right: 20px;
+  height: 500px;
+  overflow-y: scroll;
+}
+
+.privacy_policy_title {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 800;
+  font-size: 24px;
+  line-height: 40px;
+  color: #1e1f20;
+}
+.privacy_policy_content h5 {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 32px;
+  color: #1e1f20;
+}
+.privacy_policy_content h6 {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 24px;
+  text-align: right;
+  text-transform: uppercase;
+  color: #9393aa;
+}
+.privacy_policy_content .date {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 24px;
+  text-align: right;
+  color: #1e1f20;
+}
+.privacy-policy-text {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 24px;
+}
+
+/* ...Privacy & Polisy End...... */
+
+/* ......Terms & Conditions Start */
+
+.termscondition-paragraph::-webkit-scrollbar {
+  width: 6px;
+}
+
+/* Track */
+.termscondition-paragraph::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+.termscondition-paragraph::-webkit-scrollbar-thumb {
+  background: rgb(206, 202, 202);
+}
+
+/* Handle on hover */
+.termscondition-paragraph::-webkit-scrollbar-thumb:hover {
+  background: rgb(185, 183, 183);
+}
+
+.termscondition_container {
+  background: #f8fbff;
+  padding: 30px 100px;
+}
+.termscondition_card_box {
+  background: #ffffff;
+  box-shadow: 0px 5px 10px rgb(0 64 128 / 4%);
+  border-radius: 12px 12px 0px 0px;
+  padding: 24px 20px;
+  height: 650px;
+}
+.termscondition-paragraph {
+  padding-right: 20px;
+  height: 500px;
+  overflow-y: scroll;
+}
+
+.terms_condition_title {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 800;
+  font-size: 24px;
+  line-height: 40px;
+  color: #1e1f20;
+}
+.terms_condition_content h5 {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 32px;
+  color: #1e1f20;
+}
+.terms_condition_content h6 {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 24px;
+  text-align: right;
+  text-transform: uppercase;
+  color: #9393aa;
+}
+.terms-condition-heading {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 24px;
+  margin-bottom: 0px;
+}
+
+.terms_condition_content .date {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 24px;
+  text-align: right;
+  color: #1e1f20;
+}
+.terms-condition-text {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 24px;
+}
+
+/* ....Trms & Condition End */

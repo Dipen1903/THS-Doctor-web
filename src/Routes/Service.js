@@ -1,3 +1,4 @@
+import PrivacyPolicy from "../Components/Private/Privacy/Privacy";
 import { BASE_URL, POST } from "../Utilities/HTTP";
 
 //* SIGNIN API REQUEST
@@ -41,9 +42,46 @@ export const EditScheduleAPI = (data) =>
   POST(`${BASE_URL}/availibility-create`, data);
 
 
-//* CHANGE-MOBILENUMBER API REQEST in Setting page
-export const ChangeMobileNumberAPI = (data) =>
-  POST(`${BASE_URL}/verify-change-mobile-number`, data);
+
 
 export const ChangePasswordAPI = (data) =>
   POST(`${BASE_URL}/change-password`, data);
+
+
+
+
+// ...Privacy & PrivacyPolicy....
+export const PrivacyAndPolicyAPI = () =>
+  POST(`${BASE_URL}/privacy-policy`);
+
+// ...Terms&Conditions..........
+export const TermsAndConditionsAPI = () =>
+  POST(`${BASE_URL}/term-and-condition`);
+
+// ...Helps & Supports..........
+export const HelpsAndSupportsAPI = () =>
+  POST(`${BASE_URL}/faqs`);
+
+
+  // Change Mobile number in Setting...
+
+export const SendOTPOnCurrentMobileNumberAPI = (data) =>
+POST(`${BASE_URL}/send-otp-old-mobile-number`, data);
+
+export const VerifyOTPOnCurrentMobileNumberAPI = (data) =>
+POST(`${BASE_URL}/verify-otp-old-mobile-number`, data);
+
+export const SendOTPOnNewMobileNumberAPI = (data) =>
+POST(`${BASE_URL}/send-otp-new-mobile-number`, data);
+
+export const VerifyOTPOnNewMobileNumberAPI = (data) =>
+POST(`${BASE_URL}/verify-otp-new-mobile-number`, data);
+
+// ...Get Time Slot..........
+export const TimeSlotAPI = () =>
+  POST(`${BASE_URL}/profile-details`);
+
+
+//......Edit Time Slot............
+export const AvailibilityCreateAPI = (data) =>
+POST(`${BASE_URL}/availibility-create`, data);

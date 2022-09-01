@@ -4,7 +4,6 @@ import { useNavigate, useLocation } from "react-router-dom";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import { Formik, FormikProvider, useFormik } from "formik";
-
 import BasicInformation from "./Personal&Work/BasicInformation";
 import WorkProfile from "./Personal&Work/WorkProfile";
 import EducationalProfile from "./Personal&Work/EducationalProfile";
@@ -13,6 +12,7 @@ import BankInformation from "./Shedule&Payment/BankInformation";
 import { BankEnum, ProfileEnum, ScheduleEnum } from "../../../Utilities/Enums";
 import ProgressBar from "../../Common/Layouts/Progress_bar";
 import { BackGround } from "../../../Utilities/Icons";
+
 import {
   EditBankDetails,
   EditSchedule,
@@ -24,6 +24,7 @@ import {
   toggleSubmitted,
   toggleSuccess,
 } from "../../../Store/Reducers/ProfileReducer";
+
 import {
   CityList,
   DocumentList,
@@ -39,6 +40,7 @@ import {
   EducationalProfileSchema,
   WorkProfileSchema,
 } from "../../../Utilities/Schema";
+
 
 const calculatePercentage = (values) => {
   let percent = 0;
@@ -348,9 +350,11 @@ export function SetUpSetting() {
     ...ScheduleEnum,
     ...BankEnum,
   });
+
   const { profileStep, skipModal, submittedModal, userProfile } = useSelector(
     ({ ProfileSlice }) => ProfileSlice
   );
+
   const calculate = (values) => {
     let tempProfile = { ...ProfileEnum };
     tempProfile.dob = userProfile?.birthdate;
@@ -366,7 +370,7 @@ export function SetUpSetting() {
     tempProfile.qualification = userProfile?.qualifications;
     tempProfile.proof = userProfile?.id_proofs;
     tempProfile.signature = userProfile?.signature;
-    return calculatePercentage({ ...tempProfile, ...values });
+    return calculatePercentage({ ...tempProfile, ...values });    
   };
 
   const submit = (values) => {
@@ -390,6 +394,7 @@ export function SetUpSetting() {
       });
     }
   };
+  
   const initialLoad = () => {
     let tempData = { ...scheduleData };
     tempData.account_holder_name =
@@ -489,7 +494,7 @@ export function SetUpSetting() {
                     {({ values, handleSubmit }) => (
                       <>
                         <div class="progress_box">
-                          <div class="row">
+                          <div class="row">00
                             <div class="col-md-3">
                               <h5 class="profile_milestone">
                                 Profile Milestone
@@ -689,6 +694,7 @@ const ProfileSubmitted = (props) => {
     </Modal>
   );
 };
+
 const ScheduleSubmitted = (props) => {
   return (
     <Modal

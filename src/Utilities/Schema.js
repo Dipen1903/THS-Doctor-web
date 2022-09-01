@@ -173,7 +173,7 @@ export const EducationalProfileSchema = Yup.object({
 });
 
 export const ChangePasswordSchema = Yup.object({
-  password: Yup.string()
+  new_password: Yup.string()
     .required("Please enter your password"),
   confirm_password: Yup.string().oneOf(
     [Yup.ref("new_password"), null],

@@ -9,7 +9,7 @@ import Tabs from "react-bootstrap/Tabs";
 import Tab from "react-bootstrap/Tab";
 import Accordion from "react-bootstrap/Accordion";
 import { Button, Modal, Dropdown, DropdownButton } from "react-bootstrap";
-import SettingHeader from "./setting_headers";
+import SettingHeader from "./SettingHeaders";
 import { BackGround, Icon, Logo } from "../../../Utilities/Icons";
 // import Header from "../Dashboard/Header";
 import { useDispatch, useSelector } from "react-redux";
@@ -50,12 +50,13 @@ function Changepassword() {
 							<div className="row">
 								<Formik
 									initialValues={passwordData}
-									// validationSchema={ChangePasswordSchema}
+									validationSchema={ChangePasswordSchema}
 									onSubmit={(values) =>
 										dispatch(ChangePassword(values)).then((res) => {
 											if (res.payload.success) {
-												console.log("change Password::::: ", res.payload)
+												// console.log("change Password::::: ", res.payload)
 											}
+											console.log("change Password::::: ", res.payload)
 											console.log("Password change: ", values);
 										})
 									}
