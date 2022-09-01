@@ -93,7 +93,7 @@ function Header() {
               </NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item>
-                <NavLink className="dropdown-item-link" to="settings">
+                <NavLink className="dropdown-item-link" to="/settings">
                   <img src={Icon.Setting} alt="Avatar" class=" mr_10"></img>
                   Settings
                 </NavLink>
@@ -107,21 +107,21 @@ function Header() {
               </NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item>
-                <NavLink className="dropdown-item-link" to="privacy">
+                <NavLink className="dropdown-item-link" to="/privacy">
                   <img src={Icon.Notes} alt="Avatar" class="mr_10"></img>
                   Privacy Policy
                 </NavLink>
               </NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item>
-                <NavLink className="dropdown-item-link" to="terms">
+                <NavLink className="dropdown-item-link" to="/terms">
                   <img src={Icon.Document} alt="Avatar" class=" mr_10"></img>
                   Terms and Conditions
                 </NavLink>
               </NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item>
-                <NavLink className="dropdown-item-link" to="help">
+                <NavLink className="dropdown-item-link" to="/help">
                   <img src={Icon.Help} alt="Avatar" class="mr_10"></img>
                   Help and Support
                 </NavLink>

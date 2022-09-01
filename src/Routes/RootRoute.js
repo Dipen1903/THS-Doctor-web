@@ -13,6 +13,9 @@ import MyProfile from "../Components/Private/MyProfile/MyProfile";
 import ConsultIndex from "../Components/Private/Consultations/ConsultIndex";
 import Settings from "../Components/Private/Settings/Settings";
 import PrescriptionIndex from "../Components/Private/Prescription/PrescriptionIndex";
+import TermsAndConditions from "../Components/Private/TermsAndCondition/Terms";
+import HelpAndSupport from "../Components/Private/HelpAndSupport/Help";
+import PrivacyPolicy from "../Components/Private/Privacy/Privacy";
 
 // import UserProfile from "../Components/Public/Userprofile/userprofile";
 // import UserProfile2 from "../Components/Public/Userprofile/userprofile2";
@@ -53,6 +56,7 @@ function RootRoute() {
             </PrivateRoutes>
           }
         />
+
         <Route
           path="schedule-payment"
           element={
@@ -62,6 +66,7 @@ function RootRoute() {
           }
         />
       </Route>
+
       <Route
         path="/dashboard"
         element={
@@ -70,6 +75,7 @@ function RootRoute() {
           </PrivateRoutes>
         }
       />
+
       <Route
         path="/profile"
         element={
@@ -113,6 +119,7 @@ function RootRoute() {
           </PrivateRoutes>
         }
       />
+
       {/* 
       <Route
         path="/userprofile"

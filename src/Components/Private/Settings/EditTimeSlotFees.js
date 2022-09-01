@@ -10,7 +10,7 @@ import Tabs from "react-bootstrap/Tabs";
 import Tab from "react-bootstrap/Tab";
 import Accordion from "react-bootstrap/Accordion";
 import { Button, Modal, Dropdown, DropdownButton } from "react-bootstrap";
-import SettingHeader from "./setting_headers";
+import SettingHeader from "./SettingHeaders";
 import { BackGround, Icon, Logo } from "../Utilities/Icons";
 import Header from "../Dashboard/Header";
 import { Link } from "react-router-dom"

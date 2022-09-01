@@ -56,7 +56,6 @@ function SignInComponent() {
                     <h3 class="logo_title">THS Doctor’s Sign In</h3>
                     <h5 class="welcome_title">Welcome back to THS!</h5>
                     <div class="signin_box">
-
                       <Formik
                         initialValues={SignInEnum}
                         validationSchema={SignInSchema}

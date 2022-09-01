@@ -40,7 +40,6 @@ export default function SignUpComponent() {
           navigate("/dashboard");
         }}
       />
-
       <div class="sub_section_2">
         <div class="row">
           <div class="col-md-12">
@@ -173,7 +172,7 @@ export default function SignUpComponent() {
                         <div className="col-md-12">
                           <center>
                             <h3 className="dont_have_account">
-                              Already have an account?{" "}
+                              Already have an account?
                               <Link to="/" className="sign_up">
                                 Log In
                               </Link>

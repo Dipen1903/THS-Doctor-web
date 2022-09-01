@@ -29,6 +29,16 @@ import STETHOSCOPEBLUE from "../Assets/svg/StethoScopeBlue.svg";
 import NOTEGREY from "../Assets/svg/NoteGrey.svg";
 import NOTEBLUE from "../Assets/svg/NoteBlue.svg";
 
+// ...Setting Menu Icons...
+import ClockBlue from "../Assets/svg/ClockBlue.svg";
+import ClockGrey from "../Assets/svg/ClockGrey.svg";
+import BankBlue from "../Assets/svg/BankBlue.svg";
+import BankGrey from "../Assets/svg/BankGrey.svg";
+import LockBlue from "../Assets/svg/LockBlue.svg";
+import LockGrey from "../Assets/svg/LockGrey.svg";
+import MobileBlue from "../Assets/svg/MobileBlue.svg";
+import MobileGrey from "../Assets/svg/MobileGrey.svg";
+
 //BACKGROUND IMAGES
 
 export const Logo = {
@@ -44,6 +54,16 @@ export const Icon = {
   StethoScopeBlue: STETHOSCOPEBLUE,
   NoteGrey: NOTEGREY,
   NoteBlue: NOTEBLUE,
+
+  ClockBlue: ClockBlue,
+  ClockGrey: ClockGrey,
+  BankBlue: BankBlue,
+  BankGrey: BankGrey,
+  LockBlue: LockBlue,
+  LockGrey: LockGrey,
+  MobileBlue: MobileBlue,
+  MobileGrey: MobileGrey,
+
   FemaleGray: FEMALEGRAY,
   FemaleWhite: FEMALEWHITE,
   MaleWhite: MALEWHITE,
@@ -73,6 +93,9 @@ export const Icon = {
   Document: require("../Assets/img/Terms and Conditions.png"),
   Help: require("../Assets/img/Help & Support.png"),
   Logout: require("../Assets/img/logout.png"),
+  supportline: require("../Assets/img/png/support_line.png"),
+  Line: require("../Assets/img/png/line.png"),
+  Termsconditionline: require("../Assets/img/png/terms_condition_line.png"),
 };
 export const BackGround = {
   Banner: require("../Assets/img/slider_1.png"),
