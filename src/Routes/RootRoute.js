@@ -10,6 +10,7 @@ import {
   SetUpSetting,
 } from "../Components/Private/SetupProfile/SetUpProfile";
 import MyProfile from "../Components/Private/MyProfile/MyProfile";
+import ConsultIndex from "../Components/Private/Consultations/ConsultIndex";
 import Settings from "../Components/Private/Settings/Settings";
 import TermsAndConditions from "../Components/Private/TermsAndCondition/Terms";
 import HelpAndSupport from "../Components/Private/HelpAndSupport/Help";
@@ -82,40 +83,20 @@ function RootRoute() {
           </PrivateRoutes>
         }
       />
+      <Route
+        path="/consultation"
+        element={
+          <PrivateRoutes isHeader={true}>
+            <ConsultIndex />
+          </PrivateRoutes>
+        }
+      />
 
       <Route
         path="/settings"
         element={
           <PrivateRoutes isHeader={true}>
             <Settings />
-          </PrivateRoutes>
-        }
-      />
-
-      <Route
-        path="/privacy"
-        element={
-          <PrivateRoutes isHeader={true}>
-            <PrivacyPolicy />
-          </PrivateRoutes>
-        }
-      />
-
-      <Route
-        path="/terms"
-        element={
-          <PrivateRoutes isHeader={true}>
-            <TermsAndConditions />
-          </PrivateRoutes>
-        }
-      />
-
-
-      <Route
-        path="/help"
-        element={
-          <PrivateRoutes isHeader={true}>
-            <HelpAndSupport />
           </PrivateRoutes>
         }
       />

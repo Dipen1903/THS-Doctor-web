@@ -482,12 +482,15 @@ function WorkProfile() {
                     </div>
                   ) : (
                     <div class="row mt_20">
-                      {values?.qualification?.map((item, index) => (
-                        <div key={index} className="col-md-4">
-                          <h3 className="qualification_title">{item?.type}</h3>
-                          <img src={item?.file} />
-                        </div>
-                      ))}
+                      {values?.qualification?.length &&
+                        values?.qualification?.map((item, index) => (
+                          <div key={index} className="col-md-4">
+                            <h3 className="qualification_title">
+                              {item?.type}
+                            </h3>
+                            <img src={item?.file} />
+                          </div>
+                        ))}
                     </div>
                   )}
                 </div>

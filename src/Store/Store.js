@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import AuthSlice from "./Reducers/AuthSlice";
 import CommonSlice from "./Reducers/CommonReducer";
+import ConsultSlice from "./Reducers/ConsultationsReducer";
 import LayoutSlice from "./Reducers/LayoutSlice";
 import ProfileSlice from "./Reducers/ProfileReducer";
 import RegisterSlice from "./Reducers/RegiserSlice";
@@ -12,5 +13,6 @@ export const store = configureStore({
     RegisterSlice: RegisterSlice,
     ProfileSlice: ProfileSlice,
     CommonSlice: CommonSlice,
+    ConsultSlice: ConsultSlice,
   },
 });

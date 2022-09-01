@@ -13,19 +13,16 @@ import { Button, Modal, Dropdown, DropdownButton } from "react-bootstrap";
 import SettingHeader from "./SettingHeaders";
 import { BackGround, Icon, Logo } from "../Utilities/Icons";
 import Header from "../Dashboard/Header";
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 
 function EditBankdetails() {
-	return (
-		<>
-			{/* <Header/> */}
-			<Container
-				fluid
-				className="profile_container"
-			>
-				<h2 className="settings_title mt_10">Settings</h2>
-				<div className="row settingscards_box">
-					{/* <div className="col-md-3">
+  return (
+    <>
+      {/* <Header/> */}
+      <Container fluid className="profile_container">
+        <h2 className="settings_title mt_10">Settings</h2>
+        <div className="row settingscards_box">
+          {/* <div className="col-md-3">
 					<div className="settings_tab_card">
 						<ul className="setting_ul">
 						<Link to="/timeslotfees" style={{textDecoration:"none"}}>
@@ -109,90 +106,121 @@ function EditBankdetails() {
 						</ul>
 					</div>
 				</div> */}
-					<div className="col-md-9">
-						<div className="setting_profile_card_head">
-							<div className="row">
-								<div className="col-md-6">
-									<h3 className="setting_bank_title">Bank Details</h3>
-								</div>
-								<div className="col-md-6">
-
-								</div>
-							</div>
-						</div>
-						<div className="setting_profile_card_body">
-							<div className="row">
-								<Formik
-									initialValues={{
-									}}
-									onSubmit={values => { console.log("values", values) }}
-								>
-									{({ values, setFieldValue, handleSubmit }) => (
-										<form onSubmit={handleSubmit} id="myForm">
-											<div className="col-md-6">
-												<div className="row">
-													<div className="col-md-12 mt_20">
-														<label className="sign_title"> Account Holder Name </label>
-														<div className="input_box">
-															<div className="form_group">
-																<input type="text" name="account_name" placeholder="" value="John doe" />
-															</div>
-														</div>
-													</div>
-												</div>
-												<div className="row mt_20">
-													<div className="col-md-12">
-														<label className="sign_title"> Account Number </label>
-														<div className="input_box">
-															<div className="form_group">
-																<input type="text" name="account_number" placeholder="" value="3132131131311" />
-															</div>
-														</div>
-													</div>
-												</div>
-												<div className="row mt_20">
-													<div className="col-md-12 ">
-														<label className="sign_title"> IFSC Code </label>
-														<div className="input_box">
-															<div className="form_group">
-																<input type="text" name="ifc_code" placeholder="" value="BARB012112" />
-															</div>
-														</div>
-													</div>
-												</div>
-												<hr className="bottom_border mt_30 mb_30" />
-												<div className="row">
-													<div className="col-md-12">
-														<h3 className="upi_title">UPI</h3>
-													</div>
-												</div>
-												<div className="row">
-													<div className="col-md-12 mt_20">
-														<label className="sign_title"> UPI ID </label>
-														<div className="input_box">
-															<div className="form_group">
-																<input type="text" name="upi_id" placeholder="" value="9183121322@upi" />
-															</div>
-														</div>
-													</div>
-												</div>
-												<div className="row mt_50">
-													<div className="col-md-4">
-														<Link to="/bankdetails">
-															<button className="continue_btn" variant="primary">Save</button></Link>
-													</div>
-												</div>
-											</div>
-										</form>
-									)}
-								</Formik>
-							</div>
-						</div>
-					</div>
-				</div>
-			</Container>
-		</>
-	);
+          <div className="col-md-9">
+            <div className="setting_profile_card_head">
+              <div className="row">
+                <div className="col-md-6">
+                  <h3 className="setting_bank_title">Bank Details</h3>
+                </div>
+                <div className="col-md-6"></div>
+              </div>
+            </div>
+            <div className="setting_profile_card_body">
+              <div className="row">
+                <Formik
+                  initialValues={{}}
+                  onSubmit={(values) => {
+                    console.log("values", values);
+                  }}
+                >
+                  {({ values, setFieldValue, handleSubmit }) => (
+                    <form onSubmit={handleSubmit} id="myForm">
+                      <div className="col-md-6">
+                        <div className="row">
+                          <div className="col-md-12 mt_20">
+                            <label className="sign_title">
+                              {" "}
+                              Account Holder Name{" "}
+                            </label>
+                            <div className="input_box">
+                              <div className="form_group">
+                                <input
+                                  type="text"
+                                  name="account_name"
+                                  placeholder=""
+                                  value="John doe"
+                                />
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="row mt_20">
+                          <div className="col-md-12">
+                            <label className="sign_title">
+                              {" "}
+                              Account Number{" "}
+                            </label>
+                            <div className="input_box">
+                              <div className="form_group">
+                                <input
+                                  type="text"
+                                  name="account_number"
+                                  placeholder=""
+                                  value="3132131131311"
+                                />
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="row mt_20">
+                          <div className="col-md-12 ">
+                            <label className="sign_title"> IFSC Code </label>
+                            <div className="input_box">
+                              <div className="form_group">
+                                <input
+                                  type="text"
+                                  name="ifc_code"
+                                  placeholder=""
+                                  value="BARB012112"
+                                />
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <hr className="bottom_border mt_30 mb_30" />
+                        <div className="row">
+                          <div className="col-md-12">
+                            <h3 className="upi_title">UPI</h3>
+                          </div>
+                        </div>
+                        <div className="row">
+                          <div className="col-md-12 mt_20">
+                            <label className="sign_title"> UPI ID </label>
+                            <div className="input_box">
+                              <div className="form_group">
+                                <input
+                                  type="text"
+                                  name="upi_id"
+                                  placeholder=""
+                                  value="9183121322@upi"
+                                />
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="row mt_50">
+                          <div className="col-md-4">
+                            <Link to="/bankdetails">
+                              <button
+                                className="continue_btn"
+                                variant="primary"
+                              >
+                                Save
+                              </button>
+                            </Link>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  )}
+                </Formik>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Container>
+    </>
+  );
 }
 
 export default EditBankdetails;
