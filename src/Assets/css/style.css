@@ -3862,7 +3862,7 @@ button.personal_profile_btn.float_right.btn.btn-primary img {
   box-shadow: 0px 5px 10px rgb(0 64 128 / 4%);
   border-radius: 12px 12px 0px 0px;
   padding: 24px 20px;
-  height: 650px;
+  min-height: 650px;
 }
 
 /*------------------------------------------------Prescription one css end -----------------------------------------------*/
@@ -4044,7 +4044,6 @@ button.personal_profile_btn.float_right.btn.btn-primary img {
 }
 /*-------------------------------------------------Setting Css End-------------------------------------------------*/
 
-
 /* .......Help & Supports Start */
 
 support-paragraph::-webkit-scrollbar {
@@ -4165,10 +4164,7 @@ support-paragraph::-webkit-scrollbar {
   color: #1e1f20;
 }
 
-
 /* .......Help & Supports Start */
-
-
 
 /* ...Privacy & Polisy Start.......... */
 
@@ -4344,3 +4340,1835 @@ privacypolicy-paragraph::-webkit-scrollbar {
 }
 
 /* ....Trms & Condition End */
+
+/*------------------------------------------------Datatable one two modal css end -----------------------------------------------*/
+/*------------------------------------------------Prescription one css Start -----------------------------------------------*/
+/* SideNAv */
+
+.nav_container {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  overflow: hidden;
+  background: #f8fbff;
+  padding: 30px 100px;
+}
+.prescription_heading {
+  padding: 20px 100px;
+  background: #f8fbff;
+}
+.prescription-search form input {
+  background: #f8fbff;
+  border-radius: 8px;
+  width: 390px;
+  padding-top: 13px;
+  padding-bottom: 13px;
+}
+.pro-sidebar-content {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.pro-sidebar-content a {
+  text-decoration: none;
+}
+.pro-sidebar-content li {
+  list-style: none;
+  margin: 5px 10px;
+  padding: 12px 10px;
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 24px;
+  color: #9393aa;
+}
+.prescriptionTabactive li {
+  background: #f8fbff;
+  border-radius: 8px;
+  color: #3093bb;
+}
+
+.pro-sidebar {
+  background: #ffffff;
+  box-shadow: 0px 5px 10px rgba(0, 64, 128, 0.04);
+  border-radius: 12px;
+  /* width: 100%;
+  max-width: 265px; */
+}
+.sidebar_nav {
+  display: flex;
+  gap: 20px;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 24px;
+  padding: 15px;
+}
+.capsule_icon {
+  height: 43px;
+  width: 43px;
+}
+.medicine_text {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 24px;
+  color: #1e1f20;
+}
+.pro-menu ul a {
+  text-decoration: none;
+}
+.medicine_header {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 32px;
+  color: #1e1f20;
+}
+
+.medicine_search_box {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 20px;
+}
+
+.medicine_card_box {
+  background: #ffffff;
+  box-shadow: 0px 5px 10px rgb(0 64 128 / 4%);
+  border-radius: 12px 12px 12px 12px;
+  padding: 24px 20px;
+  /* width: 100%;
+  max-width: 900px; */
+}
+
+.medicine_card_box label {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 16px;
+  color: #1e1f20;
+}
+.Textarea {
+  width: 391px;
+  height: 119px;
+  background: #ffffff;
+  border: 1px solid #eceff4;
+  border-radius: 8px;
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 24px;
+  color: #1e1f20;
+}
+.follow_up {
+  background: #ffffff;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+  border: none;
+  width: 135px;
+  height: 40px;
+  padding: 10px;
+}
+
+.prescription_table {
+  border: none !important;
+  border-top: 1px solid #eceff4 !important;
+  margin-top: 20px;
+}
+
+.prescription_table_head {
+  background: #f8fbff;
+  border-radius: 12px;
+  padding: 16px;
+  height: 56px;
+}
+
+.prescription_table_head_text {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 40px;
+  color: #9393aa;
+}
+.prescription_table_body_row {
+  height: 56px;
+  border-bottom: 1px solid #eceff4;
+}
+.prescription_table_body_text {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 40px;
+  color: #1e1f20;
+  padding-left: 20px !important;
+}
+.prescription_table_body_text input {
+  height: 38px;
+  background: #ffffff;
+  border: 1px solid #eceff4;
+  border-radius: 8px;
+  padding: 10px 15px;
+}
+.prescription_table_bottom_card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.prescription_left_align {
+  display: flex;
+}
+.prescription_result_text {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 15px;
+}
+.result_declared_text {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 24px;
+  color: #9393aa;
+}
+.table_next_btn {
+  background: linear-gradient(45deg, #3093bb 0%, #82dbff 100%);
+  border-radius: 12px;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 24px;
+  text-align: center;
+  color: #ffff;
+  padding: 10px 60px;
+  border: none;
+}
+.generate-prescription-modal .modal-dialog {
+  max-width: unset;
+}
+
+.generate-prescription-modal .modal-content {
+  width: 100%;
+  max-width: 715px;
+  margin: auto;
+}
+.prescription-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #24b2b2;
+  color: #ffffff;
+  text-align: right;
+  padding-bottom: 0px;
+}
+.prescription_appoinment_input {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 10px;
+}
+.prescription_table_appoinment_input {
+  padding: 5px 10px;
+}
+
+.prescription_appoinment_input .prescription-left-text {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 800 !important;
+  font-size: 14px;
+  color: #1e1f20;
+  margin-bottom: 5px !important;
+}
+.prescription_appoinment_input span {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 24px;
+  color: #9393aa;
+}
+
+.prescription_appoinment_input .prescription-right-text {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 800 !important;
+  font-size: 14px;
+  color: #1e1f20;
+  text-align: right;
+  margin-bottom: 5px !important;
+}
+
+.text-name span {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 24px;
+  text-align: right;
+  color: #1e1f20;
+}
+.prescription-btn-modal-footer {
+  border: none;
+  width: 100%;
+}
+
+/*------------------------------------------------Prescription one css end -----------------------------------------------*/
+
+/*------------------------------------------------Setting Css Start------------------------------------------------*/
+.settings_title {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 800;
+  font-size: 24px;
+  line-height: 40px;
+  color: #1e1f20;
+}
+.settings_tab_card {
+  background: #ffffff;
+  padding: 20px 16px 20px 16px;
+  height: 100%;
+}
+.settings_option_text_active {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 24px;
+  color: #3093bb;
+  margin-left: 20px;
+}
+.setting_arrow {
+  margin-top: 5px;
+  float: right;
+}
+.setting_option_icon {
+  margin-top: -7px;
+}
+.setting_profile_card_head {
+  background: #ffffff;
+  box-shadow: 0px 5px 10px rgba(0, 64, 128, 0.04);
+  border-radius: 12px 12px 0 0;
+  padding: 15px 20px;
+  border-bottom: 1px solid #eceff4;
+}
+.setting_profile_title {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 32px;
+  color: #1e1f20;
+  margin-top: 5px;
+  margin-bottom: 0;
+}
+.setting_profile_title::before {
+  content: "";
+  background: #f8446c;
+  border: 1px solid #f8446c;
+  padding: 3px;
+  border-radius: 10px;
+  margin-right: 10px;
+}
+.setting_profile_btn {
+  background: #ffffff;
+  border: 1px solid #eceff4;
+  border-radius: 8px;
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  color: #1e1f20;
+  padding: 8px 15px;
+}
+.setting_profile_btn_icon {
+  margin-right: 15px;
+  width: 18px;
+  margin-top: -5px;
+}
+.setting_profile_card_body {
+  background: #ffffff;
+  box-shadow: 0px 5px 10px rgba(0, 64, 128, 0.04);
+  border-radius: 0 0 12px 12px;
+  padding: 25px;
+}
+.setting_form_title {
+  font-family: Mulish;
+  font-size: 16px;
+  color: #000;
+  line-height: 20px;
+  font-weight: 600;
+}
+.setting_consult_fee_subtext {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 16px;
+  color: #f8446c;
+}
+.setting_time_slot_title {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 26px;
+  color: #1e1f20;
+}
+.setting_time_slot_title::before {
+  content: "";
+  background: #24b2b2;
+  border: 1px solid #24b2b2;
+  padding: 3px;
+  border-radius: 10px;
+  margin-right: 10px;
+}
+.setting_time_slot_day {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 17px;
+  line-height: 24px;
+  color: #1e1f20;
+}
+.setting_ul {
+  padding: 0px;
+}
+.setting_tab_option_active_bg {
+  background: #f8fbff;
+  border-radius: 12px;
+  padding: 13px 15px;
+}
+.setting_watch_icon {
+  margin-top: -50px;
+  background: #fff;
+  float: right;
+  margin-right: 10px;
+}
+.setting_watch_icon_2 {
+  margin-top: -50px;
+  background: #fff;
+  float: right;
+  margin-right: 10px;
+}
+/*-------------------------------------------------Setting Css End-------------------------------------------------*/
+/*-------------------------------------------------Privacy Policy Css Start-------------------------------------------------*/
+
+/* width */
+.privacypolicy-paragraph::-webkit-scrollbar {
+  width: 6px;
+}
+
+/* Track */
+.privacypolicy-paragraph::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+.privacypolicy-paragraph::-webkit-scrollbar-thumb {
+  background: rgb(206, 202, 202);
+}
+
+/* Handle on hover */
+.privacypolicy-paragraph::-webkit-scrollbar-thumb:hover {
+  background: rgb(185, 183, 183);
+}
+
+.privacypolicy_container {
+  background: #f8fbff;
+  padding: 30px 100px;
+}
+.privacypolicy_card_box {
+  background: #ffffff;
+  box-shadow: 0px 5px 10px rgb(0 64 128 / 4%);
+  border-radius: 12px 12px 0px 0px;
+  padding: 24px 20px;
+  height: 650px;
+}
+.privacypolicy-paragraph {
+  padding-right: 20px;
+  height: 500px;
+  overflow-y: scroll;
+}
+
+.privacy_policy_title {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 800;
+  font-size: 24px;
+  line-height: 40px;
+  color: #1e1f20;
+}
+.privacy_policy_content h5 {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 32px;
+  color: #1e1f20;
+}
+.privacy_policy_content h6 {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 24px;
+  text-align: right;
+  text-transform: uppercase;
+  color: #9393aa;
+}
+.privacy_policy_content .date {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 24px;
+  text-align: right;
+  color: #1e1f20;
+}
+.privacy-policy-text {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 24px;
+}
+
+/*-------------------------------------------------Privacy Policy Css End-------------------------------------------------*/
+/*-------------------------------------------------Terms and Conditon Css start-------------------------------------------------*/
+/* width */
+.termscondition-paragraph::-webkit-scrollbar {
+  width: 6px;
+}
+
+/* Track */
+.termscondition-paragraph::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+.termscondition-paragraph::-webkit-scrollbar-thumb {
+  background: rgb(206, 202, 202);
+}
+
+/* Handle on hover */
+.termscondition-paragraph::-webkit-scrollbar-thumb:hover {
+  background: rgb(185, 183, 183);
+}
+
+.termscondition_container {
+  background: #f8fbff;
+  padding: 30px 100px;
+}
+.termscondition_card_box {
+  background: #ffffff;
+  box-shadow: 0px 5px 10px rgb(0 64 128 / 4%);
+  border-radius: 12px 12px 0px 0px;
+  padding: 24px 20px;
+  height: 650px;
+}
+.termscondition-paragraph {
+  padding-right: 20px;
+  height: 500px;
+  overflow-y: scroll;
+}
+
+.terms_condition_title {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 800;
+  font-size: 24px;
+  line-height: 40px;
+  color: #1e1f20;
+}
+.terms_condition_content h5 {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 32px;
+  color: #1e1f20;
+}
+.terms_condition_content h6 {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 24px;
+  text-align: right;
+  text-transform: uppercase;
+  color: #9393aa;
+}
+.terms-condition-heading {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 24px;
+  margin-bottom: 0px;
+}
+
+.terms_condition_content .date {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 24px;
+  text-align: right;
+  color: #1e1f20;
+}
+.terms-condition-text {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 24px;
+}
+
+/*-------------------------------------------------Terms and Condition Css  End-------------------------------------------------*/
+
+/*-------------------------------------------------Support Css Start-------------------------------------------------*/
+/* width */
+.support-paragraph::-webkit-scrollbar {
+  width: 6px;
+}
+
+/* Track */
+.support-paragraph::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+.support-paragraph::-webkit-scrollbar-thumb {
+  background: rgb(206, 202, 202);
+}
+
+/* Handle on hover */
+.support-paragraph::-webkit-scrollbar-thumb:hover {
+  background: rgb(185, 183, 183);
+}
+
+.support_container {
+  background: #f8fbff;
+  padding: 30px 100px;
+}
+.support_card_box {
+  background: #ffffff;
+  box-shadow: 0px 5px 10px rgb(0 64 128 / 4%);
+  border-radius: 12px 12px 0px 0px;
+  padding: 24px 20px;
+  padding-bottom: 0;
+  padding-left: 0;
+  padding-right: 0;
+  height: auto;
+}
+.support-paragraph {
+  padding-right: 20px;
+  height: 500px;
+  overflow-y: scroll;
+}
+.support_top_heading_card {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.support_bootom_card {
+  background: #ffffff;
+  box-shadow: 0px -5px 10px rgba(0, 64, 128, 0.04);
+  border-radius: 0px 0px 12px 12px;
+  padding: 10px 20px;
+}
+
+.support_content .date {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 24px;
+  text-align: right;
+  color: #1e1f20;
+}
+
+.support_bootom_card h5 {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 24px;
+  color: #1e1f20;
+  text-align: left;
+  margin-bottom: 0;
+  padding-top: 5px;
+}
+.support_bootom_card h6 {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 13px;
+  text-transform: uppercase;
+  color: #9393aa;
+  text-align: left;
+  margin-bottom: 0;
+  padding-top: 5px;
+}
+
+.support_content .faq-text {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  text-transform: uppercase;
+  color: #9393aa;
+  padding: 0px 20px;
+}
+.support-accordion-header button {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 500 !important;
+  font-size: 24px !important;
+  line-height: 40px !important;
+  color: #1e1f20 !important;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+/* .support-accordion-header button:focus:not(:focus-visible) {
+  outline: unset;
+}
+.support-paragraph .accordion-item:first-of-type .accordion-button {
+  border-top-left-radius: unset;
+  border-top-right-radius: unset;
+} */
+
+.support-accordion-header .bullets {
+  background: #24b2b2;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+}
+
+.accordion-collapse .support-accordion-body-text {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 26px;
+  margin: 5px 20px;
+  color: #1e1f20;
+}
+
+.support_result_text {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 24px;
+  color: #fc9875;
+}
+.support-search {
+  width: auto;
+  background: #f8fbff;
+}
+
+/*-------------------------------------------------Support Css End-------------------------------------------------*/
+/*-------------------------------------------------Setting Css start-------------------------------------------------*/
+.setting_bank_title {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 32px;
+  color: #1e1f20;
+  margin-top: 5px;
+  margin-bottom: 0;
+}
+.setting_bank_title::before {
+  content: "";
+  background: #fc9875;
+  border: 1px solid #fc9875;
+  padding: 3px;
+  border-radius: 10px;
+  margin-right: 10px;
+}
+.setting_change_password {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 32px;
+  color: #1e1f20;
+  margin-top: 5px;
+  margin-bottom: 0;
+}
+.setting_change_password::before {
+  content: "";
+  background: #3093bb;
+  border: 1px solid #3093bb;
+  padding: 3px;
+  border-radius: 10px;
+  margin-right: 10px;
+}
+.setting_change_mobile {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 32px;
+  color: #1e1f20;
+  margin-top: 5px;
+  margin-bottom: 0;
+}
+.setting_change_mobile::before {
+  content: "";
+  background: #f8446c;
+  border: 1px solid #f8446c;
+  padding: 3px;
+  border-radius: 10px;
+  margin-right: 10px;
+}
+.send_otp {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 16px;
+  color: #f8446c;
+  position: absolute;
+  float: right;
+  right: 20px;
+  margin-top: -33px;
+}
+.update_number {
+  font-family: "Mulish";
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 24px;
+  color: #f8446c;
+}
+.ok_btn {
+  font-family: "Mulish";
+  font-weight: 600;
+  font-size: 15px;
+  background: linear-gradient(45deg, #3093bb 0%, #82dbff 100%);
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  color: #fff;
+  width: 100%;
+  padding: 10px 30px;
+}
+/*-------------------------------------------------Setting Css End-------------------------------------------------*/
+
+/*-------------------------------------------------Reupload Details Css Start-------------------------------------------------*/
+
+.reupload_details_container {
+  background: #f8fbff;
+  padding: 30px 100px;
+}
+.reupload_details_card_box {
+  background: #ffffff;
+  box-shadow: 0px 5px 10px rgb(0 64 128 / 4%);
+  border-radius: 12px 12px 0px 0px;
+  padding: 24px 20px;
+}
+
+.reupload_details_title {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 800;
+  font-size: 24px;
+  line-height: 40px;
+  color: #1e1f20;
+}
+.reupload_detals_pretitle {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 17px;
+  line-height: 26px;
+  color: #1e1f20;
+}
+.attach_file_button {
+  width: 30%;
+}
+.submit_save_btn {
+  font-family: "Mulish";
+  font-weight: 700;
+  font-size: 16px;
+  background: linear-gradient(45deg, #3093bb 0%, #82dbff 100%);
+  width: 137px;
+  padding: 15px 20px;
+  border: none;
+  border-radius: 12px;
+  color: #fff;
+  margin-top: 40px;
+  margin-left: 10px;
+}
+/*-------------------------------------------------Reupload Detals Css  End-------------------------------------------------*/
+/*------------------------------------------------- Upcoming consultation  Css  End-------------------------------------------------*/
+.share_label {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 16px;
+  color: #1e1f20;
+}
+.consultationlink {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 16px;
+  color: #f8446c;
+}
+/*-------------------------------------------------Upcoming consultation Css End-------------------------------------------------*/
+
+/*-------------------------------------------------Chating Css Start-------------------------------------------------*/
+#chat-container {
+  display: grid;
+  grid:
+    "search-container chat-title" 71px
+    "conversation-list chat-message-list" 1fr;
+  min-width: 1000px;
+  max-height: 800px;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  background: #ffffff;
+  box-shadow: 0px 5px 10px rgba(0, 64, 128, 0.04);
+  border-radius: 12px;
+}
+#chat-container ::-webkit-scrollbar {
+  display: none;
+}
+#search-container {
+  grid-area: search-container;
+  border-right: 1px solid #eceff4;
+}
+#search-container input {
+  display: flex;
+  flex-direction: row;
+  padding: 5px 20px 5px 50px;
+  align-items: center;
+  height: 44px;
+  max-width: 278px;
+  width: 278px;
+  margin: 23px 13px;
+  background: #f8fbff;
+  border-radius: 8px;
+  border: none;
+}
+#conversation-list {
+  grid-area: conversation-list;
+  overflow-y: scroll;
+  border-right: 1px solid #eceff4;
+  height: 108.1vh;
+}
+.conversation {
+  display: grid;
+  grid-template-columns: 40px 1fr max-content;
+  grid-gap: 7px;
+  border-bottom: 1px solid #eceff4;
+  padding: 15px;
+  align-items: center;
+}
+.conversation.active,
+.conversation:hover {
+  background: #eceff4;
+  cursor: pointer;
+}
+.conversation > img {
+  grid-row: span 2;
+  height: 40px;
+  width: 40px;
+  border-radius: 100%;
+}
+
+.conversation .title-text {
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 24px;
+  color: #1e1f20;
+}
+
+.conversation .created-date {
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 12px;
+  color: #9393aa;
+}
+
+.conversation .conversation-message {
+  grid-column: span 2;
+  padding-left: 5px;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 12px;
+  color: #9393aa;
+}
+
+#new-message-container {
+  display: grid;
+  grid: 40px / 40px;
+  align-content: center;
+  border-top: 1px solid;
+  border-radius: 0 0 0 10px;
+  padding: 0 15px;
+}
+#new-message-container button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100%;
+  text-decoration: none;
+  font-size: 3.6rem;
+  line-height: 3.6rem;
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+
+#chat-title {
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  align-items: center;
+  grid-area: chat-title;
+  padding: 10px 20px;
+  border-bottom: 1px solid #eceff4;
+}
+
+#chat-title .title-text {
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 24px;
+  color: #1e1f20;
+}
+
+.created-gender {
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 12px;
+  color: #9393aa;
+}
+
+#chat-message-list .created-date {
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 12px;
+  color: #9393aa;
+  margin: 10px auto;
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+#chat-title .conversation-online {
+  grid-column: span 2;
+  padding-left: 5px;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 12px;
+  color: #9393aa;
+}
+
+.rightchat-title {
+  position: relative;
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.dropdown-container a {
+  text-decoration: none;
+  color: #1e1f20;
+}
+
+.dropdown-container a div {
+  padding: 2px;
+}
+
+.dropdown-container .dropdown {
+  padding: 20px 0px 20px 16px;
+  width: 173px;
+  position: absolute;
+  top: 30px;
+  right: 10px;
+  background: #ffffff;
+  /* card shadow */
+  box-shadow: 0px 5px 10px rgba(0, 64, 128, 0.04);
+  outline: none;
+  opacity: 0;
+  z-index: 9;
+  max-height: 0;
+  transition: opacity 0.1s;
+  max-height: 5s;
+}
+
+.dropdown-container .dropdown2 {
+  padding: 20px 0px 20px 16px;
+  width: 173px;
+  position: absolute;
+  top: 30px;
+  right: 10px;
+  background: #ffffff;
+  /* card shadow */
+  box-shadow: 0px 5px 10px rgba(0, 64, 128, 0.04);
+  outline: none;
+  opacity: 0;
+  z-index: 9;
+  max-height: 0;
+  transition: opacity 0.1s;
+  max-height: 5s;
+}
+
+.dropdown-container:focus {
+  outline: none;
+}
+
+.dropdown-container:focus .dropdown {
+  opacity: 1;
+  z-index: 100;
+  max-height: 100vh;
+  transition: opacity 0.2s;
+  max-height: 0.2s;
+}
+
+#chat-message-list {
+  grid-area: chat-message-list;
+  display: flex;
+  flex-direction: column;
+  padding: 0 0px;
+}
+
+.chat-message-list-inner {
+  /*height: 100%;*/
+  height: 100vh;
+  overflow-y: scroll;
+  padding: 30px 20px 24px 20px;
+}
+
+.message-row {
+  display: grid;
+  grid-template-columns: 55%;
+  margin-bottom: 10px;
+}
+.message-row > .message-content {
+  display: grid;
+}
+
+.message-row > .message-content > .message-time {
+  font-weight: 600;
+  font-size: 10px;
+  line-height: 12px;
+  color: #9393aa;
+}
+
+.message-row.you-message {
+  justify-content: end;
+}
+.message-row.you-message > .message-content {
+  justify-items: end;
+}
+.message-row.you-message > .message-content > .message-text {
+  background: #f8fbff;
+  border-radius: 12px;
+  padding: 16px 24px;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 24px;
+  color: #1e1f20;
+}
+.message-row.other-message {
+  justify-items: start;
+}
+
+.message-row.other-message > .message-content > .message-text {
+  background: #3093bb;
+  border-radius: 12px;
+  color: #fff;
+  padding: 16px 24px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 24px;
+}
+
+.content__footer {
+  padding-top: 10px;
+}
+.sendNewMessage {
+  background: #f8fbff;
+  border-radius: 12px;
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 10px;
+  margin-left: 30px;
+  margin-right: 30px;
+  margin-bottom: 10px;
+}
+.sendNewMessage button {
+  width: 36px;
+  height: 36px;
+  border: none;
+  font-size: 16px;
+  margin-left: 5px;
+  margin-right: 5px;
+  color: #96a0b5;
+  padding: 0;
+  background-color: none;
+  border-radius: 5px;
+  line-height: 36px;
+  transition: all 0.3s cubic-bezier(0.88, 0.19, 0.37, 1.11);
+}
+
+.sendNewMessage button i {
+  display: block;
+}
+.sendNewMessage input {
+  flex-grow: 1;
+  padding: 0 15px;
+  background-color: #f8fbff;
+  border: none;
+  outline: none;
+}
+#sendMsgBtn {
+  color: #96a0b5;
+}
+.attach-dropdown {
+  background-color: #f8fbff !important;
+  color: #96a0b5 !important;
+}
+.attach-dropdown:hover {
+  background-color: #f8fbff;
+  color: #96a0b5;
+}
+.attach-dropdown::after {
+  content: unset;
+}
+
+.upcomming_consult_title {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 32px;
+  color: #1e1f20;
+}
+.chat_box_bg {
+  background: #ffffff;
+  box-shadow: 0px 5px 10px rgba(0, 64, 128, 0.04);
+  border-radius: 12px;
+}
+::-webkit-scrollbar {
+  width: 4px;
+}
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+}
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #808080;
+  border-radius: 10px;
+}
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #e8e6e6;
+}
+.upcomming_consult_chat_list {
+  border-right: 1px solid #eceff4;
+}
+.chat_list_box {
+  padding: 14px 20px;
+}
+.chat_list_bottom_border {
+  border-bottom: 1px solid #eceff4;
+}
+.chat_list_box_active {
+  padding: 14px 20px;
+  background: rgba(36, 178, 178, 0.07);
+  border-radius: 12px 0px 0px 0px;
+  border: 1px solid #eceff4;
+}
+.chat_list_id {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 12px;
+  color: #9393aa;
+  margin-bottom: 10px;
+}
+.chat_list_title {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 24px;
+  color: #1e1f20;
+  margin-right: 10px;
+}
+.chat_list_subtitle {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 12px;
+  display: flex;
+  align-items: center;
+  color: #9393aa;
+}
+.chat_title_box {
+  display: inline-flex;
+}
+.date_time {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 800;
+  font-size: 12px;
+  line-height: 12px;
+  color: #1e1f20;
+  margin-top: 7px;
+  margin-bottom: 0;
+}
+.time_left_box {
+  background: rgba(248, 68, 108, 0.1);
+  border-radius: 4px;
+  padding: 7px;
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 12px;
+  color: #f8446c;
+  text-align: center;
+  margin-top: 23px;
+}
+.profile_name_box {
+  border: 1px solid #eceff4;
+  padding: 18px 20px;
+}
+.profile_card_name {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 17px;
+  line-height: 26px;
+  color: #1e1f20;
+  margin-right: 12px;
+}
+.profile_name_subtitle {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 12px;
+  align-items: center;
+  color: #9393aa;
+  margin-top: 7px;
+}
+.profile_namesubtitle_box {
+  display: inline-flex;
+}
+.padding_left_0 {
+  padding-left: 0px;
+}
+.padding_right_0 {
+  padding-right: 0px;
+}
+.online_text {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 12px;
+  display: flex;
+  align-items: center;
+  color: #9393aa;
+}
+.chat_call_btn {
+  background: #24b2b2;
+  border-radius: 8px;
+  border: none;
+  padding: 6px 11px 10px 11px;
+  float: right;
+  margin-top: 7px;
+  margin-right: 24px;
+}
+.chat_video_btn {
+  background: #24b2b2;
+  border-radius: 8px;
+  border: none;
+  padding: 6px 11px 10px 11px;
+  float: right;
+  margin-top: 7px;
+  margin-right: 4px;
+}
+.mark_complete {
+  background: #ffffff;
+  border: 1px solid rgba(137, 152, 189, 0.2);
+  border-radius: 8px;
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 24px;
+  color: #f8446c;
+  padding: 8px 16px;
+  margin-top: 7px;
+  float: right;
+  margin-right: 75px;
+}
+.upcomming_consult_chat_message_box {
+  border-right: 1px solid #eceff4;
+}
+.sender_msg_box {
+  background: #3093bb;
+  border-radius: 12px;
+  color: #fff;
+  padding: 16px 24px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 24px;
+}
+.sender_name_title {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 24px;
+  color: #f9f871;
+  margin-bottom: 0;
+}
+.sender_name_subtitle {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
+  color: #fff;
+  margin-bottom: 3px;
+}
+.sender_message_time {
+  font-weight: 600;
+  font-size: 10px;
+  line-height: 12px;
+  color: #9393aa;
+  text-align: right;
+  margin-top: 6px;
+}
+.sender_text_title {
+  font-family: "Mulish";
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 24px;
+  color: #fff;
+  margin-bottom: 0px;
+}
+.client_msg_box {
+  background: #f8fbff;
+  border-radius: 12px;
+  padding: 16px 24px;
+}
+.client_text_title {
+  font-family: "Mulish";
+  padding: 3px 10px 7px 10px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 24px;
+  color: #1e1f20;
+  margin-bottom: 0;
+}
+.client_message_time {
+  font-weight: 600;
+  font-size: 10px;
+  line-height: 12px;
+  color: #9393aa;
+  text-align: left;
+  margin-top: 6px;
+}
+.userinfo_title {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 17px;
+  line-height: 26px;
+  color: #1e1f20;
+  padding-top: 14px;
+  padding-bottom: 14px;
+  margin-bottom: 0;
+}
+.user_info_close {
+  padding: 10px;
+  float: right;
+}
+.userinfo_box {
+  padding: 20px 24px;
+}
+.userprofile_name_title {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 17px;
+  line-height: 26px;
+  color: #1e1f20;
+  margin-top: 10px;
+}
+.userprofile_name_subtitle {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 12px;
+  align-items: center;
+  color: #9393aa;
+}
+.userprofile_hr_bottom {
+  border-bottom: 1px solid #eceff4;
+  margin-top: 24px;
+}
+.userinfo_profile_title {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 17px;
+  line-height: 26px;
+  color: #1e1f20;
+  margin-bottom: 15px;
+}
+.userprofile_data_title {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 24px;
+  color: #9393aa;
+}
+.userprofile_data_value {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 24px;
+  text-align: right;
+  color: #1e1f20;
+}
+.userprofile_section_hr_bottom {
+  border-bottom: 1px solid #eceff4;
+  margin-top: 14px;
+}
+.share_file_title {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 17px;
+  line-height: 26px;
+  color: #1e1f20;
+  margin-top: 3px;
+}
+.share_file_box {
+  display: inline-flex;
+}
+.share_file_icon {
+  width: 40px;
+  height: 47px;
+  margin-right: 15px;
+}
+.share_file_name {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 24px;
+  color: #1e1f20;
+  margin-bottom: 3px;
+}
+.share_file_date {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 12px;
+  color: #9393aa;
+}
+.share_file_size {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 12px;
+  color: #9393aa;
+  text-align: right;
+  margin-top: 15px;
+}
+.share_img_title {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 17px;
+  line-height: 26px;
+  color: #292c38;
+}
+.share_img_box {
+  display: inline-flex;
+  column-gap: 15px;
+  row-gap: 15px;
+  flex-wrap: wrap;
+}
+.share_img_size {
+  width: 70px;
+}
+.dashboard_title {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 800;
+  font-size: 24px;
+  line-height: 40px;
+  color: #292c38;
+}
+.chat_profile_name_box {
+  border: 1px solid #eceff4;
+  padding: 18px 20px;
+}
+.chat_search_icon {
+  position: absolute;
+  margin-top: -49px;
+  margin-left: 33px;
+}
+.chatting_search {
+  margin-left: 30px;
+  margin-top: 0px;
+  position: absolute;
+}
+.chat_message_count {
+  background: linear-gradient(45deg, #3093bb 0%, #82dbff 100%);
+  border-radius: 1000px;
+  float: right;
+  margin-left: 22px;
+  padding: 0px 7.5px;
+  height: 22px;
+  width: 22px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  letter-spacing: 0.2px;
+  color: #ffffff;
+  margin-top: 10px;
+}
+.more_info_btn {
+  background: #ffffff;
+  box-shadow: 0px 5px 10px rgba(0, 64, 128, 0.04);
+  border-radius: 12px;
+  margin-top: 7px;
+  float: right;
+  border: none;
+  margin-left: 24px;
+}
+.chat_mark_complete_btn {
+  background: #ffffff;
+  border: 1px solid rgba(137, 152, 189, 0.2);
+  border-radius: 8px;
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 24px;
+  color: #f8446c;
+  padding: 8px 16px;
+  margin-top: 7px;
+  float: right;
+  margin-right: 24px;
+}
+.chat_contact_list_box {
+  padding: 24.5px 30px;
+  border-bottom: 1px solid #eceff4;
+}
+.chat_contact_list_box_active {
+  background: rgba(36, 178, 178, 0.07);
+  border-radius: 0px;
+}
+.chat_list_display_box {
+  display: inline-flex;
+}
+.chat_user_img {
+  width: 40px;
+  height: 40px;
+  margin-right: 15px;
+}
+.chat_user_name {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 24px;
+  color: #1e1f20;
+  margin-bottom: 5px;
+}
+.chat_user_last_msg {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 12px;
+  color: #9393aa;
+}
+.chat_time {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 12px;
+  text-align: right;
+  color: #9393aa;
+}
+.chat_contact_list_hr {
+  border-bottom: 1px solid #eceff4;
+}
+.attach_file_name {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 24px;
+  color: #1e1f20;
+  margin-bottom: 4px;
+  margin-right: 15px;
+}
+.attach_file_size {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 12px;
+  color: #9393aa;
+}
+.attach_file_box {
+  display: inline-flex;
+}
+.file_icon {
+  height: 34px;
+  width: 25px;
+  margin-right: 15px;
+  margin-top: 4px;
+}
+.file_download_icon {
+  width: 18px;
+  height: 18px;
+  margin-top: 15px;
+}
+.client_msg_title {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 24px;
+  color: #1e1f20;
+  margin-bottom: 0;
+}
+.client_msg_subtitle {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 24px;
+  color: #1e1f20;
+  margin-bottom: 0;
+}
+
+.msg_view_btn {
+  background: #ffffff;
+  border-radius: 4px;
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 24px;
+  color: #3093bb;
+  border: 0;
+  padding: 1px 10px;
+  height: 25px;
+  margin-left: 15px;
+  margin-top: 12px;
+}
+.msg_view_box {
+  display: inline-flex;
+}
+.chat_section_rightr_border {
+  border-right: 1px solid #eceff4;
+}
+.attach_items_box {
+  background: #eceff4;
+  height: 108vh;
+  padding: 30px 20px 24px 20px;
+}
+.attach_cross {
+  float: right;
+}
+.attach_img_box {
+  padding: 160px;
+  height: 100%;
+}
+.attach_input_btn_box {
+  display: inline-flex;
+  width: 96.5%;
+}
+.attach_input_box {
+  padding: 16px 24px;
+  width: 100%;
+}
+.attach_send_btn {
+  background: linear-gradient(45deg, #3093bb 0%, #82dbff 100%);
+  box-shadow: 0px 5px 10px rgba(0, 64, 128, 0.04);
+  border-radius: 12px;
+  border: none;
+  padding: 10px;
+  padding: 14px 20px 18px 21px;
+  height: 56px;
+}
+.attach_doc_img_box {
+  background: #ffffff;
+  border-radius: 12px;
+  width: 250px;
+  height: 250px;
+  padding: 42px 35px;
+}
+.attch_doc_img {
+  margin-bottom: 20px;
+  padding: 10px;
+  width: 80px;
+}
+.attch_doc_title {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 24px;
+  text-align: center;
+  color: #1e1f20;
+}
+.attach_doc_size {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 24px;
+  color: #9393aa;
+}
+.chatuserimg {
+  width: 64px;
+  height: 64px;
+}
+.attachment_img {
+  width: 384px;
+  height: 370px;
+}
+/*-------------------------------------------------Chatting Css End-------------------------------------------------*/

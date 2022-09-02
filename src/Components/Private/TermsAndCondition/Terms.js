@@ -3,10 +3,8 @@ import Container from "react-bootstrap/Container";
 import { useDispatch, useSelector } from "react-redux";
 import { BackGround, Icon, Logo } from "../../../Utilities/Icons";
 import { TermsConditions } from "../../../Store/Reducers/ProfileReducer";
-import { useReferenceInputController } from "react-admin";
 
 function TermsAndConditions() {
-
   const dispatch = useDispatch();
 
   const [termsData, setTermsData] = useState({});
@@ -43,13 +41,12 @@ function TermsAndConditions() {
       "Nov",
       "Dec",
     ];
-    
+
     const date = dateForm.getDate();
     const month = Months[dateForm.getMonth()];
     const year = dateForm.getFullYear();
 
     setFinalDate(`${date} ${month}, ${year}`);
-
   }, [updatedDate]);
 
   return (
@@ -63,7 +60,7 @@ function TermsAndConditions() {
             <div className="d-flex justify-content-between align-items-center flex-wrap">
               <h5>
                 <img
-                  src={Icon.termsconditionline}
+                  src={Icon.Termsconditionline}
                   className="logo ml_10 mr_10"
                 ></img>
                 Terms & Conditions

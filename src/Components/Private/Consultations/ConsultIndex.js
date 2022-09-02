@@ -101,13 +101,15 @@ function ConsultIndex() {
             <Tab.Pane eventKey="upcoming" title="Upcoming">
               <NewConsultation
                 upcomingConsults={
-                  upcomingConsults?.length ? upcomingConsults : []
+                  filteredData?.length ? filteredData : upcomingConsults
                 }
               />
             </Tab.Pane>
             <Tab.Pane eventKey="past" title="Past">
               <PastConsultation
-                pastConsults={pastConsults?.length ? pastConsults : []}
+                pastConsults={
+                  filteredData?.length ? filteredData : pastConsults
+                }
               />
             </Tab.Pane>
           </Tab.Content>
