@@ -11,10 +11,9 @@ import Modal from "react-bootstrap/Modal";
 import { toggleFee } from "../../../../Store/Reducers/ProfileReducer.js";
 import { SubSpecialityList } from "../../../../Store/Reducers/CommonReducer.js";
 import FormControl from "../../../Common/Forms/FormControl.js";
-
+import { compareTime } from "../../../../Utilities/Functions.js";
 
 function SheduleInformation() {
-  
   const { values, setFieldValue, handleBlur, handleChange } =
     useFormikContext();
   const dispatch = useDispatch();
@@ -31,15 +30,7 @@ function SheduleInformation() {
       )?.consulting_fee
     );
   };
-  const compareTime = (time1, time2) => {
-    const [hours1, minutes1, seconds1] = time1.split(":");
-    const [hours2, minutes2, seconds2] = time2.split(":");
 
-    const date1 = new Date(2022, 0, 1, +hours1, +minutes1, +seconds1 || "00");
-    const date2 = new Date(2022, 0, 1, +hours2, +minutes2, +seconds2 || "00");
-
-    return date1.getTime() > date2.getTime();
-  };
   return (
     <>
       <FeeCardModal show={feeModal} onHide={() => dispatch(toggleFee(false))} />

@@ -126,7 +126,7 @@ export default function WorkProfile() {
             component={({ children }) => (
               <div className="error">{children}</div>
             )}
-            name={"speciality"}
+            name={"languages"}
           />
         </div>
       </div>

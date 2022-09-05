@@ -1,15 +1,17 @@
-import React, { Component } from 'react';
-import { render } from 'react-dom';
-import {COUNTRIES} from './countries';
-import './style.css';
-import { WithContext as ReactTags } from 'react-tag-input';
+import React, { Component } from "react";
+import { render } from "react-dom";
+import { COUNTRIES } from "./countries";
+import "./style.css";
+import { WithContext as ReactTags } from "react-tag-input";
 
 class App extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
-      tags: [{ id: 1, text: "Thailand" }, { id: 2, text: "India" }],
+      tags: [
+        { id: 1, text: "Thailand" },
+        { id: 2, text: "India" },
+      ],
       suggestions: COUNTRIES,
     };
     this.handleDelete = this.handleDelete.bind(this);
@@ -38,10 +40,8 @@ class App extends Component {
     this.setState({ tags });
   }
 
-  handleTagClick(index) {
-    console.log('The tag at index ' + index + ' was clicked');
-  }
-  render(){
+  handleTagClick(index) {}
+  render() {
     const { tags, suggestions } = this.state;
     return (
       <div id="app">
@@ -59,4 +59,4 @@ class App extends Component {
   }
 }
 
-render(<App />, document.getElementById('root'));
+render(<App />, document.getElementById("root"));

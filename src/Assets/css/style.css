@@ -2828,7 +2828,7 @@ button.personal_profile_btn.float_right.btn.btn-primary img {
   transform: rotate(180deg);
   position: absolute;
   margin-top: 35px;
-  /* margin-left: -40px; */
+  margin-left: -40px;
 }
 .tab_inner_box {
   padding: 20px 0px;
@@ -3388,7 +3388,8 @@ button.personal_profile_btn.float_right.btn.btn-primary img {
   border: none;
 }
 .back_btn_icon {
-  width: 13px;
+  width: 22px;
+  height: 22px;
   margin-left: -5px;
   margin-top: -5px;
   margin-right: 8px;
@@ -3792,12 +3793,12 @@ button.personal_profile_btn.float_right.btn.btn-primary img {
   padding: 16px;
   height: 56px;
 }
-.consultation_table_head th:first-child {
+th:first-child {
   border-top-left-radius: 12px;
   border-bottom-left-radius: 12px;
 }
 
-.consultation_table_head th:last-child {
+th:last-child {
   border-top-right-radius: 12px;
   border-bottom-right-radius: 12px;
 }

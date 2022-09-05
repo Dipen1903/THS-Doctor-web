@@ -50,7 +50,11 @@ function WorkProfile() {
       tempProfile.sub_speciality = userProfile?.sub_speciality_id || "";
       tempProfile.experience = userProfile?.experience;
       tempProfile.registration_number = userProfile?.registration_number;
-      tempProfile.languages = userProfile?.languages?.split(",");
+      tempProfile.languages = [];
+
+      userProfile?.languages.map((item) =>
+        tempProfile.languages.push(item?.id)
+      );
 
       tempProfile.qualification = "";
       tempProfile.proof = "";
@@ -281,7 +285,7 @@ function WorkProfile() {
                           component={({ children }) => (
                             <div className="error">{children}</div>
                           )}
-                          name={"speciality"}
+                          name={"languages"}
                         />
                       </div>
                     ) : (

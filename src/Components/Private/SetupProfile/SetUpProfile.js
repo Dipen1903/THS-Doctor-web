@@ -41,7 +41,6 @@ import {
   WorkProfileSchema,
 } from "../../../Utilities/Schema";
 
-
 const calculatePercentage = (values) => {
   let percent = 0;
   try {
@@ -355,23 +354,23 @@ export function SetUpSetting() {
     ({ ProfileSlice }) => ProfileSlice
   );
 
-  const calculate = (values) => {
-    let tempProfile = { ...ProfileEnum };
-    tempProfile.dob = userProfile?.birthdate;
-    tempProfile.gender = userProfile?.gender;
-    tempProfile.image = userProfile?.image;
-    tempProfile.city_id = userProfile?.city_id;
-    tempProfile.state_id = userProfile?.state_id;
-    tempProfile.speciality = userProfile?.speciality;
-    tempProfile.sub_speciality = userProfile?.sub_speciality;
-    tempProfile.experience = userProfile?.experience;
-    tempProfile.registration_number = userProfile?.registration_number;
-    tempProfile.languages = userProfile?.languages?.split(",");
-    tempProfile.qualification = userProfile?.qualifications;
-    tempProfile.proof = userProfile?.id_proofs;
-    tempProfile.signature = userProfile?.signature;
-    return calculatePercentage({ ...tempProfile, ...values });    
-  };
+  // const calculate = (values) => {
+  //   let tempProfile = { ...ProfileEnum };
+  //   tempProfile.dob = userProfile?.birthdate;
+  //   tempProfile.gender = userProfile?.gender;
+  //   tempProfile.image = userProfile?.image;
+  //   tempProfile.city_id = userProfile?.city_id;
+  //   tempProfile.state_id = userProfile?.state_id;
+  //   tempProfile.speciality = userProfile?.speciality;
+  //   tempProfile.sub_speciality = userProfile?.sub_speciality;
+  //   tempProfile.experience = userProfile?.experience;
+  //   tempProfile.registration_number = userProfile?.registration_number;
+  //   tempProfile.languages = userProfile?.languages?.split(",");
+  //   tempProfile.qualification = userProfile?.qualifications;
+  //   tempProfile.proof = userProfile?.id_proofs;
+  //   tempProfile.signature = userProfile?.signature;
+  //   return calculatePercentage({ ...tempProfile, ...values });
+  // };
 
   const submit = (values) => {
     if (profileStep == 1) {
@@ -394,7 +393,7 @@ export function SetUpSetting() {
       });
     }
   };
-  
+
   const initialLoad = () => {
     let tempData = { ...scheduleData };
     tempData.account_holder_name =
@@ -494,7 +493,8 @@ export function SetUpSetting() {
                     {({ values, handleSubmit }) => (
                       <>
                         <div class="progress_box">
-                          <div class="row">00
+                          <div class="row">
+                            00
                             <div class="col-md-3">
                               <h5 class="profile_milestone">
                                 Profile Milestone

@@ -1,4 +1,9 @@
 import React from "react";
+import { Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import { Icon } from "../../../Utilities/Icons";
+import animationData from "../../../Assets/json/errorpage.json";
+import Lottie from "react-lottie";
 export default class ErrorBoundary extends React.Component {
   constructor(props) {
     super(props);
@@ -15,16 +20,23 @@ export default class ErrorBoundary extends React.Component {
   }
 
   render() {
+    const defaultOptions = {
+      loop: true,
+      autoplay: true,
+      animationData: animationData,
+      renderer: "svg",
+    };
     if (this.state.errorInfo) {
       // Error path
       return (
-        <div>
-          <h2>Something went wrong.</h2>
-          <details style={{ whiteSpace: "pre-wrap" }}>
-            {this.state.error && this.state.error.toString()}
-            <br />
-            {this.state.errorInfo.componentStack}
-          </details>
+        <div class="error-container">
+          <div class="main flex-column justify-content-center align-items-center">
+            <Lottie options={defaultOptions} />
+          </div>
+          <h1>Something went wrong.</h1>
+          <a href="/doctor/dashboard">
+            <Button className="table_next_btn">Go to home</Button>
+          </a>
         </div>
       );
     }

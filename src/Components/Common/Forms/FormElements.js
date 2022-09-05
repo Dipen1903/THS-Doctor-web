@@ -23,10 +23,16 @@ const CustomOption = (props) => {
     </div>
   ) : null;
 };
-const DropdownIndicator = ({ iconHide, ...props }) => {
+const DropdownIndicator = ({ iconHide, customIcon, ...props }) => {
   return (
     <components.DropdownIndicator {...props}>
-      {iconHide ? <></> : <img alt="myimg" src={Icon.Search} />}
+      {iconHide ? (
+        <></>
+      ) : customIcon ? (
+        <img alt="myimg" src={customIcon} />
+      ) : (
+        <img alt="myimg" src={Icon.Search} />
+      )}
     </components.DropdownIndicator>
   );
 };
@@ -103,22 +109,23 @@ function TextArea(props) {
 
 function Select(props) {
   const {
-    name,
-    options,
-    label,
-    isMulti,
-    setFieldValue,
-    id,
-    value,
-    placeholder,
-    iconHide,
-    isSearchable = false,
-    displayTag = true,
-    outerClass,
     className,
-    onChange,
-    validate,
+    customIcon,
+    displayTag = true,
+    iconHide,
+    id,
     isDisabled,
+    isMulti,
+    isSearchable = false,
+    label,
+    name,
+    onChange,
+    options,
+    outerClass,
+    placeholder,
+    setFieldValue,
+    validate,
+    value,
   } = props;
 
   const handleChange = (values) => {
@@ -188,7 +195,7 @@ function Select(props) {
               paddingBottom: 5,
               paddingLeft: 11,
               paddingRight: 6,
-              fontFamily: "Nunito Sans Bold",
+              fontFamily: "Mulish",
               fontStyle: "normal",
               fontSize: "14px",
             }),
@@ -204,7 +211,11 @@ function Select(props) {
           components={{
             Option: CustomOption,
             DropdownIndicator: (props) => (
-              <DropdownIndicator iconHide={iconHide} {...props} />
+              <DropdownIndicator
+                iconHide={iconHide}
+                customIcon={customIcon}
+                {...props}
+              />
             ),
             MultiValueRemove,
           }}

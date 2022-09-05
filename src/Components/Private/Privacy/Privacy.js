@@ -18,13 +18,8 @@ function PrivacyPolicy() {
         setPolicyData(res.payload.data);
         setupdatedDate(res?.payload?.data?.updated_at);
       }
-      console.log("PrivacyAndPolicy Res::::: ", res);
     });
   };
-
-  console.log("====================================");
-  console.log(policyData?.description);
-  console.log("====================================");
   useEffect(() => {
     privacyApiCall();
   }, []);

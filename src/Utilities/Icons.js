@@ -1,25 +1,32 @@
 //LOGOS
 import LogoShort from "../Assets/svg/LogoShort.svg";
 //ICONS
-import FEMALEGRAY from "../Assets/svg/Female_grey.svg";
-import FEMALEWHITE from "../Assets/svg/Female_white.svg";
-import MALEWHITE from "../Assets/svg/Male_white.svg";
-import MALEGREY from "../Assets/svg/Male_grey.svg";
+
 import SEARCH from "../Assets/svg/Search.svg";
 import CIVERDOWN from "../Assets/svg/CiverDown.svg";
 import FACE from "../Assets/img/svg/totalconsultations.svg";
-import CalendarBlue from "../Assets/img/svg/CalendarBlue.svg";
+import CALENDARBLUE from "../Assets/img/svg/CalendarBlue.svg";
 import CHARTROUND from "../Assets/img/svg/ChartRound.svg";
+import PENCIL from "../Assets/svg/Pencil.svg";
+import CHAT from "../Assets/svg/Message.svg";
+import CROSS from "../Assets/svg/CrossRed.svg";
+import EYE from "../Assets/svg/Eye.svg";
+import BACK from "../Assets/svg/Back.svg";
+import EARTH from "../Assets/svg/Earth.svg";
+import AIRPLANE from "../Assets/svg/AirPlane.svg";
+import SPACEMAN from "../Assets/svg/SpaceMan.svg";
+
+import FEMALEGRAY from "../Assets/svg/Female_grey.svg";
+import FEMALEWHITE from "../Assets/svg/Female_white.svg";
+import MALEGREY from "../Assets/svg/Male_grey.svg";
+import MALEWHITE from "../Assets/svg/Male_white.svg";
+
 import USERBLUE from "../Assets/svg/UserBlue.svg";
 import USERGREY from "../Assets/svg/UserGrey.svg";
 import FIRSTAIDBLUE from "../Assets/svg/FirstAidKitBlue.svg";
 import FIRSTAIDGREY from "../Assets/svg/FirstAidKitGrey.svg";
 import CIVERRIGHTBLUE from "../Assets/svg/CiverRightBlue.svg";
 import CIVERRIGHTGREY from "../Assets/svg/CiverRightGrey.svg";
-import PENCIL from "../Assets/svg/Pencil.svg";
-import CHAT from "../Assets/svg/Message.svg";
-import CROSS from "../Assets/svg/CrossRed.svg";
-import EYE from "../Assets/svg/Eye.svg";
 import MEDICINEGREY from "../Assets/svg/MedicineGrey.svg";
 import MEDICINEBLUE from "../Assets/svg/MedicineBlue.svg";
 import TESTTUBEGREY from "../Assets/svg/TestTubeGrey.svg";
@@ -68,12 +75,17 @@ export const Icon = {
   FemaleWhite: FEMALEWHITE,
   MaleWhite: MALEWHITE,
   MaleGrey: MALEGREY,
+
+  Earth: EARTH,
+  Airplane: AIRPLANE,
+  Spaceman: SPACEMAN,
+  Back: BACK,
   Search: SEARCH,
   Eye: EYE,
   CiverDown: CIVERDOWN,
   Face: FACE,
   Pencil: PENCIL,
-  CalenderCross: CalendarBlue,
+  CalenderCross: CALENDARBLUE,
   Dollor: CHARTROUND,
   Chat: CHAT,
   CrossRed: CROSS,

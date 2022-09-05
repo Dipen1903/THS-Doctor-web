@@ -117,12 +117,7 @@ function EditBankdetails() {
             </div>
             <div className="setting_profile_card_body">
               <div className="row">
-                <Formik
-                  initialValues={{}}
-                  onSubmit={(values) => {
-                    console.log("values", values);
-                  }}
-                >
+                <Formik initialValues={{}} onSubmit={(values) => {}}>
                   {({ values, setFieldValue, handleSubmit }) => (
                     <form onSubmit={handleSubmit} id="myForm">
                       <div className="col-md-6">

@@ -204,3 +204,99 @@
   padding: 10px;
   border-radius: 8px;
 }
+.title-bar {
+  width: 6px;
+  height: 19px;
+  border-radius: 2px;
+  margin: 7px 7px;
+  padding: 0;
+}
+.m {
+  background-color: #3093bb;
+}
+.l {
+  background-color: #fc9875;
+}
+.r {
+  background-color: #f8446c;
+}
+.d {
+  background-color: #24b2b2;
+}
+
+/* Error Style */
+@color-primary: #30a9de;
+@color-secondary: #30a9de;
+@color-tertiary: #30a9de;
+@color-primary-light: #6aafe6;
+@color-primary-dark: #8ec0e4;
+@Distance: 1000px;
+
+.error-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  background: #ffffff;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #274c5e;
+}
+
+.main {
+  justify-content: center;
+}
+
+.MainDescription {
+  max-width: 50%;
+  font-size: 1.2rem;
+  font-weight: lighter;
+}
+
+.MainGraphic {
+  position: relative;
+}
+
+.shuttle {
+  width: 5rem;
+  height: 5rem;
+  margin: 10rem;
+  transition: easeInOutQuint();
+  animation: CogAnimation 30s linear infinite;
+}
+
+.astronaut {
+  width: 5rem;
+  height: 5rem;
+  transition: easeInOutQuint();
+  animation: CogAnimation2 25s linear infinite;
+}
+
+.world {
+  width: 10rem;
+  height: 10rem;
+  margin: 70px 50px;
+  transition: easeInOutQuint();
+}
+
+@keyframes CogAnimation {
+  0% {
+    transform: rotate(-360deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes CogAnimation2 {
+  0% {
+    transform: rotate(360deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}

@@ -17,7 +17,6 @@ function TermsAndConditions() {
         setTermsData(res.payload.data);
         setupdatedDate(res?.payload?.data?.updated_at);
       }
-      console.log("Terms Res::::: ", res?.payload?.data);
     });
   };
 

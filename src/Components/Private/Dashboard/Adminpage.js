@@ -9,7 +9,7 @@ function Adminpage() {
     <>
       <Container
         fluid
-        style={{ background: "#f8fbff", padding: "0px 100px" }}
+        style={{ background: "#f8fbff", padding: "0px 100px", height: "100vh" }}
         className="dashboard"
       >
         <h4 className="pt_30 mb_20">Dashboard</h4>

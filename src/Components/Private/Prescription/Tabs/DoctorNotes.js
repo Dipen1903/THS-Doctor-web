@@ -10,91 +10,57 @@ function DoctorNotes() {
   const handleShow = () => setShow(true);
   return (
     <>
-      <div className="medicine_card_box">
-        <h4 className="medicine_header">
-          <img src={Icon.termsconditionline} class="logo mr_10"></img>Doctor
-          Note
-        </h4>
-        <Form>
-          <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-            <Form.Label className="referdoctor_label">
-              Chef Complaints
-            </Form.Label>
-            <Form.Control
-              as="textarea"
-              rows={3}
-              placeholder="Feel headache and cold"
-              className="Textarea"
-            />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-            <Form.Label className="referdoctor_label">Diagnosis</Form.Label>
-            <Form.Control
-              as="textarea"
-              rows={3}
-              placeholder="Feel headache and cold"
-              className="Textarea"
-            />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-            <Form.Label className="referdoctor_label">
-              Medical History
-            </Form.Label>
-            <Form.Control
-              as="textarea"
-              rows={3}
-              placeholder="Feel headache and cold"
-              className="Textarea"
-            />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-            <Form.Label className="referdoctor_label">
-              Wrtire a instructions for Patient
-            </Form.Label>
-            <Form.Control
-              as="textarea"
-              rows={3}
-              placeholder="Feel headache and cold"
-              className="Textarea"
-            />
-          </Form.Group>
-          <label for="followafter" className="referdoctor_label">
-            Follow up after
-          </label>
-          <br />
-          <select className="follow_up">
-            <option value="0">Before Food</option>
-            <option value="1">Audi</option>
-            <option value="2">BMW</option>
-            <option value="3">Citroen</option>
-            <option value="4">Ford</option>
-          </select>
-        </Form>
-        <div className="prescription_table_bottom_card mt_15">
-          <div className="prescription_left_align">
-            <div className="col-md-4">
-              <h5 class="prescription_result_text">
-                3 <span className="result_declared_text">Medicines</span>
-              </h5>
-            </div>
-            <div className="col-md-4">
-              <h5 class="prescription_result_text">
-                2 <span className="result_declared_text">Lab Tests</span>
-              </h5>
-            </div>
-            <div className="col-md-5">
-              <h5 class="prescription_result_text">
-                1 <span className="result_declared_text">Refer a doctor</span>
-              </h5>
-            </div>
-          </div>
-          <div className="">
-            <button onClick={handleShow} className="table_next_btn">
-              Generate Prescription
-            </button>
-          </div>
-        </div>
-      </div>
+      <Form>
+        <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+          <Form.Label className="referdoctor_label">Chef Complaints</Form.Label>
+          <Form.Control
+            as="textarea"
+            rows={3}
+            placeholder="Feel headache and cold"
+            className="Textarea"
+          />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+          <Form.Label className="referdoctor_label">Diagnosis</Form.Label>
+          <Form.Control
+            as="textarea"
+            rows={3}
+            placeholder="Feel headache and cold"
+            className="Textarea"
+          />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+          <Form.Label className="referdoctor_label">Medical History</Form.Label>
+          <Form.Control
+            as="textarea"
+            rows={3}
+            placeholder="Feel headache and cold"
+            className="Textarea"
+          />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+          <Form.Label className="referdoctor_label">
+            Wrtire a instructions for Patient
+          </Form.Label>
+          <Form.Control
+            as="textarea"
+            rows={3}
+            placeholder="Feel headache and cold"
+            className="Textarea"
+          />
+        </Form.Group>
+        <label for="followafter" className="referdoctor_label">
+          Follow up after
+        </label>
+        <br />
+        <select className="follow_up">
+          <option value="0">Before Food</option>
+          <option value="1">Audi</option>
+          <option value="2">BMW</option>
+          <option value="3">Citroen</option>
+          <option value="4">Ford</option>
+        </select>
+      </Form>
 
       <Modal
         show={showModal}

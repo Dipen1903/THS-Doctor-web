@@ -15,7 +15,6 @@ function HelpAndSupport() {
       if (res.payload.status_code === 200) {
         setHelpData(res.payload.data);
       }
-      // console.log("HelpsSupports Res::::: ", res);
     });
   };
 

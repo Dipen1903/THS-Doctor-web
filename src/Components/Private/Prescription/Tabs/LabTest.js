@@ -4,11 +4,7 @@ import { BackGround, Icon } from "../../../../Utilities/Icons";
 
 function LabTest() {
   return (
-    <div className="medicine_card_box ">
-      <h4 className="medicine_header">
-        {" "}
-        <img src={Icon.supportline} class="logo mr_10"></img>Lab Test
-      </h4>
+    <>
       <div className="medicine_search_box d-flex ">
         <span className="medicine_text">Add Lab test:</span>
         <div className="prescription-search ">
@@ -68,36 +64,7 @@ function LabTest() {
           </tbody>
         </table>
       </div>
-      <div className="prescription_table_bottom_card mt_15">
-        <div className="prescription_left_align">
-          <div className="col-md-3 mr_5">
-            <h5 class="prescription_result_text">
-              3 <span className="result_declared_text">Medicines</span>
-            </h5>
-          </div>
-          <div className="col-md-3 mr_5">
-            <h5 class="prescription_result_text">
-              0 <span className="result_declared_text">Lab Tests</span>
-            </h5>
-          </div>
-          <div className="col-md-4 mr_5">
-            <h5 class="prescription_result_text">
-              0 <span className="result_declared_text">Refer a doctor</span>
-            </h5>
-          </div>
-          <div className="col-md-4 mr_5">
-            <h5 class="prescription_result_text">
-              None <span className="result_declared_text">Instructions</span>
-            </h5>
-          </div>
-        </div>
-        <div className="">
-          <Link to="/prescription/searchreferdoctor">
-            <button className="table_next_btn">Next</button>
-          </Link>
-        </div>
-      </div>
-    </div>
+    </>
   );
 }
 
