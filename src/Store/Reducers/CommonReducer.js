@@ -57,6 +57,7 @@ export const CityList = createAsyncThunk(
         let cityArr = result?.data?.map((item) => ({
           label: item?.name,
           value: item?.id,
+          state_id: item?.state_id,
         }));
         return cityArr;
       } else {

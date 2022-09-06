@@ -300,3 +300,10 @@
     transform: rotate(0deg);
   }
 }
+
+.qualification_file {
+  height: 133px;
+  width: 133px;
+  border-radius: 8px;
+  object-fit: cover;
+}

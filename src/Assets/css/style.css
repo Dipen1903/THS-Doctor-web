@@ -4202,7 +4202,7 @@ privacypolicy-paragraph::-webkit-scrollbar {
 .privacypolicy-paragraph {
   padding-right: 20px;
   height: 500px;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 .privacy_policy_title {
@@ -4285,7 +4285,7 @@ privacypolicy-paragraph::-webkit-scrollbar {
 .termscondition-paragraph {
   padding-right: 20px;
   height: 500px;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 .terms_condition_title {
@@ -4795,7 +4795,7 @@ privacypolicy-paragraph::-webkit-scrollbar {
 .privacypolicy-paragraph {
   padding-right: 20px;
   height: 500px;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 .privacy_policy_title {
@@ -4877,7 +4877,7 @@ privacypolicy-paragraph::-webkit-scrollbar {
 .termscondition-paragraph {
   padding-right: 20px;
   height: 500px;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 .terms_condition_title {

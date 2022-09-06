@@ -153,6 +153,7 @@ function WorkProfile() {
                           { value: "", label: "Your speciality" },
                           ...specialityList,
                         ]}
+                        isDisabled={!isEdit}
                         setFieldValue={setFieldValue}
                         value={values.speciality}
                         iconHide={true}
@@ -183,6 +184,7 @@ function WorkProfile() {
                                 { value: "", label: "Your sub speciality" },
                                 ...subSpecialityList,
                               ]}
+                              isDisabled={!isEdit}
                               setFieldValue={setFieldValue}
                               value={values.sub_speciality}
                               iconHide={true}
@@ -204,6 +206,7 @@ function WorkProfile() {
                       <FormControl
                         control="input"
                         type="number"
+                        disabled={!isEdit}
                         key="experience"
                         label="Year Experience*"
                         id="experience"
@@ -223,6 +226,7 @@ function WorkProfile() {
                       <FormControl
                         control="input"
                         type="text"
+                        disabled={!isEdit}
                         key="registration_number"
                         label="Registration Number"
                         id="registration_number"
@@ -239,6 +243,7 @@ function WorkProfile() {
                         control="select"
                         options={[{ value: "", label: "Select" }, ...stateList]}
                         setFieldValue={setFieldValue}
+                        isDisabled={!isEdit}
                         name="state_id"
                         onChange={() => {}}
                         iconHide={true}
@@ -251,6 +256,7 @@ function WorkProfile() {
                       <FormControl
                         control="select"
                         options={[{ value: "", label: "Select" }, ...cityList]}
+                        isDisabled={!isEdit}
                         setFieldValue={setFieldValue}
                         value={values?.city_id}
                         name="city_id"
@@ -492,7 +498,10 @@ function WorkProfile() {
                             <h3 className="qualification_title">
                               {item?.type}
                             </h3>
-                            <img src={item?.file} />
+                            <img
+                              className="qualification_file"
+                              src={item?.file}
+                            />
                           </div>
                         ))}
                     </div>
@@ -502,7 +511,7 @@ function WorkProfile() {
             </div>
             <div className="work_profile_card_body_1">
               <div className="row">
-                <div className="col-md-9">
+                <div className="col-md-7">
                   <h3 className="work_profile_title_upload_id">
                     Upload ID Proof Document
                   </h3>
@@ -686,7 +695,10 @@ function WorkProfile() {
                             <h3 className="qualification_title">
                               {item?.type}
                             </h3>
-                            <img src={item?.file} />
+                            <img
+                              className="qualification_file"
+                              src={item?.file}
+                            />
                           </div>
                         ))}
                     </div>

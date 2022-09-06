@@ -27,4 +27,4 @@ function FormControl(props) {
       return null;
   }
 }
-export default FormControl;
+export default React.memo(FormControl);

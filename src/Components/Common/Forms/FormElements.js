@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Field, ErrorMessage, getIn, FieldArray } from "formik";
 import ReactSelect, { components } from "react-select";
 import { BackGround, Icon } from "../../../Utilities/Icons";
@@ -159,6 +159,7 @@ function Select(props) {
       return options?.find((item) => item.value === value);
     }
   };
+  const optionProps = useMemo(() => options, [options]);
   return (
     <>
       <div className={`form-group ${outerClass}`}>
@@ -170,7 +171,7 @@ function Select(props) {
           isDisabled={isDisabled}
           classNamePrefix="my-select"
           isSearchable={isSearchable}
-          options={options}
+          options={optionProps}
           placeholder={placeholder || ""}
           isClearable={false}
           value={selectedValue()}
@@ -565,5 +566,4 @@ function SearchBox(rest) {
     </div>
   );
 }
-
 export { Input, TextArea, Select, RadioButtons, CheckBoxes, SearchBox };

@@ -41,24 +41,24 @@ import {
   WorkProfileSchema,
 } from "../../../Utilities/Schema";
 
-const calculatePercentage = (values) => {
-  let percent = 0;
-  try {
-    const tempObj = { ...ProfileEnum, ...ScheduleEnum, ...BankEnum };
-    const total = Object.keys(tempObj).length;
-    let currentFilled = 0;
-    Object.keys(tempObj).map((key) => {
-      if (!isEmpty(values[key])) {
-        currentFilled++;
-      }
-    });
+// const calculatePercentage = (values) => {
+//   let percent = 0;
+//   try {
+//     const tempObj = { ...ProfileEnum, ...ScheduleEnum, ...BankEnum };
+//     const total = Object.keys(tempObj).length;
+//     let currentFilled = 0;
+//     Object.keys(tempObj).map((key) => {
+//       if (!isEmpty(values[key])) {
+//         currentFilled++;
+//       }
+//     });
 
-    percent = (100 * currentFilled) / total;
-    return parseInt(percent);
-  } catch (error) {
-    return 0;
-  }
-};
+//     percent = (100 * currentFilled) / total;
+//     return parseInt(percent);
+//   } catch (error) {
+//     return 0;
+//   }
+// };
 export function SetUpProfile() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -72,62 +72,71 @@ export function SetUpProfile() {
     let tempProofs = [];
     let tempQualification = [];
 
-    if (parseInt(userProfile?.basic_information_done)) {
-      dispatch(nextStep(2));
-    }
-    if (parseInt(userProfile?.work_profile_done)) {
-      dispatch(nextStep(3));
-    }
-    if (parseInt(userProfile?.qualification_documents_done)) {
-      navigate("/dashboard");
-      dispatch(nextStep(1));
-    }
-
-    tempProfile.image = userProfile?.image;
-    tempProfile.dob = userProfile?.birthdate;
-    tempProfile.gender = userProfile?.gender;
-    tempProfile.city_id = userProfile?.city_id;
-    tempProfile.state_id = userProfile?.state_id;
-    dispatch(SubSpecialityList({ speciality_id: userProfile?.speciality_id }));
-    tempProfile.speciality = userProfile?.speciality_id || "";
-    tempProfile.sub_speciality = userProfile?.sub_speciality_id || "";
-    tempProfile.experience = userProfile?.experience;
-    tempProfile.registration_number = userProfile?.registration_number;
-    tempProfile.languages = userProfile?.languages?.split(",");
-
-    tempProfile.qualification = "";
-    tempProfile.proof = "";
-
-    if (userProfile?.qualifications?.length) {
-      userProfile?.qualifications?.map((item) => {
-        tempQualification.push({
-          type: item?.qualification,
-          file: item?.document,
-        });
-      });
-      if (!isEmpty(tempQualification))
-        tempProfile.qualification = tempQualification;
-    }
-
-    if (userProfile?.id_proofs?.length) {
-      userProfile?.id_proofs?.map((item) => {
-        tempProofs.push({
-          type: item?.id_proof,
-          file: item?.document,
-        });
-      });
-      if (!isEmpty(tempProofs)) {
-        tempProfile.proof = tempProofs;
+    if (userProfile) {
+      if (parseInt(userProfile?.basic_information_done)) {
+        dispatch(nextStep(2));
       }
+      if (parseInt(userProfile?.work_profile_done)) {
+        dispatch(nextStep(3));
+      }
+      if (parseInt(userProfile?.qualification_documents_done)) {
+        navigate("/dashboard");
+        dispatch(nextStep(1));
+      }
+
+      tempProfile.image = userProfile?.image;
+      tempProfile.dob = userProfile?.birthdate;
+      tempProfile.gender = userProfile?.gender;
+      tempProfile.city_id = userProfile?.city_id;
+      tempProfile.state_id = userProfile?.state_id;
+      dispatch(
+        SubSpecialityList({ speciality_id: userProfile?.speciality_id })
+      );
+      tempProfile.speciality = userProfile?.speciality_id || "";
+      tempProfile.sub_speciality = userProfile?.sub_speciality_id || "";
+      tempProfile.experience = userProfile?.experience;
+      tempProfile.registration_number = userProfile?.registration_number;
+      tempProfile.languages = [];
+      if (typeof userProfile?.languages === "string") {
+        tempProfile.languages = userProfile?.languages.split(",");
+      } else {
+        userProfile?.languages?.map((item) =>
+          tempProfile.languages.push(item?.id)
+        );
+      }
+      tempProfile.qualification = "";
+      tempProfile.proof = "";
+
+      if (userProfile?.qualifications?.length) {
+        userProfile?.qualifications?.map((item) => {
+          tempQualification.push({
+            type: item?.qualification,
+            file: item?.document,
+          });
+        });
+        if (!isEmpty(tempQualification))
+          tempProfile.qualification = tempQualification;
+      }
+
+      if (userProfile?.id_proofs?.length) {
+        userProfile?.id_proofs?.map((item) => {
+          tempProofs.push({
+            type: item?.id_proof,
+            file: item?.document,
+          });
+        });
+        if (!isEmpty(tempProofs)) {
+          tempProfile.proof = tempProofs;
+        }
+      }
+      tempProfile.signature = userProfile?.signature;
+      setProfileData(tempProfile);
     }
-    tempProfile.signature = userProfile?.signature;
-    setProfileData(tempProfile);
   };
   const submit = (values) => {
     let tempData = { ...values };
-    if (values?.languages) {
-      tempData.languages = values?.languages?.toString();
-    }
+
+    tempData?.languages?.toString();
     if (values) tempData["deepIntegrate"] = true;
     if (profileStep === 1) {
       tempData["basic_information_done"] = 1;
@@ -403,39 +412,36 @@ export function SetUpSetting() {
     tempData.ifsc_code = userProfile?.bank_details?.ifsc_code;
     tempData.upi_id = userProfile?.bank_details?.upi_id;
 
-    if (userProfile?.availibility?.length) {
-      let weekDays = Object.keys(userProfile?.availibility).filter(
-        (item) =>
-          item === "monday" ||
-          item === "tuesday" ||
-          item === "wednsday" ||
-          item === "thursday" ||
-          item === "friday"
-      );
-      if (weekDays) tempData.weekdays.days = weekDays;
-      if (tempData?.weekdays?.days.length) {
-        userProfile?.availibility[tempData?.weekdays?.days[0]]?.map((item) => {
-          tempData.weekdays.time_period[item?.time_period] = {
-            start_time: item?.start_time,
-            end_time: item?.end_time,
-            min: tempData.weekdays.time_period[item?.time_period].min,
-            max: tempData.weekdays.time_period[item?.time_period].max,
-          };
-        });
+    if (userProfile?.availibility) {
+      if (userProfile?.availibility?.weekdays) {
+        tempData.weekdays.days = userProfile?.availibility?.weekdays?.days;
+        if (userProfile?.availibility?.weekdays?.slot) {
+          Object.keys(userProfile?.availibility?.weekdays?.slot)?.map(
+            (item) => {
+              let tempSlot = userProfile?.availibility?.weekdays?.slot[item];
+              tempData.weekdays.time_period[item] = {
+                start_time: tempSlot?.start_time,
+                end_time: tempSlot?.end_time,
+                slots: ScheduleEnum.weekdays.time_period[item].slots,
+              };
+            }
+          );
+        }
       }
-      let weekEnds = Object.keys(userProfile?.availibility).filter(
-        (item) => item === "sunday" || item === "saturday"
-      );
-      if (weekEnds) tempData.weekends.days = weekEnds;
-      if (tempData?.weekends?.days.length) {
-        userProfile?.availibility[tempData?.weekends?.days[0]]?.map((item) => {
-          tempData.weekends.time_period[item?.time_period] = {
-            start_time: item?.start_time,
-            end_time: item?.end_time,
-            min: tempData.weekends.time_period[item?.time_period].min,
-            max: tempData.weekends.time_period[item?.time_period].max,
-          };
-        });
+      if (userProfile?.availibility?.weekends) {
+        tempData.weekends.days = userProfile?.availibility?.weekends?.days;
+        if (userProfile?.availibility?.weekends?.slot) {
+          Object.keys(userProfile?.availibility?.weekends?.slot)?.map(
+            (item) => {
+              let tempSlot = userProfile?.availibility?.weekends?.slot[item];
+              tempData.weekends.time_period[item] = {
+                start_time: tempSlot?.start_time,
+                end_time: tempSlot?.end_time,
+                slots: ScheduleEnum.weekdays.time_period[item].slots,
+              };
+            }
+          );
+        }
       }
     }
 
@@ -494,7 +500,6 @@ export function SetUpSetting() {
                       <>
                         <div class="progress_box">
                           <div class="row">
-                            00
                             <div class="col-md-3">
                               <h5 class="profile_milestone">
                                 Profile Milestone

@@ -1,17 +1,18 @@
 import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import { ErrorMessage, Field, useFormikContext } from "formik";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { BackGround, Icon } from "../../../../Utilities/Icons";
 import FileUpload from "../../../Common/Layouts/FileUpload";
 import FormControl from "../../../Common/Forms/FormControl";
 import { isEmpty } from "../../../../Utilities/Functions";
+import { CityList } from "../../../../Store/Reducers/CommonReducer";
 
 export default function BasicInformation() {
   const { values, errors, setFieldValue, handleBlur, handleChange } =
     useFormikContext();
-
+  const dispatch = useDispatch();
   const { CommonSlice } = useSelector((state) => state);
   const { stateList, cityList } = CommonSlice;
 
@@ -94,26 +95,32 @@ export default function BasicInformation() {
           <div class="col-md-6">
             <FormControl
               control="select"
-              options={[{ value: "", label: "Select" }, ...stateList]}
+              options={[{ value: "", label: "Select" }, ...cityList]}
               setFieldValue={setFieldValue}
-              name="state_id"
-              onChange={() => {}}
+              value={values?.city_id}
+              name="city_id"
               iconHide={true}
-              value={values?.state_id}
-              label="State"
+              onChange={(value) => {
+                let city = cityList.find((item) => item?.value === value);
+                setFieldValue("state_id", city?.state_id);
+              }}
+              label="City"
               outerClass="mb-3"
             />
           </div>
           <div class="col-md-6">
             <FormControl
               control="select"
-              options={[{ value: "", label: "Select" }, ...cityList]}
+              options={[{ value: "", label: "Select" }, ...stateList]}
               setFieldValue={setFieldValue}
-              value={values?.city_id}
-              name="city_id"
+              name="state_id"
+              onChange={(value) => {
+                setFieldValue("city_id", "");
+                dispatch(CityList({ state_id: value }));
+              }}
               iconHide={true}
-              onChange={() => {}}
-              label="City"
+              value={values?.state_id}
+              label="State"
               outerClass="mb-3"
             />
           </div>

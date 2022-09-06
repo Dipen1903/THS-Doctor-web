@@ -119,6 +119,22 @@ function RootRoute() {
           </PrivateRoutes>
         }
       />
+      <Route
+        path="/privacy"
+        element={
+          <PrivateRoutes isHeader={true}>
+            <PrivacyPolicy />
+          </PrivateRoutes>
+        }
+      />
+      <Route
+        path="/terms"
+        element={
+          <PrivateRoutes isHeader={true}>
+            <TermsAndConditions />
+          </PrivateRoutes>
+        }
+      />
 
       {/* 
       <Route
