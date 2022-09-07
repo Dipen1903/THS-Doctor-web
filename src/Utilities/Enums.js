@@ -215,6 +215,20 @@ export const VideoPostEnum = {
   tags: [],
   speakers: [],
 };
+export const MonthsShort = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "June",
+  "July",
+  "Aug",
+  "Sept",
+  "Oct",
+  "Nov",
+  "Dec",
+];
 export const Months = [
   { value: "january", label: "January" },
   { value: "february", label: "February" },

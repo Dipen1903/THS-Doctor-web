@@ -3,7 +3,10 @@ import Button from "react-bootstrap/Button";
 import { ErrorMessage, FieldArray, Formik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { SubSpecialityList } from "../../../Store/Reducers/CommonReducer";
+import {
+  CityList,
+  SubSpecialityList,
+} from "../../../Store/Reducers/CommonReducer";
 import FormControl from "../../Common/Forms/FormControl";
 import { Icon, BackGround } from "../../../Utilities/Icons";
 import FileUpload from "../../Common/Layouts/FileUpload";
@@ -153,7 +156,7 @@ function WorkProfile() {
                           { value: "", label: "Your speciality" },
                           ...specialityList,
                         ]}
-                        isDisabled={!isEdit}
+                        isDisabled={true}
                         setFieldValue={setFieldValue}
                         value={values.speciality}
                         iconHide={true}
@@ -176,7 +179,7 @@ function WorkProfile() {
                     </div>
                     <div class="col-md-12 mt_20">
                       {subSpecialityList?.length ? (
-                        <div class="row mt_20">
+                        <div class="row">
                           <div class="col-md-12">
                             <FormControl
                               control="select"
@@ -184,7 +187,7 @@ function WorkProfile() {
                                 { value: "", label: "Your sub speciality" },
                                 ...subSpecialityList,
                               ]}
-                              isDisabled={!isEdit}
+                              isDisabled={true}
                               setFieldValue={setFieldValue}
                               value={values.sub_speciality}
                               iconHide={true}
@@ -226,7 +229,7 @@ function WorkProfile() {
                       <FormControl
                         control="input"
                         type="text"
-                        disabled={!isEdit}
+                        disabled
                         key="registration_number"
                         label="Registration Number"
                         id="registration_number"
@@ -241,28 +244,36 @@ function WorkProfile() {
                     <div class="col-md-6 mt_20">
                       <FormControl
                         control="select"
-                        options={[{ value: "", label: "Select" }, ...stateList]}
+                        options={[{ value: "", label: "Select" }, ...cityList]}
                         setFieldValue={setFieldValue}
+                        value={values?.city_id}
                         isDisabled={!isEdit}
-                        name="state_id"
-                        onChange={() => {}}
+                        name="city_id"
                         iconHide={true}
-                        value={values?.state_id}
-                        label="State"
+                        onChange={(value) => {
+                          let city = cityList.find(
+                            (item) => item?.value === value
+                          );
+                          setFieldValue("state_id", city?.state_id);
+                        }}
+                        label="City"
                         outerClass="mb-3"
                       />
                     </div>
                     <div class="col-md-6 mt_20">
                       <FormControl
                         control="select"
-                        options={[{ value: "", label: "Select" }, ...cityList]}
-                        isDisabled={!isEdit}
+                        options={[{ value: "", label: "Select" }, ...stateList]}
                         setFieldValue={setFieldValue}
-                        value={values?.city_id}
-                        name="city_id"
+                        name="state_id"
+                        isDisabled={!isEdit}
+                        onChange={(value) => {
+                          setFieldValue("city_id", "");
+                          dispatch(CityList({ state_id: value }));
+                        }}
                         iconHide={true}
-                        onChange={() => {}}
-                        label="City"
+                        value={values?.state_id}
+                        label="State"
                         outerClass="mb-3"
                       />
                     </div>
@@ -492,7 +503,7 @@ function WorkProfile() {
                     </div>
                   ) : (
                     <div class="row mt_20">
-                      {values?.qualification?.length &&
+                      {values?.qualification?.length ? (
                         values?.qualification?.map((item, index) => (
                           <div key={index} className="col-md-4">
                             <h3 className="qualification_title">
@@ -503,7 +514,10 @@ function WorkProfile() {
                               src={item?.file}
                             />
                           </div>
-                        ))}
+                        ))
+                      ) : (
+                        <></>
+                      )}
                     </div>
                   )}
                 </div>

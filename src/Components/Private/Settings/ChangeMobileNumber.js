@@ -1,136 +1,76 @@
-import React, { Fragment } from "react";
-import "../../../Assets/css/style.css";
+import React from "react";
 import { useEffect, useState } from "react";
 import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
-import { Formik } from "formik";
-import Form from "react-bootstrap/Form";
-import Tabs from "react-bootstrap/Tabs";
-import Tab from "react-bootstrap/Tab";
-import Accordion from "react-bootstrap/Accordion";
-import { Button, Modal, Dropdown, DropdownButton } from "react-bootstrap";
-import SettingHeader from "./SettingHeaders";
-import { BackGround, Icon, Logo } from "../../../Utilities/Icons";
-// import Header from "../Dashboard/Header";
-import { Link } from "react-router-dom";
+import { ErrorMessage, Formik } from "formik";
+import { Button, Modal } from "react-bootstrap";
+import { BackGround } from "../../../Utilities/Icons";
 import FormControl from "../../Common/Forms/FormControl";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  SendOTPOnCurrentMobileNumber,
-  VerifyOTPOnCurrentMobileNumber,
-  SendOTPOnNewMobileNumber,
-  VerifyOTPOnNewMobileNumber,
+  GetOTPCurrent,
+  GetOTPNew,
+  GetUserProfile,
+  VerifyOTPCurrent,
+  VerifyOTPNew,
 } from "../../../Store/Reducers/ProfileReducer";
+import { PhoneNumberSchema } from "../../../Utilities/Schema";
 
 function Changemobilenum() {
   const dispatch = useDispatch();
-  const [tog, setTog] = useState(true);
-  const [modalShow, setModalShow] = useState(false);
-  const [currentNumber, setCurrentNumber] = useState({ mobile_number: "" });
-  const [currentOTP, setCurrentOTP] = useState({ otp: "" });
-  const [newNumber, setNewNumber] = useState({ mobile_number: "" });
-  const [newOTP, setNewOTP] = useState({ otp: "" });
+  const { userProfile } = useSelector(({ ProfileSlice }) => ProfileSlice);
+  const [verified, setVerified] = useState(false);
 
-  const currentMobileInputHandler = (e) => {
-    setCurrentNumber({ ...currentNumber, mobile_number: e.target.value });
-  };
-
-  const currentOTPInputHandler = (e) => {
-    setCurrentOTP({ ...currentOTP, otp: e.target.value });
-  };
-
-  const newMobileInputHandler = (e) => {
-    setNewNumber({ ...newNumber, mobile_number: e.target.value });
-  };
-
-  const newOTPInputHandler = (e) => {
-    setNewOTP({ ...newOTP, otp: e.target.value });
-  };
-
-  const currentOtpSend = (data) => {
-    dispatch(SendOTPOnCurrentMobileNumber(data))
-      .then
-      // (res) => {
-      // }
-      ();
-  };
-
-  const verifyRecievedCurrentOtp = (data, e) => {
-    e.preventDefault();
-    dispatch(VerifyOTPOnCurrentMobileNumber(data)).then((res) => {
-      if (res.payload.success) {
-        setCurrentNumber({ mobile_number: "" });
-        setCurrentOTP({ otp: "" });
-        setNewNumber({ mobile_number: "" });
-        setNewOTP({ otp: "" });
-        setTog(false);
-      }
-    });
-  };
-
-  const newOtpSend = (data) => {
-    dispatch(SendOTPOnNewMobileNumber(data)).then((res) => {
-      // if (res.payload.success) {
-      // }
-    });
-  };
-
-  const verifyRecievedNewOtp = (data, e) => {
-    e.preventDefault();
-    dispatch(VerifyOTPOnNewMobileNumber(data)).then((res) => {
-      if (res.payload.success) {
-        setTog(false);
-      }
-    });
-  };
-
-  useEffect(() => {
-    if (!modalShow) {
-      setTog(true);
-    }
-  }, [modalShow]);
+  useEffect(() => {}, []);
 
   return (
     <>
-      {tog ? (
-        <Container fluid>
-          <div className="row settingscards">
-            <div className="col-md-12">
-              <div className="setting_profile_card_head">
-                <div className="row">
-                  <div className="col-md-6">
-                    <h3 className="setting_change_mobile">
-                      Change Mobile Number
-                    </h3>
-                  </div>
-                  <div className="col-md-6"></div>
+      <Container fluid>
+        <div className="row settingscards">
+          <div className="col-md-12">
+            <div className="setting_profile_card_head">
+              <div className="row">
+                <div className="col-md-6">
+                  <h3 className="setting_change_mobile">
+                    Change Mobile Number
+                  </h3>
                 </div>
+                <div className="col-md-6"></div>
               </div>
-              <div className="setting_profile_card_body">
-                <div className="row">
-                  <Formik>
-                    {({
-                      values,
-                      setFieldValue,
-                      handleChange,
-                      handleSubmit,
-                    }) => (
-                      <form
-                        onSubmit={(e) =>
-                          verifyRecievedCurrentOtp(
-                            {
-                              mobile_number: parseInt(
-                                currentNumber.mobile_number
-                              ),
-                              otp: parseInt(currentOTP.otp),
-                            },
-                            e
-                          )
+            </div>
+            <div className="setting_profile_card_body">
+              <div className="row">
+                <Formik
+                  initialValues={{
+                    mobile_number: verified ? "" : userProfile?.mobile_number,
+                    otp: "",
+                  }}
+                  enableReinitialize
+                  validationSchema={PhoneNumberSchema}
+                  onSubmit={(values, { resetForm }) => {
+                    if (!verified) {
+                      dispatch(VerifyOTPCurrent({ otp: values?.otp })).then(
+                        (res) => {
+                          resetForm();
+                          if (res?.payload?.success) {
+                            setVerified(true);
+                          }
                         }
-                        id="myForm"
-                      >
+                      );
+                    } else {
+                      dispatch(VerifyOTPNew(values)).then((res) => {
+                        resetForm();
+                        if (res?.payload?.success) {
+                          dispatch(GetUserProfile()).then(() =>
+                            setVerified(false)
+                          );
+                        }
+                      });
+                    }
+                  }}
+                >
+                  {({ values, handleBlur, handleChange, handleSubmit }) =>
+                    !verified ? (
+                      <form onSubmit={handleSubmit} id="myForm">
                         <div className="col-md-6">
                           <div className="row">
                             <div className="col-md-12">
@@ -139,29 +79,20 @@ function Changemobilenum() {
                               </label>
                               <div className="input_box">
                                 <div className="form_group">
-                                  {/* <input type="text" name="current_mobilenumber" placeholder="" value="9318319131" /> */}
-
-                                  <FormControl
-                                    control="input"
-                                    type="text"
+                                  <input
+                                    type="phone"
                                     name="mobile_number"
                                     id="mobile_number"
-                                    // label="mobile_number"
-                                    // disabled={!edit}
-                                    // onChange={handleChange}
-                                    onChange={currentMobileInputHandler}
-                                    // onBlur={handleBlur}
-                                    // value={values?.mobile_number}
-                                    value={currentNumber.mobile_number}
+                                    disabled
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    value={values?.mobile_number}
                                   />
                                   <span
-                                    onClick={() =>
-                                      currentOtpSend({
-                                        mobile_number: parseInt(
-                                          currentNumber.mobile_number
-                                        ),
-                                      })
-                                    }
+                                    onClick={(e) => {
+                                      e.preventDefault();
+                                      dispatch(GetOTPCurrent());
+                                    }}
                                     className="send_otp"
                                     style={{ cursor: "pointer" }}
                                   >
@@ -173,31 +104,20 @@ function Changemobilenum() {
                           </div>
                           <div className="row mt_20">
                             <div className="col-md-12">
-                              <label className="sign_title"> Enter OTP </label>
-                              <div className="input_box">
-                                <div className="form_group">
-                                  {/* <input type="text" name="enter_otp" placeholder="" value="" /> */}
-
-                                  <FormControl
-                                    control="input"
-                                    type="text"
-                                    name="otp"
-                                    id="otp"
-                                    // label="otp"
-                                    // disabled={!edit}
-                                    // onChange={handleChange}
-                                    onChange={currentOTPInputHandler}
-                                    // onBlur={handleBlur}
-                                    // value={values?.otp}
-                                    value={currentOTP.otp}
-                                  />
-                                </div>
-                              </div>
+                              <FormControl
+                                control="input"
+                                type="text"
+                                name="otp"
+                                id="otp"
+                                label="Enter OTP"
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                value={values?.otp}
+                              />
                             </div>
                           </div>
                           <div className="row mt_30">
                             <div className="col-md-4">
-                              {/* <Link to="/changenewmobilenum"> */}
                               <button
                                 type="submit"
                                 className="continue_btn"
@@ -205,136 +125,90 @@ function Changemobilenum() {
                               >
                                 Verify
                               </button>
-                              {/* </Link> */}
                             </div>
                           </div>
                         </div>
                       </form>
-                    )}
-                  </Formik>
-                </div>
-              </div>
-            </div>
-          </div>
-        </Container>
-      ) : (
-        <>
-          <MyModal
-            show={modalShow}
-            onClick={() => setTog(false)}
-            onHide={() => setModalShow(false)}
-            number={newNumber.mobile_number}
-          />
-          <Container fluid>
-            <div className="row settingscards_box">
-              <div className="col-md-12">
-                <div className="setting_profile_card_head">
-                  <div className="row">
-                    <div class="col-md-6">
-                      <h3 className="setting_change_mobile">
-                        Change Mobile Number
-                      </h3>
-                    </div>
-                    <div class="col-md-6"></div>
-                  </div>
-                </div>
-                <div className="setting_profile_card_body">
-                  <div className="row">
-                    <Formik initialValues={{}} onSubmit={(values) => {}}>
-                      {({ values, setFieldValue, handleSubmit }) => (
-                        <form
-                          onSubmit={(e) =>
-                            verifyRecievedNewOtp(
-                              {
-                                mobile_number: parseInt(
-                                  newNumber.mobile_number
-                                ),
-                                otp: parseInt(newOTP.otp),
-                              },
-                              e
-                            )
-                          }
-                          id="myForm"
-                        >
-                          <div className="col-md-6">
-                            <div class="row">
-                              <div class="col-md-12">
-                                <label className="sign_title">
-                                  New Mobile Number
-                                </label>
-                                <div class="input_box">
-                                  <div class="form_group">
-                                    <FormControl
-                                      control="input"
-                                      type="text"
-                                      name="mobile_number"
-                                      id="mobile_number"
-                                      // label="mobile_number"
-                                      // disabled={!edit}
-                                      // onChange={handleChange}
-                                      onChange={newMobileInputHandler}
-                                      // onBlur={handleBlur}
-                                      // value={values?.mobile_number}
-                                      value={newNumber.mobile_number}
-                                    />
+                    ) : (
+                      <form onSubmit={handleSubmit} id="myForm">
+                        <div className="col-md-6">
+                          <div className="row">
+                            <div className="col-md-12">
+                              <label className="sign_title">
+                                New Mobile Number
+                              </label>
+                              <div className="input_box">
+                                <div className="form_group">
+                                  <input
+                                    type="phone"
+                                    name="mobile_number"
+                                    id="mobile_number"
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    value={values?.mobile_number}
+                                  />
+                                  {values?.mobile_number && (
                                     <span
-                                      onClick={() =>
-                                        newOtpSend({
-                                          mobile_number: parseInt(
-                                            newNumber.mobile_number
-                                          ),
-                                        })
-                                      }
-                                      style={{ cursor: "pointer" }}
+                                      onClick={(e) => {
+                                        e.preventDefault();
+                                        dispatch(
+                                          GetOTPNew({
+                                            mobile_number:
+                                              values?.mobile_number,
+                                          })
+                                        );
+                                      }}
                                       className="send_otp"
+                                      style={{ cursor: "pointer" }}
                                     >
                                       Send OTP
                                     </span>
-                                  </div>
+                                  )}
                                 </div>
-                              </div>
-                            </div>
-                            <div class="row mt_20">
-                              <div class="col-md-12">
-                                <label className="sign_title">
-                                  {" "}
-                                  Enter OTP{" "}
-                                </label>
-                                <div class="input_box">
-                                  <div class="form_group">
-                                    <input
-                                      type="text"
-                                      name="enter_otp"
-                                      placeholder=""
-                                      onChange={newOTPInputHandler}
-                                      value={newOTP.otp}
-                                    />
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div className="row mt_30">
-                              <div className="col-md-4">
-                                <Button
-                                  className="continue_btn"
-                                  variant="primary"
-                                  onClick={() => setModalShow(true)}
-                                >
-                                  Verify
-                                </Button>
+                                <ErrorMessage
+                                  component={({ children }) => (
+                                    <div className="error">{children}</div>
+                                  )}
+                                  name={"mobile_number"}
+                                />
                               </div>
                             </div>
                           </div>
-                        </form>
-                      )}
-                    </Formik>
-                  </div>
-                </div>
+                          <div className="row mt_20">
+                            <div className="col-md-12">
+                              <FormControl
+                                control="input"
+                                type="text"
+                                name="otp"
+                                id="otp"
+                                label="Enter OTP"
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                value={values?.otp}
+                              />
+                            </div>
+                          </div>
+                          <div className="row mt_30">
+                            <div className="col-md-4">
+                              <button
+                                type="submit"
+                                className="continue_btn"
+                                variant="primary"
+                              >
+                                Verify
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </form>
+                    )
+                  }
+                </Formik>
               </div>
             </div>
-          </Container>
-        </>
-      )}
+          </div>
+        </div>
+      </Container>
     </>
   );
 }

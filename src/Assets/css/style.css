@@ -3399,6 +3399,7 @@ button.personal_profile_btn.float_right.btn.btn-primary img {
 .profile_container {
   background: #f8fbff;
   padding: 30px 100px;
+  min-height: 100vh;
 }
 .profile_title {
   font-family: "Mulish";

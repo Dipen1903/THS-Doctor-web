@@ -15,3 +15,7 @@ export const QualificationListAPI = (data) =>
   POST(`${BASE_URL}/qualification-list`, data);
 export const DocumentListAPI = (data) =>
   POST(`${BASE_URL}/document-list`, data);
+export const PrivacyAndPolicyAPI = () => POST(`${BASE_URL}/privacy-policy`);
+export const TermsAndConditionsAPI = () =>
+  POST(`${BASE_URL}/term-and-condition`);
+export const HelpsAndSupportsAPI = () => POST(`${BASE_URL}/faqs`);

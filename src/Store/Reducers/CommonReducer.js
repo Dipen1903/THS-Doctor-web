@@ -7,6 +7,9 @@ import {
   LanguageListAPI,
   QualificationListAPI,
   DocumentListAPI,
+  TermsAndConditionsAPI,
+  HelpsAndSupportsAPI,
+  PrivacyAndPolicyAPI,
 } from "../../Components/Common/Service";
 
 import { AlertEnum } from "../../Utilities/Enums";
@@ -209,6 +212,97 @@ export const DocumentList = createAsyncThunk(
     }
   }
 );
+export const PrivacyAndPolicy = createAsyncThunk(
+  "ProvacyAndPolicy",
+  async (values, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const result = await PrivacyAndPolicyAPI();
+      if (result?.success) {
+        dispatch(setLoading(false));
+        dispatch(
+          setMessage({
+            text: result?.message,
+            type: AlertEnum.Success,
+          })
+        );
+        return result;
+      } else {
+        throw result;
+      }
+    } catch (error) {
+      dispatch(setLoading(false));
+      dispatch(
+        setMessage({
+          text: error?.message,
+          type: AlertEnum.Error,
+        })
+      );
+      return error;
+    }
+  }
+);
+export const TermsConditions = createAsyncThunk(
+  "TermsAndConditions",
+  async (values, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const result = await TermsAndConditionsAPI();
+      if (result?.success) {
+        dispatch(setLoading(false));
+        dispatch(
+          setMessage({
+            text: result?.message,
+            type: AlertEnum.Success,
+          })
+        );
+        return result;
+      } else {
+        throw result;
+      }
+    } catch (error) {
+      dispatch(setLoading(false));
+      dispatch(
+        setMessage({
+          text: error?.message,
+          type: AlertEnum.Error,
+        })
+      );
+      return error;
+    }
+  }
+);
+export const HelpsSupports = createAsyncThunk(
+  "HelpsAndSupports",
+  async (values, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const result = await HelpsAndSupportsAPI();
+      if (result?.success) {
+        dispatch(setLoading(false));
+        dispatch(
+          setMessage({
+            text: result?.message,
+            type: AlertEnum.Success,
+          })
+        );
+        return result;
+      } else {
+        throw result;
+      }
+    } catch (error) {
+      dispatch(setLoading(false));
+      dispatch(
+        setMessage({
+          text: error?.message,
+          type: AlertEnum.Error,
+        })
+      );
+      return error;
+    }
+  }
+);
+
 export const CommonSlice = createSlice({
   name: "CommonSlice",
   initialState,

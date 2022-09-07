@@ -11,6 +11,7 @@ import PENCIL from "../Assets/svg/Pencil.svg";
 import CHAT from "../Assets/svg/Message.svg";
 import CROSS from "../Assets/svg/CrossRed.svg";
 import EYE from "../Assets/svg/Eye.svg";
+import LINK from "../Assets/svg/Link.svg";
 import BACK from "../Assets/svg/Back.svg";
 import EARTH from "../Assets/svg/Earth.svg";
 import AIRPLANE from "../Assets/svg/AirPlane.svg";
@@ -82,6 +83,7 @@ export const Icon = {
   Back: BACK,
   Search: SEARCH,
   Eye: EYE,
+  Link: LINK,
   CiverDown: CIVERDOWN,
   Face: FACE,
   Pencil: PENCIL,

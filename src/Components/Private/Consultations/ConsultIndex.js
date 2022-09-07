@@ -14,13 +14,31 @@ function ConsultIndex() {
   const { upcomingConsults, pastConsults } = useSelector(
     ({ ConsultSlice }) => ConsultSlice
   );
-  const [filteredData, setFilteredData] = useState([]);
+  const [filteredData, setFilteredData] = useState({
+    upcomingConsults: [],
+    pastConsults: [],
+  });
   const [showModal, setShow] = useState(false);
+  const [activeTab, setActiveTab] = useState("upcoming");
 
   const handleClose = () => setShow(false);
-  const handleShow = () => {};
-
-  const [activeTab, setActiveTab] = useState("upcoming");
+  const handleFilter = (e) => {
+    try {
+      let text = e?.target?.value;
+      let tempNew = upcomingConsults.filter(
+        (item) => item?.name.toUpperCase().includes(text.toUpperCase()) == 1
+      );
+      let tempPast = pastConsults.filter(
+        (item) => item?.name.toUpperCase().includes(text.toUpperCase()) == 1
+      );
+      if (tempNew?.length) {
+        setFilteredData((state) => ({ ...state, upcomingConsults: tempNew }));
+      }
+      if (tempPast?.length) {
+        setFilteredData((state) => ({ ...state, pastConsults: tempPast }));
+      }
+    } catch (error) {}
+  };
 
   useEffect(() => {
     dispatch(GetNewConsults());
@@ -68,6 +86,7 @@ function ConsultIndex() {
                     type="search"
                     placeholder="Search"
                     aria-label="Search"
+                    onChange={handleFilter}
                   />
                 </form>
               </div>
@@ -101,14 +120,18 @@ function ConsultIndex() {
             <Tab.Pane eventKey="upcoming" title="Upcoming">
               <NewConsultation
                 upcomingConsults={
-                  filteredData?.length ? filteredData : upcomingConsults
+                  filteredData.upcomingConsults?.length
+                    ? filteredData?.upcomingConsults
+                    : upcomingConsults
                 }
               />
             </Tab.Pane>
             <Tab.Pane eventKey="past" title="Past">
               <PastConsultation
                 pastConsults={
-                  filteredData?.length ? filteredData : pastConsults
+                  filteredData?.pastConsults?.length
+                    ? filteredData?.pastConsults
+                    : pastConsults
                 }
               />
             </Tab.Pane>

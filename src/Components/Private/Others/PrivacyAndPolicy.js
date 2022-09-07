@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Container from "react-bootstrap/Container";
-import { Button, Modal, Form, Dropdown, DropdownButton } from "react-bootstrap";
-import { BackGround, Icon, Logo } from "../../../Utilities/Icons";
-import { useDispatch, useSelector } from "react-redux";
-import { PrivacyAndPolicy } from "../../../Store/Reducers/ProfileReducer";
-import axios from "axios";
+import { Icon } from "../../../Utilities/Icons";
+import { useDispatch } from "react-redux";
+import { PrivacyAndPolicy } from "../../../Store/Reducers/CommonReducer";
 
 function PrivacyPolicy() {
   const dispatch = useDispatch();

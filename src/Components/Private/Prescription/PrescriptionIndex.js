@@ -1,12 +1,13 @@
 import React from "react";
 import { Container, Button, Tab, Nav } from "react-bootstrap";
 import { Icon } from "../../../Utilities/Icons";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Medicine from "./Tabs/Medicine";
 import LabTest from "./Tabs/LabTest";
 import ReferDoctor from "./Tabs/ReferDoctor";
 import DoctorNotes from "./Tabs/DoctorNotes";
 function PrescriptionIndex() {
+  const navigate = useNavigate();
   const Tabs = [
     {
       name: "Medicine",
@@ -40,11 +41,14 @@ function PrescriptionIndex() {
   return (
     <div style={{ background: "#f8fbff" }}>
       <div className="prescription_heading">
-        <Link to="/prescription/searchmedicine">
-          <Button variant="primary" className="payout_back_btn">
-            <img src={Icon.Back} className="back_btn_icon"></img> Back
-          </Button>
-        </Link>
+        <Button
+          variant="primary"
+          onClick={() => navigate(-1)}
+          className="payout_back_btn"
+        >
+          <img src={Icon.Back} className="back_btn_icon"></img> Back
+        </Button>
+
         <h2 className="payout_title mt_10">Create Prescription</h2>
       </div>
       <Container

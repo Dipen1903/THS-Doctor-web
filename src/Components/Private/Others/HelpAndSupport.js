@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Container from "react-bootstrap/Container";
 import Accordion from "react-bootstrap/Accordion";
-import { BackGround, Icon, Logo } from "../../../Utilities/Icons";
-import { useDispatch, useSelector } from "react-redux";
-import { HelpsSupports } from "../../../Store/Reducers/ProfileReducer";
+import { Icon } from "../../../Utilities/Icons";
+import { useDispatch } from "react-redux";
+import { HelpsSupports } from "../../../Store/Reducers/CommonReducer";
 
 function HelpAndSupport() {
   const dispatch = useDispatch();
@@ -11,8 +11,8 @@ function HelpAndSupport() {
   const [helpData, setHelpData] = useState([]);
 
   const helpsApiCall = (values) => {
-    dispatch(HelpsSupports({})).then((res) => {
-      if (res.payload.status_code === 200) {
+    dispatch(HelpsSupports()).then((res) => {
+      if (res.payload.success) {
         setHelpData(res.payload.data);
       }
     });

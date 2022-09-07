@@ -51,72 +51,49 @@ function Changepassword() {
                     dispatch(ChangePassword(values)).then((res) => {})
                   }
                 >
-                  {({ values, setFieldValue, handleChange, handleSubmit }) => (
+                  {({ values, handleBlur, handleChange, handleSubmit }) => (
                     <form onSubmit={handleSubmit} id="myForm">
                       <div className="col-md-6">
                         <div className="row">
                           <div className="col-md-12 mt_20">
-                            <label className="sign_title">
-                              Current Password
-                            </label>
-                            <div className="input_box">
-                              <div className="form_group">
-                                {/* <input type="text" name="current_password" placeholder="" value="" /> */}
-
-                                <FormControl
-                                  control="input"
-                                  type="text"
-                                  name="old_password"
-                                  id="old_password"
-                                  onChange={handleChange}
-                                  value={values?.old_password}
-                                />
-                              </div>
-                            </div>
+                            <FormControl
+                              control="input"
+                              type="text"
+                              name="old_password"
+                              id="old_password"
+                              label="Current Password"
+                              onChange={handleChange}
+                              onBlur={handleBlur}
+                              value={values?.old_password}
+                            />
                           </div>
                         </div>
                         <div className="row mt_20">
                           <div className="col-md-12">
-                            <label className="sign_title"> New Password </label>
-                            <div className="input_box">
-                              <div className="form_group">
-                                {/* <input type="text" name="new_password" placeholder="" value="" /> */}
-
-                                <FormControl
-                                  control="input"
-                                  type="text"
-                                  name="new_password"
-                                  id="new_password"
-                                  onChange={handleChange}
-                                  value={values.new_password}
-                                />
-                              </div>
-                            </div>
+                            <FormControl
+                              control="input"
+                              type="text"
+                              name="new_password"
+                              id="new_password"
+                              label="New Password"
+                              onChange={handleChange}
+                              onBlur={handleBlur}
+                              value={values.new_password}
+                            />
                           </div>
                         </div>
                         <div className="row mt_20">
                           <div className="col-md-12 ">
-                            <label className="sign_title">
-                              {" "}
-                              Confirm New Password
-                            </label>
-                            <div className="input_box">
-                              <div className="form_group">
-                                {/* <input onChange={e => setConfirmpassword(e.target.value)} value={confirmpassword} type="text" name="confirm_password" placeholder="" /> */}
-
-                                <FormControl
-                                  control="input"
-                                  type="text"
-                                  name="confirm_password"
-                                  id="confirm_password"
-                                  // label="First Name"
-                                  // disabled={!isEdit}
-                                  onChange={handleChange}
-                                  // onBlur={handleBlur}
-                                  value={values.confirm_password}
-                                />
-                              </div>
-                            </div>
+                            <FormControl
+                              control="input"
+                              type="text"
+                              name="confirm_password"
+                              id="confirm_password"
+                              label="Confirm New Password"
+                              onChange={handleChange}
+                              onBlur={handleBlur}
+                              value={values.confirm_password}
+                            />
                           </div>
                         </div>
                         <div className="row mt_50">

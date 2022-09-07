@@ -1,10 +1,15 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { NewConsultAPI, PastConsultAPI } from "../../Routes/Service";
+import {
+  ConsultDetailsAPI,
+  NewConsultAPI,
+  PastConsultAPI,
+} from "../../Routes/Service";
 
 import { AlertEnum } from "../../Utilities/Enums";
 import { setLoading, setMessage } from "./LayoutSlice";
 
 const initialState = {
+  consultDetails: "",
   upcomingConsults: [],
   pastConsults: [],
 };
@@ -57,6 +62,29 @@ export const GetPastConsults = createAsyncThunk(
     }
   }
 );
+export const GetConsultDetails = createAsyncThunk(
+  "GetConsultDetails",
+  async (values, { dispatch }) => {
+    try {
+      const result = await ConsultDetailsAPI(values);
+      if (result?.success) {
+        dispatch(setLoading(false));
+        return result?.data;
+      } else {
+        throw result;
+      }
+    } catch (error) {
+      dispatch(setLoading(false));
+      dispatch(
+        setMessage({
+          text: error?.message,
+          type: AlertEnum.Error,
+        })
+      );
+      return error;
+    }
+  }
+);
 export const ConsultSlice = createSlice({
   name: "ConsultSlice",
   initialState,
@@ -67,6 +95,9 @@ export const ConsultSlice = createSlice({
     });
     builder.addCase(GetPastConsults.fulfilled, (state, action) => {
       state.pastConsults = action.payload;
+    });
+    builder.addCase(GetConsultDetails.fulfilled, (state, action) => {
+      state.consultDetails = action.payload;
     });
   },
 });

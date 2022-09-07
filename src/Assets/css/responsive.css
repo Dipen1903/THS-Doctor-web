@@ -45,7 +45,7 @@
   .forgot_password {
     font-family: Mulish;
     font-size: 12px;
-    color: #3093bb!important;
+    color: #3093bb !important;
     margin-top: 0px;
     font-weight: 600;
     float: right;
@@ -103,7 +103,7 @@
     padding-top: 0;
   }
   .upload_avatar_img {
-    width: 50%!important;
+    width: 50% !important;
     margin-bottom: 20px;
   }
   .attach_certificate {
@@ -139,13 +139,13 @@
   .tab-content .basic_info_form_box .tab-content .day_box {
     display: inline-flex;
     column-gap: 2px;
-    margin-left: -33px;  
+    margin-left: -33px;
     /*margin-left: -58px;*/
   }
   .day_box {
     display: inline-flex;
     column-gap: 2px;
-    margin-left: -33px;  
+    margin-left: -33px;
     /*margin-left: -58px;*/
   }
   .days_bg_2 {
@@ -226,7 +226,7 @@
   }
   .button-spaces {
     gap: 20px;
-    display: grid!important;
+    display: grid !important;
   }
   .personal_profile_card_head {
     background: #ffffff;
@@ -299,7 +299,7 @@
     margin-bottom: 0;
   }
   .qualification_certi_img {
-    width: 133px!important;
+    width: 133px !important;
     margin-bottom: 10px;
   }
   .work_profile_title {
@@ -402,12 +402,12 @@
     background: rgba(248, 68, 108, 0.1);
     border-radius: 4px;
     padding: 7px;
-    font-family: 'Mulish';
+    font-family: "Mulish";
     font-style: normal;
     font-weight: 600;
     font-size: 12px;
     line-height: 12px;
-    color: #F8446C;
+    color: #f8446c;
     text-align: center;
     margin-top: 10px;
     margin-bottom: 20px;
@@ -420,30 +420,30 @@
     width: 100%;
   }
   .mark_complete {
-    background: #FFFFFF;
+    background: #ffffff;
     border: 1px solid rgba(137, 152, 189, 0.2);
     border-radius: 8px;
-    font-family: 'Mulish';
+    font-family: "Mulish";
     font-style: normal;
     font-weight: 600;
     font-size: 14px;
     line-height: 24px;
-    color: #F8446C;
+    color: #f8446c;
     padding: 8px 16px;
     margin-top: 7px;
     float: right;
     margin-right: 20px;
   }
   .profile_name_box {
-    border: 1px solid #ECEFF4;
+    border: 1px solid #eceff4;
     padding: 20px 20px;
     height: 150px;
   }
-  .chatprofile_name_box{
-    border: 1px solid #ECEFF4;
+  .chatprofile_name_box {
+    border: 1px solid #eceff4;
     padding: 17px 20px;
     height: 100px;
-    margin-left: -2px; 
+    margin-left: -2px;
   }
   .cards-layout {
     display: grid;
@@ -459,77 +459,77 @@
     margin-left: 240px;
     /*float: inherit;*/
   }
-  .chatuserimg{
-    width: 80px!important;
-    height: 80px!important;
+  .chatuserimg {
+    width: 80px !important;
+    height: 80px !important;
   }
   .userprofile_data_value {
-    font-family: 'Mulish';
+    font-family: "Mulish";
     font-style: normal;
     font-weight: 600;
     font-size: 14px;
     line-height: 24px;
     text-align: right;
-    color: #1E1F20;
+    color: #1e1f20;
     margin-top: -30px;
   }
   .share_file_date {
-    font-family: 'Mulish';
+    font-family: "Mulish";
     font-style: normal;
     font-weight: 600;
     font-size: 9px;
     line-height: 12px;
-    color: #9393AA;
+    color: #9393aa;
   }
   .share_file_size {
-    font-family: 'Mulish';
+    font-family: "Mulish";
     font-style: normal;
     font-weight: 600;
     font-size: 14px;
     line-height: 12px;
-    color: #9393AA;
+    color: #9393aa;
     text-align: right;
     margin-top: -40px;
     margin-bottom: 50px;
   }
   .share_img_size {
-    width: 77px!important;
+    width: 77px !important;
   }
   .chatting_search {
     margin-left: 30px;
     margin-top: 0px;
     position: absolute;
-    width: 20px!important;
+    width: 20px !important;
   }
   .chat_user_img {
-    width: 40px!important;
+    width: 40px !important;
     height: 40px;
     margin-right: 15px;
   }
   .chat_contact_list_box {
     padding: 24.5px 20px;
-    border-bottom: 1px solid #ECEFF4;
+    border-bottom: 1px solid #eceff4;
   }
   .chat_time {
-    font-family: 'Mulish';
+    font-family: "Mulish";
     font-style: normal;
     font-weight: 600;
     font-size: 12px;
     line-height: 12px;
     text-align: right;
-    color: #9393AA;
+    color: #9393aa;
     margin-top: -40px;
     right: 55px;
   }
   .chat_message_count {
-    background: linear-gradient(45deg, #3093BB 0%, #82DBFF 100%);
+    background: linear-gradient(45deg, #3093bb 0%, #82dbff 100%);
     border-radius: 1000px;
     float: right;
     margin-left: 22px;
     padding: 0px 7.5px;
     height: 22px;
     width: 22px;
-    font-family: 'Inter';
+    font-family: "Inter";
     font-style: normal;
     font-weight: 500;
     font-size: 12px;
@@ -538,12 +538,12 @@
     align-items: center;
     text-align: center;
     letter-spacing: 0.2px;
-    color: #FFFFFF;
+    color: #ffffff;
     margin-top: 10px;
     right: 65px;
   }
   .chat_call_btn {
-    background: #24B2B2;
+    background: #24b2b2;
     border-radius: 8px;
     border: none;
     padding: 6px 11px 10px 11px;
@@ -552,12 +552,12 @@
     margin-right: 10px;
   }
   .chat_profile_name_box {
-    border: 1px solid #ECEFF4;
+    border: 1px solid #eceff4;
     padding: 20px 20px;
     height: 150px;
   }
   .more_info_btn {
-    background: #FFFFFF;
+    background: #ffffff;
     box-shadow: 0px 5px 10px rgb(0 64 128 / 4%);
     border-radius: 12px;
     margin-top: 7px;
@@ -566,22 +566,22 @@
     margin-left: 5px;
   }
   .chat_mark_complete_btn {
-    background: #FFFFFF;
+    background: #ffffff;
     border: 1px solid rgba(137, 152, 189, 0.2);
     border-radius: 8px;
-    font-family: 'Mulish';
+    font-family: "Mulish";
     font-style: normal;
     font-weight: 600;
     font-size: 12px;
     line-height: 24px;
-    color: #F8446C;
+    color: #f8446c;
     padding: 5px 10px;
     margin-top: 9px;
     float: right;
     margin-right: 13px;
   }
   .client_msg_box {
-    background: #F8FBFF;
+    background: #f8fbff;
     border-radius: 12px;
     padding: 16px 15px;
   }
@@ -597,7 +597,7 @@
     font-size: 16px;
     margin-left: -10px;
     margin-right: 5px;
-    color: #96A0B5;
+    color: #96a0b5;
     padding: 0;
     background-color: none;
     border-radius: 5px;
@@ -628,7 +628,7 @@
     width: 79.5%;
   }
   .sendNewMessage {
-    background: #F8FBFF;
+    background: #f8fbff;
     border-radius: 12px;
     display: flex;
     justify-content: space-between;
@@ -638,7 +638,7 @@
     margin-bottom: 10px;
   }
   .attach_send_btn {
-    background: linear-gradient(45deg, #3093BB 0%, #82DBFF 100%);
+    background: linear-gradient(45deg, #3093bb 0%, #82dbff 100%);
     box-shadow: 0px 5px 10px rgb(0 64 128 / 4%);
     border-radius: 12px;
     border: none;
@@ -649,12 +649,12 @@
   .sendNewMessage input {
     flex-grow: 1;
     padding: 0 3px;
-    background-color: #F8FBFF;
+    background-color: #f8fbff;
     border: none;
     outline: none;
   }
   .attach_items_box {
-    background: #ECEFF4;
+    background: #eceff4;
     height: 71vh;
     padding: 30px 20px 24px 20px;
   }
@@ -665,7 +665,7 @@
   .work_profile_certificate {
     background: #f0f0f0;
     border-radius: 8px;
-    width: 24%!important;
+    width: 24% !important;
   }
   .Tabs .nav {
     font-weight: 600;
@@ -701,7 +701,7 @@
     flex-wrap: wrap;
   }
   .medicine_search_box {
-    display: block!important;
+    display: block !important;
     justify-content: flex-start;
     align-items: center;
     gap: 20px;
@@ -709,15 +709,15 @@
   .Textarea {
     width: 100%;
     height: 120px;
-    background: #FFFFFF;
-    border: 1px solid #ECEFF4;
+    background: #ffffff;
+    border: 1px solid #eceff4;
     border-radius: 8px;
-    font-family: 'Mulish';
+    font-family: "Mulish";
     font-style: normal;
     font-weight: 600;
     font-size: 15px;
     line-height: 24px;
-    color: #1E1F20;
+    color: #1e1f20;
   }
 
   .profile_container .col-md-6 {
@@ -872,7 +872,7 @@
     column-gap: 2px;
     margin-left: -30px;
   }
-  
+
   .day_box {
     display: inline-flex;
     column-gap: 2px;
@@ -911,7 +911,7 @@
     height: 40px;
     width: 40px;
   }
-   /*-------------------------------------------------------------------------------*/
+  /*-------------------------------------------------------------------------------*/
   .attach_file_button {
     width: 100%;
   }
@@ -956,7 +956,7 @@
   }
   .button-spaces {
     gap: 20px;
-    display: grid!important;
+    display: grid !important;
   }
   .personal_profile_card_head {
     background: #ffffff;
@@ -1029,7 +1029,7 @@
     margin-bottom: 0;
   }
   .qualification_certi_img {
-    width: 133px!important;
+    width: 133px !important;
     margin-bottom: 10px;
   }
   .work_profile_title {
@@ -1132,12 +1132,12 @@
     background: rgba(248, 68, 108, 0.1);
     border-radius: 4px;
     padding: 7px;
-    font-family: 'Mulish';
+    font-family: "Mulish";
     font-style: normal;
     font-weight: 600;
     font-size: 12px;
     line-height: 12px;
-    color: #F8446C;
+    color: #f8446c;
     text-align: center;
     margin-top: 10px;
     margin-bottom: 20px;
@@ -1150,30 +1150,30 @@
     width: 100%;
   }
   .mark_complete {
-    background: #FFFFFF;
+    background: #ffffff;
     border: 1px solid rgba(137, 152, 189, 0.2);
     border-radius: 8px;
-    font-family: 'Mulish';
+    font-family: "Mulish";
     font-style: normal;
     font-weight: 600;
     font-size: 14px;
     line-height: 24px;
-    color: #F8446C;
+    color: #f8446c;
     padding: 8px 16px;
     margin-top: 7px;
     float: right;
     margin-right: 20px;
   }
   .profile_name_box {
-    border: 1px solid #ECEFF4;
+    border: 1px solid #eceff4;
     padding: 20px 20px;
     height: 150px;
   }
-  .chatprofile_name_box{
-    border: 1px solid #ECEFF4;
+  .chatprofile_name_box {
+    border: 1px solid #eceff4;
     padding: 17px 20px;
     height: 100px;
-    margin-left: -2px; 
+    margin-left: -2px;
   }
   .cards-layout {
     display: grid;
@@ -1189,77 +1189,77 @@
     margin-left: 240px;
     /*float: inherit;*/
   }
-  .chatuserimg{
-    width: 80px!important;
-    height: 80px!important;
+  .chatuserimg {
+    width: 80px !important;
+    height: 80px !important;
   }
   .userprofile_data_value {
-    font-family: 'Mulish';
+    font-family: "Mulish";
     font-style: normal;
     font-weight: 600;
     font-size: 14px;
     line-height: 24px;
     text-align: right;
-    color: #1E1F20;
+    color: #1e1f20;
     margin-top: -30px;
   }
   .share_file_date {
-    font-family: 'Mulish';
+    font-family: "Mulish";
     font-style: normal;
     font-weight: 600;
     font-size: 9px;
     line-height: 12px;
-    color: #9393AA;
+    color: #9393aa;
   }
   .share_file_size {
-    font-family: 'Mulish';
+    font-family: "Mulish";
     font-style: normal;
     font-weight: 600;
     font-size: 14px;
     line-height: 12px;
-    color: #9393AA;
+    color: #9393aa;
     text-align: right;
     margin-top: -40px;
     margin-bottom: 50px;
   }
   .share_img_size {
-    width: 79px!important;
+    width: 79px !important;
   }
   .chatting_search {
     margin-left: 30px;
     margin-top: 0px;
     position: absolute;
-    width: 20px!important;
+    width: 20px !important;
   }
   .chat_user_img {
-    width: 40px!important;
+    width: 40px !important;
     height: 40px;
     margin-right: 15px;
   }
   .chat_contact_list_box {
     padding: 24.5px 20px;
-    border-bottom: 1px solid #ECEFF4;
+    border-bottom: 1px solid #eceff4;
   }
   .chat_time {
-    font-family: 'Mulish';
+    font-family: "Mulish";
     font-style: normal;
     font-weight: 600;
     font-size: 12px;
     line-height: 12px;
     text-align: right;
-    color: #9393AA;
+    color: #9393aa;
     margin-top: -40px;
     right: 55px;
   }
   .chat_message_count {
-    background: linear-gradient(45deg, #3093BB 0%, #82DBFF 100%);
+    background: linear-gradient(45deg, #3093bb 0%, #82dbff 100%);
     border-radius: 1000px;
     float: right;
     margin-left: 22px;
     padding: 0px 7.5px;
     height: 22px;
     width: 22px;
-    font-family: 'Inter';
+    font-family: "Inter";
     font-style: normal;
     font-weight: 500;
     font-size: 12px;
@@ -1268,12 +1268,12 @@
     align-items: center;
     text-align: center;
     letter-spacing: 0.2px;
-    color: #FFFFFF;
+    color: #ffffff;
     margin-top: 10px;
     right: 65px;
   }
   .chat_call_btn {
-    background: #24B2B2;
+    background: #24b2b2;
     border-radius: 8px;
     border: none;
     padding: 6px 11px 10px 11px;
@@ -1282,12 +1282,12 @@
     margin-right: 10px;
   }
   .chat_profile_name_box {
-    border: 1px solid #ECEFF4;
+    border: 1px solid #eceff4;
     padding: 20px 20px;
     height: 150px;
   }
   .more_info_btn {
-    background: #FFFFFF;
+    background: #ffffff;
     box-shadow: 0px 5px 10px rgb(0 64 128 / 4%);
     border-radius: 12px;
     margin-top: 7px;
@@ -1296,22 +1296,22 @@
     margin-left: 5px;
   }
   .chat_mark_complete_btn {
-    background: #FFFFFF;
+    background: #ffffff;
     border: 1px solid rgba(137, 152, 189, 0.2);
     border-radius: 8px;
-    font-family: 'Mulish';
+    font-family: "Mulish";
     font-style: normal;
     font-weight: 600;
     font-size: 12px;
     line-height: 24px;
-    color: #F8446C;
+    color: #f8446c;
     padding: 5px 10px;
     margin-top: 9px;
     float: right;
     margin-right: 13px;
   }
   .client_msg_box {
-    background: #F8FBFF;
+    background: #f8fbff;
     border-radius: 12px;
     padding: 16px 15px;
   }
@@ -1327,7 +1327,7 @@
     font-size: 16px;
     margin-left: -10px;
     margin-right: 5px;
-    color: #96A0B5;
+    color: #96a0b5;
     padding: 0;
     background-color: none;
     border-radius: 5px;
@@ -1358,7 +1358,7 @@
     width: 79.5%;
   }
   .sendNewMessage {
-    background: #F8FBFF;
+    background: #f8fbff;
     border-radius: 12px;
     display: flex;
     justify-content: space-between;
@@ -1368,7 +1368,7 @@
     margin-bottom: 10px;
   }
   .attach_send_btn {
-    background: linear-gradient(45deg, #3093BB 0%, #82DBFF 100%);
+    background: linear-gradient(45deg, #3093bb 0%, #82dbff 100%);
     box-shadow: 0px 5px 10px rgb(0 64 128 / 4%);
     border-radius: 12px;
     border: none;
@@ -1379,15 +1379,15 @@
   .sendNewMessage input {
     flex-grow: 1;
     padding: 0 10px;
-    background-color: #F8FBFF;
+    background-color: #f8fbff;
     border: none;
     outline: none;
   }
   .attach_items_box {
-    background: #ECEFF4;
+    background: #eceff4;
     height: 71vh;
     padding: 30px 20px 24px 20px;
-  }  
+  }
   .content__footer {
     padding-top: 10px;
     padding-left: 10px;
@@ -1412,7 +1412,7 @@
     flex-wrap: wrap;
   }
   .medicine_search_box {
-    display: block!important;
+    display: block !important;
     justify-content: flex-start;
     align-items: center;
     gap: 20px;
@@ -1420,15 +1420,15 @@
   .Textarea {
     width: 100%;
     height: 120px;
-    background: #FFFFFF;
-    border: 1px solid #ECEFF4;
+    background: #ffffff;
+    border: 1px solid #eceff4;
     border-radius: 8px;
-    font-family: 'Mulish';
+    font-family: "Mulish";
     font-style: normal;
     font-weight: 600;
     font-size: 15px;
     line-height: 24px;
-    color: #1E1F20;
+    color: #1e1f20;
   }
   .profile_container .col-md-6 {
     width: 100%;
@@ -1440,7 +1440,7 @@
   .termscondition_container {
     background: #f8fbff;
     padding: 30px 40px;
-  }  
+  }
   .setting_bank_title {
     font-family: "Mulish";
     font-style: normal;
@@ -1573,7 +1573,7 @@
     display: inline-flex;
     column-gap: 2px;
     margin-left: -17px;
-  }  
+  }
   .day_box {
     display: inline-flex;
     column-gap: 2px;
@@ -1663,7 +1663,7 @@
   }
   .button-spaces {
     gap: 20px;
-    display: grid!important;
+    display: grid !important;
   }
   .personal_profile_card_head {
     background: #ffffff;
@@ -1736,7 +1736,7 @@
     margin-bottom: 0;
   }
   .qualification_certi_img {
-    width: 133px!important;
+    width: 133px !important;
     margin-bottom: 10px;
   }
   .work_profile_title {
@@ -1839,12 +1839,12 @@
     background: rgba(248, 68, 108, 0.1);
     border-radius: 4px;
     padding: 7px;
-    font-family: 'Mulish';
+    font-family: "Mulish";
     font-style: normal;
     font-weight: 600;
     font-size: 12px;
     line-height: 12px;
-    color: #F8446C;
+    color: #f8446c;
     text-align: center;
     margin-top: 10px;
     margin-bottom: 20px;
@@ -1857,30 +1857,30 @@
     width: 100%;
   }
   .mark_complete {
-    background: #FFFFFF;
+    background: #ffffff;
     border: 1px solid rgba(137, 152, 189, 0.2);
     border-radius: 8px;
-    font-family: 'Mulish';
+    font-family: "Mulish";
     font-style: normal;
     font-weight: 600;
     font-size: 14px;
     line-height: 24px;
-    color: #F8446C;
+    color: #f8446c;
     padding: 8px 16px;
     margin-top: 7px;
     float: right;
     margin-right: 20px;
   }
   .profile_name_box {
-    border: 1px solid #ECEFF4;
+    border: 1px solid #eceff4;
     padding: 20px 20px;
     height: 150px;
   }
-  .chatprofile_name_box{
-    border: 1px solid #ECEFF4;
+  .chatprofile_name_box {
+    border: 1px solid #eceff4;
     padding: 17px 20px;
     height: 100px;
-    margin-left: -2px; 
+    margin-left: -2px;
   }
   .cards-layout {
     display: grid;
@@ -1896,77 +1896,77 @@
     margin-left: 280px;
     /*float: inherit;*/
   }
-  .chatuserimg{
-    width: 80px!important;
-    height: 80px!important;
+  .chatuserimg {
+    width: 80px !important;
+    height: 80px !important;
   }
   .userprofile_data_value {
-    font-family: 'Mulish';
+    font-family: "Mulish";
     font-style: normal;
     font-weight: 600;
     font-size: 14px;
     line-height: 24px;
     text-align: right;
-    color: #1E1F20;
+    color: #1e1f20;
     margin-top: -30px;
   }
   .share_file_date {
-    font-family: 'Mulish';
+    font-family: "Mulish";
     font-style: normal;
     font-weight: 600;
     font-size: 9px;
     line-height: 12px;
-    color: #9393AA;
+    color: #9393aa;
   }
   .share_file_size {
-    font-family: 'Mulish';
+    font-family: "Mulish";
     font-style: normal;
     font-weight: 600;
     font-size: 14px;
     line-height: 12px;
-    color: #9393AA;
+    color: #9393aa;
     text-align: right;
     margin-top: -40px;
     margin-bottom: 50px;
   }
   .share_img_size {
-    width: 89px!important;
+    width: 89px !important;
   }
   .chatting_search {
     margin-left: 30px;
     margin-top: 0px;
     position: absolute;
-    width: 20px!important;
+    width: 20px !important;
   }
   .chat_user_img {
-    width: 40px!important;
+    width: 40px !important;
     height: 40px;
     margin-right: 15px;
   }
   .chat_contact_list_box {
     padding: 24.5px 20px;
-    border-bottom: 1px solid #ECEFF4;
+    border-bottom: 1px solid #eceff4;
   }
   .chat_time {
-    font-family: 'Mulish';
+    font-family: "Mulish";
     font-style: normal;
     font-weight: 600;
     font-size: 12px;
     line-height: 12px;
     text-align: right;
-    color: #9393AA;
+    color: #9393aa;
     margin-top: -40px;
     right: 55px;
   }
   .chat_message_count {
-    background: linear-gradient(45deg, #3093BB 0%, #82DBFF 100%);
+    background: linear-gradient(45deg, #3093bb 0%, #82dbff 100%);
     border-radius: 1000px;
     float: right;
     margin-left: 22px;
     padding: 0px 7.5px;
     height: 22px;
     width: 22px;
-    font-family: 'Inter';
+    font-family: "Inter";
     font-style: normal;
     font-weight: 500;
     font-size: 12px;
@@ -1975,12 +1975,12 @@
     align-items: center;
     text-align: center;
     letter-spacing: 0.2px;
-    color: #FFFFFF;
+    color: #ffffff;
     margin-top: 10px;
     right: 65px;
   }
   .chat_call_btn {
-    background: #24B2B2;
+    background: #24b2b2;
     border-radius: 8px;
     border: none;
     padding: 6px 11px 10px 11px;
@@ -1989,12 +1989,12 @@
     margin-right: 10px;
   }
   .chat_profile_name_box {
-    border: 1px solid #ECEFF4;
+    border: 1px solid #eceff4;
     padding: 20px 20px;
     height: 150px;
   }
   .more_info_btn {
-    background: #FFFFFF;
+    background: #ffffff;
     box-shadow: 0px 5px 10px rgb(0 64 128 / 4%);
     border-radius: 12px;
     margin-top: 7px;
@@ -2003,22 +2003,22 @@
     margin-left: 5px;
   }
   .chat_mark_complete_btn {
-    background: #FFFFFF;
+    background: #ffffff;
     border: 1px solid rgba(137, 152, 189, 0.2);
     border-radius: 8px;
-    font-family: 'Mulish';
+    font-family: "Mulish";
     font-style: normal;
     font-weight: 600;
     font-size: 12px;
     line-height: 24px;
-    color: #F8446C;
+    color: #f8446c;
     padding: 5px 10px;
     margin-top: 9px;
     float: right;
     margin-right: 13px;
   }
   .client_msg_box {
-    background: #F8FBFF;
+    background: #f8fbff;
     border-radius: 12px;
     padding: 16px 15px;
   }
@@ -2034,7 +2034,7 @@
     font-size: 16px;
     margin-left: -10px;
     margin-right: 5px;
-    color: #96A0B5;
+    color: #96a0b5;
     padding: 0;
     background-color: none;
     border-radius: 5px;
@@ -2065,7 +2065,7 @@
     width: 79.5%;
   }
   .sendNewMessage {
-    background: #F8FBFF;
+    background: #f8fbff;
     border-radius: 12px;
     display: flex;
     justify-content: space-between;
@@ -2075,7 +2075,7 @@
     margin-bottom: 10px;
   }
   .attach_send_btn {
-    background: linear-gradient(45deg, #3093BB 0%, #82DBFF 100%);
+    background: linear-gradient(45deg, #3093bb 0%, #82dbff 100%);
     box-shadow: 0px 5px 10px rgb(0 64 128 / 4%);
     border-radius: 12px;
     border: none;
@@ -2086,12 +2086,12 @@
   .sendNewMessage input {
     flex-grow: 1;
     padding: 0 10px;
-    background-color: #F8FBFF;
+    background-color: #f8fbff;
     border: none;
     outline: none;
   }
   .attach_items_box {
-    background: #ECEFF4;
+    background: #eceff4;
     height: 71vh;
     padding: 30px 20px 24px 20px;
   }
@@ -2119,7 +2119,7 @@
     flex-wrap: wrap;
   }
   .medicine_search_box {
-    display: block!important;
+    display: block !important;
     justify-content: flex-start;
     align-items: center;
     gap: 20px;
@@ -2127,15 +2127,15 @@
   .Textarea {
     width: 100%;
     height: 120px;
-    background: #FFFFFF;
-    border: 1px solid #ECEFF4;
+    background: #ffffff;
+    border: 1px solid #eceff4;
     border-radius: 8px;
-    font-family: 'Mulish';
+    font-family: "Mulish";
     font-style: normal;
     font-weight: 600;
     font-size: 15px;
     line-height: 24px;
-    color: #1E1F20;
+    color: #1e1f20;
   }
   .profile_container .col-md-6 {
     width: 100%;
@@ -2147,7 +2147,7 @@
   .termscondition_container {
     background: #f8fbff;
     padding: 30px 40px;
-  }  
+  }
   .setting_bank_title {
     font-family: "Mulish";
     font-style: normal;
@@ -2364,7 +2364,7 @@
   }
   .button-spaces {
     gap: 20px;
-    display: grid!important;
+    display: grid !important;
   }
   .personal_profile_card_head {
     background: #ffffff;
@@ -2437,7 +2437,7 @@
     margin-bottom: 0;
   }
   .qualification_certi_img {
-    width: 133px!important;
+    width: 133px !important;
     margin-bottom: 10px;
   }
   .work_profile_title {
@@ -2540,12 +2540,12 @@
     background: rgba(248, 68, 108, 0.1);
     border-radius: 4px;
     padding: 7px;
-    font-family: 'Mulish';
+    font-family: "Mulish";
     font-style: normal;
     font-weight: 600;
     font-size: 12px;
     line-height: 12px;
-    color: #F8446C;
+    color: #f8446c;
     text-align: center;
     margin-top: 10px;
     margin-bottom: 20px;
@@ -2558,30 +2558,30 @@
     width: 100%;
   }
   .mark_complete {
-    background: #FFFFFF;
+    background: #ffffff;
     border: 1px solid rgba(137, 152, 189, 0.2);
     border-radius: 8px;
-    font-family: 'Mulish';
+    font-family: "Mulish";
     font-style: normal;
     font-weight: 600;
     font-size: 14px;
     line-height: 24px;
-    color: #F8446C;
+    color: #f8446c;
     padding: 8px 16px;
     margin-top: 7px;
     float: right;
     margin-right: 20px;
   }
   .profile_name_box {
-    border: 1px solid #ECEFF4;
+    border: 1px solid #eceff4;
     padding: 20px 20px;
     height: 150px;
   }
-  .chatprofile_name_box{
-    border: 1px solid #ECEFF4;
+  .chatprofile_name_box {
+    border: 1px solid #eceff4;
     padding: 17px 20px;
     height: 100px;
-    margin-left: -2px; 
+    margin-left: -2px;
   }
   .cards-layout {
     display: grid;
@@ -2597,77 +2597,77 @@
     margin-left: 330px;
     /*float: inherit;*/
   }
-  .chatuserimg{
-    width: 80px!important;
-    height: 80px!important;
+  .chatuserimg {
+    width: 80px !important;
+    height: 80px !important;
   }
   .userprofile_data_value {
-    font-family: 'Mulish';
+    font-family: "Mulish";
     font-style: normal;
     font-weight: 600;
     font-size: 14px;
     line-height: 24px;
     text-align: right;
-    color: #1E1F20;
+    color: #1e1f20;
     margin-top: -30px;
   }
   .share_file_date {
-    font-family: 'Mulish';
+    font-family: "Mulish";
     font-style: normal;
     font-weight: 600;
     font-size: 9px;
     line-height: 12px;
-    color: #9393AA;
+    color: #9393aa;
   }
   .share_file_size {
-    font-family: 'Mulish';
+    font-family: "Mulish";
     font-style: normal;
     font-weight: 600;
     font-size: 14px;
     line-height: 12px;
-    color: #9393AA;
+    color: #9393aa;
     text-align: right;
     margin-top: -40px;
     margin-bottom: 50px;
   }
   .share_img_size {
-    width: 107px!important;
+    width: 107px !important;
   }
   .chatting_search {
     margin-left: 30px;
     margin-top: 0px;
     position: absolute;
-    width: 20px!important;
+    width: 20px !important;
   }
   .chat_user_img {
-    width: 40px!important;
+    width: 40px !important;
     height: 40px;
     margin-right: 15px;
   }
   .chat_contact_list_box {
     padding: 24.5px 20px;
-    border-bottom: 1px solid #ECEFF4;
+    border-bottom: 1px solid #eceff4;
   }
   .chat_time {
-    font-family: 'Mulish';
+    font-family: "Mulish";
     font-style: normal;
     font-weight: 600;
     font-size: 12px;
     line-height: 12px;
     text-align: right;
-    color: #9393AA;
+    color: #9393aa;
     margin-top: -40px;
     right: 55px;
   }
   .chat_message_count {
-    background: linear-gradient(45deg, #3093BB 0%, #82DBFF 100%);
+    background: linear-gradient(45deg, #3093bb 0%, #82dbff 100%);
     border-radius: 1000px;
     float: right;
     margin-left: 22px;
     padding: 0px 7.5px;
     height: 22px;
     width: 22px;
-    font-family: 'Inter';
+    font-family: "Inter";
     font-style: normal;
     font-weight: 500;
     font-size: 12px;
@@ -2676,12 +2676,12 @@
     align-items: center;
     text-align: center;
     letter-spacing: 0.2px;
-    color: #FFFFFF;
+    color: #ffffff;
     margin-top: 10px;
     right: 65px;
   }
   .chat_call_btn {
-    background: #24B2B2;
+    background: #24b2b2;
     border-radius: 8px;
     border: none;
     padding: 6px 11px 10px 11px;
@@ -2690,12 +2690,12 @@
     margin-right: 10px;
   }
   .chat_profile_name_box {
-    border: 1px solid #ECEFF4;
+    border: 1px solid #eceff4;
     padding: 20px 20px;
     height: 150px;
   }
   .more_info_btn {
-    background: #FFFFFF;
+    background: #ffffff;
     box-shadow: 0px 5px 10px rgb(0 64 128 / 4%);
     border-radius: 12px;
     margin-top: 7px;
@@ -2704,22 +2704,22 @@
     margin-left: 5px;
   }
   .chat_mark_complete_btn {
-    background: #FFFFFF;
+    background: #ffffff;
     border: 1px solid rgba(137, 152, 189, 0.2);
     border-radius: 8px;
-    font-family: 'Mulish';
+    font-family: "Mulish";
     font-style: normal;
     font-weight: 600;
     font-size: 12px;
     line-height: 24px;
-    color: #F8446C;
+    color: #f8446c;
     padding: 5px 10px;
     margin-top: 9px;
     float: right;
     margin-right: 13px;
   }
   .client_msg_box {
-    background: #F8FBFF;
+    background: #f8fbff;
     border-radius: 12px;
     padding: 16px 15px;
   }
@@ -2735,7 +2735,7 @@
     font-size: 16px;
     margin-left: -10px;
     margin-right: 5px;
-    color: #96A0B5;
+    color: #96a0b5;
     padding: 0;
     background-color: none;
     border-radius: 5px;
@@ -2766,7 +2766,7 @@
     width: 79.5%;
   }
   .sendNewMessage {
-    background: #F8FBFF;
+    background: #f8fbff;
     border-radius: 12px;
     display: flex;
     justify-content: space-between;
@@ -2776,7 +2776,7 @@
     margin-bottom: 10px;
   }
   .attach_send_btn {
-    background: linear-gradient(45deg, #3093BB 0%, #82DBFF 100%);
+    background: linear-gradient(45deg, #3093bb 0%, #82dbff 100%);
     box-shadow: 0px 5px 10px rgb(0 64 128 / 4%);
     border-radius: 12px;
     border: none;
@@ -2787,15 +2787,15 @@
   .sendNewMessage input {
     flex-grow: 1;
     padding: 0 10px;
-    background-color: #F8FBFF;
+    background-color: #f8fbff;
     border: none;
     outline: none;
   }
   .attach_items_box {
-    background: #ECEFF4;
+    background: #eceff4;
     height: 71vh;
     padding: 30px 20px 24px 20px;
-  }  
+  }
   .content__footer {
     padding-top: 10px;
     padding-left: 10px;
@@ -2820,7 +2820,7 @@
     flex-wrap: wrap;
   }
   .medicine_search_box {
-    display: block!important;
+    display: block !important;
     justify-content: flex-start;
     align-items: center;
     gap: 20px;
@@ -2828,15 +2828,15 @@
   .Textarea {
     width: 100%;
     height: 120px;
-    background: #FFFFFF;
-    border: 1px solid #ECEFF4;
+    background: #ffffff;
+    border: 1px solid #eceff4;
     border-radius: 8px;
-    font-family: 'Mulish';
+    font-family: "Mulish";
     font-style: normal;
     font-weight: 600;
     font-size: 15px;
     line-height: 24px;
-    color: #1E1F20;
+    color: #1e1f20;
   }
   .profile_container .col-md-6 {
     width: 100%;
@@ -2848,7 +2848,7 @@
   .termscondition_container {
     background: #f8fbff;
     padding: 30px 40px;
-  }  
+  }
   .setting_bank_title {
     font-family: "Mulish";
     font-style: normal;
@@ -3066,7 +3066,7 @@
   }
   .button-spaces {
     gap: 20px;
-    display: grid!important;
+    display: grid !important;
   }
   .personal_profile_card_head {
     background: #ffffff;
@@ -3139,7 +3139,7 @@
     margin-bottom: 0;
   }
   .qualification_certi_img {
-    width: 133px!important;
+    width: 133px !important;
     margin-bottom: 10px;
   }
   .work_profile_title {
@@ -3242,12 +3242,12 @@
     background: rgba(248, 68, 108, 0.1);
     border-radius: 4px;
     padding: 7px;
-    font-family: 'Mulish';
+    font-family: "Mulish";
     font-style: normal;
     font-weight: 600;
     font-size: 12px;
     line-height: 12px;
-    color: #F8446C;
+    color: #f8446c;
     text-align: center;
     margin-top: 10px;
     margin-bottom: 20px;
@@ -3260,30 +3260,30 @@
     width: 100%;
   }
   .mark_complete {
-    background: #FFFFFF;
+    background: #ffffff;
     border: 1px solid rgba(137, 152, 189, 0.2);
     border-radius: 8px;
-    font-family: 'Mulish';
+    font-family: "Mulish";
     font-style: normal;
     font-weight: 600;
     font-size: 14px;
     line-height: 24px;
-    color: #F8446C;
+    color: #f8446c;
     padding: 8px 16px;
     margin-top: 7px;
     float: right;
     margin-right: 20px;
   }
   .profile_name_box {
-    border: 1px solid #ECEFF4;
+    border: 1px solid #eceff4;
     padding: 20px 20px;
     height: 150px;
   }
-  .chatprofile_name_box{
-    border: 1px solid #ECEFF4;
+  .chatprofile_name_box {
+    border: 1px solid #eceff4;
     padding: 17px 20px;
     height: 100px;
-    margin-left: -2px; 
+    margin-left: -2px;
   }
   .cards-layout {
     display: grid;
@@ -3299,77 +3299,77 @@
     margin-left: 330px;
     /*float: inherit;*/
   }
-  .chatuserimg{
-    width: 80px!important;
-    height: 80px!important;
+  .chatuserimg {
+    width: 80px !important;
+    height: 80px !important;
   }
   .userprofile_data_value {
-    font-family: 'Mulish';
+    font-family: "Mulish";
     font-style: normal;
     font-weight: 600;
     font-size: 14px;
     line-height: 24px;
     text-align: right;
-    color: #1E1F20;
+    color: #1e1f20;
     margin-top: -30px;
   }
   .share_file_date {
-    font-family: 'Mulish';
+    font-family: "Mulish";
     font-style: normal;
     font-weight: 600;
     font-size: 9px;
     line-height: 12px;
-    color: #9393AA;
+    color: #9393aa;
   }
   .share_file_size {
-    font-family: 'Mulish';
+    font-family: "Mulish";
     font-style: normal;
     font-weight: 600;
     font-size: 14px;
     line-height: 12px;
-    color: #9393AA;
+    color: #9393aa;
     text-align: right;
     margin-top: -40px;
     margin-bottom: 50px;
   }
   .share_img_size {
-    width: 107px!important;
+    width: 107px !important;
   }
   .chatting_search {
     margin-left: 30px;
     margin-top: 0px;
     position: absolute;
-    width: 20px!important;
+    width: 20px !important;
   }
   .chat_user_img {
-    width: 40px!important;
+    width: 40px !important;
     height: 40px;
     margin-right: 15px;
   }
   .chat_contact_list_box {
     padding: 24.5px 20px;
-    border-bottom: 1px solid #ECEFF4;
+    border-bottom: 1px solid #eceff4;
   }
   .chat_time {
-    font-family: 'Mulish';
+    font-family: "Mulish";
     font-style: normal;
     font-weight: 600;
     font-size: 12px;
     line-height: 12px;
     text-align: right;
-    color: #9393AA;
+    color: #9393aa;
     margin-top: -40px;
     right: 55px;
   }
   .chat_message_count {
-    background: linear-gradient(45deg, #3093BB 0%, #82DBFF 100%);
+    background: linear-gradient(45deg, #3093bb 0%, #82dbff 100%);
     border-radius: 1000px;
     float: right;
     margin-left: 22px;
     padding: 0px 7.5px;
     height: 22px;
     width: 22px;
-    font-family: 'Inter';
+    font-family: "Inter";
     font-style: normal;
     font-weight: 500;
     font-size: 12px;
@@ -3378,12 +3378,12 @@
     align-items: center;
     text-align: center;
     letter-spacing: 0.2px;
-    color: #FFFFFF;
+    color: #ffffff;
     margin-top: 10px;
     right: 65px;
   }
   .chat_call_btn {
-    background: #24B2B2;
+    background: #24b2b2;
     border-radius: 8px;
     border: none;
     padding: 6px 11px 10px 11px;
@@ -3392,12 +3392,12 @@
     margin-right: 10px;
   }
   .chat_profile_name_box {
-    border: 1px solid #ECEFF4;
+    border: 1px solid #eceff4;
     padding: 20px 20px;
     height: 150px;
   }
   .more_info_btn {
-    background: #FFFFFF;
+    background: #ffffff;
     box-shadow: 0px 5px 10px rgb(0 64 128 / 4%);
     border-radius: 12px;
     margin-top: 7px;
@@ -3406,22 +3406,22 @@
     margin-left: 5px;
   }
   .chat_mark_complete_btn {
-    background: #FFFFFF;
+    background: #ffffff;
     border: 1px solid rgba(137, 152, 189, 0.2);
     border-radius: 8px;
-    font-family: 'Mulish';
+    font-family: "Mulish";
     font-style: normal;
     font-weight: 600;
     font-size: 12px;
     line-height: 24px;
-    color: #F8446C;
+    color: #f8446c;
     padding: 5px 10px;
     margin-top: 9px;
     float: right;
     margin-right: 13px;
   }
   .client_msg_box {
-    background: #F8FBFF;
+    background: #f8fbff;
     border-radius: 12px;
     padding: 16px 15px;
   }
@@ -3437,7 +3437,7 @@
     font-size: 16px;
     margin-left: -10px;
     margin-right: 5px;
-    color: #96A0B5;
+    color: #96a0b5;
     padding: 0;
     background-color: none;
     border-radius: 5px;
@@ -3468,7 +3468,7 @@
     width: 79.5%;
   }
   .sendNewMessage {
-    background: #F8FBFF;
+    background: #f8fbff;
     border-radius: 12px;
     display: flex;
     justify-content: space-between;
@@ -3478,7 +3478,7 @@
     margin-bottom: 10px;
   }
   .attach_send_btn {
-    background: linear-gradient(45deg, #3093BB 0%, #82DBFF 100%);
+    background: linear-gradient(45deg, #3093bb 0%, #82dbff 100%);
     box-shadow: 0px 5px 10px rgb(0 64 128 / 4%);
     border-radius: 12px;
     border: none;
@@ -3489,20 +3489,20 @@
   .sendNewMessage input {
     flex-grow: 1;
     padding: 0 10px;
-    background-color: #F8FBFF;
+    background-color: #f8fbff;
     border: none;
     outline: none;
   }
   .attach_items_box {
-    background: #ECEFF4;
+    background: #eceff4;
     height: 71vh;
     padding: 30px 20px 24px 20px;
-  }  
+  }
   .content__footer {
     padding-top: 10px;
     padding-left: 10px;
   }
-  .withdraw_btn{
+  .withdraw_btn {
     float: right;
   }
   .Tabs .nav {
@@ -3525,7 +3525,7 @@
     flex-wrap: wrap;
   }
   .medicine_search_box {
-    display: block!important;
+    display: block !important;
     justify-content: flex-start;
     align-items: center;
     gap: 20px;
@@ -3533,15 +3533,15 @@
   .Textarea {
     width: 100%;
     height: 120px;
-    background: #FFFFFF;
-    border: 1px solid #ECEFF4;
+    background: #ffffff;
+    border: 1px solid #eceff4;
     border-radius: 8px;
-    font-family: 'Mulish';
+    font-family: "Mulish";
     font-style: normal;
     font-weight: 600;
     font-size: 15px;
     line-height: 24px;
-    color: #1E1F20;
+    color: #1e1f20;
   }
   .profile_container .col-md-6 {
     width: 100%;
@@ -3553,7 +3553,7 @@
   .termscondition_container {
     background: #f8fbff;
     padding: 30px 40px;
-  }  
+  }
   .setting_bank_title {
     font-family: "Mulish";
     font-style: normal;
@@ -3624,15 +3624,15 @@
   .Textarea {
     width: 100%;
     height: 120px;
-    background: #FFFFFF;
-    border: 1px solid #ECEFF4;
+    background: #ffffff;
+    border: 1px solid #eceff4;
     border-radius: 8px;
-    font-family: 'Mulish';
+    font-family: "Mulish";
     font-style: normal;
     font-weight: 600;
     font-size: 15px;
     line-height: 24px;
-    color: #1E1F20;
+    color: #1e1f20;
   }
 }
 /*-----------------------------------------------Mobile Media Query End---------------------------------------------------------------*/
@@ -3647,8 +3647,8 @@
   }
   .col-md-2 {
     flex: 0 0 auto;
-    width: initial; 
-  }3
+    width: initial;
+  }
   .sub_section_1 {
     background: #fff;
     background-repeat: no-repeat;
@@ -3806,7 +3806,7 @@
   }
   .button-spaces {
     gap: 20px;
-    display: grid!important;
+    display: grid !important;
   }
   .personal_profile_card_head {
     background: #ffffff;
@@ -3879,7 +3879,7 @@
     margin-bottom: 0;
   }
   .qualification_certi_img {
-    width: 133px!important;
+    width: 133px !important;
     margin-bottom: 10px;
   }
   .work_profile_title {
@@ -3982,12 +3982,12 @@
     background: rgba(248, 68, 108, 0.1);
     border-radius: 4px;
     padding: 7px;
-    font-family: 'Mulish';
+    font-family: "Mulish";
     font-style: normal;
     font-weight: 600;
     font-size: 12px;
     line-height: 12px;
-    color: #F8446C;
+    color: #f8446c;
     text-align: center;
     margin-top: 10px;
     margin-bottom: 20px;
@@ -4000,30 +4000,30 @@
     width: 100%;
   }
   .mark_complete {
-    background: #FFFFFF;
+    background: #ffffff;
     border: 1px solid rgba(137, 152, 189, 0.2);
     border-radius: 8px;
-    font-family: 'Mulish';
+    font-family: "Mulish";
     font-style: normal;
     font-weight: 600;
     font-size: 14px;
     line-height: 24px;
-    color: #F8446C;
+    color: #f8446c;
     padding: 8px 16px;
     margin-top: 7px;
     float: right;
     margin-right: 20px;
   }
   .profile_name_box {
-    border: 1px solid #ECEFF4;
+    border: 1px solid #eceff4;
     padding: 20px 20px;
     height: 150px;
   }
-  .chatprofile_name_box{
-    border: 1px solid #ECEFF4;
+  .chatprofile_name_box {
+    border: 1px solid #eceff4;
     padding: 17px 20px;
     height: 100px;
-    margin-left: -2px; 
+    margin-left: -2px;
   }
   .cards-layout {
     display: grid;
@@ -4039,77 +4039,77 @@
     margin-left: 630px;
     float: inherit;
   }
-  .chatuserimg{
-    width: 80px!important;
-    height: 80px!important;
+  .chatuserimg {
+    width: 80px !important;
+    height: 80px !important;
   }
   .userprofile_data_value {
-    font-family: 'Mulish';
+    font-family: "Mulish";
     font-style: normal;
     font-weight: 600;
     font-size: 14px;
     line-height: 24px;
     text-align: right;
-    color: #1E1F20;
+    color: #1e1f20;
     margin-top: -30px;
   }
   .share_file_date {
-    font-family: 'Mulish';
+    font-family: "Mulish";
     font-style: normal;
     font-weight: 600;
     font-size: 9px;
     line-height: 12px;
-    color: #9393AA;
+    color: #9393aa;
   }
   .share_file_size {
-    font-family: 'Mulish';
+    font-family: "Mulish";
     font-style: normal;
     font-weight: 600;
     font-size: 14px;
     line-height: 12px;
-    color: #9393AA;
+    color: #9393aa;
     text-align: right;
     margin-top: -40px;
     margin-bottom: 50px;
   }
   .share_img_size {
-    width: 107px!important;
+    width: 107px !important;
   }
   .chatting_search {
     margin-left: 30px;
     margin-top: 0px;
     position: absolute;
-    width: 20px!important;
+    width: 20px !important;
   }
   .chat_user_img {
-    width: 40px!important;
+    width: 40px !important;
     height: 40px;
     margin-right: 15px;
   }
   .chat_contact_list_box {
     padding: 24.5px 20px;
-    border-bottom: 1px solid #ECEFF4;
+    border-bottom: 1px solid #eceff4;
   }
   .chat_time {
-    font-family: 'Mulish';
+    font-family: "Mulish";
     font-style: normal;
     font-weight: 600;
     font-size: 12px;
     line-height: 12px;
     text-align: right;
-    color: #9393AA;
+    color: #9393aa;
     margin-top: -40px;
     right: 55px;
   }
   .chat_message_count {
-    background: linear-gradient(45deg, #3093BB 0%, #82DBFF 100%);
+    background: linear-gradient(45deg, #3093bb 0%, #82dbff 100%);
     border-radius: 1000px;
     float: right;
     margin-left: 22px;
     padding: 0px 7.5px;
     height: 22px;
     width: 22px;
-    font-family: 'Inter';
+    font-family: "Inter";
     font-style: normal;
     font-weight: 500;
     font-size: 12px;
@@ -4118,12 +4118,12 @@
     align-items: center;
     text-align: center;
     letter-spacing: 0.2px;
-    color: #FFFFFF;
+    color: #ffffff;
     margin-top: 10px;
     right: 65px;
   }
   .chat_call_btn {
-    background: #24B2B2;
+    background: #24b2b2;
     border-radius: 8px;
     border: none;
     padding: 6px 11px 10px 11px;
@@ -4132,13 +4132,13 @@
     margin-right: 10px;
   }
   .chat_profile_name_box {
-    border: 1px solid #ECEFF4;
+    border: 1px solid #eceff4;
     padding: 20px 20px;
     height: 150px;
     /*width: 208%;*/
   }
   .more_info_btn {
-    background: #FFFFFF;
+    background: #ffffff;
     box-shadow: 0px 5px 10px rgb(0 64 128 / 4%);
     border-radius: 12px;
     margin-top: 7px;
@@ -4147,22 +4147,22 @@
     margin-left: 5px;
   }
   .chat_mark_complete_btn {
-    background: #FFFFFF;
+    background: #ffffff;
     border: 1px solid rgba(137, 152, 189, 0.2);
     border-radius: 8px;
-    font-family: 'Mulish';
+    font-family: "Mulish";
     font-style: normal;
     font-weight: 600;
     font-size: 12px;
     line-height: 24px;
-    color: #F8446C;
+    color: #f8446c;
     padding: 5px 10px;
     margin-top: 9px;
     float: right;
     margin-right: 13px;
   }
   .client_msg_box {
-    background: #F8FBFF;
+    background: #f8fbff;
     border-radius: 12px;
     padding: 16px 15px;
   }
@@ -4178,7 +4178,7 @@
     font-size: 16px;
     margin-left: -10px;
     margin-right: 5px;
-    color: #96A0B5;
+    color: #96a0b5;
     padding: 0;
     background-color: none;
     border-radius: 5px;
@@ -4209,7 +4209,7 @@
     width: 79.5%;
   }
   .sendNewMessage {
-    background: #F8FBFF;
+    background: #f8fbff;
     border-radius: 12px;
     display: flex;
     justify-content: space-between;
@@ -4219,7 +4219,7 @@
     margin-bottom: 10px;
   }
   .attach_send_btn {
-    background: linear-gradient(45deg, #3093BB 0%, #82DBFF 100%);
+    background: linear-gradient(45deg, #3093bb 0%, #82dbff 100%);
     box-shadow: 0px 5px 10px rgb(0 64 128 / 4%);
     border-radius: 12px;
     border: none;
@@ -4230,15 +4230,15 @@
   .sendNewMessage input {
     flex-grow: 1;
     padding: 0 10px;
-    background-color: #F8FBFF;
+    background-color: #f8fbff;
     border: none;
     outline: none;
   }
   .attach_items_box {
-    background: #ECEFF4;
+    background: #eceff4;
     height: 71vh;
     padding: 30px 20px 24px 20px;
-  }  
+  }
   .content__footer {
     padding-top: 10px;
     padding-left: 10px;
@@ -4251,25 +4251,25 @@
     width: 208%;
   }
   .chat_time {
-    font-family: 'Mulish';
+    font-family: "Mulish";
     font-style: normal;
     font-weight: 600;
     font-size: 12px;
     line-height: 12px;
     text-align: right;
-    color: #9393AA;
+    color: #9393aa;
     margin-top: -40px;
     right: 55px;
   }
   .chat_message_count {
-    background: linear-gradient(45deg, #3093BB 0%, #82DBFF 100%);
+    background: linear-gradient(45deg, #3093bb 0%, #82dbff 100%);
     border-radius: 1000px;
     float: right;
     margin-left: 22px;
     padding: 0px 7.5px;
     height: 22px;
     width: 22px;
-    font-family: 'Inter';
+    font-family: "Inter";
     font-style: normal;
     font-weight: 500;
     font-size: 12px;
@@ -4278,7 +4278,7 @@
     align-items: center;
     text-align: center;
     letter-spacing: 0.2px;
-    color: #FFFFFF;
+    color: #ffffff;
     margin-top: 10px;
     right: 65px;
   }
@@ -4297,7 +4297,7 @@
     font-size: 18px;
   }
   .medicine_search_box {
-    display: block!important;
+    display: block !important;
     justify-content: flex-start;
     align-items: center;
     gap: 20px;
@@ -4305,15 +4305,15 @@
   .Textarea {
     width: 100%;
     height: 120px;
-    background: #FFFFFF;
-    border: 1px solid #ECEFF4;
+    background: #ffffff;
+    border: 1px solid #eceff4;
     border-radius: 8px;
-    font-family: 'Mulish';
+    font-family: "Mulish";
     font-style: normal;
     font-weight: 600;
     font-size: 15px;
     line-height: 24px;
-    color: #1E1F20;
+    color: #1e1f20;
   }
   .setting_profile_btn {
     background: #ffffff;
@@ -4334,7 +4334,7 @@
   .termscondition_container {
     background: #f8fbff;
     padding: 30px 40px;
-  }  
+  }
   .setting_bank_title {
     font-family: "Mulish";
     font-style: normal;
@@ -4363,7 +4363,7 @@
   }
   .col-md-2 {
     flex: 0 0 auto;
-    width: initial; 
+    width: initial;
   }
   .admin-bottom-content {
     max-width: 100%;
@@ -4653,7 +4653,7 @@
   }
   .button-spaces {
     gap: 20px;
-    display: grid!important;
+    display: grid !important;
   }
   .personal_profile_card_head {
     background: #ffffff;
@@ -4726,7 +4726,7 @@
     margin-bottom: 0;
   }
   .qualification_certi_img {
-    width: 133px!important;
+    width: 133px !important;
     margin-bottom: 10px;
   }
   .work_profile_title {
@@ -4829,12 +4829,12 @@
     background: rgba(248, 68, 108, 0.1);
     border-radius: 4px;
     padding: 7px;
-    font-family: 'Mulish';
+    font-family: "Mulish";
     font-style: normal;
     font-weight: 600;
     font-size: 12px;
     line-height: 12px;
-    color: #F8446C;
+    color: #f8446c;
     text-align: center;
     margin-top: 10px;
     margin-bottom: 20px;
@@ -4847,30 +4847,30 @@
     width: 100%;
   }
   .mark_complete {
-    background: #FFFFFF;
+    background: #ffffff;
     border: 1px solid rgba(137, 152, 189, 0.2);
     border-radius: 8px;
-    font-family: 'Mulish';
+    font-family: "Mulish";
     font-style: normal;
     font-weight: 600;
     font-size: 14px;
     line-height: 24px;
-    color: #F8446C;
+    color: #f8446c;
     padding: 8px 16px;
     margin-top: 7px;
     float: right;
     margin-right: 20px;
   }
   .profile_name_box {
-    border: 1px solid #ECEFF4;
+    border: 1px solid #eceff4;
     padding: 20px 20px;
     height: 150px;
   }
-  .chatprofile_name_box{
-    border: 1px solid #ECEFF4;
+  .chatprofile_name_box {
+    border: 1px solid #eceff4;
     padding: 17px 20px;
     height: 100px;
-    margin-left: -2px; 
+    margin-left: -2px;
   }
   .cards-layout {
     display: grid;
@@ -4886,77 +4886,77 @@
     margin-left: 630px;
     float: inherit;
   }
-  .chatuserimg{
-    width: 80px!important;
-    height: 80px!important;
+  .chatuserimg {
+    width: 80px !important;
+    height: 80px !important;
   }
   .userprofile_data_value {
-    font-family: 'Mulish';
+    font-family: "Mulish";
     font-style: normal;
     font-weight: 600;
     font-size: 14px;
     line-height: 24px;
     text-align: right;
-    color: #1E1F20;
+    color: #1e1f20;
     margin-top: -30px;
   }
   .share_file_date {
-    font-family: 'Mulish';
+    font-family: "Mulish";
     font-style: normal;
     font-weight: 600;
     font-size: 9px;
     line-height: 12px;
-    color: #9393AA;
+    color: #9393aa;
   }
   .share_file_size {
-    font-family: 'Mulish';
+    font-family: "Mulish";
     font-style: normal;
     font-weight: 600;
     font-size: 14px;
     line-height: 12px;
-    color: #9393AA;
+    color: #9393aa;
     text-align: right;
     margin-top: -40px;
     margin-bottom: 50px;
   }
   .share_img_size {
-    width: 107px!important;
+    width: 107px !important;
   }
   .chatting_search {
     margin-left: 30px;
     margin-top: 0px;
     position: absolute;
-    width: 20px!important;
+    width: 20px !important;
   }
   .chat_user_img {
-    width: 40px!important;
+    width: 40px !important;
     height: 40px;
     margin-right: 15px;
   }
   .chat_contact_list_box {
     padding: 24.5px 20px;
-    border-bottom: 1px solid #ECEFF4;
+    border-bottom: 1px solid #eceff4;
   }
   .chat_time {
-    font-family: 'Mulish';
+    font-family: "Mulish";
     font-style: normal;
     font-weight: 600;
     font-size: 12px;
     line-height: 12px;
     text-align: right;
-    color: #9393AA;
+    color: #9393aa;
     margin-top: -40px;
     right: 55px;
   }
   .chat_message_count {
-    background: linear-gradient(45deg, #3093BB 0%, #82DBFF 100%);
+    background: linear-gradient(45deg, #3093bb 0%, #82dbff 100%);
     border-radius: 1000px;
     float: right;
     margin-left: 22px;
     padding: 0px 7.5px;
     height: 22px;
     width: 22px;
-    font-family: 'Inter';
+    font-family: "Inter";
     font-style: normal;
     font-weight: 500;
     font-size: 12px;
@@ -4965,12 +4965,12 @@
     align-items: center;
     text-align: center;
     letter-spacing: 0.2px;
-    color: #FFFFFF;
+    color: #ffffff;
     margin-top: 10px;
     right: 65px;
   }
   .chat_call_btn {
-    background: #24B2B2;
+    background: #24b2b2;
     border-radius: 8px;
     border: none;
     padding: 6px 11px 10px 11px;
@@ -4979,13 +4979,13 @@
     margin-right: 10px;
   }
   .chat_profile_name_box {
-    border: 1px solid #ECEFF4;
+    border: 1px solid #eceff4;
     padding: 20px 20px;
     height: 150px;
     /*width: 208%;*/
   }
   .more_info_btn {
-    background: #FFFFFF;
+    background: #ffffff;
     box-shadow: 0px 5px 10px rgb(0 64 128 / 4%);
     border-radius: 12px;
     margin-top: 7px;
@@ -4994,22 +4994,22 @@
     margin-left: 5px;
   }
   .chat_mark_complete_btn {
-    background: #FFFFFF;
+    background: #ffffff;
     border: 1px solid rgba(137, 152, 189, 0.2);
     border-radius: 8px;
-    font-family: 'Mulish';
+    font-family: "Mulish";
     font-style: normal;
     font-weight: 600;
     font-size: 12px;
     line-height: 24px;
-    color: #F8446C;
+    color: #f8446c;
     padding: 5px 10px;
     margin-top: 9px;
     float: right;
     margin-right: 13px;
   }
   .client_msg_box {
-    background: #F8FBFF;
+    background: #f8fbff;
     border-radius: 12px;
     padding: 16px 15px;
   }
@@ -5025,7 +5025,7 @@
     font-size: 16px;
     margin-left: -10px;
     margin-right: 5px;
-    color: #96A0B5;
+    color: #96a0b5;
     padding: 0;
     background-color: none;
     border-radius: 5px;
@@ -5056,7 +5056,7 @@
     width: 79.5%;
   }
   .sendNewMessage {
-    background: #F8FBFF;
+    background: #f8fbff;
     border-radius: 12px;
     display: flex;
     justify-content: space-between;
@@ -5066,7 +5066,7 @@
     margin-bottom: 10px;
   }
   .attach_send_btn {
-    background: linear-gradient(45deg, #3093BB 0%, #82DBFF 100%);
+    background: linear-gradient(45deg, #3093bb 0%, #82dbff 100%);
     box-shadow: 0px 5px 10px rgb(0 64 128 / 4%);
     border-radius: 12px;
     border: none;
@@ -5077,15 +5077,15 @@
   .sendNewMessage input {
     flex-grow: 1;
     padding: 0 10px;
-    background-color: #F8FBFF;
+    background-color: #f8fbff;
     border: none;
     outline: none;
   }
   .attach_items_box {
-    background: #ECEFF4;
+    background: #eceff4;
     height: 71vh;
     padding: 30px 20px 24px 20px;
-  }  
+  }
   .content__footer {
     padding-top: 10px;
     padding-left: 10px;
@@ -5112,7 +5112,7 @@
     font-size: 18px;
   }
   .medicine_search_box {
-    display: block!important;
+    display: block !important;
     justify-content: flex-start;
     align-items: center;
     gap: 20px;
@@ -5120,15 +5120,15 @@
   .Textarea {
     width: 100%;
     height: 120px;
-    background: #FFFFFF;
-    border: 1px solid #ECEFF4;
+    background: #ffffff;
+    border: 1px solid #eceff4;
     border-radius: 8px;
-    font-family: 'Mulish';
+    font-family: "Mulish";
     font-style: normal;
     font-weight: 600;
     font-size: 15px;
     line-height: 24px;
-    color: #1E1F20;
+    color: #1e1f20;
   }
 
   .privacypolicy_container {
@@ -5138,7 +5138,7 @@
   .termscondition_container {
     background: #f8fbff;
     padding: 30px 40px;
-  }  
+  }
   .setting_bank_title {
     font-family: "Mulish";
     font-style: normal;
@@ -5360,7 +5360,7 @@
   .profile_container .col-md-3 {
     width: 100%;
   }
-   .profile_container .col-md-3 .userinfo_box .col-md-6{
+  .profile_container .col-md-3 .userinfo_box .col-md-6 {
     width: 50%;
     display: inline-block;
   }
@@ -5449,7 +5449,7 @@
   }
   .button-spaces {
     gap: 20px;
-    display: grid!important;
+    display: grid !important;
   }
   .personal_profile_card_head {
     background: #ffffff;
@@ -5509,7 +5509,7 @@
     margin-bottom: 0;
   }
   .qualification_certi_img {
-    width: 133px!important;
+    width: 133px !important;
     margin-bottom: 10px;
   }
   .work_profile_title {
@@ -5590,12 +5590,12 @@
     background: rgba(248, 68, 108, 0.1);
     border-radius: 4px;
     padding: 7px;
-    font-family: 'Mulish';
+    font-family: "Mulish";
     font-style: normal;
     font-weight: 600;
     font-size: 12px;
     line-height: 12px;
-    color: #F8446C;
+    color: #f8446c;
     text-align: center;
     margin-top: 10px;
     margin-bottom: 20px;
@@ -5608,30 +5608,30 @@
     width: 100%;
   }
   .mark_complete {
-    background: #FFFFFF;
+    background: #ffffff;
     border: 1px solid rgba(137, 152, 189, 0.2);
     border-radius: 8px;
-    font-family: 'Mulish';
+    font-family: "Mulish";
     font-style: normal;
     font-weight: 600;
     font-size: 14px;
     line-height: 24px;
-    color: #F8446C;
+    color: #f8446c;
     padding: 8px 16px;
     margin-top: 7px;
     float: right;
     margin-right: 20px;
   }
   .profile_name_box {
-    border: 1px solid #ECEFF4;
+    border: 1px solid #eceff4;
     padding: 20px 20px;
     height: 150px;
   }
-  .chatprofile_name_box{
-    border: 1px solid #ECEFF4;
+  .chatprofile_name_box {
+    border: 1px solid #eceff4;
     padding: 17px 20px;
     height: 100px;
-    margin-left: -2px; 
+    margin-left: -2px;
   }
   /*.cards-layout {
     display: block;
@@ -5641,35 +5641,35 @@
     column-count: 2;
     font-family: "Mulish", sans-serif;
   }*/
-  .chatuserimg{
-    width: 80px!important;
-    height: 80px!important;
+  .chatuserimg {
+    width: 80px !important;
+    height: 80px !important;
   }
   .userprofile_data_value {
-    font-family: 'Mulish';
+    font-family: "Mulish";
     font-style: normal;
     font-weight: 600;
     font-size: 14px;
     line-height: 24px;
     text-align: right;
-    color: #1E1F20;
+    color: #1e1f20;
     margin-top: -30px;
   }
   .share_file_date {
-    font-family: 'Mulish';
+    font-family: "Mulish";
     font-style: normal;
     font-weight: 600;
     font-size: 9px;
     line-height: 12px;
-    color: #9393AA;
+    color: #9393aa;
   }
   .share_file_size {
-    font-family: 'Mulish';
+    font-family: "Mulish";
     font-style: normal;
     font-weight: 600;
     font-size: 14px;
     line-height: 12px;
-    color: #9393AA;
+    color: #9393aa;
     text-align: right;
     margin-top: -40px;
     margin-bottom: 50px;
@@ -5678,16 +5678,16 @@
     margin-left: 30px;
     margin-top: 0px;
     position: absolute;
-    width: 20px!important;
+    width: 20px !important;
   }
   .chat_user_img {
-    width: 40px!important;
+    width: 40px !important;
     height: 40px;
     margin-right: 15px;
   }
   .chat_contact_list_box {
     padding: 24.5px 20px;
-    border-bottom: 1px solid #ECEFF4;
+    border-bottom: 1px solid #eceff4;
     height: 95px;
   }
   /*.chat_time {
@@ -5725,7 +5725,7 @@
     position: absolute;
   }*/
   .chat_call_btn {
-    background: #24B2B2;
+    background: #24b2b2;
     border-radius: 8px;
     border: none;
     padding: 6px 11px 10px 11px;
@@ -5734,7 +5734,7 @@
     margin-right: 10px;
   }
   .more_info_btn {
-    background: #FFFFFF;
+    background: #ffffff;
     box-shadow: 0px 5px 10px rgb(0 64 128 / 4%);
     border-radius: 12px;
     margin-top: 7px;
@@ -5743,22 +5743,22 @@
     margin-left: 5px;
   }
   .chat_mark_complete_btn {
-    background: #FFFFFF;
+    background: #ffffff;
     border: 1px solid rgba(137, 152, 189, 0.2);
     border-radius: 8px;
-    font-family: 'Mulish';
+    font-family: "Mulish";
     font-style: normal;
     font-weight: 600;
     font-size: 12px;
     line-height: 24px;
-    color: #F8446C;
+    color: #f8446c;
     padding: 5px 10px;
     margin-top: 9px;
     float: right;
     margin-right: 13px;
   }
   .client_msg_box {
-    background: #F8FBFF;
+    background: #f8fbff;
     border-radius: 12px;
     padding: 16px 15px;
   }
@@ -5774,7 +5774,7 @@
     font-size: 16px;
     margin-left: -10px;
     margin-right: 5px;
-    color: #96A0B5;
+    color: #96a0b5;
     padding: 0;
     background-color: none;
     border-radius: 5px;
@@ -5802,11 +5802,11 @@
   }
   .attach_input_btn_box {
     display: inline-flex;
-    /*width: 79.5%;*/    
+    /*width: 79.5%;*/
     width: -webkit-fill-available;
   }
   .sendNewMessage {
-    background: #F8FBFF;
+    background: #f8fbff;
     border-radius: 12px;
     display: flex;
     justify-content: space-between;
@@ -5816,7 +5816,7 @@
     margin-bottom: 10px;
   }
   .attach_send_btn {
-    background: linear-gradient(45deg, #3093BB 0%, #82DBFF 100%);
+    background: linear-gradient(45deg, #3093bb 0%, #82dbff 100%);
     box-shadow: 0px 5px 10px rgb(0 64 128 / 4%);
     border-radius: 12px;
     border: none;
@@ -5832,20 +5832,20 @@
     outline: none;
   }*/
   .attach_items_box {
-    background: #ECEFF4;
+    background: #eceff4;
     height: 71vh;
     padding: 30px 20px 24px 20px;
-  } 
+  }
 }
 
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
   .logo_box {
     padding: 50px 20px;
   }
-  
+
   .col-md-2 {
     flex: 0 0 auto;
-    width: initial; 
+    width: initial;
   }
   .logo_title {
     font-family: Mulish;
@@ -6639,7 +6639,7 @@
     display: inline-flex;
     column-gap: 10px;
     margin-left: 0px;
-  }  
+  }
   .day_box {
     display: inline-flex;
     column-gap: 10px;
@@ -6767,7 +6767,7 @@
     display: inline-flex;
     column-gap: 10px;
     margin-left: 0px;
-  }  
+  }
   .day_box {
     display: inline-flex;
     column-gap: 10px;

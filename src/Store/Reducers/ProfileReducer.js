@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import PrivacyPolicy from "../../Components/Private/Privacy/Privacy";
 import {
   EditBankAPI,
   EditScheduleAPI,
@@ -8,15 +7,10 @@ import {
   RejectionDetailsAPI,
   ChangePasswordAPI,
   ToggleLiveStatusAPI,
-  PrivacyAndPolicyAPI,
-  TermsAndConditionsAPI,
-  HelpsAndSupportsAPI,
-  SendOTPOnCurrentMobileNumberAPI,
-  VerifyOTPOnCurrentMobileNumberAPI,
-  SendOTPOnNewMobileNumberAPI,
-  VerifyOTPOnNewMobileNumberAPI,
-  TimeSlotAPI,
-  AvailibilityCreateAPI,
+  OTPCurrentAPI,
+  OTPNewAPI,
+  VerifyOTPNewAPI,
+  VerifyOTPCurrentAPI,
 } from "../../Routes/Service";
 
 import { AlertEnum } from "../../Utilities/Enums";
@@ -111,7 +105,6 @@ export const EditUserProfile = createAsyncThunk(
     }
   }
 );
-
 export const EditBankDetails = createAsyncThunk(
   "EditBankDetails",
   async (values, { dispatch }) => {
@@ -142,14 +135,12 @@ export const EditBankDetails = createAsyncThunk(
     }
   }
 );
-
-// Change mobile number in setting part
-export const SendOTPOnCurrentMobileNumber = createAsyncThunk(
-  "SendOTPOnCurrentMobileNumber",
+export const GetOTPCurrent = createAsyncThunk(
+  "GetOTPCurrent",
   async (values, { dispatch }) => {
     try {
       dispatch(setLoading(true));
-      const result = await SendOTPOnCurrentMobileNumberAPI(values);
+      const result = await OTPCurrentAPI(values);
       if (result?.success) {
         dispatch(setLoading(false));
         dispatch(
@@ -174,13 +165,12 @@ export const SendOTPOnCurrentMobileNumber = createAsyncThunk(
     }
   }
 );
-
-export const VerifyOTPOnCurrentMobileNumber = createAsyncThunk(
-  "VerifyOTPOnCurrentMobileNumber",
+export const VerifyOTPCurrent = createAsyncThunk(
+  "VerifyOTPCurrent",
   async (values, { dispatch }) => {
     try {
       dispatch(setLoading(true));
-      const result = await VerifyOTPOnCurrentMobileNumberAPI(values);
+      const result = await VerifyOTPCurrentAPI(values);
       if (result?.success) {
         dispatch(setLoading(false));
         dispatch(
@@ -205,13 +195,12 @@ export const VerifyOTPOnCurrentMobileNumber = createAsyncThunk(
     }
   }
 );
-
-export const SendOTPOnNewMobileNumber = createAsyncThunk(
-  "SendOTPOnNewMobileNumber",
+export const GetOTPNew = createAsyncThunk(
+  "GetOTPNew",
   async (values, { dispatch }) => {
     try {
       dispatch(setLoading(true));
-      const result = await SendOTPOnNewMobileNumberAPI(values);
+      const result = await OTPNewAPI(values);
       if (result?.success) {
         dispatch(setLoading(false));
         dispatch(
@@ -236,13 +225,12 @@ export const SendOTPOnNewMobileNumber = createAsyncThunk(
     }
   }
 );
-
-export const VerifyOTPOnNewMobileNumber = createAsyncThunk(
-  "VerifyOTPOnNewMobileNumber",
+export const VerifyOTPNew = createAsyncThunk(
+  "VerifyOTPNew",
   async (values, { dispatch }) => {
     try {
       dispatch(setLoading(true));
-      const result = await VerifyOTPOnNewMobileNumberAPI(values);
+      const result = await VerifyOTPNewAPI(values);
       if (result?.success) {
         dispatch(setLoading(false));
         dispatch(
@@ -300,168 +288,6 @@ export const ChangePassword = createAsyncThunk(
     }
   }
 );
-
-// Change Mobile Number Start.......................
-
-export const EditBankDetail = createAsyncThunk(
-  "EditBankDetails",
-  async (values, { dispatch }) => {
-    try {
-      dispatch(setLoading(true));
-      const result = await EditBankAPI(values);
-      if (result?.success) {
-        dispatch(setLoading(false));
-        dispatch(
-          setMessage({
-            text: result?.message,
-            type: AlertEnum.Success,
-          })
-        );
-        return result;
-      } else {
-        throw result;
-      }
-    } catch (error) {
-      dispatch(setLoading(false));
-      dispatch(
-        setMessage({
-          text: error?.message,
-          type: AlertEnum.Error,
-        })
-      );
-      return error;
-    }
-  }
-);
-
-// ....Privacy & PrivacyPolicy....
-export const PrivacyAndPolicy = createAsyncThunk(
-  "ProvacyAndPolicy",
-  async (values, { dispatch }) => {
-    try {
-      dispatch(setLoading(true));
-      const result = await PrivacyAndPolicyAPI();
-      if (result?.success) {
-        dispatch(setLoading(false));
-        dispatch(
-          setMessage({
-            text: result?.message,
-            type: AlertEnum.Success,
-          })
-        );
-        return result;
-      } else {
-        throw result;
-      }
-    } catch (error) {
-      dispatch(setLoading(false));
-      dispatch(
-        setMessage({
-          text: error?.message,
-          type: AlertEnum.Error,
-        })
-      );
-      return error;
-    }
-  }
-);
-
-// ....Terms & Conditions....
-export const TermsConditions = createAsyncThunk(
-  "TermsAndConditions",
-  async (values, { dispatch }) => {
-    try {
-      dispatch(setLoading(true));
-      const result = await TermsAndConditionsAPI();
-      if (result?.success) {
-        dispatch(setLoading(false));
-        dispatch(
-          setMessage({
-            text: result?.message,
-            type: AlertEnum.Success,
-          })
-        );
-        return result;
-      } else {
-        throw result;
-      }
-    } catch (error) {
-      dispatch(setLoading(false));
-      dispatch(
-        setMessage({
-          text: error?.message,
-          type: AlertEnum.Error,
-        })
-      );
-      return error;
-    }
-  }
-);
-
-// ....Helps & Supports....
-export const HelpsSupports = createAsyncThunk(
-  "HelpsAndSupports",
-  async (values, { dispatch }) => {
-    try {
-      dispatch(setLoading(true));
-      const result = await HelpsAndSupportsAPI();
-      if (result?.success) {
-        dispatch(setLoading(false));
-        dispatch(
-          setMessage({
-            text: result?.message,
-            type: AlertEnum.Success,
-          })
-        );
-        return result;
-      } else {
-        throw result;
-      }
-    } catch (error) {
-      dispatch(setLoading(false));
-      dispatch(
-        setMessage({
-          text: error?.message,
-          type: AlertEnum.Error,
-        })
-      );
-      return error;
-    }
-  }
-);
-
-// ....Time SLot API...
-export const TimeSlot = createAsyncThunk(
-  "ProvacyAndPolicy",
-  async (values, { dispatch }) => {
-    try {
-      dispatch(setLoading(true));
-      const result = await TimeSlotAPI();
-      if (result?.success) {
-        dispatch(setLoading(false));
-        dispatch(
-          setMessage({
-            text: result?.message,
-            type: AlertEnum.Success,
-          })
-        );
-        return result;
-      } else {
-        throw result;
-      }
-    } catch (error) {
-      dispatch(setLoading(false));
-      dispatch(
-        setMessage({
-          text: error?.message,
-          type: AlertEnum.Error,
-        })
-      );
-      return error;
-    }
-  }
-);
-
 export const EditSchedule = createAsyncThunk(
   "EditSchedule",
   async (values, { dispatch }) => {
@@ -492,7 +318,6 @@ export const EditSchedule = createAsyncThunk(
     }
   }
 );
-
 export const ToggleLiveStatus = createAsyncThunk(
   "ToggleLiveStatus",
   async (values, { dispatch }) => {
@@ -502,39 +327,6 @@ export const ToggleLiveStatus = createAsyncThunk(
       if (result?.success) {
         dispatch(setLoading(false));
         dispatch(GetUserProfile());
-        return result;
-      } else {
-        throw result;
-      }
-    } catch (error) {
-      dispatch(setLoading(false));
-      dispatch(
-        setMessage({
-          text: error?.message,
-          type: AlertEnum.Error,
-        })
-      );
-      return error;
-    }
-  }
-);
-
-//Create Time SLot.......
-
-export const AvailibilityCreate = createAsyncThunk(
-  "EditSchedule",
-  async (values, { dispatch }) => {
-    try {
-      dispatch(setLoading(true));
-      const result = await AvailibilityCreateAPI(values);
-      if (result?.success) {
-        dispatch(setLoading(false));
-        dispatch(
-          setMessage({
-            text: result?.message,
-            type: AlertEnum.Success,
-          })
-        );
         return result;
       } else {
         throw result;

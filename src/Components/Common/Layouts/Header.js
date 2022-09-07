@@ -7,15 +7,31 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import { BackGround, Icon, Logo } from "../../../Utilities/Icons";
 import { removeSession } from "../../../Store/Reducers/AuthSlice";
 import { NavLink } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
   GetUserProfile,
   ToggleLiveStatus,
 } from "../../../Store/Reducers/ProfileReducer";
+import { Button, Form, InputGroup, Modal } from "react-bootstrap";
+import { setMessage } from "../../../Store/Reducers/LayoutSlice";
+import { AlertEnum } from "../../../Utilities/Enums";
 
 function Header() {
   const dispatch = useDispatch();
   const { userProfile } = useSelector(({ ProfileSlice }) => ProfileSlice);
+
+  const [showModal2, setShow2] = useState(false);
+
+  const handleClose2 = () => setShow2(false);
+  const handleShow2 = () => setShow2(true);
+  async function copyToClipboard(copyMe) {
+    try {
+      await navigator.clipboard.writeText(copyMe);
+      dispatch(setMessage({ text: "Link Copied!", type: AlertEnum.Success }));
+    } catch (err) {
+      dispatch(setMessage({ text: "Failed to copy!", type: AlertEnum.Error }));
+    }
+  }
   useEffect(() => {
     if (!userProfile) dispatch(GetUserProfile());
     return () => {};
@@ -85,65 +101,145 @@ function Header() {
               }
               id="navbarScrollingDropdown"
             >
-              <NavDropdown.Item>
-                <NavLink className="dropdown-item-link" to="/profile">
+              <NavLink className="dropdown-item-link" to="/profile">
+                <NavDropdown.Item href="/profile">
                   <img src={Icon.User} alt="Avatar" class=" mr_10 "></img>My
                   Profle
-                </NavLink>
-              </NavDropdown.Item>
+                </NavDropdown.Item>
+              </NavLink>
               <NavDropdown.Divider />
-              <NavDropdown.Item>
-                <NavLink className="dropdown-item-link" to="/settings">
+              <NavLink className="dropdown-item-link" to="/settings">
+                <NavDropdown.Item href="/settings">
                   <img src={Icon.Setting} alt="Avatar" class=" mr_10"></img>
                   Settings
-                </NavLink>
-              </NavDropdown.Item>
+                </NavDropdown.Item>
+              </NavLink>
               <NavDropdown.Divider />
-              <NavDropdown.Item>
-                <NavLink className="dropdown-item-link" to="share">
+              <NavLink
+                className="dropdown-item-link"
+                to="#!"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleShow2();
+                }}
+              >
+                <NavDropdown.Item>
                   <img src={Icon.Share} alt="Avatar" class=" mr_10"></img>
-                  Share Yor Link
-                </NavLink>
-              </NavDropdown.Item>
+                  Share Your Link
+                </NavDropdown.Item>
+              </NavLink>
               <NavDropdown.Divider />
-              <NavDropdown.Item>
-                <NavLink className="dropdown-item-link" to="/privacy">
+              <NavLink className="dropdown-item-link" to="/privacy">
+                <NavDropdown.Item href="/privacy">
                   <img src={Icon.Notes} alt="Avatar" class="mr_10"></img>
                   Privacy Policy
-                </NavLink>
-              </NavDropdown.Item>
+                </NavDropdown.Item>
+              </NavLink>
               <NavDropdown.Divider />
-              <NavDropdown.Item>
-                <NavLink className="dropdown-item-link" to="/terms">
+              <NavLink className="dropdown-item-link" to="/terms">
+                <NavDropdown.Item href="/terms">
                   <img src={Icon.Document} alt="Avatar" class=" mr_10"></img>
                   Terms and Conditions
-                </NavLink>
-              </NavDropdown.Item>
+                </NavDropdown.Item>
+              </NavLink>
               <NavDropdown.Divider />
-              <NavDropdown.Item>
-                <NavLink className="dropdown-item-link" to="/help">
+              <NavLink className="dropdown-item-link" to="/help">
+                <NavDropdown.Item href="/help">
                   <img src={Icon.Help} alt="Avatar" class="mr_10"></img>
                   Help and Support
-                </NavLink>
-              </NavDropdown.Item>
+                </NavDropdown.Item>
+              </NavLink>
               <NavDropdown.Divider />
-              <NavDropdown.Item>
-                <NavLink
-                  className="dropdown-item-link"
-                  to="logout"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    dispatch(removeSession());
-                  }}
-                >
+              <NavLink className="dropdown-item-link" to="#!">
+                <NavDropdown.Item>
+                  <img src={Icon.Logout} alt="Avatar" class="mr_10"></img>
+                  Delete My Account
+                </NavDropdown.Item>
+              </NavLink>
+              <NavDropdown.Divider />
+              <NavLink
+                className="dropdown-item-link"
+                to="logout"
+                onClick={(e) => {
+                  e.preventDefault();
+                  dispatch(removeSession());
+                }}
+              >
+                <NavDropdown.Item>
                   <img src={Icon.Logout} alt="Avatar" class="mr_10"></img>
                   Logout
-                </NavLink>
-              </NavDropdown.Item>
+                </NavDropdown.Item>
+              </NavLink>
             </NavDropdown>
           </div>
         </Navbar.Collapse>
       </Container>
+      <Modal
+        show={showModal2}
+        onHide={handleClose2}
+        className="sharelink-popup-body"
+        centered
+      >
+        <Modal.Header className="sharelink-modal-header">
+          <Modal.Title
+            id="contained-modal-title-vcenter"
+            className="sharelink-modal-text"
+          >
+            Share Your Consultation link
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body className="sharelink-modal-body-text">
+          <form className="share-form" action="/action_page.php">
+            <label className="share_label">Link</label>
+            <InputGroup className="share-your-sec">
+              <Form.Control
+                placeholder="Enter Url"
+                aria-label="Recipient's username"
+                aria-describedby="basic-addon2"
+              />
+              <Button
+                onClick={() => {
+                  copyToClipboard(
+                    window.location.origin + window.location.pathname
+                  );
+                }}
+                id="basic-addon2"
+              >
+                <img src={Icon.Link} />
+                Copy Link
+              </Button>
+            </InputGroup>
+
+            <div class="row">
+              <div class="col-md-12 mt_30">
+                <label className="share_label">Enter Mobile Number</label>
+                <div class="input_box">
+                  <div class="form_group">
+                    <input type="text" name="" value="" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <p className="consultationlink error-message">
+              Consultation link will be send on above number.
+            </p>
+          </form>
+        </Modal.Body>
+        <Modal.Footer className="consultation-modal-footer">
+          <div className="d-flex">
+            <Button className="close_btn" onClick={handleClose2}>
+              Cancel
+            </Button>
+            <Button
+              className="verify_btn"
+              variant="primary"
+              onClick={handleClose2}
+            >
+              Submit
+            </Button>
+          </div>
+        </Modal.Footer>
+      </Modal>
     </Navbar>
   );
 }

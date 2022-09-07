@@ -48,7 +48,6 @@ function PersonalProfile() {
     return () => {};
   }, [userProfile]);
 
-
   return (
     <>
       <div className="personal_profile_card_head">
@@ -80,8 +79,8 @@ function PersonalProfile() {
         onSubmit={(values) =>
           dispatch(EditUserProfile(values)).then((res) => {
             if (res.payload.success) {
-              setIsEdit(false);              
-            }         
+              setIsEdit(false);
+            }
           })
         }
       >
@@ -194,7 +193,9 @@ function PersonalProfile() {
                         type="date"
                         id="dob"
                         name="dob"
+                        className="dateModule"
                         disabled={!isEdit}
+                        pattern={`\d{4}-\d{2}-\d{2}`}
                         onChange={handleChange}
                         onBlur={handleBlur}
                         value={values?.dob}

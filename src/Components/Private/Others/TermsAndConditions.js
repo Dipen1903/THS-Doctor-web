@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Container from "react-bootstrap/Container";
-import { useDispatch, useSelector } from "react-redux";
-import { BackGround, Icon, Logo } from "../../../Utilities/Icons";
-import { TermsConditions } from "../../../Store/Reducers/ProfileReducer";
+import { useDispatch } from "react-redux";
+import { Icon } from "../../../Utilities/Icons";
+import { TermsConditions } from "../../../Store/Reducers/CommonReducer";
+import { MonthsShort } from "../../../Utilities/Enums";
 
 function TermsAndConditions() {
   const dispatch = useDispatch();
@@ -26,23 +27,8 @@ function TermsAndConditions() {
 
   useEffect(() => {
     const dateForm = new Date(updatedDate);
-    var Months = [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "June",
-      "July",
-      "Aug",
-      "Sept",
-      "Oct",
-      "Nov",
-      "Dec",
-    ];
-
     const date = dateForm.getDate();
-    const month = Months[dateForm.getMonth()];
+    const month = MonthsShort[dateForm.getMonth()];
     const year = dateForm.getFullYear();
 
     setFinalDate(`${date} ${month}, ${year}`);

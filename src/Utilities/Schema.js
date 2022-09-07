@@ -111,13 +111,13 @@ export const WorkProfileSettingSchema = Yup.object({
     .matches(/^\d/)
     .required("Please enter your experience")
     .nullable(),
-  registration_number: Yup.string()
-    .matches(
-      /^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9!@#$%^&*]{6,32}$/,
-      "Please enter valid registration number"
-    )
-    .required("Please enter your registration number")
-    .nullable(),
+  // registration_number: Yup.string()
+  //   .matches(
+  //     /^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9!@#$%^&*]{6,32}$/,
+  //     "Please enter valid registration number"
+  //   )
+  //   .required("Please enter your registration number")
+  //   .nullable(),
   languages: Yup.array()
     .of(Yup.string())
     .required("Please select any one language"),
@@ -148,13 +148,13 @@ export const WorkProfileSchema = Yup.object({
     .matches(/^\d/)
     .required("Please enter your experience")
     .nullable(),
-  registration_number: Yup.string()
-    .matches(
-      /^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9!@#$%^&*]{6,32}$/,
-      "Please enter valid registration number"
-    )
-    .required("Please enter your registration number")
-    .nullable(),
+  // registration_number: Yup.string()
+  //   .matches(
+  //     /^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9!@#$%^&*]{6,32}$/,
+  //     "Please enter valid registration number"
+  //   )
+  //   .required("Please enter your registration number")
+  //   .nullable(),
   languages: Yup.array()
     .of(Yup.string())
     .required("Please select any one language"),
@@ -173,10 +173,17 @@ export const EducationalProfileSchema = Yup.object({
 });
 
 export const ChangePasswordSchema = Yup.object({
-  new_password: Yup.string()
-    .required("Please enter your password"),
+  new_password: Yup.string().required("Please enter your password"),
   confirm_password: Yup.string().oneOf(
     [Yup.ref("new_password"), null],
     "Password does not match."
   ),
+});
+export const PhoneNumberSchema = Yup.object({
+  mobile_number: Yup.string()
+    .required("Please enter your mobile number")
+    .test("mobile_number", "Please enter valid mobile number", (value) => {
+      return validatePhone(parseInt(value ?? "0"));
+    }),
+  otp: Yup.string().required("Please enter your OTP."),
 });

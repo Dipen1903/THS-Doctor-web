@@ -2,19 +2,8 @@ import React, { useEffect, useMemo, useState } from "react";
 import { Field, ErrorMessage, getIn, FieldArray } from "formik";
 import ReactSelect, { components } from "react-select";
 import { BackGround, Icon } from "../../../Utilities/Icons";
-import { useDispatch } from "react-redux";
-// import { setMessage } from "../../../Store/Reducers/CommonSlice";
-import { AlertEnum } from "../../../Utilities/Enums";
-// import { ICON, ICONFILLED } from "../../../Utilities/Icons";
-function getStyles(errors, fieldName) {
-  if (getIn(errors, fieldName)) {
-    return {
-      border: "1px solid red",
-      boxShadow: "none",
-    };
-  }
-}
-
+import DatePicker from "react-datepicker";
+import moment from "moment";
 const CustomOption = (props) => {
   const { innerProps, isDisabled, children } = props;
   return !isDisabled ? (

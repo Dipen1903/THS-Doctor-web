@@ -1,4 +1,12 @@
 import $ from "jquery";
+$(".dateModule").datepicker({
+  dateFormat: "yy-mm-dd",
+});
+// Getter
+var dateFormat = $(".dateModule").datepicker("option", "dateFormat");
+
+// Setter
+$(".dateModule").datepicker("option", "dateFormat", "yy-mm-dd");
 // ;(function () {
 // 	var isMobile = {
 // 			Android: function() {
