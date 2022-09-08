@@ -16,6 +16,8 @@ import PrescriptionIndex from "../Components/Private/Prescription/PrescriptionIn
 import PrivacyPolicy from "../Components/Private/Others/PrivacyAndPolicy";
 import TermsAndConditions from "../Components/Private/Others/TermsAndConditions";
 import HelpAndSupport from "../Components/Private/Others/HelpAndSupport";
+import Payouts from "../Components/Private/Payouts/Payouts";
+import PayoutDetailed from "../Components/Private/Payouts/PayoutDetailed";
 
 // import UserProfile from "../Components/Public/Userprofile/userprofile";
 // import UserProfile2 from "../Components/Public/Userprofile/userprofile2";
@@ -111,6 +113,24 @@ function RootRoute() {
         />
       </Route>
 
+      <Route path="/payouts">
+        <Route
+          path=""
+          element={
+            <PrivateRoutes isHeader={true}>
+              <Payouts />
+            </PrivateRoutes>
+          }
+        />
+        <Route
+          path=":id"
+          element={
+            <PrivateRoutes isHeader={true}>
+              <PayoutDetailed />
+            </PrivateRoutes>
+          }
+        />
+      </Route>
       <Route
         path="/settings"
         element={

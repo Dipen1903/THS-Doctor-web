@@ -179,6 +179,16 @@ export const ChangePasswordSchema = Yup.object({
     "Password does not match."
   ),
 });
+export const ShareLinkSchema = Yup.object({
+  link: Yup.string()
+    .url("Please enter valid link.")
+    .required("Please enter you link."),
+  mobile_number: Yup.string()
+    .required("Please enter your mobile number")
+    .test("mobile_number", "Please enter valid mobile number", (value) => {
+      return validatePhone(parseInt(value ?? "0"));
+    }),
+});
 export const PhoneNumberSchema = Yup.object({
   mobile_number: Yup.string()
     .required("Please enter your mobile number")

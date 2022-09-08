@@ -37,6 +37,7 @@ export const RejectionDetailsAPI = (data) =>
   POST(`${BASE_URL}/rejection-details`, data);
 export const ChangePasswordAPI = (data) =>
   POST(`${BASE_URL}/change-password`, data);
+export const ShareLinkAPI = (data) => POST(`${BASE_URL}/share-link`, data);
 
 //* BANK-DETAILS/SCHEDULE API REQUEST
 export const EditBankAPI = (data) =>
@@ -61,3 +62,10 @@ export const PastConsultAPI = (data) =>
   POST(`${BASE_URL}/consultation-past`, data);
 export const ConsultDetailsAPI = (data) =>
   POST(`${BASE_URL}/consultation-details`, data);
+
+//* PAYOUTS API REQUESTS
+export const PayoutsAPI = (data) => POST(`${BASE_URL}/payouts-recent`, data);
+export const PayoutDetailsAPI = (data) =>
+  POST(`${BASE_URL}/payouts-details`, data);
+export const RequestWithdrawAPI = (data) =>
+  POST(`${BASE_URL}/payouts-send-request`, data);

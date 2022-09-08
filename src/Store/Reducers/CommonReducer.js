@@ -11,6 +11,7 @@ import {
   HelpsAndSupportsAPI,
   PrivacyAndPolicyAPI,
 } from "../../Components/Common/Service";
+import { ShareLinkAPI } from "../../Routes/Service";
 
 import { AlertEnum } from "../../Utilities/Enums";
 import { setLoading, setMessage } from "./LayoutSlice";
@@ -278,6 +279,35 @@ export const HelpsSupports = createAsyncThunk(
     try {
       dispatch(setLoading(true));
       const result = await HelpsAndSupportsAPI();
+      if (result?.success) {
+        dispatch(setLoading(false));
+        dispatch(
+          setMessage({
+            text: result?.message,
+            type: AlertEnum.Success,
+          })
+        );
+        return result;
+      } else {
+        throw result;
+      }
+    } catch (error) {
+      dispatch(setLoading(false));
+      dispatch(
+        setMessage({
+          text: error?.message,
+          type: AlertEnum.Error,
+        })
+      );
+      return error;
+    }
+  }
+);
+export const ShareLink = createAsyncThunk(
+  "ShareLink",
+  async (values, { dispatch }) => {
+    try {
+      const result = await ShareLinkAPI(values);
       if (result?.success) {
         dispatch(setLoading(false));
         dispatch(

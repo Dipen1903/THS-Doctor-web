@@ -15,6 +15,9 @@ import {
 import { Button, Form, InputGroup, Modal } from "react-bootstrap";
 import { setMessage } from "../../../Store/Reducers/LayoutSlice";
 import { AlertEnum } from "../../../Utilities/Enums";
+import { ErrorMessage, Formik } from "formik";
+import { ShareLinkSchema } from "../../../Utilities/Schema";
+import { ShareLink } from "../../../Store/Reducers/CommonReducer";
 
 function Header() {
   const dispatch = useDispatch();
@@ -24,14 +27,7 @@ function Header() {
 
   const handleClose2 = () => setShow2(false);
   const handleShow2 = () => setShow2(true);
-  async function copyToClipboard(copyMe) {
-    try {
-      await navigator.clipboard.writeText(copyMe);
-      dispatch(setMessage({ text: "Link Copied!", type: AlertEnum.Success }));
-    } catch (err) {
-      dispatch(setMessage({ text: "Failed to copy!", type: AlertEnum.Error }));
-    }
-  }
+
   useEffect(() => {
     if (!userProfile) dispatch(GetUserProfile());
     return () => {};
@@ -62,7 +58,7 @@ function Header() {
               &nbsp;&nbsp;&nbsp;Consultations
             </NavLink>
 
-            <NavLink className="nav-link" to="/payout">
+            <NavLink className="nav-link" to="/payouts">
               {" "}
               <i class="fa fa-usd" aria-hidden="true"></i>
               &nbsp;&nbsp;&nbsp;Payouts
@@ -174,74 +170,114 @@ function Header() {
           </div>
         </Navbar.Collapse>
       </Container>
-      <Modal
-        show={showModal2}
-        onHide={handleClose2}
-        className="sharelink-popup-body"
-        centered
-      >
-        <Modal.Header className="sharelink-modal-header">
-          <Modal.Title
-            id="contained-modal-title-vcenter"
-            className="sharelink-modal-text"
-          >
-            Share Your Consultation link
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body className="sharelink-modal-body-text">
-          <form className="share-form" action="/action_page.php">
-            <label className="share_label">Link</label>
-            <InputGroup className="share-your-sec">
-              <Form.Control
-                placeholder="Enter Url"
-                aria-label="Recipient's username"
-                aria-describedby="basic-addon2"
-              />
-              <Button
-                onClick={() => {
-                  copyToClipboard(
-                    window.location.origin + window.location.pathname
-                  );
-                }}
-                id="basic-addon2"
-              >
-                <img src={Icon.Link} />
-                Copy Link
-              </Button>
-            </InputGroup>
-
-            <div class="row">
-              <div class="col-md-12 mt_30">
-                <label className="share_label">Enter Mobile Number</label>
-                <div class="input_box">
-                  <div class="form_group">
-                    <input type="text" name="" value="" />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <p className="consultationlink error-message">
-              Consultation link will be send on above number.
-            </p>
-          </form>
-        </Modal.Body>
-        <Modal.Footer className="consultation-modal-footer">
-          <div className="d-flex">
-            <Button className="close_btn" onClick={handleClose2}>
-              Cancel
-            </Button>
-            <Button
-              className="verify_btn"
-              variant="primary"
-              onClick={handleClose2}
-            >
-              Submit
-            </Button>
-          </div>
-        </Modal.Footer>
-      </Modal>
+      {showModal2 && <ShareYourLink show={showModal2} onHide={handleClose2} />}
     </Navbar>
   );
 }
+
+const ShareYourLink = (props) => {
+  const dispatch = useDispatch();
+  async function copyToClipboard(copyMe) {
+    try {
+      await navigator.clipboard.writeText(copyMe);
+      dispatch(setMessage({ text: "Link Copied!", type: AlertEnum.Success }));
+    } catch (err) {
+      dispatch(setMessage({ text: "Failed to copy!", type: AlertEnum.Error }));
+    }
+  }
+  return (
+    <Modal {...props} className="sharelink-popup-body" centered>
+      <Modal.Header className="sharelink-modal-header">
+        <Modal.Title
+          id="contained-modal-title-vcenter"
+          className="sharelink-modal-text"
+        >
+          Share Your Consultation link
+        </Modal.Title>
+      </Modal.Header>
+      <Formik
+        initialValues={{
+          link: "",
+          mobile_number: "",
+        }}
+        validationSchema={ShareLinkSchema}
+        onSubmit={(values, { resetForm }) => {
+          dispatch(ShareLink(values)).then((res) => {
+            if (res?.payload?.success) {
+              props.onHide();
+              resetForm();
+            }
+          });
+        }}
+      >
+        {({ values, handleChange, handleBlur, handleSubmit }) => (
+          <form className="share-form" onSubmit={handleSubmit}>
+            <Modal.Body className="sharelink-modal-body-text">
+              <label className="share_label">Link</label>
+              <InputGroup className="share-your-sec mb-2">
+                <Form.Control
+                  name="link"
+                  id="link"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values?.link}
+                />
+                {values?.link && (
+                  <Button
+                    onClick={() => {
+                      copyToClipboard(values?.link);
+                    }}
+                    id="basic-addon2"
+                  >
+                    <img src={Icon.Link} />
+                    Copy Link
+                  </Button>
+                )}
+              </InputGroup>
+              <ErrorMessage
+                render={(childern) => <div className="error">{childern}</div>}
+                name="link"
+              />
+              <div class="row">
+                <div class="col-md-12 mt_30">
+                  <label className="share_label">Enter Mobile Number</label>
+                  <InputGroup className="share-your-sec mb-2">
+                    {" "}
+                    <Form.Control
+                      name="mobile_number"
+                      id="mobile_number"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values?.mobile_number}
+                    />
+                  </InputGroup>
+                  <ErrorMessage
+                    render={(childern) => (
+                      <div className="error">{childern}</div>
+                    )}
+                    name="mobile_number"
+                  />
+                </div>
+              </div>
+              <p className="consultationlink error-message mt-3">
+                Consultation link will be send on above number.
+              </p>
+            </Modal.Body>
+            <Modal.Footer className="consultation-modal-footer">
+              <div className="d-flex">
+                <Button className="close_btn" onClick={props.onHide}>
+                  Cancel
+                </Button>
+                <Button className="verify_btn" type="submit" variant="primary">
+                  Submit
+                </Button>
+              </div>
+            </Modal.Footer>
+          </form>
+        )}
+      </Formik>
+    </Modal>
+  );
+};
 
 export default Header;

@@ -16,24 +16,13 @@ function DoctorStatus() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const isProfileNotCompleted = () =>
-    !isEmpty(userProfile?.birthdate) &&
-    !isEmpty(userProfile?.gender) &&
-    !isEmpty(userProfile?.image) &&
-    !isEmpty(userProfile?.city_id) &&
-    !isEmpty(userProfile?.state_id) &&
-    !isEmpty(userProfile?.speciality_id) &&
-    !isEmpty(userProfile?.sub_speciality_id) &&
-    !isEmpty(userProfile?.experience) &&
-    !isEmpty(userProfile?.registration_number) &&
-    !isEmpty(userProfile?.languages) &&
-    !isEmpty(userProfile?.qualifications) &&
-    !isEmpty(userProfile?.id_proofs) &&
-    !isEmpty(userProfile?.signature);
-  const isSchedulePaymentCompleted = () => {
-    return (
-      !isEmpty(userProfile?.bank_details) && !isEmpty(userProfile?.availibility)
-    );
-  };
+    parseInt(userProfile?.basic_information_done) &&
+    parseInt(userProfile?.work_profile_done) &&
+    parseInt(userProfile?.qualification_documents_done);
+  const isSchedulePaymentCompleted = () =>
+    parseInt(userProfile?.doctor_availablity_done) &&
+    parseInt(userProfile?.bank_details_done);
+
   useEffect(() => {
     dispatch(GetUserProfile()).then((res) => {
       if (parseInt(res?.payload?.is_active) === 2) {
@@ -45,7 +34,6 @@ function DoctorStatus() {
   return (
     <>
       {/* Payment and Schedule Profile not submitted */}
-
       {!isProfileNotCompleted() ? (
         //Personal and Work Profile not submitted
         <div className="admin-bottom-content">

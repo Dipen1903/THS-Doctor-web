@@ -100,6 +100,7 @@ function WorkProfile() {
         enableReinitialize
         validationSchema={WorkProfileSettingSchema}
         onSubmit={(values) => {
+          debugger;
           let tempData = { ...values };
           if (values?.languages) {
             tempData.languages = values?.languages?.toString();
