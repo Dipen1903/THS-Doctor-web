@@ -88,6 +88,12 @@ function WorkProfile() {
       setProfileData(tempProfile);
     } catch (error) {}
   };
+  const handleSignature = (e, setFieldValue) => {
+    let file = e?.target?.files[0];
+    if (file) {
+      setFieldValue(`signature`, file);
+    }
+  };
   useEffect(() => {
     initialSetup();
     return () => {};
@@ -100,7 +106,6 @@ function WorkProfile() {
         enableReinitialize
         validationSchema={WorkProfileSettingSchema}
         onSubmit={(values) => {
-          debugger;
           let tempData = { ...values };
           if (values?.languages) {
             tempData.languages = values?.languages?.toString();
@@ -505,17 +510,19 @@ function WorkProfile() {
                   ) : (
                     <div class="row mt_20">
                       {values?.qualification?.length ? (
-                        values?.qualification?.map((item, index) => (
-                          <div key={index} className="col-md-4">
-                            <h3 className="qualification_title">
-                              {item?.type}
-                            </h3>
-                            <img
-                              className="qualification_file"
-                              src={item?.file}
-                            />
-                          </div>
-                        ))
+                        <>
+                          {values?.qualification?.map((item, index) => (
+                            <div key={index} className="col-md-4">
+                              <h3 className="qualification_title">
+                                {item?.type}
+                              </h3>
+                              <img
+                                className="qualification_file"
+                                src={item?.file}
+                              />
+                            </div>
+                          ))}
+                        </>
                       ) : (
                         <></>
                       )}
@@ -704,23 +711,92 @@ function WorkProfile() {
                     </div>
                   ) : (
                     <div className="row mt_30">
-                      {values?.proof &&
-                        values?.proof?.map((item, index) => (
-                          <div key={index} className="col-md-4">
-                            <h3 className="qualification_title">
-                              {item?.type}
-                            </h3>
+                      {values?.proof && (
+                        <>
+                          {values?.proof?.map((item, index) => (
+                            <div key={index} className="col-md-4">
+                              <h3 className="qualification_title">
+                                {item?.type}
+                              </h3>
+                              <img
+                                className="qualification_file"
+                                src={item?.file}
+                              />
+                            </div>
+                          ))}
+                          <div className="col-md-4">
+                            <h3 className="qualification_title">Signature</h3>
                             <img
                               className="qualification_file"
-                              src={item?.file}
+                              src={values?.signature}
                             />
                           </div>
-                        ))}
+                        </>
+                      )}
                     </div>
                   )}
                 </div>
               </div>
             </div>
+            {isEdit && (
+              <div className="work_profile_card_body_1">
+                <div class="row">
+                  <div class="col-md-6">
+                    <h3 className="work_profile_title_upload_id">
+                      Upload Signature
+                    </h3>
+                  </div>
+                  <div class="col-md-6">
+                    {values?.signature ? (
+                      <div class="row col-md-12">
+                        <div class="col-md-6">
+                          <img
+                            src={
+                              typeof values.signature === "object"
+                                ? URL.createObjectURL(values.signature)
+                                : values.signature
+                                ? values.signature
+                                : BackGround.Profile
+                            }
+                            class="upload_avatar_img"
+                          ></img>
+                        </div>
+                        <div class="col-md-6">
+                          <h5 class="certificate_name">
+                            {values.signature?.name}
+                          </h5>
+                          <h6
+                            class="delete_photo"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              setFieldValue(`signature`, "");
+                            }}
+                          >
+                            Delete Photo
+                          </h6>
+                        </div>
+                      </div>
+                    ) : (
+                      <FileUpload
+                        label="Attach File"
+                        icon={Icon.Attach}
+                        className="attach_certificate"
+                        name="signature"
+                        id="signature"
+                        value={values.signature}
+                        onChange={(e) => handleSignature(e, setFieldValue)}
+                      />
+                    )}
+                  </div>
+                  <ErrorMessage
+                    component={({ children }) => (
+                      <div className="error">{children}</div>
+                    )}
+                    name="signature"
+                  />
+                </div>
+              </div>
+            )}
             {isEdit && (
               <div className="work_profile_card_body_1">
                 <div className="row">

@@ -24,7 +24,7 @@ function PayoutDetailed() {
       Header: "Patient",
       accessor: "created_at", // accessor is the "key" in the data
       Cell: ({ cell: { value } }) => {
-        return <>{moment(value).format("DD MMM hh:mm A")}</>;
+        return <></>;
       },
     },
     {
@@ -40,7 +40,7 @@ function PayoutDetailed() {
           row: { original },
         },
       }) => {
-        return value ? (
+        return parseInt(value) ? (
           <span class="failed_tag">Cancelled</span>
         ) : (
           <span class="paid_tag">Completed</span>

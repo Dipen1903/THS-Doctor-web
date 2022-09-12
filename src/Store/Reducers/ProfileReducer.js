@@ -19,7 +19,7 @@ import { setLoading, setMessage } from "./LayoutSlice";
 const initialState = {
   profileStep: 1,
   skipModal: false,
-  successModal: false,
+  profileSuccessModal: false,
   submittedModal: false,
   feeModal: false,
   userProfile: "",
@@ -364,8 +364,8 @@ export const ProfileSlice = createSlice({
     toggleSkip: (state, action) => {
       state.skipModal = action.payload;
     },
-    toggleSuccess: (state, action) => {
-      state.successModal = action.payload;
+    toggleProfileSuccess: (state, action) => {
+      state.profileSuccessModal = action.payload;
     },
     toggleSubmitted: (state, action) => {
       state.submittedModal = action.payload;
@@ -391,7 +391,7 @@ export const {
   nextStep,
   prevStep,
   toggleSubmitted,
-  toggleSuccess,
+  toggleProfileSuccess,
   toggleSkip,
   toggleFee,
 } = ProfileSlice.actions;

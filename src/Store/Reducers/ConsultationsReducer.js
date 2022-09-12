@@ -1,5 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import {
+  CancelAllConsultAPI,
+  CancelConsultAPI,
   ConsultDetailsAPI,
   NewConsultAPI,
   PastConsultAPI,
@@ -10,6 +12,8 @@ import { setLoading, setMessage } from "./LayoutSlice";
 
 const initialState = {
   consultDetails: "",
+  isCancel: false,
+  isCancelAll: false,
   upcomingConsults: [],
   pastConsults: [],
 };
@@ -44,6 +48,7 @@ export const GetPastConsults = createAsyncThunk(
     try {
       dispatch(setLoading(true));
       const result = await PastConsultAPI(values);
+
       if (result?.success) {
         dispatch(setLoading(false));
         return result?.data;
@@ -85,10 +90,79 @@ export const GetConsultDetails = createAsyncThunk(
     }
   }
 );
+export const CancelConsult = createAsyncThunk(
+  "CancelConsult",
+  async (values, { dispatch }) => {
+    try {
+      const result = await CancelConsultAPI(values);
+      if (result?.success) {
+        dispatch(
+          setMessage({
+            text: result?.message,
+            type: AlertEnum.Success,
+          })
+        );
+        dispatch(toggleCancel(false));
+        dispatch(GetNewConsults());
+        dispatch(GetPastConsults());
+        return result?.data;
+      } else {
+        throw result;
+      }
+    } catch (error) {
+      dispatch(setLoading(false));
+      dispatch(
+        setMessage({
+          text: error?.message,
+          type: AlertEnum.Error,
+        })
+      );
+      return error;
+    }
+  }
+);
+export const CancelAllConsult = createAsyncThunk(
+  "CancelAllConsult",
+  async (values, { dispatch }) => {
+    try {
+      const result = await CancelAllConsultAPI(values);
+      if (result?.success) {
+        dispatch(
+          setMessage({
+            text: result?.message,
+            type: AlertEnum.Success,
+          })
+        );
+        dispatch(toggleCancelAll(false));
+        dispatch(GetNewConsults());
+        dispatch(GetPastConsults());
+        return result?.data;
+      } else {
+        throw result;
+      }
+    } catch (error) {
+      dispatch(setLoading(false));
+      dispatch(
+        setMessage({
+          text: error?.message,
+          type: AlertEnum.Error,
+        })
+      );
+      return error;
+    }
+  }
+);
 export const ConsultSlice = createSlice({
   name: "ConsultSlice",
   initialState,
-  reducers: {},
+  reducers: {
+    toggleCancel: (state, action) => {
+      state.isCancel = action.payload;
+    },
+    toggleCancelAll: (state, action) => {
+      state.isCancelAll = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(GetNewConsults.fulfilled, (state, action) => {
       state.upcomingConsults = action.payload;
@@ -102,6 +176,6 @@ export const ConsultSlice = createSlice({
   },
 });
 
-export const {} = ConsultSlice.actions;
+export const { toggleCancel, toggleCancelAll } = ConsultSlice.actions;
 
 export default ConsultSlice.reducer;

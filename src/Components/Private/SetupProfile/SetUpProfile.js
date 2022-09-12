@@ -22,7 +22,7 @@ import {
   prevStep,
   toggleSkip,
   toggleSubmitted,
-  toggleSuccess,
+  toggleProfileSuccess,
 } from "../../../Store/Reducers/ProfileReducer";
 
 import {
@@ -63,15 +63,13 @@ export function SetUpProfile() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [profileData, setProfileData] = useState(ProfileEnum);
-  const { profileStep, successModal, skipModal, userProfile } = useSelector(
-    ({ ProfileSlice }) => ProfileSlice
-  );
+  const { profileStep, profileSuccessModal, skipModal, userProfile } =
+    useSelector(({ ProfileSlice }) => ProfileSlice);
 
   const intialSetup = () => {
     let tempProfile = { ...profileData };
     let tempProofs = [];
     let tempQualification = [];
-
     if (userProfile) {
       if (parseInt(userProfile?.basic_information_done)) {
         dispatch(nextStep(2));
@@ -79,21 +77,21 @@ export function SetUpProfile() {
       if (parseInt(userProfile?.work_profile_done)) {
         dispatch(nextStep(3));
       }
-      if (parseInt(userProfile?.qualification_documents_done)) {
-        navigate("/dashboard");
-        dispatch(nextStep(1));
-      }
+      // if (parseInt(userProfile?.qualification_documents_done)) {
+      //   navigate("/dashboard");
+      //   dispatch(nextStep(1));
+      // }
 
       tempProfile.image = userProfile?.image;
       tempProfile.dob = userProfile?.birthdate;
       tempProfile.gender = userProfile?.gender;
       tempProfile.city_id = userProfile?.city_id;
       tempProfile.state_id = userProfile?.state_id;
+      tempProfile.speciality = userProfile?.speciality_id;
       dispatch(
         SubSpecialityList({ speciality_id: userProfile?.speciality_id })
       );
-      tempProfile.speciality = userProfile?.speciality_id || "";
-      tempProfile.sub_speciality = userProfile?.sub_speciality_id || "";
+      tempProfile.sub_speciality = userProfile?.sub_speciality_id;
       tempProfile.experience = userProfile?.experience;
       tempProfile.registration_number = userProfile?.registration_number;
       tempProfile.languages = [];
@@ -136,7 +134,7 @@ export function SetUpProfile() {
   const submit = (values) => {
     let tempData = { ...values };
 
-    tempData?.languages?.toString();
+    tempData.languages = values?.languages?.toString();
     if (values) tempData["deepIntegrate"] = true;
     if (profileStep === 1) {
       tempData["basic_information_done"] = 1;
@@ -150,7 +148,7 @@ export function SetUpProfile() {
     dispatch(EditUserProfile(tempData)).then((res) => {
       if (res?.payload?.success) {
         if (profileStep === 3) {
-          dispatch(toggleSuccess(true));
+          dispatch(toggleProfileSuccess(true));
         } else {
           dispatch(nextStep());
         }
@@ -217,9 +215,9 @@ export function SetUpProfile() {
         onHide={() => dispatch(toggleSkip(false))}
       />
       <ProfileSubmitted
-        show={successModal}
+        show={profileSuccessModal}
         onHide={(isCancled) => {
-          dispatch(toggleSuccess(false));
+          dispatch(toggleProfileSuccess(false));
           dispatch(nextStep(1));
           isCancled && navigate("/dashboard");
         }}

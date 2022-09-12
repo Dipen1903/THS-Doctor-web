@@ -2,7 +2,7 @@ import moment from "moment";
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { Button, Modal } from "react-bootstrap";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { GetConsultDetails } from "../../../Store/Reducers/ConsultationsReducer";
 // import { Button, Form } from "react-bootstrap";
 // import Modal from "react-bootstrap/Modal";
@@ -69,9 +69,7 @@ function PastConsultation({ pastConsults = [] }) {
             src={Icon.Eye}
             style={{ cursor: "pointer" }}
             onClick={() => {
-              dispatch(
-                GetConsultDetails({ appointment_id: original?.appointment_id })
-              );
+              dispatch(GetConsultDetails({ appointment_id: original?.id }));
               hide(true);
             }}
             alt="view"
@@ -100,6 +98,7 @@ function PastConsultation({ pastConsults = [] }) {
 export default PastConsultation;
 const ConsultDetails = (props) => {
   const { values, ...rest } = props;
+  const { consultDetails } = useSelector(({ ConsultSlice }) => ConsultSlice);
   return (
     <Modal {...rest} className="consultation-modal-body-two" centered>
       <Modal.Header className="consultation-modal-header" closeButton>
@@ -110,8 +109,15 @@ const ConsultDetails = (props) => {
         >
           Appointment Details
           <div>
-            <span className="appointment_id">Id #123113131</span>
-            <span class="completed_paid_tag">Completed</span>
+            <span className="appointment_id">
+              Id #{consultDetails?.appointment_id}
+            </span>
+            {consultDetails?.status === 3 && (
+              <span class="failed_tag mx-2">Cancelled</span>
+            )}
+            {consultDetails?.status === 1 && (
+              <span class="failed_tag mx-2">Completed</span>
+            )}
           </div>
         </Modal.Title>
       </Modal.Header>
@@ -120,8 +126,11 @@ const ConsultDetails = (props) => {
           <p className="left_text">Patient</p>
           <div>
             {" "}
-            <p className="right-text">John Doe</p>
-            <span>23 | F</span>
+            <p className="right-text">{consultDetails?.name}</p>
+            <span>
+              {consultDetails?.age} |{" "}
+              {consultDetails?.gender?.toUpperCase() === "MALE" ? "M" : "F"}
+            </span>
           </div>
         </div>
 
@@ -129,7 +138,7 @@ const ConsultDetails = (props) => {
           <p className="left_text">Consultation for</p>
           <div>
             {" "}
-            <p className="right-text">Bones & joints</p>
+            <p className="right-text">{consultDetails?.health_problem}</p>
           </div>
         </div>
 
@@ -137,7 +146,10 @@ const ConsultDetails = (props) => {
           <p className="left_text">Date & Time</p>
           <div>
             {" "}
-            <p className="right-text">11 April, 2022 - 11:00 am</p>
+            <p className="right-text">
+              {consultDetails?.appointment_date} -{" "}
+              {consultDetails?.appointment_time}
+            </p>
           </div>
         </div>
 
@@ -145,8 +157,7 @@ const ConsultDetails = (props) => {
           <p className="left_text">Fee</p>
           <div>
             {" "}
-            <p className="right-text">500 Rs.</p>
-            <span>23 | F</span>
+            <p className="right-text">{consultDetails?.consulting_fee} Rs.</p>
           </div>
         </div>
 

@@ -217,16 +217,8 @@ export const PrivacyAndPolicy = createAsyncThunk(
   "ProvacyAndPolicy",
   async (values, { dispatch }) => {
     try {
-      dispatch(setLoading(true));
       const result = await PrivacyAndPolicyAPI();
       if (result?.success) {
-        dispatch(setLoading(false));
-        dispatch(
-          setMessage({
-            text: result?.message,
-            type: AlertEnum.Success,
-          })
-        );
         return result;
       } else {
         throw result;
@@ -247,16 +239,8 @@ export const TermsConditions = createAsyncThunk(
   "TermsAndConditions",
   async (values, { dispatch }) => {
     try {
-      dispatch(setLoading(true));
       const result = await TermsAndConditionsAPI();
       if (result?.success) {
-        dispatch(setLoading(false));
-        dispatch(
-          setMessage({
-            text: result?.message,
-            type: AlertEnum.Success,
-          })
-        );
         return result;
       } else {
         throw result;
@@ -277,16 +261,8 @@ export const HelpsSupports = createAsyncThunk(
   "HelpsAndSupports",
   async (values, { dispatch }) => {
     try {
-      dispatch(setLoading(true));
       const result = await HelpsAndSupportsAPI();
       if (result?.success) {
-        dispatch(setLoading(false));
-        dispatch(
-          setMessage({
-            text: result?.message,
-            type: AlertEnum.Success,
-          })
-        );
         return result;
       } else {
         throw result;

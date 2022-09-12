@@ -197,3 +197,6 @@ export const PhoneNumberSchema = Yup.object({
     }),
   otp: Yup.string().required("Please enter your OTP."),
 });
+export const CancelConsultSchema = Yup.object({
+  reason: Yup.string().required("Please provide any reason!"),
+});

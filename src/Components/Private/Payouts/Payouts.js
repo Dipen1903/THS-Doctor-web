@@ -35,7 +35,7 @@ function Payouts() {
     },
     {
       Header: "Account/Upi id",
-      accessor: "payout_id",
+      accessor: "bank_details.account_number",
     },
     {
       Header: "Status",
@@ -46,10 +46,14 @@ function Payouts() {
           row: { original },
         },
       }) => {
-        return value ? (
-          <span class="failed_tag">Cancelled</span>
+        return parseInt(value) ? (
+          parseInt(value > 1) ? (
+            <span class="failed_tag">Cancelled</span>
+          ) : (
+            <span class="paid_tag">Completed</span>
+          )
         ) : (
-          <span class="paid_tag">Completed</span>
+          <span class="in_prcoess">In Process</span>
         );
       },
     },

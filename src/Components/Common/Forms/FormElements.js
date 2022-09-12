@@ -77,21 +77,14 @@ function Input(props) {
 }
 
 function TextArea(props) {
-  const { name, label, errors, touched, id, ...rest } = props;
+  const { name, label, id, ...rest } = props;
   return (
     <div className="form-group">
-      <label htmlFor={name || ""}>{label}</label>
-      <Field
-        as="textarea"
-        className="form-control"
-        id={name || ""}
-        name={name}
-        {...rest}
-      />
-      <ErrorMessage
-        component={({ children }) => <div className="error">{children}</div>}
-        name={name}
-      />
+      <label htmlFor={id}>{label}</label>
+      <Field as="textarea" id={id} name={name} {...rest} />
+      <div className="error">
+        <ErrorMessage name={name} />
+      </div>
     </div>
   );
 }

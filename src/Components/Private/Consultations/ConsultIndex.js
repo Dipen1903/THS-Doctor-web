@@ -6,40 +6,78 @@ import { Icon } from "../../../Utilities/Icons";
 import NewConsultation from "./NewConsultation";
 import PastConsultation from "./PastConsultation";
 import {
+  CancelAllConsult,
   GetNewConsults,
   GetPastConsults,
+  toggleCancelAll,
 } from "../../../Store/Reducers/ConsultationsReducer";
+import moment from "moment";
+import { setMessage } from "../../../Store/Reducers/LayoutSlice";
+import { AlertEnum } from "../../../Utilities/Enums";
+import { Field, Formik } from "formik";
+import FormControl from "../../Common/Forms/FormControl";
 function ConsultIndex() {
   const dispatch = useDispatch();
-  const { upcomingConsults, pastConsults } = useSelector(
+  const { upcomingConsults, pastConsults, isCancelAll } = useSelector(
     ({ ConsultSlice }) => ConsultSlice
   );
   const [filteredData, setFilteredData] = useState({
     upcomingConsults: [],
     pastConsults: [],
   });
-  const [showModal, setShow] = useState(false);
+  const [date, setDate] = useState(moment());
   const [activeTab, setActiveTab] = useState("upcoming");
 
-  const handleClose = () => setShow(false);
-  const handleFilter = (e) => {
+  const handleFilter = (text) => {
     try {
-      let text = e?.target?.value;
-      let tempNew = upcomingConsults.filter(
-        (item) => item?.name.toUpperCase().includes(text.toUpperCase()) == 1
-      );
-      let tempPast = pastConsults.filter(
-        (item) => item?.name.toUpperCase().includes(text.toUpperCase()) == 1
-      );
+      let tempNew;
+      let tempPast;
+
+      if (typeof text === "string") {
+        tempNew = upcomingConsults.filter(
+          (item) => item?.name.toUpperCase().includes(text.toUpperCase()) == 1
+        );
+        tempPast = pastConsults.filter(
+          (item) => item?.name.toUpperCase().includes(text.toUpperCase()) == 1
+        );
+      } else {
+        tempNew = upcomingConsults.filter(
+          (item) =>
+            moment(item?.appointment_date).format("DD/MM/YYYY") ==
+            text?.format("DD/MM/YYYY")
+        );
+        tempPast = pastConsults.filter(
+          (item) =>
+            moment(item?.appointment_date).format("DD/MM/YYYY") ==
+            text?.format("DD/MM/YYYY")
+        );
+      }
       if (tempNew?.length) {
         setFilteredData((state) => ({ ...state, upcomingConsults: tempNew }));
       }
       if (tempPast?.length) {
         setFilteredData((state) => ({ ...state, pastConsults: tempPast }));
       }
+      if (!tempNew?.length && !tempPast?.length) {
+        dispatch(
+          setMessage({
+            type: AlertEnum.Info,
+            text: `No consultation found for ${
+              typeof text === "string" ? text : moment(text).toISOString()
+            }`,
+          })
+        );
+      }
     } catch (error) {}
   };
-
+  const cancelAllSubmit = (values, { resetForm }) => {
+    let tempValues = { ...values };
+    if (values?.reason_type !== "others") {
+      tempValues.reason = values.reason_type;
+    }
+    dispatch(CancelAllConsult(tempValues));
+    resetForm();
+  };
   useEffect(() => {
     dispatch(GetNewConsults());
     dispatch(GetPastConsults());
@@ -86,33 +124,58 @@ function ConsultIndex() {
                     type="search"
                     placeholder="Search"
                     aria-label="Search"
-                    onChange={handleFilter}
+                    onChange={(e) => {
+                      handleFilter(e.target.value);
+                    }}
                   />
                 </form>
               </div>
               <div>
                 <div className="datepicker">
-                  <div className="">
-                    <Form.Group controlId="dob">
-                      <Form.Control
-                        className="border-0"
-                        type="date"
-                        name="dob"
-                        placeholder="Today"
-                      />
-                    </Form.Group>
-                  </div>
+                  <Form.Select
+                    className="date-filter border-0 p-0"
+                    name="dob"
+                    placeholder="Today"
+                    onChange={(e) => {
+                      setDate(moment(e.target.value).format("DD/MM/YYYY"));
+
+                      handleFilter(moment(e.target.value, "DD/MM/YYYY"));
+                    }}
+                  >
+                    <option value={moment().format("DD/MM/YYYY")}>Today</option>
+                    <option
+                      value={moment().add(1, "days").format("DD/MM/YYYY")}
+                    >
+                      {moment().add(1, "day").format("DD/MM/YYYY")}
+                    </option>
+                    <option
+                      value={moment().add(2, "days").format("DD/MM/YYYY")}
+                    >
+                      {moment().add(2, "day").format("DD/MM/YYYY")}
+                    </option>
+                    <option
+                      value={moment().add(3, "days").format("DD/MM/YYYY")}
+                    >
+                      {moment().add(3, "day").format("DD/MM/YYYY")}
+                    </option>
+                    <option
+                      value={moment().add(4, "days").format("DD/MM/YYYY")}
+                    >
+                      {moment().add(4, "day").format("DD/MM/YYYY")}
+                    </option>
+                  </Form.Select>
                 </div>
               </div>
               <div className="cancel-button">
-                <Link to={"/prescription"}>
-                  <Button
-                    variant=""
-                    className={activeTab === "tab2" ? "active" : ""}
-                  >
-                    Cancel all
-                  </Button>
-                </Link>
+                <Button
+                  variant=""
+                  className={activeTab === "past" ? "active" : ""}
+                  onClick={() => {
+                    dispatch(toggleCancelAll(true));
+                  }}
+                >
+                  Cancel all
+                </Button>
               </div>
             </div>
           </div>
@@ -122,7 +185,7 @@ function ConsultIndex() {
                 upcomingConsults={
                   filteredData.upcomingConsults?.length
                     ? filteredData?.upcomingConsults
-                    : upcomingConsults
+                    : upcomingConsults || []
                 }
               />
             </Tab.Pane>
@@ -140,8 +203,10 @@ function ConsultIndex() {
       </Container>
 
       <Modal
-        show={showModal}
-        onHide={handleClose}
+        show={isCancelAll}
+        onHide={() => {
+          dispatch(toggleCancelAll(false));
+        }}
         className="consultation-modal-body"
         centered
       >
@@ -153,43 +218,83 @@ function ConsultIndex() {
             Tell us The Reasons
           </Modal.Title>
         </Modal.Header>
-        <Modal.Body className="consultation-modal-body-text">
-          <form action="/action_page.php">
-            <div className="checkbox_input">
-              <input type="checkbox" id="" name="" value="" />
-              <span> The question is'n my speciality</span>
-            </div>
-            <div className="checkbox_input">
-              <input type="checkbox" id="" name="" value="" />
-              <span> The question is'n my speciality</span>
-            </div>
-            <div className="checkbox_input">
-              <input type="checkbox" id="" name="" value="" />
-              <span> The question is'n my speciality</span>
-            </div>
-            <div className="checkbox_input">
-              <input type="checkbox" id="" name="" value="" />
-              <span> Others</span>
-            </div>
-          </form>
-
-          <div className="optional-note">
-            <p>Optional Note</p>
-            <textarea className="optional-note-text">
-              Hello there, this is some text in a text area
-            </textarea>
-          </div>
-        </Modal.Body>
-        <Modal.Footer className="consultation-modal-footer">
-          <div className="d-flex">
-            <Button className="close_btn" onClick={handleClose}>
-              Cancel
-            </Button>
-            <Button className="verify_btn" variant="primary">
-              Submit
-            </Button>
-          </div>
-        </Modal.Footer>
+        <Formik
+          initialValues={{
+            date: date,
+            reason: "",
+            reason_type: "",
+            other: false,
+          }}
+          onSubmit={cancelAllSubmit}
+        >
+          {({ values, handleChange, handleBlur, handleSubmit }) => (
+            <form onSubmit={handleSubmit}>
+              <Modal.Body className="consultation-modal-body-text">
+                <div role="group" aria-labelledby="my-radio-group">
+                  <label className="checkbox_input">
+                    <Field
+                      type="radio"
+                      id="reason_type"
+                      name="reason_type"
+                      value="The question is'n my speciality"
+                    />
+                    <span> The question is'n my speciality</span>
+                  </label>
+                  <label className="checkbox_input">
+                    <Field
+                      type="radio"
+                      id="reason_type"
+                      name="reason_type"
+                      value="The patient behaves inappropriately"
+                    />
+                    <span> The patient behaves inappropriately</span>
+                  </label>
+                  <label className="checkbox_input">
+                    <Field
+                      type="radio"
+                      id="reason_type"
+                      name="reason_type"
+                      value="others"
+                    />
+                    <span>Others</span>
+                  </label>
+                </div>
+                {values?.reason_type === "others" && (
+                  <div className="optional-note">
+                    <p>Optional Note</p>
+                    <FormControl
+                      control="textArea"
+                      className="optional-note-text m-0 w-100"
+                      style={{ border: "1px solid #80808080" }}
+                      value={values?.reason}
+                      name="reason"
+                      id="reason"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                    />
+                  </div>
+                )}
+              </Modal.Body>
+              <Modal.Footer className="consultation-modal-footer">
+                <div className="d-flex">
+                  <Button
+                    className="close_btn"
+                    onClick={() => dispatch(toggleCancelAll(false))}
+                  >
+                    Cancel
+                  </Button>
+                  <Button
+                    className="verify_btn"
+                    type="submit"
+                    variant="primary"
+                  >
+                    Submit
+                  </Button>
+                </div>
+              </Modal.Footer>
+            </form>
+          )}
+        </Formik>
       </Modal>
     </>
   );

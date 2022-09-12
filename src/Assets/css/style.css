@@ -2108,6 +2108,10 @@ input:focus {
   appearance: none;
   display: block;
 }
+.date-filter.form-select {
+  padding: 0px 20px !important;
+  max-height: 40px;
+}
 .gender_wrapper {
   display: inline-block;
   position: relative;

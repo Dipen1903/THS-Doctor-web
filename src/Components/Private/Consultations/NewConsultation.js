@@ -1,14 +1,22 @@
 import moment from "moment";
-import React, { useEffect } from "react";
-// import { Form, Pagination } from "react-bootstrap";
+import React, { useEffect, useState } from "react";
 // import { useState } from "react";
 import { Icon } from "../../../Utilities/Icons";
-// import { Modal, Button } from "react-bootstrap";
+import { Modal, Button } from "react-bootstrap";
 import Table from "../../Common/Layouts/Table";
-// import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  CancelConsult,
+  toggleCancel,
+} from "../../../Store/Reducers/ConsultationsReducer";
+import { ErrorMessage, Formik, useFormik } from "formik";
+import { CancelConsultSchema } from "../../../Utilities/Schema";
+import FormControl from "../../Common/Forms/FormControl";
+import { ConvertHMS } from "../../../Utilities/Functions";
 
 function NewConsultation({ upcomingConsults = [] }) {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
+  const [appointmentId, setAppointMentId] = useState();
   const columns = [
     {
       Header: "Appointment ID",
@@ -47,7 +55,11 @@ function NewConsultation({ upcomingConsults = [] }) {
       }) => {
         return (
           <span class="failed_tag">
-            {moment(original?.appointment_date_time).fromNow(true)} Left
+            {ConvertHMS(
+              moment().diff(original?.appointment_date_time, "seconds")
+            )}
+            {/* {moment(original?.appointment_date_time).fromNow(true)}  */}
+            Left
           </span>
         );
       },
@@ -78,12 +90,7 @@ function NewConsultation({ upcomingConsults = [] }) {
     {
       Header: "Chat",
       accessor: "chat",
-      Cell: ({
-        cell: {
-          value,
-          row: { original },
-        },
-      }) => {
+      Cell: () => {
         return <img src={Icon.Chat} alt="Avatar" className="chat-icon"></img>;
       },
     },
@@ -99,7 +106,10 @@ function NewConsultation({ upcomingConsults = [] }) {
           src={Icon.CrossRed}
           alt="Avatar"
           className="cross-icon"
-          // onClick={handleShow}
+          onClick={() => {
+            setAppointMentId(original?.id);
+            dispatch(toggleCancel(true));
+          }}
         ></img>
       ),
     },
@@ -108,43 +118,73 @@ function NewConsultation({ upcomingConsults = [] }) {
     return () => {};
   }, []);
 
-  return <Table data={upcomingConsults} columns={columns} pagination={true} />;
+  return (
+    <>
+      <CancelModal appointment_id={appointmentId} />
+      <Table data={upcomingConsults} columns={columns} pagination={true} />
+    </>
+  );
 }
 
 export default NewConsultation;
-
-{
-  /* <Modal
-show={showModal}
-onHide={handleClose}
-className="consultation-popup-body"
-centered
->
-<Modal.Header className="consultation-modal-header">
-  <Modal.Title
-    id="contained-modal-title-vcenter"
-    className="consultation-modal-text"
-  >
-    <label className="sign_title mt_30">
-      {" "}
-      Enter the reason for cancelation appointment
-    </label>
-  </Modal.Title>
-</Modal.Header>
-<Modal.Body className="consultation-modal-body-text">
-  <textarea
-    className="optional-note-text"
-    style={{ border: "1px solid #80808080" }}
-  >
-    Hello there, this is some text in a text area
-  </textarea>
-</Modal.Body>
-<Modal.Footer className="consultation-modal-footer">
-  <div>
-    <Button className="close_btn" onClick={handleClose}>
-      Close
-    </Button>
-  </div>
-</Modal.Footer>
-</Modal> */
-}
+const CancelModal = ({ appointment_id }) => {
+  const dispatch = useDispatch();
+  const { isCancel } = useSelector(({ ConsultSlice }) => ConsultSlice);
+  useEffect(() => {}, [appointment_id]);
+  return (
+    <Modal
+      show={isCancel}
+      onHide={() => dispatch(toggleCancel(false))}
+      className="consultation-popup-body"
+      centered
+    >
+      <Modal.Header className="consultation-modal-header">
+        <Modal.Title
+          id="contained-modal-title-vcenter"
+          className="consultation-modal-text"
+        >
+          <label className="sign_title mt_30">
+            Enter the reason for cancelation appointment
+          </label>
+        </Modal.Title>
+      </Modal.Header>
+      <Formik
+        initialValues={{ appointment_id, reason: "" }}
+        enableReinitialize={true}
+        validationSchema={CancelConsultSchema}
+        onSubmit={(values) => dispatch(CancelConsult(values))}
+      >
+        {({ values, handleChange, handleBlur, handleSubmit }) => (
+          <form onSubmit={handleSubmit}>
+            <Modal.Body className="consultation-modal-body-text">
+              <FormControl
+                control="textArea"
+                className="optional-note-text m-0 w-100"
+                style={{ border: "1px solid #80808080" }}
+                value={values?.reason}
+                name="reason"
+                id="reason"
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+            </Modal.Body>
+            <Modal.Footer className="consultation-modal-footer">
+              <div>
+                <Button
+                  className="close_btn"
+                  type="button"
+                  onClick={() => dispatch(toggleCancel(false))}
+                >
+                  Close
+                </Button>
+                <Button className="verify_btn" type="submit">
+                  Done
+                </Button>
+              </div>
+            </Modal.Footer>
+          </form>
+        )}
+      </Formik>
+    </Modal>
+  );
+};

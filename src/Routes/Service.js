@@ -62,6 +62,10 @@ export const PastConsultAPI = (data) =>
   POST(`${BASE_URL}/consultation-past`, data);
 export const ConsultDetailsAPI = (data) =>
   POST(`${BASE_URL}/consultation-details`, data);
+export const CancelConsultAPI = (data) =>
+  POST(`${BASE_URL}/consultation-cancel`, data);
+export const CancelAllConsultAPI = (data) =>
+  POST(`${BASE_URL}/consultation-cancel-all`, data);
 
 //* PAYOUTS API REQUESTS
 export const PayoutsAPI = (data) => POST(`${BASE_URL}/payouts-recent`, data);
