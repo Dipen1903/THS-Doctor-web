@@ -18,6 +18,7 @@ import TermsAndConditions from "../Components/Private/Others/TermsAndConditions"
 import HelpAndSupport from "../Components/Private/Others/HelpAndSupport";
 import Payouts from "../Components/Private/Payouts/Payouts";
 import PayoutDetailed from "../Components/Private/Payouts/PayoutDetailed";
+import ResetProfile from "../Components/Private/SetupProfile/ResetProfile";
 
 // import UserProfile from "../Components/Public/Userprofile/userprofile";
 // import UserProfile2 from "../Components/Public/Userprofile/userprofile2";
@@ -48,7 +49,6 @@ function RootRoute() {
           </PublicRoutes>
         }
       />
-      {/*//* Profile Details fill */}
       <Route path="details">
         <Route
           path="personal-work"
@@ -68,6 +68,14 @@ function RootRoute() {
           }
         />
       </Route>
+      <Route
+        path="reverify"
+        element={
+          <PrivateRoutes isBanner={false} isHeader={true}>
+            <ResetProfile />
+          </PrivateRoutes>
+        }
+      ></Route>
 
       <Route
         path="/dashboard"
@@ -163,37 +171,6 @@ function RootRoute() {
           </PrivateRoutes>
         }
       />
-
-      {/* 
-      <Route
-        path="/userprofile"
-        element={
-          <PublicRoutes>
-            <UserProfile />
-          </PublicRoutes>
-        }
-      />
-      <Route
-        path="/userprofile2"
-        element={
-          <PublicRoutes>
-            <UserProfile2 />
-          </PublicRoutes>
-        }
-      />
-      <Route
-        path="/userprofile3"
-        element={
-          <PublicRoutes>
-            <UserProfile3 />
-          </PublicRoutes>
-        }
-      />
-      <Route path="/home" element={<Homepage />} />
-      <Route path="/filloutmyworkprofile" element={<Filloutmyworkprofile />} />
-      <Route path="/setuppayment" element={<Setuppayment />} />
-      <Route path="/consultation" element={<Consultationtable />} />
-      <Route path="/appointment1" element={<Appointment1 />} /> */}
     </Routes>
   );
 }

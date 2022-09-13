@@ -7,6 +7,7 @@ import Table from "../../Common/Layouts/Table";
 import { useDispatch, useSelector } from "react-redux";
 import {
   CancelConsult,
+  DelayConsult,
   toggleCancel,
 } from "../../../Store/Reducers/ConsultationsReducer";
 import { ErrorMessage, Formik, useFormik } from "formik";
@@ -20,11 +21,11 @@ function NewConsultation({ upcomingConsults = [] }) {
   const columns = [
     {
       Header: "Appointment ID",
-      accessor: "appointment_id", // accessor is the "key" in the data
+      accessor: "appointment_id",
     },
     {
       Header: "Patient",
-      accessor: "name", // accessor is the "key" in the data
+      accessor: "name",
     },
     {
       Header: "Age",
@@ -53,15 +54,11 @@ function NewConsultation({ upcomingConsults = [] }) {
           row: { original },
         },
       }) => {
-        return (
-          <span class="failed_tag">
-            {ConvertHMS(
-              moment().diff(original?.appointment_date_time, "seconds")
-            )}
-            {/* {moment(original?.appointment_date_time).fromNow(true)}  */}
-            Left
-          </span>
+        var duration = moment.duration(
+          moment(original?.appointment_date_time).diff(moment.now())
         );
+        var seconds = parseInt(duration.asSeconds());
+        return <span class="failed_tag">{`${ConvertHMS(seconds)} Left`}</span>;
       },
     },
     {
@@ -74,18 +71,27 @@ function NewConsultation({ upcomingConsults = [] }) {
         },
       }) => {
         return (
-          <select className="custom-select">
-            <option value="0">No delay</option>
-            <option value="1">5 min</option>
-            <option value="2">10 min</option>
-            <option value="3">15 min</option>
+          <select
+            className="custom-select"
+            onChange={(e) => {
+              e.preventDefault();
+              let delay_time = e?.target?.value;
+              dispatch(
+                DelayConsult({ appointment_id: original?.id, delay_time })
+              );
+            }}
+          >
+            <option value="0 min">No delay</option>
+            <option value="5 min">5 min</option>
+            <option value="10 min">10 min</option>
+            <option value="15 min">15 min</option>
           </select>
         );
       },
     },
     {
       Header: "Type",
-      accessor: "type",
+      accessor: "booking_type",
     },
     {
       Header: "Chat",

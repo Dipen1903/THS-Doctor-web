@@ -7,6 +7,7 @@ import NewConsultation from "./NewConsultation";
 import PastConsultation from "./PastConsultation";
 import {
   CancelAllConsult,
+  CancelReasons,
   GetNewConsults,
   GetPastConsults,
   toggleCancelAll,
@@ -18,9 +19,8 @@ import { Field, Formik } from "formik";
 import FormControl from "../../Common/Forms/FormControl";
 function ConsultIndex() {
   const dispatch = useDispatch();
-  const { upcomingConsults, pastConsults, isCancelAll } = useSelector(
-    ({ ConsultSlice }) => ConsultSlice
-  );
+  const { upcomingConsults, pastConsults, isCancelAll, cancelReasons } =
+    useSelector(({ ConsultSlice }) => ConsultSlice);
   const [filteredData, setFilteredData] = useState({
     upcomingConsults: [],
     pastConsults: [],
@@ -81,6 +81,7 @@ function ConsultIndex() {
   useEffect(() => {
     dispatch(GetNewConsults());
     dispatch(GetPastConsults());
+    dispatch(CancelReasons());
     return () => {};
   }, []);
 
@@ -231,24 +232,17 @@ function ConsultIndex() {
             <form onSubmit={handleSubmit}>
               <Modal.Body className="consultation-modal-body-text">
                 <div role="group" aria-labelledby="my-radio-group">
-                  <label className="checkbox_input">
-                    <Field
-                      type="radio"
-                      id="reason_type"
-                      name="reason_type"
-                      value="The question is'n my speciality"
-                    />
-                    <span> The question is'n my speciality</span>
-                  </label>
-                  <label className="checkbox_input">
-                    <Field
-                      type="radio"
-                      id="reason_type"
-                      name="reason_type"
-                      value="The patient behaves inappropriately"
-                    />
-                    <span> The patient behaves inappropriately</span>
-                  </label>
+                  {cancelReasons?.map((item) => (
+                    <label className="checkbox_input">
+                      <Field
+                        type="radio"
+                        id="reason_type"
+                        name="reason_type"
+                        value={item?.name}
+                      />
+                      <span>{item?.name}</span>
+                    </label>
+                  ))}
                   <label className="checkbox_input">
                     <Field
                       type="radio"

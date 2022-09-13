@@ -200,3 +200,25 @@ export const PhoneNumberSchema = Yup.object({
 export const CancelConsultSchema = Yup.object({
   reason: Yup.string().required("Please provide any reason!"),
 });
+
+export const validateIFSC = (value) => {
+  let errorMessage;
+  if (!/^[A-Z]{4}0[A-Z0-9]{6}$/i.test(value)) {
+    errorMessage = "Please enter valid IFSC code";
+  }
+  return errorMessage;
+};
+export const validateAcccountNumber = (value) => {
+  let errorMessage;
+  if (!/^\d{9,18}$/i.test(value)) {
+    errorMessage = "Please enter valid account number";
+  }
+  return errorMessage;
+};
+export const validateConfirmAcccountNumber = (value) => {
+  let errorMessage;
+  // if (value !== values?.account_number) {
+  //   errorMessage = "Account number not matched";
+  // }
+  return errorMessage;
+};

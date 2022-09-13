@@ -96,7 +96,7 @@ function PastConsultation({ pastConsults = [] }) {
 }
 
 export default PastConsultation;
-const ConsultDetails = (props) => {
+export const ConsultDetails = (props) => {
   const { values, ...rest } = props;
   const { consultDetails } = useSelector(({ ConsultSlice }) => ConsultSlice);
   return (

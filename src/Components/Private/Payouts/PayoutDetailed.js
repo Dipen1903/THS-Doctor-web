@@ -3,17 +3,20 @@ import React, { useEffect, useState } from "react";
 import { Button, Container } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
+import { GetConsultDetails } from "../../../Store/Reducers/ConsultationsReducer";
 import { GetPayoutDetails } from "../../../Store/Reducers/PayoutReducer";
 import { Icon } from "../../../Utilities/Icons";
 import Table from "../../Common/Layouts/Table";
+import { ConsultDetails } from "../Consultations/PastConsultation";
 
 function PayoutDetailed() {
   const { id } = useParams();
   const dispatch = useDispatch();
+  const [show, hide] = useState(false);
   const [filteredData, setFilterData] = useState([]);
-  const { PayoutSlice, ProfileSlice } = useSelector((state) => state);
-  const { payouts, payoutDetails } = PayoutSlice;
-  const { userProfile } = ProfileSlice;
+  const [appointments, setAppointments] = useState([]);
+  const { PayoutSlice } = useSelector((state) => state);
+  const { payoutDetails } = PayoutSlice;
 
   const columns = [
     {
@@ -22,14 +25,17 @@ function PayoutDetailed() {
     },
     {
       Header: "Patient",
-      accessor: "created_at", // accessor is the "key" in the data
-      Cell: ({ cell: { value } }) => {
-        return <></>;
-      },
+      accessor: "patient_details.name", // accessor is the "key" in the data
+      // Cell: ({ cell: { value } }) => {
+      //   return <></>;
+      // },
     },
     {
       Header: "Date-Time",
-      accessor: "withdrawable_balance",
+      accessor: "appointment_date_time",
+      Cell: ({ cell: { value } }) => {
+        return <>{moment(value).format("DD MMM hh:mm A")}</>;
+      },
     },
     {
       Header: "Status",
@@ -57,18 +63,27 @@ function PayoutDetailed() {
         },
       }) => {
         return (
-          <center>
-            {/* <Link to={`/payouts/${original?.id}`}> */}
-            <img src={Icon.Eye} alt="view" />
-            {/* </Link> */}
-          </center>
+          <img
+            src={Icon.Eye}
+            alt="view"
+            className="p-2"
+            onClick={() => {
+              dispatch(GetConsultDetails({ appointment_id: original?.id }));
+              hide(true);
+            }}
+          />
         );
       },
     },
   ];
   useEffect(() => {
+    if (payoutDetails?.appointment_list?.length) {
+      setAppointments(payoutDetails?.appointment_list);
+    }
+    return () => {};
+  }, [payoutDetails]);
+  useEffect(() => {
     dispatch(GetPayoutDetails({ payout_id: id }));
-
     return () => {};
   }, [id]);
 
@@ -81,8 +96,12 @@ function PayoutDetailed() {
           </Button>
         </Link>
       </div>
-      <h2 className="payout_title mt_10">Payout ID: #{id}</h2>
-      <h5 className="payout_date mb_20">22 Apr. 2022 6:00 PM</h5>
+      <h2 className="payout_title mt_10">
+        Payout ID: #{payoutDetails?.payout_id}
+      </h2>
+      <h5 className="payout_date mb_20">
+        {moment(payoutDetails?.created_at).format("DD MMM,YYYY hh:mm A")}
+      </h5>
       <div className="d-flex justify-content-between flex-wrap payouts_buttons">
         <div className="payout_search_box">
           <form class="form-inline d-flex justify-content-start align-items-center">
@@ -98,19 +117,28 @@ function PayoutDetailed() {
         <div className="d-flex justify-content-between button-spaces">
           <div className="withdraw_balance_card">
             <h3 className="withdraw_balance_text">
-              Earning from 3 Consultations:{" "}
-              <span class="withdraw_balance_amount">Rs.1200</span>
+              Earning from {payoutDetails?.total_consultations?.toString()}{" "}
+              Consultations:{" "}
+              <span class="withdraw_balance_amount">
+                Rs.{payoutDetails?.withdrawable_balance}
+              </span>
             </h3>
           </div>
         </div>
       </div>
-      <div className="payout_card_box mt_20">
-        <Table
-          data={payouts.length ? payouts : filteredData}
-          columns={columns}
-          pagination={true}
-        />
-      </div>
+      {/* <div className="payout_card_box mt_20"> */}
+      <Table
+        data={filteredData.length ? filteredData : appointments}
+        columns={columns}
+        pagination={true}
+      />
+      <ConsultDetails
+        show={show}
+        onHide={(e) => {
+          hide(false);
+        }}
+      />
+      {/* </div> */}
     </Container>
   );
 }

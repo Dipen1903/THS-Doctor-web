@@ -2,7 +2,9 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import {
   CancelAllConsultAPI,
   CancelConsultAPI,
+  CancelReasonsAPI,
   ConsultDetailsAPI,
+  DelayConsultAPI,
   NewConsultAPI,
   PastConsultAPI,
 } from "../../Routes/Service";
@@ -13,6 +15,7 @@ import { setLoading, setMessage } from "./LayoutSlice";
 const initialState = {
   consultDetails: "",
   isCancel: false,
+  cancelReasons: [],
   isCancelAll: false,
   upcomingConsults: [],
   pastConsults: [],
@@ -152,6 +155,57 @@ export const CancelAllConsult = createAsyncThunk(
     }
   }
 );
+export const DelayConsult = createAsyncThunk(
+  "DelayConsult",
+  async (values, { dispatch }) => {
+    try {
+      const result = await DelayConsultAPI(values);
+      if (result?.success) {
+        dispatch(
+          setMessage({
+            text: result?.message,
+            type: AlertEnum.Success,
+          })
+        );
+        dispatch(GetNewConsults());
+        return result?.data;
+      } else {
+        throw result;
+      }
+    } catch (error) {
+      dispatch(setLoading(false));
+      dispatch(
+        setMessage({
+          text: error?.message,
+          type: AlertEnum.Error,
+        })
+      );
+      return error;
+    }
+  }
+);
+export const CancelReasons = createAsyncThunk(
+  "CancelReasons",
+  async (values, { dispatch }) => {
+    try {
+      const result = await CancelReasonsAPI(values);
+      if (result?.success) {
+        return result?.data;
+      } else {
+        throw result;
+      }
+    } catch (error) {
+      dispatch(
+        setMessage({
+          text: error?.message,
+          type: AlertEnum.Error,
+        })
+      );
+      return error;
+    }
+  }
+);
+
 export const ConsultSlice = createSlice({
   name: "ConsultSlice",
   initialState,
@@ -172,6 +226,9 @@ export const ConsultSlice = createSlice({
     });
     builder.addCase(GetConsultDetails.fulfilled, (state, action) => {
       state.consultDetails = action.payload;
+    });
+    builder.addCase(CancelReasons.fulfilled, (state, action) => {
+      state.cancelReasons = action.payload;
     });
   },
 });

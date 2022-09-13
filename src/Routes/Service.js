@@ -66,6 +66,10 @@ export const CancelConsultAPI = (data) =>
   POST(`${BASE_URL}/consultation-cancel`, data);
 export const CancelAllConsultAPI = (data) =>
   POST(`${BASE_URL}/consultation-cancel-all`, data);
+export const DelayConsultAPI = (data) =>
+  POST(`${BASE_URL}/delay-appointment`, data);
+export const CancelReasonsAPI = (data) =>
+  POST(`${BASE_URL}/cancelation-reason`, data);
 
 //* PAYOUTS API REQUESTS
 export const PayoutsAPI = (data) => POST(`${BASE_URL}/payouts-recent`, data);

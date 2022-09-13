@@ -32,13 +32,12 @@ export default function Table(props) {
     nextPage,
     previousPage,
     setPageSize,
-
-    state: { pageIndex, pageSize },
+    state: { pageIndex },
   } = useTable(
     {
       columns,
       data,
-      initialState: {},
+      initialState: { pageSize: 10 },
     },
     useSortBy,
     useExpanded,
@@ -189,6 +188,7 @@ export default function Table(props) {
                 <Form.Group className="mb-3 item_drop_box">
                   <select
                     className="form-select"
+                    defaultValue={10}
                     onChange={(e) => {
                       setPageSize(
                         e.target.value === "All"

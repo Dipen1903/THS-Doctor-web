@@ -1,23 +1,14 @@
 import React from "react";
 import { useFormikContext } from "formik";
 import FormControl from "../../../Common/Forms/FormControl";
+import {
+  validateAcccountNumber,
+  validateConfirmAcccountNumber,
+  validateIFSC,
+} from "../../../../Utilities/Schema";
 
 function BankInformation() {
   const { values, handleBlur, handleChange } = useFormikContext();
-  const validateIFSC = (value) => {
-    let errorMessage;
-    if (!/^[A-Z]{4}0[A-Z0-9]{6}$/i.test(value)) {
-      errorMessage = "Please enter valid IFSC code";
-    }
-    return errorMessage;
-  };
-  const validateAcccountNumber = (value) => {
-    let errorMessage;
-    if (!/^\d{9,18}$/i.test(value)) {
-      errorMessage = "Please enter valid account number";
-    }
-    return errorMessage;
-  };
   const validateConfirmAcccountNumber = (value) => {
     let errorMessage;
     if (value !== values?.account_number) {

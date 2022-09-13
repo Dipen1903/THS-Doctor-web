@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+
 import {
   GetRejectionDetails,
   GetUserProfile,
   nextStep,
 } from "../../../Store/Reducers/ProfileReducer";
-import { isEmpty } from "../../../Utilities/Functions";
 import { BackGround } from "../../../Utilities/Icons";
 
 function DoctorStatus() {
@@ -29,6 +29,7 @@ function DoctorStatus() {
         dispatch(GetRejectionDetails());
       }
     });
+
     return () => {};
   }, []);
   return (
@@ -153,7 +154,9 @@ function DoctorStatus() {
                   Please fill Profile details to get verified and start
                   consulting online on THS
                 </h3>
-                <button className="profile_btn mb_40">Edit My Profile</button>
+                <Link to="/reverify">
+                  <button className="profile_btn mb_40">Edit My Profile</button>
+                </Link>
               </center>
             </div>
           </div>
