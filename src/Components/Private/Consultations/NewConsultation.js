@@ -7,10 +7,11 @@ import Table from "../../Common/Layouts/Table";
 import { useDispatch, useSelector } from "react-redux";
 import {
   CancelConsult,
+  CancelReasons,
   DelayConsult,
   toggleCancel,
 } from "../../../Store/Reducers/ConsultationsReducer";
-import { ErrorMessage, Formik, useFormik } from "formik";
+import { ErrorMessage, Field, Formik, useFormik } from "formik";
 import { CancelConsultSchema } from "../../../Utilities/Schema";
 import FormControl from "../../Common/Forms/FormControl";
 import { ConvertHMS } from "../../../Utilities/Functions";
@@ -135,8 +136,23 @@ function NewConsultation({ upcomingConsults = [] }) {
 export default NewConsultation;
 const CancelModal = ({ appointment_id }) => {
   const dispatch = useDispatch();
-  const { isCancel } = useSelector(({ ConsultSlice }) => ConsultSlice);
-  useEffect(() => {}, [appointment_id]);
+  const { isCancel, cancelReasons } = useSelector(
+    ({ ConsultSlice }) => ConsultSlice
+  );
+
+  const cancelSubmit = (values, { resetForm }) => {
+    debugger;
+    let tempValues = { ...values };
+    if (values?.reason_type !== "others") {
+      tempValues.reason = values.reason_type;
+    }
+    dispatch(CancelConsult(tempValues));
+    resetForm();
+  };
+
+  useEffect(() => {
+    dispatch(CancelReasons());
+  }, [appointment_id]);
   return (
     <Modal
       show={isCancel}
@@ -155,24 +171,56 @@ const CancelModal = ({ appointment_id }) => {
         </Modal.Title>
       </Modal.Header>
       <Formik
-        initialValues={{ appointment_id, reason: "" }}
+        initialValues={{
+          appointment_id,
+          reason: "",
+          reason_type: "",
+          other: false,
+        }}
         enableReinitialize={true}
-        validationSchema={CancelConsultSchema}
-        onSubmit={(values) => dispatch(CancelConsult(values))}
+        // validationSchema={CancelConsultSchema}
+        onSubmit={cancelSubmit}
       >
         {({ values, handleChange, handleBlur, handleSubmit }) => (
           <form onSubmit={handleSubmit}>
             <Modal.Body className="consultation-modal-body-text">
-              <FormControl
-                control="textArea"
-                className="optional-note-text m-0 w-100"
-                style={{ border: "1px solid #80808080" }}
-                value={values?.reason}
-                name="reason"
-                id="reason"
-                onChange={handleChange}
-                onBlur={handleBlur}
-              />
+              <div role="group" aria-labelledby="my-radio-group">
+                {cancelReasons?.map((item) => (
+                  <label className="checkbox_input">
+                    <Field
+                      type="radio"
+                      id="reason_type"
+                      name="reason_type"
+                      value={item?.name}
+                    />
+                    <span>{item?.name}</span>
+                  </label>
+                ))}
+                <label className="checkbox_input">
+                  <Field
+                    type="radio"
+                    id="reason_type"
+                    name="reason_type"
+                    value="others"
+                  />
+                  <span>Others</span>
+                </label>
+              </div>
+              {values?.reason_type === "others" && (
+                <div className="optional-note">
+                  <p>Optional Note</p>
+                  <FormControl
+                    control="textArea"
+                    className="optional-note-text m-0 w-100"
+                    style={{ border: "1px solid #80808080" }}
+                    value={values?.reason}
+                    name="reason"
+                    id="reason"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                  />
+                </div>
+              )}
             </Modal.Body>
             <Modal.Footer className="consultation-modal-footer">
               <div>

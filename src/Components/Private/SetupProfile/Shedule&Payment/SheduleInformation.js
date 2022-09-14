@@ -86,7 +86,7 @@ function SheduleInformation() {
                             { value: "sudisable", key: "S", disabled: true },
                             { value: "monday", key: "M" },
                             { value: "tuesday", key: "T" },
-                            { value: "wednsday", key: "W" },
+                            { value: "wednesday", key: "W" },
                             { value: "thursday", key: "T" },
                             { value: "friday", key: "F" },
                             { value: "sadisable", key: "S", disabled: true },

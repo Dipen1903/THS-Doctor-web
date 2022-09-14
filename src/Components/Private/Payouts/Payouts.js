@@ -3,15 +3,18 @@ import React, { useEffect, useState } from "react";
 import { Button, Container } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { setMessage } from "../../../Store/Reducers/LayoutSlice";
 import {
   GetPayouts,
   RequestWithdraw,
 } from "../../../Store/Reducers/PayoutReducer";
+import { AlertEnum } from "../../../Utilities/Enums";
 import { Icon } from "../../../Utilities/Icons";
 import Table from "../../Common/Layouts/Table";
 
 function Payouts() {
   const dispatch = useDispatch();
+  const [isRequested, setIsRequested] = useState();
   const [filteredData, setFilterData] = useState([]);
   const { PayoutSlice, ProfileSlice } = useSelector((state) => state);
   const { payouts } = PayoutSlice;
@@ -20,7 +23,7 @@ function Payouts() {
   const columns = [
     {
       Header: "Payout ID",
-      accessor: "id", // accessor is the "key" in the data
+      accessor: "payout_id", // accessor is the "key" in the data
     },
     {
       Header: "Date-Time",
@@ -77,6 +80,35 @@ function Payouts() {
     },
   ];
 
+  const handleFilter = (text) => {
+    try {
+      let tempPayouts;
+      tempPayouts = payouts.filter(
+        (item) => item?.payout_id?.includes(text) == 1
+      );
+      if (tempPayouts?.length) {
+        setFilterData(tempPayouts);
+      }
+      if (!tempPayouts?.length) {
+        dispatch(
+          setMessage({
+            type: AlertEnum.Info,
+            text: `No payout found for ${text}`,
+          })
+        );
+      }
+    } catch (error) {}
+  };
+
+  useEffect(() => {
+    if (payouts?.length) {
+      let temp = payouts[0];
+      if (parseInt(temp?.status) === 0) {
+        setIsRequested(temp);
+      }
+    }
+    return () => {};
+  }, [payouts]);
   useEffect(() => {
     dispatch(GetPayouts());
     return () => {};
@@ -94,6 +126,7 @@ function Payouts() {
               type="search"
               placeholder="Search"
               aria-label="Search"
+              onChange={(e) => handleFilter(e?.target?.value)}
             />
           </form>
         </div>
@@ -108,21 +141,27 @@ function Payouts() {
           </div>
           <div>
             <Button
-              variant="primary"
-              disabled={!parseInt(userProfile?.wallet)}
-              className="withdraw_btn"
+              disabled={!parseInt(userProfile?.wallet) || isRequested}
+              className={isRequested ? "requiest_btn" : "withdraw_btn"}
               onClick={(e) => {
                 e.preventDefault();
                 dispatch(RequestWithdraw({ amount: userProfile?.wallet || 0 }));
               }}
             >
-              Withdraw
+              {isRequested ? (
+                <>
+                  Request sent for payouts{" "}
+                  {moment(isRequested?.created_at).format("DD MMM YYYY")}
+                </>
+              ) : (
+                "Withdraw"
+              )}
             </Button>
           </div>
         </div>
       </div>
       <Table
-        data={payouts.length ? payouts : filteredData}
+        data={filteredData.length ? filteredData : payouts}
         columns={columns}
         pagination={true}
       />

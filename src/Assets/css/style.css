@@ -3216,6 +3216,7 @@ button.personal_profile_btn.float_right.btn.btn-primary img {
 }
 .withdraw_btn {
   background: linear-gradient(45deg, #3093bb 0%, #82dbff 100%);
+  color: #ffffff;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
   border-radius: 8px;
   border: none;
@@ -3224,7 +3225,6 @@ button.personal_profile_btn.float_right.btn.btn-primary img {
   font-weight: 600;
   font-size: 14px;
   line-height: 24px;
-  color: #ffffff;
   padding: 10px 30px;
 }
 .withdraw_balance_card {
@@ -3360,18 +3360,17 @@ button.personal_profile_btn.float_right.btn.btn-primary img {
   background: #fff;
 }
 .requiest_btn {
-  background: #f0f0f0;
+  background: #f0f0f0 !important;
+  color: #9393aa !important;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
   border-radius: 8px;
-  padding: 10px 30px 10px 30px;
+  border: none;
   font-family: "Mulish";
   font-style: normal;
   font-weight: 600;
-  font-size: 12px;
-  line-height: 12px;
-  color: #9393aa;
-  border: none;
-  text-align: left;
+  font-size: 14px;
+  line-height: 24px;
+  padding: 10px 30px;
 }
 .payout_date {
   font-family: "Mulish";

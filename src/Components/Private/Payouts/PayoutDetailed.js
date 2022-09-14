@@ -4,7 +4,9 @@ import { Button, Container } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { GetConsultDetails } from "../../../Store/Reducers/ConsultationsReducer";
+import { setMessage } from "../../../Store/Reducers/LayoutSlice";
 import { GetPayoutDetails } from "../../../Store/Reducers/PayoutReducer";
+import { AlertEnum } from "../../../Utilities/Enums";
 import { Icon } from "../../../Utilities/Icons";
 import Table from "../../Common/Layouts/Table";
 import { ConsultDetails } from "../Consultations/PastConsultation";
@@ -76,6 +78,28 @@ function PayoutDetailed() {
       },
     },
   ];
+  const handleFilter = (text) => {
+    try {
+      let tempPayouts;
+      tempPayouts = payoutDetails?.appointment_list.filter(
+        (item) =>
+          item?.patient_details?.name
+            ?.toUpperCase()
+            .includes(text.toUpperCase()) == 1
+      );
+      if (tempPayouts?.length) {
+        setFilterData(tempPayouts);
+      }
+      if (!tempPayouts?.length) {
+        dispatch(
+          setMessage({
+            type: AlertEnum.Info,
+            text: `No consultation found for ${text}`,
+          })
+        );
+      }
+    } catch (error) {}
+  };
   useEffect(() => {
     if (payoutDetails?.appointment_list?.length) {
       setAppointments(payoutDetails?.appointment_list);
@@ -111,13 +135,14 @@ function PayoutDetailed() {
               type="search"
               placeholder="Search"
               aria-label="Search"
+              onChange={(e) => handleFilter(e?.target?.value)}
             />
           </form>
         </div>
         <div className="d-flex justify-content-between button-spaces">
           <div className="withdraw_balance_card">
             <h3 className="withdraw_balance_text">
-              Earning from {payoutDetails?.total_consultations?.toString()}{" "}
+              Earning from {payoutDetails?.appointment_list?.length}{" "}
               Consultations:{" "}
               <span class="withdraw_balance_amount">
                 Rs.{payoutDetails?.withdrawable_balance}

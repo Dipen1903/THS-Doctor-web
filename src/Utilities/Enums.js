@@ -43,7 +43,7 @@ export const ProfileEnum = {
 
 export const ScheduleEnum = {
   weekdays: {
-    days: ["monday", "tuesday", "wednsday", "thursday", "friday"], //"monday","tuesday"
+    days: ["monday", "tuesday", "wednesday", "thursday", "friday"], //"monday","tuesday"
     time_period: {
       morning: {
         start_time: "",

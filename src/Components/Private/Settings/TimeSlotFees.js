@@ -106,6 +106,7 @@ function Timeslotfees() {
                     tempValues.emergency_call = values.emergency_call ? 1 : 0;
                     dispatch(EditSchedule(tempValues)).then((res) => {
                       if (res?.payload?.success) {
+                        setEdit(false);
                         dispatch(GetUserProfile());
                       }
                     });
@@ -181,7 +182,7 @@ function Timeslotfees() {
                                                 disabled: !edit,
                                               },
                                               {
-                                                value: "wednsday",
+                                                value: "wednesday",
                                                 key: "W",
                                                 disabled: !edit,
                                               },
