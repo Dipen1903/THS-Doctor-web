@@ -61,7 +61,7 @@ export const ScheduleEnum = {
           { label: "11:15 AM", value: "11:15 AM" },
           { label: "11:30 AM", value: "11:30 AM" },
           { label: "11:45 AM", value: "11:45 AM" },
-          { label: "12:00 AM", value: "12:00 AM" },
+          { label: "12:00 PM", value: "12:00 PM" },
         ],
       },
       afternoon: {
@@ -138,7 +138,7 @@ export const ScheduleEnum = {
           { label: "11:15 AM", value: "11:15 AM" },
           { label: "11:30 AM", value: "11:30 AM" },
           { label: "11:45 AM", value: "11:45 AM" },
-          { label: "12:00 AM", value: "12:00 AM" },
+          { label: "12:00 PM", value: "12:00 PM" },
         ],
       },
       afternoon: {
@@ -199,6 +199,16 @@ export const ScheduleEnum = {
   emergency_call: false,
 };
 
+export const RejectedProfileEnum = {
+  registration_number: "",
+  account_holder_name: "",
+  account_number: "",
+  confirm_account_number: "",
+  ifsc_code: "",
+  qualification: "",
+  proof: "",
+  signature: "",
+};
 export const BankEnum = {
   account_holder_name: "",
   account_number: "",

@@ -42,21 +42,20 @@ function PastConsultation({ pastConsults = [] }) {
     },
     {
       Header: "Type",
-      accessor: "type",
+      accessor: "booking_type",
+      Cell: ({ cell: { value } }) => {
+        return <span style={{ textTransform: "capitalize" }}>{value}</span>;
+      },
     },
     {
       Header: "Status",
       accessor: "status",
-      Cell: ({
-        cell: {
-          value,
-          row: { original },
-        },
-      }) => {
-        return value ? (
-          <span class="failed_tag">Cancelled</span>
-        ) : (
-          <span class="paid_tag">Completed</span>
+      Cell: ({ cell: { value } }) => {
+        return (
+          <>
+            {value === 3 && <span class="failed_tag mx-2">Cancelled</span>}
+            {value === 1 && <span class="paid_tag mx-2">Completed</span>}
+          </>
         );
       },
     },
@@ -116,7 +115,7 @@ export const ConsultDetails = (props) => {
               <span class="failed_tag mx-2">Cancelled</span>
             )}
             {consultDetails?.status === 1 && (
-              <span class="failed_tag mx-2">Completed</span>
+              <span class="paid_tag mx-2">Completed</span>
             )}
           </div>
         </Modal.Title>

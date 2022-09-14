@@ -1,7 +1,7 @@
 import { Field } from "formik";
 import React, { useRef } from "react";
 
-function FileUpload({ label, icon, className, ...rest }) {
+function FileUpload({ label, icon, isPdf, className, ...rest }) {
   const fileRef = useRef();
   return (
     <>
@@ -19,7 +19,9 @@ function FileUpload({ label, icon, className, ...rest }) {
       <input
         ref={fileRef}
         type="file"
-        accept="image/png, image/gif, image/jpeg"
+        accept={`image/png, image/gif, image/jpeg, ${
+          isPdf && "application/pdf"
+        }`}
         hidden
         {...rest}
       />

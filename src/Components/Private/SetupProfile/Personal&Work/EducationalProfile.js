@@ -134,6 +134,7 @@ export default function EducationalProfile({ formProps }) {
                             <FileUpload
                               label="Attach File"
                               icon={Icon.Attach}
+                              isPdf={true}
                               className="attach_certificate"
                               name={`qualification[${index}].file`}
                               id={`qualification[${index}].file`}
@@ -293,6 +294,7 @@ export default function EducationalProfile({ formProps }) {
                               label="Attach File"
                               icon={Icon.Attach}
                               className="attach_certificate"
+                              isPdf={true}
                               name={`proof[${index}].file`}
                               id={`proof[${index}].file`}
                               value={values.proof[index]?.file}

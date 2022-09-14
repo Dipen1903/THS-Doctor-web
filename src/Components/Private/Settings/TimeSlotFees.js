@@ -249,6 +249,7 @@ function Timeslotfees() {
                                                       }
                                                       onChange={() => {}}
                                                       onBlur={handleBlur}
+                                                      isDisabled={!edit}
                                                     />
                                                   </div>
                                                   <div class=" col-md-6">
@@ -285,6 +286,7 @@ function Timeslotfees() {
                                                       }
                                                       onChange={() => {}}
                                                       onBlur={handleBlur}
+                                                      isDisabled={!edit}
                                                     />
                                                   </div>
                                                 </div>
@@ -389,6 +391,7 @@ function Timeslotfees() {
                                                       }
                                                       onChange={() => {}}
                                                       onBlur={handleBlur}
+                                                      isDisabled={!edit}
                                                     />
                                                   </div>
                                                   <div class="col-md-6">
@@ -424,6 +427,7 @@ function Timeslotfees() {
                                                       }
                                                       onChange={() => {}}
                                                       onBlur={handleBlur}
+                                                      isDisabled={!edit}
                                                     />
                                                   </div>
                                                 </div>

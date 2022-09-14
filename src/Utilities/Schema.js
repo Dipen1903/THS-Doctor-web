@@ -1,6 +1,12 @@
 import * as Yup from "yup";
 // const FILE_SIZE = 5e8;
 // const SUPPORTED_FORMATS = "image/jpeg image/png image/gif";
+const REGNUMBERREGEX =
+  /^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9!@#$%^&*]{6,32}$/;
+const PASSWORDREGEX = /(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/;
+const PHONEREGEX = /^([6-9]{1})([0-9]{1})([0-9]{8})$/;
+const ACCOUNTNOREGEX = /^\d{9,18}$/;
+const IFSCREGEX = /^[A-Z]{4}0[A-Z0-9]{6}$/;
 
 export const validateEmail = (email) => {
   return Yup.string().email().isValidSync(email);
@@ -42,7 +48,7 @@ export const ForgotSchema = Yup.object({
 export const ResetPasswordSchema = Yup.object({
   password: Yup.string()
     .matches(
-      /(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/,
+      PASSWORDREGEX,
       "Password must be eight characters and contain uppercase, lowercase, number."
     )
     .required("Please enter your password"),
@@ -51,7 +57,6 @@ export const ResetPasswordSchema = Yup.object({
     "Password does not match."
   ),
 });
-
 export const SignUpSchema = Yup.object({
   email: Yup.string()
     .email("Please enter valid email")
@@ -63,14 +68,11 @@ export const SignUpSchema = Yup.object({
     .max(32, "Last name should be less than 32 characters")
     .required("Please enter your last name"),
   mobile_number: Yup.string()
-    .matches(
-      /^([6-9]{1})([0-9]{1})([0-9]{8})$/,
-      "Please enter valid mobile number"
-    )
+    .matches(PHONEREGEX, "Please enter valid mobile number")
     .required("Please enter your mobile number"),
   password: Yup.string()
     .matches(
-      /(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/,
+      PASSWORDREGEX,
       "Password must be eight characters and contain uppercase, lowercase, number."
     )
     .required("Please enter your password"),
@@ -111,12 +113,13 @@ export const WorkProfileSettingSchema = Yup.object({
     .matches(/^\d/)
     .required("Please enter your experience")
     .nullable(),
-  // registration_number: Yup.string()
+  registration_number: Yup.string().required(
+    "Please enter your registration number"
+  ),
   //   .matches(
   //     /^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9!@#$%^&*]{6,32}$/,
   //     "Please enter valid registration number"
   //   )
-  //   .required("Please enter your registration number")
   //   .nullable(),
   languages: Yup.array()
     .of(Yup.string())
@@ -148,13 +151,14 @@ export const WorkProfileSchema = Yup.object({
     .matches(/^\d/)
     .required("Please enter your experience")
     .nullable(),
-  // registration_number: Yup.string()
-  //   .matches(
-  //     /^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9!@#$%^&*]{6,32}$/,
-  //     "Please enter valid registration number"
-  //   )
-  //   .required("Please enter your registration number")
-  //   .nullable(),
+  registration_number: Yup.string().required(
+    "Please enter your registration number"
+  ),
+  // .matches(
+  //   /^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9!@#$%^&*]{6,32}$/,
+  //   "Please enter valid registration number"
+  // )
+  // .nullable(),
   languages: Yup.array()
     .of(Yup.string())
     .required("Please select any one language"),
@@ -171,9 +175,13 @@ export const EducationalProfileSchema = Yup.object({
     .nullable(),
   signature: Yup.mixed().required("Please upload signature").nullable(),
 });
-
 export const ChangePasswordSchema = Yup.object({
-  new_password: Yup.string().required("Please enter your password"),
+  new_password: Yup.string()
+    .matches(
+      PASSWORDREGEX,
+      "Password must be eight characters and contain uppercase, lowercase, number."
+    )
+    .required("Please enter your password"),
   confirm_password: Yup.string().oneOf(
     [Yup.ref("new_password"), null],
     "Password does not match."
@@ -199,6 +207,49 @@ export const PhoneNumberSchema = Yup.object({
 });
 export const CancelConsultSchema = Yup.object({
   reason: Yup.string().required("Please provide any reason!"),
+});
+export const BankDetailsSchema = Yup.object({
+  account_holder_name: Yup.string().required(
+    "Please enter account holder name."
+  ),
+  account_number: Yup.string()
+    .matches(ACCOUNTNOREGEX, "Please enter valid account number")
+    .required("Please enter your account number"),
+  confirm_account_number: Yup.string().oneOf(
+    [Yup.ref("account_number"), null],
+    "Account number does not match."
+  ),
+  ifsc_code: Yup.string()
+    .matches(IFSCREGEX, "Please enter valid ifsc code")
+    .required("Please enter your ifsc code"),
+});
+export const ResetProfileSchema = Yup.object({
+  registration_number: Yup.string().required(
+    "Please enter your registration number"
+  ),
+  account_holder_name: Yup.string().required(
+    "Please enter account holder name."
+  ),
+  account_number: Yup.string()
+    .matches(ACCOUNTNOREGEX, "Please enter valid account number")
+    .required("Please enter your account number"),
+  confirm_account_number: Yup.string().oneOf(
+    [Yup.ref("account_number"), null],
+    "Account number does not match."
+  ),
+  ifsc_code: Yup.string()
+    .matches(IFSCREGEX, "Please enter valid ifsc code")
+    .required("Please enter your ifsc code"),
+  qualification: Yup.array()
+    .of(Yup.object())
+    .min(1, "Please select any qualification")
+    .required("Please select any qualification")
+    .nullable(),
+  proof: Yup.array()
+    .of(Yup.object())
+    .required("Please select any proof")
+    .nullable(),
+  signature: Yup.mixed().required("Please upload signature").nullable(),
 });
 
 export const validateIFSC = (value) => {

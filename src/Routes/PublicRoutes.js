@@ -19,7 +19,7 @@ function PublicRoutes({ children }) {
     }
 
     return () => {};
-  }, []);
+  }, [token]);
 
   return (
     <div class="section_1_bg">

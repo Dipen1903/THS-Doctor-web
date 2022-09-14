@@ -273,8 +273,8 @@ const OTPLogin = (props) => {
             enableReinitialize
             onSubmit={(values) => {
               dispatch(OTPVerifySignIn(values));
-              navigate("/dashboard");
               props.onHide();
+              navigate("/dashboard");
             }}
           >
             {({ values, setFieldValue, handleSubmit }) => (

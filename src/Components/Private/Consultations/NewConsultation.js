@@ -64,16 +64,17 @@ function NewConsultation({ upcomingConsults = [] }) {
     },
     {
       Header: "Mark Delay",
-      accessor: "delay",
+      accessor: "delay_time",
       Cell: ({
         cell: {
-          value = 0,
+          value,
           row: { original },
         },
       }) => {
         return (
           <select
             className="custom-select"
+            value={value}
             onChange={(e) => {
               e.preventDefault();
               let delay_time = e?.target?.value;
@@ -93,6 +94,9 @@ function NewConsultation({ upcomingConsults = [] }) {
     {
       Header: "Type",
       accessor: "booking_type",
+      Cell: ({ cell: { value } }) => {
+        return <span style={{ textTransform: "capitalize" }}>{value}</span>;
+      },
     },
     {
       Header: "Chat",

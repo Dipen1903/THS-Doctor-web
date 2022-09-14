@@ -1,3 +1,5 @@
+import moment from "moment";
+
 async function buildFormData(formData, data, parentKey) {
   if (
     data &&
@@ -43,8 +45,9 @@ export const isEmpty = (value) => {
   }
 };
 export const compareTime = (time1, time2) => {
-  time1 = time1.split(" ")[0];
-  time2 = time2.split(" ")[0];
+  time1 = moment(time1, ["h:mm A"]).format("HH:mm");
+  time2 = moment(time2, ["h:mm A"]).format("HH:mm");
+
   const [hours1, minutes1, seconds1] = time1.split(":");
   const [hours2, minutes2, seconds2] = time2.split(":");
   const date1 = new Date(2022, 0, 1, +hours1, +minutes1, +seconds1 || "00");

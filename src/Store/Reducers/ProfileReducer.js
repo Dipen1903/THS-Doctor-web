@@ -11,6 +11,7 @@ import {
   OTPNewAPI,
   VerifyOTPNewAPI,
   VerifyOTPCurrentAPI,
+  ReverifyUserProfileAPI,
 } from "../../Routes/Service";
 
 import { AlertEnum } from "../../Utilities/Enums";
@@ -80,6 +81,37 @@ export const EditUserProfile = createAsyncThunk(
     try {
       dispatch(setLoading(true));
       const result = await EditUserProfileAPI(values);
+      if (result?.success) {
+        dispatch(GetUserProfile());
+        dispatch(setLoading(false));
+        dispatch(
+          setMessage({
+            text: result?.message,
+            type: AlertEnum.Success,
+          })
+        );
+        return result;
+      } else {
+        throw result;
+      }
+    } catch (error) {
+      dispatch(setLoading(false));
+      dispatch(
+        setMessage({
+          text: error?.message,
+          type: AlertEnum.Error,
+        })
+      );
+      return error;
+    }
+  }
+);
+export const ReverifyUserProfile = createAsyncThunk(
+  "ReverifyUserProfile",
+  async (values, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const result = await ReverifyUserProfileAPI(values);
       if (result?.success) {
         dispatch(GetUserProfile());
         dispatch(setLoading(false));

@@ -479,6 +479,7 @@ function WorkProfile() {
                                                 className="attach_certificate"
                                                 name={`qualification[${index}].file`}
                                                 id={`qualification[${index}].file`}
+                                                isPdf={true}
                                                 value={
                                                   values.qualification[index]
                                                     ?.file
@@ -682,6 +683,7 @@ function WorkProfile() {
                                           <FileUpload
                                             label="Attach File"
                                             icon={Icon.Attach}
+                                            isPdf={true}
                                             className="attach_certificate"
                                             name={`proof[${index}].file`}
                                             id={`proof[${index}].file`}

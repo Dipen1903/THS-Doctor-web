@@ -84,7 +84,9 @@ function Header() {
               />
               <span class="slider round"></span>
             </label>
-            <span className="go_online ml_10 mt_5">Go online</span>
+            <span className="go_online ml_10 mt_5">
+              {userProfile?.is_online ? "online" : "offline"}
+            </span>
             <img
               src={userProfile?.image || BackGround.Profile}
               alt="Avatar"
@@ -97,29 +99,40 @@ function Header() {
               }
               id="navbarScrollingDropdown"
             >
-              <NavLink className="dropdown-item-link" to="/profile">
-                <NavDropdown.Item href="/profile">
+              <NavLink
+                className="dropdown-item-link"
+                to={userProfile?.is_active !== 1 ? "#!" : "/profile"}
+              >
+                <NavDropdown.Item
+                  disabled={userProfile?.is_active !== 1}
+                  href="/profile"
+                >
                   <img src={Icon.User} alt="Avatar" class=" mr_10 "></img>My
                   Profle
                 </NavDropdown.Item>
               </NavLink>
               <NavDropdown.Divider />
-              <NavLink className="dropdown-item-link" to="/settings">
-                <NavDropdown.Item href="/settings">
+              <NavLink
+                className="dropdown-item-link"
+                to={userProfile?.is_active !== 1 ? "#!" : "/settings"}
+              >
+                <NavDropdown.Item
+                  disabled={userProfile?.is_active !== 1}
+                  href="/settings"
+                >
                   <img src={Icon.Setting} alt="Avatar" class=" mr_10"></img>
                   Settings
                 </NavDropdown.Item>
               </NavLink>
               <NavDropdown.Divider />
-              <NavLink
-                className="dropdown-item-link"
-                to="#!"
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleShow2();
-                }}
-              >
-                <NavDropdown.Item>
+              <NavLink className="dropdown-item-link" to="#!">
+                <NavDropdown.Item
+                  disabled={userProfile?.is_active !== 1}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleShow2();
+                  }}
+                >
                   <img src={Icon.Share} alt="Avatar" class=" mr_10"></img>
                   Share Your Link
                 </NavDropdown.Item>
@@ -147,7 +160,7 @@ function Header() {
               </NavLink>
               <NavDropdown.Divider />
               <NavLink className="dropdown-item-link" to="#!">
-                <NavDropdown.Item>
+                <NavDropdown.Item disabled={userProfile?.is_active !== 1}>
                   <img src={Icon.Logout} alt="Avatar" class="mr_10"></img>
                   Delete My Account
                 </NavDropdown.Item>

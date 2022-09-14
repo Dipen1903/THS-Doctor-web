@@ -33,6 +33,8 @@ export const ToggleLiveStatusAPI = (data) =>
   POST(`${BASE_URL}/online-offline-update`, data);
 export const EditUserProfileAPI = (data) =>
   POST(`${BASE_URL}/edit-profile`, data);
+export const ReverifyUserProfileAPI = (data) =>
+  POST(`${BASE_URL}/re-upload-details`, data);
 export const RejectionDetailsAPI = (data) =>
   POST(`${BASE_URL}/rejection-details`, data);
 export const ChangePasswordAPI = (data) =>

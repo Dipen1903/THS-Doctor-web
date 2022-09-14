@@ -6,11 +6,18 @@ import { Link, useNavigate } from "react-router-dom";
 import {
   EditUserProfile,
   GetRejectionDetails,
+  ReverifyUserProfile,
 } from "../../../Store/Reducers/ProfileReducer";
-import { BankEnum, ProfileEnum, ScheduleEnum } from "../../../Utilities/Enums";
+import {
+  BankEnum,
+  ProfileEnum,
+  RejectedProfileEnum,
+  ScheduleEnum,
+} from "../../../Utilities/Enums";
 import { isEmpty } from "../../../Utilities/Functions";
 import { BackGround, Icon } from "../../../Utilities/Icons";
 import {
+  ResetProfileSchema,
   validateAcccountNumber,
   validateConfirmAcccountNumber,
   validateIFSC,
@@ -31,6 +38,7 @@ function ResetProfile() {
   const { qualification, documentList } = useSelector(
     ({ CommonSlice }) => CommonSlice
   );
+  const [profileData, setProfileData] = useState({ ...RejectedProfileEnum });
   const [rejectedFields, setRejectedFields] = useState([]);
   const [localImage, setLocalImage] = useState();
 
@@ -55,7 +63,49 @@ function ResetProfile() {
       setFieldValue(`signature`, file);
     }
   };
+  const intialLoad = () => {
+    try {
+      let tempData = { ...profileData };
+      let tempProofs = [];
+      let tempQualification = [];
+      tempData.account_holder_name =
+        userProfile?.bank_details?.account_holder_name;
+      tempData.account_number = userProfile?.bank_details?.account_number;
+      tempData.ifsc_code = userProfile?.bank_details?.ifsc_code;
+
+      tempData.registration_number = userProfile?.registration_number;
+
+      tempData.qualification = "";
+      tempData.proof = "";
+
+      if (userProfile?.qualifications?.length) {
+        userProfile?.qualifications?.map((item) => {
+          tempQualification.push({
+            type: item?.qualification,
+            file: item?.document,
+          });
+        });
+        if (!isEmpty(tempQualification))
+          tempData.qualification = tempQualification;
+      }
+
+      if (userProfile?.id_proofs?.length) {
+        userProfile?.id_proofs?.map((item) => {
+          tempProofs.push({
+            type: item?.id_proof,
+            file: item?.document,
+          });
+        });
+        if (!isEmpty(tempProofs)) {
+          tempData.proof = tempProofs;
+        }
+      }
+      tempData.signature = userProfile?.signature;
+      setProfileData(tempData);
+    } catch (error) {}
+  };
   useEffect(() => {
+    intialLoad();
     if (rejectionDetails?.type) {
       setRejectedFields(rejectionDetails?.type.split(","));
     } else {
@@ -72,11 +122,13 @@ function ResetProfile() {
         Reuplaod Required Details
       </h2>
       <Formik
-        initialValues={{}}
+        initialValues={profileData}
+        enableReinitialize
+        validationSchema={ResetProfileSchema}
         onSubmit={(values) => {
           let tempValues = { ...values };
           tempValues["deepIntegrate"] = true;
-          dispatch(EditUserProfile(tempValues));
+          dispatch(ReverifyUserProfile(tempValues));
           navigate("/dashboard");
         }}
       >
@@ -355,6 +407,7 @@ function ResetProfile() {
                                         <FileUpload
                                           label="Attach File"
                                           icon={Icon.Attach}
+                                          isPdf={true}
                                           className="attach_certificate"
                                           name={`qualification[${index}].file`}
                                           id={`qualification[${index}].file`}
@@ -579,6 +632,7 @@ function ResetProfile() {
                                         <FileUpload
                                           label="Attach File"
                                           icon={Icon.Attach}
+                                          isPdf={true}
                                           className="attach_certificate"
                                           name={`proof[${index}].file`}
                                           id={`proof[${index}].file`}
