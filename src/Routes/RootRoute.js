@@ -102,7 +102,7 @@ function RootRoute() {
           </PrivateRoutes>
         }
       />
-      <Route path="/prescription">
+      <Route path="/prescription/:booking_id">
         <Route
           path=""
           element={

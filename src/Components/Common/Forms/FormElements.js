@@ -79,7 +79,7 @@ function Input(props) {
 function TextArea(props) {
   const { name, label, id, ...rest } = props;
   return (
-    <div className="form-group">
+    <div className="form-group mt-2">
       <label htmlFor={id}>{label}</label>
       <Field as="textarea" id={id} name={name} {...rest} />
       <div className="error">
@@ -145,8 +145,7 @@ function Select(props) {
   return (
     <>
       <div className={`form-group ${outerClass}`}>
-        <label className="sign_title">{label}</label>
-
+        {label && <label className="sign_title">{label}</label>}
         <ReactSelect
           closeMenuOnSelect={true}
           className={`${className}`}

@@ -31,7 +31,6 @@ function LabTest() {
                   name="firstname"
                   className="float_right"
                   placeholder="Enter Note"
-                  required
                 />
               </td>
               <td>
@@ -50,7 +49,6 @@ function LabTest() {
                   className="float_right"
                   name="firstname"
                   placeholder="Enter Note"
-                  required
                 />
               </td>
               <td>

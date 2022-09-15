@@ -102,9 +102,13 @@ function NewConsultation({ upcomingConsults = [] }) {
     {
       Header: "Chat",
       accessor: "chat",
-      Cell: () => {
+      Cell: ({
+        cell: {
+          row: { original },
+        },
+      }) => {
         return (
-          <Link to="/prescription">
+          <Link to={`/prescription/${original?.id}`}>
             <img src={Icon.Chat} alt="Avatar" className="chat-icon" />
           </Link>
         );

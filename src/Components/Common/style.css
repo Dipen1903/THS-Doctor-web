@@ -347,3 +347,9 @@ button.setting_profile_btn.float_right.btn.btn-primary img {
 input:disabled {
   color: hsl(0, 0%, 60%);
 }
+.medicine_card_box .form-group > textarea {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}

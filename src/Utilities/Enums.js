@@ -302,14 +302,7 @@ export const PrescriptionEnum = {
       notes: "",
     },
   ],
-  refer_speciality: [
-    {
-      booking_id: "",
-      user_id: "",
-      speciality_id: "",
-      speciality_name: "",
-    },
-  ],
+  refer_speciality: [],
   doctor_notes: {
     booking_id: "",
     user_id: "",
@@ -320,4 +313,5 @@ export const PrescriptionEnum = {
     follow_up_days: "",
     instruction: "",
   },
+  tempSpeciality: [],
 };
