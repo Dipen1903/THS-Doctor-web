@@ -147,7 +147,6 @@ export const OTPVerifySignIn = createAsyncThunk(
             type: AlertEnum.Success,
           })
         );
-        dispatch(setSession(result?.data));
         return result;
       } else {
         throw result;

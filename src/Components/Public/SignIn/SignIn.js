@@ -24,6 +24,7 @@ import {
   OTPVerifyForgot,
   OTPVerifySignIn,
   ResetPassword,
+  setSession,
   SignIn,
   toggleForgotModal,
   toggleOTPModal,
@@ -32,7 +33,7 @@ import {
   toggleVerifyForgotModal,
 } from "../../../Store/Reducers/AuthSlice";
 import OTPInput from "../../Common/Layouts/OTPInput/OTPInput";
-import { isEmpty, padLeadingZeros } from "../../../Utilities/Functions";
+import { padLeadingZeros } from "../../../Utilities/Functions";
 import { useTimer } from "../../../Utilities/Hooks";
 import { BackGround } from "../../../Utilities/Icons";
 
@@ -272,9 +273,13 @@ const OTPLogin = (props) => {
             initialValues={{ mobile_number: verified, otp: "" }}
             enableReinitialize
             onSubmit={(values) => {
-              dispatch(OTPVerifySignIn(values));
-              props.onHide();
-              navigate("/dashboard");
+              dispatch(OTPVerifySignIn(values)).then((res) => {
+                if (res?.payload?.success) {
+                  dispatch(setSession(res?.payload?.data));
+                  navigate("/dashboard");
+                  props.onHide();
+                }
+              });
             }}
           >
             {({ values, setFieldValue, handleSubmit }) => (

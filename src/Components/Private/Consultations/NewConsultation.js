@@ -150,7 +150,6 @@ const CancelModal = ({ appointment_id }) => {
   );
 
   const cancelSubmit = (values, { resetForm }) => {
-    debugger;
     let tempValues = { ...values };
     if (values?.reason_type !== "others") {
       tempValues.reason = values.reason_type;

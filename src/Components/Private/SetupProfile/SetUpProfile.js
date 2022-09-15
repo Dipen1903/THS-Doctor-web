@@ -198,30 +198,30 @@ export function SetUpProfile() {
     dispatch(StateList());
     dispatch(CityList());
     dispatch(SpecialityList());
-    // dispatch(SubSpecialityList());
     dispatch(LanguageList());
     dispatch(QualificationList());
     dispatch(DocumentList());
-
-    return () => {
-      // dispatch(nextStep(1));
-    };
+    return () => {};
   }, []);
 
   return (
     <div class="sub_section_2">
-      <SkipCaution
-        show={skipModal}
-        onHide={() => dispatch(toggleSkip(false))}
-      />
-      <ProfileSubmitted
-        show={profileSuccessModal}
-        onHide={(isCancled) => {
-          dispatch(toggleProfileSuccess(false));
-          dispatch(nextStep(1));
-          isCancled && navigate("/dashboard");
-        }}
-      />
+      {skipModal && (
+        <SkipCaution
+          show={skipModal}
+          onHide={() => dispatch(toggleSkip(false))}
+        />
+      )}
+      {profileSuccessModal && (
+        <ProfileSubmitted
+          show={profileSuccessModal}
+          onHide={(isCancled) => {
+            dispatch(toggleProfileSuccess(false));
+            dispatch(nextStep(1));
+            isCancled && navigate("/dashboard");
+          }}
+        />
+      )}
       <div class="row">
         <div class="col-md-12">
           <div class="display_t js-fullheight">

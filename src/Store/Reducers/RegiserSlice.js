@@ -73,13 +73,13 @@ export const OTPVerifySignUp = createAsyncThunk(
       const result = await OTPVerifySignUpAPI(values);
       if (result?.success) {
         dispatch(setLoading(false));
+        dispatch(removeSession());
         dispatch(
           setMessage({
             text: "Registration completed succesfully",
             type: AlertEnum.Success,
           })
         );
-        dispatch(removeSession());
         dispatch(setSession(result?.data));
         return result;
       } else {

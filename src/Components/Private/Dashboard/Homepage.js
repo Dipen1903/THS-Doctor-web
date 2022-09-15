@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Container from "react-bootstrap/Container";
 import Card from "react-bootstrap/Card";
 import { BackGround, Icon } from "../../../Utilities/Icons";
 import DoctorStatus from "./DoctorStatus";
 
 function Home() {
+  useEffect(() => {
+    return () => {};
+  }, []);
+
   return (
     <>
       <Container
