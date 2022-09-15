@@ -73,6 +73,10 @@ export const DelayConsultAPI = (data) =>
 export const CancelReasonsAPI = (data) =>
   POST(`${BASE_URL}/cancelation-reason`, data);
 
+//* PRESCRIPTION API REQUESTS
+export const CreatePrescAPI = (data) =>
+  POST(`${BASE_URL}/create-prescription`, data);
+
 //* PAYOUTS API REQUESTS
 export const PayoutsAPI = (data) => POST(`${BASE_URL}/payouts-recent`, data);
 export const PayoutDetailsAPI = (data) =>

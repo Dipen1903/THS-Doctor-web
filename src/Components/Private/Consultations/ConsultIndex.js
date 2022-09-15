@@ -63,7 +63,9 @@ function ConsultIndex() {
           setMessage({
             type: AlertEnum.Info,
             text: `No consultation found for ${
-              typeof text === "string" ? text : moment(text).toISOString()
+              typeof text === "string"
+                ? text
+                : moment(text).format("DD/MM/YYYY").toString()
             }`,
           })
         );
@@ -81,6 +83,7 @@ function ConsultIndex() {
   useEffect(() => {
     dispatch(GetNewConsults());
     dispatch(GetPastConsults());
+    handleFilter(moment().format("DD/MM/YYYY"));
     dispatch(CancelReasons());
     return () => {};
   }, []);
@@ -139,7 +142,6 @@ function ConsultIndex() {
                     placeholder="Today"
                     onChange={(e) => {
                       setDate(moment(e.target.value).format("DD/MM/YYYY"));
-
                       handleFilter(moment(e.target.value, "DD/MM/YYYY"));
                     }}
                   >

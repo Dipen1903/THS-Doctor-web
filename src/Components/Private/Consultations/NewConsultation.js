@@ -15,6 +15,7 @@ import { ErrorMessage, Field, Formik, useFormik } from "formik";
 import { CancelConsultSchema } from "../../../Utilities/Schema";
 import FormControl from "../../Common/Forms/FormControl";
 import { ConvertHMS } from "../../../Utilities/Functions";
+import { Link } from "react-router-dom";
 
 function NewConsultation({ upcomingConsults = [] }) {
   const dispatch = useDispatch();
@@ -102,7 +103,11 @@ function NewConsultation({ upcomingConsults = [] }) {
       Header: "Chat",
       accessor: "chat",
       Cell: () => {
-        return <img src={Icon.Chat} alt="Avatar" className="chat-icon"></img>;
+        return (
+          <Link to="/prescription">
+            <img src={Icon.Chat} alt="Avatar" className="chat-icon" />
+          </Link>
+        );
       },
     },
     {
