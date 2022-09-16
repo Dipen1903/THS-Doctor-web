@@ -3737,6 +3737,7 @@ button.personal_profile_btn.float_right.btn.btn-primary img {
 }
 .appoinment_input span {
   text-align: right;
+  color: #9393aa;
 }
 .consultation-modal-body-two .modal-content {
   margin: auto;

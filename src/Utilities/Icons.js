@@ -1,5 +1,7 @@
 //LOGOS
-import LogoShort from "../Assets/svg/LogoShort.svg";
+import LOGOSHORT from "../Assets/svg/LogoShort.svg";
+import LOGOWHITE from "../Assets/svg/LogoWhite.svg";
+import LOGOTITLE from "../Assets/svg/LogoTitle.svg";
 //ICONS
 
 import SEARCH from "../Assets/svg/Search.svg";
@@ -16,6 +18,7 @@ import BACK from "../Assets/svg/Back.svg";
 import EARTH from "../Assets/svg/Earth.svg";
 import AIRPLANE from "../Assets/svg/AirPlane.svg";
 import SPACEMAN from "../Assets/svg/SpaceMan.svg";
+import COMMENT from "../Assets/svg/Comment.svg";
 
 import FEMALEGRAY from "../Assets/svg/Female_grey.svg";
 import FEMALEWHITE from "../Assets/svg/Female_white.svg";
@@ -50,8 +53,9 @@ import MobileGrey from "../Assets/svg/MobileGrey.svg";
 //BACKGROUND IMAGES
 
 export const Logo = {
-  THS: require("../Assets/img/logo.png"),
-  THS_SHORT: LogoShort,
+  THS_Title: LOGOTITLE,
+  THS_WHITE: LOGOWHITE,
+  THS_SHORT: LOGOSHORT,
 };
 export const Icon = {
   MedicineGrey: MEDICINEGREY,
@@ -91,6 +95,7 @@ export const Icon = {
   Dollor: CHARTROUND,
   Chat: CHAT,
   CrossRed: CROSS,
+  Comment: COMMENT,
   Chart: require("../Assets/img/totalrevenue.png"),
   Attach: require("../Assets/img/ic_attach.png"),
   Cross: require("../Assets/img/cross.png"),

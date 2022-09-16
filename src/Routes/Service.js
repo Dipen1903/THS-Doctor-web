@@ -76,6 +76,8 @@ export const CancelReasonsAPI = (data) =>
 //* PRESCRIPTION API REQUESTS
 export const CreatePrescAPI = (data) =>
   POST(`${BASE_URL}/create-prescription`, data);
+export const PrescDetailsAPI = (data) =>
+  POST(`${BASE_URL}/prescription-details`, data);
 
 //* PAYOUTS API REQUESTS
 export const PayoutsAPI = (data) => POST(`${BASE_URL}/payouts-recent`, data);

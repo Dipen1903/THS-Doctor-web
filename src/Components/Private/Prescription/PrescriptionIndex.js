@@ -1,56 +1,91 @@
-import React, { memo, useEffect } from "react";
-import { Container, Button, Tab, Nav, Modal } from "react-bootstrap";
-import { Icon, Logo } from "../../../Utilities/Icons";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import React, { memo, useEffect, useState } from "react";
+import { Container, Button, Tab, Nav } from "react-bootstrap";
+import { Formik } from "formik";
+import { useNavigate, useParams } from "react-router-dom";
+
+import PrescriptionReview from "./PresciptionDetails";
+import { Icon } from "../../../Utilities/Icons";
 import Medicine from "./Tabs/Medicine";
 import LabTest from "./Tabs/LabTest";
 import ReferDoctor from "./Tabs/ReferDoctor";
 import DoctorNotes from "./Tabs/DoctorNotes";
-import { Formik } from "formik";
+
 import { PrescriptionEnum } from "../../../Utilities/Enums";
 import { useDispatch, useSelector } from "react-redux";
-import { GetConsultDetails } from "../../../Store/Reducers/ConsultationsReducer";
-
+import {
+  CreatePrescription,
+  GetConsultDetails,
+  GetPrescDetails,
+} from "../../../Store/Reducers/ConsultationsReducer";
+import { isEmpty } from "../../../Utilities/Functions";
+const Tabs = [
+  {
+    name: "Medicine",
+    key: "medicine",
+    iconGrey: Icon.MedicineGrey,
+    iconBlue: Icon.MedicineBlue,
+    component: () => <Medicine />,
+  },
+  {
+    name: "Lab Test",
+    key: "lab_test",
+    iconGrey: Icon.TestTubeGrey,
+    iconBlue: Icon.TestTubeBlue,
+    component: () => <LabTest />,
+  },
+  {
+    name: "Refer a Doctor",
+    key: "refer_a_doctor",
+    iconGrey: Icon.StethoScopeGrey,
+    iconBlue: Icon.StethoScopeBlue,
+    component: () => <ReferDoctor />,
+  },
+  {
+    name: "Doctor Notes",
+    key: "doctor_notes",
+    iconGrey: Icon.NoteGrey,
+    iconBlue: Icon.NoteBlue,
+    component: () => <DoctorNotes />,
+  },
+];
 function PrescriptionIndex() {
   const { booking_id } = useParams();
-  const { consultDetails } = useSelector(({ ConsultSlice }) => ConsultSlice);
+  const { consultDetails, prescDetails } = useSelector(
+    ({ ConsultSlice }) => ConsultSlice
+  );
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const Tabs = [
-    {
-      name: "Medicine",
-      key: "medicine",
-      iconGrey: Icon.MedicineGrey,
-      iconBlue: Icon.MedicineBlue,
-      component: () => <Medicine />,
-    },
-    {
-      name: "Lab Test",
-      key: "lab_test",
-      iconGrey: Icon.TestTubeGrey,
-      iconBlue: Icon.TestTubeBlue,
-      component: () => <LabTest />,
-    },
-    {
-      name: "Refer a Doctor",
-      key: "refer_a_doctor",
-      iconGrey: Icon.StethoScopeGrey,
-      iconBlue: Icon.StethoScopeBlue,
-      component: () => <ReferDoctor />,
-    },
-    {
-      name: "Doctor Notes",
-      key: "doctor_notes",
-      iconGrey: Icon.NoteGrey,
-      iconBlue: Icon.NoteBlue,
-      component: () => <DoctorNotes />,
-    },
-  ];
+  const [prescriptionData, setPrescriptionData] = useState({
+    ...PrescriptionEnum,
+  });
+  const [activeKey, setActiveKey] = useState("medicine");
+  const intialLoad = () => {
+    let tempValues = { ...prescriptionData };
+    try {
+      if (prescDetails?.lab_test?.length) {
+        tempValues.lab_test = prescDetails?.lab_test;
+      }
+      if (prescDetails?.medicines?.length) {
+        tempValues.medicines = prescDetails?.medicines;
+      }
+      if (prescDetails?.refer_doctors?.length) {
+        tempValues.refer_speciality = prescDetails?.refer_doctors;
+      }
+      if (prescDetails?.doctor_notes) {
+        tempValues.doctor_notes = prescDetails?.doctor_notes;
+      }
+      setPrescriptionData({ ...tempValues });
+    } catch (error) {}
+  };
   useEffect(() => {
-    dispatch(GetConsultDetails({ appointment_id: booking_id }));
-
+    intialLoad();
     return () => {};
-  }, []);
+  }, [prescDetails]);
+
+  useEffect(() => {
+    dispatch(GetPrescDetails({ booking_id }));
+    return () => {};
+  }, [booking_id]);
 
   return (
     <div style={{ background: "#f8fbff" }}>
@@ -78,6 +113,7 @@ function PrescriptionIndex() {
           id="left-tabs-example"
           className="nav_container"
           defaultActiveKey="medicine"
+          activeKey={activeKey}
         >
           <div className="col-md-12 row">
             <div className="col-md-3">
@@ -85,7 +121,10 @@ function PrescriptionIndex() {
                 <ul className="profile_ul">
                   <Nav variant="pills" className="flex-column">
                     {Tabs?.map((item, index) => (
-                      <Nav.Item key={index}>
+                      <Nav.Item
+                        key={index}
+                        onClick={() => setActiveKey(item?.key)}
+                      >
                         <Nav.Link
                           key={index}
                           className="profile_tab_option_bg"
@@ -122,12 +161,21 @@ function PrescriptionIndex() {
             <div className="col-md-9">
               <Formik
                 initialValues={{
-                  booking_id: booking_id,
-                  user_id: consultDetails?.consultation_member_id,
-                  ...PrescriptionEnum,
+                  ...prescriptionData,
+                  booking_id: parseInt(booking_id),
+                  user_id:
+                    consultDetails?.consultation_member_id ||
+                    prescDetails?.patient_details?.id,
                 }}
+                enableReinitialize
                 onSubmit={(values) => {
-                  console.log(values);
+                  let tempValues = { ...values };
+                  Object.keys(values).map((key) => {
+                    if (!isEmpty(values[key])) {
+                      tempValues[key] = JSON.stringify(values[key]);
+                    }
+                  });
+                  dispatch(CreatePrescription(tempValues));
                 }}
               >
                 {({ values, handleSubmit }) => (
@@ -146,7 +194,11 @@ function PrescriptionIndex() {
                               </h4>
                               <Item.component />
                             </div>
-                            <PrescriptionFooter values={values} />
+                            <PrescriptionFooter
+                              values={values}
+                              mapProps={{ item: Item, index }}
+                              setActiveKey={setActiveKey}
+                            />
                           </div>
                         </Tab.Pane>
                       ))}
@@ -161,7 +213,9 @@ function PrescriptionIndex() {
     </div>
   );
 }
-const Footer = ({ values }) => {
+const Footer = ({ values, mapProps, setActiveKey }) => {
+  const { item, index } = mapProps;
+  const dispatch = useDispatch();
   return (
     <div className="prescription_table_bottom_card mt_15">
       <div className="col-md-6 prescription_left_align">
@@ -183,163 +237,30 @@ const Footer = ({ values }) => {
         </div>
       </div>
       <div className="">
-        <button className="table_next_btn">Next</button>
+        {index > 2 ? (
+          <button
+            className="table_next_btn"
+            type="submit"
+            // onClick={() => dispatch(toggleReview(true))}
+          >
+            Generate Prescription
+          </button>
+        ) : (
+          <button
+            className="table_next_btn"
+            type="button"
+            onClick={(e) => {
+              e.preventDefault();
+              setActiveKey(Tabs[index + 1].key);
+            }}
+          >
+            Next
+          </button>
+        )}
       </div>
     </div>
   );
 };
-const Review = ({ values }) => {
-  return (
-    <Modal
-      show={false}
-      onHide={() => {}}
-      className="generate-prescription-modal"
-      centered
-    >
-      <Modal.Header className="prescription-modal-header">
-        <img src={Logo.THS} class="logo ml_10"></img>
-        <div>
-          <h4>Dr John doe</h4>
-          <p>MD - Dermatology</p>
-          <p>Vadodara, Gujarat</p>
-          <p>Medical Registration Number: 31312112311</p>
-        </div>
-      </Modal.Header>
-      <Modal.Body className="prescription-modal-body-text">
-        <div className="prescription_appoinment_input">
-          <div>
-            {" "}
-            <p className="prescription-left-text">Kevin</p>
-            <span>23 | F (THS Id: kev221990)</span>
-          </div>
-          <div>
-            {" "}
-            <p className="prescription-right-text">11 Feb, 2022</p>
-            <span>Prescription Id: 1231213</span>
-          </div>
-        </div>
-
-        <hr />
-
-        <div className="prescription_appoinment_input">
-          <div>
-            {" "}
-            <span className="text-uppercase">Diagnosis</span>
-            <p className="prescription-left-text mt_5">Viral Infection</p>
-          </div>
-          <div>
-            {" "}
-            <span className="text-uppercase">Chef Complaints</span>
-            <p className="prescription-right-text mt_5">Feel headache, Cold</p>
-          </div>
-        </div>
-        <hr />
-
-        <div className="prescription_table_appoinment_input">
-          <div class="table-responsive">
-            <span className="text-uppercase">Mecdicine</span>
-            <table class="table prescription_table">
-              <thead>
-                <tr className="prescription_table_head">
-                  <th className="prescription_table_head_text">Name</th>
-                  <th className="prescription_table_head_text">Mor</th>
-                  <th className="prescription_table_head_text">Aft</th>
-                  <th className="prescription_table_head_text">Eve</th>
-                  <th className="prescription_table_head_text">Ngt</th>
-                  <th className="prescription_table_head_text">Condition</th>
-                  <th className="prescription_table_head_text">
-                    <center>Days</center>
-                  </th>
-                  <th className="prescription_table_head_text">
-                    <center>Qty</center>
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr className="prescription_table_body_row">
-                  <td className="prescription_table_body_text">Dolo 400mg</td>
-                  <td className="prescription_table_body_text">1</td>
-                  <td className="prescription_table_body_text">---</td>
-                  <td className="prescription_table_body_text">---</td>
-                  <td className="prescription_table_body_text">1</td>
-                  <td className="prescription_table_body_text">After Food</td>
-                  <td className="prescription_table_body_text">5</td>
-
-                  <td className="prescription_table_body_text">10</td>
-                </tr>
-                <tr className="prescription_table_body_row">
-                  <td className="prescription_table_body_text">Zocon 500</td>
-                  <td className="prescription_table_body_text">1</td>
-                  <td className="prescription_table_body_text">---</td>
-                  <td className="prescription_table_body_text">---</td>
-                  <td className="prescription_table_body_text">1</td>
-                  <td className="prescription_table_body_text">Before Food</td>
-                  <td className="prescription_table_body_text">5</td>
-
-                  <td className="prescription_table_body_text">10</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <div className="prescription_appoinment_input">
-          <div>
-            {" "}
-            <span className="text-uppercase">Lab Test</span>
-            <p className="prescription-left-text mt_5">Viral Infection</p>
-          </div>
-          <div>
-            {" "}
-            <span className="text-uppercase">Chef Complaints</span>
-            <p className="prescription-right-text mt_5">Feel headache, Cold</p>
-          </div>
-        </div>
-        <hr />
-        <div className="prescription_appoinment_input">
-          <div>
-            {" "}
-            <span className="text-uppercase">instructions</span>
-            <p className="prescription-left-text mt_5">
-              Avoid cold water, take rest
-            </p>
-          </div>
-          <div>
-            {" "}
-            <span className="text-uppercase">Follow up after</span>
-            <p className="prescription-right-text mt_5">5 days</p>
-          </div>
-        </div>
-
-        <div className="prescription_sign_appoinment_input d-flex justify-content-end">
-          <div>
-            {" "}
-            <img
-              // src={require("../../Assets/img/png/work_sign.png")}
-              className="work_profile_certificate "
-            ></img>
-            <br />
-            <h6>Dr John doe</h6>
-            <p className="prescription-right-text mt_5">MD - Dermatology</p>
-          </div>
-        </div>
-      </Modal.Body>
-      <Modal.Footer className="prescription-btn-modal-footer">
-        <div className="d-flex">
-          <Button className="close_btn" onClick={() => {}}>
-            Edit
-          </Button>
-          <Link to="/chatscreen">
-            <Button className="verify_btn" variant="primary" onClick={() => {}}>
-              Send Prescription
-            </Button>
-          </Link>
-        </div>
-      </Modal.Footer>
-    </Modal>
-  );
-};
 const PrescriptionFooter = memo(Footer);
-const PrescriptionReview = memo(Review);
 
 export default PrescriptionIndex;

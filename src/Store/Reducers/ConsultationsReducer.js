@@ -4,9 +4,11 @@ import {
   CancelConsultAPI,
   CancelReasonsAPI,
   ConsultDetailsAPI,
+  CreatePrescAPI,
   DelayConsultAPI,
   NewConsultAPI,
   PastConsultAPI,
+  PrescDetailsAPI,
 } from "../../Routes/Service";
 
 import { AlertEnum } from "../../Utilities/Enums";
@@ -14,11 +16,13 @@ import { setLoading, setMessage } from "./LayoutSlice";
 
 const initialState = {
   consultDetails: "",
+  prescDetails: "",
   isCancel: false,
   cancelReasons: [],
   isCancelAll: false,
   upcomingConsults: [],
   pastConsults: [],
+  isReview: false,
 };
 
 export const GetNewConsults = createAsyncThunk(
@@ -205,6 +209,50 @@ export const CancelReasons = createAsyncThunk(
     }
   }
 );
+export const CreatePrescription = createAsyncThunk(
+  "CreatePrescription",
+  async (values, { dispatch }) => {
+    try {
+      const result = await CreatePrescAPI(values);
+      if (result?.success) {
+        dispatch(toggleReview(true));
+        return result?.data;
+      } else {
+        throw result;
+      }
+    } catch (error) {
+      dispatch(
+        setMessage({
+          text: error?.message,
+          type: AlertEnum.Error,
+        })
+      );
+      return error;
+    }
+  }
+);
+export const GetPrescDetails = createAsyncThunk(
+  "GetPrescDetails",
+  async (values, { dispatch }) => {
+    try {
+      const result = await PrescDetailsAPI(values);
+      if (result?.success) {
+        // dispatch(toggleReview(true));
+        return result?.data;
+      } else {
+        throw result;
+      }
+    } catch (error) {
+      dispatch(
+        setMessage({
+          text: error?.message,
+          type: AlertEnum.Error,
+        })
+      );
+      return error;
+    }
+  }
+);
 
 export const ConsultSlice = createSlice({
   name: "ConsultSlice",
@@ -212,6 +260,9 @@ export const ConsultSlice = createSlice({
   reducers: {
     toggleCancel: (state, action) => {
       state.isCancel = action.payload;
+    },
+    toggleReview: (state, action) => {
+      state.isReview = action.payload;
     },
     toggleCancelAll: (state, action) => {
       state.isCancelAll = action.payload;
@@ -227,12 +278,19 @@ export const ConsultSlice = createSlice({
     builder.addCase(GetConsultDetails.fulfilled, (state, action) => {
       state.consultDetails = action.payload;
     });
+    builder.addCase(CreatePrescription.fulfilled, (state, action) => {
+      state.prescDetails = action.payload;
+    });
+    builder.addCase(GetPrescDetails.fulfilled, (state, action) => {
+      state.prescDetails = action.payload;
+    });
     builder.addCase(CancelReasons.fulfilled, (state, action) => {
       state.cancelReasons = action.payload;
     });
   },
 });
 
-export const { toggleCancel, toggleCancelAll } = ConsultSlice.actions;
+export const { toggleCancel, toggleReview, toggleCancelAll } =
+  ConsultSlice.actions;
 
 export default ConsultSlice.reducer;

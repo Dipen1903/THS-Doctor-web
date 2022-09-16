@@ -3,7 +3,11 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import { Button, Modal } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { GetConsultDetails } from "../../../Store/Reducers/ConsultationsReducer";
+import PresciptionDetails from "../Prescription/PresciptionDetails";
+import {
+  GetConsultDetails,
+  GetPrescDetails,
+} from "../../../Store/Reducers/ConsultationsReducer";
 // import { Button, Form } from "react-bootstrap";
 // import Modal from "react-bootstrap/Modal";
 // import { useDispatch, useSelector } from "react-redux";
@@ -89,6 +93,7 @@ function PastConsultation({ pastConsults = [] }) {
           hide(false);
         }}
       />
+      <PresciptionDetails />
       <Table data={pastConsults} columns={columns} pagination={true} />
     </>
   );
@@ -97,6 +102,7 @@ function PastConsultation({ pastConsults = [] }) {
 export default PastConsultation;
 export const ConsultDetails = (props) => {
   const { values, ...rest } = props;
+  const dispatch = useDispatch();
   const { consultDetails } = useSelector(({ ConsultSlice }) => ConsultSlice);
   return (
     <Modal {...rest} className="consultation-modal-body-two" centered>
@@ -161,7 +167,17 @@ export const ConsultDetails = (props) => {
         </div>
 
         <div className="appoinment_input">
-          <p className="left_text">Prescription</p>
+          <p className="left_text">Prescription</p>{" "}
+          <p className="right-text">
+            <button
+              className="view-btn"
+              onClick={() => {
+                dispatch(GetPrescDetails({ booking_id: consultDetails?.id }));
+              }}
+            >
+              View
+            </button>
+          </p>
         </div>
 
         <div className="appoinment_input">

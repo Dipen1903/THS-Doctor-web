@@ -279,39 +279,34 @@ export const EventEnum = {
 };
 
 export const PrescriptionEnum = {
+  booking_id: "",
+  user_id: "",
   medicines: [
-    {
-      booking_id: "",
-      user_id: "",
-      medicine_name: "",
-      medicine_id: "",
-      morning: "",
-      afternoon: "",
-      evening: "",
-      night: "",
-      conditions: "",
-      days: "",
-    },
+    // {
+    //   medicine_name: "",
+    //   medicine_id: "",
+    //   morning: "",
+    //   afternoon: "",
+    //   evening: "",
+    //   night: "",
+    //   conditions: "",
+    //   days: "",
+    // },
   ],
   lab_test: [
-    {
-      booking_id: "",
-      user_id: "",
-      test_id: "",
-      test_name: "",
-      notes: "",
-    },
+    // {
+    //   test_id: "",
+    //   test_name: "",
+    //   notes: "",
+    // },
   ],
   refer_speciality: [],
   doctor_notes: {
-    booking_id: "",
-    user_id: "",
     chef_complaints: "",
     diagnosis: "",
     medical_history: "",
     instruction: "",
     follow_up_days: "",
-    instruction: "",
   },
   tempSpeciality: [],
 };

@@ -43,8 +43,6 @@ function ReferDoctor() {
                       parseInt(value[value?.length - 1])
                   );
                   arrayHelpers.push({
-                    booking_id: values?.booking_id,
-                    user_id: values?.user_id,
                     speciality_id: speciality?.value,
                     speciality_name: speciality?.label,
                   });

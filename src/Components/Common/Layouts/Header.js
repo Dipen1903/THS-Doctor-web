@@ -84,9 +84,11 @@ function Header() {
               />
               <span class="slider round"></span>
             </label>
-            <span className="go_online ml_10 mt_5">
-              {userProfile?.is_online ? "online" : "offline"}
-            </span>
+            {userProfile?.is_online ? (
+              <span className="go_online ml_10 mt_5">Online</span>
+            ) : (
+              <span className="go_offline ml_10 mt_5">Offline</span>
+            )}
             <img
               src={userProfile?.image || BackGround.Profile}
               alt="Avatar"
