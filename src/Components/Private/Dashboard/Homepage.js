@@ -3,8 +3,11 @@ import Container from "react-bootstrap/Container";
 import Card from "react-bootstrap/Card";
 import { BackGround, Icon } from "../../../Utilities/Icons";
 import DoctorStatus from "./DoctorStatus";
+import { useSelector } from "react-redux";
+import LatestConsultation from "./LatestConsultation";
 
 function Home() {
+  const { userProfile } = useSelector(({ ProfileSlice }) => ProfileSlice);
   useEffect(() => {
     return () => {};
   }, []);
@@ -18,7 +21,11 @@ function Home() {
       >
         <h4 className="pt_30 mb_20">Dashboard</h4>
         <DashboardCounts />
-        <DoctorStatus />
+        {userProfile?.is_active === 1 ? (
+          <LatestConsultation />
+        ) : (
+          <DoctorStatus />
+        )}
       </Container>
     </>
   );
