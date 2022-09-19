@@ -4567,6 +4567,7 @@ privacypolicy-paragraph::-webkit-scrollbar {
   width: 100%;
   max-width: 715px;
   margin: auto;
+  border: none;
 }
 .prescription-modal-header {
   display: flex;

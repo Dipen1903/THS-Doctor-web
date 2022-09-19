@@ -7,6 +7,7 @@ import PresciptionDetails from "../Prescription/PresciptionDetails";
 import {
   GetConsultDetails,
   GetPrescDetails,
+  toggleReview,
 } from "../../../Store/Reducers/ConsultationsReducer";
 // import { Button, Form } from "react-bootstrap";
 // import Modal from "react-bootstrap/Modal";
@@ -173,6 +174,8 @@ export const ConsultDetails = (props) => {
               className="view-btn"
               onClick={() => {
                 dispatch(GetPrescDetails({ booking_id: consultDetails?.id }));
+                dispatch(toggleReview(true));
+                props.onHide();
               }}
             >
               View

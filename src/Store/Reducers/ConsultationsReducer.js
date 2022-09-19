@@ -237,7 +237,6 @@ export const GetPrescDetails = createAsyncThunk(
     try {
       const result = await PrescDetailsAPI(values);
       if (result?.success) {
-        // dispatch(toggleReview(true));
         return result?.data;
       } else {
         throw result;

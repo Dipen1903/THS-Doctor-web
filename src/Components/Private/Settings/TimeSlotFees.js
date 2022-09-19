@@ -1,7 +1,7 @@
 import React, { memo, useCallback, useMemo } from "react";
 import { useEffect, useState } from "react";
 import Container from "react-bootstrap/Container";
-import { Formik, useFormikContext } from "formik";
+import { ErrorMessage, Formik, useFormikContext } from "formik";
 import Form from "react-bootstrap/Form";
 import Tabs from "react-bootstrap/Tabs";
 import Tab from "react-bootstrap/Tab";
@@ -16,6 +16,7 @@ import {
 import FormControl from "../../Common/Forms/FormControl";
 import { compareTime } from "../../../Utilities/Functions";
 import { ScheduleEnum } from "../../../Utilities/Enums";
+import { ScheduleSchema } from "../../../Utilities/Schema";
 
 function Timeslotfees() {
   const [scheduleData, setScheduleData] = useState({ ...ScheduleEnum });
@@ -99,6 +100,7 @@ function Timeslotfees() {
                 <Formik
                   initialValues={scheduleData}
                   enableReinitialize
+                  validationSchema={ScheduleSchema}
                   onSubmit={(values) => {
                     let tempValues = { ...values };
                     tempValues.weekdays = JSON.stringify(values.weekdays);
@@ -112,7 +114,13 @@ function Timeslotfees() {
                     });
                   }}
                 >
-                  {({ values, setFieldValue, handleBlur, handleSubmit }) => {
+                  {({
+                    values,
+                    errors,
+                    setFieldValue,
+                    handleBlur,
+                    handleSubmit,
+                  }) => {
                     return (
                       <form onSubmit={handleSubmit} id="myForm">
                         <div className="col-md-6">
@@ -235,8 +243,8 @@ function Timeslotfees() {
                                                           .time_period[item]
                                                           .slots
                                                       }
-                                                      name={`weekdays.time_period[${item}].start_time`}
-                                                      id={`weekdays.time_period[${item}].start_time`}
+                                                      name={`weekdays.time_period.${item}.start_time`}
+                                                      id={`weekdays.time_period.${item}.start_time`}
                                                       value={
                                                         values.weekdays
                                                           .time_period[item]
@@ -252,6 +260,7 @@ function Timeslotfees() {
                                                       isDisabled={!edit}
                                                     />
                                                   </div>
+
                                                   <div class=" col-md-6">
                                                     <h5 class="end_at">
                                                       End at
@@ -259,21 +268,27 @@ function Timeslotfees() {
 
                                                     <FormControl
                                                       control="select"
-                                                      options={values.weekdays.time_period[
-                                                        item
-                                                      ].slots?.filter((s) =>
-                                                        compareTime(
-                                                          s.value,
-                                                          values.weekdays
-                                                            .time_period[item]
-                                                            .start_time
-                                                        )
-                                                      )}
+                                                      options={[
+                                                        {
+                                                          label: "None",
+                                                          value: "",
+                                                        },
+                                                        ...values.weekdays.time_period[
+                                                          item
+                                                        ].slots?.filter((s) =>
+                                                          compareTime(
+                                                            s.value,
+                                                            values.weekdays
+                                                              .time_period[item]
+                                                              .start_time
+                                                          )
+                                                        ),
+                                                      ]}
                                                       customIcon={
                                                         Icon.ClockBlue
                                                       }
-                                                      name={`weekdays.time_period[${item}].end_time`}
-                                                      id={`weekdays.time_period[${item}].end_time`}
+                                                      name={`weekdays.time_period.${item}.end_time`}
+                                                      id={`weekdays.time_period.${item}.end_time`}
                                                       value={
                                                         values.weekdays
                                                           .time_period[item]
@@ -288,6 +303,11 @@ function Timeslotfees() {
                                                       onBlur={handleBlur}
                                                       isDisabled={!edit}
                                                     />
+                                                    <div className="error">
+                                                      <ErrorMessage
+                                                        name={`weekdays.time_period.${item}.end_time`}
+                                                      />
+                                                    </div>
                                                   </div>
                                                 </div>
                                               </Accordion.Body>
@@ -379,8 +399,8 @@ function Timeslotfees() {
                                                       }
                                                       isSearchable={false}
                                                       iconHide={false}
-                                                      name={`weekends.time_period[${item}].start_time`}
-                                                      id={`weekends.time_period[${item}].start_time`}
+                                                      name={`weekends.time_period.${item}.start_time`}
+                                                      id={`weekends.time_period.${item}.start_time`}
                                                       value={
                                                         values.weekends
                                                           .time_period[item]
@@ -413,8 +433,8 @@ function Timeslotfees() {
                                                       customIcon={
                                                         Icon.ClockBlue
                                                       }
-                                                      name={`weekends.time_period[${item}].end_time`}
-                                                      id={`weekends.time_period[${item}].end_time`}
+                                                      name={`weekends.time_perio.${item}.end_time`}
+                                                      id={`weekends.time_period.${item}.end_time`}
                                                       value={
                                                         values.weekends
                                                           .time_period[item]
@@ -429,6 +449,11 @@ function Timeslotfees() {
                                                       onBlur={handleBlur}
                                                       isDisabled={!edit}
                                                     />
+                                                    <div className="error">
+                                                      <ErrorMessage
+                                                        name={`weekends.time_period.${item}.end_time`}
+                                                      />
+                                                    </div>
                                                   </div>
                                                 </div>
                                               </Accordion.Body>

@@ -36,8 +36,10 @@ import {
 } from "../../../Store/Reducers/CommonReducer";
 import { isEmpty } from "../../../Utilities/Functions";
 import {
+  BankDetailsSchema,
   BasicInformationSchema,
   EducationalProfileSchema,
+  ScheduleSchema,
   WorkProfileSchema,
 } from "../../../Utilities/Schema";
 
@@ -169,8 +171,8 @@ export function SetUpProfile() {
   });
   const Form_2 = useFormik({
     initialValues: {
-      speciality: profileData?.speciality_id,
-      sub_speciality: profileData?.sub_speciality_id,
+      speciality: profileData?.speciality,
+      sub_speciality: profileData?.sub_speciality,
       experience: profileData?.experience,
       registration_number: profileData?.registration_number,
       languages: profileData?.languages,
@@ -400,6 +402,18 @@ export function SetUpSetting() {
       });
     }
   };
+  const ScheduleForm = useFormik({
+    initialValues: ScheduleEnum,
+    enableReinitialize: true,
+    validationSchema: ScheduleSchema,
+    onSubmit: submit,
+  });
+  const BankForm = useFormik({
+    initialValues: BankEnum,
+    enableReinitialize: true,
+    validationSchema: BankDetailsSchema,
+    onSubmit: submit,
+  });
 
   const initialLoad = () => {
     let tempData = { ...scheduleData };
@@ -489,80 +503,80 @@ export function SetUpSetting() {
                       : "Bank Details"}
                   </h3>
 
-                  <Formik
+                  {/* <Formik
                     initialValues={scheduleData}
+                    validationSchema={ScheduleSchema}
                     enableReinitialize
                     onSubmit={submit}
-                  >
-                    {({ values, handleSubmit }) => (
-                      <>
-                        <div class="progress_box">
-                          <div class="row">
-                            <div class="col-md-3">
-                              <h5 class="profile_milestone">
-                                Profile Milestone
-                              </h5>
-                            </div>
-                            <div class="col-md-8">
-                              <ProgressBar
-                                isLoading={false}
-                                percent={
-                                  userProfile?.profile_completed_percentage
-                                }
-                                size={"large"}
-                                showInfo={true}
-                              />
-                              <h6 class="progress_bar_subtext">
-                                Complete your profile for connect with patients
-                              </h6>
-                            </div>
-                          </div>
+                  > */}
+                  {/* {({ values, handleSubmit }) => ( */}
+                  <>
+                    <div class="progress_box">
+                      <div class="row">
+                        <div class="col-md-3">
+                          <h5 class="profile_milestone">Profile Milestone</h5>
                         </div>
-                        <ScheduleWizardForm />
-                        <div class="row mt_10">
-                          <div className="display_inline">
-                            {profileStep > 1 ? (
-                              <button
-                                class="back_btn"
-                                variant="primary"
-                                onClick={() => {
-                                  dispatch(prevStep());
-                                }}
-                              >
-                                Back
-                              </button>
-                            ) : (
-                              <></>
-                            )}
-                            {profileStep < 2 ? (
-                              <button
-                                class="continue_btn"
-                                type="button"
-                                onClick={(e) => handleSubmit(e)}
-                              >
-                                Continue
-                              </button>
-                            ) : (
-                              <></>
-                            )}
-                            {profileStep === 2 ? (
-                              <button
-                                class="continue_btn"
-                                variant="primary"
-                                onClick={(e) => {
-                                  handleSubmit(e);
-                                }}
-                              >
-                                Submit
-                              </button>
-                            ) : (
-                              <></>
-                            )}
-                          </div>
+                        <div class="col-md-8">
+                          <ProgressBar
+                            isLoading={false}
+                            percent={userProfile?.profile_completed_percentage}
+                            size={"large"}
+                            showInfo={true}
+                          />
+                          <h6 class="progress_bar_subtext">
+                            Complete your profile for connect with patients
+                          </h6>
                         </div>
-                      </>
-                    )}
-                  </Formik>
+                      </div>
+                    </div>
+                    <ScheduleWizardForm
+                      Form_1={ScheduleForm}
+                      Form_2={BankForm}
+                    />
+                    <div class="row mt_10">
+                      <div className="display_inline">
+                        {profileStep > 1 ? (
+                          <button
+                            class="back_btn"
+                            variant="primary"
+                            onClick={() => {
+                              dispatch(prevStep());
+                            }}
+                          >
+                            Back
+                          </button>
+                        ) : (
+                          <></>
+                        )}
+                        {profileStep < 2 ? (
+                          <button
+                            class="continue_btn"
+                            type="button"
+                            onClick={(e) => ScheduleForm.handleSubmit(e)}
+                          >
+                            Continue
+                          </button>
+                        ) : (
+                          <></>
+                        )}
+                        {profileStep === 2 ? (
+                          <button
+                            class="continue_btn"
+                            variant="primary"
+                            onClick={(e) => {
+                              BankForm.handleSubmit(e);
+                            }}
+                          >
+                            Submit
+                          </button>
+                        ) : (
+                          <></>
+                        )}
+                      </div>
+                    </div>
+                  </>
+                  {/* )} */}
+                  {/* </Formik> */}
                 </div>
               </div>
             </div>
@@ -599,13 +613,23 @@ function ProfileWizardForm({ Form_1, Form_2, Form_3 }) {
   }
 }
 
-function ScheduleWizardForm(props) {
+function ScheduleWizardForm({ Form_1, Form_2 }) {
   const { profileStep } = useSelector(({ ProfileSlice }) => ProfileSlice);
   switch (profileStep) {
     case 1:
-      return <SheduleInformation />;
+      return (
+        <FormikProvider value={Form_1}>
+          <SheduleInformation />
+        </FormikProvider>
+      );
+
     case 2:
-      return <BankInformation />;
+      return (
+        <FormikProvider value={Form_2}>
+          <BankInformation />
+        </FormikProvider>
+      );
+
     default:
       return <></>;
   }

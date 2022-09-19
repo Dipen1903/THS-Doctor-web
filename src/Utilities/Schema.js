@@ -1,4 +1,5 @@
 import * as Yup from "yup";
+import { isEmpty } from "./Functions";
 // const FILE_SIZE = 5e8;
 // const SUPPORTED_FORMATS = "image/jpeg image/png image/gif";
 const REGNUMBERREGEX =
@@ -250,6 +251,80 @@ export const ResetProfileSchema = Yup.object({
     .required("Please select any proof")
     .nullable(),
   signature: Yup.mixed().required("Please upload signature").nullable(),
+});
+export const ScheduleSchema = Yup.object({
+  weekdays: Yup.object().shape({
+    time_period: Yup.object().shape({
+      morning: Yup.object().shape({
+        start_time: Yup.string().notRequired(),
+        end_time: Yup.string().when("start_time", (start_time) => {
+          return !isEmpty(start_time)
+            ? Yup.string().required("Please select end time")
+            : Yup.string().notRequired();
+        }),
+      }),
+      afternoon: Yup.object().shape({
+        start_time: Yup.string().notRequired(),
+        end_time: Yup.string().when("start_time", (start_time) => {
+          return !isEmpty(start_time)
+            ? Yup.string().required("Please select end time")
+            : Yup.string().notRequired();
+        }),
+      }),
+      evening: Yup.object().shape({
+        start_time: Yup.string().notRequired(),
+        end_time: Yup.string().when("start_time", (start_time) => {
+          return !isEmpty(start_time)
+            ? Yup.string().required("Please select end time")
+            : Yup.string().notRequired();
+        }),
+      }),
+      night: Yup.object().shape({
+        start_time: Yup.string().notRequired(),
+        end_time: Yup.string().when("start_time", (start_time) => {
+          return !isEmpty(start_time)
+            ? Yup.string().required("Please select end time")
+            : Yup.string().notRequired();
+        }),
+      }),
+    }),
+  }),
+  weekends: Yup.object().shape({
+    time_period: Yup.object().shape({
+      morning: Yup.object().shape({
+        start_time: Yup.string().notRequired(),
+        end_time: Yup.string().when("start_time", (start_time) => {
+          return !isEmpty(start_time)
+            ? Yup.string().required("Please select end time")
+            : Yup.string().notRequired();
+        }),
+      }),
+      afternoon: Yup.object().shape({
+        start_time: Yup.string().notRequired(),
+        end_time: Yup.string().when("start_time", (start_time) => {
+          return !isEmpty(start_time)
+            ? Yup.string().required("Please select end time")
+            : Yup.string().notRequired();
+        }),
+      }),
+      evening: Yup.object().shape({
+        start_time: Yup.string().notRequired(),
+        end_time: Yup.string().when("start_time", (start_time) => {
+          return !isEmpty(start_time)
+            ? Yup.string().required("Please select end time")
+            : Yup.string().notRequired();
+        }),
+      }),
+      night: Yup.object().shape({
+        start_time: Yup.string().notRequired(),
+        end_time: Yup.string().when("start_time", (start_time) => {
+          return !isEmpty(start_time)
+            ? Yup.string().required("Please select end time")
+            : Yup.string().notRequired();
+        }),
+      }),
+    }),
+  }),
 });
 
 export const validateIFSC = (value) => {

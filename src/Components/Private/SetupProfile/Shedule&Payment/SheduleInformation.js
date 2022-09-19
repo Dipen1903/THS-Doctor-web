@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 
 import Form from "react-bootstrap/Form";
-import { useFormikContext } from "formik";
+import { ErrorMessage, useFormikContext } from "formik";
 import Tabs from "react-bootstrap/Tabs";
 import Tab from "react-bootstrap/Tab";
 import Accordion from "react-bootstrap/Accordion";
@@ -108,8 +108,8 @@ function SheduleInformation() {
                                       options={
                                         values.weekdays.time_period[item].slots
                                       }
-                                      name={`weekdays.time_period[${item}].start_time`}
-                                      id={`weekdays.time_period[${item}].start_time`}
+                                      name={`weekdays.time_period.${item}.start_time`}
+                                      id={`weekdays.time_period.${item}.start_time`}
                                       value={
                                         values.weekdays.time_period[item]
                                           .start_time
@@ -125,17 +125,23 @@ function SheduleInformation() {
                                     <h5 class="end_at">End at</h5>
                                     <FormControl
                                       control="select"
-                                      options={values.weekdays.time_period[
-                                        item
-                                      ].slots?.filter((s) =>
-                                        compareTime(
-                                          s.value,
-                                          values.weekdays.time_period[item]
-                                            .start_time
-                                        )
-                                      )}
-                                      name={`weekdays.time_period[${item}].end_time`}
-                                      id={`weekdays.time_period[${item}].end_time`}
+                                      options={[
+                                        {
+                                          label: "None",
+                                          value: "",
+                                        },
+                                        ...values.weekdays.time_period[
+                                          item
+                                        ].slots?.filter((s) =>
+                                          compareTime(
+                                            s.value,
+                                            values.weekdays.time_period[item]
+                                              .start_time
+                                          )
+                                        ),
+                                      ]}
+                                      name={`weekdays.time_period.${item}.end_time`}
+                                      id={`weekdays.time_period.${item}.end_time`}
                                       value={
                                         values.weekdays.time_period[item]
                                           .end_time
@@ -146,6 +152,11 @@ function SheduleInformation() {
                                       onChange={() => {}}
                                       onBlur={handleBlur}
                                     />
+                                    <div className="error">
+                                      <ErrorMessage
+                                        name={`weekdays.time_period.${item}.end_time`}
+                                      />
+                                    </div>
                                   </div>
                                 </div>
                               </Accordion.Body>
@@ -193,8 +204,8 @@ function SheduleInformation() {
                                       }
                                       isSearchable={false}
                                       iconHide={true}
-                                      name={`weekends.time_period[${item}].start_time`}
-                                      id={`weekends.time_period[${item}].start_time`}
+                                      name={`weekends.time_period.${item}.start_time`}
+                                      id={`weekends.time_period.${item}.start_time`}
                                       value={
                                         values.weekends.time_period[item]
                                           .start_time
@@ -208,17 +219,23 @@ function SheduleInformation() {
                                     <h5 class="end_at">End at</h5>
                                     <FormControl
                                       control="select"
-                                      options={values.weekends.time_period[
-                                        item
-                                      ].slots?.filter((s) =>
-                                        compareTime(
-                                          s.value,
-                                          values.weekends.time_period[item]
-                                            .start_time
-                                        )
-                                      )}
-                                      name={`weekends.time_period[${item}].end_time`}
-                                      id={`weekends.time_period[${item}].end_time`}
+                                      options={[
+                                        {
+                                          label: "None",
+                                          value: "",
+                                        },
+                                        ...values.weekends.time_period[
+                                          item
+                                        ].slots?.filter((s) =>
+                                          compareTime(
+                                            s.value,
+                                            values.weekends.time_period[item]
+                                              .start_time
+                                          )
+                                        ),
+                                      ]}
+                                      name={`weekends.time_period.${item}.end_time`}
+                                      id={`weekends.time_period.${item}.end_time`}
                                       value={
                                         values.weekends.time_period[item]
                                           .end_time
@@ -229,6 +246,11 @@ function SheduleInformation() {
                                       onChange={() => {}}
                                       onBlur={handleBlur}
                                     />
+                                    <div className="error">
+                                      <ErrorMessage
+                                        name={`weekends.time_period.${item}.end_time`}
+                                      />
+                                    </div>
                                   </div>
                                 </div>
                               </Accordion.Body>

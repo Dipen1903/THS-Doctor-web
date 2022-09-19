@@ -49,6 +49,7 @@ export const ScheduleEnum = {
         start_time: "",
         end_time: "",
         slots: [
+          { label: "None", value: "" },
           { label: "09:00 AM", value: "09:00 AM" },
           { label: "09:15 AM", value: "09:15 AM" },
           { label: "09:30 AM", value: "09:30 AM" },
@@ -68,6 +69,7 @@ export const ScheduleEnum = {
         start_time: "",
         end_time: "",
         slots: [
+          { label: "None", value: "" },
           { label: "12:00 PM", value: "12:00 PM" },
           { label: "12:15 PM", value: "12:15 PM" },
           { label: "12:30 PM", value: "12:30 PM" },
@@ -87,6 +89,7 @@ export const ScheduleEnum = {
         start_time: "",
         end_time: "",
         slots: [
+          { label: "None", value: "" },
           { label: "03:00 PM", value: "03:00 PM" },
           { label: "03:15 PM", value: "03:15 PM" },
           { label: "03:30 PM", value: "03:30 PM" },
@@ -106,6 +109,7 @@ export const ScheduleEnum = {
         start_time: "",
         end_time: "",
         slots: [
+          { label: "None", value: "" },
           { label: "06:00 PM", value: "06:00 PM" },
           { label: "06:15 PM", value: "06:15 PM" },
           { label: "06:30 PM", value: "06:30 PM" },
@@ -126,6 +130,7 @@ export const ScheduleEnum = {
         start_time: "",
         end_time: "",
         slots: [
+          { label: "None", value: "" },
           { label: "09:00 AM", value: "09:00 AM" },
           { label: "09:15 AM", value: "09:15 AM" },
           { label: "09:30 AM", value: "09:30 AM" },
@@ -145,6 +150,7 @@ export const ScheduleEnum = {
         start_time: "",
         end_time: "",
         slots: [
+          { label: "None", value: "" },
           { label: "12:00 PM", value: "12:00 PM" },
           { label: "12:15 PM", value: "12:15 PM" },
           { label: "12:30 PM", value: "12:30 PM" },
@@ -164,6 +170,7 @@ export const ScheduleEnum = {
         start_time: "",
         end_time: "",
         slots: [
+          { label: "None", value: "" },
           { label: "03:00 PM", value: "03:00 PM" },
           { label: "03:15 PM", value: "03:15 PM" },
           { label: "03:30 PM", value: "03:30 PM" },
@@ -183,6 +190,7 @@ export const ScheduleEnum = {
         start_time: "",
         end_time: "",
         slots: [
+          { label: "None", value: "" },
           { label: "06:00 PM", value: "06:00 PM" },
           { label: "06:15 PM", value: "06:15 PM" },
           { label: "06:30 PM", value: "06:30 PM" },
