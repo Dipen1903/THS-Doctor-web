@@ -1,8 +1,49 @@
-import React from "react";
+import moment from "moment";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleRoom } from "../../../Store/Reducers/ChatReducer";
+import {
+  GetConsultDetails,
+  GetNewConsults,
+} from "../../../Store/Reducers/ConsultationsReducer";
+import { ConvertHMS } from "../../../Utilities/Functions";
 import Conversation from "../Chat/Conversation";
 import UserDetails from "../Chat/UserDetails";
 
 function LatestConsultation() {
+  const dispatch = useDispatch();
+  const { ChatSlice, ConsultSlice } = useSelector((state) => state);
+  const { isDetails } = ChatSlice;
+  const { upcomingConsults } = ConsultSlice;
+  const [latest, setLatest] = useState([]);
+  const intialLoad = () => {
+    try {
+      let tempList = upcomingConsults.filter(
+        (item) =>
+          moment(item?.appointment_date).format("DD/MM/YYYY") ==
+          moment().format("DD/MM/YYYY")
+      );
+      if (tempList) {
+        setLatest(tempList);
+        dispatch(GetConsultDetails({ appointment_id: tempList[0]?.id })).then(
+          (res) => {
+            if (res?.payload) {
+              dispatch(toggleRoom(res?.payload));
+            }
+          }
+        );
+      }
+    } catch (error) {}
+  };
+  useEffect(() => {
+    if (!upcomingConsults?.length) {
+      dispatch(GetNewConsults());
+    } else {
+      intialLoad();
+    }
+    return () => {};
+  }, [upcomingConsults]);
+
   return (
     <>
       <div className="row mt_30">
@@ -15,162 +56,56 @@ function LatestConsultation() {
         <div className="row">
           <div className="col-md-3 padding_right_0">
             <div className="upcomming_consult_chat_list">
-              <div className="chat_list_box_active">
-                <div className="row">
-                  <div className="col-md-6">
-                    <h6 class="chat_list_id">ID #13111331</h6>
-                    <div className="chat_title_box">
-                      <h4 className="chat_list_title">Juli</h4>
-                      <h5 className="chat_list_subtitle">23 | F</h5>
+              {latest?.length ? (
+                latest?.map((item, index) => {
+                  var duration = moment.duration(
+                    moment(item?.appointment_date_time).diff(moment.now())
+                  );
+                  var seconds = parseInt(duration.asSeconds());
+                  return (
+                    <div className="chat_list_box chat_list_box_active">
+                      <div className="row">
+                        <div className="col-md-6">
+                          <h6 class="chat_list_id">
+                            ID #{item?.appointment_id}
+                          </h6>
+                          <div className="chat_title_box">
+                            <h4 className="chat_list_title">{item?.name}</h4>
+                            <h5 className="chat_list_subtitle">
+                              {item?.age}|
+                              {item?.gender.toLowerCase() === "male"
+                                ? "M"
+                                : "F"}
+                            </h5>
+                          </div>
+                        </div>
+                        <div className="col-md-6">
+                          <div className="time_left_box">
+                            {ConvertHMS(seconds)} Left
+                          </div>
+                        </div>
+                      </div>
+                      <div className="row">
+                        <div className="col-md-12">
+                          <h4 className="date_time">
+                            {moment(item?.appointment_date_time).format(
+                              "DD MMM,YYYY - hh:mm A"
+                            )}
+                          </h4>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                  <div className="col-md-6">
-                    <div className="time_left_box">10 mint left</div>
-                  </div>
+                  );
+                })
+              ) : (
+                <div className="empty-data-block">
+                  <span className="empty-text">No Consultations</span>
                 </div>
-                <div className="row">
-                  <div className="col-md-12">
-                    <h4 className="date_time">11 Apr, 2022 - 11:00 am</h4>
-                  </div>
-                </div>
-              </div>
-              <div className="chat_list_box">
-                <div className="row">
-                  <div className="col-md-6">
-                    <h6 class="chat_list_id">ID #13111234</h6>
-                    <div className="chat_title_box">
-                      <h4 className="chat_list_title">John doe</h4>
-                      <h5 className="chat_list_subtitle">23 | M</h5>
-                    </div>
-                  </div>
-                  <div className="col-md-6">
-                    <div className="time_left_box">20 mint left</div>
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="col-md-12">
-                    <h4 className="date_time">11 Apr, 2022 - 11:10 am</h4>
-                  </div>
-                </div>
-              </div>
-              <div className="chat_list_box">
-                <div className="row">
-                  <div className="col-md-6">
-                    <h6 class="chat_list_id">ID #13111341</h6>
-                    <div className="chat_title_box">
-                      <h4 className="chat_list_title">Erik</h4>
-                      <h5 className="chat_list_subtitle">25 | M</h5>
-                    </div>
-                  </div>
-                  <div className="col-md-6">
-                    <div className="time_left_box">30 mint left</div>
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="col-md-12">
-                    <h4 className="date_time">11 Apr, 2022 - 11:20 am</h4>
-                  </div>
-                </div>
-              </div>
-              <div className="chat_list_box">
-                <div className="row">
-                  <div className="col-md-6">
-                    <h6 class="chat_list_id">ID #13111343</h6>
-                    <div className="chat_title_box">
-                      <h4 className="chat_list_title">Kevin</h4>
-                      <h5 className="chat_list_subtitle">23 | M</h5>
-                    </div>
-                  </div>
-                  <div className="col-md-6">
-                    <div className="time_left_box">40 mint left</div>
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="col-md-12">
-                    <h4 className="date_time">11 Apr, 2022 - 11:30 am</h4>
-                  </div>
-                </div>
-              </div>
-              <div className="chat_list_box">
-                <div className="row">
-                  <div className="col-md-6">
-                    <h6 class="chat_list_id">ID #13111332</h6>
-                    <div className="chat_title_box">
-                      <h4 className="chat_list_title">Nish</h4>
-                      <h5 className="chat_list_subtitle">23 | F</h5>
-                    </div>
-                  </div>
-                  <div className="col-md-6">
-                    <div className="time_left_box">50 mint left</div>
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="col-md-12">
-                    <h4 className="date_time">11 Apr, 2022 - 11:40 am</h4>
-                  </div>
-                </div>
-              </div>
-              <div className="chat_list_box">
-                <div className="row">
-                  <div className="col-md-6">
-                    <h6 class="chat_list_id">ID #13111375</h6>
-                    <div className="chat_title_box">
-                      <h4 className="chat_list_title">Zeni</h4>
-                      <h5 className="chat_list_subtitle">23 | F</h5>
-                    </div>
-                  </div>
-                  <div className="col-md-6">
-                    <div className="time_left_box">60 mint left</div>
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="col-md-12">
-                    <h4 className="date_time">11 Apr, 2022 - 11:50 am</h4>
-                  </div>
-                </div>
-              </div>
-              <div className="chat_list_box">
-                <div className="row">
-                  <div className="col-md-6">
-                    <h6 class="chat_list_id">ID #13111312</h6>
-                    <div className="chat_title_box">
-                      <h4 className="chat_list_title">Mihir</h4>
-                      <h5 className="chat_list_subtitle">27 | M</h5>
-                    </div>
-                  </div>
-                  <div className="col-md-6">
-                    <div className="time_left_box">1hr 10 mint</div>
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="col-md-12">
-                    <h4 className="date_time">11 Apr, 2022 - 12:00 pm</h4>
-                  </div>
-                </div>
-              </div>
-              <div className="chat_list_box">
-                <div className="row">
-                  <div className="col-md-6">
-                    <h6 class="chat_list_id">ID #13111386</h6>
-                    <div className="chat_title_box">
-                      <h4 className="chat_list_title">jay</h4>
-                      <h5 className="chat_list_subtitle">29 | M</h5>
-                    </div>
-                  </div>
-                  <div className="col-md-6">
-                    <div className="time_left_box">1hr 20 mint</div>
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="col-md-12">
-                    <h4 className="date_time">11 Apr, 2022 - 12:10 pm</h4>
-                  </div>
-                </div>
-              </div>
+              )}
             </div>
           </div>
           <Conversation />
-          <UserDetails />
+          {isDetails && <UserDetails />}
         </div>
       </div>
     </>

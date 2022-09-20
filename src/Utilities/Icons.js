@@ -11,7 +11,7 @@ import CALENDARBLUE from "../Assets/img/svg/CalendarBlue.svg";
 import CHARTROUND from "../Assets/img/svg/ChartRound.svg";
 import PENCIL from "../Assets/svg/Pencil.svg";
 import CHAT from "../Assets/svg/Message.svg";
-import CROSS from "../Assets/svg/CrossRed.svg";
+import CROSSRED from "../Assets/svg/CrossRed.svg";
 import EYE from "../Assets/svg/Eye.svg";
 import LINK from "../Assets/svg/Link.svg";
 import BACK from "../Assets/svg/Back.svg";
@@ -19,6 +19,10 @@ import EARTH from "../Assets/svg/Earth.svg";
 import AIRPLANE from "../Assets/svg/AirPlane.svg";
 import SPACEMAN from "../Assets/svg/SpaceMan.svg";
 import COMMENT from "../Assets/svg/Comment.svg";
+import VIDEO from "../Assets/svg/Video.svg";
+import PHONE from "../Assets/svg/Phone.svg";
+import DOTS from "../Assets/svg/Dots.svg";
+import CROSS from "../Assets/svg/Cross.svg";
 
 import FEMALEGRAY from "../Assets/svg/Female_grey.svg";
 import FEMALEWHITE from "../Assets/svg/Female_white.svg";
@@ -82,6 +86,9 @@ export const Icon = {
   MaleGrey: MALEGREY,
 
   Earth: EARTH,
+  Phone: PHONE,
+  Dots: DOTS,
+  Video: VIDEO,
   Airplane: AIRPLANE,
   Spaceman: SPACEMAN,
   Back: BACK,
@@ -94,11 +101,11 @@ export const Icon = {
   CalenderCross: CALENDARBLUE,
   Dollor: CHARTROUND,
   Chat: CHAT,
-  CrossRed: CROSS,
+  CrossRed: CROSSRED,
   Comment: COMMENT,
   Chart: require("../Assets/img/totalrevenue.png"),
   Attach: require("../Assets/img/ic_attach.png"),
-  Cross: require("../Assets/img/cross.png"),
+  Cross: CROSS,
   User: require("../Assets/img/My Profile.png"),
   UserBlue: USERBLUE,
   UserGrey: USERGREY,

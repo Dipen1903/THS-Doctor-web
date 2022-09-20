@@ -1,7 +1,10 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { toggleDetails } from "../../../Store/Reducers/ChatReducer";
 import { Icon } from "../../../Utilities/Icons";
 
 function UserDetails() {
+  const dispatch = useDispatch();
   return (
     <div className="col-md-3 padding_left_0">
       <div class="chatprofile_name_box">
@@ -13,7 +16,12 @@ function UserDetails() {
           </div>
           <div className="col-md-6 col-sm-6 col-xs-6 col-6">
             <div className="user_info_close">
-              <img src={Icon.userinfoclose}></img>
+              <img
+                src={Icon.Cross}
+                onClick={() => {
+                  dispatch(toggleDetails(false));
+                }}
+              ></img>
             </div>
           </div>
         </div>

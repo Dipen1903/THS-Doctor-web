@@ -1,10 +1,28 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Button, Dropdown } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  GetConversation,
+  toggleDetails,
+} from "../../../Store/Reducers/ChatReducer";
 import { Icon } from "../../../Utilities/Icons";
 
 function Conversation() {
+  const dispatch = useDispatch();
+  const { ChatSlice } = useSelector((state) => state);
+  const { isDetails, room } = ChatSlice;
+
+  useEffect(() => {
+    if (room) {
+      let jsonData = room?.json_data && JSON.parse(room?.json_data);
+      console.log(jsonData);
+      dispatch(GetConversation({ doctor_id: "", patient_id: "" }));
+    }
+    return () => {};
+  }, [room]);
+
   return (
-    <div className="col-md-6 padding_left_0 padding_right_0">
+    <div className={`${isDetails ? "col-md-6" : "col-md-9"} padding_left_0`}>
       <div className="upcomming_consult_chat_message_box">
         <div class="profile_name_box">
           <div className="row">
@@ -16,11 +34,28 @@ function Conversation() {
               <h5 className="online_text">Online</h5>
             </div>
             <div className="col-md-9">
-              <Button variant="primary" className="chat_video_btn">
-                <img src={Icon.chatvideo}></img>
+              <Dropdown>
+                <Dropdown.Toggle
+                  id="dropdown-basic"
+                  className="attach-dropdown more_info_btn"
+                >
+                  <img src={Icon.Dots}></img>
+                </Dropdown.Toggle>
+                <Dropdown.Menu>
+                  <Dropdown.Item
+                    onClick={() => {
+                      dispatch(toggleDetails(true));
+                    }}
+                  >
+                    Patient info
+                  </Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
+              <Button className="call_btn">
+                <img src={Icon.Video}></img>
               </Button>
-              <Button variant="primary" className="chat_call_btn">
-                <img src={Icon.chatcall}></img>
+              <Button className="call_btn">
+                <img src={Icon.Phone}></img>
               </Button>
               <Button variant="primary" className="mark_complete">
                 Mark Complete

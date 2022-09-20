@@ -5457,7 +5457,7 @@ privacypolicy-paragraph::-webkit-scrollbar {
 
 .chat-message-list-inner {
   /*height: 100%;*/
-  height: 100vh;
+  max-height: 75vh;
   overflow-y: scroll;
   padding: 30px 20px 24px 20px;
 }
@@ -5572,6 +5572,7 @@ privacypolicy-paragraph::-webkit-scrollbar {
   background: #ffffff;
   box-shadow: 0px 5px 10px rgba(0, 64, 128, 0.04);
   border-radius: 12px;
+  padding-bottom: 20px;
 }
 ::-webkit-scrollbar {
   width: 4px;
@@ -5701,7 +5702,7 @@ privacypolicy-paragraph::-webkit-scrollbar {
   align-items: center;
   color: #9393aa;
 }
-.chat_call_btn {
+.call_btn {
   background: #24b2b2;
   border-radius: 8px;
   border: none;
@@ -5710,15 +5711,16 @@ privacypolicy-paragraph::-webkit-scrollbar {
   margin-top: 7px;
   margin-right: 24px;
 }
-.chat_video_btn {
-  background: #24b2b2;
-  border-radius: 8px;
-  border: none;
-  padding: 6px 11px 10px 11px;
-  float: right;
-  margin-top: 7px;
-  margin-right: 4px;
+.call_btn:hover {
+  background: #24b2b2 !important;
+  border-radius: 8px !important;
+  border: none !important;
+  padding: 6px 11px 10px 11px !important;
+  float: right !important;
+  margin-top: 7px !important;
+  margin-right: 24px;
 }
+
 .mark_complete {
   background: #ffffff;
   border: 1px solid rgba(137, 152, 189, 0.2);
@@ -5733,6 +5735,21 @@ privacypolicy-paragraph::-webkit-scrollbar {
   margin-top: 7px;
   float: right;
   margin-right: 75px;
+}
+.mark_complete:hover {
+  background: #ffffff;
+  border: 1px solid rgba(137, 152, 189, 0.2);
+  border-radius: 8px;
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 24px;
+  color: #f8446c;
+  padding: 8px 16px;
+  margin-top: 7px;
+  float: right;
+  /* margin-right: 20px; */
 }
 .upcomming_consult_chat_message_box {
   border-right: 1px solid #eceff4;

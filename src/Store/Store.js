@@ -6,6 +6,7 @@ import LayoutSlice from "./Reducers/LayoutSlice";
 import ProfileSlice from "./Reducers/ProfileReducer";
 import RegisterSlice from "./Reducers/RegiserSlice";
 import PayoutSlice from "./Reducers/PayoutReducer";
+import ChatSlice from "./Reducers/ChatReducer";
 
 export const store = configureStore({
   reducer: {
@@ -16,5 +17,6 @@ export const store = configureStore({
     CommonSlice: CommonSlice,
     ConsultSlice: ConsultSlice,
     PayoutSlice: PayoutSlice,
+    ChatSlice: ChatSlice,
   },
 });
