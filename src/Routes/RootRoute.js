@@ -19,6 +19,7 @@ import HelpAndSupport from "../Components/Private/Others/HelpAndSupport";
 import Payouts from "../Components/Private/Payouts/Payouts";
 import PayoutDetailed from "../Components/Private/Payouts/PayoutDetailed";
 import ResetProfile from "../Components/Private/SetupProfile/ResetProfile";
+import ChatIndex from "../Components/Private/Chat/ChatIndex";
 
 // import UserProfile from "../Components/Public/Userprofile/userprofile";
 // import UserProfile2 from "../Components/Public/Userprofile/userprofile2";
@@ -99,6 +100,14 @@ function RootRoute() {
         element={
           <PrivateRoutes isHeader={true}>
             <ConsultIndex />
+          </PrivateRoutes>
+        }
+      />
+      <Route
+        path="/chat"
+        element={
+          <PrivateRoutes isHeader={true}>
+            <ChatIndex />
           </PrivateRoutes>
         }
       />

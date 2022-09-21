@@ -1,22 +1,37 @@
+import { Timestamp } from "firebase/firestore";
+import moment from "moment";
 import React, { useEffect } from "react";
 import { Button, Dropdown } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  GetConversation,
+  GetSnapShot,
   toggleDetails,
 } from "../../../Store/Reducers/ChatReducer";
 import { Icon } from "../../../Utilities/Icons";
 
 function Conversation() {
   const dispatch = useDispatch();
-  const { ChatSlice } = useSelector((state) => state);
-  const { isDetails, room } = ChatSlice;
+  const { ChatSlice, ProfileSlice } = useSelector((state) => state);
+  const { isDetails, snapShot, chat, room } = ChatSlice;
+  const { userProfile } = ProfileSlice;
+  const chatSetup = () => {
+    let chatBot = room?.json_data && JSON.parse(room?.json_data);
+  };
+  useEffect(() => {
+    chatSetup();
+    return () => {
+      snapShot();
+    };
+  }, []);
 
   useEffect(() => {
     if (room) {
-      let jsonData = room?.json_data && JSON.parse(room?.json_data);
-      console.log(jsonData);
-      dispatch(GetConversation({ doctor_id: "", patient_id: "" }));
+      dispatch(
+        GetSnapShot({
+          doctor_id: userProfile?.id,
+          patient_id: room?.user_id,
+        })
+      );
     }
     return () => {};
   }, [room]);
@@ -88,41 +103,44 @@ function Conversation() {
                 <div className="sender_message_time">08.24</div>
               </div>
             </div>
-            <div className="message-row you-message">
-              <div className="message-content">
-                <div className="client_msg_box">
-                  <h3 class="client_text_title">Lorem Ipsum is simply dummy</h3>
+            {console.log(chat)}
+            {chat?.map((item, index) => (
+              <div
+                key={item?.sizeOfDocument + index}
+                className={`message-row ${
+                  item?.userType === 1 ? "other-message" : "you-message"
+                }`}
+              >
+                <div className="message-content">
+                  <div
+                    className={`${
+                      item?.userType === 1 ? "sender_msg_box" : "client_msg_box"
+                    }`}
+                  >
+                    <h3
+                      class={`${
+                        item?.userType === 1
+                          ? "sender_text_title"
+                          : "client_text_title"
+                      }`}
+                    >
+                      {item?.message}
+                    </h3>
+                  </div>
+                  <div
+                    className={`${
+                      item?.userType === 1
+                        ? "sender_message_time"
+                        : "client_message_time"
+                    }`}
+                  >
+                    {moment(new Timestamp(item?.dateTime).toDate()).format(
+                      "hh:mm"
+                    )}
+                  </div>
                 </div>
-                <div className="client_message_time">08.24</div>
               </div>
-            </div>
-            <div className="message-row other-message">
-              <div className="message-content">
-                <div className="sender_msg_box">
-                  <h3 className="sender_text_title">
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry.
-                  </h3>
-                </div>
-                <div className="sender_message_time">08.24</div>
-              </div>
-            </div>
-            <div className="message-row you-message">
-              <div className="message-content">
-                <div className="client_msg_box">
-                  <h3 class="client_text_title">
-                    It is a long established fact that a reader will be
-                    distracted by the readable content
-                  </h3>
-                </div>
-                <div className="client_message_time">08.24</div>
-              </div>
-            </div>
-            <div className="message-row you-message">
-              <div className="message-content">
-                <img src={Icon.presciption}></img>
-              </div>
-            </div>
+            ))}
           </div>
           <div className="content__footer">
             <div className="sendNewMessage">

@@ -1,4 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
+
 import AuthSlice from "./Reducers/AuthSlice";
 import CommonSlice from "./Reducers/CommonReducer";
 import ConsultSlice from "./Reducers/ConsultationsReducer";
@@ -19,4 +20,11 @@ export const store = configureStore({
     PayoutSlice: PayoutSlice,
     ChatSlice: ChatSlice,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoreActions: ["ChatSlice.GetConversation"],
+        ignoreState: ["ChatSlice.conversation"],
+      },
+    }),
 });

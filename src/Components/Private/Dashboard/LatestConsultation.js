@@ -42,7 +42,7 @@ function LatestConsultation() {
       intialLoad();
     }
     return () => {};
-  }, [upcomingConsults]);
+  }, [upcomingConsults?.length]);
 
   return (
     <>

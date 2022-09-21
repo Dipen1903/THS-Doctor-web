@@ -29,7 +29,6 @@ function DoctorStatus() {
         dispatch(GetRejectionDetails());
       }
     });
-
     return () => {};
   }, []);
   return (

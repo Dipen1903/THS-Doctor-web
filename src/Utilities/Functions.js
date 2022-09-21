@@ -84,9 +84,9 @@ export function ConvertHMS(n) {
 
     if (day > 1) {
       return `${day} days`;
-    } else if (hour > 1) {
+    } else if (hour >= 1) {
       return `${hour} hours ${minutes.toFixed()} minutes`;
-    } else if (minutes > 1) {
+    } else if (minutes >= 1) {
       return `${minutes.toFixed()} minutes`;
     } else {
       return `00:00`;
