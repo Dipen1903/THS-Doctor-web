@@ -1,11 +1,14 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toggleDetails } from "../../../Store/Reducers/ChatReducer";
 import { Icon } from "../../../Utilities/Icons";
 
 function UserDetails() {
   const dispatch = useDispatch();
-  return (
+  const { ChatSlice, ProfileSlice } = useSelector((state) => state);
+  const { isDetails, snapShot, chat, room } = ChatSlice;
+  const { userProfile } = ProfileSlice;
+  return isDetails ? (
     <div className="col-md-3 padding_left_0">
       <div class="chatprofile_name_box">
         <div className="row">
@@ -116,6 +119,8 @@ function UserDetails() {
         </div>
       </div>
     </div>
+  ) : (
+    <></>
   );
 }
 

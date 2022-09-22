@@ -393,3 +393,10 @@ input:disabled {
   font-size: 16px;
   font-weight: 600;
 }
+
+.message-content .msg-image {
+  max-height: 191px;
+  max-width: 198px;
+  object-fit: cover;
+  border-radius: 8px;
+}

@@ -23,6 +23,11 @@ import VIDEO from "../Assets/svg/Video.svg";
 import PHONE from "../Assets/svg/Phone.svg";
 import DOTS from "../Assets/svg/Dots.svg";
 import CROSS from "../Assets/svg/Cross.svg";
+import CLIP from "../Assets/svg/Clip.svg";
+import SEND from "../Assets/svg/Send.svg";
+import DOWNLOAD from "../Assets/svg/Download.svg";
+import GALLARY from "../Assets/svg/Gallary.svg";
+import DOC from "../Assets/svg/Doc.svg";
 
 import FEMALEGRAY from "../Assets/svg/Female_grey.svg";
 import FEMALEWHITE from "../Assets/svg/Female_white.svg";
@@ -85,6 +90,11 @@ export const Icon = {
   MaleWhite: MALEWHITE,
   MaleGrey: MALEGREY,
 
+  Clip: CLIP,
+  Send: SEND,
+  Download: DOWNLOAD,
+  Gallary: GALLARY,
+  Doc: DOC,
   Earth: EARTH,
   Phone: PHONE,
   Dots: DOTS,

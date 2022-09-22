@@ -1,8 +1,30 @@
-import React from "react";
+import { Timestamp } from "firebase/firestore";
+import moment from "moment";
+import React, { useEffect } from "react";
 import { Container } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  GetConversations,
+  GetSnapShot,
+} from "../../../Store/Reducers/ChatReducer";
+import { ConvertHMS } from "../../../Utilities/Functions";
 import { BackGround, Icon } from "../../../Utilities/Icons";
+import Conversation from "./Conversation";
+import UserDetails from "./UserDetails";
 
 function ChatIndex() {
+  const dispatch = useDispatch();
+  const { ChatSlice, ProfileSlice } = useSelector((state) => state);
+  const { conversations } = ChatSlice;
+  const { userProfile } = ProfileSlice;
+  useEffect(() => {
+    if (userProfile) {
+      dispatch(GetConversations({ doctor_id: userProfile?.id }));
+    }
+
+    return () => {};
+  }, [userProfile]);
+
   return (
     <Container fluid className="profile_container">
       <h4 className="dashboard_title pt_30 mb_20">Chat</h4>
@@ -21,252 +43,46 @@ function ChatIndex() {
               </form>
             </div>
             <div id="conversation-list">
-              <div className="chat_contact_list_box chat_contact_list_box_active">
-                <div className="row">
-                  <div className="col-md-10 padding_right_0 padding_left_0">
-                    <div className="chat_list_display_box">
-                      <img
-                        className="chat_user_img"
-                        src={BackGround.Profile}
-                        alt="Jane Cooper"
-                      />
-                      <div>
-                        <div className="chat_user_name">Jane Cooper</div>
-                        <div className="chat_user_last_msg">
-                          IDK what else is there to do
+              {conversations?.length &&
+                conversations?.map((item, index) => (
+                  <div
+                    key={item?.userId}
+                    className="chat_contact_list_box chat_contact_list_box_active"
+                  >
+                    <div className="row">
+                      <div className="col-md-10 padding_right_0 padding_left_0">
+                        <div className="chat_list_display_box">
+                          <img
+                            className="chat_user_img"
+                            src={BackGround.Profile}
+                            alt="Jane Cooper"
+                          />
+                          <div>
+                            <div className="chat_user_name">
+                              {item?.userName}
+                            </div>
+                            <div className="chat_user_last_msg">
+                              {item?.lastMessage}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="col-md-2 padding_left_0 padding_right_0">
+                        <div className="chat_time">
+                          {moment(item?.lastMessageTime?.toDate()).fromNow()}
+                        </div>
+                        <div className="chat_message_count">
+                          {item?.unreadMessageOfDoctor &&
+                            item?.unreadMessageOfDoctor}
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div className="col-md-2 padding_left_0 padding_right_0">
-                    <div className="chat_time">1m ago</div>
-                    <div className="chat_message_count">2</div>
-                  </div>
-                </div>
-              </div>
-              <div className="chat_contact_list_box">
-                <div className="row">
-                  <div className="col-md-10 padding_right_0 padding_left_0">
-                    <div className="chat_list_display_box">
-                      <img
-                        className="chat_user_img"
-                        src={BackGround.Profile}
-                        alt="Jane Cooper"
-                      />
-                      <div>
-                        <div className="chat_user_name">Jane Cooper</div>
-                        <div className="chat_user_last_msg">
-                          IDK what else is there to do
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-md-2 padding_left_0 padding_right_0">
-                    <div className="chat_time">1m ago</div>
-                    <div className="chat_message_count">2</div>
-                  </div>
-                </div>
-              </div>
-              <div className="chat_contact_list_box">
-                <div className="row">
-                  <div className="col-md-10 padding_right_0 padding_left_0">
-                    <div className="chat_list_display_box">
-                      <img
-                        className="chat_user_img"
-                        src={BackGround.Profile}
-                        alt="Jane Cooper"
-                      />
-                      <div>
-                        <div className="chat_user_name">Jane Cooper</div>
-                        <div className="chat_user_last_msg">
-                          IDK what else is there to do
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-md-2 padding_left_0 padding_right_0">
-                    <div className="chat_time">1m ago</div>
-                  </div>
-                </div>
-              </div>
-              <div className="chat_contact_list_box">
-                <div className="row">
-                  <div className="col-md-10 padding_right_0 padding_left_0">
-                    <div className="chat_list_display_box">
-                      <img
-                        className="chat_user_img"
-                        src={BackGround.Profile}
-                        alt="Jane Cooper"
-                      />
-                      <div>
-                        <div className="chat_user_name">Jane Cooper</div>
-                        <div className="chat_user_last_msg">
-                          IDK what else is there to do
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-md-2 padding_left_0 padding_right_0">
-                    <div className="chat_time">1m ago</div>
-                  </div>
-                </div>
-              </div>
-              <div className="chat_contact_list_box">
-                <div className="row">
-                  <div className="col-md-10 padding_right_0 padding_left_0">
-                    <div className="chat_list_display_box">
-                      <img
-                        className="chat_user_img"
-                        src={BackGround.Profile}
-                        alt="Jane Cooper"
-                      />
-                      <div>
-                        <div className="chat_user_name">Jane Cooper</div>
-                        <div className="chat_user_last_msg">
-                          IDK what else is there to do
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-md-2 padding_left_0 padding_right_0">
-                    <div className="chat_time">1m ago</div>
-                  </div>
-                </div>
-              </div>
-              <div className="chat_contact_list_box">
-                <div className="row">
-                  <div className="col-md-10 padding_right_0 padding_left_0">
-                    <div className="chat_list_display_box">
-                      <img
-                        className="chat_user_img"
-                        src={BackGround.Profile}
-                        alt="Jane Cooper"
-                      />
-                      <div>
-                        <div className="chat_user_name">Jane Cooper</div>
-                        <div className="chat_user_last_msg">
-                          IDK what else is there to do
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-md-2 padding_left_0 padding_right_0">
-                    <div className="chat_time">1m ago</div>
-                  </div>
-                </div>
-              </div>
-              <div className="chat_contact_list_box">
-                <div className="row">
-                  <div className="col-md-10 padding_right_0 padding_left_0">
-                    <div className="chat_list_display_box">
-                      <img
-                        className="chat_user_img"
-                        src={BackGround.Profile}
-                        alt="Jane Cooper"
-                      />
-                      <div>
-                        <div className="chat_user_name">Jane Cooper</div>
-                        <div className="chat_user_last_msg">
-                          IDK what else is there to do
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-md-2 padding_left_0 padding_right_0">
-                    <div className="chat_time">1m ago</div>
-                  </div>
-                </div>
-              </div>
-              <div className="chat_contact_list_box">
-                <div className="row">
-                  <div className="col-md-10 padding_right_0 padding_left_0">
-                    <div className="chat_list_display_box">
-                      <img
-                        className="chat_user_img"
-                        src={BackGround.Profile}
-                        alt="Jane Cooper"
-                      />
-                      <div>
-                        <div className="chat_user_name">Jane Cooper</div>
-                        <div className="chat_user_last_msg">
-                          IDK what else is there to do
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-md-2 padding_left_0 padding_right_0">
-                    <div className="chat_time">1m ago</div>
-                  </div>
-                </div>
-              </div>
-              <div className="chat_contact_list_box">
-                <div className="row">
-                  <div className="col-md-10 padding_right_0 padding_left_0">
-                    <div className="chat_list_display_box">
-                      <img
-                        className="chat_user_img"
-                        src={BackGround.Profile}
-                        alt="Jane Cooper"
-                      />
-                      <div>
-                        <div className="chat_user_name">Jane Cooper</div>
-                        <div className="chat_user_last_msg">
-                          IDK what else is there to do
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-md-2 padding_left_0 padding_right_0">
-                    <div className="chat_time">1m ago</div>
-                  </div>
-                </div>
-              </div>
-              <div className="chat_contact_list_box">
-                <div className="row">
-                  <div className="col-md-10 padding_right_0 padding_left_0">
-                    <div className="chat_list_display_box">
-                      <img
-                        className="chat_user_img"
-                        src={BackGround.Profile}
-                        alt="Jane Cooper"
-                      />
-                      <div>
-                        <div className="chat_user_name">Jane Cooper</div>
-                        <div className="chat_user_last_msg">
-                          IDK what else is there to do
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-md-2 padding_left_0 padding_right_0">
-                    <div className="chat_time">1m ago</div>
-                  </div>
-                </div>
-              </div>
-              <div className="chat_contact_list_box">
-                <div className="row">
-                  <div className="col-md-10 padding_right_0 padding_left_0">
-                    <div className="chat_list_display_box">
-                      <img
-                        className="chat_user_img"
-                        src={BackGround.Profile}
-                        alt="Jane Cooper"
-                      />
-                      <div>
-                        <div className="chat_user_name">Jane Cooper</div>
-                        <div className="chat_user_last_msg">
-                          IDK what else is there to do
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-md-2 padding_left_0 padding_right_0">
-                    <div className="chat_time">1m ago</div>
-                  </div>
-                </div>
-              </div>
+                ))}
             </div>
           </div>
+          <Conversation />
+          <UserDetails />
         </div>
       </div>
     </Container>

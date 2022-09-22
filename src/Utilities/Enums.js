@@ -318,3 +318,14 @@ export const PrescriptionEnum = {
   },
   tempSpeciality: [],
 };
+
+export const MessageEnum = {
+  dateTime: "",
+  documentType: 0,
+  extension: null,
+  imageName: null,
+  imageUrl: null,
+  message: "",
+  sizeOfDocument: "",
+  userType: 0,
+};

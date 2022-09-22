@@ -105,7 +105,7 @@ function LatestConsultation() {
             </div>
           </div>
           <Conversation />
-          {isDetails && <UserDetails />}
+          <UserDetails />
         </div>
       </div>
     </>
