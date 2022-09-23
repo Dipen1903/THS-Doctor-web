@@ -1,13 +1,13 @@
-import { Timestamp } from "firebase/firestore";
 import moment from "moment";
 import React, { useEffect } from "react";
 import { Container } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
+
 import {
   GetConversations,
   GetSnapShot,
+  toggleRoom,
 } from "../../../Store/Reducers/ChatReducer";
-import { ConvertHMS } from "../../../Utilities/Functions";
 import { BackGround, Icon } from "../../../Utilities/Icons";
 import Conversation from "./Conversation";
 import UserDetails from "./UserDetails";
@@ -18,11 +18,12 @@ function ChatIndex() {
   const { conversations } = ChatSlice;
   const { userProfile } = ProfileSlice;
   useEffect(() => {
-    if (userProfile) {
+    if (!conversations.length) {
       dispatch(GetConversations({ doctor_id: userProfile?.id }));
     }
-
-    return () => {};
+    return () => {
+      dispatch(toggleRoom(""));
+    };
   }, [userProfile]);
 
   return (

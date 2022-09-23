@@ -13,7 +13,7 @@ import UserDetails from "../Chat/UserDetails";
 function LatestConsultation() {
   const dispatch = useDispatch();
   const { ChatSlice, ConsultSlice } = useSelector((state) => state);
-  const { isDetails } = ChatSlice;
+  const { room } = ChatSlice;
   const { upcomingConsults } = ConsultSlice;
   const [latest, setLatest] = useState([]);
   const intialLoad = () => {
@@ -54,58 +54,64 @@ function LatestConsultation() {
 
       <div className="chat_box_bg">
         <div className="row">
-          <div className="col-md-3 padding_right_0">
-            <div className="upcomming_consult_chat_list">
-              {latest?.length ? (
-                latest?.map((item, index) => {
-                  var duration = moment.duration(
-                    moment(item?.appointment_date_time).diff(moment.now())
-                  );
-                  var seconds = parseInt(duration.asSeconds());
-                  return (
-                    <div className="chat_list_box chat_list_box_active">
-                      <div className="row">
-                        <div className="col-md-6">
-                          <h6 class="chat_list_id">
-                            ID #{item?.appointment_id}
-                          </h6>
-                          <div className="chat_title_box">
-                            <h4 className="chat_list_title">{item?.name}</h4>
-                            <h5 className="chat_list_subtitle">
-                              {item?.age}|
-                              {item?.gender.toLowerCase() === "male"
-                                ? "M"
-                                : "F"}
-                            </h5>
+          {latest?.length ? (
+            <>
+              <div className="col-md-3 padding_right_0">
+                <div className="upcomming_consult_chat_list">
+                  {latest?.map((item, index) => {
+                    var duration = moment.duration(
+                      moment(item?.appointment_date_time).diff(moment.now())
+                    );
+                    var seconds = parseInt(duration.asSeconds());
+                    return (
+                      <div
+                        className={`chat_list_box ${
+                          item?.status === 1 && "chat_list_box_active"
+                        }`}
+                      >
+                        <div className="row">
+                          <div className="col-md-6">
+                            <h6 class="chat_list_id">
+                              ID #{item?.appointment_id}
+                            </h6>
+                            <div className="chat_title_box">
+                              <h4 className="chat_list_title">{item?.name}</h4>
+                              <h5 className="chat_list_subtitle">
+                                {item?.age}|
+                                {item?.gender.toLowerCase() === "male"
+                                  ? "M"
+                                  : "F"}
+                              </h5>
+                            </div>
+                          </div>
+                          <div className="col-md-6">
+                            <div className="time_left_box">
+                              {ConvertHMS(seconds)} Left
+                            </div>
                           </div>
                         </div>
-                        <div className="col-md-6">
-                          <div className="time_left_box">
-                            {ConvertHMS(seconds)} Left
+                        <div className="row">
+                          <div className="col-md-12">
+                            <h4 className="date_time">
+                              {moment(item?.appointment_date_time).format(
+                                "DD MMM,YYYY - hh:mm A"
+                              )}
+                            </h4>
                           </div>
                         </div>
                       </div>
-                      <div className="row">
-                        <div className="col-md-12">
-                          <h4 className="date_time">
-                            {moment(item?.appointment_date_time).format(
-                              "DD MMM,YYYY - hh:mm A"
-                            )}
-                          </h4>
-                        </div>
-                      </div>
-                    </div>
-                  );
-                })
-              ) : (
-                <div className="empty-data-block">
-                  <span className="empty-text">No Consultations</span>
+                    );
+                  })}
                 </div>
-              )}
+              </div>
+              <Conversation roomData={room} />
+              <UserDetails />
+            </>
+          ) : (
+            <div className="empty-data-block">
+              <span className="empty-text">No Consultations</span>
             </div>
-          </div>
-          <Conversation />
-          <UserDetails />
+          )}
         </div>
       </div>
     </>

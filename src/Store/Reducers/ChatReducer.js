@@ -7,6 +7,7 @@ import {
   onSnapshot,
   getDocs,
   addDoc,
+  getDoc,
 } from "firebase/firestore";
 
 import { AlertEnum } from "../../Utilities/Enums";
@@ -25,16 +26,15 @@ const initialState = {
 
 export const GetSnapShot = createAsyncThunk(
   "GetSnapShot",
-  async (values, { getState, dispatch }) => {
+  async (values, { dispatch }) => {
     try {
-      getState().ChatSlice?.snapShot();
-      const path = `Chat_${values?.doctor_id}_${values?.patient_id}`;
-      const q = query(collection(FirebaseDB, path));
+      const path = `Chat_${values?.doctor_id}_${values?.user_id}`;
+      const q = query(collection(FirebaseDB, path), orderBy("dateTime", "asc"));
       let unsubscribe;
       unsubscribe = onSnapshot(q, (querySnapshot) => {
-        let tempArray = [];
-        querySnapshot.forEach((item) => tempArray.push(item.data()));
-        dispatch(setUpChat({ type: "firebase", data: tempArray }));
+        querySnapshot.docChanges().forEach((change) => {
+          dispatch(setUpChat(change.doc.data()));
+        });
       });
       return unsubscribe;
     } catch (error) {
@@ -46,7 +46,7 @@ export const GetSnapShot = createAsyncThunk(
 );
 export const GetConversations = createAsyncThunk(
   "GetConversations",
-  async (values, { getState, dispatch }) => {
+  async (values, { dispatch }) => {
     try {
       if (values?.doctor_id) {
         const path = `Doctors_${values?.doctor_id}`;
@@ -58,6 +58,12 @@ export const GetConversations = createAsyncThunk(
           result.docs.map((doc) => tempArr.push(doc.data()));
           if (tempArr.length) {
             dispatch(toggleRoom(tempArr[0]));
+            dispatch(
+              GetSnapShot({
+                doctor_id: values?.doctor_id,
+                user_id: tempArr[0]?.user_id || tempArr[0]?.userId,
+              })
+            );
           }
           return tempArr;
         }
@@ -66,7 +72,6 @@ export const GetConversations = createAsyncThunk(
       }
     } catch (error) {
       dispatch(setLoading(false));
-      console.log(error);
       return error;
     }
   }
@@ -76,17 +81,14 @@ export const SendMessage = createAsyncThunk(
   "SendMessage",
   async (values, { getState, dispatch }) => {
     try {
-      debugger;
       let room = getState().ChatSlice.room;
       let userProfile = getState().ProfileSlice.userProfile;
       const path = `Chat_${userProfile?.id}_${room?.userId || room?.user_id}`;
       const collectionRef = collection(FirebaseDB, path);
-
       const docRef = await addDoc(collectionRef, values);
-      console.log(docRef);
+      return docRef;
     } catch (error) {
       dispatch(setLoading(false));
-      console.log(error);
       return error;
     }
   }
@@ -100,16 +102,12 @@ export const ChatSlice = createSlice({
       state.isDetails = action.payload;
     },
     toggleRoom: (state, action) => {
+      state.conversations = [];
+      state.chat = [];
       state.room = action.payload;
     },
     setUpChat: (state, action) => {
-      state.chat = [];
-      let details = action.payload;
-      if (details.type === "chatbot") {
-        let tempObject = JSON.parse(details.data);
-      } else if (details.type === "firebase") {
-        state.chat = [...state.chat, ...details.data];
-      }
+      state.chat = [...state.chat, action.payload];
     },
   },
   extraReducers: (builder) => {

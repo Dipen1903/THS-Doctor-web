@@ -1,8 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import {
-  ConsultDetailsAPI,
-  NewConsultAPI,
-  PastConsultAPI,
   PayoutDetailsAPI,
   PayoutsAPI,
   RequestWithdrawAPI,

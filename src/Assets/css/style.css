@@ -5463,6 +5463,10 @@ privacypolicy-paragraph::-webkit-scrollbar {
   overflow-y: auto;
   padding: 30px 20px 24px 20px;
 }
+.dashboard .chat_box_bg .chat-message-list-inner {
+  min-height: 70vh;
+  max-height: 70vh;
+}
 
 .message-row {
   display: grid;
@@ -5595,6 +5599,9 @@ privacypolicy-paragraph::-webkit-scrollbar {
 }
 .upcomming_consult_chat_list {
   border-right: 1px solid #eceff4;
+  min-height: 89vh;
+  max-height: 90vh;
+  overflow-y: auto;
 }
 .chat_list_box {
   padding: 14px 20px;
@@ -6136,14 +6143,20 @@ privacypolicy-paragraph::-webkit-scrollbar {
 }
 .attach_items_box {
   background: #eceff4;
-  height: 108vh;
+  min-height: 79vh;
+  max-height: 90vh;
   padding: 30px 20px 24px 20px;
 }
 .attach_cross {
   float: right;
 }
+.attach_img_box img {
+  max-width: 500px;
+  max-height: 500px;
+  border-radius: 8px;
+}
 .attach_img_box {
-  padding: 160px;
+  padding: 10%;
   height: 100%;
 }
 .attach_input_btn_box {
@@ -6168,7 +6181,11 @@ privacypolicy-paragraph::-webkit-scrollbar {
   border-radius: 12px;
   width: 250px;
   height: 250px;
+  display: flex;
   padding: 42px 35px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 .attch_doc_img {
   margin-bottom: 20px;
@@ -6181,7 +6198,7 @@ privacypolicy-paragraph::-webkit-scrollbar {
   font-weight: 600;
   font-size: 15px;
   line-height: 24px;
-  text-align: center;
+  text-align: initial;
   color: #1e1f20;
 }
 .attach_doc_size {

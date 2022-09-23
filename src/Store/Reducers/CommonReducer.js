@@ -10,6 +10,7 @@ import {
   TermsAndConditionsAPI,
   HelpsAndSupportsAPI,
   PrivacyAndPolicyAPI,
+  UploadFileAPI,
 } from "../../Components/Common/Service";
 import { ShareLinkAPI } from "../../Routes/Service";
 
@@ -292,6 +293,29 @@ export const ShareLink = createAsyncThunk(
             type: AlertEnum.Success,
           })
         );
+        return result;
+      } else {
+        throw result;
+      }
+    } catch (error) {
+      dispatch(setLoading(false));
+      dispatch(
+        setMessage({
+          text: error?.message,
+          type: AlertEnum.Error,
+        })
+      );
+      return error;
+    }
+  }
+);
+export const UploadFile = createAsyncThunk(
+  "UploadFile",
+  async (values, { dispatch }) => {
+    try {
+      const result = await UploadFileAPI(values);
+      if (result?.success) {
+        dispatch(setLoading(false));
         return result;
       } else {
         throw result;

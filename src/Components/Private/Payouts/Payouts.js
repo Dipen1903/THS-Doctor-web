@@ -161,7 +161,9 @@ function Payouts() {
         </div>
       </div>
       <Table
-        data={filteredData.length ? filteredData : payouts}
+        data={
+          filteredData.length ? filteredData : payouts?.length ? payouts : []
+        }
         columns={columns}
         pagination={true}
       />

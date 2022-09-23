@@ -16,7 +16,9 @@ function PrivateRoutes({ children, isHeader, isBanner }) {
     if (token) {
       dispatch(VerifySession()).then((res) => {
         if (res?.payload?.success) {
-          if (!userProfile) dispatch(GetUserProfile());
+          if (!userProfile) {
+            dispatch(GetUserProfile());
+          }
         } else {
           dispatch(removeSession());
           navigate("/");

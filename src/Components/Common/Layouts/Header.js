@@ -29,9 +29,8 @@ function Header() {
   const handleShow2 = () => setShow2(true);
 
   useEffect(() => {
-    if (!userProfile) dispatch(GetUserProfile());
     return () => {};
-  }, [userProfile]);
+  }, []);
 
   return (
     <Navbar className="headerNav pt_10 pb_15  " expand="lg">
