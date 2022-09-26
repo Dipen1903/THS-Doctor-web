@@ -103,14 +103,24 @@ function RootRoute() {
           </PrivateRoutes>
         }
       />
-      <Route
-        path="/chat"
-        element={
-          <PrivateRoutes isHeader={true}>
-            <ChatIndex />
-          </PrivateRoutes>
-        }
-      />
+      <Route path="/chat">
+        <Route
+          path=""
+          element={
+            <PrivateRoutes isHeader={true}>
+              <ChatIndex />
+            </PrivateRoutes>
+          }
+        />
+        <Route
+          path=":booking_id"
+          element={
+            <PrivateRoutes isHeader={true}>
+              <ChatIndex />
+            </PrivateRoutes>
+          }
+        />
+      </Route>
       <Route path="/prescription/:booking_id">
         <Route
           path=""

@@ -3,6 +3,7 @@ import moment from "moment";
 import React, { useEffect, useImperativeHandle, useRef, useState } from "react";
 import { Button, Dropdown } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import {
   GetSnapShot,
   SendMessage,
@@ -10,7 +11,7 @@ import {
 } from "../../../Store/Reducers/ChatReducer";
 import { UploadFile } from "../../../Store/Reducers/CommonReducer";
 import { MessageEnum } from "../../../Utilities/Enums";
-import { Icon } from "../../../Utilities/Icons";
+import { BackGround, Icon } from "../../../Utilities/Icons";
 
 function Conversation({ roomData }) {
   const dispatch = useDispatch();
@@ -51,7 +52,10 @@ function Conversation({ roomData }) {
                 <h3 className="profile_card_name">
                   {room?.userName || room?.name}
                 </h3>
-                <h5 className="profile_name_subtitle">23 | F</h5>
+                <h5 className="profile_name_subtitle">
+                  {room?.age} |{" "}
+                  {room?.gender.toLowerCase() === "male" ? "M" : "F"}
+                </h5>
               </div>
               <h5 className="online_text">Online</h5>
             </div>
@@ -144,6 +148,11 @@ function Conversation({ roomData }) {
             localFile={localFile}
             setLocalFile={setLocalFile}
           />
+          <Link to={`/prescription/${room?.id || room?.lastBookingId}`}>
+            <button className="prescription">
+              <img src={BackGround.Prescription} />
+            </button>
+          </Link>
         </div>
       </div>
     </div>
@@ -198,6 +207,42 @@ const ChatItem = ({ type, index, rest }) => {
                   </h5>
                 </div>
                 <img src={Icon.Download} className="file_download_icon" />
+              </div>
+            </div>
+            <div
+              className={`${
+                rest?.userType === 1
+                  ? "sender_message_time"
+                  : "client_message_time"
+              }`}
+            >
+              {rest?.dateTime &&
+                moment(rest?.dateTime?.toDate()).format("hh:mm")}
+            </div>
+          </div>
+        </div>
+      );
+    case 4: //Document
+      return (
+        <div
+          className={`message-row ${
+            rest?.userType === 1 ? "other-message" : "you-message"
+          }`}
+        >
+          <div className="message-content">
+            <div
+              className={`${
+                rest?.userType === 1 ? "sender_msg_box" : "client_msg_box"
+              }`}
+            >
+              <div className="msg_view_box">
+                <div>
+                  <h3 className="sender_name_title">Lab Tests</h3>
+                  <h5 className="sender_name_subtitle">CBC</h5>
+                </div>
+                <a target="_blank" variant="primary" className="msg_view_btn">
+                  View
+                </a>
               </div>
             </div>
             <div

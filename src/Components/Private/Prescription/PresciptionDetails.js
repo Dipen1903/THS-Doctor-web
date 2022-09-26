@@ -1,9 +1,12 @@
+import { Timestamp } from "firebase/firestore";
 import moment from "moment";
 import React, { memo, useEffect } from "react";
 import { Button, Modal } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { SendMessage } from "../../../Store/Reducers/ChatReducer";
 import { toggleReview } from "../../../Store/Reducers/ConsultationsReducer";
+import { MessageEnum } from "../../../Utilities/Enums";
 import { Logo } from "../../../Utilities/Icons";
 const Review = ({ values }) => {
   const dispatch = useDispatch();
@@ -12,6 +15,18 @@ const Review = ({ values }) => {
   const { isReview, prescDetails } = useSelector(
     ({ ConsultSlice }) => ConsultSlice
   );
+  const send = () => {
+    try {
+      let tempMessage = { ...MessageEnum };
+      tempMessage.dateTime = Timestamp.now();
+      tempMessage.documentType = 4;
+      tempMessage.imageUrl = prescDetails?.prescription_url;
+      dispatch(SendMessage(tempMessage)).then((res) => {
+        console.log(res, "RES");
+        navigate(`/chat/${prescDetails?.prescription_id}`);
+      });
+    } catch (error) {}
+  };
   useEffect(() => {}, [prescDetails]);
   return (
     <Modal
@@ -233,9 +248,13 @@ const Review = ({ values }) => {
             Edit
           </Button>
           {/* </Link> */}
-          {location.pathname.includes("prescription") === 1 && (
-            <Button className="verify_btn" variant="primary" onClick={() => {}}>
+          {location.pathname.includes("prescription") ? (
+            <Button className="verify_btn" variant="primary" onClick={send}>
               Send Prescription
+            </Button>
+          ) : (
+            <Button className="verify_btn" variant="primary" onClick={() => {}}>
+              Open Chat
             </Button>
           )}
         </div>

@@ -46,17 +46,9 @@ function ConsultIndex() {
             moment(item?.appointment_date).format("DD/MM/YYYY") ==
             text?.format("DD/MM/YYYY")
         );
-        tempPast = pastConsults.filter(
-          (item) =>
-            moment(item?.appointment_date).format("DD/MM/YYYY") ==
-            text?.format("DD/MM/YYYY")
-        );
       }
       if (tempNew?.length) {
         setFilteredData((state) => ({ ...state, upcomingConsults: tempNew }));
-      }
-      if (tempPast?.length) {
-        setFilteredData((state) => ({ ...state, pastConsults: tempPast }));
       }
       if (!tempNew?.length && !tempPast?.length) {
         dispatch(

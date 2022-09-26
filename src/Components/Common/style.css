@@ -412,3 +412,12 @@ input:disabled {
   object-fit: cover;
   border-radius: 8px;
 }
+#chat-message-list .prescription {
+  background-color: transparent;
+  width: 150px;
+  height: 60px;
+  position: absolute;
+  right: 5%;
+  bottom: 8%;
+  border: none;
+}

@@ -5455,6 +5455,7 @@ privacypolicy-paragraph::-webkit-scrollbar {
   display: flex;
   flex-direction: column;
   padding: 0 0px;
+  position: relative;
 }
 
 .chat-message-list-inner {
@@ -5462,6 +5463,7 @@ privacypolicy-paragraph::-webkit-scrollbar {
   max-height: 90vh;
   overflow-y: auto;
   padding: 30px 20px 24px 20px;
+  margin: 0 0 35px 0;
 }
 .dashboard .chat_box_bg .chat-message-list-inner {
   min-height: 70vh;

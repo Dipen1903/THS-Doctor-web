@@ -4,6 +4,7 @@ import LOGOWHITE from "../Assets/svg/LogoWhite.svg";
 import LOGOTITLE from "../Assets/svg/LogoTitle.svg";
 //ICONS
 
+import PLUS from "../Assets/svg/Plus.svg";
 import SEARCH from "../Assets/svg/Search.svg";
 import CIVERDOWN from "../Assets/svg/CiverDown.svg";
 import FACE from "../Assets/img/svg/totalconsultations.svg";
@@ -60,6 +61,7 @@ import MobileBlue from "../Assets/svg/MobileBlue.svg";
 import MobileGrey from "../Assets/svg/MobileGrey.svg";
 
 //BACKGROUND IMAGES
+import PRESCRIPTION from "../Assets/svg/Prescription.svg";
 
 export const Logo = {
   THS_Title: LOGOTITLE,
@@ -91,6 +93,7 @@ export const Icon = {
   MaleGrey: MALEGREY,
 
   Clip: CLIP,
+  Plus: PLUS,
   Send: SEND,
   Download: DOWNLOAD,
   Gallary: GALLARY,
@@ -134,6 +137,7 @@ export const Icon = {
   Termsconditionline: require("../Assets/img/png/terms_condition_line.png"),
 };
 export const BackGround = {
+  Prescription: PRESCRIPTION,
   Banner: require("../Assets/img/slider_1.png"),
   Email: require("../Assets/img/messageicon.png"),
   Succcess: require("../Assets/img/img_success.png"),

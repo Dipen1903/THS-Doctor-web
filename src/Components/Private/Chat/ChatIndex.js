@@ -2,10 +2,12 @@ import moment from "moment";
 import React, { useEffect } from "react";
 import { Container } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 
 import {
   GetConversations,
   GetSnapShot,
+  SetUpRoom,
   toggleRoom,
 } from "../../../Store/Reducers/ChatReducer";
 import { BackGround, Icon } from "../../../Utilities/Icons";
@@ -13,10 +15,17 @@ import Conversation from "./Conversation";
 import UserDetails from "./UserDetails";
 
 function ChatIndex() {
+  const { booking_id } = useParams();
   const dispatch = useDispatch();
   const { ChatSlice, ProfileSlice } = useSelector((state) => state);
-  const { conversations } = ChatSlice;
+  const { conversations, room } = ChatSlice;
   const { userProfile } = ProfileSlice;
+
+  useEffect(() => {
+    if (booking_id) dispatch(SetUpRoom({ booking_id: booking_id }));
+    return () => {};
+  }, [booking_id]);
+
   useEffect(() => {
     if (!conversations.length) {
       dispatch(GetConversations({ doctor_id: userProfile?.id }));
@@ -48,7 +57,15 @@ function ChatIndex() {
                 conversations?.map((item, index) => (
                   <div
                     key={item?.userId}
-                    className="chat_contact_list_box chat_contact_list_box_active"
+                    onClick={() => {
+                      dispatch(SetUpRoom({ booking_id: item?.lastBookingId }));
+                    }}
+                    className={`chat_contact_list_box ${
+                      room?.userId?.toString() === item?.userId?.toString() ||
+                      room?.user_id?.toString() === item?.userId?.toString()
+                        ? "chat_contact_list_box_active"
+                        : ""
+                    }`}
                   >
                     <div className="row">
                       <div className="col-md-10 padding_right_0 padding_left_0">
@@ -72,10 +89,13 @@ function ChatIndex() {
                         <div className="chat_time">
                           {moment(item?.lastMessageTime?.toDate()).fromNow()}
                         </div>
-                        <div className="chat_message_count">
-                          {item?.unreadMessageOfDoctor &&
-                            item?.unreadMessageOfDoctor}
-                        </div>
+                        {parseInt(item?.unreadMessageOfDoctor) ? (
+                          <div className="chat_message_count">
+                            {item?.unreadMessageOfDoctor}
+                          </div>
+                        ) : (
+                          <></>
+                        )}
                       </div>
                     </div>
                   </div>

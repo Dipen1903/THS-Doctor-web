@@ -34,8 +34,11 @@ function UserDetails() {
           <div className="col-md-12">
             <center>
               <img src={Icon.userimg} className="chatuserimg"></img>
-              <h3 className="userprofile_name_title">Juli</h3>
-              <h5 className="userprofile_name_subtitle">23 | F</h5>
+              <h3 className="userprofile_name_title">{room?.name}</h3>
+              <h5 className="userprofile_name_subtitle">
+                {room?.age} |{" "}
+                {room?.gender.toLowerCase() === "male" ? "M" : "F"}
+              </h5>
             </center>
             <hr className="userprofile_hr_bottom" />
           </div>
@@ -50,7 +53,7 @@ function UserDetails() {
             <h3 className="userprofile_data_title">Blood Group</h3>
           </div>
           <div className="col-md-6">
-            <h3 className="userprofile_data_value">AB+</h3>
+            <h3 className="userprofile_data_value">{room?.blood_group}</h3>
           </div>
         </div>
         <div className="row">
@@ -58,7 +61,7 @@ function UserDetails() {
             <h3 className="userprofile_data_title">Height</h3>
           </div>
           <div className="col-md-6">
-            <h3 className="userprofile_data_value">270 cm</h3>
+            <h3 className="userprofile_data_value">{room?.height}</h3>
           </div>
         </div>
         <div className="row">
@@ -66,7 +69,7 @@ function UserDetails() {
             <h3 className="userprofile_data_title">Weight</h3>
           </div>
           <div className="col-md-6">
-            <h3 className="userprofile_data_value">66 kg</h3>
+            <h3 className="userprofile_data_value">{room?.weight}</h3>
           </div>
         </div>
         <hr className="userprofile_section_hr_bottom" />
