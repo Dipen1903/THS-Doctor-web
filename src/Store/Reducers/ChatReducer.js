@@ -134,8 +134,12 @@ export const SendMessage = createAsyncThunk(
     try {
       debugger;
       const room = getState().ChatSlice.room;
+      const prescDetails = getState().ConsultSlice.prescDetails;
       const userProfile = getState().ProfileSlice.userProfile;
-      const path = `Chat_${userProfile?.id}_${room?.userId || room?.user_id}`;
+      let user_id =
+        room?.userId || room?.user_id || prescDetails?.patient_details?.id;
+
+      const path = `Chat_${userProfile?.id}_${user_id}`;
       const collectionRef = collection(FirebaseDB, path);
       const docRef = await addDoc(collectionRef, values);
       return docRef;
