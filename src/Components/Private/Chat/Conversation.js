@@ -12,6 +12,7 @@ import {
 import { UploadFile } from "../../../Store/Reducers/CommonReducer";
 import { MessageEnum } from "../../../Utilities/Enums";
 import { BackGround, Icon } from "../../../Utilities/Icons";
+import Call from "./AudioVideoCall";
 
 function Conversation({ roomData }) {
   const dispatch = useDispatch();
@@ -60,6 +61,7 @@ function Conversation({ roomData }) {
               <h5 className="online_text">Online</h5>
             </div>
             <div className="col-md-9">
+              <Call />
               <Dropdown>
                 <Dropdown.Toggle
                   id="dropdown-basic"
@@ -237,10 +239,17 @@ const ChatItem = ({ type, index, rest }) => {
             >
               <div className="msg_view_box">
                 <div>
-                  <h3 className="sender_name_title">Lab Tests</h3>
-                  <h5 className="sender_name_subtitle">CBC</h5>
+                  <h3 className="sender_name_title">Prescription</h3>
+                  <h5 className="sender_name_subtitle">
+                    Appointment : {rest?.imageName}
+                  </h5>
                 </div>
-                <a target="_blank" variant="primary" className="msg_view_btn">
+                <a
+                  target="_blank"
+                  href={rest?.imageUrl}
+                  variant="primary"
+                  className="msg_view_btn"
+                >
                   View
                 </a>
               </div>

@@ -15,14 +15,18 @@ const Review = ({ values }) => {
   const { isReview, prescDetails } = useSelector(
     ({ ConsultSlice }) => ConsultSlice
   );
-  const send = () => {
+  const send = (e) => {
     try {
+      debugger;
+
+      e.preventDefault();
       let tempMessage = { ...MessageEnum };
       tempMessage.dateTime = Timestamp.now();
       tempMessage.documentType = 4;
+      tempMessage.extension = "pdf";
+      tempMessage.imageName = prescDetails?.prescription_id;
       tempMessage.imageUrl = prescDetails?.prescription_url;
       dispatch(SendMessage(tempMessage)).then((res) => {
-        console.log(res, "RES");
         navigate(`/chat/${prescDetails?.prescription_id}`);
       });
     } catch (error) {}

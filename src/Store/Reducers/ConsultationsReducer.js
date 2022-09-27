@@ -216,6 +216,9 @@ export const CreatePrescription = createAsyncThunk(
       const result = await CreatePrescAPI(values);
       if (result?.success) {
         dispatch(toggleReview(true));
+        dispatch(
+          GetPrescDetails({ booking_id: result?.data?.prescription_id })
+        );
         return result?.data;
       } else {
         throw result;

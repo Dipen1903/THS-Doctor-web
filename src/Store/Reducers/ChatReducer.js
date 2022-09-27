@@ -10,11 +10,9 @@ import {
   getDoc,
   where,
 } from "firebase/firestore";
-
-import { AlertEnum } from "../../Utilities/Enums";
 import { FirebaseDB } from "../../Utilities/Firebase.config";
 import { GetConsultDetails } from "./ConsultationsReducer";
-import { setLoading, setMessage } from "./LayoutSlice";
+import { setLoading } from "./LayoutSlice";
 
 const initialState = {
   patient: "",
@@ -133,11 +131,10 @@ export const SendMessage = createAsyncThunk(
   async (values, { getState, dispatch }) => {
     try {
       debugger;
-      const room = getState().ChatSlice.room;
+      // const room = getState().ChatSlice.room;
       const prescDetails = getState().ConsultSlice.prescDetails;
       const userProfile = getState().ProfileSlice.userProfile;
-      let user_id =
-        room?.userId || room?.user_id || prescDetails?.patient_details?.id;
+      let user_id = prescDetails?.patient_details?.user_id;
 
       const path = `Chat_${userProfile?.id}_${user_id}`;
       const collectionRef = collection(FirebaseDB, path);

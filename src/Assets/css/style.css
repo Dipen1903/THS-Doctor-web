@@ -5779,7 +5779,7 @@ privacypolicy-paragraph::-webkit-scrollbar {
   font-weight: 700;
   font-size: 14px;
   line-height: 24px;
-  color: #f9f871;
+  color: #3093bb;
   margin-bottom: 0;
 }
 .sender_name_subtitle {
@@ -5788,7 +5788,7 @@ privacypolicy-paragraph::-webkit-scrollbar {
   font-weight: 400;
   font-size: 14px;
   line-height: 24px;
-  color: #fff;
+  color: #3093bb;
   margin-bottom: 3px;
 }
 .sender_message_time {
@@ -6123,19 +6123,22 @@ privacypolicy-paragraph::-webkit-scrollbar {
 }
 
 .msg_view_btn {
-  background: #ffffff;
+  background: #3093bb;
   border-radius: 4px;
   font-family: "Mulish";
   font-style: normal;
   font-weight: 500;
   font-size: 14px;
   line-height: 24px;
-  color: #3093bb;
+  text-decoration: none;
+  color: #f2f2f2;
   border: 0;
   padding: 1px 10px;
   height: 25px;
   margin-left: 15px;
-  margin-top: 12px;
+}
+.msg_view_btn:hover {
+  color: #f2f2f2;
 }
 .msg_view_box {
   display: inline-flex;
