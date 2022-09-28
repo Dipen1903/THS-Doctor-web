@@ -116,7 +116,8 @@ function PayoutDetailed() {
       <div className="payout_back">
         <Link to="/payouts">
           <Button variant="primary" className="payout_back_btn">
-            <img src={Icon.Back} className="back_btn_icon"></img> Back
+            <img alt="myImg" src={Icon.Back} className="back_btn_icon"></img>{" "}
+            Back
           </Button>
         </Link>
       </div>
@@ -129,7 +130,7 @@ function PayoutDetailed() {
       <div className="d-flex justify-content-between flex-wrap payouts_buttons">
         <div className="payout_search_box">
           <form class="form-inline d-flex justify-content-start align-items-center">
-            <img src={Icon.Search} className="payout_search"></img>
+            <img alt="myImg" src={Icon.Search} className="payout_search"></img>
             <input
               class="form-control mr-sm-2 border-0 ml_5 pl_35"
               type="search"

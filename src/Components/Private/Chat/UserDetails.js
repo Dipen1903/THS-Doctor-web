@@ -20,6 +20,7 @@ function UserDetails() {
           <div className="col-md-6 col-sm-6 col-xs-6 col-6">
             <div className="user_info_close">
               <img
+                alt="myImg"
                 src={Icon.Cross}
                 onClick={() => {
                   dispatch(toggleDetails(false));
@@ -33,7 +34,7 @@ function UserDetails() {
         <div className="row">
           <div className="col-md-12">
             <center>
-              <img src={Icon.userimg} className="chatuserimg"></img>
+              <img alt="myImg" src={Icon.userimg} className="chatuserimg"></img>
               <h3 className="userprofile_name_title">{room?.name}</h3>
               <h5 className="userprofile_name_subtitle">
                 {room?.age} |{" "}
@@ -81,7 +82,11 @@ function UserDetails() {
         <div className="row mt_10">
           <div className="col-md-8">
             <div className="share_file_box">
-              <img src={Icon.shareimg} className="share_file_icon"></img>
+              <img
+                alt="myImg"
+                src={Icon.shareimg}
+                className="share_file_icon"
+              ></img>
               <div>
                 <h3 className="share_file_name">thisfile.pdf</h3>
                 <h4 className="share_file_date">Oct 21, 12:56</h4>
@@ -95,7 +100,11 @@ function UserDetails() {
         <div className="row mt_20">
           <div className="col-md-8">
             <div className="share_file_box">
-              <img src={Icon.shareimg} className="share_file_icon"></img>
+              <img
+                alt="myImg"
+                src={Icon.shareimg}
+                className="share_file_icon"
+              ></img>
               <div>
                 <h3 className="share_file_name">word.doc</h3>
                 <h4 className="share_file_date">Oct 21, 12:56</h4>
@@ -113,12 +122,36 @@ function UserDetails() {
           </div>
         </div>
         <div className="share_img_box mt_15">
-          <img src={Icon.sharefileimg1} className="share_img_size"></img>
-          <img src={Icon.sharefileimg2} className="share_img_size"></img>
-          <img src={Icon.sharefileimg3} className="share_img_size"></img>
-          <img src={Icon.sharefileimg4} className="share_img_size"></img>
-          <img src={Icon.sharefileimg5} className="share_img_size"></img>
-          <img src={Icon.sharefileimg6} className="share_img_size"></img>
+          <img
+            alt="myImg"
+            src={Icon.sharefileimg1}
+            className="share_img_size"
+          ></img>
+          <img
+            alt="myImg"
+            src={Icon.sharefileimg2}
+            className="share_img_size"
+          ></img>
+          <img
+            alt="myImg"
+            src={Icon.sharefileimg3}
+            className="share_img_size"
+          ></img>
+          <img
+            alt="myImg"
+            src={Icon.sharefileimg4}
+            className="share_img_size"
+          ></img>
+          <img
+            alt="myImg"
+            src={Icon.sharefileimg5}
+            className="share_img_size"
+          ></img>
+          <img
+            alt="myImg"
+            src={Icon.sharefileimg6}
+            className="share_img_size"
+          ></img>
         </div>
       </div>
     </div>

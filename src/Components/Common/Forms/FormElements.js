@@ -1,9 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { Field, ErrorMessage, getIn, FieldArray } from "formik";
+import { Field, ErrorMessage, FieldArray } from "formik";
 import ReactSelect, { components } from "react-select";
 import { BackGround, Icon } from "../../../Utilities/Icons";
-import DatePicker from "react-datepicker";
-import moment from "moment";
 const CustomOption = (props) => {
   const { innerProps, isDisabled, children } = props;
   return !isDisabled ? (
@@ -18,9 +16,9 @@ const DropdownIndicator = ({ iconHide, customIcon, ...props }) => {
       {iconHide ? (
         <></>
       ) : customIcon ? (
-        <img alt="myimg" src={customIcon} />
+        <img alt="myImg" src={customIcon} />
       ) : (
-        <img alt="myimg" src={Icon.Search} />
+        <img alt="myImg" src={Icon.Search} />
       )}
     </components.DropdownIndicator>
   );
@@ -28,7 +26,7 @@ const DropdownIndicator = ({ iconHide, customIcon, ...props }) => {
 const MultiValueRemove = (props) => {
   return (
     <components.MultiValueRemove {...props}>
-      <img src={Icon.Cross} alt="" />
+      <img alt="myImg" src={Icon.Cross} />
     </components.MultiValueRemove>
   );
 };
@@ -106,7 +104,6 @@ function Select(props) {
     outerClass,
     placeholder,
     setFieldValue,
-    validate,
     value,
   } = props;
 
@@ -325,7 +322,7 @@ function SearchBox(rest) {
       setText(text);
       let tempResult = options?.filter(
         (item) =>
-          item[objectKey].toUpperCase().includes(text.toUpperCase()) == 1
+          item[objectKey].toUpperCase().includes(text.toUpperCase()) === 1
       );
       setResult(tempResult);
     } catch (error) {
@@ -372,7 +369,7 @@ function SearchBox(rest) {
     value()?.map((user) =>
       options.filter((item) => {
         if (item?.id.toString() === user.toString()) {
-          tempArr.push(item);
+          return tempArr.push(item);
         }
       })
     );
@@ -393,7 +390,7 @@ function SearchBox(rest) {
                 }}
                 key={user?.id}
               >
-                <img alt="myimg" src={user?.image || BackGround.Upload} />
+                <img alt="myImg" src={user?.image || BackGround.Upload} />
               </li>
             ))}
             <span>
@@ -431,7 +428,7 @@ function SearchBox(rest) {
           <ul>
             {selectedUsers.map((user) => (
               <li key={user?.id}>
-                <img alt="myimg" style={{ height: "40px" }} src={user?.image} />
+                <img alt="myImg" style={{ height: "40px" }} src={user?.image} />
                 <div>
                   <h5>
                     {user?.first_name} {user?.last_name}
@@ -449,7 +446,7 @@ function SearchBox(rest) {
                     removeItem(user);
                   }}
                 >
-                  <img alt="myimg" src={Icon.CancelBlack} />
+                  <img alt="myImg" src={Icon.CancelBlack} />
                 </a>
               </li>
             ))}
@@ -469,7 +466,7 @@ function SearchBox(rest) {
                   selectOption(user);
                 }}
               >
-                <img alt="myimg" src={user?.image} />
+                <img alt="myImg" src={user?.image} />
                 <h5>
                   {user?.first_name} {user?.last_name}
                 </h5>
@@ -513,7 +510,7 @@ function SearchBox(rest) {
                   {selectedUsers.map((user) => (
                     <li key={user?.id}>
                       <img
-                        alt="myimg"
+                        alt="myImg"
                         style={{ height: "40px" }}
                         src={user?.image}
                       />
@@ -534,7 +531,7 @@ function SearchBox(rest) {
                           removeItem(user);
                         }}
                       >
-                        <img alt="myimg" src={Icon.CancelBlack} />
+                        <img alt="myImg" src={Icon.CancelBlack} />
                       </a>
                     </li>
                   ))}

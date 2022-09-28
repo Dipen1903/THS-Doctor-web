@@ -45,6 +45,7 @@ function TermsAndConditions() {
             <div className="d-flex justify-content-between align-items-center flex-wrap">
               <h5>
                 <img
+                  alt="myImg"
                   src={Icon.Termsconditionline}
                   className="logo ml_10 mr_10"
                 ></img>

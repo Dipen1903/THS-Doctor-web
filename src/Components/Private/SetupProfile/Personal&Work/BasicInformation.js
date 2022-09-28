@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import Form from "react-bootstrap/Form";
-import { ErrorMessage, Field, useFormikContext } from "formik";
+
+import { ErrorMessage, useFormikContext } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 
 import { BackGround, Icon } from "../../../../Utilities/Icons";
@@ -10,7 +10,7 @@ import { isEmpty } from "../../../../Utilities/Functions";
 import { CityList } from "../../../../Store/Reducers/CommonReducer";
 
 export default function BasicInformation() {
-  const { values, errors, setFieldValue, handleBlur, handleChange } =
+  const { values, setFieldValue, handleBlur, handleChange } =
     useFormikContext();
   const dispatch = useDispatch();
   const { CommonSlice } = useSelector((state) => state);
@@ -41,6 +41,7 @@ export default function BasicInformation() {
           <div class="col-md-3">
             <center>
               <img
+                alt="myImg"
                 src={
                   (localImage && URL.createObjectURL(localImage)) ||
                   values?.image ||
@@ -133,13 +134,13 @@ export default function BasicInformation() {
               <div class="col-md-3 radio-container mt_20 mb_20">
                 <div
                   className={`radio_box ${
-                    values?.gender == "male" && "selected"
+                    values?.gender === "male" && "selected"
                   }`}
                 >
                   <label htmlFor={"male"}>
                     <img
                       src={
-                        values?.gender == "male"
+                        values?.gender === "male"
                           ? Icon.MaleWhite
                           : Icon.MaleGrey
                       }
@@ -158,13 +159,13 @@ export default function BasicInformation() {
                 </div>
                 <div
                   className={`radio_box ${
-                    values?.gender == "female" && "selected"
+                    values?.gender === "female" && "selected"
                   }`}
                 >
                   <label htmlFor={"female"}>
                     <img
                       src={
-                        values?.gender == "female"
+                        values?.gender === "female"
                           ? Icon.FemaleWhite
                           : Icon.FemaleGray
                       }

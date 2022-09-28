@@ -1,5 +1,4 @@
 import React from "react";
-import Form from "react-bootstrap/Form";
 import { useSelector, useDispatch } from "react-redux";
 import { useFormikContext, FieldArray, ErrorMessage } from "formik";
 import { BackGround, Icon } from "../../../../Utilities/Icons";
@@ -9,7 +8,6 @@ import FileUpload from "../../../Common/Layouts/FileUpload";
 export default function EducationalProfile({ formProps }) {
   const { values, errors, touched, setFieldValue, handleBlur, handleChange } =
     useFormikContext();
-  const dispatch = useDispatch();
   const { qualification, documentList } = useSelector(
     ({ CommonSlice }) => CommonSlice
   );
@@ -99,6 +97,7 @@ export default function EducationalProfile({ formProps }) {
                             <div class="row col-md-12">
                               <div class="col-md-6">
                                 <img
+                                  alt="myImg"
                                   src={
                                     values.qualification[index]?.file
                                       ? typeof values.qualification[index]
@@ -261,6 +260,7 @@ export default function EducationalProfile({ formProps }) {
                             <div class="row col-md-12">
                               <div class="col-md-6">
                                 <img
+                                  alt="myImg"
                                   src={
                                     values.proof[index]?.file
                                       ? typeof values.proof[index]?.file ===
@@ -326,6 +326,7 @@ export default function EducationalProfile({ formProps }) {
               <div class="row col-md-12">
                 <div class="col-md-6">
                   <img
+                    alt="myImg"
                     src={
                       typeof values.signature === "object"
                         ? URL.createObjectURL(values.signature)

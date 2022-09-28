@@ -43,7 +43,11 @@ function ChatIndex() {
           <div className="col-md-3  padding_right_0">
             <div id="search-container">
               <form class="form-inline d-flex justify-content-start align-items-center">
-                <img src={Icon.Search} className="chatting_search"></img>
+                <img
+                  alt="myImg"
+                  src={Icon.Search}
+                  className="chatting_search"
+                ></img>
                 <input
                   class="form-control mr-sm-2 border-0 ml_5 pl_35"
                   type="search"

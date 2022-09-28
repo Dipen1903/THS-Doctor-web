@@ -42,12 +42,14 @@ const Review = ({ values }) => {
       <Modal.Header className="prescription-modal-header">
         <div>
           <img
+            alt="myImg"
             height={"37px"}
             width={"67px"}
             src={Logo.THS_WHITE}
             class="logo ml_10"
           />
           <img
+            alt="myImg"
             height={"25px"}
             width={"185px"}
             src={Logo.THS_Title}
@@ -227,6 +229,7 @@ const Review = ({ values }) => {
           <div>
             {" "}
             <img
+              alt="myImg"
               src={prescDetails?.doctor_details?.signature}
               className="work_profile_certificate "
             ></img>

@@ -87,7 +87,7 @@ function Timeslotfees() {
                       variant="primary"
                       className="setting_profile_btn float_right"
                     >
-                      <img src={Icon.Pencil} />
+                      <img alt="myImg" src={Icon.Pencil} />
                       Edit
                     </Button>
                   )}

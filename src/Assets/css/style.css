@@ -1286,7 +1286,6 @@ form {
   font-family: Mulish;
   font-size: 14px;
   color: #3093bb;
-  margin-top: 20px;
   font-weight: 600;
   cursor: pointer;
 }
@@ -1296,7 +1295,6 @@ form {
   color: #3093bb;
   margin-top: 0px;
   font-weight: 600;
-  float: right;
   cursor: pointer;
 }
 

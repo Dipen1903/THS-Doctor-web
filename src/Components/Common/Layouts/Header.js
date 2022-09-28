@@ -35,7 +35,7 @@ function Header() {
   return (
     <Navbar className="headerNav pt_10 pb_15  " expand="lg">
       <Container fluid>
-        <img src={Logo.THS_SHORT} class="logo ml_10"></img>
+        <img alt="myImg" src={Logo.THS_SHORT} class="logo ml_10"></img>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse
           className="d-flex justify-content-between"
@@ -108,8 +108,8 @@ function Header() {
                   disabled={userProfile?.is_active !== 1}
                   href="/profile"
                 >
-                  <img src={Icon.User} alt="Avatar" class=" mr_10 "></img>My
-                  Profle
+                  <img src={Icon.User} alt="Avatar" class=" mr_10 "></img>
+                  My Profle
                 </NavDropdown.Item>
               </NavLink>
               <NavDropdown.Divider />
@@ -243,7 +243,7 @@ const ShareYourLink = (props) => {
                     }}
                     id="basic-addon2"
                   >
-                    <img src={Icon.Link} />
+                    <img alt="myImg" src={Icon.Link} />
                     Copy Link
                   </Button>
                 )}

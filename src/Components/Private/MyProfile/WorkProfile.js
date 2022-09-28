@@ -144,7 +144,7 @@ function WorkProfile() {
                       }}
                       className="personal_profile_btn float_right"
                     >
-                      <img src={Icon.Pencil} />
+                      <img alt="myImg" src={Icon.Pencil} />
                       Edit
                     </Button>
                   )}
@@ -427,6 +427,7 @@ function WorkProfile() {
                                               <div class="row col-md-12">
                                                 <div class="col-md-6">
                                                   <img
+                                                    alt="myImg"
                                                     src={
                                                       values.qualification[
                                                         index
@@ -518,6 +519,7 @@ function WorkProfile() {
                                 {item?.type}
                               </h3>
                               <img
+                                alt="myImg"
                                 className="qualification_file"
                                 src={item?.file}
                               />
@@ -643,6 +645,7 @@ function WorkProfile() {
                                           <div class="row col-md-12">
                                             <div class="col-md-6">
                                               <img
+                                                alt="myImg"
                                                 src={
                                                   values.proof[index]?.file
                                                     ? typeof values.proof[index]
@@ -721,6 +724,7 @@ function WorkProfile() {
                                 {item?.type}
                               </h3>
                               <img
+                                alt="myImg"
                                 className="qualification_file"
                                 src={item?.file}
                               />
@@ -729,6 +733,7 @@ function WorkProfile() {
                           <div className="col-md-4">
                             <h3 className="qualification_title">Signature</h3>
                             <img
+                              alt="myImg"
                               className="qualification_file"
                               src={values?.signature}
                             />
@@ -753,6 +758,7 @@ function WorkProfile() {
                       <div class="row col-md-12">
                         <div class="col-md-6">
                           <img
+                            alt="myImg"
                             src={
                               typeof values.signature === "object"
                                 ? URL.createObjectURL(values.signature)

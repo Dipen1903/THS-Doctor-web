@@ -2,18 +2,12 @@ import { ErrorMessage, FieldArray, Formik } from "formik";
 import React, { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
-  EditUserProfile,
   GetRejectionDetails,
   ReverifyUserProfile,
 } from "../../../Store/Reducers/ProfileReducer";
-import {
-  BankEnum,
-  ProfileEnum,
-  RejectedProfileEnum,
-  ScheduleEnum,
-} from "../../../Utilities/Enums";
+import { RejectedProfileEnum } from "../../../Utilities/Enums";
 import { isEmpty } from "../../../Utilities/Functions";
 import { BackGround, Icon } from "../../../Utilities/Icons";
 import {
@@ -79,23 +73,23 @@ function ResetProfile() {
       tempData.proof = "";
 
       if (userProfile?.qualifications?.length) {
-        userProfile?.qualifications?.map((item) => {
+        userProfile?.qualifications?.map((item) =>
           tempQualification.push({
             type: item?.qualification,
             file: item?.document,
-          });
-        });
+          })
+        );
         if (!isEmpty(tempQualification))
           tempData.qualification = tempQualification;
       }
 
       if (userProfile?.id_proofs?.length) {
-        userProfile?.id_proofs?.map((item) => {
+        userProfile?.id_proofs?.map((item) =>
           tempProofs.push({
             type: item?.id_proof,
             file: item?.document,
-          });
-        });
+          })
+        );
         if (!isEmpty(tempProofs)) {
           tempData.proof = tempProofs;
         }
@@ -106,13 +100,17 @@ function ResetProfile() {
   };
   useEffect(() => {
     intialLoad();
+    !qualification.length && dispatch(QualificationList());
+    !documentList.length && dispatch(DocumentList());
+    return () => {};
+  }, []);
+
+  useEffect(() => {
     if (rejectionDetails?.type) {
       setRejectedFields(rejectionDetails?.type.split(","));
     } else {
       dispatch(GetRejectionDetails());
     }
-    !qualification.length && dispatch(QualificationList());
-    !documentList.length && dispatch(DocumentList());
     return () => {};
   }, [rejectionDetails]);
 
@@ -236,6 +234,7 @@ function ResetProfile() {
                       <div class="col-md-3">
                         <center>
                           <img
+                            alt="myImg"
                             src={
                               (localImage && URL.createObjectURL(localImage)) ||
                               values?.image ||
@@ -363,6 +362,7 @@ function ResetProfile() {
                                         <div class="row col-md-12">
                                           <div class="col-md-6">
                                             <img
+                                              alt="myImg"
                                               src={
                                                 values.qualification[index]
                                                   ?.file
@@ -446,6 +446,7 @@ function ResetProfile() {
                         <div class="row col-md-12">
                           <div class="col-md-6">
                             <img
+                              alt="myImg"
                               src={
                                 typeof values.signature === "object"
                                   ? URL.createObjectURL(values.signature)
@@ -596,6 +597,7 @@ function ResetProfile() {
                                         <div class="row col-md-12">
                                           <div class="col-md-6">
                                             <img
+                                              alt="myImg"
                                               src={
                                                 values.proof[index]?.file
                                                   ? typeof values.proof[index]

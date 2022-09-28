@@ -30,12 +30,20 @@ function HelpAndSupport() {
           <div className="support_content">
             <div className="support_top_heading_card d-flex justify-content-between align-items-center flex-wrap">
               <h5>
-                <img src={Icon.supportline} className="logo ml_10 mr_10"></img>
+                <img
+                  alt="myImg"
+                  src={Icon.supportline}
+                  className="logo ml_10 mr_10"
+                ></img>
                 Supports
               </h5>
               <div className="search support-search">
                 <form className="form-inline d-flex justify-content-start align-items-center">
-                  <img src={Icon.Search} className="payout_search"></img>
+                  <img
+                    alt="myImg"
+                    src={Icon.Search}
+                    className="payout_search"
+                  ></img>
                   <input
                     className="form-control mr-sm-2 border-0 ml_5 pl_35"
                     type="search"

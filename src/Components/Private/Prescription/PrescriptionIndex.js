@@ -95,7 +95,7 @@ function PrescriptionIndex() {
           onClick={() => navigate(-1)}
           className="payout_back_btn"
         >
-          <img src={Icon.Back} className="back_btn_icon"></img> Back
+          <img alt="myImg" src={Icon.Back} className="back_btn_icon"></img> Back
         </Button>
 
         <h2 className="payout_title mt_10">Create Prescription</h2>
@@ -131,8 +131,13 @@ function PrescriptionIndex() {
                           eventKey={item?.key}
                         >
                           <span>
-                            <img src={item?.iconGrey} className="tab-title" />
                             <img
+                              alt="myImg"
+                              src={item?.iconGrey}
+                              className="tab-title"
+                            />
+                            <img
+                              alt="myImg"
                               src={item?.iconBlue}
                               className="tab-title active"
                             />
@@ -143,10 +148,12 @@ function PrescriptionIndex() {
 
                           <span>
                             <img
+                              alt="myImg"
                               src={Icon.CiverRightBlue}
                               className="tab-title active"
                             />
                             <img
+                              alt="myImg"
                               src={Icon.CiverRightGrey}
                               className="tab-title"
                             />

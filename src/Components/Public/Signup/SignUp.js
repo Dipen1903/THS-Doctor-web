@@ -301,7 +301,7 @@ const SuccessModal = (props) => {
       <Modal.Header closeButton></Modal.Header>
       <Modal.Body>
         <center>
-          <img src={BackGround.Succcess}></img>
+          <img alt="myImg" src={BackGround.Succcess}></img>
           <h3 className="welcome_ths">Welcome to Doctor THS!</h3>
           <p className="please_fill_out_profile">
             Please fill out your personal-work profile and verify your identity

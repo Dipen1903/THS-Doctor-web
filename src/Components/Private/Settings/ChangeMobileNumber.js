@@ -224,7 +224,7 @@ const MyModal = (props) => {
       <Modal.Header closeButton style={{ border: "none" }}></Modal.Header>
       <Modal.Body>
         <center>
-          <img src={BackGround.Succcess}></img>
+          <img alt="myImg" src={BackGround.Succcess}></img>
           <h3 className="skip_registration_title">Done</h3>
           <p className="update_number">
             Your mobile number is updated to {props.number}

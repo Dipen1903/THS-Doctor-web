@@ -30,10 +30,10 @@ function Settings() {
                     >
                       <span className="d-flex align-items-center">
                         <span className="tab-title">
-                          <img src={Icon.ClockGrey} />
+                          <img alt="myImg" src={Icon.ClockGrey} />
                         </span>
                         <span className="tab-title active">
-                          <img src={Icon.ClockBlue} />
+                          <img alt="myImg" src={Icon.ClockBlue} />
                         </span>
 
                         <span className="profile_option_text">
@@ -43,10 +43,15 @@ function Settings() {
 
                       <span>
                         <img
+                          alt="myImg"
                           src={Icon.CiverRightBlue}
                           className="tab-title active"
                         />
-                        <img src={Icon.CiverRightGrey} className="tab-title" />
+                        <img
+                          alt="myImg"
+                          src={Icon.CiverRightGrey}
+                          className="tab-title"
+                        />
                       </span>
                     </Nav.Link>
                   </Nav.Item>
@@ -57,17 +62,17 @@ function Settings() {
                       eventKey="second"
                     >
                       <span className="d-flex align-items-center">
-                        {/* <img src={Icon.FirstAidGrey} className="tab-title" />
-                                                <img
+                        {/* <img alt="myImg" src={Icon.FirstAidGrey} className="tab-title" />
+                                                <img alt="myImg"
                                                     src={Icon.FirstAidBlue}
                                                     className="tab-title active"
                                                 /> */}
 
                         <span className="tab-title">
-                          <img src={Icon.BankGrey} />
+                          <img alt="myImg" src={Icon.BankGrey} />
                         </span>
                         <span className="tab-title active">
-                          <img src={Icon.BankBlue} />
+                          <img alt="myImg" src={Icon.BankBlue} />
                         </span>
 
                         <span className="profile_option_text">
@@ -77,10 +82,15 @@ function Settings() {
 
                       <span>
                         <img
+                          alt="myImg"
                           src={Icon.CiverRightBlue}
                           className="tab-title active"
                         />
-                        <img src={Icon.CiverRightGrey} className="tab-title" />
+                        <img
+                          alt="myImg"
+                          src={Icon.CiverRightGrey}
+                          className="tab-title"
+                        />
                       </span>
                     </Nav.Link>
                   </Nav.Item>
@@ -91,17 +101,17 @@ function Settings() {
                       eventKey="third"
                     >
                       <span className="d-flex align-items-center">
-                        {/* <img src={Icon.FirstAidGrey} className="tab-title" />
-                                                <img
+                        {/* <img alt="myImg" src={Icon.FirstAidGrey} className="tab-title" />
+                                                <img alt="myImg"
                                                     src={Icon.FirstAidBlue}
                                                     className="tab-title active"
                                                 /> */}
 
                         <span className="tab-title">
-                          <img src={Icon.LockGrey} />
+                          <img alt="myImg" src={Icon.LockGrey} />
                         </span>
                         <span className="tab-title active">
-                          <img src={Icon.LockBlue} />
+                          <img alt="myImg" src={Icon.LockBlue} />
                         </span>
 
                         <span className="profile_option_text">
@@ -110,10 +120,15 @@ function Settings() {
                       </span>
                       <span>
                         <img
+                          alt="myImg"
                           src={Icon.CiverRightBlue}
                           className="tab-title active"
                         />
-                        <img src={Icon.CiverRightGrey} className="tab-title" />
+                        <img
+                          alt="myImg"
+                          src={Icon.CiverRightGrey}
+                          className="tab-title"
+                        />
                       </span>
                     </Nav.Link>
                   </Nav.Item>
@@ -126,10 +141,10 @@ function Settings() {
                       {" "}
                       <span className="d-flex align-items-center">
                         <span className="tab-title">
-                          <img src={Icon.MobileGrey} />
+                          <img alt="myImg" src={Icon.MobileGrey} />
                         </span>
                         <span className="tab-title active">
-                          <img src={Icon.MobileBlue} />
+                          <img alt="myImg" src={Icon.MobileBlue} />
                         </span>
 
                         <span className="profile_option_text">
@@ -138,10 +153,15 @@ function Settings() {
                       </span>
                       <span>
                         <img
+                          alt="myImg"
                           src={Icon.CiverRightBlue}
                           className="tab-title active"
                         />
-                        <img src={Icon.CiverRightGrey} className="tab-title" />
+                        <img
+                          alt="myImg"
+                          src={Icon.CiverRightGrey}
+                          className="tab-title"
+                        />
                       </span>
                     </Nav.Link>
                   </Nav.Item>

@@ -1,9 +1,9 @@
-import React, { useEffect, useLayoutEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useLocation } from "react-router-dom";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
-import { Formik, FormikProvider, useFormik } from "formik";
+import { FormikProvider, useFormik } from "formik";
 import BasicInformation from "./Personal&Work/BasicInformation";
 import WorkProfile from "./Personal&Work/WorkProfile";
 import EducationalProfile from "./Personal&Work/EducationalProfile";
@@ -68,71 +68,6 @@ export function SetUpProfile() {
   const { profileStep, profileSuccessModal, skipModal, userProfile } =
     useSelector(({ ProfileSlice }) => ProfileSlice);
 
-  const intialSetup = () => {
-    let tempProfile = { ...profileData };
-    let tempProofs = [];
-    let tempQualification = [];
-    if (userProfile) {
-      if (parseInt(userProfile?.basic_information_done)) {
-        dispatch(nextStep(2));
-      }
-      if (parseInt(userProfile?.work_profile_done)) {
-        dispatch(nextStep(3));
-      }
-      // if (parseInt(userProfile?.qualification_documents_done)) {
-      //   navigate("/dashboard");
-      //   dispatch(nextStep(1));
-      // }
-
-      tempProfile.image = userProfile?.image;
-      tempProfile.dob = userProfile?.birthdate;
-      tempProfile.gender = userProfile?.gender;
-      tempProfile.city_id = userProfile?.city_id;
-      tempProfile.state_id = userProfile?.state_id;
-      tempProfile.speciality = userProfile?.speciality_id;
-      dispatch(
-        SubSpecialityList({ speciality_id: userProfile?.speciality_id })
-      );
-      tempProfile.sub_speciality = userProfile?.sub_speciality_id;
-      tempProfile.experience = userProfile?.experience;
-      tempProfile.registration_number = userProfile?.registration_number;
-      tempProfile.languages = [];
-      if (typeof userProfile?.languages === "string") {
-        tempProfile.languages = userProfile?.languages.split(",");
-      } else {
-        userProfile?.languages?.map((item) =>
-          tempProfile.languages.push(item?.id)
-        );
-      }
-      tempProfile.qualification = "";
-      tempProfile.proof = "";
-
-      if (userProfile?.qualifications?.length) {
-        userProfile?.qualifications?.map((item) => {
-          tempQualification.push({
-            type: item?.qualification,
-            file: item?.document,
-          });
-        });
-        if (!isEmpty(tempQualification))
-          tempProfile.qualification = tempQualification;
-      }
-
-      if (userProfile?.id_proofs?.length) {
-        userProfile?.id_proofs?.map((item) => {
-          tempProofs.push({
-            type: item?.id_proof,
-            file: item?.document,
-          });
-        });
-        if (!isEmpty(tempProofs)) {
-          tempProfile.proof = tempProofs;
-        }
-      }
-      tempProfile.signature = userProfile?.signature;
-      setProfileData(tempProfile);
-    }
-  };
   const submit = (values) => {
     let tempData = { ...values };
 
@@ -192,9 +127,72 @@ export function SetUpProfile() {
     onSubmit: submit,
   });
   useEffect(() => {
+    const intialSetup = () => {
+      let tempProfile = { ...profileData };
+      let tempProofs = [];
+      let tempQualification = [];
+      if (userProfile) {
+        if (parseInt(userProfile?.basic_information_done)) {
+          dispatch(nextStep(2));
+        }
+        if (parseInt(userProfile?.work_profile_done)) {
+          dispatch(nextStep(3));
+        }
+
+        tempProfile.image = userProfile?.image;
+        tempProfile.dob = userProfile?.birthdate;
+        tempProfile.gender = userProfile?.gender;
+        tempProfile.city_id = userProfile?.city_id;
+        tempProfile.state_id = userProfile?.state_id;
+        tempProfile.speciality = userProfile?.speciality_id;
+        dispatch(
+          SubSpecialityList({ speciality_id: userProfile?.speciality_id })
+        );
+        tempProfile.sub_speciality = userProfile?.sub_speciality_id;
+        tempProfile.experience = userProfile?.experience;
+        tempProfile.registration_number = userProfile?.registration_number;
+        tempProfile.languages = [];
+        if (typeof userProfile?.languages === "string") {
+          tempProfile.languages = userProfile?.languages.split(",");
+        } else {
+          userProfile?.languages?.map((item) =>
+            tempProfile.languages.push(item?.id)
+          );
+        }
+        tempProfile.qualification = "";
+        tempProfile.proof = "";
+
+        if (userProfile?.qualifications?.length) {
+          userProfile?.qualifications?.map((item) => {
+            tempQualification.push({
+              type: item?.qualification,
+              file: item?.document,
+            });
+            return null;
+          });
+          if (!isEmpty(tempQualification))
+            tempProfile.qualification = tempQualification;
+        }
+
+        if (userProfile?.id_proofs?.length) {
+          userProfile?.id_proofs?.map((item) => {
+            tempProofs.push({
+              type: item?.id_proof,
+              file: item?.document,
+            });
+            return null;
+          });
+          if (!isEmpty(tempProofs)) {
+            tempProfile.proof = tempProofs;
+          }
+        }
+        tempProfile.signature = userProfile?.signature;
+        setProfileData(tempProfile);
+      }
+    };
     intialSetup();
     return () => {};
-  }, [userProfile]);
+  }, [dispatch, userProfile]);
 
   useEffect(() => {
     dispatch(StateList());
@@ -243,13 +241,15 @@ export function SetUpProfile() {
                   </div>
                   <h5 class="steps mt_50">Step {profileStep} of 3</h5>
                   <h3 class="info_title">
-                    {profileStep == 1
-                      ? "Basic Information"
-                      : profileStep == 2
-                      ? "Your Work Profile"
-                      : profileStep == 3
-                      ? "Your qualification and ID Proof"
-                      : ""}
+                    {
+                      (profileStep = 1
+                        ? "Basic Information"
+                        : profileStep === 2
+                        ? "Your Work Profile"
+                        : profileStep === 3
+                        ? "Your qualification and ID Proof"
+                        : "")
+                    }
                   </h3>
 
                   {/* <Formik
@@ -393,7 +393,7 @@ export function SetUpSetting() {
           dispatch(nextStep());
         }
       });
-    } else if (profileStep == 2) {
+    } else if (profileStep === 2) {
       values["bank_details_done"] = 1;
       dispatch(EditBankDetails(values)).then((res) => {
         if (res?.payload?.success) {
@@ -650,7 +650,7 @@ const SkipCaution = (props) => {
       <Modal.Header className="display_none"></Modal.Header>
       <Modal.Body>
         <center>
-          <img src={BackGround.Caution}></img>
+          <img alt="myImg" src={BackGround.Caution}></img>
           <h3 className="skip_registration_title">
             Are you sure you want to skip the registration?
           </h3>
@@ -696,7 +696,7 @@ const ProfileSubmitted = (props) => {
       ></Modal.Header>
       <Modal.Body>
         <center>
-          <img src={BackGround.Succcess}></img>
+          <img alt="myImg" src={BackGround.Succcess}></img>
           <h3 className="submit_profile">Your Profile Submited Successfully</h3>
           <p className="preferred_schedule">
             Please choose your preferred Schedule and provide A/C Details to
@@ -733,7 +733,7 @@ const ScheduleSubmitted = (props) => {
       <Modal.Header class="modal_header" closeButton></Modal.Header>
       <Modal.Body>
         <center>
-          <img src={BackGround.Sent}></img>
+          <img alt="myImg" src={BackGround.Sent}></img>
           <h3 className="details_submitted">Detials Submitted Successfully!</h3>
           <p className="submit_successfully_text">
             Our team will analyse the details and revert back in up to 3

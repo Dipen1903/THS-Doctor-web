@@ -9,7 +9,7 @@ function Medicine() {
         <span className="medicine_text">Add Medicines:</span>
         <div className="prescription-search">
           <form class="form-inline d-flex justify-content-start align-items-center">
-            <img src={Icon.Search} className="payout_search"></img>
+            <img alt="myImg" src={Icon.Search} className="payout_search"></img>
 
             <input
               class="form-control mr-sm-2 border-0 pl_35 pt_10 pb_10"

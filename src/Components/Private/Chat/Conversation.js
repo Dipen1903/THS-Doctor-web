@@ -67,7 +67,7 @@ function Conversation({ roomData }) {
                   id="dropdown-basic"
                   className="attach-dropdown more_info_btn"
                 >
-                  <img src={Icon.Dots}></img>
+                  <img alt="myImg" src={Icon.Dots}></img>
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
                   <Dropdown.Item
@@ -80,10 +80,10 @@ function Conversation({ roomData }) {
                 </Dropdown.Menu>
               </Dropdown>
               <Button className="call_btn">
-                <img src={Icon.Video}></img>
+                <img alt="myImg" src={Icon.Video}></img>
               </Button>
               <Button className="call_btn">
-                <img src={Icon.Phone}></img>
+                <img alt="myImg" src={Icon.Phone}></img>
               </Button>
               <Button variant="primary" className="mark_complete">
                 Mark Complete
@@ -98,6 +98,7 @@ function Conversation({ roomData }) {
               <div className="row">
                 <div className="col-md-12">
                   <img
+                    alt="myImg"
                     src={Icon.Cross}
                     onClick={(e) => {
                       e.preventDefault();
@@ -152,7 +153,7 @@ function Conversation({ roomData }) {
           />
           <Link to={`/prescription/${room?.id || room?.lastBookingId}`}>
             <button className="prescription">
-              <img src={BackGround.Prescription} />
+              <img alt="myImg" src={BackGround.Prescription} />
             </button>
           </Link>
         </div>
@@ -173,7 +174,7 @@ const ChatItem = ({ type, index, rest }) => {
           }`}
         >
           <div className="message-content">
-            <img className="msg-image" src={rest?.imageUrl} />
+            <img alt="myImg" className="msg-image" src={rest?.imageUrl} />
             <div
               className={`${
                 rest?.userType === 1
@@ -201,14 +202,18 @@ const ChatItem = ({ type, index, rest }) => {
               }`}
             >
               <div className="attach_file_box">
-                <img src={Icon.Doc} className="file_icon" />
+                <img alt="myImg" src={Icon.Doc} className="file_icon" />
                 <div>
                   <h4 className="attach_file_name">{rest?.imageName}</h4>
                   <h5 className="attach_file_size">
                     {rest?.extension} - {rest?.sizeOfDocument}
                   </h5>
                 </div>
-                <img src={Icon.Download} className="file_download_icon" />
+                <img
+                  alt="myImg"
+                  src={Icon.Download}
+                  className="file_download_icon"
+                />
               </div>
             </div>
             <div
@@ -395,7 +400,7 @@ const ChatInput = React.forwardRef(({ localFile, setLocalFile }, ref) => {
         {!localFile && (
           <Dropdown>
             <Dropdown.Toggle id="dropdown-basic" className="attach-dropdown">
-              <img src={Icon.Clip}></img>
+              <img alt="myImg" src={Icon.Clip}></img>
             </Dropdown.Toggle>
 
             <Dropdown.Menu>

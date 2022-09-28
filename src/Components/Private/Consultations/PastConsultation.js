@@ -108,7 +108,7 @@ export const ConsultDetails = (props) => {
   return (
     <Modal {...rest} className="consultation-modal-body-two" centered>
       <Modal.Header className="consultation-modal-header" closeButton>
-        <img className="mr_15" src={BackGround.Appointment}></img>
+        <img alt="myImg" className="mr_15" src={BackGround.Appointment}></img>
         <Modal.Title
           id="contained-modal-title-vcenter"
           className="consultation-modal-text"
@@ -206,7 +206,8 @@ export const ConsultDetails = (props) => {
             Close
           </Button>
           <Button className="verify_btn" variant="primary">
-            <img className="mr_10" src={Icon.Comment}></img>Open Chat
+            <img alt="myImg" className="mr_10" src={Icon.Comment}></img>Open
+            Chat
           </Button>
         </div>
       </Modal.Footer>

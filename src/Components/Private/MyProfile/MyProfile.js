@@ -47,8 +47,16 @@ function MyProfile() {
                       eventKey="first"
                     >
                       <span>
-                        <img src={Icon.UserGrey} className="tab-title" />
-                        <img src={Icon.UserBlue} className="tab-title active" />
+                        <img
+                          alt="myImg"
+                          src={Icon.UserGrey}
+                          className="tab-title"
+                        />
+                        <img
+                          alt="myImg"
+                          src={Icon.UserBlue}
+                          className="tab-title active"
+                        />
                         <span className="profile_option_text">
                           Personal Profile
                         </span>
@@ -56,22 +64,32 @@ function MyProfile() {
 
                       <span>
                         <img
+                          alt="myImg"
                           src={Icon.CiverRightBlue}
                           className="tab-title active"
                         />
-                        <img src={Icon.CiverRightGrey} className="tab-title" />
+                        <img
+                          alt="myImg"
+                          src={Icon.CiverRightGrey}
+                          className="tab-title"
+                        />
                       </span>
                     </Nav.Link>
                   </Nav.Item>
-                  
+
                   <Nav.Item>
                     <Nav.Link
                       className="profile_tab_option_bg"
                       eventKey="second"
                     >
                       <span>
-                        <img src={Icon.FirstAidGrey} className="tab-title" />
                         <img
+                          alt="myImg"
+                          src={Icon.FirstAidGrey}
+                          className="tab-title"
+                        />
+                        <img
+                          alt="myImg"
                           src={Icon.FirstAidBlue}
                           className="tab-title active"
                         />
@@ -82,15 +100,19 @@ function MyProfile() {
 
                       <span>
                         <img
+                          alt="myImg"
                           src={Icon.CiverRightBlue}
                           className="tab-title active"
                         />
-                        <img src={Icon.CiverRightGrey} className="tab-title" />
+                        <img
+                          alt="myImg"
+                          src={Icon.CiverRightGrey}
+                          className="tab-title"
+                        />
                       </span>
                     </Nav.Link>
                   </Nav.Item>
                 </Nav>
-
               </ul>
             </div>
           </div>

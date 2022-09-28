@@ -31,7 +31,7 @@ function SideBanner() {
       <div className="row">
         <div class="col-md-12">
           <div class="display_t">
-            <img src={Logo.THS} class="logo_box"></img>
+            <img alt="myImg" src={Logo.THS_Title} class="logo_box" />
             <div class="slider_1">
               <OwlCarousel
                 className="owl-theme"

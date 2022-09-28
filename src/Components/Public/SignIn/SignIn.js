@@ -20,7 +20,6 @@ import {
   MobileSignIn,
   OTPResendForgot,
   OTPResendSignIn,
-  OTPSignIn,
   OTPVerifyForgot,
   OTPVerifySignIn,
   ResetPassword,
@@ -120,31 +119,28 @@ function SignInComponent() {
                                 />
                               )}
                             </Form>
-                            <div className="row mt_30">
-                              <div className="col-md-6 col-6">
-                                <a
-                                  href="#!"
-                                  onClick={(e) => {
-                                    e.preventDefault();
-                                    dispatch(toggleOTPModal(true));
-                                  }}
-                                  className="login_with_otp"
-                                >
-                                  Login with OTP
-                                </a>
-                              </div>
-                              <div className="col-md-6 col-6">
-                                <a
-                                  href="#!"
-                                  className="forgot_password"
-                                  onClick={(e) => {
-                                    e.preventDefault();
-                                    dispatch(toggleForgotModal(true));
-                                  }}
-                                >
-                                  Forgot Password?
-                                </a>
-                              </div>
+                            <div className="d-flex justify-content-between align-items-center px-2 mt_30">
+                              <a
+                                href="#!"
+                                onClick={(e) => {
+                                  e.preventDefault();
+                                  dispatch(toggleOTPModal(true));
+                                }}
+                                className="login_with_otp"
+                              >
+                                Login with OTP
+                              </a>
+
+                              <a
+                                href="#!"
+                                className="forgot_password"
+                                onClick={(e) => {
+                                  e.preventDefault();
+                                  dispatch(toggleForgotModal(true));
+                                }}
+                              >
+                                Forgot Password?
+                              </a>
                             </div>
                           </>
                         )}
@@ -602,7 +598,7 @@ const SuccessModal = (props) => {
       <Modal.Header closeButton></Modal.Header>
       <Modal.Body>
         <center>
-          <img src={BackGround.Succcess}></img>
+          <img alt="myImg" src={BackGround.Succcess}></img>
           <h3 className="password_reset_success_title">Done</h3>
           <p className="password_reset_subtitle">
             Password reset successfully done!

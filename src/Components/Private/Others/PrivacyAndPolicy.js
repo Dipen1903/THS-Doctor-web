@@ -52,8 +52,12 @@ function PrivacyPolicy() {
           <div className="privacy_policy_content">
             <div className="d-flex justify-content-between align-items-center flex-wrap">
               <h5>
-                <img src={Icon.Line} className="logo ml_10 mr_10"></img>Privacy
-                Policy
+                <img
+                  alt="myImg"
+                  src={Icon.Line}
+                  className="logo ml_10 mr_10"
+                ></img>
+                Privacy Policy
               </h5>
               <div>
                 <h6>last updated</h6>

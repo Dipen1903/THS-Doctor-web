@@ -65,7 +65,7 @@ function PersonalProfile() {
                   setIsEdit(true);
                 }}
               >
-                <img src={Icon.Pencil} />
+                <img alt="myImg" src={Icon.Pencil} />
                 Edit
               </Button>
             )}
@@ -101,6 +101,7 @@ function PersonalProfile() {
                         <div className="col-md-3">
                           <center>
                             <img
+                              alt="myImg"
                               src={
                                 (localImage &&
                                   URL.createObjectURL(localImage)) ||
