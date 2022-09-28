@@ -53,9 +53,12 @@ const VideoCall = ({ setInCall, channelName }) => {
   // const { setInCall, channelName } = props;
   const [users, setUsers] = useState([]);
   const [start, setStart] = useState(false);
-  const { agora_token } = useSelector(({ CallingSlice }) => CallingSlice);
+  const { ProfileSlice, CallingSlice } = useSelector((state) => state);
+  const { agora_token } = CallingSlice;
+  const { userProfile } = ProfileSlice;
   const client = useClient();
-  const { ready, track, error } = useMicroPhone();
+  const { ready, tracks, error } = useMicrophoneAndCameraTracks();
+
   useEffect(() => {
     // function to initialise the SDK
     let init = async (name) => {
@@ -91,23 +94,23 @@ const VideoCall = ({ setInCall, channelName }) => {
           return prevUsers.filter((User) => User.uid !== user.uid);
         });
       });
-      debugger;
-      await client.join(config.appId, name, agora_token, null);
-      if (track) await client.publish(track);
+
+      await client.join(appId, name, agora_token, userProfile?.id);
+      if (tracks) await client.publish([tracks[0], tracks[1]]);
       setStart(true);
     };
 
-    if (ready && track) {
+    if (ready && tracks) {
       console.log("init ready");
       init(channelName);
     }
-  }, [channelName, client, ready, track]);
+  }, [channelName, client, ready, tracks]);
   return (
     <div className="App">
-      {ready && track && (
-        <Controls tracks={track} setStart={setStart} setInCall={setInCall} />
+      {ready && tracks && (
+        <Controls tracks={tracks} setStart={setStart} setInCall={setInCall} />
       )}
-      {start && track && <Videos users={users} tracks={track} />}
+      {start && tracks && <Videos users={users} tracks={tracks} />}
     </div>
   );
 };

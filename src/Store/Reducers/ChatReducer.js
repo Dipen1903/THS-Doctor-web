@@ -38,7 +38,6 @@ export const GetSnapShot = createAsyncThunk(
       return unsubscribe;
     } catch (error) {
       dispatch(setLoading(false));
-      console.log(error);
       return error;
     }
   }
@@ -68,7 +67,6 @@ export const SetUpRoom = createAsyncThunk(
       });
     } catch (error) {
       dispatch(setLoading(false));
-      console.log(error);
       return error;
     }
   }
@@ -88,11 +86,11 @@ export const UpdateRoom = createAsyncThunk(
         where("userId", "==", `${room?.userId || room?.user_id}`)
       );
       const result = await getDocs(q);
-      console.log(result);
-      return true;
+      if (result) {
+        return result;
+      }
     } catch (error) {
       dispatch(setLoading(false));
-      console.log(error);
       return error;
     }
   }

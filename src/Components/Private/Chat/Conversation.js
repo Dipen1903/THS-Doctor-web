@@ -332,7 +332,7 @@ const ChatInput = React.forwardRef(({ localFile, setLocalFile }, ref) => {
       }
       setMessage(tempMessage);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
