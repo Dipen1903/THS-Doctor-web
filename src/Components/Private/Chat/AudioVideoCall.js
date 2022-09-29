@@ -11,6 +11,7 @@ import {
 } from "agora-rtc-react";
 import { useDispatch, useSelector } from "react-redux";
 import { GetToken } from "../../../Store/Reducers/CallingReducer";
+import { async } from "@firebase/util";
 const appId = "28a539781ef8461784c6debcf0723aca"; //ENTER APP ID HERE
 const token = null;
 const config = {
@@ -63,6 +64,12 @@ const VideoCall = ({ setInCall, channelName }) => {
     // function to initialise the SDK
     let init = async (name) => {
       console.log("init", name);
+      client.on("user-joined", async (state) => {
+        console.log(state);
+      });
+      client.on("connection-state-change", async (state) => {
+        console.log(state);
+      });
       client.on("user-published", async (user, mediaType) => {
         await client.subscribe(user, mediaType);
         console.log("subscribe success");

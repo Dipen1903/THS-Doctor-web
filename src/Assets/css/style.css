@@ -6069,6 +6069,7 @@ privacypolicy-paragraph::-webkit-scrollbar {
 .chat_contact_list_hr {
   border-bottom: 1px solid #eceff4;
 }
+
 .attach_file_name {
   font-family: "Mulish";
   font-style: normal;
@@ -6079,6 +6080,9 @@ privacypolicy-paragraph::-webkit-scrollbar {
   margin-bottom: 4px;
   margin-right: 15px;
 }
+.other-message .attach_file_name {
+  color: #f9f871;
+}
 .attach_file_size {
   font-family: "Mulish";
   font-style: normal;
@@ -6086,6 +6090,9 @@ privacypolicy-paragraph::-webkit-scrollbar {
   font-size: 12px;
   line-height: 12px;
   color: #9393aa;
+}
+.other-message .attach_file_size {
+  color: #f8f8f8;
 }
 .attach_file_box {
   display: inline-flex;
@@ -6100,6 +6107,7 @@ privacypolicy-paragraph::-webkit-scrollbar {
   width: 18px;
   height: 18px;
   margin-top: 15px;
+  cursor: pointer;
 }
 .client_msg_title {
   font-family: "Mulish";

@@ -209,11 +209,21 @@ const ChatItem = ({ type, index, rest }) => {
                     {rest?.extension} - {rest?.sizeOfDocument}
                   </h5>
                 </div>
-                <img
-                  alt="myImg"
-                  src={Icon.Download}
-                  className="file_download_icon"
-                />
+                <a
+                  href={rest?.imageUrl}
+                  download={rest?.imageName}
+                  target="_blank"
+                >
+                  <img
+                    alt="myImg"
+                    src={
+                      rest?.userType === 1
+                        ? Icon.DownloadWhite
+                        : Icon.DownloadGrey
+                    }
+                    className="file_download_icon"
+                  />
+                </a>
               </div>
             </div>
             <div

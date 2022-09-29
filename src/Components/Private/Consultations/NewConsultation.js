@@ -108,7 +108,7 @@ function NewConsultation({ upcomingConsults = [] }) {
         },
       }) => {
         return (
-          <Link to={`/prescription/${original?.id}`}>
+          <Link to={`/chat/${original?.id}`}>
             <img src={Icon.Chat} alt="Avatar" className="chat-icon" />
           </Link>
         );

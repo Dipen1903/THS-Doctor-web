@@ -15,6 +15,7 @@ import {
 
 import { BackGround, Icon } from "../../../Utilities/Icons";
 import Table from "../../Common/Layouts/Table";
+import { Link } from "react-router-dom";
 function PastConsultation({ pastConsults = [] }) {
   const dispatch = useDispatch();
   const [show, hide] = useState(false);
@@ -202,13 +203,15 @@ export const ConsultDetails = (props) => {
       </Modal.Body>
       <Modal.Footer className="consultation-modal-footer">
         <div className="d-flex">
-          <Button className="close_btn" onClick={props?.onClose}>
+          <Button className="close_btn" onClick={props.onClose}>
             Close
           </Button>
-          <Button className="verify_btn" variant="primary">
-            <img alt="myImg" className="mr_10" src={Icon.Comment}></img>Open
-            Chat
-          </Button>
+          <Link to={`/chat/${consultDetails?.id}`}>
+            <Button className="verify_btn" variant="primary">
+              <img alt="myImg" className="mr_10" src={Icon.Comment}></img>Open
+              Chat
+            </Button>
+          </Link>
         </div>
       </Modal.Footer>
     </Modal>

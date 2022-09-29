@@ -260,7 +260,14 @@ const Review = ({ values }) => {
               Send Prescription
             </Button>
           ) : (
-            <Button className="verify_btn" variant="primary" onClick={() => {}}>
+            <Button
+              className="verify_btn"
+              variant="primary"
+              onClick={() => {
+                console.log("CHAT");
+                navigate(`/chat/${prescDetails?.prescription_id}`);
+              }}
+            >
               Open Chat
             </Button>
           )}

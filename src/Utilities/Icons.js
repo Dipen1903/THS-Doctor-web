@@ -26,7 +26,8 @@ import DOTS from "../Assets/svg/Dots.svg";
 import CROSS from "../Assets/svg/Cross.svg";
 import CLIP from "../Assets/svg/Clip.svg";
 import SEND from "../Assets/svg/Send.svg";
-import DOWNLOAD from "../Assets/svg/Download.svg";
+import DOWNLOADWHITE from "../Assets/svg/DownloadWhite.svg";
+import DOWNLOADGREY from "../Assets/svg/DownloadGrey.svg";
 import GALLARY from "../Assets/svg/Gallary.svg";
 import DOC from "../Assets/svg/Doc.svg";
 
@@ -91,11 +92,12 @@ export const Icon = {
   FemaleWhite: FEMALEWHITE,
   MaleWhite: MALEWHITE,
   MaleGrey: MALEGREY,
+  DownloadGrey: DOWNLOADGREY,
+  DownloadWhite: DOWNLOADWHITE,
 
   Clip: CLIP,
   Plus: PLUS,
   Send: SEND,
-  Download: DOWNLOAD,
   Gallary: GALLARY,
   Doc: DOC,
   Earth: EARTH,
