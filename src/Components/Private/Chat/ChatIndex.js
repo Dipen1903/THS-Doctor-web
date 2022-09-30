@@ -57,7 +57,7 @@ function ChatIndex() {
               </form>
             </div>
             <div id="conversation-list">
-              {conversations?.length &&
+              {conversations?.length ? (
                 conversations?.map((item, index) => (
                   <div
                     key={item?.userId}
@@ -103,7 +103,10 @@ function ChatIndex() {
                       </div>
                     </div>
                   </div>
-                ))}
+                ))
+              ) : (
+                <></>
+              )}
             </div>
           </div>
           <Conversation />

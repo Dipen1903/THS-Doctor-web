@@ -4,6 +4,7 @@ import LOGOWHITE from "../Assets/svg/LogoWhite.svg";
 import LOGOTITLE from "../Assets/svg/LogoTitle.svg";
 //ICONS
 
+import APPOINTMENT from "../Assets/svg/Appointment.svg";
 import PLUS from "../Assets/svg/Plus.svg";
 import SEARCH from "../Assets/svg/Search.svg";
 import CIVERDOWN from "../Assets/svg/CiverDown.svg";
@@ -95,6 +96,7 @@ export const Icon = {
   DownloadGrey: DOWNLOADGREY,
   DownloadWhite: DOWNLOADWHITE,
 
+  Appointment: APPOINTMENT,
   Clip: CLIP,
   Plus: PLUS,
   Send: SEND,

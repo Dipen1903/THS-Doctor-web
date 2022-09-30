@@ -109,7 +109,7 @@ export const ConsultDetails = (props) => {
   return (
     <Modal {...rest} className="consultation-modal-body-two" centered>
       <Modal.Header className="consultation-modal-header" closeButton>
-        <img alt="myImg" className="mr_15" src={BackGround.Appointment}></img>
+        <img alt="myImg" className="mr_15" src={Icon.Appointment}></img>
         <Modal.Title
           id="contained-modal-title-vcenter"
           className="consultation-modal-text"
@@ -168,50 +168,57 @@ export const ConsultDetails = (props) => {
           </div>
         </div>
 
-        <div className="appoinment_input">
-          <p className="left_text">Prescription</p>{" "}
-          <p className="right-text">
-            <button
-              className="view-btn"
-              onClick={() => {
-                dispatch(GetPrescDetails({ booking_id: consultDetails?.id }));
-                dispatch(toggleReview(true));
-                props.onHide();
-              }}
-            >
-              View
-            </button>
-          </p>
-        </div>
+        {consultDetails?.status === 1 && (
+          <>
+            <div className="appoinment_input">
+              <p className="left_text">Prescription</p>{" "}
+              <p className="right-text">
+                <button
+                  className="view-btn"
+                  onClick={() => {
+                    dispatch(
+                      GetPrescDetails({ booking_id: consultDetails?.id })
+                    );
+                    dispatch(toggleReview(true));
+                    props.onHide();
+                  }}
+                >
+                  View
+                </button>
+              </p>
+            </div>
+            <div className="appoinment_input">
+              <p className="left_text">Lab Test</p>
+              <div>
+                {" "}
+                <p className="right-text">CBC</p>
+                <span>Test name</span>
+              </div>
+            </div>
 
-        <div className="appoinment_input">
-          <p className="left_text">Lab Test</p>
-          <div>
-            {" "}
-            <p className="right-text">CBC</p>
-            <span>Test name</span>
-          </div>
-        </div>
-
-        <div className="appoinment_input">
-          <p className="left_text">Recommended Doctor</p>
-          <div>
-            {" "}
-            <p className="right-text">Neurologist</p>
-          </div>
-        </div>
+            <div className="appoinment_input">
+              <p className="left_text">Recommended Doctor</p>
+              <div>
+                {" "}
+                <p className="right-text">Neurologist</p>
+              </div>
+            </div>
+          </>
+        )}
       </Modal.Body>
       <Modal.Footer className="consultation-modal-footer">
         <div className="d-flex">
           <Button className="close_btn" onClick={props.onClose}>
             Close
           </Button>
-          <Link to={`/chat/${consultDetails?.id}`}>
-            <Button className="verify_btn" variant="primary">
-              <img alt="myImg" className="mr_10" src={Icon.Comment}></img>Open
-              Chat
-            </Button>
-          </Link>
+          {consultDetails?.status === 1 && (
+            <Link to={`/chat/${consultDetails?.id}`}>
+              <Button className="verify_btn" variant="primary">
+                <img alt="myImg" className="mr_10" src={Icon.Comment}></img>Open
+                Chat
+              </Button>
+            </Link>
+          )}
         </div>
       </Modal.Footer>
     </Modal>

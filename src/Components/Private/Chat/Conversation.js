@@ -55,7 +55,7 @@ function Conversation({ roomData }) {
                 </h3>
                 <h5 className="profile_name_subtitle">
                   {room?.age} |{" "}
-                  {room?.gender.toLowerCase() === "male" ? "M" : "F"}
+                  {room?.gender?.toLowerCase() === "male" ? "M" : "F"}
                 </h5>
               </div>
               <h5 className="online_text">Online</h5>
