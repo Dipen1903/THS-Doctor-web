@@ -7,9 +7,13 @@ import {
   onSnapshot,
   getDocs,
   addDoc,
+  doc,
   getDoc,
   where,
+  Timestamp,
+  setDoc,
 } from "firebase/firestore";
+import { ChatRoomEnum } from "../../Utilities/Enums";
 import { FirebaseDB } from "../../Utilities/Firebase.config";
 import { GetConsultDetails } from "./ConsultationsReducer";
 import { setLoading } from "./LayoutSlice";
@@ -43,25 +47,70 @@ export const GetSnapShot = createAsyncThunk(
   }
 );
 
+export const createRoom = createAsyncThunk(
+  "createRoom",
+  async (values, { getState, dispatch }) => {
+    try {
+      const { ProfileSlice } = getState();
+      const { userProfile } = ProfileSlice;
+
+      const path = `Doctors_${userProfile?.id}`;
+      const ref = collection(FirebaseDB, path);
+
+      await addDoc(ref, {
+        ...ChatRoomEnum,
+        userId: values?.user_id?.toString(),
+        userName: values?.name,
+        doctorOnlineStatus: 1,
+        doctorOnlineLastTime: Timestamp.now(),
+        lastBookingId: values?.id?.toString(),
+      }).then((res) => {
+        dispatch(SetUpRoom(values));
+      });
+    } catch (error) {
+      dispatch(setLoading(false));
+      return error;
+    }
+  }
+);
+export const GetRoom = createAsyncThunk(
+  "GetRoom",
+  async (values, { getState, dispatch }) => {
+    try {
+      const { ProfileSlice } = getState();
+      const { userProfile } = ProfileSlice;
+      const path = `Doctors_${userProfile?.id}`;
+      const ref = collection(FirebaseDB, path);
+      const q = query(
+        ref,
+        where("userId", "==", `${values?.user_id || values?.userId}`)
+      );
+      const result = await getDocs(q);
+      if (!result?.empty) {
+        return result?.docs[0]?.data();
+      } else {
+        return null;
+      }
+    } catch (error) {
+      dispatch(setLoading(false));
+      return error;
+    }
+  }
+);
 export const SetUpRoom = createAsyncThunk(
   "SetUpRoom",
   async (values, { getState, dispatch }) => {
     try {
       const { userProfile } = getState().ProfileSlice;
-      return dispatch(
-        GetConsultDetails({ appointment_id: values?.booking_id })
-      ).then((res) => {
+      return dispatch(GetRoom(values)).then((res) => {
         if (!res?.payload?.hasError) {
           let tempRoom = res?.payload;
-          dispatch(toggleRoom(tempRoom));
-          dispatch(
-            GetSnapShot({
-              doctor_id: userProfile?.id,
-              user_id: tempRoom?.user_id,
-            })
-          );
-          dispatch(UpdateRoom({ unreadMessageOfDoctor: 0 }));
-
+          if (tempRoom) {
+            dispatch(toggleRoom(tempRoom));
+            dispatch(UpdateRoom({ unreadMessageOfDoctor: 0 }));
+          } else {
+            dispatch(createRoom(values));
+          }
           return true;
         }
       });
@@ -79,18 +128,21 @@ export const UpdateRoom = createAsyncThunk(
       const { ProfileSlice, ChatSlice } = getState();
       const { userProfile } = ProfileSlice;
       const { room } = ChatSlice;
+
+      let roomRef = "";
       const path = `Doctors_${userProfile?.id}`;
       const ref = collection(FirebaseDB, path);
-      const q = query(
-        ref,
-        where("userId", "==", `${room?.userId || room?.user_id}`)
-      );
+      const q = query(ref, where("userId", "==", `${room?.userId}`));
       const result = await getDocs(q);
-      if (result) {
-        return result;
+      if (!result?.empty) {
+        roomRef = result?.docs[0].ref;
+        return await setDoc(roomRef, values, { merge: true });
+      } else {
+        return null;
       }
     } catch (error) {
       dispatch(setLoading(false));
+      console.log(error);
       return error;
     }
   }
@@ -100,20 +152,35 @@ export const GetConversations = createAsyncThunk(
   "GetConversations",
   async (values, { getState, dispatch }) => {
     try {
-      const { room } = getState().ChatSlice;
+      const { conversations } = getState().ChatSlice;
       if (values?.doctor_id) {
         const path = `Doctors_${values?.doctor_id}`;
         const ref = collection(FirebaseDB, path);
         const q = query(ref, orderBy("lastMessageTime", "desc"));
+        let tempArr = [];
         const result = await getDocs(q);
-        if (!result.empty) {
-          let tempArr = [];
-          result.docs.map((doc) => tempArr.push(doc.data()));
-          if (tempArr.length && !room) {
-            dispatch(SetUpRoom({ booking_id: tempArr[0]?.lastBookingId }));
-          }
-          return tempArr;
-        }
+        result.forEach((doc) => tempArr.push(doc?.data()));
+        onSnapshot(q, (querySnapshot) => {
+          querySnapshot.docChanges().forEach((change) => {
+            if (change.type === "modified") {
+              let tempConversation = [];
+              if (tempArr.length) {
+                tempConversation = [...tempArr];
+              } else {
+                tempConversation = [...conversations];
+              }
+              let temp = change.doc.data();
+              let index = tempConversation?.findIndex(
+                (item) => parseInt(item?.userId) === parseInt(temp?.userId)
+              );
+              if (parseInt(index) > -1) {
+                tempConversation[index] = temp;
+              }
+              dispatch(setUpConvertations(tempConversation));
+            }
+          });
+        });
+        return tempArr;
       } else {
         return [];
       }
@@ -128,15 +195,21 @@ export const SendMessage = createAsyncThunk(
   "SendMessage",
   async (values, { getState, dispatch }) => {
     try {
-      debugger;
-      // const room = getState().ChatSlice.room;
-      const prescDetails = getState().ConsultSlice.prescDetails;
+      const room = getState().ChatSlice.room;
       const userProfile = getState().ProfileSlice.userProfile;
-      let user_id = prescDetails?.patient_details?.user_id;
-
+      let user_id = room?.user_id || room?.userId;
       const path = `Chat_${userProfile?.id}_${user_id}`;
       const collectionRef = collection(FirebaseDB, path);
       const docRef = await addDoc(collectionRef, values);
+      dispatch(
+        UpdateRoom({
+          lastMessage:
+            values?.message || values?.extension?.split("/")[1]?.toUpperCase(),
+          lastMessageTime: Timestamp.now(),
+          lastMessageType: values?.documentType,
+          unreadMessageOfUser: parseInt(room?.unreadMessageOfUser || 0) + 1,
+        })
+      );
       return docRef;
     } catch (error) {
       dispatch(setLoading(false));
@@ -159,6 +232,12 @@ export const ChatSlice = createSlice({
     setUpChat: (state, action) => {
       state.chat = [...state.chat, action.payload];
     },
+    setUpConvertations: (state, action) => {
+      state.conversations = [...action.payload];
+    },
+    clearChat: (state) => {
+      state.chat = [];
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(GetSnapShot.fulfilled, (state, action) => {
@@ -170,6 +249,12 @@ export const ChatSlice = createSlice({
   },
 });
 
-export const { setUpChat, toggleDetails, toggleRoom } = ChatSlice.actions;
+export const {
+  setUpChat,
+  toggleDetails,
+  toggleRoom,
+  clearChat,
+  setUpConvertations,
+} = ChatSlice.actions;
 
 export default ChatSlice.reducer;

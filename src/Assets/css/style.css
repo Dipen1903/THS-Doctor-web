@@ -5277,7 +5277,8 @@ privacypolicy-paragraph::-webkit-scrollbar {
   overflow-y: auto;
   overflow-x: hidden;
   border-right: 1px solid #eceff4;
-  height: 85vh;
+  max-height: 95vh;
+  min-height: 79vh;
 }
 .conversation {
   display: grid;

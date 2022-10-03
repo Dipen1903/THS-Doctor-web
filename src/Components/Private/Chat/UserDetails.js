@@ -38,7 +38,7 @@ function UserDetails() {
               <h3 className="userprofile_name_title">{room?.name}</h3>
               <h5 className="userprofile_name_subtitle">
                 {room?.age} |{" "}
-                {room?.gender.toLowerCase() === "male" ? "M" : "F"}
+                {room?.gender?.toLowerCase() === "male" ? "M" : "F"}
               </h5>
             </center>
             <hr className="userprofile_hr_bottom" />

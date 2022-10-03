@@ -1,11 +1,8 @@
 import moment from "moment";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { toggleRoom } from "../../../Store/Reducers/ChatReducer";
-import {
-  GetConsultDetails,
-  GetNewConsults,
-} from "../../../Store/Reducers/ConsultationsReducer";
+import { clearChat, SetUpRoom } from "../../../Store/Reducers/ChatReducer";
+import { GetNewConsults } from "../../../Store/Reducers/ConsultationsReducer";
 import { ConvertHMS } from "../../../Utilities/Functions";
 import Conversation from "../Chat/Conversation";
 import UserDetails from "../Chat/UserDetails";
@@ -13,7 +10,7 @@ import UserDetails from "../Chat/UserDetails";
 function LatestConsultation() {
   const dispatch = useDispatch();
   const { ChatSlice, ConsultSlice } = useSelector((state) => state);
-  const { room } = ChatSlice;
+  const { room, snapShot } = ChatSlice;
   const { upcomingConsults } = ConsultSlice;
   const [latest, setLatest] = useState([]);
   const intialLoad = () => {
@@ -25,13 +22,7 @@ function LatestConsultation() {
       );
       if (tempList) {
         setLatest(tempList);
-        dispatch(GetConsultDetails({ appointment_id: tempList[0]?.id })).then(
-          (res) => {
-            if (res?.payload) {
-              dispatch(toggleRoom(res?.payload));
-            }
-          }
-        );
+        dispatch(SetUpRoom(tempList[0]));
       }
     } catch (error) {}
   };
@@ -41,7 +32,10 @@ function LatestConsultation() {
     } else {
       intialLoad();
     }
-    return () => {};
+    return () => {
+      snapShot();
+      dispatch(clearChat());
+    };
   }, [upcomingConsults?.length]);
 
   return (
@@ -68,6 +62,9 @@ function LatestConsultation() {
                         className={`chat_list_box ${
                           item?.status === 1 && "chat_list_box_active"
                         }`}
+                        onClick={() => {
+                          dispatch(SetUpRoom(item));
+                        }}
                       >
                         <div className="row">
                           <div className="col-md-6">

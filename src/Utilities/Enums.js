@@ -329,3 +329,22 @@ export const MessageEnum = {
   sizeOfDocument: "",
   userType: 0,
 };
+
+export const ChatRoomEnum = {
+  callingType: "",
+  doctorCallingId: "",
+  doctorOnlineLastTime: "",
+  doctorOnlineStatus: "",
+  isCallingStatus: "",
+  lastBookingId: "",
+  lastMessage: "",
+  lastMessageTime: "",
+  lastMessageType: "",
+  unreadMessageOfDoctor: "",
+  unreadMessageOfUser: "",
+  userCallingId: "",
+  userId: "",
+  userName: "",
+  userOnlineLastTime: "",
+  userOnlineStatus: "",
+};

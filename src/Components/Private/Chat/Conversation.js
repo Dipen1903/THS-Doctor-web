@@ -34,7 +34,7 @@ function Conversation({ roomData }) {
       dispatch(
         GetSnapShot({
           doctor_id: userProfile?.id,
-          user_id: roomData?.user_id,
+          user_id: roomData?.user_id || roomData?.userId,
         })
       );
     }
@@ -58,10 +58,11 @@ function Conversation({ roomData }) {
                   {room?.gender?.toLowerCase() === "male" ? "M" : "F"}
                 </h5>
               </div>
-              <h5 className="online_text">Online</h5>
+              <h5 className="online_text">
+                {parseInt(room?.userOnlineStatus) ? "Online" : "Offline"}
+              </h5>
             </div>
             <div className="col-md-9">
-              <Call />
               <Dropdown>
                 <Dropdown.Toggle
                   id="dropdown-basic"
@@ -334,7 +335,7 @@ const ChatInput = React.forwardRef(({ localFile, setLocalFile }, ref) => {
       let tempMessage = { ...message };
       tempMessage.dateTime = Timestamp.now();
       if (typeof data === "string") tempMessage.message = data;
-      if (type === 1 || type === 2) {
+      if (type !== 0) {
         tempMessage.sizeOfDocument = data?.size;
         tempMessage.extension = data?.type;
         tempMessage.imageName = data?.name;
