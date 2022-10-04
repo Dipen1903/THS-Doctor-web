@@ -20,6 +20,7 @@ function LatestConsultation() {
           moment(item?.appointment_date).format("DD/MM/YYYY") ==
           moment().format("DD/MM/YYYY")
       );
+      debugger;
       if (tempList) {
         setLatest(tempList);
         dispatch(SetUpRoom(tempList[0]));

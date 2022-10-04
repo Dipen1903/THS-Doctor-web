@@ -89,7 +89,7 @@ export const GetRoom = createAsyncThunk(
       if (!result?.empty) {
         return result?.docs[0]?.data();
       } else {
-        return null;
+        return false;
       }
     } catch (error) {
       dispatch(setLoading(false));
@@ -105,6 +105,7 @@ export const SetUpRoom = createAsyncThunk(
       return dispatch(GetRoom(values)).then((res) => {
         if (!res?.payload?.hasError) {
           let tempRoom = res?.payload;
+          debugger;
           if (tempRoom) {
             dispatch(toggleRoom(tempRoom));
             dispatch(UpdateRoom({ unreadMessageOfDoctor: 0 }));
