@@ -1,6 +1,10 @@
 export const SESSION = "USER";
 export const TOKEN = "TOKEN";
-export const COMMUNITYLINK = process.env.REACT_APP_CURRENT_COMMUNITY_ADDRESS;
+export const MEDKART_TOKEN = "MEDKART_TOKEN";
+export const MK_CLIENT = process.env.REACT_APP_MEDKART_CLIENT;
+export const MK_APPID = process.env.REACT_APP_MEDKART_APP_ID;
+export const MK_SECRET = process.env.REACT_APP_MEDKART_APP_SECRET;
+
 export const AlertEnum = {
   Success: "SUCCESS",
   Error: "ERROR",

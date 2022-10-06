@@ -1,4 +1,4 @@
-import { BASE_URL, POST } from "../../Utilities/HTTP";
+import { BASE_URL, GET, MEDKART_URL, POST } from "../../Utilities/HTTP";
 //* AUTHENTICATE USER SESSION API REQUEST
 export const VerifySessionAPI = (data) =>
   POST(`${BASE_URL}/check-auth-token`, data);
@@ -23,3 +23,9 @@ export const PrivacyAndPolicyAPI = () => POST(`${BASE_URL}/privacy-policy`);
 export const TermsAndConditionsAPI = () =>
   POST(`${BASE_URL}/term-and-condition`);
 export const HelpsAndSupportsAPI = () => POST(`${BASE_URL}/faqs`);
+
+//* MEDKART APIS
+export const GetMedKartTokenAPI = (data) =>
+  POST(`${MEDKART_URL}/v1/token`, data);
+export const SearchMedicineAPI = (data) =>
+  GET(`${MEDKART_URL}/v1/product/search`, data);

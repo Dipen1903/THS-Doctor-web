@@ -1,8 +1,11 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { GetMedicine } from "../../../../Store/Reducers/CommonReducer";
 import { BackGround, Icon } from "../../../../Utilities/Icons";
 
 function Medicine() {
+  const dispatch = useDispatch();
   return (
     <>
       <div className="medicine_search_box d-flex ">
@@ -16,6 +19,10 @@ function Medicine() {
               type="search"
               placeholder="Search"
               aria-label="Search"
+              onChange={(e) => {
+                let q = e?.target?.value;
+                dispatch(GetMedicine({ q, page: 1 }));
+              }}
             />
           </form>
         </div>

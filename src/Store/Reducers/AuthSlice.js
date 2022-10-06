@@ -1,5 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { VerifySessionAPI } from "../../Components/Common/Service";
+import {
+  GetMedKartTokenAPI,
+  VerifySessionAPI,
+} from "../../Components/Common/Service";
 import {
   ForgotPasswordAPI,
   MobileSignInAPI,
@@ -11,13 +14,22 @@ import {
   ResetPasswordAPI,
   SignInAPI,
 } from "../../Routes/Service";
-import { AlertEnum, SESSION, TOKEN } from "../../Utilities/Enums";
+import {
+  AlertEnum,
+  MEDKART_TOKEN,
+  MK_APPID,
+  MK_CLIENT,
+  MK_SECRET,
+  SESSION,
+  TOKEN,
+} from "../../Utilities/Enums";
 import { setLoading, setMessage } from "./LayoutSlice";
 import { GetUserProfile } from "./ProfileReducer";
 
 const initialState = {
   token: `${localStorage.getItem(TOKEN) || ""}`,
-  session: JSON.parse(localStorage.getItem(SESSION)) || "",
+  medkart_token: `${localStorage.getItem(MEDKART_TOKEN) || ""}`,
+  session: JSON.parse(localStorage.getItem(SESSION) || "{}") || "",
   otpModal: false,
   forgotModal: false,
   verifyForgot: false,
@@ -303,6 +315,33 @@ export const VerifySession = createAsyncThunk(
     }
   }
 );
+export const GetMedkartToken = createAsyncThunk(
+  "GetMedkartToken",
+  async (values, { dispatch }) => {
+    try {
+      const result = await GetMedKartTokenAPI({
+        client_id: MK_CLIENT,
+        app_id: MK_APPID,
+        secret: MK_SECRET,
+      });
+      if (result) {
+        console.log(result);
+        localStorage.setItem(MEDKART_TOKEN, result?.data?.token);
+        return result;
+      } else {
+        throw result;
+      }
+    } catch (error) {
+      dispatch(
+        setMessage({
+          text: error?.message,
+          type: AlertEnum.Error,
+        })
+      );
+      return error;
+    }
+  }
+);
 export const AuthSlice = createSlice({
   name: "AuthSlice",
   initialState,
@@ -316,6 +355,7 @@ export const AuthSlice = createSlice({
     removeSession: (state) => {
       localStorage.removeItem(SESSION);
       localStorage.removeItem(TOKEN);
+      localStorage.removeItem(MEDKART_TOKEN);
       state.session = "";
       state.token = "";
     },
@@ -338,9 +378,6 @@ export const AuthSlice = createSlice({
   extraReducers: (builder) => {},
 });
 
-export const GetToken = (state) => {
-  return state?.Authenticate?.token;
-};
 export const {
   setSession,
   removeSession,

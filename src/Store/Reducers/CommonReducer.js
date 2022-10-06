@@ -11,6 +11,7 @@ import {
   HelpsAndSupportsAPI,
   PrivacyAndPolicyAPI,
   UploadFileAPI,
+  SearchMedicineAPI,
 } from "../../Components/Common/Service";
 import { ShareLinkAPI } from "../../Routes/Service";
 
@@ -26,6 +27,34 @@ const initialState = {
   qualification: [],
   documentList: [],
 };
+export const GetMedicine = createAsyncThunk(
+  "GetMedicine",
+  async (values, { dispatch }) => {
+    try {
+      const result = await SearchMedicineAPI(values);
+
+      if (result) {
+        console.log(result);
+        // let stateArr = result?.data?.map((item) => ({
+        //   label: item?.name,
+        //   value: item?.id,
+        // }));
+        return result?.data;
+      } else {
+        throw result;
+      }
+    } catch (error) {
+      dispatch(setLoading(false));
+      dispatch(
+        setMessage({
+          text: error?.message,
+          type: AlertEnum.Error,
+        })
+      );
+      return error;
+    }
+  }
+);
 export const StateList = createAsyncThunk(
   "StateList",
   async (values, { dispatch }) => {

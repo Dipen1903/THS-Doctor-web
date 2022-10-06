@@ -17,6 +17,7 @@ import {
 } from "../../../Utilities/Schema";
 import {
   ForgotPassword,
+  GetMedkartToken,
   MobileSignIn,
   OTPResendForgot,
   OTPResendSignIn,
@@ -62,6 +63,7 @@ function SignInComponent() {
                         onSubmit={(values) => {
                           dispatch(SignIn(values)).then((res) => {
                             if (res.payload?.success) {
+                              dispatch(GetMedkartToken());
                               navigate("/dashboard");
                             }
                           });
