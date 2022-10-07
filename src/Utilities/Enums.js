@@ -324,13 +324,13 @@ export const PrescriptionEnum = {
 };
 
 export const MessageEnum = {
-  dateTime: "",
+  dateTime: null,
   documentType: 0,
   extension: null,
   imageName: null,
   imageUrl: null,
   message: "",
-  sizeOfDocument: "",
+  sizeOfDocument: null,
   userType: 0,
 };
 

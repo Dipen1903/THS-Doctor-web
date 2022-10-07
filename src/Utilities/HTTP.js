@@ -94,12 +94,12 @@ export async function GET(url, data) {
         Authorization: `Bearer ${localStorage.getItem(MEDKART_TOKEN)}`,
       },
     };
-    axios
+    return await axios
       .get(url, config)
-      .then(function (response) {
+      .then((response) => {
         return response.data;
       })
-      .catch(function (error) {
+      .catch((error) => {
         throw error;
       });
   } catch (error) {

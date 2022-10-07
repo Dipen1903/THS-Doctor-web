@@ -17,8 +17,6 @@ const Review = ({ values }) => {
   );
   const send = (e) => {
     try {
-      debugger;
-
       e.preventDefault();
       let tempMessage = { ...MessageEnum };
       tempMessage.dateTime = Timestamp.now();
@@ -264,7 +262,6 @@ const Review = ({ values }) => {
               className="verify_btn"
               variant="primary"
               onClick={() => {
-                console.log("CHAT");
                 navigate(`/chat/${prescDetails?.prescription_id}`);
               }}
             >

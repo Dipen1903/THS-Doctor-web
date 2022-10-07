@@ -42,7 +42,7 @@ const Pagination = (props) => {
             onClick={() => currentPage !== 1 && onPrevious()}
           >
             <a href="#!" onClick={(e) => e.preventDefault()}>
-              Previous
+              {`<`}
             </a>
           </li>
           {paginationRange.map((pageNumber, i) => {
@@ -78,7 +78,7 @@ const Pagination = (props) => {
             onClick={() => currentPage !== lastPage && onNext()}
           >
             <a href="#!" onClick={(e) => e.preventDefault()}>
-              Next
+              {`>`}
             </a>
           </li>
         </ul>

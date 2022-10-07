@@ -414,10 +414,59 @@ input:disabled {
 }
 #chat-message-list .prescription {
   background-color: transparent;
-  width: 150px;
-  height: 60px;
-  position: absolute;
-  right: 5%;
-  bottom: 8%;
   border: none;
+}
+.list {
+  position: absolute;
+  margin: 10px auto;
+  border-radius: 8px;
+  width: 390px;
+  display: flex;
+  flex-direction: column;
+  background: #f8fbff;
+}
+.list-container {
+  padding: 10px;
+  max-height: 330px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+.list-item {
+  padding: 15px;
+  border-bottom: 1px solid #eceff4;
+}
+.pagination {
+  justify-content: center;
+  margin-top: 10px;
+}
+.pagination ul {
+  padding: 0;
+}
+.pagination ul li {
+  display: inline-block;
+  text-align: center;
+  position: relative;
+  transition: all 0.5s ease 0s;
+  top: 0;
+}
+.pagination ul li.disable {
+  cursor: not-allowed;
+}
+.pagination ul li.active {
+  text-decoration: underline;
+}
+.pagination ul li + li {
+  margin-left: 27px;
+}
+.pagination ul li a {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 20px;
+  color: #000000;
+  text-decoration: none !important;
+}
+
+.pagination li.disable a {
+  color: #7e7e7e !important;
+  pointer-events: none;
 }

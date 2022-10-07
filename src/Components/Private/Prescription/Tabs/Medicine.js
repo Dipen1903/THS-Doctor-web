@@ -1,30 +1,68 @@
-import React from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { GetMedicine } from "../../../../Store/Reducers/CommonReducer";
+import {
+  clearMedicines,
+  GetMedicine,
+} from "../../../../Store/Reducers/CommonReducer";
 import { BackGround, Icon } from "../../../../Utilities/Icons";
+import GridLayout from "../../../Common/Layouts/GridLayout";
 
 function Medicine() {
   const dispatch = useDispatch();
+  const [searchParams, setSearchParams] = useState({ q: "", page: 1 });
+  const { medicines } = useSelector(({ CommonSlice }) => CommonSlice);
+  useEffect(() => {
+    if (searchParams.page && searchParams.q) {
+      setTimeout(() => {
+        dispatch(GetMedicine(searchParams));
+      }, 1000);
+    } else {
+      dispatch(clearMedicines());
+    }
+  }, [searchParams]);
+
+  const setText = (e) => {
+    let q = e?.target?.value;
+    setSearchParams((state) => ({ ...state, q }));
+  };
   return (
     <>
-      <div className="medicine_search_box d-flex ">
-        <span className="medicine_text">Add Medicines:</span>
-        <div className="prescription-search">
+      <div className="medicine_search_box d-flex col-md-12">
+        <span className="medicine_text col-md-2">Add Medicines:</span>
+        <div className="prescription-search col-md-10">
           <form class="form-inline d-flex justify-content-start align-items-center">
             <img alt="myImg" src={Icon.Search} className="payout_search"></img>
-
             <input
               class="form-control mr-sm-2 border-0 pl_35 pt_10 pb_10"
               type="search"
               placeholder="Search"
               aria-label="Search"
-              onChange={(e) => {
-                let q = e?.target?.value;
-                dispatch(GetMedicine({ q, page: 1 }));
-              }}
+              onChange={setText}
             />
           </form>
+          {medicines?.products?.length ? (
+            <div className="list">
+              <GridLayout
+                data={medicines?.products}
+                component={({ data, index }) => {
+                  return (
+                    <div className="list-item" key={data?.id}>
+                      {data?.name}
+                    </div>
+                  );
+                }}
+                page={{
+                  total: medicines?.meta?.total,
+                  pageSize: medicines?.meta?.per_page,
+                  onPageChange: (page) =>
+                    setSearchParams((state) => ({ ...state, page })),
+                }}
+              />
+            </div>
+          ) : (
+            <></>
+          )}
         </div>
       </div>
       <div class="table-responsive">
@@ -105,10 +143,10 @@ function Medicine() {
               <td>
                 <center>
                   <img
-                    src={BackGround.CrossImg}
+                    src={Icon.CrossRed}
                     alt="Avatar"
                     className="ml_15 mt_15 mb_5"
-                  ></img>
+                  />
                 </center>
               </td>
             </tr>

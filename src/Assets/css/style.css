@@ -5516,6 +5516,9 @@ privacypolicy-paragraph::-webkit-scrollbar {
 
 .content__footer {
   padding-top: 10px;
+  display: flex;
+  align-items: center;
+  width: 100%;
 }
 .sendNewMessage {
   background: #f8fbff;
@@ -5524,8 +5527,8 @@ privacypolicy-paragraph::-webkit-scrollbar {
   justify-content: space-between;
   padding: 5px 10px;
   margin-left: 30px;
-  margin-right: 30px;
   margin-bottom: 10px;
+  width: 80%;
 }
 .sendNewMessage button {
   width: 36px;

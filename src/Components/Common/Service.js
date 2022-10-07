@@ -25,7 +25,7 @@ export const TermsAndConditionsAPI = () =>
 export const HelpsAndSupportsAPI = () => POST(`${BASE_URL}/faqs`);
 
 //* MEDKART APIS
-export const GetMedKartTokenAPI = (data) =>
+export const GetMedKartTokenAPI = async (data) =>
   POST(`${MEDKART_URL}/v1/token`, data);
-export const SearchMedicineAPI = (data) =>
+export const SearchMedicineAPI = async (data) =>
   GET(`${MEDKART_URL}/v1/product/search`, data);

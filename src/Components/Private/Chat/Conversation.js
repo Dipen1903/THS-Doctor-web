@@ -152,11 +152,6 @@ function Conversation({ roomData }) {
             localFile={localFile}
             setLocalFile={setLocalFile}
           />
-          <Link to={`/prescription/${room?.id || room?.lastBookingId}`}>
-            <button className="prescription">
-              <img alt="myImg" src={BackGround.Prescription} />
-            </button>
-          </Link>
         </div>
       </div>
     </div>
@@ -260,14 +255,16 @@ const ChatItem = ({ type, index, rest }) => {
                     Appointment : {rest?.imageName}
                   </h5>
                 </div>
-                <a
-                  target="_blank"
-                  href={rest?.imageUrl}
-                  variant="primary"
-                  className="msg_view_btn"
-                >
-                  View
-                </a>
+                {rest?.imageUrl && (
+                  <a
+                    target="_blank"
+                    href={rest?.imageUrl}
+                    variant="primary"
+                    className="msg_view_btn"
+                  >
+                    View
+                  </a>
+                )}
               </div>
             </div>
             <div
@@ -324,6 +321,8 @@ const ChatItem = ({ type, index, rest }) => {
 
 const ChatInput = React.forwardRef(({ localFile, setLocalFile }, ref) => {
   const dispatch = useDispatch();
+  const { ChatSlice } = useSelector((state) => state);
+  const { room } = ChatSlice;
   const [text, setText] = useState();
   const [message, setMessage] = useState(MessageEnum);
 
@@ -456,6 +455,11 @@ const ChatInput = React.forwardRef(({ localFile, setLocalFile }, ref) => {
           </button>
         )}
       </div>
+      <Link to={`/prescription/${room?.id || room?.lastBookingId}`}>
+        <button className="prescription">
+          <img alt="myImg" src={BackGround.Prescription} />
+        </button>
+      </Link>
     </div>
   );
 });

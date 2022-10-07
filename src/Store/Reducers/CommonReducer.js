@@ -19,6 +19,7 @@ import { AlertEnum } from "../../Utilities/Enums";
 import { setLoading, setMessage } from "./LayoutSlice";
 
 const initialState = {
+  medicines: "",
   cityList: [],
   stateList: [],
   specialityList: [],
@@ -32,13 +33,7 @@ export const GetMedicine = createAsyncThunk(
   async (values, { dispatch }) => {
     try {
       const result = await SearchMedicineAPI(values);
-
       if (result) {
-        console.log(result);
-        // let stateArr = result?.data?.map((item) => ({
-        //   label: item?.name,
-        //   value: item?.id,
-        // }));
         return result?.data;
       } else {
         throw result;
@@ -365,8 +360,15 @@ export const UploadFile = createAsyncThunk(
 export const CommonSlice = createSlice({
   name: "CommonSlice",
   initialState,
-  reducers: {},
+  reducers: {
+    clearMedicines: (state, action) => {
+      state.medicines = [];
+    },
+  },
   extraReducers: (builder) => {
+    builder.addCase(GetMedicine.fulfilled, (state, action) => {
+      state.medicines = action.payload;
+    });
     builder.addCase(StateList.fulfilled, (state, action) => {
       state.stateList = action.payload;
     });
@@ -391,6 +393,6 @@ export const CommonSlice = createSlice({
   },
 });
 
-export const {} = CommonSlice.actions;
+export const { clearMedicines } = CommonSlice.actions;
 
 export default CommonSlice.reducer;

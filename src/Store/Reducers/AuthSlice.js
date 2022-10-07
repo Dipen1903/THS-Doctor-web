@@ -325,7 +325,6 @@ export const GetMedkartToken = createAsyncThunk(
         secret: MK_SECRET,
       });
       if (result) {
-        console.log(result);
         localStorage.setItem(MEDKART_TOKEN, result?.data?.token);
         return result;
       } else {

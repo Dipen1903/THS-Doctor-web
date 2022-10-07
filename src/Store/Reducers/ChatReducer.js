@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-
 import {
   collection,
   query,
@@ -7,15 +6,12 @@ import {
   onSnapshot,
   getDocs,
   addDoc,
-  doc,
-  getDoc,
   where,
   Timestamp,
   setDoc,
 } from "firebase/firestore";
 import { ChatRoomEnum } from "../../Utilities/Enums";
 import { FirebaseDB } from "../../Utilities/Firebase.config";
-import { GetConsultDetails } from "./ConsultationsReducer";
 import { setLoading } from "./LayoutSlice";
 
 const initialState = {
@@ -73,6 +69,7 @@ export const createRoom = createAsyncThunk(
     }
   }
 );
+
 export const GetRoom = createAsyncThunk(
   "GetRoom",
   async (values, { getState, dispatch }) => {
@@ -97,6 +94,7 @@ export const GetRoom = createAsyncThunk(
     }
   }
 );
+
 export const SetUpRoom = createAsyncThunk(
   "SetUpRoom",
   async (values, { getState, dispatch }) => {
@@ -105,7 +103,6 @@ export const SetUpRoom = createAsyncThunk(
       return dispatch(GetRoom(values)).then((res) => {
         if (!res?.payload?.hasError) {
           let tempRoom = res?.payload;
-          debugger;
           if (tempRoom) {
             dispatch(toggleRoom(tempRoom));
             dispatch(UpdateRoom({ unreadMessageOfDoctor: 0 }));
@@ -143,7 +140,6 @@ export const UpdateRoom = createAsyncThunk(
       }
     } catch (error) {
       dispatch(setLoading(false));
-      console.log(error);
       return error;
     }
   }
