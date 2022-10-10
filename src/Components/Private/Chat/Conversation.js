@@ -10,6 +10,7 @@ import {
   GetSnapShot,
   SendMessage,
   toggleDetails,
+  UpdateRoom,
 } from "../../../Store/Reducers/ChatReducer";
 import { UploadFile } from "../../../Store/Reducers/CommonReducer";
 import { MessageEnum } from "../../../Utilities/Enums";
@@ -87,18 +88,20 @@ function Conversation({ roomData }) {
               </Dropdown>
               <Button
                 className="call_btn"
-                onClick={() =>
-                  dispatch(
-                    GetToken({
-                      user_id: userProfile?.id,
-                      channel_name: `Channel_Doctors_${userProfile?.id}`,
-                    })
-                  ).then((res) => {
-                    if (!isEmpty(res?.payload)) {
-                      setVideocall(true);
-                    }
-                  })
-                }
+                onClick={() => {
+                  dispatch(UpdateRoom({ isCallingStatus: 1 }));
+                  setVideocall(true);
+                }}
+                // dispatch(
+                //   GetToken({
+                //     user_id: userProfile?.id,
+                //     channel_name: `Channel_Doctors_${userProfile?.id}`,
+                //   })
+                // ).then((res) => {
+                //   if (!isEmpty(res?.payload)) {
+                //   }
+                // })
+                // }
               >
                 <img alt="myImg" src={Icon.Video}></img>
               </Button>

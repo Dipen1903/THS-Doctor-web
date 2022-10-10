@@ -12,7 +12,7 @@ import {
 } from "firebase/firestore";
 import { ChatRoomEnum } from "../../Utilities/Enums";
 import { FirebaseDB } from "../../Utilities/Firebase.config";
-import { GetToken } from "./CallingReducer";
+import { GetToken, setCallData } from "./CallingReducer";
 import { setLoading } from "./LayoutSlice";
 
 const initialState = {
@@ -83,6 +83,12 @@ export const GetRoom = createAsyncThunk(
         ref,
         where("userId", "==", `${values?.user_id || values?.userId}`)
       );
+      let snapShot;
+      snapShot = onSnapshot(q, { includeMetadataChanges: true }, (doc) => {
+        let data = doc.docChanges()[0].doc.data();
+        dispatch(setCallData({ snapShot, isCalling: data?.isCallingStatus }));
+      });
+
       const result = await getDocs(q);
       if (!result?.empty) {
         return result?.docs[0]?.data();
@@ -100,7 +106,11 @@ export const SetUpRoom = createAsyncThunk(
   "SetUpRoom",
   async (values, { getState, dispatch }) => {
     try {
-      const { userProfile } = getState().ProfileSlice;
+      const { ProfileSlice, CallingSlice } = getState();
+      const { userProfile } = ProfileSlice;
+      const { callData } = CallingSlice;
+
+      callData?.snapShot();
       return dispatch(GetRoom(values)).then((res) => {
         if (!res?.payload?.hasError) {
           let tempRoom = res?.payload;
@@ -115,9 +125,7 @@ export const SetUpRoom = createAsyncThunk(
             dispatch(toggleRoom(tempRoom));
             dispatch(
               UpdateRoom({
-                channelName:
-                  !tempRoom?.channelName &&
-                  `Channel_Doctors_${userProfile?.id}`,
+                channelName: `Channel_Users_173`,
                 unreadMessageOfDoctor: 0,
               })
             );

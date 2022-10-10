@@ -14,6 +14,10 @@ const initialState = {
     role: "host",
     layout: layout.grid,
   },
+  callData: {
+    snapShot: () => {},
+    isCalling: false,
+  },
 };
 
 export const GetToken = createAsyncThunk(
@@ -52,6 +56,9 @@ export const CallingSlice = createSlice({
   name: "CallingSlice",
   initialState,
   reducers: {
+    setCallData: (state, action) => {
+      state.callData = { ...state.callData, ...action.payload };
+    },
     setAgoraSession: (state, action) => {
       localStorage.setItem(
         AGORA,
@@ -74,6 +81,7 @@ export const CallingSlice = createSlice({
   extraReducers: (builder) => {},
 });
 
-export const { setAgoraSession, removeAgoraSession } = CallingSlice.actions;
+export const { setCallData, setAgoraSession, removeAgoraSession } =
+  CallingSlice.actions;
 
 export default CallingSlice.reducer;
