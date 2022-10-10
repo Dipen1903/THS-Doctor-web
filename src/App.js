@@ -6,6 +6,7 @@ import ErrorBoundary from "./Components/Common/Layouts/ErrorBoundry";
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
 import "react-datepicker/dist/react-datepicker.css";
+import "agora-react-uikit/dist/index.css";
 import "./Assets/css/responsive.css";
 import "./Assets/css/style.css";
 import "./Components/Common/style.css";

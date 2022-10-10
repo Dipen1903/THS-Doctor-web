@@ -12,6 +12,7 @@ import {
 } from "firebase/firestore";
 import { ChatRoomEnum } from "../../Utilities/Enums";
 import { FirebaseDB } from "../../Utilities/Firebase.config";
+import { GetToken } from "./CallingReducer";
 import { setLoading } from "./LayoutSlice";
 
 const initialState = {
@@ -104,8 +105,22 @@ export const SetUpRoom = createAsyncThunk(
         if (!res?.payload?.hasError) {
           let tempRoom = res?.payload;
           if (tempRoom) {
+            dispatch(
+              GetToken({
+                user_id: userProfile?.id,
+                channel_name:
+                  tempRoom?.channelName || `Channel_Doctors_${userProfile?.id}`,
+              })
+            );
             dispatch(toggleRoom(tempRoom));
-            dispatch(UpdateRoom({ unreadMessageOfDoctor: 0 }));
+            dispatch(
+              UpdateRoom({
+                channelName:
+                  !tempRoom?.channelName &&
+                  `Channel_Doctors_${userProfile?.id}`,
+                unreadMessageOfDoctor: 0,
+              })
+            );
           } else {
             dispatch(createRoom(values));
           }

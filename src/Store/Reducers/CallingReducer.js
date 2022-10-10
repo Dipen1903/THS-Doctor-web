@@ -1,22 +1,35 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { layout } from "agora-react-uikit";
 import { GetAgoraToken } from "../../Components/Common/Service";
 
-import { AlertEnum } from "../../Utilities/Enums";
+import { AGORA, AGORA_APP, AlertEnum } from "../../Utilities/Enums";
 import { setLoading, setMessage } from "./LayoutSlice";
 
 const initialState = {
-  agora_token: localStorage.getItem("agora_token") || "",
+  rtcProps: {
+    appId: AGORA_APP,
+    uid: "",
+    channel: "",
+    token: "",
+    role: "host",
+    layout: layout.grid,
+  },
 };
 
 export const GetToken = createAsyncThunk(
   "GetToken",
   async (values, { dispatch }) => {
     try {
-      dispatch(removeAgoraToken());
       dispatch(setLoading(true));
       const result = await GetAgoraToken(values);
       if (result?.success) {
-        dispatch(setAgoraToken(result?.data));
+        dispatch(
+          setAgoraSession({
+            uid: values?.user_id,
+            channel: values?.channel_name,
+            token: result?.data,
+          })
+        );
         dispatch(setLoading(false));
         return result?.data;
       } else {
@@ -39,18 +52,28 @@ export const CallingSlice = createSlice({
   name: "CallingSlice",
   initialState,
   reducers: {
-    setAgoraToken: (state, action) => {
-      localStorage.setItem("agora_token", action?.payload);
-      state.agora_token = action?.payload;
+    setAgoraSession: (state, action) => {
+      localStorage.setItem(
+        AGORA,
+        JSON.stringify({ ...state.rtcProps, ...action?.payload })
+      );
+      state.rtcProps = { ...state.rtcProps, ...action?.payload };
     },
-    removeAgoraToken: (state, action) => {
-      localStorage.removeItem("agora_token");
-      state.agora_token = "";
+    removeAgoraSession: (state, action) => {
+      localStorage.removeItem(AGORA);
+      state.rtcProps = {
+        appId: AGORA_APP,
+        uid: "",
+        channel: "",
+        token: "",
+        role: "host",
+        layout: layout.grid,
+      };
     },
   },
   extraReducers: (builder) => {},
 });
 
-export const { setAgoraToken, removeAgoraToken } = CallingSlice.actions;
+export const { setAgoraSession, removeAgoraSession } = CallingSlice.actions;
 
 export default CallingSlice.reducer;

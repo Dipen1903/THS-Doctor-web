@@ -1,9 +1,11 @@
 export const SESSION = "USER";
+export const AGORA = "AGORA_SESSION";
 export const TOKEN = "TOKEN";
-export const MEDKART_TOKEN = "MEDKART_TOKEN";
+export const MK_TOKEN = "MEDKART_TOKEN";
 export const MK_CLIENT = process.env.REACT_APP_MEDKART_CLIENT;
 export const MK_APPID = process.env.REACT_APP_MEDKART_APP_ID;
 export const MK_SECRET = process.env.REACT_APP_MEDKART_APP_SECRET;
+export const AGORA_APP = process.env.REACT_APP_AGORA_APPID;
 
 export const AlertEnum = {
   Success: "SUCCESS",

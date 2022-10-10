@@ -91,7 +91,12 @@ function ChatIndex() {
                     <div
                       key={item?.userId}
                       onClick={() => {
-                        dispatch(SetUpRoom(item));
+                        dispatch(
+                          SetUpRoom({
+                            ...item,
+                            channelName: `Channel_Doctors_${userProfile?.id}`,
+                          })
+                        );
                       }}
                       className={`chat_contact_list_box ${
                         room?.userId?.toString() === item?.userId?.toString() ||

@@ -16,19 +16,20 @@ import {
 } from "../../Routes/Service";
 import {
   AlertEnum,
-  MEDKART_TOKEN,
+  MK_TOKEN,
   MK_APPID,
   MK_CLIENT,
   MK_SECRET,
   SESSION,
   TOKEN,
+  AGORA,
 } from "../../Utilities/Enums";
 import { setLoading, setMessage } from "./LayoutSlice";
 import { GetUserProfile } from "./ProfileReducer";
 
 const initialState = {
   token: `${localStorage.getItem(TOKEN) || ""}`,
-  medkart_token: `${localStorage.getItem(MEDKART_TOKEN) || ""}`,
+  medkart_token: `${localStorage.getItem(MK_TOKEN) || ""}`,
   session: JSON.parse(localStorage.getItem(SESSION) || "{}") || "",
   otpModal: false,
   forgotModal: false,
@@ -325,7 +326,7 @@ export const GetMedkartToken = createAsyncThunk(
         secret: MK_SECRET,
       });
       if (result) {
-        localStorage.setItem(MEDKART_TOKEN, result?.data?.token);
+        localStorage.setItem(MK_TOKEN, result?.data?.token);
         return result;
       } else {
         throw result;
@@ -354,7 +355,8 @@ export const AuthSlice = createSlice({
     removeSession: (state) => {
       localStorage.removeItem(SESSION);
       localStorage.removeItem(TOKEN);
-      localStorage.removeItem(MEDKART_TOKEN);
+      localStorage.removeItem(MK_TOKEN);
+      localStorage.removeItem(AGORA);
       state.session = "";
       state.token = "";
     },

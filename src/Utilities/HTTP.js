@@ -1,5 +1,5 @@
 import axios from "axios";
-import { MEDKART_TOKEN, SESSION } from "./Enums";
+import { MK_TOKEN, SESSION } from "./Enums";
 import { JSONToFormData } from "./Functions";
 // const USER = process.env.REACT_APP_VENDOR || process.env.REACT_APP_MANAGER;
 async function processFormData(data) {
@@ -91,7 +91,7 @@ export async function GET(url, data) {
     let config = {
       params: data,
       headers: {
-        Authorization: `Bearer ${localStorage.getItem(MEDKART_TOKEN)}`,
+        Authorization: `Bearer ${localStorage.getItem(MK_TOKEN)}`,
       },
     };
     return await axios
