@@ -12,10 +12,11 @@ export const GetToken = createAsyncThunk(
   "GetToken",
   async (values, { dispatch }) => {
     try {
+      dispatch(removeAgoraToken());
       dispatch(setLoading(true));
       const result = await GetAgoraToken(values);
       if (result?.success) {
-        localStorage.setItem("agora_token", result?.data);
+        dispatch(setAgoraToken(result?.data));
         dispatch(setLoading(false));
         return result?.data;
       } else {
@@ -37,10 +38,19 @@ export const GetToken = createAsyncThunk(
 export const CallingSlice = createSlice({
   name: "CallingSlice",
   initialState,
-  reducers: {},
+  reducers: {
+    setAgoraToken: (state, action) => {
+      localStorage.setItem("agora_token", action?.payload);
+      state.agora_token = action?.payload;
+    },
+    removeAgoraToken: (state, action) => {
+      localStorage.removeItem("agora_token");
+      state.agora_token = "";
+    },
+  },
   extraReducers: (builder) => {},
 });
 
-export const {} = CallingSlice.actions;
+export const { setAgoraToken, removeAgoraToken } = CallingSlice.actions;
 
 export default CallingSlice.reducer;

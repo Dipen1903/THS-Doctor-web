@@ -2,6 +2,9 @@ import { serverTimestamp, Timestamp } from "firebase/firestore";
 import moment from "moment";
 import React, { useEffect, useImperativeHandle, useRef, useState } from "react";
 import { Button, Dropdown } from "react-bootstrap";
+import AgoraRTC from "agora-rtc-sdk-ng";
+import AgoraUIKit, { layout } from "agora-react-uikit";
+import "agora-react-uikit/dist/index.css";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import {
@@ -12,6 +15,7 @@ import {
 import { UploadFile } from "../../../Store/Reducers/CommonReducer";
 import { MessageEnum } from "../../../Utilities/Enums";
 import { BackGround, Icon } from "../../../Utilities/Icons";
+import { GetToken } from "../../../Store/Reducers/CallingReducer";
 import Call from "./AudioVideoCall";
 
 function Conversation({ roomData }) {
@@ -19,11 +23,22 @@ function Conversation({ roomData }) {
   const { ChatSlice, ProfileSlice } = useSelector((state) => state);
   const { isDetails, snapShot, chat, room } = ChatSlice;
   const { userProfile } = ProfileSlice;
+  const [videocall, setVideocall] = useState(false);
+  const [isHost, setHost] = useState(true);
+  const [isPinned, setPinned] = useState(false);
+  const [agora, setAgora] = useState("");
+
   const [localFile, setLocalFile] = useState();
   const messagesEndRef = useRef(null);
   const inputRef = useRef();
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+  const rtcProps = {
+    appId: "28a539781ef8461784c6debcf0723aca",
+    // appId: 'de28854847e140e58f73e2568edca676',
+    channel: "test", // your agora channel
+    token: agora, // use null or skip if using app in testing mode
   };
   useEffect(() => {
     scrollToBottom();
@@ -80,7 +95,20 @@ function Conversation({ roomData }) {
                   </Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
-              <Button className="call_btn">
+              <Button
+                className="call_btn"
+                onClick={() =>
+                  dispatch(
+                    GetToken({
+                      user_id: userProfile?.id,
+                      channel_name: `Channel_Doctors_292`,
+                    })
+                  ).then((res) => {
+                    setAgora(res?.payload);
+                    setVideocall(true);
+                  })
+                }
+              >
                 <img alt="myImg" src={Icon.Video}></img>
               </Button>
               <Button className="call_btn">
@@ -92,67 +120,113 @@ function Conversation({ roomData }) {
             </div>
           </div>
         </div>
-        <div id="chat-message-list">
-          {/* <div className="created-date">08.24 Today</div> */}
-          {localFile ? (
-            <div className="attach_items_box">
-              <div className="row">
-                <div className="col-md-12">
-                  <img
-                    alt="myImg"
-                    src={Icon.Cross}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      setLocalFile("");
-                      scrollToBottom();
-                      inputRef.current.clearMessage("");
-                    }}
-                    className="attach_cross"
-                  />
-                </div>
-                <div className="col-md-12">
-                  <div className="attach_img_box">
-                    <center>
-                      {localFile?.type?.includes("image") ? (
-                        <img src={URL.createObjectURL(localFile)} alt="file" />
-                      ) : (
-                        <div className="attach_doc_img_box">
+
+        {agora && videocall ? (
+          <>
+            <div style={styles.nav}>
+              <p style={{ fontSize: 20, width: 200 }}>
+                You're {isHost ? "a host" : "an audience"}
+              </p>
+              <p style={styles.btn} onClick={() => setHost(!isHost)}>
+                Change Role
+              </p>
+              <p style={styles.btn} onClick={() => setPinned(!isPinned)}>
+                Change Layout
+              </p>
+            </div>
+            <div style={{ height: "100vh" }}>
+              {console.log(agora, "Agora_Token")}
+              <AgoraUIKit
+                styleProps={{ gridVideoContainer: { height: "100vh" } }}
+                rtcProps={{
+                  appId: options.appId,
+
+                  uid: userProfile?.id,
+                  channel: `Channel_Doctors_292`,
+                  token: agora,
+                  role: "host",
+                  layout: isPinned ? layout.pin : layout.grid,
+                }}
+                rtmProps={{
+                  token: agora,
+                  uid: userProfile?.id,
+                  username: userProfile?.name,
+                  displayUsername: true,
+                }}
+                callbacks={{
+                  EndCall: () => setVideocall(false),
+                }}
+              />
+            </div>
+          </>
+        ) : (
+          <div id="chat-message-list">
+            {/* <div className="created-date">08.24 Today</div> */}
+            {localFile ? (
+              <div className="attach_items_box">
+                <div className="row">
+                  <div className="col-md-12">
+                    <img
+                      alt="myImg"
+                      src={Icon.Cross}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setLocalFile("");
+                        scrollToBottom();
+                        inputRef.current.clearMessage("");
+                      }}
+                      className="attach_cross"
+                    />
+                  </div>
+                  <div className="col-md-12">
+                    <div className="attach_img_box">
+                      <center>
+                        {localFile?.type?.includes("image") ? (
                           <img
-                            src={Icon.Doc}
-                            className="attch_doc_img"
-                            alt="doc"
+                            src={URL.createObjectURL(localFile)}
+                            alt="file"
                           />
-                          <h5 className="attch_doc_title">{localFile?.name}</h5>
-                          <h6 className="attach_doc_size">
-                            {localFile?.type.split("/")[1].toUpperCase()} -{" "}
-                            {localFile?.size} mb
-                          </h6>
-                        </div>
-                      )}
-                    </center>
+                        ) : (
+                          <div className="attach_doc_img_box">
+                            <img
+                              src={Icon.Doc}
+                              className="attch_doc_img"
+                              alt="doc"
+                            />
+                            <h5 className="attch_doc_title">
+                              {localFile?.name}
+                            </h5>
+                            <h6 className="attach_doc_size">
+                              {localFile?.type.split("/")[1].toUpperCase()} -{" "}
+                              {localFile?.size} mb
+                            </h6>
+                          </div>
+                        )}
+                      </center>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          ) : (
-            <div className="chat-message-list-inner">
-              {chat?.map((item, index) => (
-                <ChatItem
-                  key={(item?.sizeOfDocument || 0) + index}
-                  type={item?.documentType}
-                  index={index}
-                  rest={item}
-                />
-              ))}
-              <div ref={messagesEndRef} />
-            </div>
-          )}
-          <ChatInput
-            ref={inputRef}
-            localFile={localFile}
-            setLocalFile={setLocalFile}
-          />
-        </div>
+            ) : (
+              <div className="chat-message-list-inner">
+                {chat?.map((item, index) => (
+                  <ChatItem
+                    key={(item?.sizeOfDocument || 0) + index}
+                    type={item?.documentType}
+                    index={index}
+                    rest={item}
+                  />
+                ))}
+                <div ref={messagesEndRef} />
+              </div>
+            )}
+            <ChatInput
+              ref={inputRef}
+              localFile={localFile}
+              setLocalFile={setLocalFile}
+            />
+          </div>
+        )}
       </div>
     </div>
   ) : (
