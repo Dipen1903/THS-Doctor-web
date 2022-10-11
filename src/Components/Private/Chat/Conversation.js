@@ -89,19 +89,10 @@ function Conversation({ roomData }) {
               <Button
                 className="call_btn"
                 onClick={() => {
-                  dispatch(UpdateRoom({ isCallingStatus: 1 }));
-                  setVideocall(true);
+                  dispatch(UpdateRoom({ isCallingStatus: 1 })).then((res) => {
+                    setVideocall(true);
+                  });
                 }}
-                // dispatch(
-                //   GetToken({
-                //     user_id: userProfile?.id,
-                //     channel_name: `Channel_Doctors_${userProfile?.id}`,
-                //   })
-                // ).then((res) => {
-                //   if (!isEmpty(res?.payload)) {
-                //   }
-                // })
-                // }
               >
                 <img alt="myImg" src={Icon.Video}></img>
               </Button>
@@ -429,7 +420,7 @@ const ChatInput = React.forwardRef(({ localFile, setLocalFile }, ref) => {
           placeholder="Write your message..."
           value={text}
           onKeyDown={(e) => {
-            if (e.key === "Enter") {
+            if (e.key === "Enter" && (text || localFile)) {
               e.preventDefault();
               dispatch(SendMessage(message));
               setText("");

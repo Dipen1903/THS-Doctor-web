@@ -75,7 +75,7 @@ function LatestConsultation() {
                               <h4 className="chat_list_title">{item?.name}</h4>
                               <h5 className="chat_list_subtitle">
                                 {item?.age}|
-                                {item?.gender.toLowerCase() === "male"
+                                {item?.gender?.toLowerCase() === "male"
                                   ? "M"
                                   : "F"}
                               </h5>

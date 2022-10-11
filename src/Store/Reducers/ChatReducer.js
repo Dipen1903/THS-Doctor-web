@@ -85,7 +85,7 @@ export const GetRoom = createAsyncThunk(
       );
       let snapShot;
       snapShot = onSnapshot(q, { includeMetadataChanges: true }, (doc) => {
-        let data = doc.docChanges()[0].doc.data();
+        let data = doc?.docChanges()[0]?.doc?.data();
         dispatch(setCallData({ snapShot, isCalling: data?.isCallingStatus }));
       });
 
@@ -114,21 +114,23 @@ export const SetUpRoom = createAsyncThunk(
       return dispatch(GetRoom(values)).then((res) => {
         if (!res?.payload?.hasError) {
           let tempRoom = res?.payload;
+          debugger;
           if (tempRoom) {
             dispatch(
-              GetToken({
-                user_id: userProfile?.id,
-                channel_name:
-                  tempRoom?.channelName || `Channel_Doctors_${userProfile?.id}`,
-              })
-            );
-            dispatch(toggleRoom(tempRoom));
-            dispatch(
               UpdateRoom({
-                channelName: `Channel_Users_173`,
+                // channelName: `Channel_282_530`,
+                channelName: `Channel_${userProfile?.id}_${tempRoom?.userId}`,
                 unreadMessageOfDoctor: 0,
               })
             );
+            dispatch(
+              GetToken({
+                user_id: userProfile?.id,
+                channel_name: `Channel_${userProfile?.id}_${tempRoom?.userId}`,
+                // channel_name: `Channel_282_530`,
+              })
+            );
+            dispatch(toggleRoom(tempRoom));
           } else {
             dispatch(createRoom(values));
           }

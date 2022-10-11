@@ -11,6 +11,7 @@ import {
   SetUpRoom,
   toggleRoom,
 } from "../../../Store/Reducers/ChatReducer";
+import { GetConsultDetails } from "../../../Store/Reducers/ConsultationsReducer";
 import { setMessage } from "../../../Store/Reducers/LayoutSlice";
 import { AlertEnum } from "../../../Utilities/Enums";
 import { BackGround, Icon } from "../../../Utilities/Icons";
@@ -48,7 +49,13 @@ function ChatIndex() {
 
   useEffect(() => {
     if (booking_id) {
-      dispatch(SetUpRoom({ id: booking_id }));
+      dispatch(GetConsultDetails({ appointment_id: booking_id })).then(
+        (res) => {
+          if (res?.payload) {
+            dispatch(SetUpRoom(res?.payload));
+          }
+        }
+      );
     }
     return () => {};
   }, [booking_id]);
