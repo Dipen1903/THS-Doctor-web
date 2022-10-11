@@ -13,7 +13,10 @@ function AudioVideoCall({ endCall }) {
   return (
     <div style={{ height: "100vh" }}>
       <AgoraUIKit
-        styleProps={{ gridVideoContainer: { height: "100vh" } }}
+        styleProps={{
+          gridVideoContainer: { height: "100vh" },
+          pinnedVideoContainer: { height: "100vh" },
+        }}
         rtmCallbacks={{
           channel: {
             MemberJoined: (member) => {
@@ -21,19 +24,12 @@ function AudioVideoCall({ endCall }) {
             },
           },
         }}
-        rtcProps={{
+        rtcProps={rtcProps}
+        rtmProps={{
           ...rtcProps,
-          appId: rtcProps?.appId,
-          token: rtcProps?.token,
-          uid: userProfile?.id,
-          layout: layout.pin,
-          channel: `Channel_Users_173`,
+          username: userProfile?.name,
+          displayUsername: true,
         }}
-        // rtmProps={{
-        //   ...rtcProps,
-        //   username: userProfile?.name,
-        //   displayUsername: true,
-        // }}
         callbacks={{
           EndCall: () => endCall(false),
         }}
