@@ -272,7 +272,8 @@ export const ConsultSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(GetNewConsults.fulfilled, (state, action) => {
-      state.upcomingConsults = action.payload;
+      var temp = action.payload;
+      state.upcomingConsults = [...temp];
     });
     builder.addCase(GetPastConsults.fulfilled, (state, action) => {
       state.pastConsults = action.payload;

@@ -3773,6 +3773,9 @@ button.personal_profile_btn.float_right.btn.btn-primary img {
 .cancel-button .active {
   display: none;
 }
+.datepicker.active {
+  display: none;
+}
 
 .consultation-heading {
   font-family: "Mulish";

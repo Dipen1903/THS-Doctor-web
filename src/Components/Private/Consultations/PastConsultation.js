@@ -36,7 +36,7 @@ function PastConsultation({ pastConsults = [] }) {
       Header: "Gender",
       accessor: "gender",
       Cell: ({ cell: { value } }) => {
-        return <>{value.toUpperCase() === "MALE" ? "M" : "F"}</>;
+        return <>{value?.toUpperCase() === "MALE" ? "M" : "F"}</>;
       },
     },
     {

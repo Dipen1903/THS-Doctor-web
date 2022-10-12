@@ -32,7 +32,7 @@ function ConsultIndex() {
     try {
       let tempNew;
       let tempPast;
-      debugger;
+
       if (typeof text === "string") {
         tempNew = upcomingConsults.filter(
           (item) => item?.name?.toUpperCase().includes(text?.toUpperCase()) == 1
@@ -41,6 +41,7 @@ function ConsultIndex() {
           (item) => item?.name?.toUpperCase().includes(text?.toUpperCase()) == 1
         );
       } else {
+        setFilteredData((state) => ({ ...state, upcomingConsults: [] }));
         tempNew = upcomingConsults.filter(
           (item) =>
             moment(item?.appointment_date).format("DD/MM/YYYY") ==
@@ -49,6 +50,9 @@ function ConsultIndex() {
       }
       if (tempNew?.length) {
         setFilteredData((state) => ({ ...state, upcomingConsults: tempNew }));
+      }
+      if (tempPast?.length) {
+        setFilteredData((state) => ({ ...state, pastConsults: tempPast }));
       }
       if (!tempNew?.length && !tempPast?.length) {
         dispatch(
@@ -130,41 +134,38 @@ function ConsultIndex() {
                   />
                 </form>
               </div>
-              <div>
-                <div className="datepicker">
-                  <Form.Select
-                    className="date-filter border-0 p-0"
-                    name="dob"
-                    placeholder="Today"
-                    onChange={(e) => {
-                      setDate(moment(e.target.value).format("DD/MM/YYYY"));
-                      handleFilter(moment(e.target.value, "DD/MM/YYYY"));
-                    }}
-                  >
-                    <option value={moment().format("DD/MM/YYYY")}>Today</option>
-                    <option
-                      value={moment().add(1, "days").format("DD/MM/YYYY")}
-                    >
-                      {moment().add(1, "day").format("DD/MM/YYYY")}
-                    </option>
-                    <option
-                      value={moment().add(2, "days").format("DD/MM/YYYY")}
-                    >
-                      {moment().add(2, "day").format("DD/MM/YYYY")}
-                    </option>
-                    <option
-                      value={moment().add(3, "days").format("DD/MM/YYYY")}
-                    >
-                      {moment().add(3, "day").format("DD/MM/YYYY")}
-                    </option>
-                    <option
-                      value={moment().add(4, "days").format("DD/MM/YYYY")}
-                    >
-                      {moment().add(4, "day").format("DD/MM/YYYY")}
-                    </option>
-                  </Form.Select>
-                </div>
+
+              <div
+                className={
+                  activeTab === "past" ? "datepicker active" : "datepicker"
+                }
+              >
+                <Form.Select
+                  className="date-filter border-0 p-0"
+                  name="dob"
+                  placeholder="Today"
+                  value={date}
+                  onChange={(e) => {
+                    setDate(e.target.value);
+                    handleFilter(moment(e.target.value, "DD/MM/YYYY"));
+                  }}
+                >
+                  <option value={moment().format("DD/MM/YYYY")}>Today</option>
+                  <option value={moment().add(1, "days").format("DD/MM/YYYY")}>
+                    {moment().add(1, "day").format("DD/MM/YYYY")}
+                  </option>
+                  <option value={moment().add(2, "days").format("DD/MM/YYYY")}>
+                    {moment().add(2, "day").format("DD/MM/YYYY")}
+                  </option>
+                  <option value={moment().add(3, "days").format("DD/MM/YYYY")}>
+                    {moment().add(3, "day").format("DD/MM/YYYY")}
+                  </option>
+                  <option value={moment().add(4, "days").format("DD/MM/YYYY")}>
+                    {moment().add(4, "day").format("DD/MM/YYYY")}
+                  </option>
+                </Form.Select>
               </div>
+
               <div className="cancel-button">
                 <Button
                   variant=""
@@ -184,7 +185,7 @@ function ConsultIndex() {
                 upcomingConsults={
                   filteredData.upcomingConsults?.length
                     ? filteredData?.upcomingConsults
-                    : upcomingConsults || []
+                    : []
                 }
               />
             </Tab.Pane>
