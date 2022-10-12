@@ -241,15 +241,13 @@ export function SetUpProfile() {
                   </div>
                   <h5 class="steps mt_50">Step {profileStep} of 3</h5>
                   <h3 class="info_title">
-                    {
-                      (profileStep = 1
-                        ? "Basic Information"
-                        : profileStep === 2
-                        ? "Your Work Profile"
-                        : profileStep === 3
-                        ? "Your qualification and ID Proof"
-                        : "")
-                    }
+                    {profileStep === 1
+                      ? "Basic Information"
+                      : profileStep === 2
+                      ? "Your Work Profile"
+                      : profileStep === 3
+                      ? "Your qualification and ID Proof"
+                      : ""}
                   </h3>
 
                   {/* <Formik

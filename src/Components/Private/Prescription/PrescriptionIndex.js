@@ -228,7 +228,8 @@ const Footer = ({ values, mapProps, setActiveKey }) => {
       <div className="col-md-6 prescription_left_align">
         <div className="col-md-4 mr_10">
           <h5 class="prescription_result_text">
-            0 <span className="result_declared_text">Medicines</span>
+            {values?.medicines?.length}{" "}
+            <span className="result_declared_text">Medicines</span>
           </h5>
         </div>
         <div className="col-md-4 mr_10">

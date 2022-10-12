@@ -46,13 +46,6 @@ const Review = ({ values }) => {
             src={Logo.THS_WHITE}
             class="logo ml_10"
           />
-          <img
-            alt="myImg"
-            height={"25px"}
-            width={"185px"}
-            src={Logo.THS_Title}
-            class="logo ml_10"
-          />
         </div>
         <div>
           <h4>Dr {prescDetails?.doctor_details?.name}</h4>
@@ -141,30 +134,46 @@ const Review = ({ values }) => {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr className="prescription_table_body_row">
-                    <td className="prescription_table_body_text">Dolo 400mg</td>
-                    <td className="prescription_table_body_text">1</td>
-                    <td className="prescription_table_body_text">---</td>
-                    <td className="prescription_table_body_text">---</td>
-                    <td className="prescription_table_body_text">1</td>
-                    <td className="prescription_table_body_text">After Food</td>
-                    <td className="prescription_table_body_text">5</td>
+                  {prescDetails?.medicines?.map((item, index) => (
+                    <tr
+                      key={item?.medicine_id}
+                      className="prescription_table_body_row"
+                    >
+                      <td className="prescription_table_body_text">
+                        {item?.medicine_name}
+                      </td>
+                      <td className="prescription_table_body_text">
+                        {item?.morning || "---"}
+                      </td>
+                      <td className="prescription_table_body_text">
+                        {item?.afternoon || "---"}
+                      </td>
+                      <td className="prescription_table_body_text">
+                        {item?.evening || "---"}
+                      </td>
+                      <td className="prescription_table_body_text">
+                        {item?.night || "---"}
+                      </td>
+                      <td className="prescription_table_body_text">
+                        {item?.conditions === "after_food"
+                          ? "After Food"
+                          : item?.conditions === "before_food"
+                          ? "Before Food"
+                          : "---"}
+                      </td>
+                      <td className="prescription_table_body_text">
+                        {item?.days}
+                      </td>
 
-                    <td className="prescription_table_body_text">10</td>
-                  </tr>
-                  <tr className="prescription_table_body_row">
-                    <td className="prescription_table_body_text">Zocon 500</td>
-                    <td className="prescription_table_body_text">1</td>
-                    <td className="prescription_table_body_text">---</td>
-                    <td className="prescription_table_body_text">---</td>
-                    <td className="prescription_table_body_text">1</td>
-                    <td className="prescription_table_body_text">
-                      Before Food
-                    </td>
-                    <td className="prescription_table_body_text">5</td>
-
-                    <td className="prescription_table_body_text">10</td>
-                  </tr>
+                      <td className="prescription_table_body_text">
+                        {(parseInt(item?.morning || 1) +
+                          parseInt(item?.afternoon || 0) +
+                          parseInt(item?.evening || 0) +
+                          parseInt(item?.night || 0)) *
+                          parseInt(item?.days)}
+                      </td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>
@@ -184,7 +193,7 @@ const Review = ({ values }) => {
                   <p className="prescription-left-text mt_5">Viral Infection</p>
                 </div>
               ) : (
-                <></>
+                <div></div>
               )}
               {prescDetails?.refer_doctors?.length ? (
                 <div>

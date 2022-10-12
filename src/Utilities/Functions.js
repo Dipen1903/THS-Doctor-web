@@ -82,15 +82,19 @@ export function ConvertHMS(n) {
     n %= 60;
     var seconds = n;
 
-    if (day > 1) {
-      return `${day} days`;
-    } else if (hour >= 1) {
-      return `${hour} hours ${minutes.toFixed()} minutes`;
-    } else if (minutes >= 1) {
-      return `${minutes.toFixed()} minutes`;
-    } else {
-      return `00:00`;
+    var time = "";
+    if (day >= 1) {
+      time += `${day} day/s `;
     }
+    if (hour >= 1) {
+      time += `${hour} hours `;
+    }
+    if (minutes >= 1) {
+      time += `${minutes.toFixed()} minutes`;
+    } else {
+      time += `00:00`;
+    }
+    return time;
   } catch (error) {
     return "00:00";
   }

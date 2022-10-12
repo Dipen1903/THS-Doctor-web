@@ -53,17 +53,25 @@ export const createRoom = createAsyncThunk(
 
       const path = `Doctors_${userProfile?.id}`;
       const ref = collection(FirebaseDB, path);
-
-      await addDoc(ref, {
-        ...ChatRoomEnum,
-        userId: values?.user_id?.toString(),
-        userName: values?.name,
-        doctorOnlineStatus: 1,
-        doctorOnlineLastTime: Timestamp.now(),
-        lastBookingId: values?.id?.toString(),
-      }).then((res) => {
-        dispatch(SetUpRoom(values));
-      });
+      const q = query(
+        ref,
+        where("userId", "==", `${values?.user_id || values?.userId}`)
+      );
+      const result = await getDocs(q);
+      if (!result?.empty) {
+        dispatch(SetUpRoom(result?.docs[0]?.data()));
+      } else {
+        await addDoc(ref, {
+          ...ChatRoomEnum,
+          userId: values?.user_id?.toString(),
+          userName: values?.name,
+          doctorOnlineStatus: 1,
+          doctorOnlineLastTime: Timestamp.now(),
+          lastBookingId: values?.id?.toString(),
+        }).then((res) => {
+          dispatch(SetUpRoom(values));
+        });
+      }
     } catch (error) {
       dispatch(setLoading(false));
       return error;
@@ -118,7 +126,6 @@ export const SetUpRoom = createAsyncThunk(
           if (tempRoom) {
             dispatch(
               UpdateRoom({
-                // channelName: `Channel_282_530`,
                 channelName: `Channel_${userProfile?.id}_${tempRoom?.userId}`,
                 unreadMessageOfDoctor: 0,
               })
@@ -127,7 +134,6 @@ export const SetUpRoom = createAsyncThunk(
               GetToken({
                 user_id: userProfile?.id,
                 channel_name: `Channel_${userProfile?.id}_${tempRoom?.userId}`,
-                // channel_name: `Channel_282_530`,
               })
             );
             dispatch(toggleRoom(tempRoom));

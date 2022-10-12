@@ -1,3 +1,4 @@
+import { FieldArray, useFormikContext } from "formik";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -6,153 +7,232 @@ import {
   GetMedicine,
 } from "../../../../Store/Reducers/CommonReducer";
 import { BackGround, Icon } from "../../../../Utilities/Icons";
+import FormControl from "../../../Common/Forms/FormControl";
 import GridLayout from "../../../Common/Layouts/GridLayout";
 
 function Medicine() {
   const dispatch = useDispatch();
+  const { values, setFieldValue, handleChange, handleBlur } =
+    useFormikContext();
   const [searchParams, setSearchParams] = useState({ q: "", page: 1 });
+  const [show, setShow] = useState(false);
+  const [text, setText] = useState("");
   const { medicines } = useSelector(({ CommonSlice }) => CommonSlice);
   useEffect(() => {
     if (searchParams.page && searchParams.q) {
       setTimeout(() => {
-        dispatch(GetMedicine(searchParams));
+        dispatch(GetMedicine(searchParams)).then((res) => {
+          setShow(true);
+        });
       }, 1000);
     } else {
+      setShow(false);
       dispatch(clearMedicines());
     }
   }, [searchParams]);
 
-  const setText = (e) => {
+  const onChangeText = (e) => {
     let q = e?.target?.value;
+    setText(q);
     setSearchParams((state) => ({ ...state, q }));
   };
   return (
     <>
-      <div className="medicine_search_box d-flex col-md-12">
-        <span className="medicine_text col-md-2">Add Medicines:</span>
-        <div className="prescription-search col-md-10">
-          <form class="form-inline d-flex justify-content-start align-items-center">
-            <img alt="myImg" src={Icon.Search} className="payout_search"></img>
-            <input
-              class="form-control mr-sm-2 border-0 pl_35 pt_10 pb_10"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-              onChange={setText}
-            />
-          </form>
-          {medicines?.products?.length ? (
-            <div className="list">
-              <GridLayout
-                data={medicines?.products}
-                component={({ data, index }) => {
-                  return (
-                    <div className="list-item" key={data?.id}>
-                      {data?.name}
+      <FieldArray
+        name="medicines"
+        render={(arrayHelpers) => {
+          return (
+            <>
+              <div className="medicine_search_box d-flex col-md-12">
+                <span className="medicine_text col-md-2">Add Medicines:</span>
+                <div className="prescription-search col-md-10">
+                  <form class="form-inline d-flex justify-content-start align-items-center">
+                    <img
+                      alt="myImg"
+                      src={Icon.Search}
+                      className="payout_search"
+                    ></img>
+                    <input
+                      class="form-control mr-sm-2 border-0 pl_35 pt_10 pb_10"
+                      type="search"
+                      placeholder="Search"
+                      aria-label="Search"
+                      value={text}
+                      onChange={onChangeText}
+                    />
+                  </form>
+                  {medicines?.products?.length && show ? (
+                    <div className="list">
+                      <img></img>
+                      <GridLayout
+                        data={medicines?.products}
+                        component={({ data, index }) => {
+                          return (
+                            <div
+                              className="list-item"
+                              onClick={(e) => {
+                                arrayHelpers.push({
+                                  medicine_name: data?.name,
+                                  medicine_id: data?.id,
+                                  morning: "",
+                                  afternoon: "",
+                                  evening: "",
+                                  night: "",
+                                  conditions: "",
+                                  days: "",
+                                });
+                                setShow(false);
+                                setText("");
+                              }}
+                              key={data?.id}
+                            >
+                              {data?.name}
+                            </div>
+                          );
+                        }}
+                        page={{
+                          total: medicines?.meta?.total,
+                          pageSize: medicines?.meta?.per_page,
+                          onPageChange: (page) =>
+                            setSearchParams((state) => ({ ...state, page })),
+                        }}
+                      />
                     </div>
-                  );
-                }}
-                page={{
-                  total: medicines?.meta?.total,
-                  pageSize: medicines?.meta?.per_page,
-                  onPageChange: (page) =>
-                    setSearchParams((state) => ({ ...state, page })),
-                }}
-              />
-            </div>
-          ) : (
-            <></>
-          )}
-        </div>
-      </div>
-      <div class="table-responsive">
-        <table class="table prescription_table">
-          <thead>
-            <tr className="prescription_table_head">
-              <th className="prescription_table_head_text">Medicine</th>
-              <th className="prescription_table_head_text">Morning</th>
-              <th className="prescription_table_head_text">Afternoon</th>
-              <th className="prescription_table_head_text">Evening</th>
-              <th className="prescription_table_head_text">Night</th>
-              <th className="prescription_table_head_text">Condition</th>
-              <th className="prescription_table_head_text">
-                <center>Days</center>
-              </th>
-              <th className="prescription_table_head_text">
-                <center>Action</center>
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr className="prescription_table_body_row">
-              <td className="prescription_table_body_text">
-                <input
-                  name="medicinename"
-                  type="text"
-                  id="medicinename"
-                  style={{ width: "120px", border: "none" }}
-                />
-              </td>
-              <td className="prescription_table_body_text">
-                <input
-                  name="morningmedicine"
-                  type="number"
-                  id="morningmedicine"
-                  style={{ width: "50px", textAlign: "center" }}
-                />
-              </td>
-              <td className="prescription_table_body_text">
-                <input
-                  name="afternoonmedicine"
-                  type="number"
-                  id="afternoonmedicine"
-                  style={{ width: "50px", textAlign: "center" }}
-                />
-              </td>
-              <td className="prescription_table_body_text">
-                <input
-                  name="evemedicine"
-                  type="number"
-                  id="evemedicine"
-                  style={{ width: "50px", textAlign: "center" }}
-                />
-              </td>
-              <td className="prescription_table_body_text">
-                <input
-                  name="nightmedicine"
-                  type="number"
-                  id="nightmedicine"
-                  style={{ width: "50px", textAlign: "center" }}
-                />
-              </td>
-              <td className="prescription_table_body_text">
-                <select className="custom-select" style={{ width: "110px" }}>
-                  <option value="0">Before Food</option>
-                  <option value="1">After Food</option>
-                </select>
-              </td>
-              <td className="prescription_table_body_text">
-                <input
-                  name="noofdays"
-                  type="number"
-                  id="noofdays"
-                  style={{ width: "40px", textAlign: "center" }}
-                />
-              </td>
+                  ) : (
+                    <></>
+                  )}
+                </div>
+              </div>
+              <div class="table-responsive">
+                <table class="table prescription_table">
+                  <thead>
+                    <tr className="prescription_table_head">
+                      <th className="prescription_table_head_text">Medicine</th>
+                      <th className="prescription_table_head_text">Morning</th>
+                      <th className="prescription_table_head_text">
+                        Afternoon
+                      </th>
+                      <th className="prescription_table_head_text">Evening</th>
+                      <th className="prescription_table_head_text">Night</th>
+                      <th className="prescription_table_head_text">
+                        Condition
+                      </th>
+                      <th className="prescription_table_head_text">
+                        <center>Days</center>
+                      </th>
+                      <th className="prescription_table_head_text">
+                        <center>Action</center>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {values?.medicines?.map((item, index) => (
+                      <tr className="prescription_table_body_row">
+                        <td className="prescription_table_body_text">
+                          <FormControl
+                            control="input"
+                            type="text"
+                            name={`medicines[${index}].medicine_name`}
+                            id={`medicines[${index}].medicine_name`}
+                            value={values?.medicines[index].medicine_name}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                          />
+                        </td>
+                        <td className="prescription_table_body_text">
+                          <FormControl
+                            control="input"
+                            type="text"
+                            name={`medicines[${index}].morning`}
+                            id={`medicines[${index}].morning`}
+                            value={values?.medicines[index].morning}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                          />
+                        </td>
+                        <td className="prescription_table_body_text">
+                          <FormControl
+                            control="input"
+                            type="text"
+                            name={`medicines[${index}].afternoon`}
+                            id={`medicines[${index}].afternoon`}
+                            value={values?.medicines[index].afternoon}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                          />
+                        </td>
+                        <td className="prescription_table_body_text">
+                          <FormControl
+                            control="input"
+                            type="text"
+                            name={`medicines[${index}].evening`}
+                            id={`medicines[${index}].evening`}
+                            value={values?.medicines[index].evening}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                          />
+                        </td>
+                        <td className="prescription_table_body_text">
+                          <FormControl
+                            control="input"
+                            type="text"
+                            name={`medicines[${index}].night`}
+                            id={`medicines[${index}].night`}
+                            value={values?.medicines[index].night}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                          />
+                        </td>
+                        <td className="prescription_table_body_text">
+                          <select
+                            className="custom-select"
+                            name={`medicines[${index}].conditions`}
+                            onChange={(e) => {
+                              setFieldValue(
+                                `medicines[${index}].conditions`,
+                                e.target.value
+                              );
+                            }}
+                            style={{ width: "110px" }}
+                          >
+                            <option value="before_food">Before Food</option>
+                            <option value="after_food">After Food</option>
+                          </select>
+                        </td>
+                        <td className="prescription_table_body_text">
+                          <FormControl
+                            control="input"
+                            type="text"
+                            name={`medicines[${index}].days`}
+                            id={`medicines[${index}].days`}
+                            value={values?.medicines[index].days}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                          />
+                        </td>
 
-              <td>
-                <center>
-                  <img
-                    src={Icon.CrossRed}
-                    alt="Avatar"
-                    className="ml_15 mt_15 mb_5"
-                  />
-                </center>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+                        <td>
+                          <center>
+                            <img
+                              onClick={(e) => {
+                                e.preventDefault();
+                                arrayHelpers.remove(index);
+                              }}
+                              src={Icon.CrossRed}
+                              alt="Avatar"
+                              className="ml_15 mt_15 mb_5"
+                            />
+                          </center>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </>
+          );
+        }}
+      />
     </>
   );
 }

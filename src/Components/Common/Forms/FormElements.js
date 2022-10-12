@@ -26,7 +26,7 @@ const DropdownIndicator = ({ iconHide, customIcon, ...props }) => {
 const MultiValueRemove = (props) => {
   return (
     <components.MultiValueRemove {...props}>
-      <img alt="myImg" src={Icon.Cross} />
+      <img alt="myImg" height={16} width={16} src={Icon.CrossWhite} />
     </components.MultiValueRemove>
   );
 };

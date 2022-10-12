@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { clearChat, SetUpRoom } from "../../../Store/Reducers/ChatReducer";
 import { GetNewConsults } from "../../../Store/Reducers/ConsultationsReducer";
 import { ConvertHMS } from "../../../Utilities/Functions";
+import TimeLeft from "../../Common/Layouts/TimeLeft";
 import Conversation from "../Chat/Conversation";
 import UserDetails from "../Chat/UserDetails";
 
@@ -22,7 +23,17 @@ function LatestConsultation() {
       );
       if (tempList) {
         setLatest(tempList);
-        dispatch(SetUpRoom(tempList[0]));
+        // dispatch(SetUpRoom(tempList[0]));
+      }
+    } catch (error) {}
+  };
+
+  const isActive = (item) => {
+    try {
+      if (item?.status === 1) {
+        return true;
+      } else if (item?.status === 0) {
+        return false;
       }
     } catch (error) {}
   };
@@ -53,17 +64,13 @@ function LatestConsultation() {
               <div className="col-md-3 padding_right_0">
                 <div className="upcomming_consult_chat_list">
                   {latest?.map((item, index) => {
-                    var duration = moment.duration(
-                      moment(item?.appointment_date_time).diff(moment.now())
-                    );
-                    var seconds = parseInt(duration.asSeconds());
                     return (
                       <div
                         className={`chat_list_box ${
-                          item?.status === 1 && "chat_list_box_active"
+                          isActive(item) && "chat_list_box_active"
                         }`}
                         onClick={() => {
-                          dispatch(SetUpRoom(item));
+                          item?.status === 1 && dispatch(SetUpRoom(item));
                         }}
                       >
                         <div className="row">
@@ -83,7 +90,10 @@ function LatestConsultation() {
                           </div>
                           <div className="col-md-6">
                             <div className="time_left_box">
-                              {ConvertHMS(seconds)} Left
+                              <TimeLeft
+                                occuringDate={item?.appointment_date_time}
+                                hide={true}
+                              />
                             </div>
                           </div>
                         </div>

@@ -13,6 +13,7 @@ import CALENDARBLUE from "../Assets/img/svg/CalendarBlue.svg";
 import CHARTROUND from "../Assets/img/svg/ChartRound.svg";
 import PENCIL from "../Assets/svg/Pencil.svg";
 import CHAT from "../Assets/svg/Message.svg";
+import CROSSWHITE from "../Assets/svg/CrossWhite.svg";
 import CROSSRED from "../Assets/svg/CrossRed.svg";
 import EYE from "../Assets/svg/Eye.svg";
 import LINK from "../Assets/svg/Link.svg";
@@ -118,6 +119,7 @@ export const Icon = {
   CalenderCross: CALENDARBLUE,
   Dollor: CHARTROUND,
   Chat: CHAT,
+  CrossWhite: CROSSWHITE,
   CrossRed: CROSSRED,
   Comment: COMMENT,
   Chart: require("../Assets/img/totalrevenue.png"),

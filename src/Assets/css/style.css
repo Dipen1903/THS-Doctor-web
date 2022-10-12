@@ -4594,7 +4594,8 @@ privacypolicy-paragraph::-webkit-scrollbar {
   color: #1e1f20;
   margin-bottom: 5px !important;
 }
-.prescription_appoinment_input span {
+.prescription_appoinment_input span,
+.prescription_table_appoinment_input span {
   font-family: "Mulish";
   font-style: normal;
   font-weight: 500;

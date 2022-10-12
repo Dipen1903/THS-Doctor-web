@@ -12,7 +12,6 @@ function AudioVideoCall({ endCall }) {
 
   return (
     <div style={{ height: "100vh" }}>
-      {console.log("rtcProps", rtcProps)}
       <AgoraUIKit
         styleProps={{
           gridVideoContainer: { height: "100vh" },
@@ -32,12 +31,9 @@ function AudioVideoCall({ endCall }) {
           displayUsername: true,
         }}
         callbacks={{
-          "user-published": ({ uid }) => {
-            console.log("UID_PUBLISH", uid);
-          },
-          "user-joined": ({ uid }) => {
-            console.log("UID_PUBLISH", uid);
-          },
+          "user-published": ({ uid }) => {},
+          "user-joined": ({ uid }) => {},
+
           EndCall: () => endCall(false),
         }}
       />

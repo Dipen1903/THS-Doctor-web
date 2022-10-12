@@ -16,6 +16,7 @@ import { CancelConsultSchema } from "../../../Utilities/Schema";
 import FormControl from "../../Common/Forms/FormControl";
 import { ConvertHMS } from "../../../Utilities/Functions";
 import { Link } from "react-router-dom";
+import TimeLeft from "../../Common/Layouts/TimeLeft";
 
 function NewConsultation({ upcomingConsults = [] }) {
   const dispatch = useDispatch();
@@ -37,7 +38,7 @@ function NewConsultation({ upcomingConsults = [] }) {
       Header: "Gender",
       accessor: "gender",
       Cell: ({ cell: { value } }) => {
-        return <>{value.toUpperCase() === "MALE" ? "M" : "F"}</>;
+        return <>{value?.toUpperCase() === "MALE" ? "M" : "F"}</>;
       },
     },
     {
@@ -52,16 +53,9 @@ function NewConsultation({ upcomingConsults = [] }) {
       accessor: "appointment_time",
       Cell: ({
         cell: {
-          value,
           row: { original },
         },
-      }) => {
-        var duration = moment.duration(
-          moment(original?.appointment_date_time).diff(moment.now())
-        );
-        var seconds = parseInt(duration.asSeconds());
-        return <span class="failed_tag">{`${ConvertHMS(seconds)} Left`}</span>;
-      },
+      }) => <TimeLeft occuringDate={original?.appointment_date_time} />,
     },
     {
       Header: "Mark Delay",

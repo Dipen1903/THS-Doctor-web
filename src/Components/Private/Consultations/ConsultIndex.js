@@ -32,13 +32,13 @@ function ConsultIndex() {
     try {
       let tempNew;
       let tempPast;
-
+      debugger;
       if (typeof text === "string") {
         tempNew = upcomingConsults.filter(
-          (item) => item?.name.toUpperCase().includes(text.toUpperCase()) == 1
+          (item) => item?.name?.toUpperCase().includes(text?.toUpperCase()) == 1
         );
         tempPast = pastConsults.filter(
-          (item) => item?.name.toUpperCase().includes(text.toUpperCase()) == 1
+          (item) => item?.name?.toUpperCase().includes(text?.toUpperCase()) == 1
         );
       } else {
         tempNew = upcomingConsults.filter(
@@ -75,7 +75,7 @@ function ConsultIndex() {
   useEffect(() => {
     dispatch(GetNewConsults());
     dispatch(GetPastConsults());
-    handleFilter(moment().format("DD/MM/YYYY"));
+    upcomingConsults?.length && handleFilter(moment().format("DD/MM/YYYY"));
     dispatch(CancelReasons());
     return () => {};
   }, []);
