@@ -91,8 +91,6 @@ export function ConvertHMS(n) {
     }
     if (minutes >= 1) {
       time += `${minutes.toFixed()} minutes`;
-    } else {
-      time += `00:00`;
     }
     return time;
   } catch (error) {

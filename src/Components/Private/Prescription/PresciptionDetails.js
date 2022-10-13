@@ -102,6 +102,13 @@ const Review = ({ values }) => {
               </div>
               <div>
                 {" "}
+                <span className="text-uppercase">Medical History</span>
+                <p className="prescription-right-text mt_5">
+                  {prescDetails?.doctor_notes?.medical_history}
+                </p>
+              </div>
+              <div>
+                {" "}
                 <span className="text-uppercase">Chef Complaints</span>
                 <p className="prescription-right-text mt_5">
                   {prescDetails?.doctor_notes?.chef_complaints}

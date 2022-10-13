@@ -16,7 +16,11 @@ function Home() {
     <>
       <Container
         fluid
-        style={{ background: "#f8fbff", padding: "0px 100px", height: "100vh" }}
+        style={{
+          background: "#f8fbff",
+          padding: "0 100px 30px 100px",
+          minHeight: "100vh",
+        }}
         className="dashboard"
       >
         <h4 className="pt_30 mb_20">Dashboard</h4>

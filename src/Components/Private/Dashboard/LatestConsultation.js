@@ -33,7 +33,11 @@ function LatestConsultation() {
       if (item?.status === 1) {
         return true;
       } else if (item?.status === 0) {
-        return false;
+        var duration = moment.duration(
+          moment(item?.appointment_date_time).diff(moment.now())
+        );
+        var minutes = duration.asMinutes();
+        return parseInt(minutes) > 10 ? false : true;
       }
     } catch (error) {}
   };
@@ -70,7 +74,7 @@ function LatestConsultation() {
                           isActive(item) && "chat_list_box_active"
                         }`}
                         onClick={() => {
-                          item?.status === 1 && dispatch(SetUpRoom(item));
+                          isActive(item) && dispatch(SetUpRoom(item));
                         }}
                       >
                         <div className="row">
@@ -89,12 +93,20 @@ function LatestConsultation() {
                             </div>
                           </div>
                           <div className="col-md-6">
-                            <div className="time_left_box">
-                              <TimeLeft
-                                occuringDate={item?.appointment_date_time}
-                                hide={true}
-                              />
-                            </div>
+                            {item?.status === 1 ? (
+                              <div className="in-process-box">
+                                <span className="inprocess_tag">
+                                  In Process
+                                </span>
+                              </div>
+                            ) : (
+                              <div className="time_left_box">
+                                <TimeLeft
+                                  occuringDate={item?.appointment_date_time}
+                                  hide={true}
+                                />
+                              </div>
+                            )}
                           </div>
                         </div>
                         <div className="row">

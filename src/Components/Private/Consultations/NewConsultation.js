@@ -55,7 +55,12 @@ function NewConsultation({ upcomingConsults = [] }) {
         cell: {
           row: { original },
         },
-      }) => <TimeLeft occuringDate={original?.appointment_date_time} />,
+      }) =>
+        original?.status === 1 ? (
+          <span className="inprocess_tag">In Process</span>
+        ) : (
+          <TimeLeft occuringDate={original?.appointment_date_time} />
+        ),
     },
     {
       Header: "Mark Delay",

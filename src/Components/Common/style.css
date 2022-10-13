@@ -471,3 +471,26 @@ input:disabled {
   color: #7e7e7e !important;
   pointer-events: none;
 }
+.in-process-box {
+  border-radius: 4px;
+  padding: 7px;
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 12px;
+
+  text-align: center;
+  margin-top: 23px;
+}
+.inprocess_tag {
+  background: rgba(83, 121, 219, 0.15);
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 24px;
+  color: rgba(83, 121, 219, 1);
+}

@@ -4615,6 +4615,10 @@ privacypolicy-paragraph::-webkit-scrollbar {
   color: #1e1f20;
   text-align: right;
   margin-bottom: 5px !important;
+  width: 130px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .text-name span {

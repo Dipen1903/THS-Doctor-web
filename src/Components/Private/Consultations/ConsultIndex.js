@@ -32,7 +32,6 @@ function ConsultIndex() {
     try {
       let tempNew;
       let tempPast;
-
       if (typeof text === "string") {
         tempNew = upcomingConsults.filter(
           (item) => item?.name?.toUpperCase().includes(text?.toUpperCase()) == 1
@@ -48,13 +47,16 @@ function ConsultIndex() {
             text?.format("DD/MM/YYYY")
         );
       }
-      if (tempNew?.length) {
+      if (tempNew?.length && activeTab === "upcoming") {
         setFilteredData((state) => ({ ...state, upcomingConsults: tempNew }));
       }
-      if (tempPast?.length) {
+      if (tempPast?.length && activeTab === "past") {
         setFilteredData((state) => ({ ...state, pastConsults: tempPast }));
       }
-      if (!tempNew?.length && !tempPast?.length) {
+      if (
+        (!tempNew?.length && activeTab === "upcoming") ||
+        (!tempPast?.length && activeTab === "past")
+      ) {
         dispatch(
           setMessage({
             type: AlertEnum.Info,
@@ -77,9 +79,15 @@ function ConsultIndex() {
     resetForm();
   };
   useEffect(() => {
+    if (upcomingConsults?.length) {
+      handleFilter(moment(Date.now()));
+    }
+    return () => {};
+  }, [upcomingConsults]);
+
+  useEffect(() => {
     dispatch(GetNewConsults());
     dispatch(GetPastConsults());
-    upcomingConsults?.length && handleFilter(moment().format("DD/MM/YYYY"));
     dispatch(CancelReasons());
     return () => {};
   }, []);

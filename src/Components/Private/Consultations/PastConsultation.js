@@ -60,7 +60,7 @@ function PastConsultation({ pastConsults = [] }) {
         return (
           <>
             {value === 3 && <span class="failed_tag mx-2">Cancelled</span>}
-            {value === 1 && <span class="paid_tag mx-2">Completed</span>}
+            {value === 2 && <span class="paid_tag mx-2">Completed</span>}
           </>
         );
       },
@@ -122,7 +122,7 @@ export const ConsultDetails = (props) => {
             {consultDetails?.status === 3 && (
               <span class="failed_tag mx-2">Cancelled</span>
             )}
-            {consultDetails?.status === 1 && (
+            {consultDetails?.status === 2 && (
               <span class="paid_tag mx-2">Completed</span>
             )}
           </div>
@@ -168,7 +168,7 @@ export const ConsultDetails = (props) => {
           </div>
         </div>
 
-        {consultDetails?.status === 1 && (
+        {consultDetails?.status === 2 && (
           <>
             <div className="appoinment_input">
               <p className="left_text">Prescription</p>{" "}
@@ -208,10 +208,15 @@ export const ConsultDetails = (props) => {
       </Modal.Body>
       <Modal.Footer className="consultation-modal-footer">
         <div className="d-flex">
-          <Button className="close_btn" onClick={props.onClose}>
+          <Button
+            className="close_btn"
+            onClick={() => {
+              props.onHide();
+            }}
+          >
             Close
           </Button>
-          {consultDetails?.status === 1 && (
+          {consultDetails?.status === 2 && (
             <Link to={`/chat/${consultDetails?.id}`}>
               <Button className="verify_btn" variant="primary">
                 <img alt="myImg" className="mr_10" src={Icon.Comment}></img>Open
