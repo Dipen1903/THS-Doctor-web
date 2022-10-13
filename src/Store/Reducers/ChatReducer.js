@@ -28,7 +28,7 @@ export const GetSnapShot = createAsyncThunk(
   "GetSnapShot",
   async (values, { dispatch }) => {
     try {
-      const path = `Chat_${values?.doctor_id}_${values?.user_id}`;
+      const path = `Chat_${values?.doctor_id}_${values?.user_id}_${values?.booking_id}`;
       const q = query(collection(FirebaseDB, path), orderBy("dateTime", "asc"));
       let unsubscribe;
       unsubscribe = onSnapshot(q, (querySnapshot) => {
@@ -55,7 +55,12 @@ export const createRoom = createAsyncThunk(
       const ref = collection(FirebaseDB, path);
       const q = query(
         ref,
-        where("userId", "==", `${values?.user_id || values?.userId}`)
+        where("userId", "==", `${values?.user_id || values?.userId}`),
+        where(
+          "lastBookingId",
+          "==",
+          `${values?.id?.toString() || values?.lastBookingId}`
+        )
       );
       const result = await getDocs(q);
       if (!result?.empty) {
@@ -89,7 +94,8 @@ export const GetRoom = createAsyncThunk(
       const ref = collection(FirebaseDB, path);
       const q = query(
         ref,
-        where("userId", "==", `${values?.user_id || values?.userId}`)
+        where("userId", "==", `${values?.user_id || values?.userId}`),
+        where("lastBookingId", "==", `${values?.lastBookingId || values?.id}`)
       );
       let snapShot;
       snapShot = onSnapshot(q, { includeMetadataChanges: true }, (doc) => {
@@ -122,7 +128,7 @@ export const SetUpRoom = createAsyncThunk(
       return dispatch(GetRoom(values)).then((res) => {
         if (!res?.payload?.hasError) {
           let tempRoom = res?.payload;
-          debugger;
+
           if (tempRoom) {
             dispatch(
               UpdateRoom({
@@ -161,7 +167,11 @@ export const UpdateRoom = createAsyncThunk(
       let roomRef = "";
       const path = `Doctors_${userProfile?.id}`;
       const ref = collection(FirebaseDB, path);
-      const q = query(ref, where("userId", "==", `${room?.userId}`));
+      const q = query(
+        ref,
+        where("userId", "==", `${room?.userId}`),
+        where("lastBookingId", "==", `${room?.lastBookingId || room?.id}`)
+      );
       const result = await getDocs(q);
       if (!result?.empty) {
         roomRef = result?.docs[0].ref;
@@ -226,7 +236,8 @@ export const SendMessage = createAsyncThunk(
       const room = getState().ChatSlice.room;
       const userProfile = getState().ProfileSlice.userProfile;
       let user_id = room?.user_id || room?.userId;
-      const path = `Chat_${userProfile?.id}_${user_id}`;
+      let booking_id = room?.lastBookingId || room?.id;
+      const path = `Chat_${userProfile?.id}_${user_id}_${booking_id}`;
       const collectionRef = collection(FirebaseDB, path);
       const docRef = await addDoc(collectionRef, values);
       dispatch(

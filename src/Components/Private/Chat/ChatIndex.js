@@ -106,8 +106,14 @@ function ChatIndex() {
                         );
                       }}
                       className={`chat_contact_list_box ${
-                        room?.userId?.toString() === item?.userId?.toString() ||
-                        room?.user_id?.toString() === item?.userId?.toString()
+                        (room?.userId?.toString() ===
+                          item?.userId?.toString() ||
+                          room?.user_id?.toString() ===
+                            item?.userId?.toString()) &&
+                        (room?.lastBookingId?.toString() ===
+                          item?.lastBookingId?.toString() ||
+                          room?.id?.toString() ===
+                            item?.lastBookingId?.toString())
                           ? "chat_contact_list_box_active"
                           : ""
                       }`}
@@ -123,6 +129,9 @@ function ChatIndex() {
                             <div>
                               <div className="chat_user_name">
                                 {item?.userName}
+                              </div>
+                              <div className="chat_user_name">
+                                #{item?.lastBookingId}
                               </div>
                               <div className="chat_user_last_msg">
                                 {item?.lastMessage}

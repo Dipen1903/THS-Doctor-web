@@ -16,8 +16,9 @@ import { UploadFile } from "../../../Store/Reducers/CommonReducer";
 import { MessageEnum } from "../../../Utilities/Enums";
 import { BackGround, Icon } from "../../../Utilities/Icons";
 import { GetToken } from "../../../Store/Reducers/CallingReducer";
-import AudioVideoCall from "./AudioVideoCall";
+import VideoCall from "./VideoCall";
 import { isEmpty } from "../../../Utilities/Functions";
+import AudioCall from "./AudioCall";
 
 function Conversation({ roomData }) {
   const dispatch = useDispatch();
@@ -25,6 +26,7 @@ function Conversation({ roomData }) {
   const { isDetails, snapShot, chat, room } = ChatSlice;
   const { userProfile } = ProfileSlice;
   const [videocall, setVideocall] = useState(false);
+  const [audiocall, setAudiocall] = useState(false);
   const [localFile, setLocalFile] = useState();
   const messagesEndRef = useRef(null);
   const inputRef = useRef();
@@ -41,6 +43,7 @@ function Conversation({ roomData }) {
         GetSnapShot({
           doctor_id: userProfile?.id,
           user_id: roomData?.user_id || roomData?.userId,
+          booking_id: roomData?.lastBookingId || roomData?.id,
         })
       );
     }
@@ -107,9 +110,15 @@ function Conversation({ roomData }) {
         </div>
 
         {videocall ? (
-          <AudioVideoCall
+          <VideoCall
             endCall={() => {
               setVideocall(false);
+            }}
+          />
+        ) : audiocall ? (
+          <AudioCall
+            endCall={() => {
+              setAudiocall(false);
             }}
           />
         ) : (

@@ -107,7 +107,12 @@ function NewConsultation({ upcomingConsults = [] }) {
         },
       }) => {
         return (
-          <Link to={`/chat/${original?.id}`}>
+          <Link
+            to={
+              (original?.status === 2 || original?.status === 1) &&
+              `/chat/${original?.id}`
+            }
+          >
             <img src={Icon.Chat} alt="Avatar" className="chat-icon" />
           </Link>
         );
