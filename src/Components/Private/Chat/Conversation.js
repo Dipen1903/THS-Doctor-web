@@ -64,7 +64,9 @@ function Conversation({ roomData }) {
                 </h3>
                 <h5 className="profile_name_subtitle">
                   {room?.age} |{" "}
-                  {room?.gender?.toLowerCase() === "male" ? "M" : "F"}
+                  {room?.gender && room?.gender?.toLowerCase() === "male"
+                    ? "M"
+                    : "F"}
                 </h5>
               </div>
               <h5 className="online_text">
@@ -99,7 +101,14 @@ function Conversation({ roomData }) {
               >
                 <img alt="myImg" src={Icon.Video}></img>
               </Button>
-              <Button className="call_btn">
+              <Button
+                className="call_btn"
+                onClick={() => {
+                  dispatch(UpdateRoom({ isCallingStatus: 1 })).then((res) => {
+                    setAudiocall(true);
+                  });
+                }}
+              >
                 <img alt="myImg" src={Icon.Phone}></img>
               </Button>
               <Button variant="primary" className="mark_complete">

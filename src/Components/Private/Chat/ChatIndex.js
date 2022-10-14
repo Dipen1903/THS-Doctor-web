@@ -96,24 +96,19 @@ function ChatIndex() {
                 ((filterData.length && filterData) || conversations)?.map(
                   (item, index) => (
                     <div
-                      key={item?.userId}
+                      key={item?.lastBookingId || item?.id}
                       onClick={() => {
                         dispatch(
                           SetUpRoom({
                             ...item,
-                            channelName: `Channel_Doctors_${userProfile?.id}`,
+                            channelName: `Channel_${userProfile?.id}_${item?.userId}`,
                           })
                         );
                       }}
                       className={`chat_contact_list_box ${
-                        (room?.userId?.toString() ===
-                          item?.userId?.toString() ||
-                          room?.user_id?.toString() ===
-                            item?.userId?.toString()) &&
-                        (room?.lastBookingId?.toString() ===
+                        room?.lastBookingId?.toString() ===
                           item?.lastBookingId?.toString() ||
-                          room?.id?.toString() ===
-                            item?.lastBookingId?.toString())
+                        room?.id?.toString() === item?.lastBookingId?.toString()
                           ? "chat_contact_list_box_active"
                           : ""
                       }`}

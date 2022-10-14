@@ -55,7 +55,7 @@ export const createRoom = createAsyncThunk(
       const ref = collection(FirebaseDB, path);
       const q = query(
         ref,
-        where("userId", "==", `${values?.user_id || values?.userId}`),
+        // where("userId", "==", `${values?.user_id || values?.userId}`),
         where(
           "lastBookingId",
           "==",
@@ -70,6 +70,8 @@ export const createRoom = createAsyncThunk(
           ...ChatRoomEnum,
           userId: values?.user_id?.toString(),
           userName: values?.name,
+          age: values?.age,
+          gender: values?.gender,
           doctorOnlineStatus: 1,
           doctorOnlineLastTime: Timestamp.now(),
           lastBookingId: values?.id?.toString(),
@@ -94,7 +96,7 @@ export const GetRoom = createAsyncThunk(
       const ref = collection(FirebaseDB, path);
       const q = query(
         ref,
-        where("userId", "==", `${values?.user_id || values?.userId}`),
+        // where("userId", "==", `${values?.user_id || values?.userId}`),
         where("lastBookingId", "==", `${values?.lastBookingId || values?.id}`)
       );
       let snapShot;
@@ -120,35 +122,37 @@ export const SetUpRoom = createAsyncThunk(
   "SetUpRoom",
   async (values, { getState, dispatch }) => {
     try {
-      const { ProfileSlice, CallingSlice } = getState();
+      const { ProfileSlice, CallingSlice, ChatSlice } = getState();
       const { userProfile } = ProfileSlice;
+      const { room } = ChatSlice;
       const { callData } = CallingSlice;
-
       callData?.snapShot();
-      return dispatch(GetRoom(values)).then((res) => {
-        if (!res?.payload?.hasError) {
-          let tempRoom = res?.payload;
+      if (room?.lastBookingId !== (values?.id || values?.lastBookingId)) {
+        return dispatch(GetRoom(values)).then((res) => {
+          if (!res?.payload?.hasError) {
+            let tempRoom = res?.payload;
 
-          if (tempRoom) {
-            dispatch(
-              UpdateRoom({
-                channelName: `Channel_${userProfile?.id}_${tempRoom?.userId}`,
-                unreadMessageOfDoctor: 0,
-              })
-            );
-            dispatch(
-              GetToken({
-                user_id: userProfile?.id,
-                channel_name: `Channel_${userProfile?.id}_${tempRoom?.userId}`,
-              })
-            );
-            dispatch(toggleRoom(tempRoom));
-          } else {
-            dispatch(createRoom(values));
+            if (tempRoom) {
+              dispatch(
+                UpdateRoom({
+                  channelName: `Channel_${userProfile?.id}_${tempRoom?.userId}`,
+                  unreadMessageOfDoctor: 0,
+                })
+              );
+              dispatch(
+                GetToken({
+                  user_id: userProfile?.id,
+                  channel_name: `Channel_${userProfile?.id}_${tempRoom?.userId}`,
+                })
+              );
+              dispatch(toggleRoom(tempRoom));
+            } else {
+              dispatch(createRoom(values));
+            }
+            return true;
           }
-          return true;
-        }
-      });
+        });
+      }
     } catch (error) {
       dispatch(setLoading(false));
       return error;
@@ -169,7 +173,7 @@ export const UpdateRoom = createAsyncThunk(
       const ref = collection(FirebaseDB, path);
       const q = query(
         ref,
-        where("userId", "==", `${room?.userId}`),
+        // where("userId", "==", `${room?.userId}`),
         where("lastBookingId", "==", `${room?.lastBookingId || room?.id}`)
       );
       const result = await getDocs(q);
@@ -202,6 +206,7 @@ export const GetConversations = createAsyncThunk(
           querySnapshot.docChanges().forEach((change) => {
             if (change.type === "modified") {
               let tempConversation = [];
+
               if (tempArr.length) {
                 tempConversation = [...tempArr];
               } else {
@@ -209,7 +214,10 @@ export const GetConversations = createAsyncThunk(
               }
               let temp = change.doc.data();
               let index = tempConversation?.findIndex(
-                (item) => parseInt(item?.userId) === parseInt(temp?.userId)
+                (item) =>
+                  // parseInt(item?.userId) === parseInt(temp?.userId) &&
+                  parseInt(item?.lastBookingId) ===
+                  parseInt(temp?.lastBookingId)
               );
               if (parseInt(index) > -1) {
                 tempConversation[index] = temp;

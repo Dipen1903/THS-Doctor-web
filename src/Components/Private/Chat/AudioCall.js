@@ -15,10 +15,11 @@ let channelParameters = {
 export default function AudioCall({ endCall }) {
   const dispatch = useDispatch();
   const { rtcProps } = useSelector(({ CallingSlice }) => CallingSlice);
-  const callButtonRef = useRef();
+  const joinButtonRef = useRef();
+  const endButtonRef = useRef();
+  const agoraEngine = AgoraRTC.createClient({ mode: "rtc", codec: "vp8" });
   async function startBasicCall() {
     // Create an instance of the Agora Engine
-    const agoraEngine = AgoraRTC.createClient({ mode: "rtc", codec: "vp8" });
 
     // Listen for the "user-published" event to retrieve an AgoraRTCRemoteUser object.
     agoraEngine.on("user-published", async (user, mediaType) => {
@@ -42,46 +43,51 @@ export default function AudioCall({ endCall }) {
         showMessage("Remote user has left the channel");
       });
     });
-
-    window.onload = function () {
-      // Listen to the Join button click event.
-      document.getElementById("join").onclick = async function () {
-        // Join a channel.
-        await agoraEngine.join(rtcProps);
-        showMessage("Joined channel: " + rtcProps.channel);
-        // Create a local audio track from the microphone audio.
-        channelParameters.localAudioTrack =
-          await AgoraRTC.createMicrophoneAudioTrack();
-        // Publish the local audio track in the channel.
-        await agoraEngine.publish(channelParameters.localAudioTrack);
-        console.log("Publish success!");
-      };
-
-      // Listen to the Leave button click event.
-      document.getElementById("leave").onclick = async function () {
-        // Destroy the local audio track.
-        channelParameters.localAudioTrack.close();
-        // Leave the channel
-        await agoraEngine.leave();
-        endCall();
-        console.log("You left the channel");
-        // Refresh the page for reuse
-        window.location.reload();
-      };
-    };
   }
   useEffect(() => {
-    callButtonRef?.current?.click();
+    startBasicCall();
+    joinButtonRef.current.onclick = async function () {
+      // Join a channel.
+      debugger;
+      await agoraEngine.join(rtcProps);
+      showMessage("Joined channel: " + rtcProps.channel);
+      // Create a local audio track from the microphone audio.
+      channelParameters.localAudioTrack =
+        await AgoraRTC.createMicrophoneAudioTrack();
+      // Publish the local audio track in the channel.
+      await agoraEngine.publish(channelParameters.localAudioTrack);
+      console.log("Publish success!");
+    };
+
+    // Listen to the Leave button click event.
+    endButtonRef.current.onclick = async function () {
+      // Destroy the local audio track.
+      channelParameters.localAudioTrack.close();
+      // Leave the channel
+      await agoraEngine.leave();
+      endCall();
+      console.log("You left the channel");
+      // Refresh the page for reuse
+      window.location.reload();
+    };
+
+    joinButtonRef?.current?.click();
 
     return () => {};
   }, []);
 
   useEffect(() => {
-    startBasicCall();
     return () => {};
   }, []);
 
-  return <button ref={callButtonRef} hidden />;
+  return (
+    <>
+      <button ref={joinButtonRef} id="join" hidden />
+      <button id="leave" ref={endButtonRef} className="btn">
+        End
+      </button>
+    </>
+  );
 }
 
 function showMessage(text) {
