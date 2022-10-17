@@ -17,7 +17,11 @@ export default function AudioCall({ endCall }) {
   const { rtcProps } = useSelector(({ CallingSlice }) => CallingSlice);
   const joinButtonRef = useRef();
   const endButtonRef = useRef();
-  const agoraEngine = AgoraRTC.createClient({ mode: "rtc", codec: "vp8" });
+  const agoraEngine = AgoraRTC.createClient({
+    mode: "rtc",
+    role: "host",
+    codec: "vp8",
+  });
   async function startBasicCall() {
     // Create an instance of the Agora Engine
 
@@ -49,7 +53,12 @@ export default function AudioCall({ endCall }) {
     joinButtonRef.current.onclick = async function () {
       // Join a channel.
       debugger;
-      await agoraEngine.join(rtcProps);
+      await agoraEngine.join(
+        rtcProps?.appId,
+        rtcProps?.channel,
+        rtcProps?.token,
+        rtcProps?.uid
+      );
       showMessage("Joined channel: " + rtcProps.channel);
       // Create a local audio track from the microphone audio.
       channelParameters.localAudioTrack =
@@ -91,5 +100,5 @@ export default function AudioCall({ endCall }) {
 }
 
 function showMessage(text) {
-  document.getElementById("message").textContent = text;
+  console.log(text);
 }

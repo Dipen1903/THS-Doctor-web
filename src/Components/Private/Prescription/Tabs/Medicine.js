@@ -112,7 +112,6 @@ function Medicine() {
                       <th className="prescription_table_head_text">
                         Afternoon
                       </th>
-                      <th className="prescription_table_head_text">Evening</th>
                       <th className="prescription_table_head_text">Night</th>
                       <th className="prescription_table_head_text">
                         Condition
@@ -132,6 +131,7 @@ function Medicine() {
                           <FormControl
                             control="input"
                             type="text"
+                            disabled
                             name={`medicines[${index}].medicine_name`}
                             id={`medicines[${index}].medicine_name`}
                             value={values?.medicines[index].medicine_name}
@@ -142,7 +142,8 @@ function Medicine() {
                         <td className="prescription_table_body_text">
                           <FormControl
                             control="input"
-                            type="text"
+                            type="number"
+                            min={0}
                             name={`medicines[${index}].morning`}
                             id={`medicines[${index}].morning`}
                             value={values?.medicines[index].morning}
@@ -153,7 +154,8 @@ function Medicine() {
                         <td className="prescription_table_body_text">
                           <FormControl
                             control="input"
-                            type="text"
+                            type="number"
+                            min={0}
                             name={`medicines[${index}].afternoon`}
                             id={`medicines[${index}].afternoon`}
                             value={values?.medicines[index].afternoon}
@@ -164,18 +166,8 @@ function Medicine() {
                         <td className="prescription_table_body_text">
                           <FormControl
                             control="input"
-                            type="text"
-                            name={`medicines[${index}].evening`}
-                            id={`medicines[${index}].evening`}
-                            value={values?.medicines[index].evening}
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                          />
-                        </td>
-                        <td className="prescription_table_body_text">
-                          <FormControl
-                            control="input"
-                            type="text"
+                            type="number"
+                            min={0}
                             name={`medicines[${index}].night`}
                             id={`medicines[${index}].night`}
                             value={values?.medicines[index].night}
@@ -193,7 +185,6 @@ function Medicine() {
                                 e.target.value
                               );
                             }}
-                            style={{ width: "110px" }}
                           >
                             <option value="before_food">Before Food</option>
                             <option value="after_food">After Food</option>
@@ -202,7 +193,8 @@ function Medicine() {
                         <td className="prescription_table_body_text">
                           <FormControl
                             control="input"
-                            type="text"
+                            type="number"
+                            min={0}
                             name={`medicines[${index}].days`}
                             id={`medicines[${index}].days`}
                             value={values?.medicines[index].days}

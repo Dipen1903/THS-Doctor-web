@@ -3,6 +3,7 @@ import {
   CancelAllConsultAPI,
   CancelConsultAPI,
   CancelReasonsAPI,
+  CompleteConsultAPI,
   ConsultDetailsAPI,
   CreatePrescAPI,
   DelayConsultAPI,
@@ -81,6 +82,36 @@ export const GetConsultDetails = createAsyncThunk(
       const result = await ConsultDetailsAPI(values);
       if (result?.success) {
         dispatch(setLoading(false));
+        return result?.data;
+      } else {
+        throw result;
+      }
+    } catch (error) {
+      dispatch(setLoading(false));
+      dispatch(
+        setMessage({
+          text: error?.message,
+          type: AlertEnum.Error,
+        })
+      );
+      return error;
+    }
+  }
+);
+export const CompleteConsult = createAsyncThunk(
+  "CompleteConsult",
+  async (values, { dispatch }) => {
+    try {
+      const result = await CompleteConsultAPI(values);
+      if (result?.success) {
+        dispatch(
+          setMessage({
+            text: result?.message,
+            type: AlertEnum.Success,
+          })
+        );
+        dispatch(GetNewConsults());
+        dispatch(GetPastConsults());
         return result?.data;
       } else {
         throw result;

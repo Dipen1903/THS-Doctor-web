@@ -19,12 +19,22 @@ import { GetToken } from "../../../Store/Reducers/CallingReducer";
 import VideoCall from "./VideoCall";
 import { isEmpty } from "../../../Utilities/Functions";
 import AudioCall from "./AudioCall";
+import {
+  CompleteConsult,
+  GetPrescDetails,
+  toggleReview,
+} from "../../../Store/Reducers/ConsultationsReducer";
+import PresciptionDetails from "../Prescription/PresciptionDetails";
 
 function Conversation({ roomData }) {
   const dispatch = useDispatch();
-  const { ChatSlice, ProfileSlice } = useSelector((state) => state);
+  const { ChatSlice, ProfileSlice, ConsultSlice } = useSelector(
+    (state) => state
+  );
   const { isDetails, snapShot, chat, room } = ChatSlice;
   const { userProfile } = ProfileSlice;
+  const { consultDetails } = ConsultSlice;
+
   const [videocall, setVideocall] = useState(false);
   const [audiocall, setAudiocall] = useState(false);
   const [localFile, setLocalFile] = useState();
@@ -54,6 +64,7 @@ function Conversation({ roomData }) {
 
   return room ? (
     <div className={`${isDetails ? "col-md-6" : "col-md-9"} padding_left_0`}>
+      <PresciptionDetails />
       <div className="upcomming_consult_chat_message_box">
         <div class="profile_name_box">
           <div className="row">
@@ -99,7 +110,7 @@ function Conversation({ roomData }) {
                   });
                 }}
               >
-                <img alt="myImg" src={Icon.Video}></img>
+                <img alt="myImg" src={Icon.Video} />
               </Button>
               <Button
                 className="call_btn"
@@ -109,11 +120,24 @@ function Conversation({ roomData }) {
                   });
                 }}
               >
-                <img alt="myImg" src={Icon.Phone}></img>
+                <img alt="myImg" src={Icon.Phone} />
               </Button>
-              <Button variant="primary" className="mark_complete">
-                Mark Complete
-              </Button>
+              {parseInt(consultDetails?.status) < 2 && (
+                <Button
+                  variant="primary"
+                  className="mark_complete"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    dispatch(
+                      CompleteConsult({
+                        appointment_id: room?.lastBookingId || room?.id,
+                      })
+                    );
+                  }}
+                >
+                  Mark Complete
+                </Button>
+              )}
             </div>
           </div>
         </div>
@@ -206,6 +230,7 @@ function Conversation({ roomData }) {
 }
 
 const ChatItem = ({ type, index, rest }) => {
+  const dispatch = useDispatch();
   switch (parseInt(type)) {
     case 1: //Image
       return (
@@ -280,7 +305,7 @@ const ChatItem = ({ type, index, rest }) => {
           </div>
         </div>
       );
-    case 4: //Document
+    case 4: //Prescription
       return (
         <div
           className={`message-row ${
@@ -300,15 +325,20 @@ const ChatItem = ({ type, index, rest }) => {
                     Appointment : {rest?.imageName}
                   </h5>
                 </div>
-                {rest?.imageUrl && (
-                  <a
-                    target="_blank"
-                    href={rest?.imageUrl}
+                {rest?.imageName && (
+                  <button
                     variant="primary"
                     className="msg_view_btn"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      dispatch(
+                        GetPrescDetails({ booking_id: rest?.imageName })
+                      );
+                      dispatch(toggleReview(true));
+                    }}
                   >
                     View
-                  </a>
+                  </button>
                 )}
               </div>
             </div>

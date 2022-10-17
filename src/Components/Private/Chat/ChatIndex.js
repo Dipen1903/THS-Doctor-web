@@ -3,7 +3,7 @@ import moment from "moment";
 import React, { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import {
   clearChat,
@@ -21,6 +21,7 @@ import UserDetails from "./UserDetails";
 function ChatIndex() {
   const { booking_id } = useParams();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { ChatSlice, ProfileSlice } = useSelector((state) => state);
   const { conversations, room } = ChatSlice;
   const { userProfile } = ProfileSlice;
@@ -98,12 +99,7 @@ function ChatIndex() {
                     <div
                       key={item?.lastBookingId || item?.id}
                       onClick={() => {
-                        dispatch(
-                          SetUpRoom({
-                            ...item,
-                            channelName: `Channel_${userProfile?.id}_${item?.userId}`,
-                          })
-                        );
+                        navigate(`/chat/${item?.lastBookingId || item?.id}`);
                       }}
                       className={`chat_contact_list_box ${
                         room?.lastBookingId?.toString() ===

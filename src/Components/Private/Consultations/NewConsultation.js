@@ -21,6 +21,20 @@ import TimeLeft from "../../Common/Layouts/TimeLeft";
 function NewConsultation({ upcomingConsults = [] }) {
   const dispatch = useDispatch();
   const [appointmentId, setAppointMentId] = useState();
+
+  const isActive = (item) => {
+    try {
+      if (item?.status === 1) {
+        return true;
+      } else if (item?.status === 0) {
+        var duration = moment.duration(
+          moment(item?.appointment_date_time).diff(moment.now())
+        );
+        var minutes = duration.asMinutes();
+        return parseInt(minutes) > 10 ? false : true;
+      }
+    } catch (error) {}
+  };
   const columns = [
     {
       Header: "Appointment ID",
@@ -107,12 +121,7 @@ function NewConsultation({ upcomingConsults = [] }) {
         },
       }) => {
         return (
-          <Link
-            to={
-              (original?.status === 2 || original?.status === 1) &&
-              `/chat/${original?.id}`
-            }
-          >
+          <Link to={isActive(original) && `/chat/${original?.id}`}>
             <img src={Icon.Chat} alt="Avatar" className="chat-icon" />
           </Link>
         );

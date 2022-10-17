@@ -74,8 +74,10 @@ function PastConsultation({ pastConsults = [] }) {
             src={Icon.Eye}
             style={{ cursor: "pointer" }}
             onClick={() => {
-              dispatch(GetConsultDetails({ appointment_id: original?.id }));
-              hide(true);
+              if (original?.status !== 3) {
+                dispatch(GetConsultDetails({ appointment_id: original?.id }));
+                hide(true);
+              }
             }}
             alt="view"
           />
@@ -154,8 +156,9 @@ export const ConsultDetails = (props) => {
           <div>
             {" "}
             <p className="right-text">
-              {consultDetails?.appointment_date} -{" "}
-              {consultDetails?.appointment_time}
+              {moment(consultDetails?.appointment_date_time).format(
+                "DD MMM, YYYY hh:mm A"
+              )}
             </p>
           </div>
         </div>
@@ -168,19 +171,22 @@ export const ConsultDetails = (props) => {
           </div>
         </div>
 
-        {consultDetails?.status === 2 && (
+        {consultDetails?.status !== 3 && (
           <>
             <div className="appoinment_input">
               <p className="left_text">Prescription</p>{" "}
               <p className="right-text">
                 <button
                   className="view-btn"
-                  onClick={() => {
-                    dispatch(
-                      GetPrescDetails({ booking_id: consultDetails?.id })
-                    );
-                    dispatch(toggleReview(true));
-                    props.onHide();
+                  onClick={(e) => {
+                    e.preventDefault();
+                    if (consultDetails?.status !== 3) {
+                      dispatch(
+                        GetPrescDetails({ booking_id: consultDetails?.id })
+                      );
+                      dispatch(toggleReview(true));
+                      props.onHide();
+                    }
                   }}
                 >
                   View

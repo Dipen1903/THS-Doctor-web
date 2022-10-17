@@ -55,7 +55,6 @@ export const createRoom = createAsyncThunk(
       const ref = collection(FirebaseDB, path);
       const q = query(
         ref,
-        // where("userId", "==", `${values?.user_id || values?.userId}`),
         where(
           "lastBookingId",
           "==",
@@ -72,6 +71,7 @@ export const createRoom = createAsyncThunk(
           userName: values?.name,
           age: values?.age,
           gender: values?.gender,
+          doctorImage: userProfile?.image,
           doctorOnlineStatus: 1,
           doctorOnlineLastTime: Timestamp.now(),
           lastBookingId: values?.id?.toString(),
@@ -96,7 +96,6 @@ export const GetRoom = createAsyncThunk(
       const ref = collection(FirebaseDB, path);
       const q = query(
         ref,
-        // where("userId", "==", `${values?.user_id || values?.userId}`),
         where("lastBookingId", "==", `${values?.lastBookingId || values?.id}`)
       );
       let snapShot;
@@ -173,7 +172,6 @@ export const UpdateRoom = createAsyncThunk(
       const ref = collection(FirebaseDB, path);
       const q = query(
         ref,
-        // where("userId", "==", `${room?.userId}`),
         where("lastBookingId", "==", `${room?.lastBookingId || room?.id}`)
       );
       const result = await getDocs(q);
@@ -215,7 +213,6 @@ export const GetConversations = createAsyncThunk(
               let temp = change.doc.data();
               let index = tempConversation?.findIndex(
                 (item) =>
-                  // parseInt(item?.userId) === parseInt(temp?.userId) &&
                   parseInt(item?.lastBookingId) ===
                   parseInt(temp?.lastBookingId)
               );

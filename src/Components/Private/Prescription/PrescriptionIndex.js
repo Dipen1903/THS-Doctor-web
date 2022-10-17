@@ -221,8 +221,8 @@ function PrescriptionIndex() {
   );
 }
 const Footer = ({ values, mapProps, setActiveKey }) => {
-  const { item, index } = mapProps;
-  const dispatch = useDispatch();
+  const { index } = mapProps;
+  // const dispatch = useDispatch();
   return (
     <div className="prescription_table_bottom_card mt_15">
       <div className="col-md-6 prescription_left_align">

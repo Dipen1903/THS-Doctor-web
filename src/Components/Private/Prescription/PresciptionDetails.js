@@ -128,7 +128,6 @@ const Review = ({ values }) => {
                   <tr className="prescription_table_head">
                     <th className="prescription_table_head_text">Name</th>
                     <th className="prescription_table_head_text">Mor</th>
-                    <th className="prescription_table_head_text">Aft</th>
                     <th className="prescription_table_head_text">Eve</th>
                     <th className="prescription_table_head_text">Ngt</th>
                     <th className="prescription_table_head_text">Condition</th>
@@ -151,9 +150,6 @@ const Review = ({ values }) => {
                       </td>
                       <td className="prescription_table_body_text">
                         {item?.morning || "---"}
-                      </td>
-                      <td className="prescription_table_body_text">
-                        {item?.afternoon || "---"}
                       </td>
                       <td className="prescription_table_body_text">
                         {item?.evening || "---"}
@@ -258,18 +254,30 @@ const Review = ({ values }) => {
       </Modal.Body>
       <Modal.Footer className="prescription-btn-modal-footer">
         <div className="d-flex">
-          {/* <Link to={`/prescription/${prescDetails?.prescription_id}`} > */}
-          <Button
-            className="close_btn"
-            onClick={() => {
-              dispatch(toggleReview(false));
-              navigate(`/prescription/${prescDetails?.prescription_id}`);
-            }}
-          >
-            Edit
-          </Button>
-          {/* </Link> */}
-          {location.pathname.includes("prescription") ? (
+          {!location.pathname.includes("chat") && (
+            <Button
+              className="close_btn"
+              onClick={() => {
+                dispatch(toggleReview(false));
+                navigate(`/prescription/${prescDetails?.prescription_id}`);
+              }}
+            >
+              Edit
+            </Button>
+          )}
+
+          {location.pathname.includes("chat") ? (
+            <Button
+              className="verify_btn"
+              variant="primary"
+              onClick={(e) => {
+                e.preventDefault();
+                dispatch(toggleReview(false));
+              }}
+            >
+              Close
+            </Button>
+          ) : location.pathname.includes("prescription") ? (
             <Button className="verify_btn" variant="primary" onClick={send}>
               Send Prescription
             </Button>
