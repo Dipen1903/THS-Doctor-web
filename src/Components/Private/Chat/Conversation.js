@@ -68,7 +68,7 @@ function Conversation({ roomData }) {
       <div className="upcomming_consult_chat_message_box">
         <div class="profile_name_box">
           <div className="row">
-            <div className="col-md-3">
+            <div className="col-md-6">
               <div className="profile_namesubtitle_box">
                 <h3 className="profile_card_name">
                   {room?.userName || room?.name}
@@ -84,45 +84,9 @@ function Conversation({ roomData }) {
                 {parseInt(room?.userOnlineStatus) ? "Online" : "Offline"}
               </h5>
             </div>
-            <div className="col-md-9">
-              <Dropdown>
-                <Dropdown.Toggle
-                  id="dropdown-basic"
-                  className="attach-dropdown more_info_btn"
-                >
-                  <img alt="myImg" src={Icon.Dots}></img>
-                </Dropdown.Toggle>
-                <Dropdown.Menu>
-                  <Dropdown.Item
-                    onClick={() => {
-                      dispatch(toggleDetails(true));
-                    }}
-                  >
-                    Patient info
-                  </Dropdown.Item>
-                </Dropdown.Menu>
-              </Dropdown>
-              <Button
-                className="call_btn"
-                onClick={() => {
-                  dispatch(UpdateRoom({ isCallingStatus: 1 })).then((res) => {
-                    setVideocall(true);
-                  });
-                }}
-              >
-                <img alt="myImg" src={Icon.Video} />
-              </Button>
-              <Button
-                className="call_btn"
-                onClick={() => {
-                  dispatch(UpdateRoom({ isCallingStatus: 1 })).then((res) => {
-                    setAudiocall(true);
-                  });
-                }}
-              >
-                <img alt="myImg" src={Icon.Phone} />
-              </Button>
-              {parseInt(consultDetails?.status) < 2 && (
+            <div className="col-md-6 chat-head-right">
+              {
+                // parseInt(consultDetails?.status) < 2 &&
                 <Button
                   variant="primary"
                   className="mark_complete"
@@ -137,7 +101,47 @@ function Conversation({ roomData }) {
                 >
                   Mark Complete
                 </Button>
-              )}
+              }
+
+              <div className="d-flex">
+                <Button
+                  className="call_btn"
+                  onClick={() => {
+                    dispatch(UpdateRoom({ isCallingStatus: 1 })).then((res) => {
+                      setVideocall(true);
+                    });
+                  }}
+                >
+                  <img alt="myImg" src={Icon.Video} />
+                </Button>
+                <Button
+                  className="call_btn"
+                  onClick={() => {
+                    dispatch(UpdateRoom({ isCallingStatus: 1 })).then((res) => {
+                      setAudiocall(true);
+                    });
+                  }}
+                >
+                  <img alt="myImg" src={Icon.Phone} />
+                </Button>
+                <Dropdown>
+                  <Dropdown.Toggle
+                    id="dropdown-basic"
+                    className="attach-dropdown more_info_btn"
+                  >
+                    <img alt="myImg" src={Icon.Dots}></img>
+                  </Dropdown.Toggle>
+                  <Dropdown.Menu>
+                    <Dropdown.Item
+                      onClick={() => {
+                        dispatch(toggleDetails(true));
+                      }}
+                    >
+                      Patient info
+                    </Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown>
+              </div>
             </div>
           </div>
         </div>
@@ -240,7 +244,25 @@ const ChatItem = ({ type, index, rest }) => {
           }`}
         >
           <div className="message-content">
-            <img alt="myImg" className="msg-image" src={rest?.imageUrl} />
+            <div
+              className={`${
+                rest?.message &&
+                (rest?.userType === 1 ? "sender_msg_box" : "client_msg_box")
+              }`}
+            >
+              <img alt="myImg" className="msg-image" src={rest?.imageUrl} />
+              {rest?.message && (
+                <h3
+                  class={`${
+                    rest?.userType === 1
+                      ? "sender_text_title"
+                      : "client_text_title"
+                  }`}
+                >
+                  {rest?.message}
+                </h3>
+              )}
+            </div>
             <div
               className={`${
                 rest?.userType === 1
@@ -291,6 +313,17 @@ const ChatItem = ({ type, index, rest }) => {
                   />
                 </a>
               </div>
+              {rest?.message && (
+                <h3
+                  class={`${
+                    rest?.userType === 1
+                      ? "sender_text_title"
+                      : "client_text_title"
+                  }`}
+                >
+                  {rest?.message}
+                </h3>
+              )}
             </div>
             <div
               className={`${
@@ -469,10 +502,7 @@ const ChatInput = React.forwardRef(({ localFile, setLocalFile }, ref) => {
           value={text}
           onKeyDown={(e) => {
             if (e.key === "Enter" && (text || localFile)) {
-              e.preventDefault();
-              dispatch(SendMessage(message));
-              setText("");
-              setMessage(MessageEnum);
+              send(e);
             }
           }}
           onChange={(e) => {

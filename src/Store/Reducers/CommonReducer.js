@@ -337,6 +337,7 @@ export const UploadFile = createAsyncThunk(
   "UploadFile",
   async (values, { dispatch }) => {
     try {
+      dispatch(setLoading(true));
       const result = await UploadFileAPI(values);
       if (result?.success) {
         dispatch(setLoading(false));

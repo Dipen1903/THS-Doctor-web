@@ -97,7 +97,7 @@ function ChatIndex() {
                 ((filterData.length && filterData) || conversations)?.map(
                   (item, index) => (
                     <div
-                      key={item?.lastBookingId || item?.id}
+                      key={"user" + item?.lastBookingId}
                       onClick={() => {
                         navigate(`/chat/${item?.lastBookingId || item?.id}`);
                       }}

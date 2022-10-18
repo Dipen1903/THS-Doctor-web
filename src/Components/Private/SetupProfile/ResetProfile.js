@@ -66,9 +66,7 @@ function ResetProfile() {
         userProfile?.bank_details?.account_holder_name;
       tempData.account_number = userProfile?.bank_details?.account_number;
       tempData.ifsc_code = userProfile?.bank_details?.ifsc_code;
-
       tempData.registration_number = userProfile?.registration_number;
-
       tempData.qualification = "";
       tempData.proof = "";
 
@@ -99,14 +97,18 @@ function ResetProfile() {
     } catch (error) {}
   };
   useEffect(() => {
-    intialLoad();
     !qualification.length && dispatch(QualificationList());
     !documentList.length && dispatch(DocumentList());
     return () => {};
   }, []);
+  useEffect(() => {
+    userProfile && intialLoad();
+    return () => {};
+  }, [userProfile]);
 
   useEffect(() => {
     if (rejectionDetails?.type) {
+      debugger;
       setRejectedFields(rejectionDetails?.type.split(","));
     } else {
       dispatch(GetRejectionDetails());
@@ -140,6 +142,7 @@ function ResetProfile() {
           handleSubmit,
         }) => (
           <form onSubmit={handleSubmit}>
+            {console.log(errors)}
             {rejectedFields.map((item) => (
               <div className="col-md-6">
                 {item === "registration number" && (

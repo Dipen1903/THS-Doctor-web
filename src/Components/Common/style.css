@@ -397,6 +397,8 @@ input:disabled {
 .message-content .msg-image {
   max-height: 191px;
   max-width: 198px;
+  min-width: 100px;
+  min-height: 100px;
   object-fit: cover;
   border-radius: 8px;
 }
