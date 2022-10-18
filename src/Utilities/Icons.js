@@ -24,6 +24,8 @@ import SPACEMAN from "../Assets/svg/SpaceMan.svg";
 import COMMENT from "../Assets/svg/Comment.svg";
 import VIDEO from "../Assets/svg/Video.svg";
 import PHONE from "../Assets/svg/Phone.svg";
+import MUTE from "../Assets/svg/Mute.svg";
+import CALLEND from "../Assets/svg/CallEnd.svg";
 import DOTS from "../Assets/svg/Dots.svg";
 import CROSS from "../Assets/svg/Cross.svg";
 import CLIP from "../Assets/svg/Clip.svg";
@@ -105,6 +107,8 @@ export const Icon = {
   Doc: DOC,
   Earth: EARTH,
   Phone: PHONE,
+  Mute: MUTE,
+  CallEnd: CALLEND,
   Dots: DOTS,
   Video: VIDEO,
   Airplane: AIRPLANE,

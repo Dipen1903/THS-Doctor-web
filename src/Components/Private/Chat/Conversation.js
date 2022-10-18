@@ -40,6 +40,7 @@ function Conversation({ roomData }) {
   const [localFile, setLocalFile] = useState();
   const messagesEndRef = useRef(null);
   const inputRef = useRef();
+  const audioRef = useRef();
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
@@ -119,6 +120,7 @@ function Conversation({ roomData }) {
                   onClick={() => {
                     dispatch(UpdateRoom({ isCallingStatus: 1 })).then((res) => {
                       setAudiocall(true);
+                      audioRef.current.join();
                     });
                   }}
                 >
@@ -154,6 +156,7 @@ function Conversation({ roomData }) {
           />
         ) : audiocall ? (
           <AudioCall
+            ref={audioRef}
             endCall={() => {
               setAudiocall(false);
             }}

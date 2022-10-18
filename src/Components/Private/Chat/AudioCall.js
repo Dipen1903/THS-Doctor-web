@@ -1,8 +1,14 @@
 import AgoraRTC from "agora-rtc-sdk-ng";
-import { useEffect, useRef } from "react";
+import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { GetToken } from "../../../Store/Reducers/CallingReducer";
-
+import { setMessage } from "../../../Store/Reducers/LayoutSlice";
+import { AlertEnum } from "../../../Utilities/Enums";
+import { Icon } from "../../../Utilities/Icons";
+const agoraEngine = AgoraRTC.createClient({
+  mode: "rtc",
+  role: "host",
+  codec: "vp8",
+});
 let channelParameters = {
   // A variable to hold a local audio track.
   localAudioTrack: null,
@@ -12,25 +18,17 @@ let channelParameters = {
   remoteUid: null,
 };
 
-export default function AudioCall({ endCall }) {
+const AudioCall = forwardRef(({ endCall }, ref) => {
   const dispatch = useDispatch();
-  const { rtcProps } = useSelector(({ CallingSlice }) => CallingSlice);
-  const joinButtonRef = useRef();
-  const endButtonRef = useRef();
-  const agoraEngine = AgoraRTC.createClient({
-    mode: "rtc",
-    role: "host",
-    codec: "vp8",
-  });
+  const [remoteUser, setRemoteUser] = useState();
+  const { CallingSlice, ChatSlice } = useSelector((state) => state);
+  const { rtcProps } = CallingSlice;
+  const { room } = ChatSlice;
   async function startBasicCall() {
-    // Create an instance of the Agora Engine
-
-    // Listen for the "user-published" event to retrieve an AgoraRTCRemoteUser object.
+    console.log(agoraEngine.remoteUsers);
     agoraEngine.on("user-published", async (user, mediaType) => {
       // Subscribe to the remote user when the SDK triggers the "user-published" event.
       await agoraEngine.subscribe(user, mediaType);
-      console.log("subscribe success");
-
       // Subscribe and play the remote audio track.
       if (mediaType == "audio") {
         channelParameters.remoteUid = user.uid;
@@ -38,67 +36,100 @@ export default function AudioCall({ endCall }) {
         channelParameters.remoteAudioTrack = user.audioTrack;
         // Play the remote audio track.
         channelParameters.remoteAudioTrack.play();
-        showMessage("Remote user connected: " + user.uid);
       }
-
       // Listen for the "user-unpublished" event.
-      agoraEngine.on("user-unpublished", (user) => {
-        console.log(user.uid + "has left the channel");
-        showMessage("Remote user has left the channel");
-      });
+      agoraEngine.on("user-unpublished", (user) => {});
+    });
+
+    agoraEngine.on("user-joined", (user) => {
+      setRemoteUser(user);
     });
   }
-  useEffect(() => {
-    startBasicCall();
-    joinButtonRef.current.onclick = async function () {
+
+  const JoinCall = async function () {
+    try {
       // Join a channel.
-      debugger;
       await agoraEngine.join(
         rtcProps?.appId,
         rtcProps?.channel,
         rtcProps?.token,
         rtcProps?.uid
       );
-      showMessage("Joined channel: " + rtcProps.channel);
       // Create a local audio track from the microphone audio.
       channelParameters.localAudioTrack =
         await AgoraRTC.createMicrophoneAudioTrack();
       // Publish the local audio track in the channel.
       await agoraEngine.publish(channelParameters.localAudioTrack);
-      console.log("Publish success!");
-    };
-
-    // Listen to the Leave button click event.
-    endButtonRef.current.onclick = async function () {
+    } catch (error) {
+      dispatch(
+        setMessage({
+          text: error,
+          type: AlertEnum.Error,
+        })
+      );
+    }
+  };
+  const EndCall = async function () {
+    try {
       // Destroy the local audio track.
       channelParameters.localAudioTrack.close();
       // Leave the channel
       await agoraEngine.leave();
-      endCall();
-      console.log("You left the channel");
-      // Refresh the page for reuse
-      window.location.reload();
-    };
+    } catch (error) {
+      dispatch(
+        setMessage({
+          text: error,
+          type: AlertEnum.Error,
+        })
+      );
+    }
+  };
 
-    joinButtonRef?.current?.click();
-
-    return () => {};
-  }, []);
+  useImperativeHandle(
+    ref,
+    () => ({
+      join: () => {
+        return JoinCall();
+      },
+    }),
+    [room]
+  );
 
   useEffect(() => {
+    startBasicCall();
     return () => {};
   }, []);
 
   return (
-    <>
-      <button ref={joinButtonRef} id="join" hidden />
-      <button id="leave" ref={endButtonRef} className="btn">
-        End
-      </button>
-    </>
+    <div className="audio-call-container">
+      <div className="user-container">
+        {remoteUser ? (
+          <h3>User Joined {remoteUser.uid}</h3>
+        ) : (
+          <h3>Waiting to Join</h3>
+        )}
+      </div>
+      <div className="action-container">
+        <button
+          className="btn-call-mute"
+          onClick={(e) => {
+            e.preventDefault();
+          }}
+        >
+          <img height={16} width={16} src={Icon.Mute} />
+        </button>
+        <button
+          className="btn-call-end"
+          onClick={(e) => {
+            e.preventDefault();
+            EndCall();
+          }}
+        >
+          <img height={16} width={16} src={Icon.CallEnd} />
+        </button>
+      </div>
+    </div>
   );
-}
+});
 
-function showMessage(text) {
-  console.log(text);
-}
+export default AudioCall;
