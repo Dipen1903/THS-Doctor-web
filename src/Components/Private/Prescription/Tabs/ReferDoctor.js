@@ -61,16 +61,19 @@ function ReferDoctor() {
                         {item?.speciality_name}
                       </td>
                       <td>
-                        <center>
-                          <img
-                            onClick={() => {
-                              arrayHelpers.remove(index);
-                            }}
-                            src={Icon.CrossRed}
-                            alt="Avatar"
-                            className="ml_15 mt_15 mb_5"
-                          ></img>
-                        </center>
+                        <img
+                          onClick={() => {
+                            values?.tempSpeciality?.splice(index, 1);
+                            setFieldValue(
+                              "tempSpeciality",
+                              values?.tempSpeciality
+                            );
+                            arrayHelpers.remove(index);
+                          }}
+                          src={Icon.CrossRed}
+                          alt="Avatar"
+                          className="ml_15 mt_15 mb_5"
+                        ></img>
                       </td>
                     </tr>
                   ))

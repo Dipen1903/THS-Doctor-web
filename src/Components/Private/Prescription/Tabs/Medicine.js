@@ -17,24 +17,29 @@ function Medicine() {
   const [searchParams, setSearchParams] = useState({ q: "", page: 1 });
   const [show, setShow] = useState(false);
   const [text, setText] = useState("");
+  const [timer, setTimer] = useState(null);
   const { medicines } = useSelector(({ CommonSlice }) => CommonSlice);
+
   useEffect(() => {
     if (searchParams.page && searchParams.q) {
-      setTimeout(() => {
-        dispatch(GetMedicine(searchParams)).then((res) => {
-          setShow(true);
-        });
-      }, 1000);
+      dispatch(GetMedicine(searchParams)).then((res) => {
+        setShow(true);
+      });
     } else {
       setShow(false);
       dispatch(clearMedicines());
     }
+    return () => {};
   }, [searchParams]);
 
   const onChangeText = (e) => {
     let q = e?.target?.value;
     setText(q);
-    setSearchParams((state) => ({ ...state, q }));
+    clearTimeout(timer);
+    const newTimer = setTimeout(() => {
+      setSearchParams((state) => ({ ...state, q }));
+    }, 500);
+    setTimer(newTimer);
   };
   return (
     <>

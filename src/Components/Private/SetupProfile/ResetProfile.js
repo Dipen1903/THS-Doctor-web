@@ -142,7 +142,6 @@ function ResetProfile() {
           handleSubmit,
         }) => (
           <form onSubmit={handleSubmit}>
-            {console.log(errors)}
             {rejectedFields.map((item) => (
               <div className="col-md-6">
                 {item === "registration number" && (
