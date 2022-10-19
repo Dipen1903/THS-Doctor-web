@@ -1,5 +1,13 @@
-import { BASE_URL, POST } from "../Utilities/HTTP";
-
+import { RP_ID, RP_SECRET } from "../Utilities/Enums";
+import { BASE_URL, POST, RP_URL } from "../Utilities/HTTP";
+const token = `${RP_ID}:${RP_SECRET}`;
+const encodedToken = window.btoa(token);
+let config = {
+  headers: {
+    "Content-Type": "application/json",
+    Authorization: `Basic ${encodedToken}`,
+  },
+};
 //* SIGNIN API REQUEST
 export const SignInAPI = (data) => POST(`${BASE_URL}/login`, data);
 export const MobileSignInAPI = (data) => POST(`${BASE_URL}/login-mobile`, data);
@@ -46,6 +54,10 @@ export const EditBankAPI = (data) =>
   POST(`${BASE_URL}/bank-account-create`, data);
 export const EditScheduleAPI = (data) =>
   POST(`${BASE_URL}/availibility-create`, data);
+export const CreateRPContactAPI = (data) =>
+  POST(`${RP_URL}/contacts`, JSON.stringify(data), config);
+export const CreateRPFundACAPI = (data) =>
+  POST(`${RP_URL}/fund_accounts`, JSON.stringify(data), config);
 
 //* MOBILE NUMBER API REQUEST
 export const OTPCurrentAPI = (data) =>

@@ -12,6 +12,7 @@ import {
   VerifyOTPNewAPI,
   VerifyOTPCurrentAPI,
   ReverifyUserProfileAPI,
+  CreateRPContactAPI,
 } from "../../Routes/Service";
 
 import { AlertEnum } from "../../Utilities/Enums";
@@ -139,10 +140,23 @@ export const ReverifyUserProfile = createAsyncThunk(
 );
 export const EditBankDetails = createAsyncThunk(
   "EditBankDetails",
-  async (values, { dispatch }) => {
+  async (values, { getState, dispatch }) => {
     try {
+      const { ProfileSlice } = getState();
+      const { userProfile } = ProfileSlice;
       dispatch(setLoading(true));
       const result = await EditBankAPI(values);
+      debugger;
+      const account = await CreateRPContactAPI({
+        name: values?.account_holder_name,
+        email: userProfile?.email,
+        contact: userProfile?.mobile_number,
+        type: "vendor",
+        reference_id: userProfile?.id,
+      });
+      // if (account) {
+      //   account?.id;
+      // }
       if (result?.success) {
         dispatch(setLoading(false));
         dispatch(

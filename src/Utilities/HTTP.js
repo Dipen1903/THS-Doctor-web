@@ -15,16 +15,17 @@ async function processFormData(data) {
 }
 export const BASE_URL = process.env.REACT_APP_BASE_URL;
 export const MEDKART_URL = process.env.REACT_APP_MEDKART_BASE_URL;
+export const RP_URL = process.env.REACT_APP_RP_BASE_URL;
 
 let SessionData;
 
-export async function POST(url, data) {
+export async function POST(url, data, customConfig) {
   let formData = [];
   try {
     if (data?.deepIntegrate) {
       formData = await JSONToFormData(data);
     } else {
-      formData = await processFormData(data);
+      formData = data;
     }
     SessionData = JSON.parse(localStorage.getItem(SESSION));
     let config = {
@@ -33,9 +34,9 @@ export async function POST(url, data) {
         Authorization: `Bearer ${SessionData?.token}`,
       },
     };
-
+    debugger;
     return await axios
-      .post(url, formData, config)
+      .post(url, formData, customConfig || config)
       .then((result) => {
         if (
           (result?.data?.status_code && result?.data?.status_code !== 200) ||

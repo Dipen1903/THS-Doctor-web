@@ -25,6 +25,7 @@ import COMMENT from "../Assets/svg/Comment.svg";
 import VIDEO from "../Assets/svg/Video.svg";
 import PHONE from "../Assets/svg/Phone.svg";
 import MUTE from "../Assets/svg/Mute.svg";
+import MIC from "../Assets/svg/Mic.svg";
 import CALLEND from "../Assets/svg/CallEnd.svg";
 import DOTS from "../Assets/svg/Dots.svg";
 import CROSS from "../Assets/svg/Cross.svg";
@@ -107,6 +108,7 @@ export const Icon = {
   Doc: DOC,
   Earth: EARTH,
   Phone: PHONE,
+  Mic: MIC,
   Mute: MUTE,
   CallEnd: CALLEND,
   Dots: DOTS,

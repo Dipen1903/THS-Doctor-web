@@ -11,11 +11,11 @@ function AudioVideoCall({ endCall }) {
   }, []);
   try {
     return (
-      <div style={{ height: "100vh" }}>
+      <div style={{ height: "75vh" }}>
         <AgoraUIKit
           styleProps={{
-            gridVideoContainer: { height: "100vh" },
-            pinnedVideoContainer: { height: "100vh" },
+            gridVideoContainer: { height: "75vh" },
+            pinnedVideoContainer: { height: "75vh" },
           }}
           rtmCallbacks={{
             channel: {

@@ -21,11 +21,12 @@ let channelParameters = {
 const AudioCall = forwardRef(({ endCall }, ref) => {
   const dispatch = useDispatch();
   const [remoteUser, setRemoteUser] = useState();
+  const [isMute, setIsMute] = useState(false);
   const { CallingSlice, ChatSlice } = useSelector((state) => state);
   const { rtcProps } = CallingSlice;
   const { room } = ChatSlice;
   async function startBasicCall() {
-    console.log(agoraEngine.remoteUsers);
+    console.log("state", agoraEngine.connectionState);
     agoraEngine.on("user-published", async (user, mediaType) => {
       // Subscribe to the remote user when the SDK triggers the "user-published" event.
       await agoraEngine.subscribe(user, mediaType);
@@ -75,6 +76,7 @@ const AudioCall = forwardRef(({ endCall }, ref) => {
       channelParameters.localAudioTrack.close();
       // Leave the channel
       await agoraEngine.leave();
+      endCall();
     } catch (error) {
       dispatch(
         setMessage({
@@ -83,6 +85,11 @@ const AudioCall = forwardRef(({ endCall }, ref) => {
         })
       );
     }
+  };
+
+  const toggleMute = () => {
+    channelParameters.localAudioTrack.setEnabled(isMute ? true : false);
+    setIsMute(!isMute);
   };
 
   useImperativeHandle(
@@ -114,9 +121,14 @@ const AudioCall = forwardRef(({ endCall }, ref) => {
           className="btn-call-mute"
           onClick={(e) => {
             e.preventDefault();
+            toggleMute();
           }}
         >
-          <img height={16} width={16} src={Icon.Mute} />
+          {isMute ? (
+            <img height={20} width={20} src={Icon.Mute} />
+          ) : (
+            <img height={20} width={20} src={Icon.Mic} />
+          )}
         </button>
         <button
           className="btn-call-end"
@@ -125,7 +137,7 @@ const AudioCall = forwardRef(({ endCall }, ref) => {
             EndCall();
           }}
         >
-          <img height={16} width={16} src={Icon.CallEnd} />
+          <img height={26} width={26} src={Icon.CallEnd} />
         </button>
       </div>
     </div>
