@@ -4510,6 +4510,9 @@ privacypolicy-paragraph::-webkit-scrollbar {
 .prescription_table_body_row {
   height: 56px;
   border-bottom: 1px solid #eceff4;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 .prescription_table_body_text {
   font-family: "Mulish";

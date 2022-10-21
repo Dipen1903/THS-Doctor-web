@@ -355,4 +355,9 @@ export const ChatRoomEnum = {
   userName: "",
   userOnlineLastTime: "",
   userOnlineStatus: "",
+  age: "",
+  gender: "",
+  bloodGroup: "",
+  userImage: "",
+  doctorImage: "",
 };

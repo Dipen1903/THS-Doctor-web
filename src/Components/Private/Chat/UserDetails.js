@@ -96,53 +96,66 @@ function UserDetails() {
             <h3 className="userprofile_data_value">{room?.weight}</h3>
           </div>
         </div>
-        <hr className="userprofile_section_hr_bottom" />
-        <div className="row">
-          <div className="col-md-12">
-            <h3 className="share_file_title">Shared Files</h3>
-          </div>
-        </div>
-        {documents?.map((item, index) => (
-          <div key={item?.dateTime} className="row mt_10">
-            <div className="col-md-8">
-              <div className="share_file_box">
-                <img
-                  alt="myImg"
-                  src={Icon.Doc}
-                  className="share_file_icon"
-                ></img>
-                <div>
-                  <h3 className="share_file_name">{item?.imageName}</h3>
-                  <h4 className="share_file_date">
-                    {item?.dateTime &&
-                      moment(item?.dateTime?.toDate()).format(
-                        "DD MMM, YYYY hh:mm A"
-                      )}
-                  </h4>
-                </div>
+        {documents?.length ? (
+          <>
+            <hr className="userprofile_section_hr_bottom" />
+            <div className="row">
+              <div className="col-md-12">
+                <h3 className="share_file_title">Shared Files</h3>
               </div>
             </div>
-            <div className="col-md-4">
-              <h3 className="share_file_size">{item?.sizeOfDocument} MB</h3>
+            {documents?.map((item, index) => (
+              <div key={item?.dateTime} className="row mt_10">
+                <div className="col-md-8">
+                  <div className="share_file_box">
+                    <img
+                      alt="myImg"
+                      src={Icon.Doc}
+                      className="share_file_icon"
+                    ></img>
+                    <div>
+                      <h3 className="share_file_name">{item?.imageName}</h3>
+                      <h4 className="share_file_date">
+                        {item?.dateTime &&
+                          moment(item?.dateTime?.toDate()).format(
+                            "DD MMM, YYYY hh:mm A"
+                          )}
+                      </h4>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-md-4">
+                  <h3 className="share_file_size">{item?.sizeOfDocument} MB</h3>
+                </div>
+              </div>
+            ))}
+          </>
+        ) : (
+          <></>
+        )}
+
+        {images?.length ? (
+          <>
+            <hr className="userprofile_section_hr_bottom" />
+            <div className="row">
+              <div className="col-md-12">
+                <h3 className="share_img_title">Shared Images</h3>
+              </div>
             </div>
-          </div>
-        ))}
-        <hr className="userprofile_section_hr_bottom" />
-        <div className="row">
-          <div className="col-md-12">
-            <h3 className="share_img_title">Shared Images</h3>
-          </div>
-        </div>
-        <div className="share_img_box mt_15">
-          {images?.map((item, index) => (
-            <img
-              key={item?.dateTime}
-              alt="myImg"
-              src={item?.imageUrl}
-              className="share_img_size"
-            />
-          ))}
-        </div>
+            <div className="share_img_box mt_15">
+              {images?.map((item, index) => (
+                <img
+                  key={item?.dateTime}
+                  alt="myImg"
+                  src={item?.imageUrl}
+                  className="share_img_size"
+                />
+              ))}
+            </div>
+          </>
+        ) : (
+          <></>
+        )}
       </div>
     </div>
   ) : (

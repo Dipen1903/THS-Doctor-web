@@ -27,6 +27,7 @@ const initialState = {
   languageList: [],
   qualification: [],
   documentList: [],
+  analytics: "",
 };
 export const GetMedicine = createAsyncThunk(
   "GetMedicine",
@@ -364,7 +365,7 @@ export const GetAnalytics = createAsyncThunk(
       const result = await AnalyticsAPI(values);
       if (result?.success) {
         dispatch(setLoading(false));
-        return result;
+        return result?.data;
       } else {
         throw result;
       }
@@ -413,6 +414,9 @@ export const CommonSlice = createSlice({
     });
     builder.addCase(DocumentList.fulfilled, (state, action) => {
       state.documentList = action.payload;
+    });
+    builder.addCase(GetAnalytics.fulfilled, (state, action) => {
+      state.analytics = action.payload;
     });
   },
 });

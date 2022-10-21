@@ -1,15 +1,12 @@
-import { Timestamp } from "firebase/firestore";
 import moment from "moment";
 import React, { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-
 import {
   clearChat,
   GetConversations,
   SetUpRoom,
-  toggleRoom,
 } from "../../../Store/Reducers/ChatReducer";
 import { GetConsultDetails } from "../../../Store/Reducers/ConsultationsReducer";
 import { setMessage } from "../../../Store/Reducers/LayoutSlice";
@@ -26,7 +23,6 @@ function ChatIndex() {
   const { conversations, room } = ChatSlice;
   const { userProfile } = ProfileSlice;
   const [filterData, setFilterData] = useState([]);
-
   const handleFilter = (text) => {
     try {
       let tempPayouts;
@@ -97,7 +93,7 @@ function ChatIndex() {
                 ((filterData.length && filterData) || conversations)?.map(
                   (item, index) => (
                     <div
-                      key={"user" + item?.lastBookingId}
+                      key={"user " + item?.lastMessage + item?.lastBookingId}
                       onClick={() => {
                         navigate(`/chat/${item?.lastBookingId || item?.id}`);
                       }}
