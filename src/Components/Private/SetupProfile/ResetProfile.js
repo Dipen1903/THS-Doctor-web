@@ -108,7 +108,6 @@ function ResetProfile() {
 
   useEffect(() => {
     if (rejectionDetails?.type) {
-      debugger;
       setRejectedFields(rejectionDetails?.type.split(","));
     } else {
       dispatch(GetRejectionDetails());

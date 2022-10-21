@@ -146,7 +146,6 @@ export const EditBankDetails = createAsyncThunk(
       const { userProfile } = ProfileSlice;
       dispatch(setLoading(true));
       const result = await EditBankAPI(values);
-      debugger;
       const account = await CreateRPContactAPI({
         name: values?.account_holder_name,
         email: userProfile?.email,

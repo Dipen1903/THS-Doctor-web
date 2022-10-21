@@ -26,7 +26,6 @@ const AudioCall = forwardRef(({ endCall }, ref) => {
   const { rtcProps } = CallingSlice;
   const { room } = ChatSlice;
   async function startBasicCall() {
-    console.log("state", agoraEngine.connectionState);
     agoraEngine.on("user-published", async (user, mediaType) => {
       // Subscribe to the remote user when the SDK triggers the "user-published" event.
       await agoraEngine.subscribe(user, mediaType);
@@ -64,10 +63,11 @@ const AudioCall = forwardRef(({ endCall }, ref) => {
     } catch (error) {
       dispatch(
         setMessage({
-          text: error,
+          text: "Please connect mirophone device",
           type: AlertEnum.Error,
         })
       );
+      endCall(false);
     }
   };
   const EndCall = async function () {
@@ -86,7 +86,6 @@ const AudioCall = forwardRef(({ endCall }, ref) => {
       );
     }
   };
-
   const toggleMute = () => {
     channelParameters.localAudioTrack.setEnabled(isMute ? true : false);
     setIsMute(!isMute);
@@ -107,41 +106,46 @@ const AudioCall = forwardRef(({ endCall }, ref) => {
     return () => {};
   }, []);
 
-  return (
-    <div className="audio-call-container">
-      <div className="user-container">
-        {remoteUser ? (
-          <h3>User Joined {remoteUser.uid}</h3>
-        ) : (
-          <h3>Waiting to Join</h3>
-        )}
-      </div>
-      <div className="action-container">
-        <button
-          className="btn-call-mute"
-          onClick={(e) => {
-            e.preventDefault();
-            toggleMute();
-          }}
-        >
-          {isMute ? (
-            <img height={20} width={20} src={Icon.Mute} />
+  try {
+    return (
+      <div className="audio-call-container">
+        <div className="user-container">
+          {remoteUser ? (
+            <h3>User Joined {remoteUser.uid}</h3>
           ) : (
-            <img height={20} width={20} src={Icon.Mic} />
+            <h3>Waiting to Join</h3>
           )}
-        </button>
-        <button
-          className="btn-call-end"
-          onClick={(e) => {
-            e.preventDefault();
-            EndCall();
-          }}
-        >
-          <img height={26} width={26} src={Icon.CallEnd} />
-        </button>
+        </div>
+        <div className="action-container">
+          <button
+            className="btn-call-mute"
+            onClick={(e) => {
+              e.preventDefault();
+              toggleMute();
+            }}
+          >
+            {isMute ? (
+              <img height={20} width={20} src={Icon.Mute} />
+            ) : (
+              <img height={20} width={20} src={Icon.Mic} />
+            )}
+          </button>
+          <button
+            className="btn-call-end"
+            onClick={(e) => {
+              e.preventDefault();
+              EndCall();
+            }}
+          >
+            <img height={26} width={26} src={Icon.CallEnd} />
+          </button>
+        </div>
       </div>
-    </div>
-  );
+    );
+  } catch (error) {
+    endCall(false);
+    return <></>;
+  }
 });
 
 export default AudioCall;

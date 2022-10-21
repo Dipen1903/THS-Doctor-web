@@ -13,7 +13,7 @@ import {
   UploadFileAPI,
   SearchMedicineAPI,
 } from "../../Components/Common/Service";
-import { ShareLinkAPI } from "../../Routes/Service";
+import { AnalyticsAPI, ShareLinkAPI } from "../../Routes/Service";
 
 import { AlertEnum } from "../../Utilities/Enums";
 import { setLoading, setMessage } from "./LayoutSlice";
@@ -339,6 +339,29 @@ export const UploadFile = createAsyncThunk(
     try {
       dispatch(setLoading(true));
       const result = await UploadFileAPI(values);
+      if (result?.success) {
+        dispatch(setLoading(false));
+        return result;
+      } else {
+        throw result;
+      }
+    } catch (error) {
+      dispatch(setLoading(false));
+      dispatch(
+        setMessage({
+          text: error?.message,
+          type: AlertEnum.Error,
+        })
+      );
+      return error;
+    }
+  }
+);
+export const GetAnalytics = createAsyncThunk(
+  "GetAnalytics",
+  async (values, { dispatch }) => {
+    try {
+      const result = await AnalyticsAPI(values);
       if (result?.success) {
         dispatch(setLoading(false));
         return result;

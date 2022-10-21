@@ -34,7 +34,6 @@ export async function POST(url, data, customConfig) {
         Authorization: `Bearer ${SessionData?.token}`,
       },
     };
-    debugger;
     return await axios
       .post(url, formData, customConfig || config)
       .then((result) => {

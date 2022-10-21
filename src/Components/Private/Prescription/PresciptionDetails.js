@@ -128,7 +128,7 @@ const Review = ({ values }) => {
                   <tr className="prescription_table_head">
                     <th className="prescription_table_head_text">Name</th>
                     <th className="prescription_table_head_text">Mor</th>
-                    <th className="prescription_table_head_text">Eve</th>
+                    <th className="prescription_table_head_text">Aft</th>
                     <th className="prescription_table_head_text">Ngt</th>
                     <th className="prescription_table_head_text">Condition</th>
                     <th className="prescription_table_head_text">
@@ -152,7 +152,7 @@ const Review = ({ values }) => {
                         {item?.morning || "---"}
                       </td>
                       <td className="prescription_table_body_text">
-                        {item?.evening || "---"}
+                        {item?.afternoon || "---"}
                       </td>
                       <td className="prescription_table_body_text">
                         {item?.night || "---"}

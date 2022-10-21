@@ -86,8 +86,7 @@ function Conversation({ roomData }) {
               </h5>
             </div>
             <div className="col-md-6 chat-head-right">
-              {
-                // parseInt(consultDetails?.status) < 2 &&
+              {parseInt(consultDetails?.status) < 2 ? (
                 <Button
                   variant="primary"
                   className="mark_complete"
@@ -102,21 +101,14 @@ function Conversation({ roomData }) {
                 >
                   Mark Complete
                 </Button>
-              }
+              ) : (
+                <div></div>
+              )}
 
               <div className="d-flex">
                 <Button
                   className="call_btn"
-                  onClick={() => {
-                    dispatch(UpdateRoom({ isCallingStatus: 1 })).then((res) => {
-                      setVideocall(true);
-                    });
-                  }}
-                >
-                  <img alt="myImg" src={Icon.Video} />
-                </Button>
-                <Button
-                  className="call_btn"
+                  disabled={audiocall || videocall}
                   onClick={() => {
                     dispatch(UpdateRoom({ isCallingStatus: 1 })).then((res) => {
                       setAudiocall(true);
@@ -126,6 +118,18 @@ function Conversation({ roomData }) {
                 >
                   <img alt="myImg" src={Icon.Phone} />
                 </Button>
+                <Button
+                  className="call_btn"
+                  disabled={audiocall || videocall}
+                  onClick={() => {
+                    dispatch(UpdateRoom({ isCallingStatus: 1 })).then((res) => {
+                      setVideocall(true);
+                    });
+                  }}
+                >
+                  <img alt="myImg" src={Icon.Video} />
+                </Button>
+
                 <Dropdown>
                   <Dropdown.Toggle
                     id="dropdown-basic"

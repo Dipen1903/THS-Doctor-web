@@ -114,7 +114,7 @@ function ChatIndex() {
                           <div className="chat_list_display_box">
                             <img
                               className="chat_user_img"
-                              src={BackGround.Profile}
+                              src={item?.userImage || BackGround.Profile}
                               alt="Jane Cooper"
                             />
                             <div>

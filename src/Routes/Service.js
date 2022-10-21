@@ -24,6 +24,9 @@ export const OTPResendSignUpAPI = (data) =>
 export const OTPVerifySignUpAPI = (data) =>
   POST(`${BASE_URL}/doctor-verify-otp`, data);
 
+//* DASHBOARD ANALYTICS API REQUEST
+export const AnalyticsAPI = (data) =>
+  POST(`${BASE_URL}/dashboard-analytics`, data);
 //* FORGOT/RESET PASSWORD API REQUEST
 export const ForgotPasswordAPI = (data) =>
   POST(`${BASE_URL}/forgot-password`, data);
