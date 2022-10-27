@@ -23,7 +23,7 @@ function PayoutDetailed() {
   const columns = [
     {
       Header: "Appointment ID",
-      accessor: "id", // accessor is the "key" in the data
+      accessor: "appointment_id", // accessor is the "key" in the data
     },
     {
       Header: "Patient",
@@ -48,11 +48,7 @@ function PayoutDetailed() {
           row: { original },
         },
       }) => {
-        return parseInt(value) ? (
-          <span class="failed_tag">Cancelled</span>
-        ) : (
-          <span class="paid_tag">Completed</span>
-        );
+        return <span class="paid_tag">Completed</span>;
       },
     },
     {

@@ -528,3 +528,8 @@ input:disabled {
   padding: 8px 13px 12px 13px;
   margin: 0 10px;
 }
+.bank-verify{
+  padding: 0 10px;
+  height: 25px;
+  margin: 10px;
+}

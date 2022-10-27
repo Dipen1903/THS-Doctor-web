@@ -518,11 +518,17 @@ function WorkProfile() {
                               <h3 className="qualification_title">
                                 {item?.type}
                               </h3>
-                              <img
-                                alt="myImg"
-                                className="qualification_file"
-                                src={item?.file}
-                              />
+                              <a href={item?.file} target="_blank">
+                                <img
+                                  alt="myImg"
+                                  className="qualification_file"
+                                  src={
+                                    item?.file.includes("pdf")
+                                      ? Icon.Doc
+                                      : item?.file
+                                  }
+                                />
+                              </a>
                             </div>
                           ))}
                         </>

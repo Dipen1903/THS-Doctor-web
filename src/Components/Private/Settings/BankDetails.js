@@ -5,7 +5,10 @@ import { Formik } from "formik";
 import { Button } from "react-bootstrap";
 import FormControl from "../../Common/Forms/FormControl";
 import { useDispatch, useSelector } from "react-redux";
-import { EditBankDetails } from "../../../Store/Reducers/ProfileReducer";
+import {
+  EditBankDetails,
+  ValidateBank,
+} from "../../../Store/Reducers/ProfileReducer";
 import { Icon } from "../../../Utilities/Icons";
 
 function Bankdetails() {
@@ -43,8 +46,20 @@ function Bankdetails() {
           <div className="col-md-12">
             <div className="setting_profile_card_head">
               <div className="d-flex">
-                <div className="col-md-6">
+                <div className="col-md-6 d-flex align-items-center">
                   <h3 className="setting_bank_title">Bank Details</h3>
+                  {bankDetails?.is_validated ? (
+                    <span class="paid_tag bank-verify">Verified</span>
+                  ) : (
+                    <span
+                      class="failed_tag bank-verify"
+                      onClick={() => {
+                        dispatch(ValidateBank());
+                      }}
+                    >
+                      Not Verified
+                    </span>
+                  )}
                 </div>
                 <div className="col-md-6 ml_10">
                   {!edit && (

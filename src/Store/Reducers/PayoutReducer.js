@@ -67,6 +67,7 @@ export const RequestWithdraw = createAsyncThunk(
     try {
       const result = await RequestWithdrawAPI(values);
       if (result?.success) {
+        dispatch(GetPayouts());
         dispatch(
           setMessage({
             text: result?.message,

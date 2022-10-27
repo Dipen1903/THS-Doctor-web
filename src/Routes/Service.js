@@ -57,10 +57,8 @@ export const EditBankAPI = (data) =>
   POST(`${BASE_URL}/bank-account-create`, data);
 export const EditScheduleAPI = (data) =>
   POST(`${BASE_URL}/availibility-create`, data);
-export const CreateRPContactAPI = (data) =>
-  POST(`${RP_URL}/contacts`, JSON.stringify(data), config);
-export const CreateRPFundACAPI = (data) =>
-  POST(`${RP_URL}/fund_accounts`, JSON.stringify(data), config);
+export const ValidateBankAccountAPI = (data) =>
+  POST(`${BASE_URL}/validate-bank-account`, data);
 
 //* MOBILE NUMBER API REQUEST
 export const OTPCurrentAPI = (data) =>

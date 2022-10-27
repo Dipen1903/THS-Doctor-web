@@ -97,7 +97,7 @@ export default function EducationalProfile({ formProps }) {
                             <div class="row col-md-12">
                               <div class="col-md-6">
                                 <img
-                                  alt="myImg"
+                                  alt={Icon.Doc}
                                   src={
                                     values.qualification[index]?.file
                                       ? typeof values.qualification[index]
