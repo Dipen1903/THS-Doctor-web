@@ -5799,6 +5799,9 @@ privacypolicy-paragraph::-webkit-scrollbar {
   color: #3093bb;
   margin-bottom: 0;
 }
+.sender_name_title.yellow {
+  color: #f9f871;
+}
 .sender_name_subtitle {
   font-family: "Mulish";
   font-style: normal;
@@ -5807,6 +5810,9 @@ privacypolicy-paragraph::-webkit-scrollbar {
   line-height: 24px;
   color: #3093bb;
   margin-bottom: 3px;
+}
+.sender_name_subtitle.yellow {
+  color: #fff;
 }
 .sender_message_time {
   font-weight: 600;

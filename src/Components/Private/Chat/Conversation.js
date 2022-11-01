@@ -37,6 +37,7 @@ function Conversation({ roomData }) {
 
   const [videocall, setVideocall] = useState(false);
   const [audiocall, setAudiocall] = useState(false);
+  const [chatBot, setChatBot] = useState([]);
   const [localFile, setLocalFile] = useState();
   const messagesEndRef = useRef(null);
   const inputRef = useRef();
@@ -62,6 +63,12 @@ function Conversation({ roomData }) {
       snapShot();
     };
   }, [roomData]);
+  useEffect(() => {
+    let tempData = JSON.parse(consultDetails?.json_data || "{}");
+    setChatBot(tempData?.data);
+
+    return () => {};
+  }, [consultDetails]);
 
   return room ? (
     <div className={`${isDetails ? "col-md-6" : "col-md-9"} padding_left_0`}>
@@ -215,6 +222,29 @@ function Conversation({ roomData }) {
               </div>
             ) : (
               <div className="chat-message-list-inner">
+                {chatBot?.length &&
+                  chatBot?.map(
+                    ({ chatBoatQuestionsWithOptions }, index) =>
+                      chatBoatQuestionsWithOptions && (
+                        <>
+                          <ChatItem
+                            key={
+                              chatBoatQuestionsWithOptions?.finalAnswer + index
+                            }
+                            index={index}
+                            type={0}
+                            rest={{
+                              userType: 1,
+                              question:
+                                chatBoatQuestionsWithOptions?.messageList
+                                  ?.length &&
+                                chatBoatQuestionsWithOptions?.messageList[0],
+                              answer: chatBoatQuestionsWithOptions?.finalAnswer,
+                            }}
+                          />
+                        </>
+                      )
+                  )}
                 {chat?.map((item, index) => (
                   <ChatItem
                     key={(item?.sizeOfDocument || 0) + index}
@@ -408,15 +438,24 @@ const ChatItem = ({ type, index, rest }) => {
                 rest?.userType === 1 ? "sender_msg_box" : "client_msg_box"
               }`}
             >
-              <h3
-                class={`${
-                  rest?.userType === 1
-                    ? "sender_text_title"
-                    : "client_text_title"
-                }`}
-              >
-                {rest?.message}
-              </h3>
+              {rest?.question ? (
+                <>
+                  <h3 className="sender_name_title yellow">{rest?.question}</h3>
+                  <h5 className="sender_name_subtitle yellow">
+                    {rest?.answer}
+                  </h5>
+                </>
+              ) : (
+                <h3
+                  class={`${
+                    rest?.userType === 1
+                      ? "sender_text_title"
+                      : "client_text_title"
+                  }`}
+                >
+                  {rest?.message}
+                </h3>
+              )}
             </div>
             <div
               className={`${

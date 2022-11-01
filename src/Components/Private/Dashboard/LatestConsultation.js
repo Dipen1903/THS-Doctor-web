@@ -52,6 +52,15 @@ function LatestConsultation() {
       dispatch(clearChat());
     };
   }, [upcomingConsults?.length]);
+  useEffect(() => {
+    let interval = setInterval(() => {
+      dispatch(GetNewConsults());
+    }, 15 * 60000);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
 
   return (
     <>
@@ -73,7 +82,8 @@ function LatestConsultation() {
                         className={`chat_list_box ${
                           isActive(item) && "chat_list_box_active"
                         }`}
-                        onClick={() => {
+                        onClick={(e) => {
+                          e.preventDefault();
                           isActive(item) && dispatch(SetUpRoom(item));
                         }}
                       >

@@ -183,6 +183,7 @@ export const UpdateRoom = createAsyncThunk(
       }
     } catch (error) {
       dispatch(setLoading(false));
+      console.log("ERROR", error);
       return error;
     }
   }
@@ -219,6 +220,11 @@ export const GetConversations = createAsyncThunk(
               if (parseInt(index) > -1) {
                 tempConversation[index] = temp;
               }
+              // tempConversation.sort(
+              //   (a, b) =>
+              //     b?.lastMessageTime?.toMillis() -
+              //     a?.lastMessageTime?.toMillis()
+              // );
               dispatch(setUpConvertations(tempConversation));
             }
           });
