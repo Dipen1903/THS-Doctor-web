@@ -245,6 +245,7 @@ export const CreatePrescription = createAsyncThunk(
   async (values, { dispatch }) => {
     try {
       const result = await CreatePrescAPI(values);
+      debugger;
       if (result?.success) {
         dispatch(toggleReview(true));
         dispatch(

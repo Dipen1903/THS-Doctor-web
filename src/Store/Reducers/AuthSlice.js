@@ -24,6 +24,7 @@ import {
   TOKEN,
   AGORA,
 } from "../../Utilities/Enums";
+import { GetToken } from "../../Utilities/Firebase.config";
 import { setLoading, setMessage } from "./LayoutSlice";
 import { GetUserProfile } from "./ProfileReducer";
 
@@ -42,7 +43,10 @@ export const SignIn = createAsyncThunk(
   async (values, { dispatch }) => {
     try {
       dispatch(setLoading(true));
-
+      const fcmToken = await GetToken();
+      if (fcmToken) {
+        console.log("fcmToken", fcmToken);
+      }
       const result = await SignInAPI(values);
       if (result?.success) {
         dispatch(setLoading(false));
@@ -299,6 +303,10 @@ export const VerifySession = createAsyncThunk(
   "VerifySession",
   async (values, { dispatch }) => {
     try {
+      const fcmToken = await GetToken();
+      if (fcmToken) {
+        console.log("fcmToken", fcmToken);
+      }
       const result = await VerifySessionAPI(values);
       if (result?.success) {
         return result;

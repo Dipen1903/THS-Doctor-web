@@ -1,5 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
+import { getMessaging, getToken } from "firebase/messaging";
 const firebaseConfig = {
   apiKey: "AIzaSyAJh9bSIe-gZ74qFYxfWzsOmkr_z1FviyA",
   authDomain: "thsmedical-3333e.firebaseapp.com",
@@ -11,3 +12,23 @@ const firebaseConfig = {
 };
 const FirebaseApp = initializeApp(firebaseConfig);
 export const FirebaseDB = getFirestore(FirebaseApp);
+const messaging = getMessaging(FirebaseApp);
+
+export const GetToken = async () => {
+  return await getToken(messaging, {
+    vapidKey: `BJbEZL3uHsKTBM6_d-3hR3bepIKfIjLWpFQ1IIs-U33ouIRe0sn4qryjPtzAWQHuLX29M7mLMVF6qwqTVHCuIls`,
+  })
+    .then((currentToken) => {
+      if (currentToken) {
+        return currentToken;
+        // Track the token -> client mapping, by sending to backend server
+        // show on the UI that permission is secured
+      } else {
+        throw "No registration token available. Request permission to generate one.";
+        // shows on the UI that permission is required
+      }
+    })
+    .catch((err) => {
+      return err;
+    });
+};

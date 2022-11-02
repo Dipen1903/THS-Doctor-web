@@ -69,10 +69,10 @@ export default function Table(props) {
                           className: column.className,
                           style: column.style,
                         },
-                        column.getSortByToggleProps(),
+                        // column.getSortByToggleProps(),
                       ])}
                     >
-                      {column?.sort && (
+                      {/* {column?.sort && (
                         <span>
                           {column?.isSorted ? (
                             column.isSortedDesc ? (
@@ -84,7 +84,7 @@ export default function Table(props) {
                             <img src={Icon.UpDown} alt="updown" />
                           )}
                         </span>
-                      )}
+                      )} */}
                       {column.render("Header")}
                     </th>
                   ))}

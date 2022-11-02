@@ -4510,9 +4510,6 @@ privacypolicy-paragraph::-webkit-scrollbar {
 .prescription_table_body_row {
   height: 56px;
   border-bottom: 1px solid #eceff4;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 }
 .prescription_table_body_text {
   font-family: "Mulish";
@@ -4619,7 +4616,7 @@ privacypolicy-paragraph::-webkit-scrollbar {
   color: #1e1f20;
   text-align: right;
   margin-bottom: 5px !important;
-  width: 130px;
+  width: 100%;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;

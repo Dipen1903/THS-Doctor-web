@@ -12,7 +12,7 @@ const Review = ({ values }) => {
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
-  const { isReview, prescDetails } = useSelector(
+  const { isReview, prescDetails, consultDetails } = useSelector(
     ({ ConsultSlice }) => ConsultSlice
   );
   const send = (e) => {
@@ -254,17 +254,18 @@ const Review = ({ values }) => {
       </Modal.Body>
       <Modal.Footer className="prescription-btn-modal-footer">
         <div className="d-flex">
-          {!location.pathname.includes("chat") && (
-            <Button
-              className="close_btn"
-              onClick={() => {
-                dispatch(toggleReview(false));
-                navigate(`/prescription/${prescDetails?.prescription_id}`);
-              }}
-            >
-              Edit
-            </Button>
-          )}
+          {!location.pathname.includes("chat") ||
+            (consultDetails?.status < 2 && (
+              <Button
+                className="close_btn"
+                onClick={() => {
+                  dispatch(toggleReview(false));
+                  navigate(`/prescription/${prescDetails?.prescription_id}`);
+                }}
+              >
+                Edit
+              </Button>
+            ))}
 
           {location.pathname.includes("chat") ? (
             <Button
@@ -286,6 +287,7 @@ const Review = ({ values }) => {
               className="verify_btn"
               variant="primary"
               onClick={() => {
+                dispatch(toggleReview(false));
                 navigate(`/chat/${prescDetails?.prescription_id}`);
               }}
             >

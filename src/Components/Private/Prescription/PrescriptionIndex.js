@@ -74,6 +74,9 @@ function PrescriptionIndex() {
       if (prescDetails?.doctor_notes) {
         tempValues.doctor_notes = prescDetails?.doctor_notes;
       }
+      tempValues.user_id =
+        prescDetails?.patient_details?.id ||
+        consultDetails?.consultation_member_id;
       setPrescriptionData({ ...tempValues });
     } catch (error) {}
   };

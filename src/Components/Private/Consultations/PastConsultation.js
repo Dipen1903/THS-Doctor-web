@@ -193,22 +193,22 @@ export const ConsultDetails = (props) => {
                 </button>
               </p>
             </div>
-            <div className="appoinment_input">
+            {/* <div className="appoinment_input">
               <p className="left_text">Lab Test</p>
               <div>
                 {" "}
                 <p className="right-text">CBC</p>
                 <span>Test name</span>
               </div>
-            </div>
+            </div> */}
 
-            <div className="appoinment_input">
+            {/* <div className="appoinment_input">
               <p className="left_text">Recommended Doctor</p>
               <div>
                 {" "}
                 <p className="right-text">Neurologist</p>
               </div>
-            </div>
+            </div> */}
           </>
         )}
       </Modal.Body>

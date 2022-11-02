@@ -84,7 +84,7 @@ function Medicine() {
                                   evening: "",
                                   night: "",
                                   conditions: "",
-                                  days: "",
+                                  days: 1,
                                 });
                                 setShow(false);
                                 setText("");
@@ -199,7 +199,7 @@ function Medicine() {
                           <FormControl
                             control="input"
                             type="number"
-                            min={0}
+                            min={1}
                             name={`medicines[${index}].days`}
                             id={`medicines[${index}].days`}
                             value={values?.medicines[index].days}
