@@ -21,6 +21,7 @@ import { isEmpty } from "../../../Utilities/Functions";
 import AudioCall from "./AudioCall";
 import {
   CompleteConsult,
+  GetConsultDetails,
   GetPrescDetails,
   toggleReview,
 } from "../../../Store/Reducers/ConsultationsReducer";
@@ -66,7 +67,6 @@ function Conversation({ roomData }) {
   useEffect(() => {
     let tempData = JSON.parse(consultDetails?.json_data || "{}");
     setChatBot(tempData?.data);
-
     return () => {};
   }, [consultDetails]);
 

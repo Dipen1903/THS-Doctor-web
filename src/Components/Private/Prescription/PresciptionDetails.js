@@ -25,6 +25,7 @@ const Review = ({ values }) => {
       tempMessage.imageName = prescDetails?.prescription_id;
       tempMessage.imageUrl = prescDetails?.prescription_url;
       dispatch(SendMessage(tempMessage)).then((res) => {
+        dispatch(toggleReview(false));
         navigate(`/chat/${prescDetails?.prescription_id}`);
       });
     } catch (error) {}
@@ -254,18 +255,18 @@ const Review = ({ values }) => {
       </Modal.Body>
       <Modal.Footer className="prescription-btn-modal-footer">
         <div className="d-flex">
-          {!location.pathname.includes("chat") ||
-            (consultDetails?.status < 2 && (
-              <Button
-                className="close_btn"
-                onClick={() => {
-                  dispatch(toggleReview(false));
-                  navigate(`/prescription/${prescDetails?.prescription_id}`);
-                }}
-              >
-                Edit
-              </Button>
-            ))}
+          {(!location.pathname.includes("chat") ||
+            consultDetails?.status < 2) && (
+            <Button
+              className="close_btn"
+              onClick={() => {
+                dispatch(toggleReview(false));
+                navigate(`/prescription/${prescDetails?.prescription_id}`);
+              }}
+            >
+              Edit
+            </Button>
+          )}
 
           {location.pathname.includes("chat") ? (
             <Button

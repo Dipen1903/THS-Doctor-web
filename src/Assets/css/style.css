@@ -4597,6 +4597,10 @@ privacypolicy-paragraph::-webkit-scrollbar {
   font-size: 14px;
   color: #1e1f20;
   margin-bottom: 5px !important;
+  max-width: 135px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 .prescription_appoinment_input span,
 .prescription_table_appoinment_input span {
@@ -4616,7 +4620,7 @@ privacypolicy-paragraph::-webkit-scrollbar {
   color: #1e1f20;
   text-align: right;
   margin-bottom: 5px !important;
-  width: 100%;
+  max-width: 135px;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;

@@ -87,6 +87,7 @@ function PrescriptionIndex() {
 
   useEffect(() => {
     dispatch(GetPrescDetails({ booking_id }));
+    dispatch(GetConsultDetails({ appointment_id: booking_id }));
     return () => {};
   }, [booking_id]);
 

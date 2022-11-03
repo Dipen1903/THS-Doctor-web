@@ -83,7 +83,7 @@ function Medicine() {
                                   afternoon: "",
                                   evening: "",
                                   night: "",
-                                  conditions: "",
+                                  conditions: "before_food",
                                   days: 1,
                                 });
                                 setShow(false);
@@ -184,6 +184,7 @@ function Medicine() {
                           <select
                             className="custom-select"
                             name={`medicines[${index}].conditions`}
+                            defaultValue="before_food"
                             onChange={(e) => {
                               setFieldValue(
                                 `medicines[${index}].conditions`,

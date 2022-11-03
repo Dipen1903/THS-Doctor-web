@@ -2,7 +2,10 @@ import moment from "moment";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { clearChat, SetUpRoom } from "../../../Store/Reducers/ChatReducer";
-import { GetNewConsults } from "../../../Store/Reducers/ConsultationsReducer";
+import {
+  GetConsultDetails,
+  GetNewConsults,
+} from "../../../Store/Reducers/ConsultationsReducer";
 import { ConvertHMS } from "../../../Utilities/Functions";
 import TimeLeft from "../../Common/Layouts/TimeLeft";
 import Conversation from "../Chat/Conversation";
@@ -84,7 +87,15 @@ function LatestConsultation() {
                         }`}
                         onClick={(e) => {
                           e.preventDefault();
-                          isActive(item) && dispatch(SetUpRoom(item));
+
+                          isActive(item) &&
+                            parseInt(room?.lastBookingId) !==
+                              parseInt(item?.id) &&
+                            dispatch(
+                              GetConsultDetails({ appointment_id: item?.id })
+                            ).then((res) => {
+                              dispatch(SetUpRoom(item));
+                            });
                         }}
                       >
                         <div className="row">
