@@ -6179,8 +6179,9 @@ privacypolicy-paragraph::-webkit-scrollbar {
 }
 .attach_items_box {
   background: #eceff4;
-  min-height: 79vh;
-  max-height: 90vh;
+  min-height: 75vh;
+  max-height: 75vh;
+  overflow-y: auto;
   padding: 30px 20px 24px 20px;
 }
 .attach_cross {
