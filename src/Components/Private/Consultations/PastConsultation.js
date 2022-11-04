@@ -59,8 +59,8 @@ function PastConsultation({ pastConsults = [] }) {
       Cell: ({ cell: { value } }) => {
         return (
           <>
-            {value === 3 && <span class="failed_tag mx-2">Cancelled</span>}
-            {value === 2 && <span class="paid_tag mx-2">Completed</span>}
+            {value === 3 && <span className="failed_tag mx-2">Cancelled</span>}
+            {value === 2 && <span className="paid_tag mx-2">Completed</span>}
           </>
         );
       },
@@ -122,10 +122,10 @@ export const ConsultDetails = (props) => {
               Id #{consultDetails?.appointment_id}
             </span>
             {consultDetails?.status === 3 && (
-              <span class="failed_tag mx-2">Cancelled</span>
+              <span className="failed_tag mx-2">Cancelled</span>
             )}
             {consultDetails?.status === 2 && (
-              <span class="paid_tag mx-2">Completed</span>
+              <span className="paid_tag mx-2">Completed</span>
             )}
           </div>
         </Modal.Title>

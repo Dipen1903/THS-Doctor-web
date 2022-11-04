@@ -13,9 +13,9 @@ export default function WorkProfile() {
     ({ CommonSlice }) => CommonSlice
   );
   return (
-    <div class="basic_info_form_box">
-      <div class="row mt_20">
-        <div class="col-md-12">
+    <div className="basic_info_form_box">
+      <div className="row mt_20">
+        <div className="col-md-12">
           <FormControl
             control="select"
             options={[
@@ -44,8 +44,8 @@ export default function WorkProfile() {
         </div>
       </div>
       {subSpecialityList?.length ? (
-        <div class="row mt_20">
-          <div class="col-md-12">
+        <div className="row mt_20">
+          <div className="col-md-12">
             <FormControl
               control="select"
               options={[
@@ -66,8 +66,8 @@ export default function WorkProfile() {
       ) : (
         <></>
       )}
-      <div class="row mt_20">
-        <div class="col-md-12">
+      <div className="row mt_20">
+        <div className="col-md-12">
           <FormControl
             control="input"
             type="number"
@@ -86,8 +86,8 @@ export default function WorkProfile() {
           />
         </div>
       </div>
-      <div class="row mt_20">
-        <div class="col-md-12">
+      <div className="row mt_20">
+        <div className="col-md-12">
           <FormControl
             control="input"
             type="text"
@@ -101,8 +101,8 @@ export default function WorkProfile() {
           />
         </div>
       </div>
-      <div class="row mt_20">
-        <div class="col-md-12">
+      <div className="row mt_20">
+        <div className="col-md-12">
           <FormControl
             control="select"
             label="Language"

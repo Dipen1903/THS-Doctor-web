@@ -40,16 +40,16 @@ export default function SignUpComponent() {
           navigate("/dashboard");
         }}
       />
-      <div class="sub_section_2">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="display_t js-fullheight">
-              <div class="row">
-                <div class="col-md-12">
-                  <div class="login_box">
-                    <h3 class="logo_title">THS Doctor’s Sign Up</h3>
-                    <h5 class="welcome_title">Welcome back to THS!</h5>
-                    <div class="signin_box">
+      <div className="sub_section_2">
+        <div className="row">
+          <div className="col-md-12">
+            <div className="display_t js-fullheight">
+              <div className="row">
+                <div className="col-md-12">
+                  <div className="login_box">
+                    <h3 className="logo_title">THS Doctor’s Sign Up</h3>
+                    <h5 className="welcome_title">Welcome back to THS!</h5>
+                    <div className="signin_box">
                       <Formik
                         initialValues={SignUpEnum}
                         validationSchema={SignUpSchema}
@@ -62,8 +62,8 @@ export default function SignUpComponent() {
                           handleSubmit,
                         }) => (
                           <Form onSubmit={handleSubmit}>
-                            <div class="row">
-                              <div class="col-md-6 mt_20">
+                            <div className="row">
+                              <div className="col-md-6 mt_20">
                                 <FormControl
                                   control="input"
                                   type="text"
@@ -75,7 +75,7 @@ export default function SignUpComponent() {
                                   value={values.first_name}
                                 />
                               </div>
-                              <div class="col-md-6 mt_20">
+                              <div className="col-md-6 mt_20">
                                 <FormControl
                                   control="input"
                                   type="text"
@@ -88,8 +88,8 @@ export default function SignUpComponent() {
                                 />
                               </div>
                             </div>
-                            <div class="row">
-                              <div class="col-md-12 mt_20">
+                            <div className="row">
+                              <div className="col-md-12 mt_20">
                                 <FormControl
                                   control="input"
                                   type="phone"
@@ -101,7 +101,7 @@ export default function SignUpComponent() {
                                   value={values.mobile_number}
                                 />
                               </div>
-                              <div class="col-md-12 mt_20">
+                              <div className="col-md-12 mt_20">
                                 <FormControl
                                   control="input"
                                   type="email"
@@ -113,7 +113,7 @@ export default function SignUpComponent() {
                                   value={values.email}
                                 />
                               </div>
-                              <div class="col-md-12 mt_20">
+                              <div className="col-md-12 mt_20">
                                 <FormControl
                                   control="input"
                                   type="password"
@@ -125,7 +125,7 @@ export default function SignUpComponent() {
                                   value={values.password}
                                 />
                               </div>
-                              <div class="col-md-12 mt_20">
+                              <div className="col-md-12 mt_20">
                                 <FormControl
                                   control="input"
                                   type="password"
@@ -137,9 +137,9 @@ export default function SignUpComponent() {
                                   value={values.confirm_password}
                                 />
                               </div>
-                              <div class="col-md-12">
+                              <div className="col-md-12">
                                 <button
-                                  class="login_btn"
+                                  className="login_btn"
                                   type="submit"
                                   variant="primary"
                                 >
@@ -159,9 +159,9 @@ export default function SignUpComponent() {
                           </Form>
                         )}
                       </Formik>
-                      <div class="row mt_20">
-                        <div class="col-md-12">
-                          <h3 class="by_clicking">
+                      <div className="row mt_20">
+                        <div className="col-md-12">
+                          <h3 className="by_clicking">
                             By clicking sign up you are agreeing to the
                             <br /> <Link to="">Terms of use</Link> and the{" "}
                             <Link to="/">Privacy policy</Link>
@@ -238,7 +238,7 @@ const OTPVerify = (props) => {
         {({ values, setFieldValue, handleSubmit }) => (
           <Form onSubmit={handleSubmit}>
             <Modal.Body>
-              <p class="otp_sent">
+              <p className="otp_sent">
                 Enter the OTP sent on {values?.mobile_number}
               </p>
               <center>

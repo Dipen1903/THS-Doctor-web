@@ -166,10 +166,10 @@ function Timeslotfees() {
                                   title="Weekdays"
                                   className="tab_inner_box"
                                 >
-                                  <div class="weekdays_box">
-                                    <div class="row">
-                                      <div class="col-md-12">
-                                        <div class="day_box">
+                                  <div className="weekdays_box">
+                                    <div className="row">
+                                      <div className="col-md-12">
+                                        <div className="day_box">
                                           <FormControl
                                             control="checkbox"
                                             name="weekdays.days"
@@ -228,9 +228,9 @@ function Timeslotfees() {
                                                 {item}
                                               </Accordion.Header>
                                               <Accordion.Body>
-                                                <div class="row">
-                                                  <div class=" col-md-6">
-                                                    <h5 class="start_at">
+                                                <div className="row">
+                                                  <div className=" col-md-6">
+                                                    <h5 className="start_at">
                                                       Start at
                                                     </h5>
                                                     <FormControl
@@ -261,8 +261,8 @@ function Timeslotfees() {
                                                     />
                                                   </div>
 
-                                                  <div class=" col-md-6">
-                                                    <h5 class="end_at">
+                                                  <div className=" col-md-6">
+                                                    <h5 className="end_at">
                                                       End at
                                                     </h5>
 
@@ -323,10 +323,10 @@ function Timeslotfees() {
                                   title="Weekends"
                                   className="tab_inner_box"
                                 >
-                                  <div class="weekends_box">
-                                    <div class="row">
-                                      <div class="col-md-12">
-                                        <div class="day_box">
+                                  <div className="weekends_box">
+                                    <div className="row">
+                                      <div className="col-md-12">
+                                        <div className="day_box">
                                           <FormControl
                                             control="checkbox"
                                             name="weekends.days"
@@ -382,9 +382,9 @@ function Timeslotfees() {
                                                 {item}
                                               </Accordion.Header>
                                               <Accordion.Body>
-                                                <div class="row">
-                                                  <div class="col-md-6">
-                                                    <h5 class="start_at">
+                                                <div className="row">
+                                                  <div className="col-md-6">
+                                                    <h5 className="start_at">
                                                       Start at
                                                     </h5>
                                                     <FormControl
@@ -414,8 +414,8 @@ function Timeslotfees() {
                                                       isDisabled={!edit}
                                                     />
                                                   </div>
-                                                  <div class="col-md-6">
-                                                    <h5 class="end_at">
+                                                  <div className="col-md-6">
+                                                    <h5 className="end_at">
                                                       End at
                                                     </h5>
                                                     <FormControl
@@ -467,8 +467,8 @@ function Timeslotfees() {
                               </Tabs>
                             </div>
                           </div>
-                          <div class="row mt_20">
-                            <div class="col-md-12">
+                          <div className="row mt_20">
+                            <div className="col-md-12">
                               <FormControl
                                 control="checkbox"
                                 name="emergency_call"
@@ -488,7 +488,7 @@ function Timeslotfees() {
                               <div className="col-md-4">
                                 <button
                                   type="submit"
-                                  class="continue_btn"
+                                  className="continue_btn"
                                   variant="primary"
                                 >
                                   Save

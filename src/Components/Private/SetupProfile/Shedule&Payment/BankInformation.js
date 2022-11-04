@@ -17,9 +17,9 @@ function BankInformation() {
     return errorMessage;
   };
   return (
-    <div class="basic_info_form_box">
-      <div class="row">
-        <div class="col-md-12 mt_20">
+    <div className="basic_info_form_box">
+      <div className="row">
+        <div className="col-md-12 mt_20">
           <FormControl
             control="input"
             type="text"
@@ -32,8 +32,8 @@ function BankInformation() {
           />
         </div>
       </div>
-      <div class="row mt_20">
-        <div class="col-md-12 mt_20">
+      <div className="row mt_20">
+        <div className="col-md-12 mt_20">
           <FormControl
             control="input"
             type="password"
@@ -48,8 +48,8 @@ function BankInformation() {
           />
         </div>
       </div>
-      <div class="row mt_20">
-        <div class="col-md-12 mt_20">
+      <div className="row mt_20">
+        <div className="col-md-12 mt_20">
           <FormControl
             control="input"
             type="text"
@@ -63,8 +63,8 @@ function BankInformation() {
           />
         </div>
       </div>
-      <div class="row mt_20">
-        <div class="col-md-12 mt_20">
+      <div className="row mt_20">
+        <div className="col-md-12 mt_20">
           <FormControl
             control="input"
             type="text"
@@ -79,13 +79,13 @@ function BankInformation() {
         </div>
       </div>
       <hr className="bottom_border mt_30 mb_30" />
-      <div class="row">
-        <div class="col-md-12">
-          <h3 class="upi_title">UPI</h3>
+      <div className="row">
+        <div className="col-md-12">
+          <h3 className="upi_title">UPI</h3>
         </div>
       </div>
-      <div class="row">
-        <div class="col-md-12 mt_20">
+      <div className="row">
+        <div className="col-md-12 mt_20">
           <FormControl
             control="input"
             type="text"

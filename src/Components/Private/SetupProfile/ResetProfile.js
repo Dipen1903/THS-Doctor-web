@@ -144,7 +144,7 @@ function ResetProfile() {
             {rejectedFields.map((item) => (
               <div className="col-md-6">
                 {item === "registration number" && (
-                  <div class="col-md-12">
+                  <div className="col-md-12">
                     <h5 className="reupload_detals_pretitle mt-5">
                       Registration Number
                     </h5>
@@ -162,12 +162,12 @@ function ResetProfile() {
                   </div>
                 )}
                 {item === "bank details" && (
-                  <div class="col-md-12">
+                  <div className="col-md-12">
                     <h5 className="reupload_detals_pretitle mt-5">
                       Bank Details
                     </h5>
-                    <div class="row">
-                      <div class="col-md-12 mt_20">
+                    <div className="row">
+                      <div className="col-md-12 mt_20">
                         <FormControl
                           control="input"
                           type="text"
@@ -180,8 +180,8 @@ function ResetProfile() {
                         />
                       </div>
                     </div>
-                    <div class="row mt_20">
-                      <div class="col-md-12 mt_20">
+                    <div className="row mt_20">
+                      <div className="col-md-12 mt_20">
                         <FormControl
                           control="input"
                           type="password"
@@ -196,8 +196,8 @@ function ResetProfile() {
                         />
                       </div>
                     </div>
-                    <div class="row mt_20">
-                      <div class="col-md-12 mt_20">
+                    <div className="row mt_20">
+                      <div className="col-md-12 mt_20">
                         <FormControl
                           control="input"
                           type="text"
@@ -211,8 +211,8 @@ function ResetProfile() {
                         />
                       </div>
                     </div>
-                    <div class="row mt_20">
-                      <div class="col-md-12 mt_20">
+                    <div className="row mt_20">
+                      <div className="col-md-12 mt_20">
                         <FormControl
                           control="input"
                           type="text"
@@ -229,10 +229,10 @@ function ResetProfile() {
                   </div>
                 )}
                 {item === "profile" && (
-                  <div class="col-md-12">
+                  <div className="col-md-12">
                     <h5 className="reupload_detals_pretitle mt-5">Profile</h5>
-                    <div class="row">
-                      <div class="col-md-3">
+                    <div className="row">
+                      <div className="col-md-3">
                         <center>
                           <img
                             alt="myImg"
@@ -241,12 +241,12 @@ function ResetProfile() {
                               values?.image ||
                               BackGround.Profile
                             }
-                            class="upload_avatar_img"
+                            className="upload_avatar_img"
                           ></img>
                         </center>
                       </div>
-                      <div class="col-md-9">
-                        <div class="wrapper">
+                      <div className="col-md-9">
+                        <div className="wrapper">
                           <FileUpload
                             className="upload_avatar_btn"
                             label="Upload Your Avatar"
@@ -259,7 +259,7 @@ function ResetProfile() {
                           />
                         </div>
                         <div
-                          class="custom-file-container"
+                          className="custom-file-container"
                           data-upload-id="myFirstImage"
                         ></div>
                         <p className="upload_avatar_subtitle">
@@ -275,7 +275,7 @@ function ResetProfile() {
                   </div>
                 )}
                 {item === "qualification" && (
-                  <div class="col-md-12">
+                  <div className="col-md-12">
                     <h5 className="reupload_detals_pretitle mt-5">
                       Qualification
                     </h5>
@@ -308,8 +308,8 @@ function ResetProfile() {
                         };
                         return (
                           <>
-                            <div class="row mt_20">
-                              <div class="col-md-12">
+                            <div className="row mt_20">
+                              <div className="col-md-12">
                                 <FormControl
                                   control="select"
                                   label="Qualification"
@@ -336,19 +336,19 @@ function ResetProfile() {
                             </div>
                             {values?.qualification?.length ? (
                               <>
-                                <div class="row mt_20">
-                                  <h3 class="added_qualifications">
+                                <div className="row mt_20">
+                                  <h3 className="added_qualifications">
                                     Added qualification
                                   </h3>
                                 </div>
                                 {values?.qualification?.map((item, index) => (
-                                  <div class="row mt_20">
-                                    <div class="col-md-6">
-                                      <h5 class="qualification_text">
+                                  <div className="row mt_20">
+                                    <div className="col-md-6">
+                                      <h5 className="qualification_text">
                                         {item?.type}
                                       </h5>
                                       <h5
-                                        class="remove_title"
+                                        className="remove_title"
                                         onClick={(e) => {
                                           arrayHelpers.remove(index);
                                           removeValue(index);
@@ -357,11 +357,11 @@ function ResetProfile() {
                                         Remove
                                       </h5>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div className="col-md-6">
                                       {values?.qualification?.length &&
                                       values?.qualification[index]?.file ? (
-                                        <div class="row col-md-12">
-                                          <div class="col-md-6">
+                                        <div className="row col-md-12">
+                                          <div className="col-md-6">
                                             <img
                                               alt="myImg"
                                               src={
@@ -380,18 +380,18 @@ function ResetProfile() {
                                                       ]?.file
                                                   : BackGround.Profile
                                               }
-                                              class="upload_avatar_img"
+                                              className="upload_avatar_img"
                                             ></img>
                                           </div>
-                                          <div class="col-md-6">
-                                            <h5 class="certificate_name">
+                                          <div className="col-md-6">
+                                            <h5 className="certificate_name">
                                               {
                                                 values.qualification[index]
                                                   ?.file?.name
                                               }
                                             </h5>
                                             <h6
-                                              class="delete_photo"
+                                              className="delete_photo"
                                               onClick={(e) => {
                                                 e.preventDefault();
                                                 setFieldValue(
@@ -440,12 +440,12 @@ function ResetProfile() {
                   </div>
                 )}
                 {item === "signature" && (
-                  <div class="col-md-12">
+                  <div className="col-md-12">
                     <h5 className="reupload_detals_pretitle mt-5">Signature</h5>
-                    <div class="col-md-6">
+                    <div className="col-md-6">
                       {values?.signature ? (
-                        <div class="row col-md-12">
-                          <div class="col-md-6">
+                        <div className="row col-md-12">
+                          <div className="col-md-6">
                             <img
                               alt="myImg"
                               src={
@@ -455,15 +455,15 @@ function ResetProfile() {
                                   ? values.signature
                                   : BackGround.Profile
                               }
-                              class="upload_avatar_img"
+                              className="upload_avatar_img"
                             ></img>
                           </div>
-                          <div class="col-md-6">
-                            <h5 class="certificate_name">
+                          <div className="col-md-6">
+                            <h5 className="certificate_name">
                               {values.signature?.name}
                             </h5>
                             <h6
-                              class="delete_photo"
+                              className="delete_photo"
                               onClick={(e) => {
                                 e.preventDefault();
                                 setFieldValue(`signature`, "");
@@ -494,7 +494,7 @@ function ResetProfile() {
                   </div>
                 )}
                 {item === "id proof" && (
-                  <div class="col-md-12">
+                  <div className="col-md-12">
                     <h5 className="reupload_detals_pretitle mt-5">ID Proof</h5>
                     <FieldArray
                       name="proof"
@@ -538,8 +538,8 @@ function ResetProfile() {
                         };
                         return (
                           <>
-                            <div class="row mt_20">
-                              <div class="col-md-12">
+                            <div className="row mt_20">
+                              <div className="col-md-12">
                                 <FormControl
                                   control="select"
                                   label="Select Document"
@@ -577,13 +577,13 @@ function ResetProfile() {
                             {values?.proof?.length ? (
                               <>
                                 {values?.proof?.map((item, index) => (
-                                  <div class="row mt_20">
-                                    <div class="col-md-6">
-                                      <h5 class="qualification_text">
+                                  <div className="row mt_20">
+                                    <div className="col-md-6">
+                                      <h5 className="qualification_text">
                                         {item?.type}
                                       </h5>
                                       <h5
-                                        class="remove_title"
+                                        className="remove_title"
                                         onClick={(e) => {
                                           arrayHelpers.remove(index);
                                           removeValue(index);
@@ -592,11 +592,11 @@ function ResetProfile() {
                                         Remove
                                       </h5>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div className="col-md-6">
                                       {values?.proof.length &&
                                       values?.proof[index]?.file ? (
-                                        <div class="row col-md-12">
-                                          <div class="col-md-6">
+                                        <div className="row col-md-12">
+                                          <div className="col-md-6">
                                             <img
                                               alt="myImg"
                                               src={
@@ -610,15 +610,15 @@ function ResetProfile() {
                                                     : values.proof[index]?.file
                                                   : BackGround.Profile
                                               }
-                                              class="upload_avatar_img"
+                                              className="upload_avatar_img"
                                             ></img>
                                           </div>
-                                          <div class="col-md-6">
-                                            <h5 class="certificate_name">
+                                          <div className="col-md-6">
+                                            <h5 className="certificate_name">
                                               {values.proof[index]?.file?.name}
                                             </h5>
                                             <h6
-                                              class="delete_photo"
+                                              className="delete_photo"
                                               onClick={(e) => {
                                                 e.preventDefault();
                                                 setFieldValue(
@@ -666,8 +666,12 @@ function ResetProfile() {
                 )}
               </div>
             ))}
-            <div class="row mt_10">
-              <button class="submit_save_btn" type="submit" variant="primary">
+            <div className="row mt_10">
+              <button
+                className="submit_save_btn"
+                type="submit"
+                variant="primary"
+              >
                 Submit
               </button>
             </div>

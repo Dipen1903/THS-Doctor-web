@@ -20,7 +20,7 @@ export default function EducationalProfile({ formProps }) {
 
   return (
     <>
-      <div class="basic_info_form_box">
+      <div className="basic_info_form_box">
         {/*//* CERTIFICATE SECTION */}
         <FieldArray
           name="qualification"
@@ -50,8 +50,8 @@ export default function EducationalProfile({ formProps }) {
             };
             return (
               <>
-                <div class="row mt_20">
-                  <div class="col-md-12">
+                <div className="row mt_20">
+                  <div className="col-md-12">
                     <FormControl
                       control="select"
                       label="Qualification"
@@ -74,15 +74,17 @@ export default function EducationalProfile({ formProps }) {
                 </div>
                 {values?.qualification?.length ? (
                   <>
-                    <div class="row mt_20">
-                      <h3 class="added_qualifications">Added qualification</h3>
+                    <div className="row mt_20">
+                      <h3 className="added_qualifications">
+                        Added qualification
+                      </h3>
                     </div>
                     {values?.qualification?.map((item, index) => (
-                      <div class="row mt_20">
-                        <div class="col-md-6">
-                          <h5 class="qualification_text">{item?.type}</h5>
+                      <div className="row mt_20">
+                        <div className="col-md-6">
+                          <h5 className="qualification_text">{item?.type}</h5>
                           <h5
-                            class="remove_title"
+                            className="remove_title"
                             onClick={(e) => {
                               arrayHelpers.remove(index);
                               removeValue(index);
@@ -91,11 +93,11 @@ export default function EducationalProfile({ formProps }) {
                             Remove
                           </h5>
                         </div>
-                        <div class="col-md-6">
+                        <div className="col-md-6">
                           {values?.qualification?.length &&
                           values?.qualification[index]?.file ? (
-                            <div class="row col-md-12">
-                              <div class="col-md-6">
+                            <div className="row col-md-12">
+                              <div className="col-md-6">
                                 <img
                                   alt={Icon.Doc}
                                   src={
@@ -108,15 +110,15 @@ export default function EducationalProfile({ formProps }) {
                                         : values.qualification[index]?.file
                                       : BackGround.Profile
                                   }
-                                  class="upload_avatar_img"
+                                  className="upload_avatar_img"
                                 ></img>
                               </div>
-                              <div class="col-md-6">
-                                <h5 class="certificate_name">
+                              <div className="col-md-6">
+                                <h5 className="certificate_name">
                                   {values.qualification[index]?.file?.name}
                                 </h5>
                                 <h6
-                                  class="delete_photo"
+                                  className="delete_photo"
                                   onClick={(e) => {
                                     e.preventDefault();
                                     setFieldValue(
@@ -159,9 +161,9 @@ export default function EducationalProfile({ formProps }) {
 
         <hr className="bottom_border mt_50 mb_50" />
         {/*//* DOCUMENT SECTION */}
-        <div class="row">
-          <div class="col-md-12">
-            <h3 class="id_proof_doc">Upload ID Proof Document</h3>
+        <div className="row">
+          <div className="col-md-12">
+            <h3 className="id_proof_doc">Upload ID Proof Document</h3>
           </div>
         </div>
         <FieldArray
@@ -205,8 +207,8 @@ export default function EducationalProfile({ formProps }) {
             };
             return (
               <>
-                <div class="row mt_20">
-                  <div class="col-md-12">
+                <div className="row mt_20">
+                  <div className="col-md-12">
                     <FormControl
                       control="select"
                       label="Select Document"
@@ -241,11 +243,11 @@ export default function EducationalProfile({ formProps }) {
                 {values?.proof?.length ? (
                   <>
                     {values?.proof?.map((item, index) => (
-                      <div class="row mt_20">
-                        <div class="col-md-6">
-                          <h5 class="qualification_text">{item?.type}</h5>
+                      <div className="row mt_20">
+                        <div className="col-md-6">
+                          <h5 className="qualification_text">{item?.type}</h5>
                           <h5
-                            class="remove_title"
+                            className="remove_title"
                             onClick={(e) => {
                               arrayHelpers.remove(index);
                               removeValue(index);
@@ -254,11 +256,11 @@ export default function EducationalProfile({ formProps }) {
                             Remove
                           </h5>
                         </div>
-                        <div class="col-md-6">
+                        <div className="col-md-6">
                           {values?.proof.length &&
                           values?.proof[index]?.file ? (
-                            <div class="row col-md-12">
-                              <div class="col-md-6">
+                            <div className="row col-md-12">
+                              <div className="col-md-6">
                                 <img
                                   alt="myImg"
                                   src={
@@ -271,15 +273,15 @@ export default function EducationalProfile({ formProps }) {
                                         : values.proof[index]?.file
                                       : BackGround.Profile
                                   }
-                                  class="upload_avatar_img"
+                                  className="upload_avatar_img"
                                 ></img>
                               </div>
-                              <div class="col-md-6">
-                                <h5 class="certificate_name">
+                              <div className="col-md-6">
+                                <h5 className="certificate_name">
                                   {values.proof[index]?.file?.name}
                                 </h5>
                                 <h6
-                                  class="delete_photo"
+                                  className="delete_photo"
                                   onClick={(e) => {
                                     e.preventDefault();
                                     setFieldValue(`proof[${index}].file`, "");
@@ -317,14 +319,14 @@ export default function EducationalProfile({ formProps }) {
           name="proof"
         />
         <hr className="bottom_border mt_50 mb_50" />
-        <div class="row">
-          <div class="col-md-6">
-            <h5 class="upload_signature">Upload Signature</h5>
+        <div className="row">
+          <div className="col-md-6">
+            <h5 className="upload_signature">Upload Signature</h5>
           </div>
-          <div class="col-md-6">
+          <div className="col-md-6">
             {values?.signature ? (
-              <div class="row col-md-12">
-                <div class="col-md-6">
+              <div className="row col-md-12">
+                <div className="col-md-6">
                   <img
                     alt="myImg"
                     src={
@@ -334,13 +336,13 @@ export default function EducationalProfile({ formProps }) {
                         ? values.signature
                         : BackGround.Profile
                     }
-                    class="upload_avatar_img"
+                    className="upload_avatar_img"
                   ></img>
                 </div>
-                <div class="col-md-6">
-                  <h5 class="certificate_name">{values.signature?.name}</h5>
+                <div className="col-md-6">
+                  <h5 className="certificate_name">{values.signature?.name}</h5>
                   <h6
-                    class="delete_photo"
+                    className="delete_photo"
                     onClick={(e) => {
                       e.preventDefault();
                       setFieldValue(`signature`, "");

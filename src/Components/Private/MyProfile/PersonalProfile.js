@@ -127,7 +127,7 @@ function PersonalProfile() {
                                 />
                               </div>
                               <div
-                                class="custom-file-container"
+                                className="custom-file-container"
                                 data-upload-id="myFirstImage"
                               ></div>
                               <p className="upload_avatar_subtitle">
@@ -146,7 +146,7 @@ function PersonalProfile() {
                       </div>
                     </div>
 
-                    <div class="col-md-6 mt_20">
+                    <div className="col-md-6 mt_20">
                       <FormControl
                         control="input"
                         type="text"
@@ -159,7 +159,7 @@ function PersonalProfile() {
                         value={values.first_name}
                       />
                     </div>
-                    <div class="col-md-6 mt_20">
+                    <div className="col-md-6 mt_20">
                       <FormControl
                         control="input"
                         type="text"
@@ -173,8 +173,8 @@ function PersonalProfile() {
                       />
                     </div>
                   </div>
-                  <div class="row">
-                    <div class="col-md-12 mt_20">
+                  <div className="row">
+                    <div className="col-md-12 mt_20">
                       <FormControl
                         control="input"
                         type="email"
@@ -187,7 +187,7 @@ function PersonalProfile() {
                         value={values.email}
                       />
                     </div>
-                    <div class="col-md-12 mt_20">
+                    <div className="col-md-12 mt_20">
                       <label className="sign_title form-label">Birthday</label>
                       <FormControl
                         control="input"
@@ -202,10 +202,10 @@ function PersonalProfile() {
                         value={values?.dob}
                       />
                     </div>
-                    <div class="col-md-12 mt_20 ">
+                    <div className="col-md-12 mt_20 ">
                       <h5 className="sign_title">Gender</h5>
                       {/* <Field name="gender" validate={validateGender} hidden /> */}
-                      <div class="col-md-3 radio-container mt_20 mb_20">
+                      <div className="col-md-3 radio-container mt_20 mb_20">
                         {(isEdit || values?.gender == "male") && (
                           <div
                             className={`radio_box ${
@@ -270,7 +270,7 @@ function PersonalProfile() {
                   {isEdit && (
                     <button
                       type="submit"
-                      class="edit_profile_save_btn"
+                      className="edit_profile_save_btn"
                       variant="primary"
                     >
                       Save

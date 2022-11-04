@@ -30,6 +30,10 @@ function LatestConsultation() {
       }
     } catch (error) {}
   };
+  let interval = () =>
+    setInterval(() => {
+      dispatch(GetNewConsults());
+    }, 15 * 60000);
 
   const isActive = (item) => {
     try {
@@ -49,21 +53,14 @@ function LatestConsultation() {
       dispatch(GetNewConsults());
     } else {
       intialLoad();
+      interval();
     }
     return () => {
       snapShot();
       dispatch(clearChat());
+      clearInterval(interval());
     };
   }, [upcomingConsults?.length]);
-  useEffect(() => {
-    let interval = setInterval(() => {
-      dispatch(GetNewConsults());
-    }, 15 * 60000);
-
-    return () => {
-      clearInterval(interval);
-    };
-  }, []);
 
   return (
     <>
@@ -100,7 +97,7 @@ function LatestConsultation() {
                       >
                         <div className="row">
                           <div className="col-md-6">
-                            <h6 class="chat_list_id">
+                            <h6 className="chat_list_id">
                               ID #{item?.appointment_id}
                             </h6>
                             <div className="chat_title_box">

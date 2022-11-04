@@ -27,12 +27,12 @@ function SideBanner() {
     },
   ];
   return (
-    <div class="sub_section_1 js-fullheight">
+    <div className="sub_section_1 js-fullheight">
       <div className="row">
-        <div class="col-md-12">
-          <div class="display_t">
-            <img alt="myImg" src={Logo.THS_Title} class="logo_box" />
-            <div class="slider_1">
+        <div className="col-md-12">
+          <div className="display_t">
+            <img alt="myImg" src={Logo.THS_Title} className="logo_box" />
+            <div className="slider_1">
               <OwlCarousel
                 className="owl-theme"
                 loop
@@ -42,10 +42,10 @@ function SideBanner() {
                 items={1}
               >
                 {defaultOptions.map((item, index) => (
-                  <div class="item" key={index}>
+                  <div className="item" key={index}>
                     <center>
                       <Lottie options={item} />
-                      <h3 class="slider_text">
+                      <h3 className="slider_text">
                         Help millions of people everywhere,
                         <br /> everytime
                       </h3>

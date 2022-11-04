@@ -36,9 +36,9 @@ export default function BasicInformation() {
 
   return (
     <>
-      <div class="basic_info_form_box">
-        <div class="row">
-          <div class="col-md-3">
+      <div className="basic_info_form_box">
+        <div className="row">
+          <div className="col-md-3">
             <center>
               <img
                 alt="myImg"
@@ -47,12 +47,12 @@ export default function BasicInformation() {
                   values?.image ||
                   BackGround.Profile
                 }
-                class="upload_avatar_img"
+                className="upload_avatar_img"
               ></img>
             </center>
           </div>
-          <div class="col-md-9">
-            <div class="wrapper">
+          <div className="col-md-9">
+            <div className="wrapper">
               <FileUpload
                 className="upload_avatar_btn"
                 label="Upload Your Avatar"
@@ -65,7 +65,7 @@ export default function BasicInformation() {
               />
             </div>
             <div
-              class="custom-file-container"
+              className="custom-file-container"
               data-upload-id="myFirstImage"
             ></div>
             <p className="upload_avatar_subtitle">
@@ -78,8 +78,8 @@ export default function BasicInformation() {
             render={(error) => <div className="error">{error}</div>}
           />
         </div>
-        <div class="row mt_20">
-          <div class="col-md-12">
+        <div className="row mt_20">
+          <div className="col-md-12">
             <label className="sign_title form-label">Birthday</label>
             <FormControl
               control="input"
@@ -92,8 +92,8 @@ export default function BasicInformation() {
             />
           </div>
         </div>
-        <div class="row mt_20">
-          <div class="col-md-6">
+        <div className="row mt_20">
+          <div className="col-md-6">
             <FormControl
               control="select"
               options={[{ value: "", label: "Select" }, ...cityList]}
@@ -109,7 +109,7 @@ export default function BasicInformation() {
               outerClass="mb-3"
             />
           </div>
-          <div class="col-md-6">
+          <div className="col-md-6">
             <FormControl
               control="select"
               options={[{ value: "", label: "Select" }, ...stateList]}
@@ -126,12 +126,12 @@ export default function BasicInformation() {
             />
           </div>
         </div>
-        <div class="row mt_20">
-          <div class="row">
-            <div class="col-md-12">
+        <div className="row mt_20">
+          <div className="row">
+            <div className="col-md-12">
               <h5 className="sign_title">Gender</h5>
               {/* <Field name="gender" validate={validateGender} hidden /> */}
-              <div class="col-md-3 radio-container mt_20 mb_20">
+              <div className="col-md-3 radio-container mt_20 mb_20">
                 <div
                   className={`radio_box ${
                     values?.gender === "male" && "selected"

@@ -205,7 +205,7 @@ export function SetUpProfile() {
   }, []);
 
   return (
-    <div class="sub_section_2">
+    <div className="sub_section_2">
       {skipModal && (
         <SkipCaution
           show={skipModal}
@@ -222,15 +222,15 @@ export function SetUpProfile() {
           }}
         />
       )}
-      <div class="row">
-        <div class="col-md-12">
-          <div class="display_t js-fullheight">
-            <div class="row">
-              <div class="col-md-12">
-                <div class="basic_info_box">
-                  <div class="row">
-                    <div class="col-md-6"></div>
-                    <div class="col-md-6">
+      <div className="row">
+        <div className="col-md-12">
+          <div className="display_t js-fullheight">
+            <div className="row">
+              <div className="col-md-12">
+                <div className="basic_info_box">
+                  <div className="row">
+                    <div className="col-md-6"></div>
+                    <div className="col-md-6">
                       <span
                         className="skip"
                         onClick={() => dispatch(toggleSkip(true))}
@@ -239,8 +239,8 @@ export function SetUpProfile() {
                       </span>
                     </div>
                   </div>
-                  <h5 class="steps mt_50">Step {profileStep} of 3</h5>
-                  <h3 class="info_title">
+                  <h5 className="steps mt_50">Step {profileStep} of 3</h5>
+                  <h3 className="info_title">
                     {profileStep === 1
                       ? "Basic Information"
                       : profileStep === 2
@@ -258,19 +258,19 @@ export function SetUpProfile() {
                     {({ values, handleSubmit }) => {
                       return (
                         <> */}
-                  <div class="progress_box">
-                    <div class="row">
-                      <div class="col-md-3">
-                        <h5 class="profile_milestone">Profile Milestone</h5>
+                  <div className="progress_box">
+                    <div className="row">
+                      <div className="col-md-3">
+                        <h5 className="profile_milestone">Profile Milestone</h5>
                       </div>
-                      <div class="col-md-8">
+                      <div className="col-md-8">
                         <ProgressBar
                           isLoading={false}
                           percent={userProfile?.profile_completed_percentage}
                           size={"large"}
                           showInfo={true}
                         />
-                        <h6 class="progress_bar_subtext">
+                        <h6 className="progress_bar_subtext">
                           Complete your profile for connect with patients{" "}
                         </h6>
                       </div>
@@ -286,11 +286,11 @@ export function SetUpProfile() {
                     />
                   )}
 
-                  <div class="row mt_10">
+                  <div className="row mt_10">
                     <div className="display_inline">
                       {profileStep > 1 ? (
                         <button
-                          class="back_btn"
+                          className="back_btn"
                           // variant="primary"
                           onClick={(e) => {
                             e.preventDefault();
@@ -304,7 +304,7 @@ export function SetUpProfile() {
                       )}
                       {profileStep < 3 ? (
                         <button
-                          class="continue_btn"
+                          className="continue_btn"
                           variant="primary"
                           type="button"
                           onClick={(e) => {
@@ -324,7 +324,7 @@ export function SetUpProfile() {
                       )}
                       {profileStep === 3 ? (
                         <button
-                          class="continue_btn"
+                          className="continue_btn"
                           variant="primary"
                           onClick={Form_3.handleSubmit}
                         >
@@ -465,7 +465,7 @@ export function SetUpSetting() {
   }, []);
 
   return (
-    <div class="sub_section_2">
+    <div className="sub_section_2">
       <SkipCaution
         show={skipModal}
         onHide={() => dispatch(toggleSkip(false))}
@@ -477,15 +477,15 @@ export function SetUpSetting() {
           navigate("/dashboard");
         }}
       />
-      <div class="row">
-        <div class="col-md-12">
-          <div class="display_t js-fullheight">
-            <div class="row">
-              <div class="col-md-12">
-                <div class="basic_info_box">
-                  <div class="row">
-                    <div class="col-md-6"></div>
-                    <div class="col-md-6">
+      <div className="row">
+        <div className="col-md-12">
+          <div className="display_t js-fullheight">
+            <div className="row">
+              <div className="col-md-12">
+                <div className="basic_info_box">
+                  <div className="row">
+                    <div className="col-md-6"></div>
+                    <div className="col-md-6">
                       <span
                         className="skip"
                         onClick={() => dispatch(toggleSkip(true))}
@@ -494,8 +494,8 @@ export function SetUpSetting() {
                       </span>
                     </div>
                   </div>
-                  <h5 class="steps mt_50">Steps {profileStep} of 2</h5>
-                  <h3 class="doc_appointment_head">
+                  <h5 className="steps mt_50">Steps {profileStep} of 2</h5>
+                  <h3 className="doc_appointment_head">
                     {profileStep === 1
                       ? "Doctor Availbility and Fees"
                       : "Bank Details"}
@@ -509,19 +509,21 @@ export function SetUpSetting() {
                   > */}
                   {/* {({ values, handleSubmit }) => ( */}
                   <>
-                    <div class="progress_box">
-                      <div class="row">
-                        <div class="col-md-3">
-                          <h5 class="profile_milestone">Profile Milestone</h5>
+                    <div className="progress_box">
+                      <div className="row">
+                        <div className="col-md-3">
+                          <h5 className="profile_milestone">
+                            Profile Milestone
+                          </h5>
                         </div>
-                        <div class="col-md-8">
+                        <div className="col-md-8">
                           <ProgressBar
                             isLoading={false}
                             percent={userProfile?.profile_completed_percentage}
                             size={"large"}
                             showInfo={true}
                           />
-                          <h6 class="progress_bar_subtext">
+                          <h6 className="progress_bar_subtext">
                             Complete your profile for connect with patients
                           </h6>
                         </div>
@@ -531,11 +533,11 @@ export function SetUpSetting() {
                       Form_1={ScheduleForm}
                       Form_2={BankForm}
                     />
-                    <div class="row mt_10">
+                    <div className="row mt_10">
                       <div className="display_inline">
                         {profileStep > 1 ? (
                           <button
-                            class="back_btn"
+                            className="back_btn"
                             variant="primary"
                             onClick={() => {
                               dispatch(prevStep());
@@ -548,7 +550,7 @@ export function SetUpSetting() {
                         )}
                         {profileStep < 2 ? (
                           <button
-                            class="continue_btn"
+                            className="continue_btn"
                             type="button"
                             onClick={(e) => ScheduleForm.handleSubmit(e)}
                           >
@@ -559,7 +561,7 @@ export function SetUpSetting() {
                         )}
                         {profileStep === 2 ? (
                           <button
-                            class="continue_btn"
+                            className="continue_btn"
                             variant="primary"
                             onClick={(e) => {
                               BankForm.handleSubmit(e);
@@ -688,7 +690,7 @@ const ProfileSubmitted = (props) => {
       centered
     >
       <Modal.Header
-        class="modal_header"
+        className="modal_header"
         closeButton
         onClick={() => props.onHide(true)}
       ></Modal.Header>
@@ -728,7 +730,7 @@ const ScheduleSubmitted = (props) => {
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
-      <Modal.Header class="modal_header" closeButton></Modal.Header>
+      <Modal.Header className="modal_header" closeButton></Modal.Header>
       <Modal.Body>
         <center>
           <img alt="myImg" src={BackGround.Sent}></img>

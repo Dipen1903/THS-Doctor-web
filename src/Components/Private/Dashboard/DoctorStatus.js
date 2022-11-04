@@ -164,13 +164,13 @@ function DoctorStatus() {
         userProfile?.is_active === 0 && (
           //* Verification Pending
           <div className="admin-bottom-content">
-            <div class="d-block justify-content-center text-center">
+            <div classNameNameName="d-block justify-content-center text-center">
               <img
                 src={BackGround.Email}
                 alt="Avatar"
-                class="avatar2 mt_100 mb_5"
+                classNameNameName="avatar2 mt_100 mb_5"
               ></img>
-              <h4 class="welcome-text mt_20">
+              <h4 classNameNameName="welcome-text mt_20">
                 Welcome to <br />
                 THS’s growing Doctors Community
               </h4>

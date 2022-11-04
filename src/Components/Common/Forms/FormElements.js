@@ -282,8 +282,13 @@ function CheckBoxes(rest) {
         />
       ) : (
         <label className="ml_20" htmlFor={name}>
-          <Field type="checkbox" id={name} name={name} class="checkbox_icon" />
-          <span class="emergency_call_text">
+          <Field
+            type="checkbox"
+            id={name}
+            name={name}
+            className="checkbox_icon"
+          />
+          <span className="emergency_call_text">
             {options?.length && options[0].key}
           </span>
         </label>

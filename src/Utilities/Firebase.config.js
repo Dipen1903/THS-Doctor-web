@@ -21,14 +21,11 @@ export const GetToken = async () => {
     .then((currentToken) => {
       if (currentToken) {
         return currentToken;
-        // Track the token -> client mapping, by sending to backend server
-        // show on the UI that permission is secured
       } else {
-        throw "No registration token available. Request permission to generate one.";
-        // shows on the UI that permission is required
+        throw null;
       }
     })
     .catch((err) => {
-      return err;
+      return null;
     });
 };

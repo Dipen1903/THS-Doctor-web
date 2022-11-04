@@ -125,14 +125,14 @@ function ConsultIndex() {
 
             <div className="d-flex justify-content-between button-spaces">
               <div className="search ">
-                <form class="form-inline d-flex justify-content-start align-items-center">
+                <form className="form-inline d-flex justify-content-start align-items-center">
                   <img
                     alt="myImg"
                     src={Icon.Search}
                     className="payout_search"
                   ></img>
                   <input
-                    class="form-control mr-sm-2 border-0 ml_5 pl_35"
+                    className="form-control mr-sm-2 border-0 ml_5 pl_35"
                     type="search"
                     placeholder="Search"
                     aria-label="Search"

@@ -8,11 +8,9 @@ import {
   removeSession,
   VerifySession,
 } from "../Store/Reducers/AuthSlice";
-import { GetUserProfile } from "../Store/Reducers/ProfileReducer";
 
 function PrivateRoutes({ children, isHeader, isBanner }) {
   const { token, medkart_token } = useSelector(({ AuthSlice }) => AuthSlice);
-  const { userProfile } = useSelector(({ ProfileSlice }) => ProfileSlice);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -20,9 +18,8 @@ function PrivateRoutes({ children, isHeader, isBanner }) {
     if (token) {
       dispatch(VerifySession()).then((res) => {
         if (res?.payload?.success) {
-          if (!userProfile) {
-            !medkart_token && dispatch(GetMedkartToken());
-            dispatch(GetUserProfile());
+          if (!medkart_token) {
+            dispatch(GetMedkartToken());
           }
         } else {
           dispatch(removeSession());

@@ -51,8 +51,8 @@ function ReferDoctor() {
               />
             </div>
           </div>
-          <div class="table-responsive">
-            <table class="table prescription_table">
+          <div className="table-responsive">
+            <table className="table prescription_table">
               <tbody>
                 {values?.refer_speciality?.length ? (
                   values?.refer_speciality?.map((item, index) => (

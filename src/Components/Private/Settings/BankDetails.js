@@ -49,10 +49,10 @@ function Bankdetails() {
                 <div className="col-md-6 d-flex align-items-center">
                   <h3 className="setting_bank_title">Bank Details</h3>
                   {bankDetails?.is_validated ? (
-                    <span class="paid_tag bank-verify">Verified</span>
+                    <span className="paid_tag bank-verify">Verified</span>
                   ) : (
                     <span
-                      class="failed_tag bank-verify"
+                      className="failed_tag bank-verify"
                       onClick={() => {
                         dispatch(ValidateBank());
                       }}
@@ -91,8 +91,8 @@ function Bankdetails() {
                   {({ values, handleBlur, handleChange, handleSubmit }) => (
                     <form onSubmit={handleSubmit} id="myForm">
                       <div className="col-md-6">
-                        <div class="row">
-                          <div class="col-md-12 mt_20">
+                        <div className="row">
+                          <div className="col-md-12 mt_20">
                             <FormControl
                               control="input"
                               type="text"
@@ -106,8 +106,8 @@ function Bankdetails() {
                             />
                           </div>
                         </div>
-                        <div class="row mt_20">
-                          <div class="col-md-12">
+                        <div className="row mt_20">
+                          <div className="col-md-12">
                             <FormControl
                               control="input"
                               type="text"
@@ -122,8 +122,8 @@ function Bankdetails() {
                           </div>
                         </div>
 
-                        <div class="row mt_20">
-                          <div class="col-md-12 ">
+                        <div className="row mt_20">
+                          <div className="col-md-12 ">
                             <FormControl
                               control="input"
                               type="text"
@@ -138,13 +138,13 @@ function Bankdetails() {
                           </div>
                         </div>
                         <hr className="bottom_border mt_30 mb_30" />
-                        <div class="row">
-                          <div class="col-md-12">
-                            <h3 class="upi_title">UPI</h3>
+                        <div className="row">
+                          <div className="col-md-12">
+                            <h3 className="upi_title">UPI</h3>
                           </div>
                         </div>
-                        <div class="row">
-                          <div class="col-md-12 mt_20">
+                        <div className="row">
+                          <div className="col-md-12 mt_20">
                             <FormControl
                               control="input"
                               type="text"
@@ -164,7 +164,7 @@ function Bankdetails() {
                             <div className="col-md-4">
                               <button
                                 type="submit"
-                                class="continue_btn"
+                                className="continue_btn"
                                 variant="primary"
                               >
                                 Save

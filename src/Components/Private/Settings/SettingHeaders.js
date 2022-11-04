@@ -11,7 +11,7 @@ function SettingHeader() {
   return (
     <Navbar className="headerNav pt_10 pb_15" expand="lg">
       <Container fluid>
-        <img alt="myImg" src={Logo.THS} class="logo ml_10"></img>
+        <img alt="myImg" src={Logo.THS} className="logo ml_10"></img>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse
           className="d-flex justify-content-between"
@@ -27,7 +27,7 @@ function SettingHeader() {
               <svg
                 width="22"
                 height="22"
-                class="nav_links_icon"
+                className="nav_links_icon"
                 viewBox="0 0 22 22"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -57,13 +57,13 @@ function SettingHeader() {
                   fill="#9393AA"
                 />
               </svg>{" "}
-              <span class="nav_links">Dashboard</span>
+              <span className="nav_links">Dashboard</span>
             </Nav.Link>
             <Nav.Link href="#action2">
               <svg
                 width="18"
                 height="18"
-                class="nav_links_icon"
+                className="nav_links_icon"
                 viewBox="0 0 18 18"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -75,13 +75,13 @@ function SettingHeader() {
                   fill="#9393AA"
                 />
               </svg>{" "}
-              <span class="nav_links">Consultations</span>
+              <span className="nav_links">Consultations</span>
             </Nav.Link>
             <Nav.Link href="#action2">
               <svg
                 width="22"
                 height="22"
-                class="nav_links_icon"
+                className="nav_links_icon"
                 viewBox="0 0 22 22"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -111,13 +111,13 @@ function SettingHeader() {
                   fill="#3093BB"
                 />
               </svg>{" "}
-              <span class="nav_links_active">Payouts</span>
+              <span className="nav_links_active">Payouts</span>
             </Nav.Link>
             <Nav.Link href="#action2">
               <svg
                 width="20"
                 height="18"
-                class="nav_links_icon"
+                className="nav_links_icon"
                 viewBox="0 0 20 18"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -147,30 +147,30 @@ function SettingHeader() {
                   fill="#9393AA"
                 />
               </svg>{" "}
-              <span class="nav_links">Chat</span>
+              <span className="nav_links">Chat</span>
             </Nav.Link>
           </Nav>
           <div className="d-flex justify-content-between align-items-center">
-            <label class="switch">
+            <label className="switch">
               <input type="checkbox" />
-              <span class="slider round"></span>
+              <span className="slider round"></span>
             </label>
             <span className="online_toggle_text">Go online</span>
             <img
               src={BackGround.ProfileImg}
               alt="Avatar"
-              class="avatar ml_40"
+              className="avatar ml_40"
             ></img>
             <span className="profile_name ml_10">
               Dr John Doe <br />
-              <span class="userprofile_subtext">123121</span>
+              <span className="userprofile_subtext">123121</span>
             </span>
             <NavDropdown title="" id="navbarScrollingDropdown">
               <NavLink to="">
                 <img
                   src={BackGround.Profile}
                   alt="Avatar"
-                  class="dropdown_icon mr_10"
+                  className="dropdown_icon mr_10"
                 ></img>
                 My Profle
               </NavLink>
@@ -179,7 +179,7 @@ function SettingHeader() {
                 <img
                   src={Icon.Setting}
                   alt="Avatar"
-                  class="dropdown_icon mr_10"
+                  className="dropdown_icon mr_10"
                 ></img>
                 Settings
               </NavLink>
@@ -188,7 +188,7 @@ function SettingHeader() {
                 <img
                   src={Icon.Share}
                   alt="Avatar"
-                  class="dropdown_icon mr_10"
+                  className="dropdown_icon mr_10"
                 ></img>
                 Share Yor Link
               </NavLink>
@@ -197,7 +197,7 @@ function SettingHeader() {
                 <img
                   src={Icon.Notes}
                   alt="Avatar"
-                  class="dropdown_icon mr_10"
+                  className="dropdown_icon mr_10"
                 ></img>
                 Privacy Policy
               </NavLink>
@@ -206,7 +206,7 @@ function SettingHeader() {
                 <img
                   src={Icon.Document}
                   alt="Avatar"
-                  class="dropdown_icon mr_10"
+                  className="dropdown_icon mr_10"
                 ></img>
                 Terms and Conditions
               </NavLink>
@@ -215,7 +215,7 @@ function SettingHeader() {
                 <img
                   src={Icon.Help}
                   alt="Avatar"
-                  class="dropdown_icon mr_10"
+                  className="dropdown_icon mr_10"
                 ></img>
                 Help and Support
               </NavLink>
@@ -224,7 +224,7 @@ function SettingHeader() {
                 <img
                   src={Icon.Logout}
                   alt="Avatar"
-                  class="dropdown_icon mr_10"
+                  className="dropdown_icon mr_10"
                 ></img>
                 Logout
               </NavLink>

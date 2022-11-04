@@ -74,7 +74,7 @@ function Conversation({ roomData }) {
     <div className={`${isDetails ? "col-md-6" : "col-md-9"} padding_left_0`}>
       <PresciptionDetails />
       <div className="upcomming_consult_chat_message_box">
-        <div class="profile_name_box">
+        <div className="profile_name_box">
           <div className="row">
             <div className="col-md-6">
               <div className="profile_namesubtitle_box">
@@ -290,7 +290,7 @@ const ChatItem = ({ type, index, rest }) => {
               <img alt="myImg" className="msg-image" src={rest?.imageUrl} />
               {rest?.message && (
                 <h3
-                  class={`${
+                  className={`${
                     rest?.userType === 1
                       ? "sender_text_title"
                       : "client_text_title"
@@ -350,7 +350,7 @@ const ChatItem = ({ type, index, rest }) => {
               </div>
               {rest?.message && (
                 <h3
-                  class={`${
+                  className={`${
                     rest?.userType === 1
                       ? "sender_text_title"
                       : "client_text_title"
@@ -445,7 +445,7 @@ const ChatItem = ({ type, index, rest }) => {
                 </>
               ) : (
                 <h3
-                  class={`${
+                  className={`${
                     rest?.userType === 1
                       ? "sender_text_title"
                       : "client_text_title"

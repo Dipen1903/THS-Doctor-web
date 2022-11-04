@@ -49,11 +49,11 @@ const DashboardCounts = () => {
     <Card className="cards-layout" style={{ background: "#f8fbff" }}>
       <Card.Body className="card-body">
         <i
-          class="fa fa-question-circle-o float-right consult"
+          className="fa fa-question-circle-o float-right consult"
           style={{ color: "#ABB7C9" }}
           aria-hidden="true"
         ></i>
-        <img src={Icon.Face} alt="Avatar" class="ml_15 mt_15 mb_5 "></img>
+        <img src={Icon.Face} alt="Avatar" className="ml_15 mt_15 mb_5 "></img>
         <Card.Title className="card_dynamicnum pt_10">
           {analytics?.total_consultations}
         </Card.Title>
@@ -61,14 +61,14 @@ const DashboardCounts = () => {
       </Card.Body>
       <Card.Body className="card-body">
         <i
-          class="fa fa-question-circle-o float-right"
+          className="fa fa-question-circle-o float-right"
           style={{ color: "#ABB7C9" }}
           aria-hidden="true"
         ></i>
         <img
           src={Icon.CalenderCross}
           alt="Avatar"
-          class="ml_15 mt_15 mb_5"
+          className="ml_15 mt_15 mb_5"
         ></img>
         <Card.Title className="card_dynamicnum pt_10">
           {analytics?.total_canceled_consultations}
@@ -77,11 +77,11 @@ const DashboardCounts = () => {
       </Card.Body>
       <Card.Body className="card-body">
         <i
-          class="fa fa-question-circle-o float-right"
+          className="fa fa-question-circle-o float-right"
           style={{ color: "#ABB7C9" }}
           aria-hidden="true"
         ></i>
-        <img src={Icon.Dollor} alt="Avatar" class="ml_15 mt_15 mb_5"></img>
+        <img src={Icon.Dollor} alt="Avatar" className="ml_15 mt_15 mb_5"></img>
         <Card.Title className="card_dynamicnum pt_10">
           {analytics?.total_revenue}
         </Card.Title>
@@ -89,11 +89,11 @@ const DashboardCounts = () => {
       </Card.Body>
       <Card.Body className="card-body">
         <i
-          class="fa fa-question-circle-o float-right"
+          className="fa fa-question-circle-o float-right"
           style={{ color: "#ABB7C9" }}
           aria-hidden="true"
         ></i>
-        <img src={Icon.Dollor} alt="Avatar" class="ml_15 mt_15 mb_5"></img>
+        <img src={Icon.Dollor} alt="Avatar" className="ml_15 mt_15 mb_5"></img>
         <Card.Title className="card_dynamicnum pt_10">
           {analytics?.current_month_revenue}
         </Card.Title>

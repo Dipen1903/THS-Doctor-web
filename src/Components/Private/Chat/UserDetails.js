@@ -29,7 +29,7 @@ function UserDetails() {
 
   return isDetails ? (
     <div className="col-md-3 padding_left_0">
-      <div class="chatprofile_name_box">
+      <div className="chatprofile_name_box">
         <div className="row">
           <div className="col-md-6 col-sm-6 col-xs-6 col-6">
             <div className="profile_namesubtitle_box">

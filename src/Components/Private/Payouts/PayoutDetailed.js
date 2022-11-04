@@ -48,7 +48,7 @@ function PayoutDetailed() {
           row: { original },
         },
       }) => {
-        return <span class="paid_tag">Completed</span>;
+        return <span className="paid_tag">Completed</span>;
       },
     },
     {
@@ -125,10 +125,10 @@ function PayoutDetailed() {
       </h5>
       <div className="d-flex justify-content-between flex-wrap payouts_buttons">
         <div className="payout_search_box">
-          <form class="form-inline d-flex justify-content-start align-items-center">
+          <form className="form-inline d-flex justify-content-start align-items-center">
             <img alt="myImg" src={Icon.Search} className="payout_search"></img>
             <input
-              class="form-control mr-sm-2 border-0 ml_5 pl_35"
+              className="form-control mr-sm-2 border-0 ml_5 pl_35"
               type="search"
               placeholder="Search"
               aria-label="Search"
@@ -141,7 +141,7 @@ function PayoutDetailed() {
             <h3 className="withdraw_balance_text">
               Earning from {payoutDetails?.appointment_list?.length}{" "}
               Consultations:{" "}
-              <span class="withdraw_balance_amount">
+              <span className="withdraw_balance_amount">
                 Rs.{payoutDetails?.withdrawable_balance}
               </span>
             </h3>

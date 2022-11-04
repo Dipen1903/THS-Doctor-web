@@ -51,7 +51,7 @@ export default function Table(props) {
   return (
     <>
       <div className="consultation_card_box mt_20">
-        <div class="table-responsive">
+        <div className="table-responsive">
           <table {...getTableProps()} className="table consultation_table">
             <thead>
               {headerGroups.map((headerGroup, i) => (
@@ -129,7 +129,7 @@ export default function Table(props) {
         <div className="pagination_card">
           <div className="row">
             <div className="col-md-3">
-              <h5 class="pagination_result_text">
+              <h5 className="pagination_result_text">
                 Showing {parseInt(page[0].id) + 1} -{" "}
                 {parseInt(page[page.length - 1].id) + 1} of {data.length}{" "}
                 Results
@@ -184,7 +184,7 @@ export default function Table(props) {
             </div>
             <div className="col-md-3">
               <div className="display_inline float_right item_list_box ">
-                <h6 class="page_item_list">Items per page</h6>
+                <h6 className="page_item_list">Items per page</h6>
                 <Form.Group className="mb-3 item_drop_box">
                   <select
                     className="form-select"

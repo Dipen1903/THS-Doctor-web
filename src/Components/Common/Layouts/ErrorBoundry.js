@@ -29,8 +29,8 @@ export default class ErrorBoundary extends React.Component {
     if (this.state.errorInfo) {
       // Error path
       return (
-        <div class="error-container">
-          <div class="main flex-column justify-content-center align-items-center">
+        <div className="error-container">
+          <div className="main flex-column justify-content-center align-items-center">
             <Lottie options={defaultOptions} />
           </div>
           <h1>Something went wrong.</h1>

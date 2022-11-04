@@ -45,7 +45,7 @@ const Review = ({ values }) => {
             height={"37px"}
             width={"67px"}
             src={Logo.THS_WHITE}
-            class="logo ml_10"
+            className="logo ml_10"
           />
         </div>
         <div>
@@ -122,9 +122,9 @@ const Review = ({ values }) => {
 
         {prescDetails?.medicines?.length ? (
           <div className="prescription_table_appoinment_input">
-            <div class="table-responsive">
+            <div className="table-responsive">
               <span className="text-uppercase">Mecdicine</span>
-              <table class="table prescription_table">
+              <table className="table prescription_table">
                 <thead>
                   <tr className="prescription_table_head">
                     <th className="prescription_table_head_text">Name</th>

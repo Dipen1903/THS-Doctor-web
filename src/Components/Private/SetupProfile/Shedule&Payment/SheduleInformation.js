@@ -34,12 +34,12 @@ function SheduleInformation() {
   return (
     <>
       <FeeCardModal show={feeModal} onHide={() => dispatch(toggleFee(false))} />
-      <div class="basic_info_form_box">
-        <div class="row mt_20">
-          <div class="col-md-9 col-sm-8">
+      <div className="basic_info_form_box">
+        <div className="row mt_20">
+          <div className="col-md-9 col-sm-8">
             <label className="sign_title">Consultation Fee (Rs)</label>
-            <div class="input_box">
-              <div class="form_group">
+            <div className="input_box">
+              <div className="form_group">
                 <input
                   type="text"
                   disabled
@@ -51,34 +51,37 @@ function SheduleInformation() {
               </div>
             </div>
           </div>
-          <div class="col-md-3 col-sm-4">
-            <button class="fee_card" onClick={() => dispatch(toggleFee(true))}>
+          <div className="col-md-3 col-sm-4">
+            <button
+              className="fee_card"
+              onClick={() => dispatch(toggleFee(true))}
+            >
               Fee Card
             </button>
           </div>
         </div>
-        <div class="row mt_10">
-          <div class="col-md-12">
-            <span class="consult_fee_subtext">
+        <div className="row mt_10">
+          <div className="col-md-12">
+            <span className="consult_fee_subtext">
               You will get 70% of the consultation fees and 30% is THS Platform
               Fees.{" "}
             </span>
           </div>
         </div>
         <hr className="bottom_border mt_30 mb_30" />
-        <div class="row">
-          <div class="col-md-12">
-            <h3 class="time_slot">Online Time Slot Managment</h3>
+        <div className="row">
+          <div className="col-md-12">
+            <h3 className="time_slot">Online Time Slot Managment</h3>
           </div>
         </div>
-        <div class="row mt_20">
-          <div class="col-md-12">
+        <div className="row mt_20">
+          <div className="col-md-12">
             <Tabs defaultActiveKey="first">
               <Tab eventKey="first" title="Weekdays" className="tab_inner_box">
-                <div class="weekdays_box">
-                  <div class="row">
-                    <div class="col-md-12">
-                      <div class="day_box">
+                <div className="weekdays_box">
+                  <div className="row">
+                    <div className="col-md-12">
+                      <div className="day_box">
                         <FormControl
                           control="checkbox"
                           name="weekdays.days"
@@ -100,9 +103,9 @@ function SheduleInformation() {
                             <Accordion.Item eventKey={index}>
                               <Accordion.Header>{item}</Accordion.Header>
                               <Accordion.Body>
-                                <div class="row">
-                                  <div class=" col-md-6">
-                                    <h5 class="start_at">Start at</h5>
+                                <div className="row">
+                                  <div className=" col-md-6">
+                                    <h5 className="start_at">Start at</h5>
                                     <FormControl
                                       control="select"
                                       options={
@@ -121,8 +124,8 @@ function SheduleInformation() {
                                       onBlur={handleBlur}
                                     />
                                   </div>
-                                  <div class=" col-md-6">
-                                    <h5 class="end_at">End at</h5>
+                                  <div className=" col-md-6">
+                                    <h5 className="end_at">End at</h5>
                                     <FormControl
                                       control="select"
                                       options={[
@@ -169,10 +172,10 @@ function SheduleInformation() {
                 </div>
               </Tab>
               <Tab eventKey="second" title="Weekends" className="tab_inner_box">
-                <div class="weekends_box">
-                  <div class="row">
-                    <div class="col-md-12">
-                      <div class="day_box">
+                <div className="weekends_box">
+                  <div className="row">
+                    <div className="col-md-12">
+                      <div className="day_box">
                         <FormControl
                           control="checkbox"
                           name="weekends.days"
@@ -194,9 +197,9 @@ function SheduleInformation() {
                             <Accordion.Item eventKey={index}>
                               <Accordion.Header>{item}</Accordion.Header>
                               <Accordion.Body>
-                                <div class="row">
-                                  <div class="col-md-6">
-                                    <h5 class="start_at">Start at</h5>
+                                <div className="row">
+                                  <div className="col-md-6">
+                                    <h5 className="start_at">Start at</h5>
                                     <FormControl
                                       control="select"
                                       options={
@@ -215,8 +218,8 @@ function SheduleInformation() {
                                       onBlur={handleBlur}
                                     />
                                   </div>
-                                  <div class="col-md-6">
-                                    <h5 class="end_at">End at</h5>
+                                  <div className="col-md-6">
+                                    <h5 className="end_at">End at</h5>
                                     <FormControl
                                       control="select"
                                       options={[
@@ -264,8 +267,8 @@ function SheduleInformation() {
               </Tab>
             </Tabs>
 
-            <div class="row mt_20">
-              <div class="col-md-12">
+            <div className="row mt_20">
+              <div className="col-md-12">
                 <FormControl
                   control="checkbox"
                   name="emergency_call"
@@ -302,21 +305,21 @@ const FeeCardModal = (props) => {
       centered
     >
       <Modal.Header className="" closeButton>
-        <h5 class="fee_card_title">Fee Card</h5>
+        <h5 className="fee_card_title">Fee Card</h5>
       </Modal.Header>
       <Modal.Body>
         <table className="width_100">
           <tr>
-            <td class="fee_card_table_head">Speciality</td>
-            <td class="fee_card_table_head">Consultation Fee (Rs)</td>
-            <td class="fee_card_table_head">Follow up Fee (Rs)</td>
+            <td className="fee_card_table_head">Speciality</td>
+            <td className="fee_card_table_head">Consultation Fee (Rs)</td>
+            <td className="fee_card_table_head">Follow up Fee (Rs)</td>
           </tr>
           {subSpecialityList?.length ? (
             subSpecialityList.map((item) => (
               <tr key={item?.id}>
-                <td class="table_text">{item?.sub_speciality}</td>
-                <td class="table_text">{item?.consulting_fee}</td>
-                <td class="table_text">{item?.follow_up_fee}</td>
+                <td className="table_text">{item?.sub_speciality}</td>
+                <td className="table_text">{item?.consulting_fee}</td>
+                <td className="table_text">{item?.follow_up_fee}</td>
               </tr>
             ))
           ) : (

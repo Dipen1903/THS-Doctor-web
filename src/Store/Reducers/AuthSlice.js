@@ -45,13 +45,13 @@ export const SignIn = createAsyncThunk(
       dispatch(setLoading(true));
       const fcmToken = await GetToken();
       if (fcmToken) {
-        console.log("fcmToken", fcmToken);
+        values["device_token"] = fcmToken;
       }
       const result = await SignInAPI(values);
       if (result?.success) {
         dispatch(setLoading(false));
         dispatch(setSession(result?.data));
-        dispatch(GetUserProfile());
+        await dispatch(GetUserProfile());
         return result;
       } else {
         throw result;
@@ -303,10 +303,6 @@ export const VerifySession = createAsyncThunk(
   "VerifySession",
   async (values, { dispatch }) => {
     try {
-      const fcmToken = await GetToken();
-      if (fcmToken) {
-        console.log("fcmToken", fcmToken);
-      }
       const result = await VerifySessionAPI(values);
       if (result?.success) {
         return result;

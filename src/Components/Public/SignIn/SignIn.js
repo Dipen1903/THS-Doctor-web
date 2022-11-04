@@ -47,16 +47,16 @@ function SignInComponent() {
 
   return (
     <>
-      <div class="sub_section_2">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="display_t js-fullheight">
-              <div class="row">
-                <div class="col-md-12">
-                  <div class="login_box">
-                    <h3 class="logo_title">THS Doctor’s Sign In</h3>
-                    <h5 class="welcome_title">Welcome back to THS!</h5>
-                    <div class="signin_box">
+      <div className="sub_section_2">
+        <div className="row">
+          <div className="col-md-12">
+            <div className="display_t js-fullheight">
+              <div className="row">
+                <div className="col-md-12">
+                  <div className="login_box">
+                    <h3 className="logo_title">THS Doctor’s Sign In</h3>
+                    <h5 className="welcome_title">Welcome back to THS!</h5>
+                    <div className="signin_box">
                       <Formik
                         initialValues={SignInEnum}
                         validationSchema={SignInSchema}
@@ -80,7 +80,7 @@ function SignInComponent() {
                           <>
                             <Form onSubmit={handleSubmit}>
                               <div className="row">
-                                <div class="col-md-12">
+                                <div className="col-md-12">
                                   <FormControl
                                     control="input"
                                     type="text"
@@ -92,7 +92,7 @@ function SignInComponent() {
                                     value={values.email}
                                   />
                                 </div>
-                                <div class="col-md-12">
+                                <div className="col-md-12">
                                   <FormControl
                                     control="input"
                                     type="password"
@@ -105,8 +105,8 @@ function SignInComponent() {
                                     value={values.password}
                                   />
                                 </div>
-                                <div class="col-md-12">
-                                  <button type="submit" class="login_btn">
+                                <div className="col-md-12">
+                                  <button type="submit" className="login_btn">
                                     Login
                                   </button>
                                 </div>
@@ -226,7 +226,7 @@ const OTPLogin = (props) => {
             {({ values, handleChange, handleBlur, handleSubmit }) => (
               <Form onSubmit={handleSubmit}>
                 <Modal.Body>
-                  <p class="otp_sent">
+                  <p className="otp_sent">
                     Please enter registered Mobile to receive verification code.
                   </p>
 
@@ -283,7 +283,7 @@ const OTPLogin = (props) => {
             {({ values, setFieldValue, handleSubmit }) => (
               <Form onSubmit={handleSubmit}>
                 <Modal.Body>
-                  <p class="otp_sent">Enter the OTP sent on {verified}</p>
+                  <p className="otp_sent">Enter the OTP sent on {verified}</p>
                   <center>
                     <div className="display_inline">
                       <OTPInput
@@ -371,7 +371,7 @@ const ForgotModal = (props) => {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <p class="forgot_password_subtext">
+        <p className="forgot_password_subtext">
           Please enter registered Mobile / email below to receive verification
           code.
         </p>
@@ -382,8 +382,8 @@ const ForgotModal = (props) => {
         >
           {({ values, handleChange, handleBlur, handleSubmit }) => (
             <Form onSubmit={handleSubmit}>
-              <div class="row">
-                <div class="col-md-12">
+              <div className="row">
+                <div className="col-md-12">
                   <FormControl
                     control="input"
                     type="text"
@@ -472,7 +472,7 @@ const OTPForgot = (props) => {
         {({ values, setFieldValue, handleSubmit }) => (
           <Form onSubmit={handleSubmit}>
             <Modal.Body>
-              <p class="otp_sent">Enter the OTP sent on {values?.value}</p>
+              <p className="otp_sent">Enter the OTP sent on {values?.value}</p>
               <center>
                 <div className="display_inline">
                   <OTPInput
@@ -533,7 +533,7 @@ const ResetPasswordModal = (props) => {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <p class="reset_password_subtext">
+        <p className="reset_password_subtext">
           Create new password for your account.
         </p>
         <Formik
@@ -547,8 +547,8 @@ const ResetPasswordModal = (props) => {
         >
           {({ values, handleBlur, handleChange, handleSubmit }) => (
             <Form onSubmit={handleSubmit}>
-              <div class="row">
-                <div class="col-md-12 mt_20">
+              <div className="row">
+                <div className="col-md-12 mt_20">
                   <FormControl
                     control="input"
                     type="password"
@@ -560,7 +560,7 @@ const ResetPasswordModal = (props) => {
                     value={values.password}
                   />
                 </div>
-                <div class="col-md-12 mt_20">
+                <div className="col-md-12 mt_20">
                   <FormControl
                     control="input"
                     type="password"

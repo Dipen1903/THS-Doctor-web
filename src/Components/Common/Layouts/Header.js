@@ -8,10 +8,7 @@ import { BackGround, Icon, Logo } from "../../../Utilities/Icons";
 import { removeSession } from "../../../Store/Reducers/AuthSlice";
 import { NavLink } from "react-router-dom";
 import { useEffect, useState } from "react";
-import {
-  GetUserProfile,
-  ToggleLiveStatus,
-} from "../../../Store/Reducers/ProfileReducer";
+import { ToggleLiveStatus } from "../../../Store/Reducers/ProfileReducer";
 import { Button, Form, InputGroup, Modal } from "react-bootstrap";
 import { setMessage } from "../../../Store/Reducers/LayoutSlice";
 import { AlertEnum } from "../../../Utilities/Enums";
@@ -35,7 +32,7 @@ function Header() {
   return (
     <Navbar className="headerNav pt_10 pb_15  " expand="lg">
       <Container fluid>
-        <img alt="myImg" src={Logo.THS_SHORT} class="logo ml_10"></img>
+        <img alt="myImg" src={Logo.THS_SHORT} className="logo ml_10"></img>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse
           className="d-flex justify-content-between"
@@ -48,28 +45,28 @@ function Header() {
             navbarScroll
           >
             <NavLink className="nav-link" to="/dashboard">
-              <i class="fa fa-tachometer" aria-hidden="true"></i>
+              <i className="fa fa-tachometer" aria-hidden="true"></i>
               &nbsp;&nbsp;&nbsp;Dashboard
             </NavLink>
 
             <NavLink className="nav-link" to="/consultation">
-              <i class="fa fa-phone" aria-hidden="true"></i>
+              <i className="fa fa-phone" aria-hidden="true"></i>
               &nbsp;&nbsp;&nbsp;Consultations
             </NavLink>
 
             <NavLink className="nav-link" to="/payouts">
               {" "}
-              <i class="fa fa-usd" aria-hidden="true"></i>
+              <i className="fa fa-usd" aria-hidden="true"></i>
               &nbsp;&nbsp;&nbsp;Payouts
             </NavLink>
 
             <NavLink className="nav-link" to="/chat">
-              <i class="fa fa-commenting-o" aria-hidden="true"></i>
+              <i className="fa fa-commenting-o" aria-hidden="true"></i>
               &nbsp;&nbsp;&nbsp;Chats
             </NavLink>
           </Nav>
           <div className="d-flex justify-content-between align-items-center">
-            <label class="switch">
+            <label className="switch">
               <input
                 type="checkbox"
                 checked={userProfile?.is_online}
@@ -81,7 +78,7 @@ function Header() {
                   )
                 }
               />
-              <span class="slider round"></span>
+              <span className="slider round"></span>
             </label>
             {userProfile?.is_online ? (
               <span className="go_online ml_10 mt_5">Online</span>
@@ -91,7 +88,7 @@ function Header() {
             <img
               src={userProfile?.image || BackGround.Profile}
               alt="Avatar"
-              class="avatar ml_40"
+              className="avatar ml_40"
             ></img>
 
             <NavDropdown
@@ -108,7 +105,7 @@ function Header() {
                   disabled={userProfile?.is_active !== 1}
                   href="/profile"
                 >
-                  <img src={Icon.User} alt="Avatar" class=" mr_10 "></img>
+                  <img src={Icon.User} alt="Avatar" className=" mr_10 "></img>
                   My Profle
                 </NavDropdown.Item>
               </NavLink>
@@ -121,7 +118,7 @@ function Header() {
                   disabled={userProfile?.is_active !== 1}
                   href="/settings"
                 >
-                  <img src={Icon.Setting} alt="Avatar" class=" mr_10"></img>
+                  <img src={Icon.Setting} alt="Avatar" className=" mr_10"></img>
                   Settings
                 </NavDropdown.Item>
               </NavLink>
@@ -134,35 +131,39 @@ function Header() {
                     handleShow2();
                   }}
                 >
-                  <img src={Icon.Share} alt="Avatar" class=" mr_10"></img>
+                  <img src={Icon.Share} alt="Avatar" className=" mr_10"></img>
                   Share Your Link
                 </NavDropdown.Item>
               </NavLink>
               <NavDropdown.Divider />
               <NavLink className="dropdown-item-link" to="/privacy">
                 <NavDropdown.Item href="/privacy">
-                  <img src={Icon.Notes} alt="Avatar" class="mr_10"></img>
+                  <img src={Icon.Notes} alt="Avatar" className="mr_10"></img>
                   Privacy Policy
                 </NavDropdown.Item>
               </NavLink>
               <NavDropdown.Divider />
               <NavLink className="dropdown-item-link" to="/terms">
                 <NavDropdown.Item href="/terms">
-                  <img src={Icon.Document} alt="Avatar" class=" mr_10"></img>
+                  <img
+                    src={Icon.Document}
+                    alt="Avatar"
+                    className=" mr_10"
+                  ></img>
                   Terms and Conditions
                 </NavDropdown.Item>
               </NavLink>
               <NavDropdown.Divider />
               <NavLink className="dropdown-item-link" to="/help">
                 <NavDropdown.Item href="/help">
-                  <img src={Icon.Help} alt="Avatar" class="mr_10"></img>
+                  <img src={Icon.Help} alt="Avatar" className="mr_10"></img>
                   Help and Support
                 </NavDropdown.Item>
               </NavLink>
               <NavDropdown.Divider />
               <NavLink className="dropdown-item-link" to="#!">
                 <NavDropdown.Item disabled={userProfile?.is_active !== 1}>
-                  <img src={Icon.Logout} alt="Avatar" class="mr_10"></img>
+                  <img src={Icon.Logout} alt="Avatar" className="mr_10"></img>
                   Delete My Account
                 </NavDropdown.Item>
               </NavLink>
@@ -176,7 +177,7 @@ function Header() {
                 }}
               >
                 <NavDropdown.Item>
-                  <img src={Icon.Logout} alt="Avatar" class="mr_10"></img>
+                  <img src={Icon.Logout} alt="Avatar" className="mr_10"></img>
                   Logout
                 </NavDropdown.Item>
               </NavLink>
@@ -252,8 +253,8 @@ const ShareYourLink = (props) => {
                 render={(childern) => <div className="error">{childern}</div>}
                 name="link"
               />
-              <div class="row">
-                <div class="col-md-12 mt_30">
+              <div className="row">
+                <div className="col-md-12 mt_30">
                   <label className="share_label">Enter Mobile Number</label>
                   <InputGroup className="share-your-sec mb-2">
                     {" "}

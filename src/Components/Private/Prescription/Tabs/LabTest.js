@@ -8,10 +8,10 @@ function LabTest() {
       <div className="medicine_search_box d-flex ">
         <span className="medicine_text">Add Lab test:</span>
         <div className="prescription-search ">
-          <form class="form-inline d-flex justify-content-start align-items-center">
+          <form className="form-inline d-flex justify-content-start align-items-center">
             <img alt="myImg" src={Icon.Search} className="payout_search"></img>
             <input
-              class="form-control mr-sm-2 border-0 ml_5 pl_35 pt_10 pb_10"
+              className="form-control mr-sm-2 border-0 ml_5 pl_35 pt_10 pb_10"
               type="search"
               placeholder="Search"
               aria-label="Search"
@@ -19,8 +19,8 @@ function LabTest() {
           </form>
         </div>
       </div>
-      <div class="table-responsive">
-        <table class="table prescription_table">
+      <div className="table-responsive">
+        <table className="table prescription_table">
           <thead></thead>
           <tbody>
             <tr className="prescription_table_body_row ">

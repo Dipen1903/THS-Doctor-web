@@ -51,14 +51,14 @@ function Medicine() {
               <div className="medicine_search_box d-flex col-md-12">
                 <span className="medicine_text col-md-2">Add Medicines:</span>
                 <div className="prescription-search col-md-10">
-                  <form class="form-inline d-flex justify-content-start align-items-center">
+                  <form className="form-inline d-flex justify-content-start align-items-center">
                     <img
                       alt="myImg"
                       src={Icon.Search}
                       className="payout_search"
                     ></img>
                     <input
-                      class="form-control mr-sm-2 border-0 pl_35 pt_10 pb_10"
+                      className="form-control mr-sm-2 border-0 pl_35 pt_10 pb_10"
                       type="search"
                       placeholder="Search"
                       aria-label="Search"
@@ -108,8 +108,8 @@ function Medicine() {
                   )}
                 </div>
               </div>
-              <div class="table-responsive">
-                <table class="table prescription_table">
+              <div className="table-responsive">
+                <table className="table prescription_table">
                   <thead>
                     <tr className="prescription_table_head">
                       <th className="prescription_table_head_text">Medicine</th>
