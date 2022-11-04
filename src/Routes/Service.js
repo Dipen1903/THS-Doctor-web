@@ -1,13 +1,5 @@
-import { RP_ID, RP_SECRET } from "../Utilities/Enums";
-import { BASE_URL, POST, RP_URL } from "../Utilities/HTTP";
-const token = `${RP_ID}:${RP_SECRET}`;
-const encodedToken = window.btoa(token);
-let config = {
-  headers: {
-    "Content-Type": "application/json",
-    Authorization: `Basic ${encodedToken}`,
-  },
-};
+import { BASE_URL, POST } from "../Utilities/HTTP";
+
 //* SIGNIN API REQUEST
 export const SignInAPI = (data) => POST(`${BASE_URL}/login`, data);
 export const MobileSignInAPI = (data) => POST(`${BASE_URL}/login-mobile`, data);
@@ -100,3 +92,6 @@ export const PayoutDetailsAPI = (data) =>
   POST(`${BASE_URL}/payouts-details`, data);
 export const RequestWithdrawAPI = (data) =>
   POST(`${BASE_URL}/payouts-send-request`, data);
+
+//*NOTIFICATION API REQUEST
+export const NotifyAPI = (data) => POST(`${BASE_URL}/notification-send`, data);

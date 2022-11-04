@@ -119,7 +119,7 @@ function Conversation({ roomData }) {
                   onClick={() => {
                     dispatch(UpdateRoom({ isCallingStatus: 1 })).then((res) => {
                       setAudiocall(true);
-                      audioRef.current.join();
+                      audioRef?.current?.join();
                     });
                   }}
                 >

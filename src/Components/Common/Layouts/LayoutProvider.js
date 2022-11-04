@@ -55,7 +55,7 @@ function SnackBar() {
             show ? "alert-shown" : "alert-hidden"
           }`}
         >
-          {text}
+          {text.toString()}
         </div>
       );
     case AlertEnum.Error:
@@ -65,7 +65,7 @@ function SnackBar() {
             show ? "alert-shown" : "alert-hidden"
           }`}
         >
-          {text}
+          {text.toString()}
         </div>
       );
     case AlertEnum.Warning:
@@ -75,7 +75,7 @@ function SnackBar() {
             show ? "alert-shown" : "alert-hidden"
           }`}
         >
-          {text}
+          {text.toString()}
         </div>
       );
     default:
@@ -85,7 +85,7 @@ function SnackBar() {
             show ? "alert-shown" : "alert-hidden"
           }`}
         >
-          {text}
+          {text.toString()}
         </div>
       );
   }

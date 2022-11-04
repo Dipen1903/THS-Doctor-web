@@ -4,6 +4,7 @@ import { useFormikContext, FieldArray, ErrorMessage } from "formik";
 import { BackGround, Icon } from "../../../../Utilities/Icons";
 import FormControl from "../../../Common/Forms/FormControl";
 import FileUpload from "../../../Common/Layouts/FileUpload";
+import Signature from "../../../Common/Layouts/SignaturePad";
 
 export default function EducationalProfile({ formProps }) {
   const { values, errors, touched, setFieldValue, handleBlur, handleChange } =
@@ -353,14 +354,13 @@ export default function EducationalProfile({ formProps }) {
                 </div>
               </div>
             ) : (
-              <FileUpload
-                label="Attach File"
-                icon={Icon.Attach}
+              <Signature
+                label="Create signature"
                 className="attach_certificate"
                 name="signature"
                 id="signature"
                 value={values.signature}
-                onChange={handleSignature}
+                onChange={(file) => setFieldValue(`signature`, file)}
               />
             )}
           </div>

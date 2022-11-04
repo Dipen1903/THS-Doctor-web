@@ -528,8 +528,15 @@ input:disabled {
   padding: 8px 13px 12px 13px;
   margin: 0 10px;
 }
-.bank-verify{
+.bank-verify {
   padding: 0 10px;
   height: 25px;
   margin: 10px;
+}
+.signature-canvas {
+  width: 100%;
+  min-height: 500px;
+}
+.signature-btn-modal-footer {
+  width: 100%;
 }

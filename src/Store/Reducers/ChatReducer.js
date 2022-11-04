@@ -19,6 +19,7 @@ const initialState = {
   patient: "",
   room: "",
   chat: [],
+  chatDoc: "",
   conversations: [],
   snapShot: () => {},
   isDetails: false,
@@ -106,6 +107,7 @@ export const GetRoom = createAsyncThunk(
 
       const result = await getDocs(q);
       if (!result?.empty) {
+        dispatch(setUpChatDoc(result?.docs[0]));
         return result?.docs[0]?.data();
       } else {
         return false;
@@ -183,7 +185,6 @@ export const UpdateRoom = createAsyncThunk(
       }
     } catch (error) {
       dispatch(setLoading(false));
-      console.log("ERROR", error);
       return error;
     }
   }
@@ -251,6 +252,7 @@ export const SendMessage = createAsyncThunk(
       const path = `Chat_${userProfile?.id}_${user_id}_${booking_id}`;
       const collectionRef = collection(FirebaseDB, path);
       const docRef = await addDoc(collectionRef, values);
+
       dispatch(
         UpdateRoom({
           lastMessage:
@@ -279,6 +281,9 @@ export const ChatSlice = createSlice({
       state.chat = [];
       state.room = action.payload;
     },
+    setUpChatDoc: (state, action) => {
+      state.chatDoc = action.payload;
+    },
     setUpChat: (state, action) => {
       state.chat = [...state.chat, action.payload];
     },
@@ -304,6 +309,7 @@ export const {
   toggleDetails,
   toggleRoom,
   clearChat,
+  setUpChatDoc,
   setUpConvertations,
 } = ChatSlice.actions;
 

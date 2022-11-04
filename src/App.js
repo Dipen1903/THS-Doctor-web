@@ -10,8 +10,16 @@ import "agora-react-uikit/dist/index.css";
 import "./Assets/css/responsive.css";
 import "./Assets/css/style.css";
 import "./Components/Common/style.css";
+import { onMessageListener } from "./Utilities/Firebase.config";
+import { setMessage } from "./Store/Reducers/LayoutSlice";
+import { AlertEnum } from "./Utilities/Enums";
 
 function App() {
+  onMessageListener()
+    .then((payload) => {
+      setMessage({ text: payload?.notification?.title, type: AlertEnum.Info });
+    })
+    .catch((err) => console.log("failed: ", err));
   return (
     <ErrorBoundary>
       <LayoutProvider>

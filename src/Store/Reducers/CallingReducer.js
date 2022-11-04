@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { layout } from "agora-react-uikit";
 import { GetAgoraToken } from "../../Components/Common/Service";
+import { NotifyAPI } from "../../Routes/Service";
 
 import { AGORA, AGORA_APP, AlertEnum } from "../../Utilities/Enums";
 import { setLoading, setMessage } from "./LayoutSlice";
@@ -34,6 +35,29 @@ export const GetToken = createAsyncThunk(
             token: result?.data,
           })
         );
+        dispatch(setLoading(false));
+        return result?.data;
+      } else {
+        throw result;
+      }
+    } catch (error) {
+      dispatch(setLoading(false));
+      dispatch(
+        setMessage({
+          text: error?.message,
+          type: AlertEnum.Error,
+        })
+      );
+      return error;
+    }
+  }
+);
+export const SendNotification = createAsyncThunk(
+  "SendNotification",
+  async (values, { dispatch }) => {
+    try {
+      const result = await NotifyAPI(values);
+      if (result?.success) {
         dispatch(setLoading(false));
         return result?.data;
       } else {

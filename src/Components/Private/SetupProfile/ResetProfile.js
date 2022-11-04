@@ -22,6 +22,7 @@ import {
   DocumentList,
   QualificationList,
 } from "../../../Store/Reducers/CommonReducer";
+import Signature from "../../Common/Layouts/SignaturePad";
 
 function ResetProfile() {
   const dispatch = useDispatch();
@@ -474,14 +475,13 @@ function ResetProfile() {
                           </div>
                         </div>
                       ) : (
-                        <FileUpload
-                          label="Attach File"
-                          icon={Icon.Attach}
+                        <Signature
+                          label="Create signature"
                           className="attach_certificate"
                           name="signature"
                           id="signature"
                           value={values.signature}
-                          onChange={(e) => handleSignature(e, setFieldValue)}
+                          onChange={(file) => setFieldValue(`signature`, file)}
                         />
                       )}
                     </div>

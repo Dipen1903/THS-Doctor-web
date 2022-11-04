@@ -12,7 +12,7 @@ function FileUpload({ label, icon, isPdf, className, ...rest }) {
           fileRef?.current?.click();
         }}
       >
-        {icon && <img alt="myImg" src={icon} className="attach_icon"></img>}
+        {icon && <img alt="myImg" src={icon} class="attach_icon"></img>}
         {label}
       </button>
       <Field name={rest?.name} validate={rest?.validate} hidden />

@@ -13,6 +13,7 @@ import FileUpload from "../../Common/Layouts/FileUpload";
 import { isEmpty } from "../../../Utilities/Functions";
 import { EditUserProfile } from "../../../Store/Reducers/ProfileReducer";
 import { WorkProfileSettingSchema } from "../../../Utilities/Schema";
+import Signature from "../../Common/Layouts/SignaturePad";
 function WorkProfile() {
   const [isEdit, setIsEdit] = useState(false);
   const [profileData, setProfileData] = useState({
@@ -88,8 +89,7 @@ function WorkProfile() {
       setProfileData(tempProfile);
     } catch (error) {}
   };
-  const handleSignature = (e, setFieldValue) => {
-    let file = e?.target?.files[0];
+  const handleSignature = (file, setFieldValue) => {
     if (file) {
       setFieldValue(`signature`, file);
     }
@@ -791,14 +791,15 @@ function WorkProfile() {
                         </div>
                       </div>
                     ) : (
-                      <FileUpload
-                        label="Attach File"
-                        icon={Icon.Attach}
+                      <Signature
+                        label="Create signature"
                         className="attach_certificate"
                         name="signature"
                         id="signature"
                         value={values.signature}
-                        onChange={(e) => handleSignature(e, setFieldValue)}
+                        onChange={(file) =>
+                          handleSignature(file, setFieldValue)
+                        }
                       />
                     )}
                   </div>
