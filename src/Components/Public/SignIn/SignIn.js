@@ -232,9 +232,11 @@ const OTPLogin = (props) => {
 
                   <FormControl
                     control="input"
-                    type="phone"
+                    type="number"
                     label="Mobile"
                     name="mobile_number"
+                    min={0}
+                    maxLength={10}
                     id="mobile_number"
                     onChange={handleChange}
                     onBlur={handleBlur}

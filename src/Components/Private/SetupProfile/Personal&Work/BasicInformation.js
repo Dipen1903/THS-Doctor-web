@@ -8,6 +8,7 @@ import FileUpload from "../../../Common/Layouts/FileUpload";
 import FormControl from "../../../Common/Forms/FormControl";
 import { isEmpty } from "../../../../Utilities/Functions";
 import { CityList } from "../../../../Store/Reducers/CommonReducer";
+import moment from "moment";
 
 export default function BasicInformation() {
   const { values, setFieldValue, handleBlur, handleChange } =
@@ -88,7 +89,7 @@ export default function BasicInformation() {
               name="dob"
               onChange={handleChange}
               onBlur={handleBlur}
-              value={values?.dob}
+              value={moment(values?.dob).format("YYYY-MM-DD")}
             />
           </div>
         </div>

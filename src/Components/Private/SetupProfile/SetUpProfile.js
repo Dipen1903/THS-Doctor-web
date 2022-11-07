@@ -42,6 +42,7 @@ import {
   ScheduleSchema,
   WorkProfileSchema,
 } from "../../../Utilities/Schema";
+import moment from "moment";
 
 // const calculatePercentage = (values) => {
 //   let percent = 0;
@@ -140,14 +141,16 @@ export function SetUpProfile() {
         }
 
         tempProfile.image = userProfile?.image;
-        tempProfile.dob = userProfile?.birthdate;
+        tempProfile.dob = moment(userProfile?.birthdate).format("YYYY-MM-DD");
         tempProfile.gender = userProfile?.gender;
         tempProfile.city_id = userProfile?.city_id;
         tempProfile.state_id = userProfile?.state_id;
         tempProfile.speciality = userProfile?.speciality_id;
-        dispatch(
-          SubSpecialityList({ speciality_id: userProfile?.speciality_id })
-        );
+        if (tempProfile.speciality) {
+          dispatch(
+            SubSpecialityList({ speciality_id: userProfile?.speciality_id })
+          );
+        }
         tempProfile.sub_speciality = userProfile?.sub_speciality_id;
         tempProfile.experience = userProfile?.experience;
         tempProfile.registration_number = userProfile?.registration_number;

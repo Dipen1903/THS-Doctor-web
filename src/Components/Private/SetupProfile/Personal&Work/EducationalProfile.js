@@ -5,6 +5,7 @@ import { BackGround, Icon } from "../../../../Utilities/Icons";
 import FormControl from "../../../Common/Forms/FormControl";
 import FileUpload from "../../../Common/Layouts/FileUpload";
 import Signature from "../../../Common/Layouts/SignaturePad";
+import Media from "../../../Common/Layouts/Media";
 
 export default function EducationalProfile({ formProps }) {
   const { values, errors, touched, setFieldValue, handleBlur, handleChange } =
@@ -99,20 +100,9 @@ export default function EducationalProfile({ formProps }) {
                           values?.qualification[index]?.file ? (
                             <div className="row col-md-12">
                               <div className="col-md-6">
-                                <img
-                                  alt={Icon.Doc}
-                                  src={
-                                    values.qualification[index]?.file
-                                      ? typeof values.qualification[index]
-                                          ?.file === "object"
-                                        ? URL.createObjectURL(
-                                            values.qualification[index]?.file
-                                          )
-                                        : values.qualification[index]?.file
-                                      : BackGround.Profile
-                                  }
-                                  className="upload_avatar_img"
-                                ></img>
+                                <Media
+                                  src={values.qualification[index]?.file}
+                                />
                               </div>
                               <div className="col-md-6">
                                 <h5 className="certificate_name">
@@ -262,20 +252,7 @@ export default function EducationalProfile({ formProps }) {
                           values?.proof[index]?.file ? (
                             <div className="row col-md-12">
                               <div className="col-md-6">
-                                <img
-                                  alt="myImg"
-                                  src={
-                                    values.proof[index]?.file
-                                      ? typeof values.proof[index]?.file ===
-                                        "object"
-                                        ? URL.createObjectURL(
-                                            values.proof[index]?.file
-                                          )
-                                        : values.proof[index]?.file
-                                      : BackGround.Profile
-                                  }
-                                  className="upload_avatar_img"
-                                ></img>
+                                <Media src={values.proof[index]?.file} />
                               </div>
                               <div className="col-md-6">
                                 <h5 className="certificate_name">

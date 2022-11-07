@@ -1,6 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { isEmpty } from "../../../Utilities/Functions";
-import EmptyData from "./EmptyData";
 import Pagination from "./Pagination";
 
 function GridLayout({

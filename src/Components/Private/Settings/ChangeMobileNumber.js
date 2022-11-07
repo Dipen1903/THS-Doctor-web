@@ -80,7 +80,7 @@ function Changemobilenum() {
                               <div className="input_box">
                                 <div className="form_group">
                                   <input
-                                    type="phone"
+                                    type="number"
                                     name="mobile_number"
                                     id="mobile_number"
                                     disabled
@@ -140,8 +140,10 @@ function Changemobilenum() {
                               <div className="input_box">
                                 <div className="form_group">
                                   <input
-                                    type="phone"
+                                    type="number"
                                     name="mobile_number"
+                                    min={0}
+                                    maxLength={10}
                                     id="mobile_number"
                                     onChange={handleChange}
                                     onBlur={handleBlur}

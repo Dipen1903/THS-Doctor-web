@@ -806,7 +806,7 @@
     text-align: center;
   }
   .basic_info_box {
-    padding: 50px 30px;
+    padding: 50px 30px !important;
   }
   .progress_box {
     border: 1px dashed #24b2b2;
@@ -1494,7 +1494,7 @@
     line-height: 27px;
   }
   .basic_info_box {
-    padding: 50px 30px;
+    padding: 50px 30px !important;
   }
   .progress_box {
     border: 1px dashed #24b2b2;
@@ -2180,7 +2180,7 @@
     float: right;
   }
   .basic_info_box {
-    padding: 50px 30px;
+    padding: 50px 30px !important;
   }
   .progress_box {
     border: 1px dashed #24b2b2;
@@ -2868,7 +2868,7 @@
   }
 
   .basic_info_box {
-    padding: 50px 30px;
+    padding: 50px 30px !important;
   }
   .progress_box {
     border: 1px dashed #24b2b2;
@@ -2885,7 +2885,7 @@
     margin-top: 5px;
   }
   .progress {
-    width: 82%;
+    width: 75% !important;
     background: #eee;
     min-height: 1px;
     position: relative;
@@ -2893,6 +2893,17 @@
     border-radius: 10px;
     margin-bottom: 20px;
   }
+  .progress_bar_subtext {
+    font-family: "Mulish";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 11px;
+    line-height: 12px;
+    color: #9393aa;
+    margin-bottom: 13px;
+    width: 75%;
+  }
+
   .progress-info {
     width: 30px;
     padding-left: 10px;
@@ -3638,7 +3649,7 @@
     display: block;
   }
   .basic_info_box {
-    padding: 50px 70px;
+    padding: 50px 70px !important;
   }
   .fee_card {
     font-family: "Mulish";
@@ -4459,7 +4470,7 @@
     cursor: pointer;
   }
   .basic_info_box {
-    padding: 50px 30px;
+    padding: 50px 30px !important;
   }
   .profile_milestone {
     font-family: "Mulish";
@@ -5757,7 +5768,7 @@
     text-align: left;
   }
   .basic_info_box {
-    padding: 75px 70px;
+    padding: 75px 70px !important;
   }
   .profile_milestone {
     font-family: "Mulish";
@@ -6006,7 +6017,7 @@
     text-align: left;
   }
   .basic_info_box {
-    padding: 75px 70px;
+    padding: 75px 70px !important;
   }
   .profile_milestone {
     font-family: "Mulish";
@@ -6163,7 +6174,7 @@
     padding: 113px 70px;
   }
   .basic_info_box {
-    padding: 75px 70px;
+    padding: 75px 70px !important;
   }
   .upload_avatar_subtitle {
     font-family: "Mulish";
@@ -6200,8 +6211,6 @@
     line-height: 24px;
     margin-bottom: 0;
     margin-top: 10px;
-    position: absolute;
-    margin-left: -8px;
   }
   .fee_card {
     font-family: "Mulish";
@@ -6294,7 +6303,6 @@
     line-height: 17px;
     margin-bottom: 0;
     margin-top: 19px;
-    margin-left: 0px;
   }
   .progress-info {
     width: 30px;
@@ -6447,7 +6455,7 @@
     padding: 113px 100px;
   }
   .basic_info_box {
-    padding: 75px 70px;
+    padding: 75px 70px !important;
   }
   .fee_card {
     font-family: "Mulish";
@@ -6603,7 +6611,7 @@
     padding: 113px 70px;
   }
   .basic_info_box {
-    padding: 75px 70px;
+    padding: 75px 70px !important;
   }
   .progress-info {
     width: 30px;
@@ -6733,7 +6741,7 @@
     padding: 113px 100px;
   }
   .basic_info_box {
-    padding: 75px 115px;
+    padding: 75px 115px !important;
   }
 }
 @media only screen and (min-width: 2101px) and (max-width: 2200px) {

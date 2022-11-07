@@ -259,8 +259,11 @@ const ShareYourLink = (props) => {
                   <InputGroup className="share-your-sec mb-2">
                     {" "}
                     <Form.Control
+                      type="number"
                       name="mobile_number"
                       id="mobile_number"
+                      min={0}
+                      maxLength={10}
                       onChange={handleChange}
                       onBlur={handleBlur}
                       value={values?.mobile_number}

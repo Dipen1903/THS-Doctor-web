@@ -92,10 +92,12 @@ export default function SignUpComponent() {
                               <div className="col-md-12 mt_20">
                                 <FormControl
                                   control="input"
-                                  type="phone"
+                                  type="number"
                                   name="mobile_number"
                                   id="mobile_number"
                                   label="Mobile"
+                                  min={0}
+                                  maxLength={10}
                                   onChange={handleChange}
                                   onBlur={handleBlur}
                                   value={values.mobile_number}
@@ -302,7 +304,7 @@ const SuccessModal = (props) => {
       <Modal.Body>
         <center>
           <img alt="myImg" src={BackGround.Succcess}></img>
-          <h3 className="welcome_ths">Welcome to Doctor THS!</h3>
+          <h3 className="welcome_ths">Welcome to THS</h3>
           <p className="please_fill_out_profile">
             Please fill out your personal-work profile and verify your identity
             before starting. Thanks!

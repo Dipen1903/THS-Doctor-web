@@ -6255,3 +6255,14 @@ privacypolicy-paragraph::-webkit-scrollbar {
   height: 370px;
 }
 /*-------------------------------------------------Chatting Css End-------------------------------------------------*/
+/* Chrome, Safari, Edge, Opera */
+input[id="mobile_number"]::-webkit-outer-spin-button,
+input[id="mobile_number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"][id="mobile_number"] {
+  -moz-appearance: textfield;
+}
