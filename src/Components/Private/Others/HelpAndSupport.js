@@ -81,11 +81,11 @@ function HelpAndSupport() {
               </div>
               <div className="mr_10 ml_10">
                 <h6>Call us</h6>
-                <h5 className="">91231231112</h5>
+                <h5 className="">7486049850</h5>
               </div>
               <div className="mr_10 ml_10">
                 <h6>Email us</h6>
-                <h5 className="">ths@gmail.com</h5>
+                <h5 className="">admins@thsindia.in</h5>
               </div>
             </div>
           </div>

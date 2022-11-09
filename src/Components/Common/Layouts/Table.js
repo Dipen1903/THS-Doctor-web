@@ -7,11 +7,10 @@ import {
   usePagination,
   useExpanded,
 } from "react-table";
-import { Icon } from "../../../Utilities/Icons";
 
 export default function Table(props) {
   const Collapse = (row) => props.collapseComponent(row);
-  const data = React.useMemo(() => [...props.data], [props.data]);
+  const data = React.useMemo(() => [...props?.data], [props?.data]);
   const columns = React.useMemo(() => [...props.columns], [props.columns]);
 
   const RowSubComponent = React.useCallback(({ row }) => {
@@ -41,12 +40,11 @@ export default function Table(props) {
     },
     useSortBy,
     useExpanded,
-    props.pagination && usePagination,
-    useRowSelect
+    props.pagination && usePagination
   );
-  useEffect(() => {
-    return () => {};
-  }, [props.data]);
+  // useEffect(() => {
+  //   return () => {};
+  // }, [props.data]);
 
   return (
     <>
@@ -69,7 +67,7 @@ export default function Table(props) {
                           className: column.className,
                           style: column.style,
                         },
-                        // column.getSortByToggleProps(),
+                        column.getSortByToggleProps(),
                       ])}
                     >
                       {/* {column?.sort && (
@@ -131,7 +129,7 @@ export default function Table(props) {
             <div className="col-md-3">
               <h5 className="pagination_result_text">
                 Showing {parseInt(page[0].id) + 1} -{" "}
-                {parseInt(page[page.length - 1].id) + 1} of {data.length}{" "}
+                {parseInt(page[page.length - 1].id) + 1} of {data?.length}{" "}
                 Results
               </h5>
             </div>
@@ -192,7 +190,7 @@ export default function Table(props) {
                     onChange={(e) => {
                       setPageSize(
                         e.target.value === "All"
-                          ? Number(props.data.length)
+                          ? Number(props?.data?.length)
                           : Number(e.target.value)
                       );
                     }}

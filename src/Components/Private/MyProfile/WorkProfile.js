@@ -89,7 +89,8 @@ function WorkProfile() {
       setProfileData(tempProfile);
     } catch (error) {}
   };
-  const handleSignature = (file, setFieldValue) => {
+  const handleSignature = (e, setFieldValue) => {
+    let file = e?.target?.files[0];
     if (file) {
       setFieldValue(`signature`, file);
     }
@@ -791,16 +792,24 @@ function WorkProfile() {
                         </div>
                       </div>
                     ) : (
-                      <Signature
-                        label="Create signature"
-                        className="attach_certificate"
-                        name="signature"
-                        id="signature"
-                        value={values.signature}
-                        onChange={(file) =>
-                          handleSignature(file, setFieldValue)
-                        }
-                      />
+                      <div className="d-flex gap-2">
+                        <Signature
+                          label="Create"
+                          className="attach_certificate"
+                          name="signature"
+                          id="signature"
+                          value={values.signature}
+                          onChange={(file) => setFieldValue(`signature`, file)}
+                        />
+                        <FileUpload
+                          label="Upload"
+                          className="attach_certificate"
+                          name="signature"
+                          id="signature"
+                          value={values.signature}
+                          onChange={(e) => handleSignature(e, setFieldValue)}
+                        />
+                      </div>
                     )}
                   </div>
                   <ErrorMessage

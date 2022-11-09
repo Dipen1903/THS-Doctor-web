@@ -48,27 +48,17 @@ const DashboardCounts = () => {
   return (
     <Card className="cards-layout" style={{ background: "#f8fbff" }}>
       <Card.Body className="card-body">
-        <i
-          className="fa fa-question-circle-o float-right consult"
-          style={{ color: "#ABB7C9" }}
-          aria-hidden="true"
-        ></i>
-        <img src={Icon.Face} alt="Avatar" className="ml_15 mt_15 mb_5 "></img>
+        <img src={Icon.Face} alt="Avatar" className=" mt_15 mb_5 "></img>
         <Card.Title className="card_dynamicnum pt_10">
           {analytics?.total_consultations}
         </Card.Title>
         <Card.Text className="texts">Total Consultations</Card.Text>
       </Card.Body>
       <Card.Body className="card-body">
-        <i
-          className="fa fa-question-circle-o float-right"
-          style={{ color: "#ABB7C9" }}
-          aria-hidden="true"
-        ></i>
         <img
           src={Icon.CalenderCross}
           alt="Avatar"
-          className="ml_15 mt_15 mb_5"
+          className=" mt_15 mb_5"
         ></img>
         <Card.Title className="card_dynamicnum pt_10">
           {analytics?.total_canceled_consultations}
@@ -76,24 +66,14 @@ const DashboardCounts = () => {
         <Card.Text className="texts">Cancelled Consultations</Card.Text>
       </Card.Body>
       <Card.Body className="card-body">
-        <i
-          className="fa fa-question-circle-o float-right"
-          style={{ color: "#ABB7C9" }}
-          aria-hidden="true"
-        ></i>
-        <img src={Icon.Dollor} alt="Avatar" className="ml_15 mt_15 mb_5"></img>
+        <img src={Icon.ChartRound} alt="Avatar" className=" mt_15 mb_5"></img>
         <Card.Title className="card_dynamicnum pt_10">
           {analytics?.total_revenue}
         </Card.Title>
         <Card.Text className="texts">Total Revenue</Card.Text>
       </Card.Body>
       <Card.Body className="card-body">
-        <i
-          className="fa fa-question-circle-o float-right"
-          style={{ color: "#ABB7C9" }}
-          aria-hidden="true"
-        ></i>
-        <img src={Icon.Dollor} alt="Avatar" className="ml_15 mt_15 mb_5"></img>
+        <img src={Icon.ChartRound} alt="Avatar" className=" mt_15 mb_5"></img>
         <Card.Title className="card_dynamicnum pt_10">
           {analytics?.current_month_revenue}
         </Card.Title>

@@ -331,14 +331,24 @@ export default function EducationalProfile({ formProps }) {
                 </div>
               </div>
             ) : (
-              <Signature
-                label="Create signature"
-                className="attach_certificate"
-                name="signature"
-                id="signature"
-                value={values.signature}
-                onChange={(file) => setFieldValue(`signature`, file)}
-              />
+              <div className="d-flex gap-2">
+                <Signature
+                  label="Create"
+                  className="attach_certificate"
+                  name="signature"
+                  id="signature"
+                  value={values.signature}
+                  onChange={(file) => setFieldValue(`signature`, file)}
+                />
+                <FileUpload
+                  label="Upload"
+                  className="attach_certificate"
+                  name="signature"
+                  id="signature"
+                  value={values.signature}
+                  onChange={(e) => handleSignature(e, setFieldValue)}
+                />
+              </div>
             )}
           </div>
           <ErrorMessage

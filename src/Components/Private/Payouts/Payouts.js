@@ -109,6 +109,7 @@ function Payouts() {
     }
     return () => {};
   }, [payouts]);
+
   useEffect(() => {
     dispatch(GetPayouts());
     return () => {};
@@ -161,9 +162,7 @@ function Payouts() {
         </div>
       </div>
       <Table
-        data={
-          filteredData.length ? filteredData : payouts?.length ? payouts : []
-        }
+        data={payouts?.length ? payouts : []}
         columns={columns}
         pagination={true}
       />

@@ -56,7 +56,7 @@ function Header() {
 
             <NavLink className="nav-link" to="/payouts">
               {" "}
-              <i className="fa fa-usd" aria-hidden="true"></i>
+              <i className="fa fa-inr" aria-hidden="true"></i>
               &nbsp;&nbsp;&nbsp;Payouts
             </NavLink>
 
@@ -106,7 +106,7 @@ function Header() {
                   href="/profile"
                 >
                   <img src={Icon.User} alt="Avatar" className=" mr_10 "></img>
-                  My Profle
+                  My Profile
                 </NavDropdown.Item>
               </NavLink>
               <NavDropdown.Divider />

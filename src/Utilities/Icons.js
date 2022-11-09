@@ -123,7 +123,7 @@ export const Icon = {
   Face: FACE,
   Pencil: PENCIL,
   CalenderCross: CALENDARBLUE,
-  Dollor: CHARTROUND,
+  ChartRound: CHARTROUND,
   Chat: CHAT,
   CrossWhite: CROSSWHITE,
   CrossRed: CROSSRED,

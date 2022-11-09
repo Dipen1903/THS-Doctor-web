@@ -51,6 +51,7 @@ function Signature({ label, icon, className, onChange, value }) {
             style={{ border: "none", opacity: 1 }}
             class="btn-close btn-close-white"
             aria-label="Close"
+            onClick={() => setOpen(false)}
           ></button>
         </Modal.Header>
         <Modal.Body className="prescription-modal-body-text">

@@ -37,7 +37,7 @@ function ChatIndex() {
         dispatch(
           setMessage({
             type: AlertEnum.Info,
-            text: `No convertations found for ${text}`,
+            text: `No conversation found for ${text}`,
           })
         );
       }
