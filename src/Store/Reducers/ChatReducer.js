@@ -100,12 +100,12 @@ export const GetRoom = createAsyncThunk(
         where("lastBookingId", "==", `${values?.lastBookingId || values?.id}`)
       );
       let snapShot;
+      const result = await getDocs(q);
       snapShot = onSnapshot(q, { includeMetadataChanges: true }, (doc) => {
         let data = doc?.docChanges()[0]?.doc?.data();
         dispatch(setCallData({ snapShot, isCalling: data?.isCallingStatus }));
       });
 
-      const result = await getDocs(q);
       if (!result?.empty) {
         dispatch(setUpChatDoc(result?.docs[0]));
         return result?.docs[0]?.data();
@@ -205,28 +205,24 @@ export const GetConversations = createAsyncThunk(
         onSnapshot(q, (querySnapshot) => {
           querySnapshot.docChanges().forEach((change) => {
             if (change.type === "modified") {
-              let tempConversation = [];
+              // let tempConversation = [];
 
-              if (tempArr.length) {
-                tempConversation = [...tempArr];
-              } else {
-                tempConversation = [...conversations];
-              }
+              // if (tempArr.length) {
+              //   tempConversation = [...tempArr];
+              // } else {
+              //   tempConversation = [...conversations];
+              // }
               let temp = change.doc.data();
-              let index = tempConversation?.findIndex(
-                (item) =>
-                  parseInt(item?.lastBookingId) ===
-                  parseInt(temp?.lastBookingId)
-              );
-              if (parseInt(index) > -1) {
-                tempConversation[index] = temp;
-              }
-              // tempConversation.sort(
-              //   (a, b) =>
-              //     b?.lastMessageTime?.toMillis() -
-              //     a?.lastMessageTime?.toMillis()
+              dispatch(updateConversation(temp));
+              // let index = tempConversation?.findIndex(
+              //   (item) =>
+              //     parseInt(item?.lastBookingId) ===
+              //     parseInt(temp?.lastBookingId)
               // );
-              dispatch(setUpConvertations(tempConversation));
+              // if (parseInt(index) > -1) {
+              //   tempConversation[index] = temp;
+              // }
+              // dispatch(setUpConvertations(tempConversation));
             }
           });
         });
@@ -290,6 +286,19 @@ export const ChatSlice = createSlice({
     setUpConvertations: (state, action) => {
       state.conversations = [...action.payload];
     },
+    updateConversation: (state, action) => {
+      let tempConversation = state.conversations;
+      let index = tempConversation.findIndex(
+        (item) => item?.lastBookingId === action?.payload?.lastBookingId
+      );
+      if (index > -1) {
+        tempConversation[index] = action?.payload;
+      }
+      tempConversation.sort(
+        (a, b) => b?.lastMessageTime?.toDate() - a?.lastMessageTime?.toDate()
+      );
+      state.conversations = [...tempConversation];
+    },
     clearChat: (state) => {
       state.chat = [];
     },
@@ -311,6 +320,7 @@ export const {
   clearChat,
   setUpChatDoc,
   setUpConvertations,
+  updateConversation,
 } = ChatSlice.actions;
 
 export default ChatSlice.reducer;

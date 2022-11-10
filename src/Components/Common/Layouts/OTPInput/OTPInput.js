@@ -167,6 +167,7 @@ export function OTPInputComponent({
         .map((_, index) => (
           <SingleInput
             key={`SingleInput-${index}`}
+            id="mobile_number"
             type={isNumberInput ? "number" : "text"}
             focus={activeInput === index}
             value={otpValues && otpValues[index]}

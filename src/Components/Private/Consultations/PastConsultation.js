@@ -74,7 +74,7 @@ function PastConsultation({ pastConsults = [] }) {
             src={Icon.Eye}
             style={{ cursor: "pointer" }}
             onClick={() => {
-              if (original?.status !== 3) {
+              if (parseInt(original?.status) > 1) {
                 dispatch(GetConsultDetails({ appointment_id: original?.id }));
                 hide(true);
               }
@@ -147,7 +147,7 @@ export const ConsultDetails = (props) => {
           <p className="left_text">Consultation for</p>
           <div>
             {" "}
-            <p className="right-text">{consultDetails?.health_problem}</p>
+            <p className="right-text">{consultDetails?.speciality_title}</p>
           </div>
         </div>
 

@@ -5718,7 +5718,7 @@ privacypolicy-paragraph::-webkit-scrollbar {
 .padding_right_0 {
   padding-right: 0px;
 }
-.online_text {
+.offline_text {
   font-family: "Mulish";
   font-style: normal;
   font-weight: 600;
@@ -5727,6 +5727,16 @@ privacypolicy-paragraph::-webkit-scrollbar {
   display: flex;
   align-items: center;
   color: #9393aa;
+}
+.online_text {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 12px;
+  display: flex;
+  align-items: center;
+  color: #199A8E;
 }
 .chat-head-right {
   display: flex;

@@ -4,7 +4,6 @@ import { Icon } from "../../../Utilities/Icons";
 function Media({ src }) {
   const mediaOut = useMemo(() => {
     let type, file;
-    debugger;
     if (typeof src === "object") {
       type = src?.name?.includes("pdf") ? "PDF" : "IMG";
       file = URL.createObjectURL(src);

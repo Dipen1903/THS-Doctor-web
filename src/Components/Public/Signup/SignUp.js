@@ -248,6 +248,7 @@ const OTPVerify = (props) => {
                   <OTPInput
                     autoFocus
                     length={4}
+                    isNumberInput={true}
                     className="otpContainer"
                     inputClassName="otpInput"
                     onChangeOTP={(otp) => setFieldValue("otp", otp)}

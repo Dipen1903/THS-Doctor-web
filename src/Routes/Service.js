@@ -43,6 +43,8 @@ export const RejectionDetailsAPI = (data) =>
 export const ChangePasswordAPI = (data) =>
   POST(`${BASE_URL}/change-password`, data);
 export const ShareLinkAPI = (data) => POST(`${BASE_URL}/share-link`, data);
+export const DeleteAccountAPI = (data) =>
+  POST(`${BASE_URL}/delete-account`, data);
 
 //* BANK-DETAILS/SCHEDULE API REQUEST
 export const EditBankAPI = (data) =>

@@ -5,7 +5,10 @@ import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 
 import { BackGround, Icon, Logo } from "../../../Utilities/Icons";
-import { removeSession } from "../../../Store/Reducers/AuthSlice";
+import {
+  DeleteAccount,
+  removeSession,
+} from "../../../Store/Reducers/AuthSlice";
 import { NavLink } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { ToggleLiveStatus } from "../../../Store/Reducers/ProfileReducer";
@@ -20,10 +23,11 @@ function Header() {
   const dispatch = useDispatch();
   const { userProfile } = useSelector(({ ProfileSlice }) => ProfileSlice);
 
-  const [showModal2, setShow2] = useState(false);
+  const [showLink, setShowLink] = useState(false);
+  const [isConfirm, setIsConfirm] = useState(false);
 
-  const handleClose2 = () => setShow2(false);
-  const handleShow2 = () => setShow2(true);
+  const handleClose = () => setShowLink(false);
+  const handleShow = () => setShowLink(true);
 
   useEffect(() => {
     return () => {};
@@ -128,7 +132,7 @@ function Header() {
                   disabled={userProfile?.is_active !== 1}
                   onClick={(e) => {
                     e.preventDefault();
-                    handleShow2();
+                    handleShow();
                   }}
                 >
                   <img src={Icon.Share} alt="Avatar" className=" mr_10"></img>
@@ -162,7 +166,10 @@ function Header() {
               </NavLink>
               <NavDropdown.Divider />
               <NavLink className="dropdown-item-link" to="#!">
-                <NavDropdown.Item disabled={userProfile?.is_active !== 1}>
+                <NavDropdown.Item
+                  disabled={userProfile?.is_active !== 1}
+                  onClick={() => setIsConfirm(true)}
+                >
                   <img src={Icon.Logout} alt="Avatar" className="mr_10"></img>
                   Delete My Account
                 </NavDropdown.Item>
@@ -185,11 +192,52 @@ function Header() {
           </div>
         </Navbar.Collapse>
       </Container>
-      {showModal2 && <ShareYourLink show={showModal2} onHide={handleClose2} />}
+      {showLink && <ShareYourLink show={showLink} onHide={handleClose} />}
+      {isConfirm && (
+        <Confirm
+          show={isConfirm}
+          onHide={() => setIsConfirm(false)}
+          onConfirm={() => {
+            dispatch(DeleteAccount());
+          }}
+        />
+      )}
     </Navbar>
   );
 }
 
+const Confirm = (props) => {
+  return (
+    <Modal {...props} className="sharelink-popup-body" centered>
+      <Modal.Header className="sharelink-modal-header">
+        <Modal.Title
+          id="contained-modal-title-vcenter"
+          className="sharelink-modal-text"
+        >
+          Are you sure?
+          <p className="consultationlink error-message mt-3">
+            You will not able to re-gain any data after deletion!
+          </p>
+        </Modal.Title>
+      </Modal.Header>
+      <Modal.Footer className="consultation-modal-footer">
+        <div className="d-flex">
+          <Button className="close_btn" onClick={props.onHide}>
+            No
+          </Button>
+          <Button
+            className="verify_btn"
+            type="button"
+            onClick={() => props?.onConfirm()}
+            variant="primary"
+          >
+            Yes
+          </Button>
+        </div>
+      </Modal.Footer>
+    </Modal>
+  );
+};
 const ShareYourLink = (props) => {
   const dispatch = useDispatch();
   async function copyToClipboard(copyMe) {

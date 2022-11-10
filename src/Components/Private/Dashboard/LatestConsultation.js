@@ -58,7 +58,6 @@ function LatestConsultation() {
     return () => {
       snapShot();
       dispatch(clearChat());
-      clearInterval(interval());
     };
   }, [upcomingConsults?.length]);
 
@@ -80,7 +79,10 @@ function LatestConsultation() {
                     return (
                       <div
                         className={`chat_list_box ${
-                          isActive(item) && "chat_list_box_active"
+                          isActive(item) &&
+                          parseInt(room?.lastBookingId) !==
+                            parseInt(item?.id) &&
+                          "chat_list_box_active"
                         }`}
                         onClick={(e) => {
                           e.preventDefault();

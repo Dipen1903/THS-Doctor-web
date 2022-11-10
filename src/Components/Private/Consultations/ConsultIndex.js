@@ -88,7 +88,7 @@ function ConsultIndex() {
   useEffect(() => {
     dispatch(GetNewConsults());
     dispatch(GetPastConsults());
-    dispatch(CancelReasons());
+    !cancelReasons && dispatch(CancelReasons());
     return () => {};
   }, []);
 

@@ -1,5 +1,5 @@
 import moment from "moment";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Button, Container } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -20,65 +20,68 @@ function Payouts() {
   const { payouts } = PayoutSlice;
   const { userProfile } = ProfileSlice;
 
-  const columns = [
-    {
-      Header: "Payout ID",
-      accessor: "payout_id", // accessor is the "key" in the data
-    },
-    {
-      Header: "Date-Time",
-      accessor: "created_at", // accessor is the "key" in the data
-      Cell: ({ cell: { value } }) => {
-        return <>{moment(value).format("DD MMM hh:mm A")}</>;
+  const columns = useMemo(
+    () => [
+      {
+        Header: "Payout ID",
+        accessor: "payout_id", // accessor is the "key" in the data
       },
-    },
-    {
-      Header: "Amount (Rs)",
-      accessor: "withdrawable_balance",
-    },
-    {
-      Header: "Account/Upi id",
-      accessor: "bank_details.account_number",
-    },
-    {
-      Header: "Status",
-      accessor: "status",
-      Cell: ({
-        cell: {
-          value,
-          row: { original },
+      {
+        Header: "Date-Time",
+        accessor: "created_at", // accessor is the "key" in the data
+        Cell: ({ cell: { value } }) => {
+          return <>{moment(value).format("DD MMM hh:mm A")}</>;
         },
-      }) => {
-        return parseInt(value) ? (
-          parseInt(value > 1) ? (
-            <span className="failed_tag">Cancelled</span>
+      },
+      {
+        Header: "Amount (Rs)",
+        accessor: "withdrawable_balance",
+      },
+      {
+        Header: "Account/Upi id",
+        accessor: "bank_details.account_number",
+      },
+      {
+        Header: "Status",
+        accessor: "status",
+        Cell: ({
+          cell: {
+            value,
+            row: { original },
+          },
+        }) => {
+          return parseInt(value) ? (
+            parseInt(value > 1) ? (
+              <span className="failed_tag">Cancelled</span>
+            ) : (
+              <span className="paid_tag">Completed</span>
+            )
           ) : (
-            <span className="paid_tag">Completed</span>
-          )
-        ) : (
-          <span className="in_prcoess">In Process</span>
-        );
-      },
-    },
-    {
-      Header: "Consultations",
-      accessor: "action",
-      Cell: ({
-        cell: {
-          value,
-          row: { original },
+            <span className="in_prcoess">In Process</span>
+          );
         },
-      }) => {
-        return (
-          <center>
-            <Link to={original?.status === 1 && `/payouts/${original?.id}`}>
-              <img src={Icon.Eye} alt="view" />
-            </Link>
-          </center>
-        );
       },
-    },
-  ];
+      {
+        Header: "Consultations",
+        accessor: "action",
+        Cell: ({
+          cell: {
+            value,
+            row: { original },
+          },
+        }) => {
+          return (
+            <center>
+              <Link to={original?.status === 1 && `/payouts/${original?.id}`}>
+                <img src={Icon.Eye} alt="view" />
+              </Link>
+            </center>
+          );
+        },
+      },
+    ],
+    []
+  );
 
   const handleFilter = (text) => {
     try {
@@ -90,6 +93,7 @@ function Payouts() {
         setFilterData(tempPayouts);
       }
       if (!tempPayouts?.length) {
+        setFilterData(payouts);
         dispatch(
           setMessage({
             type: AlertEnum.Info,
@@ -102,6 +106,7 @@ function Payouts() {
 
   useEffect(() => {
     if (payouts?.length) {
+      setFilterData(payouts);
       let temp = payouts[0];
       if (parseInt(temp?.status) === 0) {
         setIsRequested(temp);
@@ -113,7 +118,7 @@ function Payouts() {
   useEffect(() => {
     dispatch(GetPayouts());
     return () => {};
-  }, []);
+  }, [dispatch]);
 
   return (
     <Container fluid className="payout_container">
@@ -161,11 +166,7 @@ function Payouts() {
           </div>
         </div>
       </div>
-      <Table
-        data={payouts?.length ? payouts : []}
-        columns={columns}
-        pagination={true}
-      />
+      <Table data={filteredData} columns={columns} pagination={true} />
     </Container>
   );
 }

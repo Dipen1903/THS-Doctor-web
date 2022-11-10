@@ -4,6 +4,7 @@ import {
   VerifySessionAPI,
 } from "../../Components/Common/Service";
 import {
+  DeleteAccountAPI,
   ForgotPasswordAPI,
   MobileSignInAPI,
   OTPResendForgotAPI,
@@ -29,8 +30,8 @@ import { setLoading, setMessage } from "./LayoutSlice";
 import { GetUserProfile } from "./ProfileReducer";
 
 const initialState = {
-  token: `${localStorage.getItem(TOKEN) || ""}`,
-  medkart_token: `${localStorage.getItem(MK_TOKEN) || ""}`,
+  token: localStorage.getItem(TOKEN),
+  medkart_token: localStorage.getItem(MK_TOKEN),
   session: JSON.parse(localStorage.getItem(SESSION) || "{}") || "",
   otpModal: false,
   forgotModal: false,
@@ -305,6 +306,36 @@ export const VerifySession = createAsyncThunk(
     try {
       const result = await VerifySessionAPI(values);
       if (result?.success) {
+        return result;
+      } else {
+        throw result;
+      }
+    } catch (error) {
+      dispatch(
+        setMessage({
+          text: error?.message,
+          type: AlertEnum.Error,
+        })
+      );
+      return error;
+    }
+  }
+);
+export const DeleteAccount = createAsyncThunk(
+  "DeleteAccount",
+  async (values, { dispatch }) => {
+    try {
+      const result = await DeleteAccountAPI(values);
+      if (result?.success) {
+        dispatch(
+          setMessage({
+            type: AlertEnum.Success,
+            text: result.message,
+          })
+        );
+        setTimeout(() => {
+          dispatch(removeSession());
+        }, 2000);
         return result;
       } else {
         throw result;

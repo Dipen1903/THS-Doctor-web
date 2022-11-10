@@ -8,11 +8,13 @@ import LatestConsultation from "./LatestConsultation";
 import { GetAnalytics } from "../../../Store/Reducers/CommonReducer";
 
 function Home() {
+  const dispatch = useDispatch();
   const { userProfile } = useSelector(({ ProfileSlice }) => ProfileSlice);
+  const { analytics } = useSelector(({ CommonSlice }) => CommonSlice);
   useEffect(() => {
+    !analytics && dispatch(GetAnalytics());
     return () => {};
-  }, []);
-
+  }, [analytics]);
   return (
     <>
       <Container
@@ -25,7 +27,7 @@ function Home() {
         className="dashboard"
       >
         <h4 className="pt_30 mb_20">Dashboard</h4>
-        <DashboardCounts />
+        <DashboardCounts analytics={analytics} />
         {userProfile?.is_active === 1 ? (
           <LatestConsultation />
         ) : (
@@ -36,15 +38,7 @@ function Home() {
   );
 }
 
-const DashboardCounts = () => {
-  const dispatch = useDispatch();
-  const { analytics } = useSelector(({ CommonSlice }) => CommonSlice);
-  useEffect(() => {
-    dispatch(GetAnalytics());
-
-    return () => {};
-  }, []);
-
+const DashboardCounts = ({ analytics }) => {
   return (
     <Card className="cards-layout" style={{ background: "#f8fbff" }}>
       <Card.Body className="card-body">

@@ -16,7 +16,6 @@ import {
   QualificationList,
   SpecialityList,
   StateList,
-  SubSpecialityList,
 } from "../../../Store/Reducers/CommonReducer";
 import { useDispatch } from "react-redux";
 function MyProfile() {
@@ -25,7 +24,6 @@ function MyProfile() {
     dispatch(StateList());
     dispatch(CityList());
     dispatch(SpecialityList());
-    // dispatch(SubSpecialityList());
     dispatch(LanguageList());
     dispatch(QualificationList());
     dispatch(DocumentList());

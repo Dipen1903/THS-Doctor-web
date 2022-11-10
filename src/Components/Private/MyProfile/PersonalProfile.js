@@ -99,18 +99,15 @@ function PersonalProfile() {
                     <div className="col-md-12">
                       <div className="row">
                         <div className="col-md-3">
-                          <center>
-                            <img
-                              alt="myImg"
-                              src={
-                                (localImage &&
-                                  URL.createObjectURL(localImage)) ||
-                                values?.image ||
-                                BackGround.Profile
-                              }
-                              className="upload_avatar_img"
-                            ></img>
-                          </center>
+                          <img
+                            alt="myImg"
+                            src={
+                              (localImage && URL.createObjectURL(localImage)) ||
+                              values?.image ||
+                              BackGround.Profile
+                            }
+                            className="upload_avatar_img"
+                          ></img>
                         </div>
                         {isEdit && (
                           <>

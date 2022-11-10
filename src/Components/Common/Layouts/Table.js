@@ -10,7 +10,7 @@ import {
 
 export default function Table(props) {
   const Collapse = (row) => props.collapseComponent(row);
-  const data = React.useMemo(() => [...props?.data], [props?.data]);
+  const data = React.useMemo(() => [...props?.data], [props.data]);
   const columns = React.useMemo(() => [...props.columns], [props.columns]);
 
   const RowSubComponent = React.useCallback(({ row }) => {

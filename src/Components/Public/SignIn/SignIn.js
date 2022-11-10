@@ -292,6 +292,7 @@ const OTPLogin = (props) => {
                         autoFocus
                         length={4}
                         className="otpContainer"
+                        isNumberInput={true}
                         inputClassName="otpInput"
                         onChangeOTP={(otp) => setFieldValue("otp", otp)}
                       />
@@ -480,6 +481,7 @@ const OTPForgot = (props) => {
                   <OTPInput
                     autoFocus
                     length={4}
+                    isNumberInput={true}
                     className="otpContainer"
                     inputClassName="otpInput"
                     onChangeOTP={(otp) => setFieldValue("otp", otp)}

@@ -88,8 +88,14 @@ function Conversation({ roomData }) {
                     : "F"}
                 </h5>
               </div>
-              <h5 className="online_text">
-                {parseInt(room?.userOnlineStatus) ? "Online" : "Offline"}
+              <h5
+                className={
+                  !parseInt(room?.userOnlineStatus)
+                    ? "online_text"
+                    : "offline_text"
+                }
+              >
+                {!parseInt(room?.userOnlineStatus) ? "Online" : "Offline"}
               </h5>
             </div>
             <div className="col-md-6 chat-head-right">
