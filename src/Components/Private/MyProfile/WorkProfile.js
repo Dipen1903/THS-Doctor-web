@@ -14,11 +14,11 @@ import { isEmpty } from "../../../Utilities/Functions";
 import { EditUserProfile } from "../../../Store/Reducers/ProfileReducer";
 import { WorkProfileSettingSchema } from "../../../Utilities/Schema";
 import Signature from "../../Common/Layouts/SignaturePad";
+import Media from "../../Common/Layouts/Media";
 function WorkProfile() {
   const [isEdit, setIsEdit] = useState(false);
   const [profileData, setProfileData] = useState({
     speciality: "",
-    sub_speciality: "",
     tempQualification: [],
     qualification: [],
     tempProof: [],
@@ -51,7 +51,7 @@ function WorkProfile() {
         SubSpecialityList({ speciality_id: userProfile?.speciality_id })
       );
       tempProfile.speciality = userProfile?.speciality_id || "";
-      tempProfile.sub_speciality = userProfile?.sub_speciality_id || "";
+      // tempProfile.sub_speciality = userProfile?.sub_speciality_id || "";
       tempProfile.experience = userProfile?.experience;
       tempProfile.registration_number = userProfile?.registration_number;
       tempProfile.languages = [];
@@ -159,10 +159,7 @@ function WorkProfile() {
                     <div className="col-md-12 mt_20">
                       <FormControl
                         control="select"
-                        options={[
-                          { value: "", label: "Your speciality" },
-                          ...specialityList,
-                        ]}
+                        options={[...specialityList]}
                         isDisabled={true}
                         setFieldValue={setFieldValue}
                         value={values.speciality}
@@ -171,8 +168,8 @@ function WorkProfile() {
                         defaultValue=""
                         name="speciality"
                         onChange={(value) => {
-                          setFieldValue("sub_speciality", "");
-                          dispatch(SubSpecialityList({ speciality_id: value }));
+                          // setFieldValue("sub_speciality", "");
+                          // dispatch(SubSpecialityList({ speciality_id: value }));
                         }}
                         label="Your Speciality"
                         outerClass="mb-3"
@@ -184,7 +181,7 @@ function WorkProfile() {
                         name={"speciality"}
                       />
                     </div>
-                    <div className="col-md-12 mt_20">
+                    {/* <div className="col-md-12 mt_20">
                       {subSpecialityList?.length ? (
                         <div className="row">
                           <div className="col-md-12">
@@ -209,7 +206,7 @@ function WorkProfile() {
                       ) : (
                         <></>
                       )}
-                    </div>
+                    </div> */}
                   </div>
                   <div className="row">
                     <div className="col-md-12 mt_20">
@@ -427,30 +424,13 @@ function WorkProfile() {
                                               ?.file ? (
                                               <div className="row col-md-12">
                                                 <div className="col-md-6">
-                                                  <img
-                                                    alt="myImg"
+                                                  <Media
                                                     src={
                                                       values.qualification[
                                                         index
                                                       ]?.file
-                                                        ? typeof values
-                                                            .qualification[
-                                                            index
-                                                          ]?.file === "object"
-                                                          ? URL.createObjectURL(
-                                                              values
-                                                                .qualification[
-                                                                index
-                                                              ]?.file
-                                                            )
-                                                          : values
-                                                              .qualification[
-                                                              index
-                                                            ]?.file
-                                                        : BackGround.Profile
                                                     }
-                                                    className="upload_avatar_img"
-                                                  ></img>
+                                                  />
                                                 </div>
                                                 <div className="col-md-6">
                                                   <h5 className="certificate_name">
@@ -651,22 +631,9 @@ function WorkProfile() {
                                         values?.proof[index]?.file ? (
                                           <div className="row col-md-12">
                                             <div className="col-md-6">
-                                              <img
-                                                alt="myImg"
-                                                src={
-                                                  values.proof[index]?.file
-                                                    ? typeof values.proof[index]
-                                                        ?.file === "object"
-                                                      ? URL.createObjectURL(
-                                                          values.proof[index]
-                                                            ?.file
-                                                        )
-                                                      : values.proof[index]
-                                                          ?.file
-                                                    : BackGround.Profile
-                                                }
-                                                className="upload_avatar_img"
-                                              ></img>
+                                              <Media
+                                                src={values.proof[index]?.file}
+                                              />
                                             </div>
                                             <div className="col-md-6">
                                               <h5 className="certificate_name">

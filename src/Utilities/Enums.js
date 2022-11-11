@@ -38,7 +38,7 @@ export const ProfileEnum = {
   image: "",
   //second step
   speciality: "",
-  sub_speciality: "",
+  // sub_speciality: "",
   tempQualification: [],
   qualification: [],
   tempProof: [],

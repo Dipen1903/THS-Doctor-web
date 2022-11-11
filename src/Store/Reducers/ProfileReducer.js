@@ -410,6 +410,7 @@ export const ProfileSlice = createSlice({
   name: "ProfileSlice",
   initialState,
   reducers: {
+    reset: () => initialState,
     nextStep: (state, action) => {
       if (action.payload) {
         state.profileStep = action.payload;
@@ -451,6 +452,7 @@ export const ProfileSlice = createSlice({
 });
 
 export const {
+  reset,
   nextStep,
   prevStep,
   toggleSubmitted,

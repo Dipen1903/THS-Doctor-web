@@ -29,8 +29,8 @@ export default function WorkProfile() {
             defaultValue=""
             name="speciality"
             onChange={(value) => {
-              setFieldValue("sub_speciality", "");
-              dispatch(SubSpecialityList({ speciality_id: value }));
+              // setFieldValue("sub_speciality", "");
+              // dispatch(SubSpecialityList({ speciality_id: value }));
             }}
             label="Your Speciality"
             outerClass="mb-3"
@@ -43,7 +43,7 @@ export default function WorkProfile() {
           />
         </div>
       </div>
-      {subSpecialityList?.length ? (
+      {/* {subSpecialityList?.length ? (
         <div className="row mt_20">
           <div className="col-md-12">
             <FormControl
@@ -65,7 +65,7 @@ export default function WorkProfile() {
         </div>
       ) : (
         <></>
-      )}
+      )} */}
       <div className="row mt_20">
         <div className="col-md-12">
           <FormControl

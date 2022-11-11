@@ -9,7 +9,10 @@ import { Icon } from "../../../../Utilities/Icons.js";
 import { useDispatch, useSelector } from "react-redux";
 import Modal from "react-bootstrap/Modal";
 import { toggleFee } from "../../../../Store/Reducers/ProfileReducer.js";
-import { SubSpecialityList } from "../../../../Store/Reducers/CommonReducer.js";
+import {
+  SpecialityList,
+  SubSpecialityList,
+} from "../../../../Store/Reducers/CommonReducer.js";
 import FormControl from "../../../Common/Forms/FormControl.js";
 import { compareTime } from "../../../../Utilities/Functions.js";
 
@@ -22,14 +25,14 @@ function SheduleInformation() {
   );
   const { subSpecialityList } = useSelector(({ CommonSlice }) => CommonSlice);
 
-  const getFee = () => {
-    return (
-      subSpecialityList?.length &&
-      subSpecialityList?.find(
-        (item) => item?.id === userProfile?.sub_speciality_id
-      )?.consulting_fee
-    );
-  };
+  // const getFee = () => {
+  //   return (
+  //     subSpecialityList?.length &&
+  //     subSpecialityList?.find(
+  //       (item) => item?.id === userProfile?.sub_speciality_id
+  //     )?.consulting_fee
+  //   );
+  // };
 
   return (
     <>
@@ -290,10 +293,10 @@ function SheduleInformation() {
 export default SheduleInformation;
 
 const FeeCardModal = (props) => {
-  const { subSpecialityList } = useSelector(({ CommonSlice }) => CommonSlice);
+  const { specialityList } = useSelector(({ CommonSlice }) => CommonSlice);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(SubSpecialityList({ isFeeCard: true }));
+    dispatch(SpecialityList({ isFeeCard: true }));
     return () => {};
   }, []);
 
@@ -314,10 +317,10 @@ const FeeCardModal = (props) => {
             <td className="fee_card_table_head">Consultation Fee (Rs)</td>
             <td className="fee_card_table_head">Follow up Fee (Rs)</td>
           </tr>
-          {subSpecialityList?.length ? (
-            subSpecialityList.map((item) => (
+          {specialityList?.length ? (
+            specialityList.map((item) => (
               <tr key={item?.id}>
-                <td className="table_text">{item?.sub_speciality}</td>
+                <td className="table_text">{item?.speciality}</td>
                 <td className="table_text">{item?.consulting_fee}</td>
                 <td className="table_text">{item?.follow_up_fee}</td>
               </tr>

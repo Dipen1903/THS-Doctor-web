@@ -109,7 +109,7 @@ export const WorkProfileSettingSchema = Yup.object({
     .min(1, "Please select your speaciality")
     .required("Please select your speaciality")
     .nullable(),
-  sub_speciality: Yup.string().notRequired(),
+  // sub_speciality: Yup.string().notRequired(),
   experience: Yup.string()
     .matches(/^\d/)
     .required("Please enter your experience")
@@ -147,7 +147,7 @@ export const WorkProfileSchema = Yup.object({
     .min(1, "Please select your speaciality")
     .required("Please select your speaciality")
     .nullable(),
-  sub_speciality: Yup.string().notRequired(),
+  // sub_speciality: Yup.string().notRequired(),
   experience: Yup.string()
     .matches(/^\d/)
     .required("Please enter your experience")

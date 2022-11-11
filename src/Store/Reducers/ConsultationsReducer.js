@@ -292,6 +292,7 @@ export const ConsultSlice = createSlice({
   name: "ConsultSlice",
   initialState,
   reducers: {
+    reset: () => initialState,
     toggleCancel: (state, action) => {
       state.isCancel = action.payload;
     },
@@ -324,7 +325,7 @@ export const ConsultSlice = createSlice({
   },
 });
 
-export const { toggleCancel, toggleReview, toggleCancelAll } =
+export const { reset, toggleCancel, toggleReview, toggleCancelAll } =
   ConsultSlice.actions;
 
 export default ConsultSlice.reducer;

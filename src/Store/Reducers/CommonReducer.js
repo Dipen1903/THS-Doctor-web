@@ -111,6 +111,9 @@ export const SpecialityList = createAsyncThunk(
     try {
       const result = await SpecialityListAPI(values);
       if (result?.success) {
+        if (values?.isFeeCard) {
+          return result?.data;
+        }
         let specialtyArr = result?.data?.map((item) => ({
           label: item?.speciality,
           value: item?.id,

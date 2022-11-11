@@ -108,7 +108,7 @@ export function SetUpProfile() {
   const Form_2 = useFormik({
     initialValues: {
       speciality: profileData?.speciality,
-      sub_speciality: profileData?.sub_speciality,
+      // sub_speciality: profileData?.sub_speciality,
       experience: profileData?.experience,
       registration_number: profileData?.registration_number,
       languages: profileData?.languages,
@@ -151,7 +151,7 @@ export function SetUpProfile() {
             SubSpecialityList({ speciality_id: userProfile?.speciality_id })
           );
         }
-        tempProfile.sub_speciality = userProfile?.sub_speciality_id;
+        // tempProfile.sub_speciality = userProfile?.sub_speciality_id;
         tempProfile.experience = userProfile?.experience;
         tempProfile.registration_number = userProfile?.registration_number;
         tempProfile.languages = [];

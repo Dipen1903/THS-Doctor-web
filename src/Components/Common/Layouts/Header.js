@@ -11,7 +11,10 @@ import {
 } from "../../../Store/Reducers/AuthSlice";
 import { NavLink } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { ToggleLiveStatus } from "../../../Store/Reducers/ProfileReducer";
+import {
+  reset,
+  ToggleLiveStatus,
+} from "../../../Store/Reducers/ProfileReducer";
 import { Button, Form, InputGroup, Modal } from "react-bootstrap";
 import { setMessage } from "../../../Store/Reducers/LayoutSlice";
 import { AlertEnum } from "../../../Utilities/Enums";
@@ -181,6 +184,7 @@ function Header() {
                 onClick={(e) => {
                   e.preventDefault();
                   dispatch(removeSession());
+                  dispatch(reset());
                 }}
               >
                 <NavDropdown.Item>
@@ -260,7 +264,7 @@ const ShareYourLink = (props) => {
       </Modal.Header>
       <Formik
         initialValues={{
-          link: "",
+          link: "https://thsindia.in/patient/",
           mobile_number: "",
         }}
         validationSchema={ShareLinkSchema}

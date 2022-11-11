@@ -20,6 +20,7 @@ function HelpAndSupport() {
 
   useEffect(() => {
     helpsApiCall();
+    return () => {};
   }, []);
 
   return (
@@ -76,7 +77,7 @@ function HelpAndSupport() {
             <div className="support_bootom_card d-flex justify-content-start align-items-center flex-wrap">
               <div className="col-md-3">
                 <p className="support_result_text">
-                  Cant find what you are looking for?
+                  Can't find what you are looking for?
                 </p>
               </div>
               <div className="mr_10 ml_10">
