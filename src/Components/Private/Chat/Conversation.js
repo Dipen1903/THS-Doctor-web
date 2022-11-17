@@ -1,8 +1,7 @@
-import { serverTimestamp, Timestamp } from "firebase/firestore";
+import { Timestamp } from "firebase/firestore";
 import moment from "moment";
 import React, { useEffect, useImperativeHandle, useRef, useState } from "react";
 import { Button, Dropdown } from "react-bootstrap";
-import AgoraRTC from "agora-rtc-sdk-ng";
 
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -15,13 +14,12 @@ import {
 import { UploadFile } from "../../../Store/Reducers/CommonReducer";
 import { MessageEnum } from "../../../Utilities/Enums";
 import { BackGround, Icon } from "../../../Utilities/Icons";
-import { GetToken } from "../../../Store/Reducers/CallingReducer";
+
 import VideoCall from "./VideoCall";
-import { isEmpty } from "../../../Utilities/Functions";
+
 import AudioCall from "./AudioCall";
 import {
   CompleteConsult,
-  GetConsultDetails,
   GetPrescDetails,
   toggleReview,
 } from "../../../Store/Reducers/ConsultationsReducer";
@@ -294,6 +292,54 @@ const ChatItem = ({ type, index, rest }) => {
               }`}
             >
               <img alt="myImg" className="msg-image" src={rest?.imageUrl} />
+              {rest?.message && (
+                <h3
+                  className={`${
+                    rest?.userType === 1
+                      ? "sender_text_title"
+                      : "client_text_title"
+                  }`}
+                >
+                  {rest?.message}
+                </h3>
+              )}
+            </div>
+            <div
+              className={`${
+                rest?.userType === 1
+                  ? "sender_message_time"
+                  : "client_message_time"
+              }`}
+            >
+              {rest?.dateTime &&
+                moment(rest?.dateTime?.toDate()).format("hh:mm")}
+            </div>
+          </div>
+        </div>
+      );
+    case 2: //Video
+      return (
+        <div
+          className={`message-row ${
+            rest?.userType === 1 ? "other-message" : "you-message"
+          }`}
+        >
+          <div className="message-content">
+            <div
+              className={`${
+                rest?.message &&
+                (rest?.userType === 1 ? "sender_msg_box" : "client_msg_box")
+              }`}
+            >
+              <iframe
+                // ref={videoRef}
+                allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+                autoSave="false"
+                width="200px"
+                height="200px"
+                src={rest?.imageUrl}
+              ></iframe>
               {rest?.message && (
                 <h3
                   className={`${
