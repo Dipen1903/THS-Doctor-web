@@ -1642,7 +1642,6 @@ input.input_field:pattern {
   border-color: transparent;
   line-height: 1.9;
   width: 100%;
-  color: transparent;
   -webkit-transition: all 0.28s ease;
   transition: all 0.28s ease;
   box-shadow: none;
@@ -5736,7 +5735,7 @@ privacypolicy-paragraph::-webkit-scrollbar {
   line-height: 12px;
   display: flex;
   align-items: center;
-  color: #199A8E;
+  color: #199a8e;
 }
 .chat-head-right {
   display: flex;

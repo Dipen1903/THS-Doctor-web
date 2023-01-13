@@ -89,6 +89,7 @@ export default function BasicInformation() {
               name="dob"
               onChange={handleChange}
               onBlur={handleBlur}
+              required
               value={moment(values?.dob).format("YYYY-MM-DD")}
             />
           </div>

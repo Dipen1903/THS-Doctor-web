@@ -512,8 +512,8 @@ input:disabled {
   height: 80%;
   width: 100%;
 }
-.action-container {
-}
+/* .action-container {
+} */
 .btn-call-end {
   background: #fa4169;
   border: none;
@@ -539,4 +539,11 @@ input:disabled {
 }
 .signature-btn-modal-footer {
   width: 100%;
+}
+
+input[type="date"]#dob:required:invalid::-webkit-datetime-edit {
+  color: transparent !important;
+}
+input[type="date"]#dob:focus::-webkit-datetime-edit {
+  color: #1d1929 !important;
 }

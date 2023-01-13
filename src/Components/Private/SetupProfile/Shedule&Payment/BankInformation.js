@@ -73,7 +73,10 @@ function BankInformation() {
             id="ifsc_code"
             value={values?.ifsc_code}
             validate={validateIFSC}
-            onChange={handleChange}
+            onChange={(e) => {
+              e.target.value = e?.target?.value?.toUpperCase();
+              handleChange(e);
+            }}
             onBlur={handleBlur}
           />
         </div>

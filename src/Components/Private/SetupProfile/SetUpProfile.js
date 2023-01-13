@@ -96,7 +96,7 @@ export function SetUpProfile() {
   const Form_1 = useFormik({
     initialValues: {
       image: profileData?.image,
-      dob: profileData?.birthdate,
+      dob: profileData?.dob,
       gender: profileData?.gender,
       city_id: profileData?.city_id,
       state_id: profileData?.state_id,

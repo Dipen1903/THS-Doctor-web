@@ -32,6 +32,7 @@ export default function WorkProfile() {
               // setFieldValue("sub_speciality", "");
               // dispatch(SubSpecialityList({ speciality_id: value }));
             }}
+            placeholder="Please select your speciality"
             label="Your Speciality"
             outerClass="mb-3"
           />
@@ -73,6 +74,7 @@ export default function WorkProfile() {
             type="number"
             key="experience"
             label="Year Experience*"
+            placeholder="Please enter your experience"
             id="experience"
             name="experience"
             min={0}
@@ -95,6 +97,7 @@ export default function WorkProfile() {
             label="Registration Number"
             id="registration_number"
             name="registration_number"
+            placeholder="Please enter your registration number"
             onChange={handleChange}
             onBlur={handleBlur}
             value={values?.registration_number}
@@ -108,7 +111,7 @@ export default function WorkProfile() {
             label="Language"
             options={languageList?.length ? languageList : []}
             isMulti={true}
-            placeholder="Search"
+            placeholder="Search languages"
             isSearchable={true}
             onChange={() => {}}
             name="languages"

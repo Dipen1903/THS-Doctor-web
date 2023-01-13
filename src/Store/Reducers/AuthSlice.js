@@ -25,7 +25,7 @@ import {
   TOKEN,
   AGORA,
 } from "../../Utilities/Enums";
-import { GetToken } from "../../Utilities/Firebase.config";
+import { GetFirbaseToken } from "../../Utilities/Firebase.config";
 import { setLoading, setMessage } from "./LayoutSlice";
 import { GetUserProfile } from "./ProfileReducer";
 
@@ -44,7 +44,8 @@ export const SignIn = createAsyncThunk(
   async (values, { dispatch }) => {
     try {
       dispatch(setLoading(true));
-      const fcmToken = await GetToken();
+      const fcmToken = await GetFirbaseToken();
+      debugger;
       if (fcmToken) {
         values["device_token"] = fcmToken;
       }

@@ -13,7 +13,8 @@ import "./Components/Common/style.css";
 import { onMessageListener } from "./Utilities/Firebase.config";
 import { setMessage } from "./Store/Reducers/LayoutSlice";
 import { AlertEnum } from "./Utilities/Enums";
-
+import { LocalServiceWorkerRegister } from "./Utilities/Functions";
+LocalServiceWorkerRegister();
 function App() {
   onMessageListener()
     .then((payload) => {

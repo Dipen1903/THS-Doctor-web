@@ -1,29 +1,28 @@
 import React, { useEffect } from "react";
 
-import Form from "react-bootstrap/Form";
+// import Form from "react-bootstrap/Form";
 import { ErrorMessage, useFormikContext } from "formik";
 import Tabs from "react-bootstrap/Tabs";
 import Tab from "react-bootstrap/Tab";
 import Accordion from "react-bootstrap/Accordion";
-import { Icon } from "../../../../Utilities/Icons.js";
+// import { Icon } from "../../../../Utilities/Icons.js";
 import { useDispatch, useSelector } from "react-redux";
 import Modal from "react-bootstrap/Modal";
 import { toggleFee } from "../../../../Store/Reducers/ProfileReducer.js";
 import {
   SpecialityList,
-  SubSpecialityList,
+  // SubSpecialityList,
 } from "../../../../Store/Reducers/CommonReducer.js";
 import FormControl from "../../../Common/Forms/FormControl.js";
 import { compareTime } from "../../../../Utilities/Functions.js";
 
 function SheduleInformation() {
-  const { values, setFieldValue, handleBlur, handleChange } =
-    useFormikContext();
+  const { values, setFieldValue, handleBlur } = useFormikContext();
   const dispatch = useDispatch();
   const { feeModal, userProfile } = useSelector(
     ({ ProfileSlice }) => ProfileSlice
   );
-  const { subSpecialityList } = useSelector(({ CommonSlice }) => CommonSlice);
+  // const { subSpecialityList } = useSelector(({ CommonSlice }) => CommonSlice);
 
   // const getFee = () => {
   //   return (

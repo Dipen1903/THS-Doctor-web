@@ -28,6 +28,7 @@ function Home() {
       >
         <h4 className="pt_30 mb_20">Dashboard</h4>
         <DashboardCounts analytics={analytics} />
+
         {userProfile?.is_active === 1 ? (
           <LatestConsultation />
         ) : (
@@ -42,7 +43,7 @@ const DashboardCounts = ({ analytics }) => {
   return (
     <Card className="cards-layout" style={{ background: "#f8fbff" }}>
       <Card.Body className="card-body">
-        <img src={Icon.Face} alt="Avatar" className=" mt_15 mb_5 "></img>
+        <img src={Icon.Face} alt="Avatar" className=" mt_15 mb_5"></img>
         <Card.Title className="card_dynamicnum pt_10">
           {analytics?.total_consultations}
         </Card.Title>
@@ -60,14 +61,14 @@ const DashboardCounts = ({ analytics }) => {
         <Card.Text className="texts">Cancelled Consultations</Card.Text>
       </Card.Body>
       <Card.Body className="card-body">
-        <img src={Icon.ChartRound} alt="Avatar" className=" mt_15 mb_5"></img>
+        <img src={Icon.ChartRound} alt="Avatar" className="mt_15 mb_5"></img>
         <Card.Title className="card_dynamicnum pt_10">
           {analytics?.total_revenue}
         </Card.Title>
         <Card.Text className="texts">Total Revenue</Card.Text>
       </Card.Body>
       <Card.Body className="card-body">
-        <img src={Icon.ChartRound} alt="Avatar" className=" mt_15 mb_5"></img>
+        <img src={Icon.ChartRound} alt="Avatar" className="mt_15 mb_5"></img>
         <Card.Title className="card_dynamicnum pt_10">
           {analytics?.current_month_revenue}
         </Card.Title>
