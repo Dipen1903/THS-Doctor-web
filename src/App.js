@@ -14,11 +14,36 @@ import { onMessageListener } from "./Utilities/Firebase.config";
 import { setMessage } from "./Store/Reducers/LayoutSlice";
 import { AlertEnum } from "./Utilities/Enums";
 import { LocalServiceWorkerRegister } from "./Utilities/Functions";
+import { useDispatch } from "react-redux";
 LocalServiceWorkerRegister();
 function App() {
+  const dispatch = useDispatch();
   onMessageListener()
     .then((payload) => {
-      setMessage({ text: payload?.notification?.title, type: AlertEnum.Info });
+      let messageBody;
+      if (payload?.data?.incomming_call_type == 0) {
+        messageBody = {
+          text: `${payload?.notification?.title} started audio call.`,
+          subText: payload?.notification?.body,
+          type: AlertEnum.Call,
+        };
+      }
+      if (payload?.data?.incomming_call_type == 3) {
+        messageBody = {
+          text: `${payload?.notification?.title} booked a consultation.`,
+          subText: payload?.notification?.body,
+          type: AlertEnum.Booking,
+        };
+      }
+      if (payload?.data?.incomming_call_type == 4) {
+        messageBody = {
+          text: `${payload?.notification?.title} sent you a message.`,
+          subText: payload?.notification?.body,
+          type: AlertEnum.Message,
+        };
+      }
+
+      dispatch(setMessage(messageBody));
     })
     .catch((err) => console.log("failed: ", err));
   return (

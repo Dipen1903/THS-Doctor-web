@@ -36,14 +36,15 @@ export function Loader() {
 }
 
 function SnackBar() {
-  const { type, show, text } = useSelector(
+  const { type, show, text, subText } = useSelector(
     ({ LayoutSlice }) => LayoutSlice.message
   );
   const dispatch = useDispatch();
   useEffect(() => {
     show &&
+      type !== AlertEnum.Call &&
       setTimeout(() => {
-        dispatch(setMessage({ type: "", text: "", show: false }));
+        dispatch(setMessage({ type: "", text: "", subText: "", show: false }));
       }, 3000);
   });
 
@@ -76,6 +77,42 @@ function SnackBar() {
           }`}
         >
           {text.toString()}
+        </div>
+      );
+    case AlertEnum.Booking:
+      return (
+        <div
+          className={`alert alert-primary ${
+            show ? "alert-shown" : "alert-hidden"
+          }`}
+        >
+          {text.toString()}
+          <p>{subText.toString()}</p>
+        </div>
+      );
+    case AlertEnum.Message:
+      return (
+        <div
+          className={`alert alert-primary ${
+            show ? "alert-shown" : "alert-hidden"
+          }`}
+        >
+          {text.toString()}
+          <p>{subText.toString()}</p>
+        </div>
+      );
+    case AlertEnum.Call:
+      return (
+        <div
+          className={`alert alert-primary ${
+            show ? "alert-shown" : "alert-hidden"
+          }`}
+        >
+          {text.toString()}
+          <div className="">
+            <button className="button-accept">Accept</button>
+            <button className="button-decline">Decline</button>
+          </div>
         </div>
       );
     default:

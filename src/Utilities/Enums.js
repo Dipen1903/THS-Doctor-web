@@ -13,6 +13,9 @@ export const AlertEnum = {
   Success: "SUCCESS",
   Error: "ERROR",
   Info: "INFO",
+  Call: "CALL",
+  Booking: "BOOKING",
+  Message: "MESSAGE",
   Warning: "WARNING",
 };
 export const SignInEnum = { email: "", password: "" };

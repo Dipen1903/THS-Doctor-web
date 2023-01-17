@@ -4,6 +4,7 @@ const initialState = {
   message: {
     type: "",
     text: "",
+    subText: "",
     show: false,
   },
 };
@@ -15,8 +16,8 @@ export const LayoutSlice = createSlice({
     setLoading: (state, action) => {
       state.isLoading = action.payload;
     },
-    setMessage: (state, { payload: { type, text, show = true } }) => {
-      state.message = { type, text, show };
+    setMessage: (state, { payload: { type, text, subText, show = true } }) => {
+      state.message = { type, text, subText, show };
     },
   },
   extraReducers: (builder) => {},
