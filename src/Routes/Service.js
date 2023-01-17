@@ -19,6 +19,15 @@ export const OTPVerifySignUpAPI = (data) =>
 //* DASHBOARD ANALYTICS API REQUEST
 export const AnalyticsAPI = (data) =>
   POST(`${BASE_URL}/dashboard-analytics`, data);
+export const TotalConsulationAPI = (data) =>
+  POST(`${BASE_URL}/dashboard-total-consulations`, data);
+export const CanceledConsulationAPI = (data) =>
+  POST(`${BASE_URL}/dashboard-canceled-consulations`, data);
+export const TotalRevenueAPI = (data) =>
+  POST(`${BASE_URL}/dashboard-total-revenue`, data);
+export const MonthlyRevenueAPI = (data) =>
+  POST(`${BASE_URL}/dashboard-current-month-revenue-list`, data);
+
 //* FORGOT/RESET PASSWORD API REQUEST
 export const ForgotPasswordAPI = (data) =>
   POST(`${BASE_URL}/forgot-password`, data);

@@ -104,6 +104,7 @@ function PastConsultation({ pastConsults = [] }) {
 }
 
 export default PastConsultation;
+
 export const ConsultDetails = (props) => {
   const { values, ...rest } = props;
   const dispatch = useDispatch();
