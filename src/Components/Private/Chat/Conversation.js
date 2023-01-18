@@ -4,7 +4,7 @@ import React, { useEffect, useImperativeHandle, useRef, useState } from "react";
 import { Button, Dropdown } from "react-bootstrap";
 
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import {
   GetSnapShot,
   SendMessage,
@@ -26,6 +26,7 @@ import {
 import PresciptionDetails from "../Prescription/PresciptionDetails";
 
 function Conversation({ roomData }) {
+  const location = useLocation();
   const dispatch = useDispatch();
   const { ChatSlice, ProfileSlice, ConsultSlice } = useSelector(
     (state) => state
@@ -47,6 +48,20 @@ function Conversation({ roomData }) {
   useEffect(() => {
     scrollToBottom();
   }, [chat]);
+
+  useEffect(() => {
+    if (location.state) {
+      if (location.state?.incomming_call_type == 0) {
+        setAudiocall(true);
+        audioRef.current.join();
+      }
+      if (location.state?.incomming_call_type == 1) {
+        setVideocall(true);
+      }
+    }
+
+    return () => {};
+  }, [location.state]);
 
   useEffect(() => {
     if (roomData) {

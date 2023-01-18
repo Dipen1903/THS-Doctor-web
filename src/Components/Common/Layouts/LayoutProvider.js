@@ -4,6 +4,7 @@ import { setMessage } from "../../../Store/Reducers/LayoutSlice";
 import { AlertEnum } from "../../../Utilities/Enums";
 import Lottie from "react-lottie";
 import animationData from "../../../Assets/json/loader.json";
+import { useNavigate } from "react-router-dom";
 const LayoutContext = createContext({ isLoading: false });
 
 function LayoutProvider({ children }) {
@@ -36,9 +37,10 @@ export function Loader() {
 }
 
 function SnackBar() {
-  const { type, show, text, subText } = useSelector(
+  const { type, show, text, metaData, subText } = useSelector(
     ({ LayoutSlice }) => LayoutSlice.message
   );
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   useEffect(() => {
     show &&
@@ -109,9 +111,29 @@ function SnackBar() {
           }`}
         >
           {text.toString()}
+
           <div className="">
-            <button className="button-accept">Accept</button>
-            <button className="button-decline">Decline</button>
+            <button
+              className="button-accept"
+              onClick={() => {
+                dispatch(
+                  setMessage({ type: "", text: "", subText: "", show: false })
+                );
+                navigate(`/chat/${metaData?.booking_id}`, { state: metaData });
+              }}
+            >
+              Accept
+            </button>
+            <button
+              className="button-decline"
+              onClick={() => {
+                dispatch(
+                  setMessage({ type: "", text: "", subText: "", show: false })
+                );
+              }}
+            >
+              Decline
+            </button>
           </div>
         </div>
       );

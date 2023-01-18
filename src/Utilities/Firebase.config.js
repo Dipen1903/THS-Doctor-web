@@ -19,13 +19,11 @@ export const GetFirbaseToken = async () => {
     vapidKey: `BJbEZL3uHsKTBM6_d-3hR3bepIKfIjLWpFQ1IIs-U33ouIRe0sn4qryjPtzAWQHuLX29M7mLMVF6qwqTVHCuIls`,
   })
     .then((currentToken) => {
-      debugger;
       if (currentToken) {
         return currentToken;
       }
     })
     .catch((err) => {
-      console.log(err);
       return { error: err };
     });
 };

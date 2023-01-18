@@ -12,7 +12,7 @@ function DoctorNotes() {
     <>
       <FormControl
         control="textArea"
-        label="Chef Complaints"
+        label="Chef complaints"
         name="doctor_notes.chef_complaints"
         id="doctor_notes.chef_complaints"
         value={values.doctor_notes.chef_complaints}
@@ -36,7 +36,7 @@ function DoctorNotes() {
 
       <FormControl
         control="textArea"
-        label="Medical History"
+        label="Medical history"
         name="doctor_notes.medical_history"
         id="doctor_notes.medical_history"
         value={values.doctor_notes.medical_history}
@@ -48,7 +48,18 @@ function DoctorNotes() {
 
       <FormControl
         control="textArea"
-        label="Wrtire a instructions for Patient"
+        label="Recommended medicines for patient"
+        name="doctor_notes.medicines"
+        id="doctor_notes.medicines"
+        value={values.doctor_notes.medicines}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        placeholder=""
+        className="Textarea"
+      />
+      <FormControl
+        control="textArea"
+        label="Wrtire a instructions for patient"
         name="doctor_notes.instruction"
         id="doctor_notes.instruction"
         value={values.doctor_notes.instruction}

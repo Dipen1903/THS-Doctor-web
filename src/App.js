@@ -25,6 +25,15 @@ function App() {
         messageBody = {
           text: `${payload?.notification?.title} started audio call.`,
           subText: payload?.notification?.body,
+          metaData: payload?.data,
+          type: AlertEnum.Call,
+        };
+      }
+      if (payload?.data?.incomming_call_type == 1) {
+        messageBody = {
+          text: `${payload?.notification?.title} started video call.`,
+          subText: payload?.notification?.body,
+          metaData: payload?.data,
           type: AlertEnum.Call,
         };
       }

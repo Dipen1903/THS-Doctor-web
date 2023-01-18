@@ -347,6 +347,7 @@ export const PrescriptionEnum = {
   doctor_notes: {
     chef_complaints: "",
     diagnosis: "",
+    medicines: "",
     medical_history: "",
     instruction: "",
     follow_up_days: "",

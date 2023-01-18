@@ -45,7 +45,6 @@ export const SignIn = createAsyncThunk(
     try {
       dispatch(setLoading(true));
       const fcmToken = await GetFirbaseToken();
-      debugger;
       if (fcmToken) {
         values["device_token"] = fcmToken;
       }
