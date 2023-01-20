@@ -135,7 +135,11 @@ function Timeslotfees() {
                                     type="text"
                                     name=""
                                     placeholder=""
-                                    value={userProfile?.consulting_fee}
+                                    value={
+                                      userProfile?.consultation_fee
+                                        ?.consulting_fee ||
+                                      userProfile?.consulting_fee
+                                    }
                                     disabled
                                   />
                                 </div>

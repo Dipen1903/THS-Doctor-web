@@ -1,9 +1,6 @@
 import { useFormikContext } from "formik";
-import React, { useState } from "react";
-import { Button, Form, Modal } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import React from "react";
 import { ArrayRange } from "../../../../Utilities/Functions";
-import { BackGround, Icon, Logo } from "../../../../Utilities/Icons";
 import FormControl from "../../../Common/Forms/FormControl";
 
 function DoctorNotes() {

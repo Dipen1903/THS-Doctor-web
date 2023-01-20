@@ -77,6 +77,12 @@ function PrescriptionIndex() {
       tempValues.user_id =
         prescDetails?.patient_details?.id ||
         consultDetails?.consultation_member_id;
+      tempValues.doctor_notes.medical_history =
+        prescDetails?.doctor_notes?.medical_history ||
+        consultDetails?.medical_history;
+      tempValues.doctor_notes.chef_complaints =
+        prescDetails?.doctor_notes?.chef_complaints ||
+        consultDetails?.health_problem;
       setPrescriptionData({ ...tempValues });
     } catch (error) {}
   };

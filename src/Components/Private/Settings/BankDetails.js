@@ -10,6 +10,10 @@ import {
   ValidateBank,
 } from "../../../Store/Reducers/ProfileReducer";
 import { Icon } from "../../../Utilities/Icons";
+import {
+  validateAcccountNumber,
+  validateIFSC,
+} from "../../../Utilities/Schema";
 
 function Bankdetails() {
   const [edit, setEdit] = useState(false);
@@ -117,6 +121,7 @@ function Bankdetails() {
                               disabled={!edit}
                               onChange={handleChange}
                               onBlur={handleBlur}
+                              validate={validateAcccountNumber}
                               value={values?.account_number}
                             />
                           </div>
@@ -131,7 +136,12 @@ function Bankdetails() {
                               id="ifsc_code"
                               label="IFSC Code"
                               disabled={!edit}
-                              onChange={handleChange}
+                              validate={validateIFSC}
+                              onChange={(e) => {
+                                e.target.value =
+                                  e?.target?.value?.toUpperCase();
+                                handleChange(e);
+                              }}
                               onBlur={handleBlur}
                               value={values?.ifsc_code}
                             />
