@@ -7344,3 +7344,16 @@ font-style: normal;
 font-weight: 600;
 line-height: 24px; 
 }
+/* Hide the default checkbox */
+input[type="checkbox"].checkboxdesign {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 20px;
+  height: 20px;
+  background-color: #fff; /* Set the background color of the checkbox */
+  border-radius: 50%;
+  border: 1px solid #000;
+  outline: none; 
+  cursor: pointer;
+}

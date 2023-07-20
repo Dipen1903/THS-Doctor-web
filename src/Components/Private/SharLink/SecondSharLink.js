@@ -31,6 +31,17 @@ const SecondSharLink = () => {
                         </div>
                     </div>
                     <h4 className='paycontent pt_20'>Select consultation type</h4>
+                    <div className='firstpayment pt_20'>
+                        <div className='firstpayment'>
+                            <input type="checkbox" class="checkboxdesign" />
+                            <p className='secondh2'>New </p>
+                        </div>
+                        <div className='firstpayment'>
+                        <input type="checkbox" class="checkboxdesign" />
+                            <p className='secondh2'>Follow up </p>
+                        </div>
+
+                    </div>
                     <div >
 
                     </div>
