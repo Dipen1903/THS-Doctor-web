@@ -29,3 +29,10 @@ export const GetMedKartTokenAPI = async (data) =>
   POST(`${MEDKART_URL}/v1/token`, data);
 export const SearchMedicineAPI = async (data) =>
   GET(`${MEDKART_URL}/v1/product/search`, data);
+
+//* LABTEST API
+export const LabtestLabsAPI = (data) => POST(`${BASE_URL}/Labtest-labs`, data);
+
+//* RADIOLOGY API
+export const RadiologyDataApi = (data) =>
+  POST(`${BASE_URL}/radiological-labs`, data);

@@ -33,7 +33,7 @@ function Medicine() {
   }, [searchParams]);
 
   const onChangeText = (e) => {
-    let q = e?.target?.value;
+    let q = e?.target?.value.toLowerCase();
     setText(q);
     clearTimeout(timer);
     const newTimer = setTimeout(() => {
@@ -76,16 +76,25 @@ function Medicine() {
                             <div
                               className="list-item"
                               onClick={(e) => {
-                                arrayHelpers.push({
-                                  medicine_name: data?.name,
-                                  medicine_id: data?.id,
-                                  morning: "",
-                                  afternoon: "",
-                                  evening: "",
-                                  night: "",
-                                  conditions: "before_food",
-                                  days: 1,
-                                });
+                                if (
+                                  values?.medicines?.find(
+                                    (e) => e.medicine_id === data?.id
+                                  )
+                                ) {
+                                  /* same result as above, but a different function return type */
+                                } else {
+                                  arrayHelpers.push({
+                                    medicine_name: data?.name,
+                                    medicine_id: data?.id,
+                                    morning: "",
+                                    afternoon: "",
+                                    evening: "",
+                                    night: "",
+                                    conditions: "before_food",
+                                    days: 1,
+                                  });
+                                }
+
                                 setShow(false);
                                 setText("");
                               }}

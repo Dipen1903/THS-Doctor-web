@@ -104,12 +104,14 @@ export const CompleteConsult = createAsyncThunk(
     try {
       const result = await CompleteConsultAPI(values);
       if (result?.success) {
+        debugger
         dispatch(
           setMessage({
             text: result?.message,
             type: AlertEnum.Success,
           })
         );
+       
         dispatch(GetNewConsults());
         dispatch(GetPastConsults());
         return result?.data;

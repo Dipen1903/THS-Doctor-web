@@ -122,7 +122,9 @@ function Conversation({ roomData }) {
                       CompleteConsult({
                         appointment_id: room?.lastBookingId || room?.id,
                       })
-                    );
+                    ).then((res) => {
+                      window.location.reload();
+                    });
                   }}
                 >
                   Mark Complete

@@ -194,7 +194,48 @@ const Review = ({ values }) => {
                 <div>
                   {" "}
                   <span className="text-uppercase">Lab Test</span>
-                  <p className="prescription-left-text mt_5">Viral Infection</p>
+                  {prescDetails?.lab_test?.map((item, index) => (
+                    <p className="prescription-left-text mt_5" key={index}>
+                      {item.lab_test_name}
+                    </p>
+                  ))}
+                </div>
+              ) : (
+                <div></div>
+              )}
+              {prescDetails?.refer_doctors?.length ? (
+                <div>
+                  {" "}
+                  <span className="text-uppercase">Recommended Doctor</span>
+                  <p className="prescription-right-text mt_5">
+                    {prescDetails?.refer_doctors
+                      ?.map((item) => item?.speciality_name)
+                      .join(", ")}
+                  </p>
+                </div>
+              ) : (
+                <></>
+              )}
+            </div>
+            <hr />
+          </>
+        ) : (
+          <></>
+        )}
+
+        {prescDetails?.Radiological_test?.length ||
+        prescDetails?.refer_doctors?.length ? (
+          <>
+            <div className="prescription_appoinment_input">
+              {prescDetails?.Radiological_test?.length ? (
+                <div>
+                  {" "}
+                  <span className="text-uppercase">Radiological Test</span>
+                  {prescDetails?.Radiological_test?.map((item, index) => (
+                    <p className="prescription-left-text mt_5" key={index}>
+                      {item.lab_test_name}
+                    </p>
+                  ))}
                 </div>
               ) : (
                 <div></div>

@@ -1,10 +1,28 @@
 import { useFormikContext } from "formik";
-import React from "react";
+import React, { useEffect } from "react";
 import { ArrayRange } from "../../../../Utilities/Functions";
 import FormControl from "../../../Common/Forms/FormControl";
 
 function DoctorNotes() {
-  const { values, handleChange, handleBlur } = useFormikContext();
+  const { values, handleChange, handleBlur, setFieldValue } =
+    useFormikContext();
+
+  useEffect(() => {
+    if (values?.medicines) {
+      let medicines = values?.medicines?.map(function (i) {
+        return i?.medicine_name;
+      });
+      setFieldValue("doctor_notes.medicines", medicines?.toString());
+    }
+  }, [values?.medicines]);
+
+  let lab_tests = values?.lab_test?.map(function (i) {
+    return i?.test_name;
+  });
+
+  let radiology_test = values?.radiological_test?.map(function (i) {
+    return i?.test_name;
+  });
   return (
     <>
       <FormControl
@@ -54,6 +72,37 @@ function DoctorNotes() {
         placeholder=""
         className="Textarea"
       />
+
+      {values?.lab_test?.length > 0 && (
+        <FormControl
+          control="textArea"
+          label="Recommended Leb Test for patient"
+          name="lab_test"
+          id="lab_test"
+          value={lab_tests?.toString()}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          placeholder=""
+          className="Textarea"
+          disabled
+        />
+      )}
+
+      {values?.radiological_test?.length > 0 && (
+        <FormControl
+          control="textArea"
+          label="Recommended Radiology for patient"
+          name="radiology_test"
+          id="radiology_test"
+          value={radiology_test?.toString()}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          placeholder=""
+          className="Textarea"
+          disabled
+        />
+      )}
+
       <FormControl
         control="textArea"
         label="Wrtire a instructions for patient"
@@ -76,7 +125,7 @@ function DoctorNotes() {
         onChange={handleChange}
         value={values.doctor_notes.follow_up_days}
       >
-        {ArrayRange(1, 30).map((item) => (
+        {ArrayRange(0, 30).map((item) => (
           <option key={item} value={item}>
             {item}
           </option>

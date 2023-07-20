@@ -42,10 +42,18 @@ function ReferDoctor() {
                       parseInt(item?.value) ===
                       parseInt(value[value?.length - 1])
                   );
-                  arrayHelpers.push({
-                    speciality_id: speciality?.value,
-                    speciality_name: speciality?.label,
-                  });
+                  if (
+                    values?.tempSpeciality?.find(
+                      (e) => e.speciality_id === speciality?.value
+                    )
+                  ) {
+                    /* same result as above, but a different function return type */
+                  } else {
+                    arrayHelpers.push({
+                      speciality_id: speciality?.value,
+                      speciality_name: speciality?.label,
+                    });
+                  }
                 }}
                 outerClass=""
               />

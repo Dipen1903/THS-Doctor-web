@@ -9,6 +9,7 @@ import Medicine from "./Tabs/Medicine";
 import LabTest from "./Tabs/LabTest";
 import ReferDoctor from "./Tabs/ReferDoctor";
 import DoctorNotes from "./Tabs/DoctorNotes";
+import * as Yup from "yup";
 
 import { PrescriptionEnum } from "../../../Utilities/Enums";
 import { useDispatch, useSelector } from "react-redux";
@@ -18,6 +19,7 @@ import {
   GetPrescDetails,
 } from "../../../Store/Reducers/ConsultationsReducer";
 import { isEmpty } from "../../../Utilities/Functions";
+import RadiologyTest from "./Tabs/RadiologyTest";
 const Tabs = [
   {
     name: "Medicine",
@@ -32,6 +34,13 @@ const Tabs = [
     iconGrey: Icon.TestTubeGrey,
     iconBlue: Icon.TestTubeBlue,
     component: () => <LabTest />,
+  },
+  {
+    name: "Radiology Test",
+    key: "radiology_test",
+    iconGrey: Icon.TestTubeGrey,
+    iconBlue: Icon.TestTubeBlue,
+    component: () => <RadiologyTest />,
   },
   {
     name: "Refer a Doctor",
@@ -58,12 +67,29 @@ function PrescriptionIndex() {
   const [prescriptionData, setPrescriptionData] = useState({
     ...PrescriptionEnum,
   });
+
+  const PrescriptionSchema = Yup.object({
+    doctor_notes: Yup.object().shape({
+      chef_complaints: Yup.string().required("Please Enter Chef complaints"),
+      diagnosis: Yup.string().required("Please Enter Diagnosis"),
+      medicines: Yup.string().required("Please Enter medicines"),
+      medical_history: Yup.string().required("Please Enter Medical history"),
+      instruction: Yup.string().required(
+        "Please Enter Instructions For Patient"
+      ),
+      follow_up_days: Yup.string().required("Please Enter Follow up after"),
+    }),
+  });
+
   const [activeKey, setActiveKey] = useState("medicine");
   const intialLoad = () => {
     let tempValues = { ...prescriptionData };
     try {
       if (prescDetails?.lab_test?.length) {
         tempValues.lab_test = prescDetails?.lab_test;
+      }
+      if (prescDetails?.radiological_test?.length) {
+        tempValues.radiological_test = prescDetails?.radiological_test;
       }
       if (prescDetails?.medicines?.length) {
         tempValues.medicines = prescDetails?.medicines;
@@ -86,6 +112,7 @@ function PrescriptionIndex() {
       setPrescriptionData({ ...tempValues });
     } catch (error) {}
   };
+
   useEffect(() => {
     intialLoad();
     return () => {};
@@ -184,6 +211,7 @@ function PrescriptionIndex() {
                     consultDetails?.consultation_member_id ||
                     prescDetails?.patient_details?.id,
                 }}
+                validationSchema={PrescriptionSchema}
                 enableReinitialize
                 onSubmit={(values) => {
                   let tempValues = { ...values };
@@ -232,7 +260,6 @@ function PrescriptionIndex() {
 }
 const Footer = ({ values, mapProps, setActiveKey }) => {
   const { index } = mapProps;
-  // const dispatch = useDispatch();
   return (
     <div className="prescription_table_bottom_card mt_15">
       <div className="col-md-6 prescription_left_align">
@@ -244,7 +271,8 @@ const Footer = ({ values, mapProps, setActiveKey }) => {
         </div>
         <div className="col-md-4 mr_10">
           <h5 className="prescription_result_text">
-            0 <span className="result_declared_text">Lab Tests</span>
+            {values?.medicines?.length}{" "}
+            <span className="result_declared_text">Lab Tests</span>
           </h5>
         </div>
         <div className="col-md-4 mr_10">
@@ -255,7 +283,7 @@ const Footer = ({ values, mapProps, setActiveKey }) => {
         </div>
       </div>
       <div className="">
-        {index > 2 ? (
+        {index > 3 ? (
           <button
             className="table_next_btn"
             type="submit"

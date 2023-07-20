@@ -23,7 +23,7 @@ function PublicRoutes({ children }) {
 
   return (
     <div className="section_1_bg">
-      <div className="section_1_container">
+      <div className="section_1_container section_1_container2">
         <SideBanner />
         {children}
       </div>

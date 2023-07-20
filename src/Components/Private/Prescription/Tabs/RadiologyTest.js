@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { BackGround, Icon } from "../../../../Utilities/Icons";
-import { LabtestLabs } from "../../../../Store/Reducers/LabtestSlice";
+import { GetRadioLogyData } from "../../../../Store/Reducers/RadiologySlice";
 import GridLayout from "../../../Common/Layouts/GridLayout";
 import { FieldArray, useFormikContext } from "formik";
-function LabTest() {
+function RadiologyTest() {
   const dispatch = useDispatch();
+  const { radiologyData } = useSelector(({ RadiologySlice }) => RadiologySlice);
   const { values } = useFormikContext();
-  const { labTestList } = useSelector(({ LabtestSlice }) => LabtestSlice);
-
   const [searchParams, setSearchParams] = useState({
     q: "",
     page: 1,
@@ -19,7 +18,7 @@ function LabTest() {
 
   useEffect(() => {
     if (searchParams.page && searchParams.q) {
-      dispatch(LabtestLabs({ search: searchParams?.q })).then((res) => {
+      dispatch(GetRadioLogyData({ search: searchParams?.q })).then((res) => {
         setShow(true);
       });
     } else {
@@ -41,12 +40,12 @@ function LabTest() {
   return (
     <>
       <FieldArray
-        name="lab_test"
+        name="radiological_test"
         render={(arrayHelpers) => {
           return (
             <>
               <div className="medicine_search_box d-flex ">
-                <span className="medicine_text">Add Lab test:</span>
+                <span className="medicine_text">Add Radiology test:</span>
                 <div className="prescription-search ">
                   <form className="form-inline d-flex justify-content-start align-items-center">
                     <img
@@ -63,35 +62,38 @@ function LabTest() {
                       aria-label="Search"
                     />
                   </form>
-                  {labTestList?.length && show ? (
+                  {radiologyData?.length && show ? (
                     <div className="list">
                       <img></img>
                       <GridLayout
-                        data={labTestList}
+                        data={radiologyData}
                         component={({ data, index }) => {
                           return (
                             <div
                               className="list-item"
                               onClick={(e) => {
-
-                                if (values?.lab_test?.find(e => e.test_id === data?.id)) {
+                                if (
+                                  values?.radiological_test?.find(
+                                    (e) => e.test_id === data?.id
+                                  )
+                                ) {
                                   /* same result as above, but a different function return type */
-                                }else{
+                                } else {
                                   arrayHelpers.push({
                                     // booking_id: 12344,
                                     // user_id: 12,
                                     test_id: data?.id,
-                                    test_name: data?.test_name,
-                                    notes: data?.test_preparation,
+                                    test_name: data?.name,
+                                    notes: data?.prescription,
                                   });
                                 }
-                               
+
                                 setShow(false);
                                 setText("");
                               }}
                               key={data?.id}
                             >
-                              {data?.test_name}
+                              {data?.name}
                             </div>
                           );
                         }}
@@ -112,9 +114,9 @@ function LabTest() {
                 <table className="table prescription_table">
                   <thead></thead>
                   <tbody>
-                    {values?.lab_test?.length > 0 &&
-                      values?.lab_test.map((item, index) => (
-                        <tr className="prescription_table_body_row  lab-radiology-text-td-center">
+                    {values?.radiological_test?.length > 0 &&
+                      values?.radiological_test.map((item, index) => (
+                        <tr className="prescription_table_body_row lab-radiology-text-td-center ">
                           <td className="prescription_table_body_text">
                             {item?.test_name}
                           </td>
@@ -127,13 +129,7 @@ function LabTest() {
                               placeholder="Enter Note"
                             />
                           </td>
-                          {/* <td>
-                            <img
-                              src={BackGround.CrossImg}
-                              alt="Avatar"
-                              className="ml_5 mt_10 mb_5 float_right"
-                            ></img>
-                          </td> */}
+
                           <td>
                             <center>
                               <img
@@ -179,4 +175,4 @@ function LabTest() {
   );
 }
 
-export default LabTest;
+export default RadiologyTest;

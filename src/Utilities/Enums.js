@@ -375,6 +375,7 @@ export const PrescriptionEnum = {
     //   notes: "",
     // },
   ],
+  radiological_test: [],
   refer_speciality: [],
   doctor_notes: {
     chef_complaints: "",

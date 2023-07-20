@@ -26,9 +26,9 @@ function ChatIndex() {
   const handleFilter = (text) => {
     try {
       let tempPayouts;
-      tempPayouts = conversations.filter(
+      tempPayouts = conversations?.filter(
         (item) =>
-          item?.userName?.toLowerCase()?.includes(text.toLowerCase()) == 1
+          item?.userName?.toLowerCase()?.includes(text?.toLowerCase()) == 1
       );
       if (tempPayouts?.length) {
         setFilterData(tempPayouts);

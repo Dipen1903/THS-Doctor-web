@@ -54,8 +54,10 @@ function SignInComponent() {
               <div className="row">
                 <div className="col-md-12">
                   <div className="login_box">
+                    <div className="login-card">
                     <h3 className="logo_title">THS Doctor’s Sign In</h3>
                     <h5 className="welcome_title">Welcome back to THS!</h5>
+                    </div>
                     <div className="signin_box">
                       <Formik
                         initialValues={SignInEnum}

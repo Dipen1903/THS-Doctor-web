@@ -10,19 +10,19 @@ function SideBanner() {
     {
       loop: true,
       autoplay: true,
-      animationData: require("../../../Assets/json/splash_1.json"),
+      animationData: require("../../../Assets/json/THS Banner 2_1170 x 2532_23 Dec.png"),
       renderer: "svg",
     },
     {
       loop: true,
       autoplay: true,
-      animationData: require("../../../Assets/json/splash_2.json"),
+      animationData: require("../../../Assets/json/THS Banner 3_1170 x 2532_23 Dec.png"),
       renderer: "svg",
     },
     {
       loop: true,
       autoplay: true,
-      animationData: require("../../../Assets/json/splash_3.json"),
+      animationData: require("../../../Assets/json/THS Banner 5_1170 x 2532_23 Dec.png"),
       renderer: "svg",
     },
   ];
@@ -31,7 +31,9 @@ function SideBanner() {
       <div className="row">
         <div className="col-md-12">
           <div className="display_t">
-            <img alt="myImg" src={Logo.THS_Title} className="logo_box" />
+            <center>
+              <img alt="myImg" src={Logo.THS_Title} className="logo_box" />
+            </center>
             <div className="slider_1">
               <OwlCarousel
                 className="owl-theme"
@@ -44,7 +46,11 @@ function SideBanner() {
                 {defaultOptions.map((item, index) => (
                   <div className="item" key={index}>
                     <center>
-                      <Lottie options={item} />
+                      <img
+                        src={item?.animationData}
+                        class="owl_banner_img_box"
+                      />
+                      {/* <Lottie options={item} /> */}
                       <h3 className="slider_text">
                         Help millions of people everywhere,
                         <br /> everytime

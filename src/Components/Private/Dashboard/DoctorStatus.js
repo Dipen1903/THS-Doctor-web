@@ -61,8 +61,8 @@ function DoctorStatus() {
                   starting. Thanks!
                 </h3>
                 <h3 className="profile-bottom-text mt_10">
-                  Once profile verification completed, you will get online
-                  consultation requests.
+                  Once profile verificatin completed, you will get online
+                  consultaion requests.
                 </h3>
                 <button
                   className="profile_btn mb_40"
@@ -104,8 +104,8 @@ function DoctorStatus() {
                   starting. Thanks!
                 </h3>
                 <h3 className="profile-bottom-text mt_10 mb_30">
-                  Once profile verification completed, you will get online
-                  consultation requests.
+                  Once profile verificatin completed, you will get online
+                  consultaion requests.
                 </h3>
 
                 <button
@@ -164,13 +164,13 @@ function DoctorStatus() {
         userProfile?.is_active === 0 && (
           //* Verification Pending
           <div className="admin-bottom-content">
-            <div className="d-block justify-content-center text-center">
+            <div class="d-block justify-content-center text-center">
               <img
                 src={BackGround.Email}
                 alt="Avatar"
-                className="avatar2 mt_100 mb_5"
+                class="avatar2 mt_100 mb_5"
               ></img>
-              <h4 className="welcome-text mt_20">
+              <h4 class="welcome-text mt_20">
                 Welcome to <br />
                 THS’s growing Doctors Community
               </h4>
@@ -184,8 +184,8 @@ function DoctorStatus() {
                     about your profile within 2-3 business days.
                   </h3>
                   <h3 className="profile-bottom-text mt_15 mb_20">
-                    Once profile verification completed, you will get online
-                    consultation requests.
+                    Once profile verificatin completed, you will get online
+                    consultaion requests.
                   </h3>
                 </center>
               </div>
