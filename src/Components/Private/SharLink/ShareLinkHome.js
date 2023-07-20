@@ -2,6 +2,9 @@ import React from 'react'
 import { Container } from 'react-bootstrap'
 
 const ShareLinkHome = () => {
+    const navigates = () => {
+        window.location.href='/doctor/sharelinkhome'
+    }
     return (
         <Container
             fluid
@@ -32,7 +35,7 @@ const ShareLinkHome = () => {
                         <h4 className='cons'>You Earn</h4>
                         <h4 className='consultionfee'>Rs. 400</h4>
                     </div>
-                    <button className='buttonsave mt_40'>
+                    <button className='buttonsave mt_40' onClick={() => {navigates()}} >
                     Save & Continue
                     </button>
                 </div>

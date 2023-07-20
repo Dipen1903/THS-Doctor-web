@@ -21,6 +21,7 @@ import PayoutDetailed from "../Components/Private/Payouts/PayoutDetailed";
 import ResetProfile from "../Components/Private/SetupProfile/ResetProfile";
 import ChatIndex from "../Components/Private/Chat/ChatIndex";
 import ShareLinkHome from "../Components/Private/SharLink/ShareLinkHome";
+import SecondSharLink from "../Components/Private/SharLink/SecondSharLink";
 
 // import UserProfile from "../Components/Public/Userprofile/userprofile";
 // import UserProfile2 from "../Components/Public/Userprofile/userprofile2";
@@ -92,6 +93,14 @@ function RootRoute() {
         element={
           <PrivateRoutes isHeader={true}>
             <ShareLinkHome />
+          </PrivateRoutes>
+        }
+      />
+         <Route
+        path="/sharelinkhome"
+        element={
+          <PrivateRoutes isHeader={true}>
+            <SecondSharLink />
           </PrivateRoutes>
         }
       />
