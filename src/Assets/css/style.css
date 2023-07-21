@@ -7271,7 +7271,7 @@ privacypolicy-paragraph::-webkit-scrollbar {
 }
 
 .inputclass {
-  width: 191px;
+  width: 191px !important;
   height: 48px;
   flex-shrink: 0;
   border: 1px solid #F0F0F0;
@@ -7323,27 +7323,31 @@ privacypolicy-paragraph::-webkit-scrollbar {
   border-radius: 8px;
   border: 1px solid #ECEFF4;
 }
-.secondsharelink{
+
+.secondsharelink {
   color: #1E1F20;
-font-family: Mulish;
-font-size: 13px;
-font-style: normal;
-font-weight: 600;
-line-height: 16px; 
+  font-family: Mulish;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 16px;
 }
-.textdiv{
+
+.textdiv {
   display: flex;
   gap: 8px;
   align-items: center;
 }
-.secondh2{
-  color:#1E1F20;
-font-family: Mulish;
-font-size: 15px;
-font-style: normal;
-font-weight: 600;
-line-height: 24px; 
+
+.secondh2 {
+  color: #1E1F20;
+  font-family: Mulish;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px;
 }
+
 /* Hide the default checkbox */
 input[type="checkbox"].checkboxdesign {
   appearance: none;
@@ -7351,9 +7355,177 @@ input[type="checkbox"].checkboxdesign {
   -moz-appearance: none;
   width: 20px;
   height: 20px;
-  background-color: #fff; /* Set the background color of the checkbox */
+  background-color: #fff;
+  /* Set the background color of the checkbox */
   border-radius: 50%;
   border: 1px solid #000;
-  outline: none; 
+  outline: none;
   cursor: pointer;
+  position: relative;
+}
+
+/* Add a pseudo-element to represent the checkmark */
+input[type="checkbox"].checkboxdesign::before {
+  content: "\2713";
+  /* Unicode character for checkmark (✓) */
+  display: none;
+  /* Initially hide the checkmark */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 16px;
+}
+
+/* Show the checkmark when the checkbox is checked */
+input[type="checkbox"].checkboxdesign:checked::before {
+  display: block;
+}
+
+.input-container {
+  position: relative;
+}
+
+input[type="text"] {
+  width: 100%;
+  height: 48px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+#copyLinkText {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #3093BB;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* Optional styling for the text on hover */
+#copyLinkText:hover {
+  text-decoration: underline;
+}
+
+.sharebtn {
+  padding: 10px 117px;
+  align-items: center;
+  border: 1px solid #F0F0F0;
+  border-radius: 10px;
+  background-color: #FFFFFF;
+  width: 385px;
+  margin-top: 20px;
+}
+
+.sharebtn2 {
+  padding: 10px 115px;
+  align-items: center;
+  border: 1px solid #F0F0F0;
+  border-radius: 10px;
+  background-color: #FFFFFF;
+  width: 385px;
+  margin-top: 20px;
+}
+
+.sharebtn3 {
+  padding: 10px 30px;
+  align-items: center;
+  border: 1px solid #F0F0F0;
+  border-radius: 10px;
+  background-color: #FFFFFF;
+  width: 385px;
+  margin-top: 20px;
+}
+
+.shreflex {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Your existing CSS styles */
+/* ... */
+
+/* CSS styles for the modal container */
+.modal-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(50, 59, 75, 0.30);
+  backdrop-filter: blur(2px);
+  z-index: 999;
+  /* Ensure the modal appears above other elements */
+}
+
+.mainModal {
+  border-radius: 16px;
+  background: #FFF;
+  width: 391px;
+  height: 308px;
+}
+
+.modalmaintext {
+  color: #1E1F20;
+  font-family: Mulish;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 32px;
+}
+
+.okbtn {
+  border-radius: 12px;
+  background: var(--gradient, linear-gradient(45deg, #3093BB 0%, #82DBFF 100%));
+  width: 343px;
+  height: 50px;
+  flex-shrink: 0;
+  border: none;
+  color: #FFF;
+  text-align: center;
+  font-family: Mulish;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 24px;
+}
+.numberdiv{
+  display: flex;
+gap: 20px;
+padding-top: 15px;
+
+}
+.textnumber{
+  color: #1E1F20;
+font-family: Mulish;
+font-size: 15px;
+font-style: normal;
+font-weight: 600;
+line-height: 24px; /* 160% */
+border-radius: 8px;
+background: var(--line-colour, #ECEFF4);
+padding: 8px 10px;
+}
+.uploadmodal{
+  display: flex;
+  justify-content: space-between;
+}
+.uploadtext{
+  color: #1E1F20;
+font-family: Mulish;
+font-size: 20px;
+font-style: normal;
+font-weight: 700;
+line-height: 32px;
+}
+.uploadbtn{
+  
 }
