@@ -39,6 +39,7 @@ const ShareLinkHome = () => {
                     <button className='buttonsave mt_40' onClick={() => { navigates() }} >
                         Save & Continue
                     </button>
+                  
                 </div>
             </div>
           

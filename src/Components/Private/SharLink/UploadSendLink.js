@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Modal } from "react-bootstrap";
-import uploadimg from '../../../Assets/img/png/Group 34282.png'
+import uplaodsheet from '../../../Assets/img/png/Group 34274.png'
 
-const UploadModal = ({ isOpen, onClose }) => {
+const UploadSendLink = ({ isOpen, onClose }) => {
 
     return (
         <>
@@ -14,12 +14,13 @@ const UploadModal = ({ isOpen, onClose }) => {
                                 <h4 className="uploadtext">Upload Excel Sheet</h4>
                                 <button className="uploadbtn">View Demo Sheet</button>
                             </div>
-                            <div className="sheetimgdiv pt_40">
-                                <img src={uploadimg} className="sheetimg"></img>
+                            <div className="sheetimgdiv pt_30">
+                                <img src={uplaodsheet} className="sheetimg"></img>
                             </div>
-                            <div className='uploadbtndiv pt_40'>
+                            <p className="text-center textcolor">contact.xlsx</p>
+                            <div className='uploadbtndiv pt_20'>
                                 <button className='closebtn' onClick={onClose}>Close</button>
-                                <button className='sendbtn'> send Link</button>
+                                <button className='okbtn' style={{width:"48%"}}> send Link</button>
                             </div>
                         </div>
 
@@ -30,4 +31,4 @@ const UploadModal = ({ isOpen, onClose }) => {
     );
 };
 
-export default UploadModal;
+export default UploadSendLink;

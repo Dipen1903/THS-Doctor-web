@@ -3290,8 +3290,8 @@ input:checked+.slider:before {
 
 .upload_avatar_img {
   width: 75px;
-  max-width: 75px;
-  max-height: 75px;
+  max-width: 50px;
+  max-height: 50px;
   border-radius: 12px;
   object-fit: cover;
 }
@@ -3299,8 +3299,8 @@ input:checked+.slider:before {
 .personal_profile_card_body .upload_avatar_img {
   width: 112px;
   height: 112px;
-  max-width: 112px;
-  max-height: 112px;
+  max-width: 90px;
+  max-height: 90px;
 }
 
 button.personal_profile_btn.float_right.btn.btn-primary img {
@@ -7527,5 +7527,68 @@ font-weight: 700;
 line-height: 32px;
 }
 .uploadbtn{
-  
+  border-radius: 12px;
+border: 1px solid #E0E0E0;
+background: #FFF;
+color:  #3093BB;
+text-align: center;
+font-family: Mulish;
+font-size: 15px;
+font-style: normal;
+font-weight: 700;
+line-height: 24px; 
+}
+.uploadbtndiv{
+  display: flex;
+  justify-content: space-between;
+}
+.closebtn{
+  color:  #9393AA;
+text-align: center;
+font-family: Mulish;
+font-size: 15px;
+font-style: normal;
+font-weight: 700;
+line-height: 24px; /* 160% */
+border-radius: 12px;
+border: 1px solid #E0E0E0;
+background: #FFF;
+width: 48%;
+height: 50px;
+flex-shrink: 0;
+}
+.sendbtn{
+  border-radius: 12px;
+border: 1px solid #E0E0E0;
+background:  #F0F0F0;
+color: #9393AA;
+text-align: center;
+font-family: Mulish;
+font-size: 15px;
+font-style: normal;
+font-weight: 700;
+line-height: 24px; /* 160% */
+width: 48%;
+height: 50px;
+flex-shrink: 0;
+}
+.sheetimg{
+  width: 110px;
+height: 110px;
+}
+.sheetimgdiv{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+.textcolor{
+  color:#1E1F20;
+text-align: center;
+font-family: Mulish;
+font-size: 14px;
+font-style: normal;
+font-weight: 500;
+line-height: 24px; 
+margin-bottom: 0px;
 }

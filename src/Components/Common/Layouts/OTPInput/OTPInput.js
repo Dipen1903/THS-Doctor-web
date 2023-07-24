@@ -168,7 +168,7 @@ export function OTPInputComponent({
           <SingleInput
             key={`SingleInput-${index}`}
             id="mobile_number"
-            type={isNumberInput ? "number" : "text"}
+            type={isNumberInput ? "text" : "text"}
             focus={activeInput === index}
             value={otpValues && otpValues[index]}
             autoFocus={autoFocus}

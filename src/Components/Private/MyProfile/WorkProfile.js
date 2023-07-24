@@ -87,7 +87,8 @@ function WorkProfile() {
       }
       tempProfile.signature = userProfile?.signature;
       setProfileData(tempProfile);
-    } catch (error) {}
+      console.log("tempProfiletempProfiletempProfiletempProfiletempProfiletempProfiletempProfiletempProfile", tempProfile);
+    } catch (error) { }
   };
   const handleSignature = (e, setFieldValue) => {
     let file = e?.target?.files[0];
@@ -97,7 +98,7 @@ function WorkProfile() {
   };
   useEffect(() => {
     initialSetup();
-    return () => {};
+    return () => { };
   }, [userProfile]);
 
   return (
@@ -129,6 +130,7 @@ function WorkProfile() {
           handleBlur,
           handleSubmit,
         }) => (
+
           <form onSubmit={handleSubmit}>
             <div className="work_profile_card_head">
               <div className="d-flex">
@@ -292,7 +294,7 @@ function WorkProfile() {
                           isMulti={true}
                           placeholder="Search"
                           isSearchable={true}
-                          onChange={() => {}}
+                          onChange={() => { }}
                           name="languages"
                           id="languages"
                           className="mb-4"
@@ -420,8 +422,8 @@ function WorkProfile() {
                                           </div>
                                           <div className="col-md-6">
                                             {values?.qualification?.length &&
-                                            values?.qualification[index]
-                                              ?.file ? (
+                                              values?.qualification[index]
+                                                ?.file ? (
                                               <div className="row col-md-12">
                                                 <div className="col-md-6">
                                                   <Media
@@ -580,12 +582,12 @@ function WorkProfile() {
                                     options={
                                       documentList?.length
                                         ? [
-                                            {
-                                              value: "",
-                                              label: "Select document",
-                                            },
-                                            ...documentList,
-                                          ]
+                                          {
+                                            value: "",
+                                            label: "Select document",
+                                          },
+                                          ...documentList,
+                                        ]
                                         : []
                                     }
                                     isSearchable={true}
@@ -628,7 +630,7 @@ function WorkProfile() {
                                       </div>
                                       <div className="col-md-6">
                                         {values?.proof.length &&
-                                        values?.proof[index]?.file ? (
+                                          values?.proof[index]?.file ? (
                                           <div className="row col-md-12">
                                             <div className="col-md-6">
                                               <Media
@@ -731,14 +733,15 @@ function WorkProfile() {
                     {values?.signature ? (
                       <div className="row col-md-12">
                         <div className="col-md-6">
+                          {console.log("values.signature", values.signature)}
                           <img
                             alt="myImg"
                             src={
                               typeof values.signature === "object"
                                 ? URL.createObjectURL(values.signature)
                                 : values.signature
-                                ? values.signature
-                                : BackGround.Profile
+                                  ? values.signature
+                                  : BackGround.Profile
                             }
                             className="upload_avatar_img"
                           ></img>

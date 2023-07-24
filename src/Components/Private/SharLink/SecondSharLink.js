@@ -7,6 +7,7 @@ import ARROW from '../../../Assets/img/svg/upload.svg';
 import { Button, Form, InputGroup, Modal } from "react-bootstrap";
 import ModalComponent from './ModalComponent';
 import UploadModal from './UploadModal.js';
+import UploadSendLink from './UploadSendLink';
 // import firebase from 'firebase/compat/app';
 
 // const firebaseConfig = {
@@ -25,6 +26,7 @@ import UploadModal from './UploadModal.js';
 const SecondSharLink = () => {
     const [data, SetData] = useState(false);
     const [uploadModal , SetUploadModal]= useState(false);
+    const [uploadLink , SetUploadLink] = useState(false);
     // const handleShareButtonClick = async () => {
     //     try {
     //         const dynamicLinkURL = 'https://medicaluser.page.link/y1E4';
@@ -99,7 +101,7 @@ const SecondSharLink = () => {
                                 Copy link</span>
                         </div>
                         <div>
-                            <button className='sharebtn' >
+                            <button className='sharebtn' onClick={() =>SetUploadLink(true)}>
                                 <div className='shreflex'>
                                     <img src={share} alt='Share Icon' />
                                     <h4 className='paycontent'>Share Link</h4>
@@ -123,6 +125,7 @@ const SecondSharLink = () => {
             </Container>
             <ModalComponent isOpen={data} onClose={() => SetData(false)} />
             <UploadModal isOpen={uploadModal} onClose={() => SetUploadModal(false)}/>
+            <UploadSendLink isOpen={uploadLink} onClose={() => SetUploadLink(false)} />
         </>
     )
 }

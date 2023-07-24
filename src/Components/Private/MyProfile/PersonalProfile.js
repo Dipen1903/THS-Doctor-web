@@ -40,12 +40,12 @@ function PersonalProfile() {
       tempData.email = userProfile?.email;
       tempData.image = userProfile?.image;
       setProfileData(tempData);
-    } catch (error) {}
+    } catch (error) { }
   };
-
+  const currentDate = new Date().toISOString().split('T')[0];
   useEffect(() => {
     intialSetup();
-    return () => {};
+    return () => { };
   }, [userProfile]);
 
   return (
@@ -97,7 +97,7 @@ function PersonalProfile() {
                 <div className="col-md-6">
                   <div className="row">
                     <div className="col-md-12">
-                      <div className="row">
+                      <div className="avtarabtnd row">
                         <div className="col-md-3">
                           <img
                             alt="myImg"
@@ -193,10 +193,11 @@ function PersonalProfile() {
                         name="dob"
                         className="dateModule"
                         disabled={!isEdit}
-                        pattern={`\d{4}-\d{2}-\d{2}`}
+                        pattern="\d{4}-\d{2}-\d{2}"
                         onChange={handleChange}
                         onBlur={handleBlur}
                         value={values?.dob}
+                        max={currentDate} // Set the max attribute to the current date
                       />
                     </div>
                     <div className="col-md-12 mt_20 ">
@@ -205,9 +206,8 @@ function PersonalProfile() {
                       <div className="col-md-3 radio-container mt_20 mb_20">
                         {(isEdit || values?.gender == "male") && (
                           <div
-                            className={`radio_box ${
-                              values?.gender == "male" && "selected"
-                            }`}
+                            className={`radio_box ${values?.gender == "male" && "selected"
+                              }`}
                           >
                             <label htmlFor={"male"}>
                               <img
@@ -232,9 +232,8 @@ function PersonalProfile() {
                         )}
                         {(isEdit || values?.gender == "female") && (
                           <div
-                            className={`radio_box ${
-                              values?.gender == "female" && "selected"
-                            }`}
+                            className={`radio_box ${values?.gender == "female" && "selected"
+                              }`}
                           >
                             <label htmlFor={"female"}>
                               <img

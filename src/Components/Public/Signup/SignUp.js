@@ -5,7 +5,7 @@ import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import { Formik, ErrorMessage } from "formik";
 import { Link, useNavigate } from "react-router-dom";
-
+import * as Yup from "yup";
 import OTPInput from "../../Common/Layouts/OTPInput/OTPInput";
 import { BackGround } from "../../../Utilities/Icons";
 import { SignUpEnum } from "../../../Utilities/Enums";
@@ -20,7 +20,7 @@ import {
 } from "../../../Store/Reducers/RegiserSlice";
 import { useTimer } from "../../../Utilities/Hooks";
 import { padLeadingZeros } from "../../../Utilities/Functions";
-
+import { useField } from "formik";
 export default function SignUpComponent() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -73,7 +73,9 @@ export default function SignUpComponent() {
                                   onChange={handleChange}
                                   onBlur={handleBlur}
                                   value={values.first_name}
+                                  maxLength="32"
                                 />
+                          
                               </div>
                               <div className="col-md-6 mt_20">
                                 <FormControl
@@ -85,6 +87,7 @@ export default function SignUpComponent() {
                                   onChange={handleChange}
                                   onBlur={handleBlur}
                                   value={values.last_name}
+                                  maxLength="32"
                                 />
                               </div>
                             </div>
@@ -193,6 +196,7 @@ export default function SignUpComponent() {
     </>
   );
 }
+
 
 const OTPVerify = (props) => {
   const { values, ...rest } = props;

@@ -109,7 +109,7 @@ export const RegisterSlice = createSlice({
       state.success = action.payload;
     },
   },
-  extraReducers: (builder) => {},
+  extraReducers: (builder) => { },
 });
 
 export const { toggleOTPverify, toggleSuccess } = RegisterSlice.actions;

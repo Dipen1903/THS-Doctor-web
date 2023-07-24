@@ -234,7 +234,7 @@ const OTPLogin = (props) => {
 
                   <FormControl
                     control="input"
-                    type="number"
+                    type="text"
                     label="Mobile"
                     name="mobile_number"
                     min={0}

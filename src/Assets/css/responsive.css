@@ -58,6 +58,10 @@
     color: #1e1f20;
     line-height: 24px;
   }
+  .display_inline {
+    display: inline-flex!important
+  }
+
   .by_clicking {
     font-family: Mulish;
     font-weight: 600;
