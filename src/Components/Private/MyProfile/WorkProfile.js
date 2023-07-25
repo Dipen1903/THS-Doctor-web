@@ -115,7 +115,7 @@ function WorkProfile() {
           tempData["deepIntegrate"] = true;
           dispatch(EditUserProfile(tempData)).then((res) => {
             if (res?.payload?.success) {
-              setIsEdit(false);
+              setIsEdit(true);
               initialSetup();
             }
           });
