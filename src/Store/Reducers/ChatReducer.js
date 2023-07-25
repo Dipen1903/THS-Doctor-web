@@ -21,7 +21,7 @@ const initialState = {
   chat: [],
   chatDoc: "",
   conversations: [],
-  snapShot: () => {},
+  snapShot: () => { },
   isDetails: false,
 };
 
@@ -196,6 +196,7 @@ export const GetConversations = createAsyncThunk(
     try {
       const { conversations } = getState().ChatSlice;
       if (values?.doctor_id) {
+        console.log("values?.doctor_id", values?.doctor_id);
         const path = `Doctors_${values?.doctor_id}`;
         const ref = collection(FirebaseDB, path);
         const q = query(ref, orderBy("lastMessageTime", "desc"));
@@ -204,7 +205,7 @@ export const GetConversations = createAsyncThunk(
         result.forEach((doc) => tempArr.push(doc?.data()));
         onSnapshot(q, (querySnapshot) => {
           querySnapshot.docChanges().forEach((change) => {
-            console.log("change",change);
+            console.log("change", change);
             if (change.type === "modified") {
               // let tempConversation = [];
 
@@ -214,7 +215,7 @@ export const GetConversations = createAsyncThunk(
               //   tempConversation = [...conversations];
               // }
               let temp = change.doc.data();
-              console.log("temp",temp);
+              console.log("temp", temp);
               dispatch(updateConversation(temp));
               // let index = tempConversation?.findIndex(
               //   (item) =>
@@ -293,7 +294,7 @@ export const ChatSlice = createSlice({
       let index = tempConversation.findIndex(
         (item) => item?.lastBookingId === action?.payload?.lastBookingId
       );
-     
+
       if (index > -1) {
         tempConversation[index] = action?.payload;
       }

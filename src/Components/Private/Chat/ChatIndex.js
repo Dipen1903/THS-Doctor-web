@@ -23,7 +23,7 @@ function ChatIndex() {
   const { conversations, room } = ChatSlice;
   const { userProfile } = ProfileSlice;
   const [filterData, setFilterData] = useState([]);
-  console.log("filterDatafilterDatafilterData",filterData);
+
   const handleFilter = (text) => {
     try {
       let tempPayouts;
@@ -31,10 +31,12 @@ function ChatIndex() {
         (item) =>
           item?.userName?.toLowerCase()?.includes(text?.toLowerCase()) == 1
       );
-      console.log("tempPayoutstempPayouts",tempPayouts);
+      console.log("tempPayoutstempPayouts", tempPayouts);
       if (tempPayouts?.length) {
         setFilterData(tempPayouts);
       }
+
+      console.log("filterDatafilterDatafilterData", tempPayouts, "----," , filterData);
       if (!tempPayouts?.length) {
         dispatch(
           setMessage({
@@ -92,60 +94,60 @@ function ChatIndex() {
             </div>
             <div id="conversation-list">
               {conversations.length ? (
-            
-                  ((filterData.length && filterData) || conversations)?.map(
-                    (item, index) => (
-                      <div
-                        key={"user " + item?.lastMessage + item?.lastBookingId}
-                        onClick={() => {
-                          navigate(`/chat/${item?.lastBookingId || item?.id}`);
-                        }}
-                        className={`chat_contact_list_box ${room?.lastBookingId?.toString() ===
-                          item?.lastBookingId?.toString() ||
-                          room?.id?.toString() === item?.lastBookingId?.toString()
-                          ? "chat_contact_list_box_active"
-                          : ""
-                          }`}
-                      >
-                            { console.log("conversations", conversations) }
-                        <div className="row">
-                          <div className="col-md-10 padding_right_0 padding_left_0">
-                            <div className="chat_list_display_box">
-                              <img
-                                className="chat_user_img"
-                                src={item?.userImage || BackGround.Profile}
-                                alt="Jane Cooper"
-                              />
-                              <div>
-                                <div className="chat_user_name">
-                                  {item?.userName}
-                                </div>
-                                <div className="chat_user_name">
-                                  #{item?.lastBookingId}
-                                </div>
-                                <div className="chat_user_last_msg">
-                                  {item?.lastMessage}
-                                </div>
+
+                ((filterData.length && filterData) || conversations)?.map(
+                  (item, index) => (
+                    <div
+                      key={"user " + item?.lastMessage + item?.lastBookingId}
+                      onClick={() => {
+                        navigate(`/chat/${item?.lastBookingId || item?.id}`);
+                      }}
+                      className={`chat_contact_list_box ${room?.lastBookingId?.toString() ===
+                        item?.lastBookingId?.toString() ||
+                        room?.id?.toString() === item?.lastBookingId?.toString()
+                        ? "chat_contact_list_box_active"
+                        : ""
+                        }`}
+                    >
+                      {/* {console.log("conversations", conversations)} */}
+                      <div className="row">
+                        <div className="col-md-10 padding_right_0 padding_left_0">
+                          <div className="chat_list_display_box">
+                            <img
+                              className="chat_user_img"
+                              src={item?.userImage || BackGround.Profile}
+                              alt="Jane Cooper"
+                            />
+                            <div>
+                              <div className="chat_user_name">
+                                {item?.userName}
+                              </div>
+                              <div className="chat_user_name">
+                                #{item?.lastBookingId}
+                              </div>
+                              <div className="chat_user_last_msg">
+                                {item?.lastMessage}
                               </div>
                             </div>
-                          </div>
-                          <div className="col-md-2 padding_left_0 padding_right_0">
-                            <div className="chat_time">
-                              {item?.lastMessageTime &&
-                                moment(item?.lastMessageTime?.toDate()).fromNow()}
-                            </div>
-                            {parseInt(item?.unreadMessageOfDoctor) ? (
-                              <div className="chat_message_count">
-                                {item?.unreadMessageOfDoctor}
-                              </div>
-                            ) : (
-                              <></>
-                            )}
                           </div>
                         </div>
+                        <div className="col-md-2 padding_left_0 padding_right_0">
+                          <div className="chat_time">
+                            {item?.lastMessageTime &&
+                              moment(item?.lastMessageTime?.toDate()).fromNow()}
+                          </div>
+                          {parseInt(item?.unreadMessageOfDoctor) ? (
+                            <div className="chat_message_count">
+                              {item?.unreadMessageOfDoctor}
+                            </div>
+                          ) : (
+                            <></>
+                          )}
+                        </div>
                       </div>
-                    )
+                    </div>
                   )
+                )
               ) : (
                 <></>
               )}

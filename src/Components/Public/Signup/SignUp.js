@@ -100,11 +100,11 @@ export default function SignUpComponent() {
                                   id="mobile_number"
                                   label="Mobile"
                                   min={0}
-                                  maxLength={10}
+                                  maxLength="10"
                                   onChange={handleChange}
                                   onBlur={handleBlur}
                                   value={values.mobile_number}
-                                  maxLength="10"
+                                  
                                 />
                               </div>
                               <div className="col-md-12 mt_20">

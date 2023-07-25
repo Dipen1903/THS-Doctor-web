@@ -89,10 +89,10 @@ export const GetConsultDetails = createAsyncThunk(
     } catch (error) {
       dispatch(setLoading(false));
       dispatch(
-        setMessage({
-          text: error?.message,
-          type: AlertEnum.Error,
-        })
+        // setMessage({
+        //   text: error?.message,
+        //   type: AlertEnum.Error,
+        // })
       );
       return error;
     }
@@ -111,7 +111,7 @@ export const CompleteConsult = createAsyncThunk(
             type: AlertEnum.Success,
           })
         );
-       
+
         dispatch(GetNewConsults());
         dispatch(GetPastConsults());
         return result?.data;
