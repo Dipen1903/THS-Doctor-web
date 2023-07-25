@@ -71,7 +71,7 @@ export default function WorkProfile() {
         <div className="col-md-12">
           <FormControl
             control="input"
-            type="number"
+            type="text"
             key="experience"
             label="Year Experience*"
             placeholder="Please enter your experience"

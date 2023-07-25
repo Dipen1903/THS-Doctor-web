@@ -204,6 +204,7 @@ export const GetConversations = createAsyncThunk(
         result.forEach((doc) => tempArr.push(doc?.data()));
         onSnapshot(q, (querySnapshot) => {
           querySnapshot.docChanges().forEach((change) => {
+            console.log("change",change);
             if (change.type === "modified") {
               // let tempConversation = [];
 
@@ -213,6 +214,7 @@ export const GetConversations = createAsyncThunk(
               //   tempConversation = [...conversations];
               // }
               let temp = change.doc.data();
+              console.log("temp",temp);
               dispatch(updateConversation(temp));
               // let index = tempConversation?.findIndex(
               //   (item) =>
@@ -291,6 +293,7 @@ export const ChatSlice = createSlice({
       let index = tempConversation.findIndex(
         (item) => item?.lastBookingId === action?.payload?.lastBookingId
       );
+     
       if (index > -1) {
         tempConversation[index] = action?.payload;
       }

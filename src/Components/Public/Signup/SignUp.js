@@ -95,7 +95,7 @@ export default function SignUpComponent() {
                               <div className="col-md-12 mt_20">
                                 <FormControl
                                   control="input"
-                                  type="number"
+                                  type="text"
                                   name="mobile_number"
                                   id="mobile_number"
                                   label="Mobile"
@@ -104,6 +104,7 @@ export default function SignUpComponent() {
                                   onChange={handleChange}
                                   onBlur={handleBlur}
                                   value={values.mobile_number}
+                                  maxLength="10"
                                 />
                               </div>
                               <div className="col-md-12 mt_20">

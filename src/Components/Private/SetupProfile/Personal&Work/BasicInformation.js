@@ -16,7 +16,7 @@ export default function BasicInformation() {
   const dispatch = useDispatch();
   const { CommonSlice } = useSelector((state) => state);
   const { stateList, cityList } = CommonSlice;
-
+  const currentDate = new Date().toISOString().split('T')[0];
   const [localImage, setLocalImage] = useState();
 
   const handleImage = (e, setFieldValue) => {
@@ -91,6 +91,7 @@ export default function BasicInformation() {
               onBlur={handleBlur}
               required
               value={moment(values?.dob).format("YYYY-MM-DD")}
+              max={currentDate} 
             />
           </div>
         </div>
