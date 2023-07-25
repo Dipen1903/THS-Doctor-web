@@ -86,7 +86,7 @@ function PastConsultation({ pastConsults = [] }) {
     },
   ];
   useEffect(() => {
-    return () => {};
+    return () => { };
   }, []);
 
   return (
@@ -94,7 +94,7 @@ function PastConsultation({ pastConsults = [] }) {
       <ConsultDetails
         show={show}
         onHide={(e) => {
-          hide(false);
+          hide(true);
         }}
       />
       <PresciptionDetails />

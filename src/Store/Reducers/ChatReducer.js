@@ -49,6 +49,7 @@ export const createRoom = createAsyncThunk(
   "createRoom",
   async (values, { getState, dispatch }) => {
     try {
+      console.log("valuesvaluesvalues", values);
       const { ProfileSlice } = getState();
       const { userProfile } = ProfileSlice;
 
@@ -156,6 +157,7 @@ export const SetUpRoom = createAsyncThunk(
       }
     } catch (error) {
       dispatch(setLoading(false));
+      console.log("errrrrr", error);
       return error;
     }
   }

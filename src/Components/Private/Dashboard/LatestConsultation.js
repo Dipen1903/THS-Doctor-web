@@ -26,9 +26,9 @@ function LatestConsultation() {
       );
       if (tempList) {
         setLatest(tempList);
-        // dispatch(SetUpRoom(tempList[0]));
+        dispatch(SetUpRoom(tempList[0]));
       }
-    } catch (error) {}
+    } catch (error) { }
   };
   let interval = () =>
     setInterval(() => {
@@ -37,6 +37,7 @@ function LatestConsultation() {
 
   const isActive = (item) => {
     try {
+      console.log(" isActive(item) && parseInt(room?.lastBookingId) !== parseInt(item?.id)", item);
       if (item?.status === 1) {
         return true;
       } else if (item?.status === 0) {
@@ -46,7 +47,7 @@ function LatestConsultation() {
         var minutes = duration.asMinutes();
         return parseInt(minutes) > 10 ? false : true;
       }
-    } catch (error) {}
+    } catch (error) { }
   };
   useEffect(() => {
     if (!upcomingConsults?.length) {
@@ -77,30 +78,32 @@ function LatestConsultation() {
                 <div className="upcomming_consult_chat_list">
                   {latest?.map((item, index) => {
                     return (
-                      <div
-                        className={`chat_list_box ${
-                          isActive(item) &&
-                          parseInt(room?.lastBookingId) !==
-                            parseInt(item?.id) &&
-                          "chat_list_box_active"
-                        }`}
-                        onClick={(e) => {
-                          e.preventDefault();
 
-                          isActive(item) &&
-                            parseInt(room?.lastBookingId) !==
-                              parseInt(item?.id) &&
-                            dispatch(
-                              GetConsultDetails({ appointment_id: item?.id })
-                            ).then((res) => {
-                              dispatch(SetUpRoom(item));
-                            });
+                      <div
+                        className={`chat_list_box ${isActive(item) &&
+                          parseInt(room?.lastBookingId) !==
+                          parseInt(item?.id) &&
+                          "chat_list_box_active"
+                          }`}
+                        onClick={(e) => {
+                          {
+                            // e.preventDefault();
+                            console.log("item?.id", item, item?.id, room?.lastBookingId, room, isActive(item) && parseInt(room?.lastBookingId) !== parseInt(item?.id))
+                            parseInt(room?.lastBookingId) !== parseInt(item?.id) &&
+                              dispatch(
+                                GetConsultDetails({ appointment_id: item?.id })
+                              ).then((res) => {
+                                console.log("essssss", res);
+                                dispatch(SetUpRoom(item));
+                              })
+                          };
                         }}
                       >
                         <div className="row">
                           <div className="col-md-6">
                             <h6 className="chat_list_id">
                               ID #{item?.appointment_id}
+                              {console.log("latestlatestlatestlatest", latest)}
                             </h6>
                             <div className="chat_title_box">
                               <h4 className="chat_list_title">{item?.name}</h4>

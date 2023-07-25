@@ -54,63 +54,57 @@ function SnackBar() {
     case AlertEnum.Success:
       return (
         <div
-          className={`alert alert-success ${
-            show ? "alert-shown" : "alert-hidden"
-          }`}
+          className={`alert alert-success ${show ? "alert-shown" : "alert-hidden"
+            }`}
         >
-          {text.toString()}
+          {text?.toString()}
         </div>
       );
     case AlertEnum.Error:
       return (
         <div
-          className={`alert alert-danger ${
-            show ? "alert-shown" : "alert-hidden"
-          }`}
+          className={`alert alert-danger ${show ? "alert-shown" : "alert-hidden"
+            }`}
         >
-          {text.toString()}
+          {text?.toString()}
         </div>
       );
     case AlertEnum.Warning:
       return (
         <div
-          className={`alert alert-warning ${
-            show ? "alert-shown" : "alert-hidden"
-          }`}
+          className={`alert alert-warning ${show ? "alert-shown" : "alert-hidden"
+            }`}
         >
-          {text.toString()}
+          {text?.toString()}
         </div>
       );
     case AlertEnum.Booking:
       return (
         <div
-          className={`alert alert-primary ${
-            show ? "alert-shown" : "alert-hidden"
-          }`}
+          className={`alert alert-primary ${show ? "alert-shown" : "alert-hidden"
+            }`}
         >
-          {text.toString()}
+          {text?.toString()}
           <p>{subText.toString()}</p>
         </div>
       );
     case AlertEnum.Message:
       return (
         <div
-          className={`alert alert-primary ${
-            show ? "alert-shown" : "alert-hidden"
-          }`}
+          className={`alert alert-primary ${show ? "alert-shown" : "alert-hidden"
+            }`}
         >
-          {text.toString()}
-          <p>{subText.toString()}</p>
+          {text?.toString()}
+          <p>{subText?.toString()}</p>
         </div>
       );
     case AlertEnum.Call:
       return (
         <div
-          className={`alert alert-primary ${
-            show ? "alert-shown" : "alert-hidden"
-          }`}
+          className={`alert alert-primary ${show ? "alert-shown" : "alert-hidden"
+            }`}
         >
-          {text.toString()}
+          {text?.toString()}
 
           <div className="">
             <button
@@ -140,11 +134,10 @@ function SnackBar() {
     default:
       return (
         <div
-          className={`alert alert-primary ${
-            show ? "alert-shown" : "alert-hidden"
-          }`}
+          className={`alert alert-primary ${show ? "alert-shown" : "alert-hidden"
+            }`}
         >
-          {text.toString()}
+          {text?.toString()}
         </div>
       );
   }

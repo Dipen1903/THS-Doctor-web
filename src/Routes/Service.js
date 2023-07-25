@@ -78,8 +78,11 @@ export const NewConsultAPI = (data) =>
   POST(`${BASE_URL}/consultation-upcoming`, data);
 export const PastConsultAPI = (data) =>
   POST(`${BASE_URL}/consultation-past`, data);
-export const ConsultDetailsAPI = (data) =>
+export const ConsultDetailsAPI = (data) => {
+  console.log("data", data);
   POST(`${BASE_URL}/consultation-details`, data);
+}
+
 export const CompleteConsultAPI = (data) =>
   POST(`${BASE_URL}/complete-appointment`, data);
 export const CancelConsultAPI = (data) =>

@@ -60,7 +60,7 @@ function Conversation({ roomData }) {
       }
     }
 
-    return () => {};
+    return () => { };
   }, [location.state]);
 
   useEffect(() => {
@@ -79,15 +79,20 @@ function Conversation({ roomData }) {
   }, [roomData]);
   useEffect(() => {
     let tempData = JSON.parse(consultDetails?.json_data || "{}");
+    console.log("tempDatatempData", tempData);
     setChatBot(tempData?.data);
-    return () => {};
+    return () => { };
   }, [consultDetails]);
 
+
+  console.log("consultDetailsconsultDetails", consultDetails);
   return room ? (
+
     <div className={`${isDetails ? "col-md-6" : "col-md-9"} padding_left_0`}>
       <PresciptionDetails />
       <div className="upcomming_consult_chat_message_box">
         <div className="profile_name_box">
+          {console.log("room", room)}
           <div className="row">
             <div className="col-md-6">
               <div className="profile_namesubtitle_box">
@@ -266,6 +271,7 @@ function Conversation({ roomData }) {
                         </>
                       )
                   )}
+                {console.log("chatvc", chat)}
                 {chat?.map((item, index) => (
                   <ChatItem
                     key={(item?.sizeOfDocument || 0) + index}
@@ -297,36 +303,32 @@ const ChatItem = ({ type, index, rest }) => {
     case 1: //Image
       return (
         <div
-          className={`message-row ${
-            rest?.userType === 1 ? "other-message" : "you-message"
-          }`}
+          className={`message-row ${rest?.userType === 1 ? "other-message" : "you-message"
+            }`}
         >
           <div className="message-content">
             <div
-              className={`${
-                rest?.message &&
+              className={`${rest?.message &&
                 (rest?.userType === 1 ? "sender_msg_box" : "client_msg_box")
-              }`}
+                }`}
             >
               <img alt="myImg" className="msg-image" src={rest?.imageUrl} />
               {rest?.message && (
                 <h3
-                  className={`${
-                    rest?.userType === 1
-                      ? "sender_text_title"
-                      : "client_text_title"
-                  }`}
+                  className={`${rest?.userType === 1
+                    ? "sender_text_title"
+                    : "client_text_title"
+                    }`}
                 >
                   {rest?.message}
                 </h3>
               )}
             </div>
             <div
-              className={`${
-                rest?.userType === 1
-                  ? "sender_message_time"
-                  : "client_message_time"
-              }`}
+              className={`${rest?.userType === 1
+                ? "sender_message_time"
+                : "client_message_time"
+                }`}
             >
               {rest?.dateTime &&
                 moment(rest?.dateTime?.toDate()).format("hh:mm")}
@@ -337,16 +339,14 @@ const ChatItem = ({ type, index, rest }) => {
     case 2: //Video
       return (
         <div
-          className={`message-row ${
-            rest?.userType === 1 ? "other-message" : "you-message"
-          }`}
+          className={`message-row ${rest?.userType === 1 ? "other-message" : "you-message"
+            }`}
         >
           <div className="message-content">
             <div
-              className={`${
-                rest?.message &&
+              className={`${rest?.message &&
                 (rest?.userType === 1 ? "sender_msg_box" : "client_msg_box")
-              }`}
+                }`}
             >
               <iframe
                 // ref={videoRef}
@@ -359,22 +359,20 @@ const ChatItem = ({ type, index, rest }) => {
               ></iframe>
               {rest?.message && (
                 <h3
-                  className={`${
-                    rest?.userType === 1
-                      ? "sender_text_title"
-                      : "client_text_title"
-                  }`}
+                  className={`${rest?.userType === 1
+                    ? "sender_text_title"
+                    : "client_text_title"
+                    }`}
                 >
                   {rest?.message}
                 </h3>
               )}
             </div>
             <div
-              className={`${
-                rest?.userType === 1
-                  ? "sender_message_time"
-                  : "client_message_time"
-              }`}
+              className={`${rest?.userType === 1
+                ? "sender_message_time"
+                : "client_message_time"
+                }`}
             >
               {rest?.dateTime &&
                 moment(rest?.dateTime?.toDate()).format("hh:mm")}
@@ -385,15 +383,13 @@ const ChatItem = ({ type, index, rest }) => {
     case 3: //Document
       return (
         <div
-          className={`message-row ${
-            rest?.userType === 1 ? "other-message" : "you-message"
-          }`}
+          className={`message-row ${rest?.userType === 1 ? "other-message" : "you-message"
+            }`}
         >
           <div className="message-content">
             <div
-              className={`${
-                rest?.userType === 1 ? "sender_msg_box" : "client_msg_box"
-              }`}
+              className={`${rest?.userType === 1 ? "sender_msg_box" : "client_msg_box"
+                }`}
             >
               <div className="attach_file_box">
                 <img alt="myImg" src={Icon.Doc} className="file_icon" />
@@ -419,22 +415,20 @@ const ChatItem = ({ type, index, rest }) => {
               </div>
               {rest?.message && (
                 <h3
-                  className={`${
-                    rest?.userType === 1
-                      ? "sender_text_title"
-                      : "client_text_title"
-                  }`}
+                  className={`${rest?.userType === 1
+                    ? "sender_text_title"
+                    : "client_text_title"
+                    }`}
                 >
                   {rest?.message}
                 </h3>
               )}
             </div>
             <div
-              className={`${
-                rest?.userType === 1
-                  ? "sender_message_time"
-                  : "client_message_time"
-              }`}
+              className={`${rest?.userType === 1
+                ? "sender_message_time"
+                : "client_message_time"
+                }`}
             >
               {rest?.dateTime &&
                 moment(rest?.dateTime?.toDate()).format("hh:mm")}
@@ -445,15 +439,13 @@ const ChatItem = ({ type, index, rest }) => {
     case 4: //Prescription
       return (
         <div
-          className={`message-row ${
-            rest?.userType === 1 ? "other-message" : "you-message"
-          }`}
+          className={`message-row ${rest?.userType === 1 ? "other-message" : "you-message"
+            }`}
         >
           <div className="message-content">
             <div
-              className={`${
-                rest?.userType === 1 ? "sender_msg_box" : "client_msg_box"
-              }`}
+              className={`${rest?.userType === 1 ? "sender_msg_box" : "client_msg_box"
+                }`}
             >
               <div className="msg_view_box">
                 <div>
@@ -480,11 +472,10 @@ const ChatItem = ({ type, index, rest }) => {
               </div>
             </div>
             <div
-              className={`${
-                rest?.userType === 1
-                  ? "sender_message_time"
-                  : "client_message_time"
-              }`}
+              className={`${rest?.userType === 1
+                ? "sender_message_time"
+                : "client_message_time"
+                }`}
             >
               {rest?.dateTime &&
                 moment(rest?.dateTime?.toDate()).format("hh:mm")}
@@ -495,15 +486,13 @@ const ChatItem = ({ type, index, rest }) => {
     default:
       return (
         <div
-          className={`message-row ${
-            rest?.userType === 1 ? "other-message" : "you-message"
-          }`}
+          className={`message-row ${rest?.userType === 1 ? "other-message" : "you-message"
+            }`}
         >
           <div className="message-content">
             <div
-              className={`${
-                rest?.userType === 1 ? "sender_msg_box" : "client_msg_box"
-              }`}
+              className={`${rest?.userType === 1 ? "sender_msg_box" : "client_msg_box"
+                }`}
             >
               {rest?.question ? (
                 <>
@@ -514,22 +503,20 @@ const ChatItem = ({ type, index, rest }) => {
                 </>
               ) : (
                 <h3
-                  className={`${
-                    rest?.userType === 1
-                      ? "sender_text_title"
-                      : "client_text_title"
-                  }`}
+                  className={`${rest?.userType === 1
+                    ? "sender_text_title"
+                    : "client_text_title"
+                    }`}
                 >
                   {rest?.message}
                 </h3>
               )}
             </div>
             <div
-              className={`${
-                rest?.userType === 1
-                  ? "sender_message_time"
-                  : "client_message_time"
-              }`}
+              className={`${rest?.userType === 1
+                ? "sender_message_time"
+                : "client_message_time"
+                }`}
             >
               {rest?.dateTime &&
                 moment(rest?.dateTime?.toDate()).format("hh:mm")}

@@ -84,16 +84,20 @@ export const GetConsultDetails = createAsyncThunk(
         dispatch(setLoading(false));
         return result?.data;
       } else {
+
+        console.log("e333333333333333=----", result);
+
         throw result;
       }
     } catch (error) {
+      console.log("e333333333333333", error);
       dispatch(setLoading(false));
-      dispatch(
-        // setMessage({
-        //   text: error?.message,
-        //   type: AlertEnum.Error,
-        // })
-      );
+      // dispatch(
+      //   setMessage({
+      //     text: error?.message,
+      //     type: AlertEnum.Error,
+      //   })
+      // );
       return error;
     }
   }

@@ -94,17 +94,17 @@ function PayoutDetailed() {
           })
         );
       }
-    } catch (error) {}
+    } catch (error) { }
   };
   useEffect(() => {
     if (payoutDetails?.appointment_list?.length) {
       setAppointments(payoutDetails?.appointment_list);
     }
-    return () => {};
+    return () => { };
   }, [payoutDetails]);
   useEffect(() => {
     dispatch(GetPayoutDetails({ payout_id: id }));
-    return () => {};
+    return () => { };
   }, [id]);
 
   return (

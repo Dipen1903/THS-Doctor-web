@@ -373,7 +373,7 @@ function SearchBox(rest) {
 
     value()?.map((user) =>
       options.filter((item) => {
-        if (item?.id.toString() === user.toString()) {
+        if (item?.id?.toString() === user.toString()) {
           return tempArr.push(item);
         }
       })
