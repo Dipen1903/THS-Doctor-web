@@ -107,7 +107,7 @@ const AudioCall = forwardRef(({ endCall }, ref) => {
     }),
     [room]
   );
-  console.log("roooooooooooooooooo",room);
+  console.log("roooooooooooooooooo", room);
 
   useEffect(() => {
     startBasicCall();
@@ -125,11 +125,11 @@ const AudioCall = forwardRef(({ endCall }, ref) => {
         user_name: userProfile?.name,
         caller_user_id: userProfile?.id,
         chat_id: chatDoc?.id,
-        age: room?.age,
+        age: room?.age ? room?.age : 1,
         gender: room?.gender,
       })
     );
-    return () => {};
+    return () => { };
   }, []);
 
   return (

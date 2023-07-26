@@ -30,6 +30,7 @@ export const GetSnapShot = createAsyncThunk(
   async (values, { dispatch }) => {
     try {
       const path = `Chat_${values?.doctor_id}_${values?.user_id}_${values?.booking_id}`;
+      console.log("vcxvxv", `Chat_${values?.doctor_id}_${values?.user_id}_${values?.booking_id}`);
       const q = query(collection(FirebaseDB, path), orderBy("dateTime", "asc"));
       let unsubscribe;
       unsubscribe = onSnapshot(q, (querySnapshot) => {
@@ -286,7 +287,7 @@ export const ChatSlice = createSlice({
       state.chatDoc = action.payload;
     },
     setUpChat: (state, action) => {
-      state.chat = [...state.chat, action.payload];
+      state.chat.push(action.payload);
     },
     setUpConvertations: (state, action) => {
       state.conversations = [...action.payload];

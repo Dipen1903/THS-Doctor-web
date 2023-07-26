@@ -55,6 +55,7 @@ export const GetToken = createAsyncThunk(
 export const SendNotification = createAsyncThunk(
   "SendNotification",
   async (values, { dispatch }) => {
+    console.log("valuesss" , values);
     try {
       const result = await NotifyAPI(values);
       if (result?.success) {
