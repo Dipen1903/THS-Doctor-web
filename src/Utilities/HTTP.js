@@ -1,7 +1,7 @@
 import axios from "axios";
 import { MK_TOKEN, SESSION } from "./Enums";
 import { JSONToFormData } from "./Functions";
-// const USER = process.env.REACT_APP_VENDOR || process.env.REACT_APP_MANAGER;
+const USER = process.env.REACT_APP_VENDOR || process.env.REACT_APP_MANAGER;
 async function processFormData(data) {
   try {
     var form_data = new FormData();

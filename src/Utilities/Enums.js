@@ -422,16 +422,16 @@ export const ChatRoomEnum = {
   userImage: "",
   doctorImage: "",
 };
-export const NotifyEnum = {
-  user_id: "",
-  booking_id: "",
-  channel_name: "",
-  uuid: "",
-  incomming_call_type: "", // 1 = VIDEO , 0 = AUDIO
-  agora_user_id: "",
-  title: "",
-  message: "Incoming Call",
-  user_name: "",
-  caller_user_id: "",
-  chat_id: "",
-};
+  export const NotifyEnum = {
+    user_id: "",
+    booking_id: "",
+    channel_name: "",
+    uuid: "",
+    incomming_call_type: "", // 1 = VIDEO , 0 = AUDIO
+    agora_user_id: "",
+    title: "",
+    message: "Incoming Call",
+    user_name: "",
+    caller_user_id: "",
+    chat_id: "",
+  };

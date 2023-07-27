@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { getMessaging, getToken, onMessage } from "firebase/messaging";
+
 const firebaseConfig = {
   apiKey: "AIzaSyAJh9bSIe-gZ74qFYxfWzsOmkr_z1FviyA",
   authDomain: "thsmedical-3333e.firebaseapp.com",
@@ -14,19 +15,41 @@ const FirebaseApp = initializeApp(firebaseConfig);
 export const FirebaseDB = getFirestore(FirebaseApp);
 const messaging = getMessaging(FirebaseApp);
 
+// export const GetFirbaseToken = async () => {
+//   return await getToken(messaging, {
+//     vapidKey: `BJbEZL3uHsKTBM6_d-3hR3bepIKfIjLWpFQ1IIs-U33ouIRe0sn4qryjPtzAWQHuLX29M7mLMVF6qwqTVHCuIls`,
+//   })
+//     .then((currentToken) => {
+//       console.log("currentTokencurrentTokencurrentTokencurrentToken",currentToken);
+//       if (currentToken) {
+//         return currentToken;
+//       }
+//     })
+//     .catch((err) => {
+//       return { error: err };
+//     });
+// };
+
 export const GetFirbaseToken = async () => {
-  return await getToken(messaging, {
-    vapidKey: `BJbEZL3uHsKTBM6_d-3hR3bepIKfIjLWpFQ1IIs-U33ouIRe0sn4qryjPtzAWQHuLX29M7mLMVF6qwqTVHCuIls`,
-  })
-    .then((currentToken) => {
-      if (currentToken) {
-        return currentToken;
-      }
-    })
-    .catch((err) => {
-      return { error: err };
+  try {
+    console.log("gggggggggggggggggggggggg");
+    const currentToken = await getToken(messaging, {
+      vapidKey: `BJbEZL3uHsKTBM6_d-3hR3bepIKfIjLWpFQ1IIs-U33ouIRe0sn4qryjPtzAWQHuLX29M7mLMVF6qwqTVHCuIls`,
     });
+    console.log("currrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr", messaging);
+
+    if (currentToken) {
+      console.log("Current FCM Token:", currentToken);
+      return currentToken;
+    } else {
+      throw new Error("No FCM token available.");
+    }
+  } catch (error) {
+    console.error("Error getting FCM token:", error);
+    return { error: error.message };
+  }
 };
+
 export const onMessageListener = () =>
   new Promise((resolve) => {
     onMessage(messaging, (payload) => {

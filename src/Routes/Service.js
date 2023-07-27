@@ -108,4 +108,4 @@ export const RequestWithdrawAPI = (data) =>
   POST(`${BASE_URL}/payouts-send-request`, data);
 
 //*NOTIFICATION API REQUEST
-export const NotifyAPI = (data) => POST(`${BASE_URL}/notification-send`, data);
+export const NotifyAPI = (data) => POST(`https://thsindia.in/medical-web/api/web/user/notification-send`, data);

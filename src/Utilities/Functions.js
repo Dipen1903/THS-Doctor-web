@@ -122,7 +122,7 @@ export function LocalServiceWorkerRegister() {
   if ("serviceWorker" in navigator && process.env.NODE_ENV !== "production") {
     window.addEventListener("load", function () {
       navigator.serviceWorker.register(swPath).then((registration) => {
-        // console.log("Service worker registered");
+        console.log("Service worker registered");
       });
     });
   }

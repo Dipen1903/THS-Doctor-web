@@ -2,8 +2,11 @@ import React, { useEffect } from "react";
 import AgoraUIKit from "agora-react-uikit";
 import { useDispatch, useSelector } from "react-redux";
 
-import { NotifyEnum } from "../../../Utilities/Enums";
+import { AlertEnum, NotifyEnum } from "../../../Utilities/Enums";
 import { SendNotification } from "../../../Store/Reducers/CallingReducer";
+import AgoraRTC from "agora-rtc-react";
+import { setMessage } from "../../../Store/Reducers/LayoutSlice";
+
 function VideoCall({ endCall }) {
   const dispatch = useDispatch();
   const { CallingSlice, ProfileSlice, ChatSlice } = useSelector(
@@ -12,22 +15,22 @@ function VideoCall({ endCall }) {
   const { rtcProps } = CallingSlice;
   const { userProfile } = ProfileSlice;
   const { room, chatDoc } = ChatSlice;
-  // const getDeviceState = async () => {
-  //   try {
-  //     await AgoraRTC.createMicrophoneAndCameraTracks();
-  //   } catch (error) {
-  //     dispatch(
-  //       setMessage({
-  //         text: "Please connect camera/mirophone device",
-  //         type: AlertEnum.Error,
-  //       })
-  //     );
-  //     endCall(false);
-  //   }
-  // };
+  const getDeviceState = async () => {
+    try {
+      await AgoraRTC.createMicrophoneAndCameraTracks();
+    } catch (error) {
+      dispatch(
+        setMessage({
+          text: "Please connect camera/mirophone device",
+          type: AlertEnum.Error,
+        })
+      );
+      endCall(false);
+    }
+  };
 
   useEffect(() => {
-    // getDeviceState();
+    getDeviceState();
     dispatch(
       SendNotification({
         ...NotifyEnum,
@@ -46,7 +49,7 @@ function VideoCall({ endCall }) {
         gender: room?.gender,
       })
     );
-    return () => {};
+    return () => { };
   }, []);
   return (
     <div style={{ height: "75vh" }}>

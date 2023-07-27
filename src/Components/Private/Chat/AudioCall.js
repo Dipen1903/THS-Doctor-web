@@ -119,9 +119,9 @@ const AudioCall = forwardRef(({ endCall }, ref) => {
         channel_name: rtcProps?.channel,
         uuid: userProfile?.id,
         agora_user_id: rtcProps?.uid,
-        incomming_call_type: 0,
+        incomming_call_type: 1,
         title: userProfile?.name,
-        message: "Incoming Call",
+        message: "Outcoming Call",
         user_name: userProfile?.name,
         caller_user_id: userProfile?.id,
         chat_id: chatDoc?.id,
@@ -131,7 +131,7 @@ const AudioCall = forwardRef(({ endCall }, ref) => {
     );
     return () => { };
   }, []);
-
+console.log("remoteUserremoteUserremoteUserremoteUserremoteUserremoteUserremoteUserremoteUserremoteUserremoteUserremoteUser",remoteUser)
   return (
     <div className="audio-call-container">
       <div className="user-container">

@@ -28,6 +28,7 @@ import {
 import { GetFirbaseToken } from "../../Utilities/Firebase.config";
 import { setLoading, setMessage } from "./LayoutSlice";
 import { GetUserProfile } from "./ProfileReducer";
+import { useEffect } from "react";
 
 const initialState = {
   token: localStorage.getItem(TOKEN),
@@ -42,12 +43,13 @@ const initialState = {
 export const SignIn = createAsyncThunk(
   "SignIn",
   async (values, { dispatch }) => {
+    const fcmToken = await GetFirbaseToken();
+    console.log("fcmToken1111111111111111111111111111111111111111111111111111111111111",fcmToken);
+    if (fcmToken) {
+      values["device_token"] = fcmToken;
+    }
     try {
       dispatch(setLoading(true));
-      const fcmToken = await GetFirbaseToken();
-      if (fcmToken) {
-        values["device_token"] = fcmToken;
-      }
       const result = await SignInAPI(values);
       if (result?.success) {
         dispatch(setLoading(false));
@@ -72,9 +74,18 @@ export const SignIn = createAsyncThunk(
 export const MobileSignIn = createAsyncThunk(
   "MobileSignIn",
   async (values, { dispatch }) => {
+    const fcmToken = await GetFirbaseToken();
+    console.log("fcmTokennnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn",fcmToken);
+    if (fcmToken) {
+      values["device_token"] = fcmToken;
+    }
     try {
       dispatch(setLoading(true));
-
+      const fcmToken = await GetFirbaseToken();
+      console.log("fcmToken??????????????????????????????????",fcmToken);
+      if (fcmToken) {
+        values["device_token"] = fcmToken;
+      }
       const result = await MobileSignInAPI(values);
       if (result?.success) {
         dispatch(setLoading(false));
@@ -97,6 +108,11 @@ export const MobileSignIn = createAsyncThunk(
 export const OTPSignIn = createAsyncThunk(
   "SignIn",
   async (values, { dispatch }) => {
+    const fcmToken = await GetFirbaseToken();
+    console.log("fcmToke222222222222222222222222222",fcmToken);
+    if (fcmToken) {
+      values["device_token"] = fcmToken;
+    }
     try {
       const result = await OTPSignInAPI(values);
       if (result?.success) {
