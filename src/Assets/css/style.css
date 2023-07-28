@@ -3168,7 +3168,7 @@ input:checked+.slider:before {
   cursor: pointer;
 }
 
-.certificate_name {
+h5.certificate_name {
   font-family: "Mulish";
   font-style: normal;
   font-weight: 600;
@@ -3179,6 +3179,8 @@ input:checked+.slider:before {
   margin-bottom: 0px;
   overflow: hidden;
   text-overflow: ellipsis!important;
+  width: 80%!important;  
+  white-space: nowrap!important;
 }
 
 .delete_photo {
@@ -3349,7 +3351,8 @@ button.personal_profile_btn.float_right.btn.btn-primary img {
   border: 1px solid #3093bb;
   border-radius: 8px;
   padding: 8px 34px;
-  margin-top: 28px;
+  height: 48px;
+  margin-top: 25px;
 }
 
 .consult_fee_subtext {

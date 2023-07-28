@@ -498,6 +498,7 @@ function WorkProfile() {
                         <>
                           {values?.qualification?.map((item, index) => (
                             <div key={index} className="col-md-4">
+                              {console.log("values?.qualificationvalues?.qualification",values)}
                               <h3 className="qualification_title">
                                 {item?.type}
                               </h3>
