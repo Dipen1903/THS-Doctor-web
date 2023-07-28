@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { getMessaging, getToken, onMessage } from "firebase/messaging";
-  
+
 const firebaseConfig = {
   apiKey: "AIzaSyAJh9bSIe-gZ74qFYxfWzsOmkr_z1FviyA",
   authDomain: "thsmedical-3333e.firebaseapp.com",
@@ -13,7 +13,9 @@ const firebaseConfig = {
 };
 const FirebaseApp = initializeApp(firebaseConfig);
 export const FirebaseDB = getFirestore(FirebaseApp);
-export const messaging = getMessaging(FirebaseApp);
+const messaging = getMessaging(FirebaseApp);
+
+
 
 // export const GetFirbaseToken = async () => {
 //   return await getToken(messaging, {
@@ -32,12 +34,19 @@ export const messaging = getMessaging(FirebaseApp);
 
 export const GetFirbaseToken = async () => {
   try {
+
+    navigator.serviceWorker.register('/firebase-messaging-sw')
+      .then((registration) => {
+        messaging.useServiceWorker(registration);
+
+        // Request permission and get token.....
+      });
+
     console.log("gggggggggggggggggggggggg");
     const currentToken = await getToken(messaging, {
       vapidKey: `BJbEZL3uHsKTBM6_d-3hR3bepIKfIjLWpFQ1IIs-U33ouIRe0sn4qryjPtzAWQHuLX29M7mLMVF6qwqTVHCuIls`,
     });
     console.log("currrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr", messaging);
-    console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>",currentToken)
 
     if (currentToken) {
       console.log("Current FCM Token:", currentToken);

@@ -3178,7 +3178,7 @@ input:checked+.slider:before {
   margin-top: 5px;
   margin-bottom: 0px;
   overflow: hidden;
-  text-overflow: ellipsis;
+  text-overflow: ellipsis!important;
 }
 
 .delete_photo {

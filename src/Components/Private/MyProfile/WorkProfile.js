@@ -638,7 +638,7 @@ function WorkProfile() {
                                               />
                                             </div>
                                             <div className="col-md-6">
-                                              <h5 className="certificate_name">
+                                              <h5 className="certificate_name" style={{textOverflow: "ellipsis"}}>
                                                 {
                                                   values.proof[index]?.file
                                                     ?.name
