@@ -130,13 +130,16 @@ function Header() {
                 </NavDropdown.Item>
               </NavLink>
               <NavDropdown.Divider />
-              <NavLink className="dropdown-item-link" to="#!">
+              <NavLink className="dropdown-item-link"
+                to={userProfile?.is_active !== 1 ? "#!" : "/sharelink"}
+              >
                 <NavDropdown.Item
                   disabled={userProfile?.is_active !== 1}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleShow();
-                  }}
+                  href="/sharelink"
+                  // onClick={(e) => {
+                  //   e.preventDefault();
+                  //   // handleShow();
+                  // }}
                 >
                   <img src={Icon.Share} alt="Avatar" className=" mr_10"></img>
                   Share Your Link

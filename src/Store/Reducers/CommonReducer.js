@@ -13,7 +13,7 @@ import {
   UploadFileAPI,
   SearchMedicineAPI,
 } from "../../Components/Common/Service";
-import { AnalyticsAPI, ShareLinkAPI } from "../../Routes/Service";
+import { AnalyticsAPI, DoctorFee, DoctorFeeUpdate, DoctorLink, ShareLinkAPI } from "../../Routes/Service";
 
 import { AlertEnum } from "../../Utilities/Enums";
 import { setLoading, setMessage } from "./LayoutSlice";
@@ -28,6 +28,9 @@ const initialState = {
   qualification: [],
   documentList: [],
   analytics: "",
+  doctorFees: "",
+  doctorLinks: "",
+  doctorfeesUpdate: "",
 };
 export const GetMedicine = createAsyncThunk(
   "GetMedicine",
@@ -361,6 +364,51 @@ export const UploadFile = createAsyncThunk(
     }
   }
 );
+export const DoctorFees = createAsyncThunk(
+  "doctorFees",
+  async (values, { dispatch }) => {
+    try {
+      // dispatch(setLoading(true));
+      const result = await DoctorFee(values);
+      console.log("result", result);
+      return result?.data;
+
+    } catch (error) {
+      // dispatch(setLoading(false));
+      return error;
+    }
+  }
+);
+export const DoctorFeesUpdate = createAsyncThunk(
+  "doctorFeesUpdate",
+  async (values, { dispatch }) => {
+    try {
+      // dispatch(setLoading(true));
+      const result = await DoctorFeeUpdate(values);
+      console.log("result", result);
+      return result?.data;
+
+    } catch (error) {
+      // dispatch(setLoading(false));
+      return error;
+    }
+  }
+);
+export const DoctorLinks = createAsyncThunk(
+  "doctorLinks",
+  async (values, { dispatch }) => {
+    try {
+      // dispatch(setLoading(true));
+      const result = await DoctorLink({ consultation_type: values });
+      console.log("result", result);
+      return result?.data;
+
+    } catch (error) {
+      // dispatch(setLoading(false));
+      return error;
+    }
+  }
+);
 export const GetAnalytics = createAsyncThunk(
   "GetAnalytics",
   async (values, { dispatch }) => {
@@ -421,6 +469,13 @@ export const CommonSlice = createSlice({
     builder.addCase(GetAnalytics.fulfilled, (state, action) => {
       state.analytics = action.payload;
     });
+    builder.addCase(DoctorFees.fulfilled, (state, action) => {
+      state.doctorFees = action.payload;
+    });
+    builder.addCase(DoctorLinks.fulfilled, (state, action) => {
+      state.doctorLinks = action.payload;
+    });
+   
   },
 });
 

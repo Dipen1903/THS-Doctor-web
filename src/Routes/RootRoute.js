@@ -88,14 +88,7 @@ function RootRoute() {
           </PrivateRoutes>
         }
       />
-        <Route
-        path="/sharelink"
-        element={
-          <PrivateRoutes isHeader={true}>
-            <ShareLinkHome />
-          </PrivateRoutes>
-        }
-      />
+      
          <Route
         path="/sharelinkhome"
         element={
@@ -181,6 +174,14 @@ function RootRoute() {
         element={
           <PrivateRoutes isHeader={true}>
             <Settings />
+          </PrivateRoutes>
+        }
+      />
+        <Route
+        path="/sharelink"
+        element={
+          <PrivateRoutes isHeader={true}>
+            <ShareLinkHome />
           </PrivateRoutes>
         }
       />

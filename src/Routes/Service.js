@@ -109,3 +109,10 @@ export const RequestWithdrawAPI = (data) =>
 
 //*NOTIFICATION API REQUEST
 export const NotifyAPI = (data) => POST(`https://thsindia.in/medical-web/api/web/user/notification-send`, data);
+
+
+//ShareMyLink
+
+export const DoctorFee = (data) => POST(`${BASE_URL}/doctor-consultation-fee`, data);
+export const DoctorFeeUpdate = (data) => POST(`${BASE_URL}/doctor-consultation-fee-add`,data);
+export const DoctorLink = (data) => POST(`${BASE_URL}/doctor-consultation-link`,data);

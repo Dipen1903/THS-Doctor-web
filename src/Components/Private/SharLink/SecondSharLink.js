@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Container } from 'react-bootstrap'
 import Link from "../../../Assets/img/png/link.png";
 import share from '../../../Assets/img/svg/share.svg';
@@ -8,6 +8,9 @@ import { Button, Form, InputGroup, Modal } from "react-bootstrap";
 import ModalComponent from './ModalComponent';
 import UploadModal from './UploadModal.js';
 import UploadSendLink from './UploadSendLink';
+import { DoctorFees, DoctorLinks } from '../../../Store/Reducers/CommonReducer';
+import { useDispatch, useSelector } from "react-redux";
+import { DoctorLink } from '../../../Routes/Service';
 // import firebase from 'firebase/compat/app';
 
 // const firebaseConfig = {
@@ -25,8 +28,13 @@ import UploadSendLink from './UploadSendLink';
 
 const SecondSharLink = () => {
     const [data, SetData] = useState(false);
-    const [uploadModal , SetUploadModal]= useState(false);
-    const [uploadLink , SetUploadLink] = useState(false);
+    const [uploadModal, SetUploadModal] = useState(false);
+    const [uploadLink, SetUploadLink] = useState(false);
+    const { CommonSlice, ProfileSlice } = useSelector((state) => state);
+    const dispatch = useDispatch();
+    const [isNewChecked, setIsNewChecked] = useState(false);
+    const [isFollowUpChecked, setIsFollowUpChecked] = useState(false);
+    const [apiResponse, setApiResponse] = useState('');
     // const handleShareButtonClick = async () => {
     //     try {
     //         const dynamicLinkURL = 'https://medicaluser.page.link/y1E4';
@@ -51,6 +59,64 @@ const SecondSharLink = () => {
     //         console.error('Error generating dynamic link:', error);
     //     }
     // };
+
+
+    useEffect(() => {
+        dispatch(DoctorFees());
+        // dispatch(DoctorLink(1));
+    }, [dispatch]);
+
+
+    const {
+        doctorFees,
+        doctorLink
+    } = CommonSlice;
+    const navigates = () => {
+        window.location.href = '/doctor/sharelink'
+    }
+
+    useEffect(() => {
+        if (isNewChecked || isFollowUpChecked) {
+            const consultationType = getConsultationType();
+            callApi(consultationType);
+        }
+    }, [isNewChecked, isFollowUpChecked]);
+
+    const handleNewCheckboxChange = (event) => {
+        setIsNewChecked(event.target.checked);
+    };
+
+    const handleFollowUpCheckboxChange = (event) => {
+        setIsFollowUpChecked(event.target.checked);
+    };
+
+    const getConsultationType = () => {
+        if (isNewChecked && isFollowUpChecked) {
+            return '1,2';
+        } else if (isNewChecked) {
+            return '1';
+        } else if (isFollowUpChecked) {
+            return '2';
+        } else {
+            return '';
+        }
+    };
+
+    const callApi = async (consultationType) => {
+        try {
+            const result = await dispatch(DoctorLinks(consultationType));
+            console.log('API call result', result);
+            setApiResponse(result?.payload?.url || '');
+        } catch (error) {
+            console.error('API call error', error);
+        }
+    };
+    const truncateLink = (text) => {
+        if (text.length > 20) {
+            return text.slice(0, 20) + '...';
+        }
+        return text;
+    };
     return (
         <>
             <Container
@@ -70,38 +136,54 @@ const SecondSharLink = () => {
                             <div>
                                 <div className='textdiv'>
                                     <h3 className='secondsharelink'>Share Consultation Link</h3>
-                                    <h2 className='secondh2'>Rs.500</h2>
+                                    <h2 className='secondh2'>Rs.{doctorFees?.consulting_fee}</h2>
                                 </div>
                                 <div className='textdiv'>
                                     <h3 className='secondsharelink'>Followup Fee:</h3>
-                                    <h2 className='secondh2'>Rs.500</h2>
+                                    <h2 className='secondh2'>Rs.{doctorFees?.follow_up_fee}</h2>
                                 </div>
                             </div>
                             <div>
-                                <button className='editbtn'>Edit Fees</button>
+                                <button className='editbtn' onClick={() => { navigates() }}>Edit Fees</button>
                             </div>
                         </div>
                         <h4 className='paycontent pt_20'>Select consultation type</h4>
                         <div className='firstpayment pt_20'>
                             <div className='firstpayment'>
-                                <input type="checkbox" class="checkboxdesign" />
-                                <p className='secondh2'>New </p>
+                                <input
+                                    type='checkbox'
+                                    className='checkboxdesign'
+                                    checked={isNewChecked}
+                                    onChange={handleNewCheckboxChange}
+                                />
+                                <p className='secondh2'>New</p>
                             </div>
                             <div className='firstpayment'>
-                                <input type="checkbox" class="checkboxdesign" />
-                                <p className='secondh2'>Follow up </p>
+                                <input
+                                    type='checkbox'
+                                    className='checkboxdesign'
+                                    checked={isFollowUpChecked}
+                                    onChange={handleFollowUpCheckboxChange}
+                                />
+                                <p className='secondh2'>Follow up</p>
                             </div>
                         </div>
                         <hr />
                         <h4 className='paycontent pt_10'>Link</h4>
                         <div class="input-container pt_4">
-                            <input type="text" placeholder="https://www.ths.com/p...." id="linkInput" />
+                            <input
+                                type="text"
+                                placeholder="https://www.ths.com/p...."
+                                id="linkinput"
+                                value={truncateLink(apiResponse)}
+                                onChange={(e) => setApiResponse(e.target.value)}
+                            />
                             <span id="copyLinkText">
                                 <img src={Link}></img>
                                 Copy link</span>
                         </div>
                         <div>
-                            <button className='sharebtn' onClick={() =>SetUploadLink(true)}>
+                            <button className='sharebtn' onClick={() => SetUploadLink(true)}>
                                 <div className='shreflex'>
                                     <img src={share} alt='Share Icon' />
                                     <h4 className='paycontent'>Share Link</h4>
@@ -124,7 +206,7 @@ const SecondSharLink = () => {
                 </div>
             </Container>
             <ModalComponent isOpen={data} onClose={() => SetData(false)} />
-            <UploadModal isOpen={uploadModal} onClose={() => SetUploadModal(false)}/>
+            <UploadModal isOpen={uploadModal} onClose={() => SetUploadModal(false)} />
             <UploadSendLink isOpen={uploadLink} onClose={() => SetUploadLink(false)} />
         </>
     )
