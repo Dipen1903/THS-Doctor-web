@@ -13,7 +13,7 @@ import {
   UploadFileAPI,
   SearchMedicineAPI,
 } from "../../Components/Common/Service";
-import { AnalyticsAPI, DoctorFee, DoctorFeeUpdate, DoctorLink, ShareLinkAPI } from "../../Routes/Service";
+import { AnalyticsAPI, DoctorFee, DoctorFeeUpdate, DoctorFetachNumber, DoctorLink, ShareLinkAPI } from "../../Routes/Service";
 
 import { AlertEnum } from "../../Utilities/Enums";
 import { setLoading, setMessage } from "./LayoutSlice";
@@ -31,6 +31,7 @@ const initialState = {
   doctorFees: "",
   doctorLinks: "",
   doctorfeesUpdate: "",
+  doctorFetachNumbers:"",
 };
 export const GetMedicine = createAsyncThunk(
   "GetMedicine",
@@ -409,6 +410,21 @@ export const DoctorLinks = createAsyncThunk(
     }
   }
 );
+export const DoctorFetachNumbers = createAsyncThunk(
+  "doctorFetachNumbers",
+  async (values, { dispatch }) => {
+    try {
+      // dispatch(setLoading(true));
+      const result = await DoctorFetachNumber(values);
+      console.log("result", result);
+      return result?.data;
+
+    } catch (error) {
+      // dispatch(setLoading(false));
+      return error;
+    }
+  }
+);
 export const GetAnalytics = createAsyncThunk(
   "GetAnalytics",
   async (values, { dispatch }) => {
@@ -474,6 +490,9 @@ export const CommonSlice = createSlice({
     });
     builder.addCase(DoctorLinks.fulfilled, (state, action) => {
       state.doctorLinks = action.payload;
+    });
+    builder.addCase(DoctorFetachNumbers.fulfilled, (state, action) => {
+      state.doctorFetachNumbers = action.payload;
     });
    
   },

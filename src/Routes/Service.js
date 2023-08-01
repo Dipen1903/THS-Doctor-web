@@ -116,3 +116,4 @@ export const NotifyAPI = (data) => POST(`https://thsindia.in/medical-web/api/web
 export const DoctorFee = (data) => POST(`${BASE_URL}/doctor-consultation-fee`, data);
 export const DoctorFeeUpdate = (data) => POST(`${BASE_URL}/doctor-consultation-fee-add`,data);
 export const DoctorLink = (data) => POST(`${BASE_URL}/doctor-consultation-link`,data);
+export const DoctorFetachNumber = (data) => POST(`${BASE_URL}/doctor-consultation-link-sms`,data);

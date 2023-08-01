@@ -3178,9 +3178,9 @@ h5.certificate_name {
   margin-top: 5px;
   margin-bottom: 0px;
   overflow: hidden;
-  text-overflow: ellipsis!important;
-  width: 80%!important;  
-  white-space: nowrap!important;
+  text-overflow: ellipsis !important;
+  width: 80% !important;
+  white-space: nowrap !important;
 }
 
 .delete_photo {
@@ -7501,98 +7501,126 @@ input[type="text"] {
   font-weight: 700;
   line-height: 24px;
 }
-.numberdiv{
+
+.numberdiv {
   display: flex;
-gap: 20px;
-padding-top: 15px;
+  gap: 20px;
+  padding-top: 15px;
 
 }
-.textnumber{
+
+.textnumber {
   color: #1E1F20;
-font-family: Mulish;
-font-size: 15px;
-font-style: normal;
-font-weight: 600;
-line-height: 24px; /* 160% */
-border-radius: 8px;
-background: var(--line-colour, #ECEFF4);
-padding: 8px 10px;
+  font-family: Mulish;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px;
+  /* 160% */
+  border-radius: 8px;
+  background: var(--line-colour, #ECEFF4);
+  padding: 8px 10px;
 }
-.uploadmodal{
+
+.uploadmodal {
   display: flex;
   justify-content: space-between;
 }
-.uploadtext{
+
+.uploadtext {
   color: #1E1F20;
-font-family: Mulish;
-font-size: 20px;
-font-style: normal;
-font-weight: 700;
-line-height: 32px;
+  font-family: Mulish;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 32px;
 }
-.uploadbtn{
+
+.uploadbtn {
   border-radius: 12px;
-border: 1px solid #E0E0E0;
-background: #FFF;
-color:  #3093BB;
-text-align: center;
-font-family: Mulish;
-font-size: 15px;
-font-style: normal;
-font-weight: 700;
-line-height: 24px; 
+  border: 1px solid #E0E0E0;
+  background: #FFF;
+  color: #3093BB;
+  text-align: center;
+  font-family: Mulish;
+  font-size: 15px;
+  font-style: normal;
+  text-decoration: none !important;
+  padding-top: 8px !important;
 }
-.uploadbtndiv{
+
+.uploadbtndiv {
   display: flex;
   justify-content: space-between;
 }
-.closebtn{
-  color:  #9393AA;
-text-align: center;
-font-family: Mulish;
-font-size: 15px;
-font-style: normal;
-font-weight: 700;
-line-height: 24px; /* 160% */
-border-radius: 12px;
-border: 1px solid #E0E0E0;
-background: #FFF;
-width: 48%;
-height: 50px;
-flex-shrink: 0;
-}
-.sendbtn{
+
+.closebtn {
+  color: #9393AA;
+  text-align: center;
+  font-family: Mulish;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 24px;
+  /* 160% */
   border-radius: 12px;
-border: 1px solid #E0E0E0;
-background:  #F0F0F0;
-color: #9393AA;
-text-align: center;
-font-family: Mulish;
-font-size: 15px;
-font-style: normal;
-font-weight: 700;
-line-height: 24px; /* 160% */
-width: 48%;
-height: 50px;
-flex-shrink: 0;
+  border: 1px solid #E0E0E0;
+  background: #FFF;
+  width: 48%;
+  height: 50px;
+  flex-shrink: 0;
 }
-.sheetimg{
+
+.sendbtn {
+  border-radius: 12px;
+  border: 1px solid #E0E0E0;
+  background: #F0F0F0;
+  color: #9393AA;
+  text-align: center;
+  font-family: Mulish;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 24px;
+  width: 48%;
+  height: 50px;
+  flex-shrink: 0;
+}
+.sendbtns {
+  border: 1px solid #E0E0E0;
+  border-radius: 12px;
+  background: var(--gradient, linear-gradient(45deg, #3093BB 0%, #82DBFF 100%));
+  color: #FFF;
+  text-align: center;
+  font-family: Mulish;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 24px;
+  width: 48%;
+  height: 50px;
+  flex-shrink: 0;
+}
+
+.sheetimg {
   width: 110px;
-height: 110px;
+  height: 110px;
 }
-.sheetimgdiv{
+
+.sheetimgdiv {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100%;
 }
-.textcolor{
-  color:#1E1F20;
-text-align: center;
-font-family: Mulish;
-font-size: 14px;
-font-style: normal;
-font-weight: 500;
-line-height: 24px; 
-margin-bottom: 0px;
+
+.textcolor {
+  color: #1E1F20;
+  text-align: center;
+  font-family: Mulish;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+  margin-bottom: 0px;
 }

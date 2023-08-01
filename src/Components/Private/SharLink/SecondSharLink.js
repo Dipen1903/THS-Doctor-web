@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { Container } from 'react-bootstrap'
 import Link from "../../../Assets/img/png/link.png";
 import share from '../../../Assets/img/svg/share.svg';
@@ -32,7 +32,7 @@ const SecondSharLink = () => {
     const [uploadLink, SetUploadLink] = useState(false);
     const { CommonSlice, ProfileSlice } = useSelector((state) => state);
     const dispatch = useDispatch();
-    const [isNewChecked, setIsNewChecked] = useState(false);
+    const [isNewChecked, setIsNewChecked] = useState('1');
     const [isFollowUpChecked, setIsFollowUpChecked] = useState(false);
     const [apiResponse, setApiResponse] = useState('');
     // const handleShareButtonClick = async () => {
@@ -65,7 +65,7 @@ const SecondSharLink = () => {
         dispatch(DoctorFees());
         // dispatch(DoctorLink(1));
     }, [dispatch]);
-
+    const linkInputRef = useRef(null);
 
     const {
         doctorFees,
@@ -109,6 +109,14 @@ const SecondSharLink = () => {
             setApiResponse(result?.payload?.url || '');
         } catch (error) {
             console.error('API call error', error);
+        }
+    };
+    const handleCopyLinkClick = () => {
+        if (linkInputRef.current) {
+            // Set the input value to the full link (apiResponse)
+            linkInputRef.current.value = apiResponse;
+            linkInputRef.current.select();
+            document.execCommand('copy');
         }
     };
     const truncateLink = (text) => {
@@ -175,15 +183,17 @@ const SecondSharLink = () => {
                                 type="text"
                                 placeholder="https://www.ths.com/p...."
                                 id="linkinput"
+                                ref={linkInputRef} // <-- Step 1: Attach the ref to the input
                                 value={truncateLink(apiResponse)}
                                 onChange={(e) => setApiResponse(e.target.value)}
+                                style={{ fontSize: '10px' }} // <-- Add this style to set the font size to 10px
                             />
-                            <span id="copyLinkText">
-                                <img src={Link}></img>
-                                Copy link</span>
+                            <span id="copyLinkText" onClick={handleCopyLinkClick}> {/* Step 2: Add onClick event */}
+                                <img src={Link} alt="Copy Link Icon" /> Copy link
+                            </span>
                         </div>
                         <div>
-                            <button className='sharebtn' onClick={() => SetUploadLink(true)}>
+                            <button className='sharebtn' onClick={() => { SetData(true); }}>
                                 <div className='shreflex'>
                                     <img src={share} alt='Share Icon' />
                                     <h4 className='paycontent'>Share Link</h4>
@@ -195,12 +205,12 @@ const SecondSharLink = () => {
                                     <h4 className='paycontent'>Upload Excel Sheet</h4>
                                 </div>
                             </button>
-                            <button className='sharebtn3' onClick={() => { SetData(true); }} >
+                            {/* <button className='sharebtn3' onClick={() => { SetData(true); }} >
                                 <div className='shreflex'>
                                     <img src={PHONE} alt='Share Icon' />
                                     <h4 className='paycontent'>Direct Share on Contact Number</h4>
                                 </div>
-                            </button>
+                            </button> */}
                         </div>
                     </div>
                 </div>

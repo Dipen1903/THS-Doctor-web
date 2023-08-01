@@ -138,7 +138,7 @@ function Header() {
                   href="/sharelink"
                   // onClick={(e) => {
                   //   e.preventDefault();
-                  //   // handleShow();
+                  //   handleShow();
                   // }}
                 >
                   <img src={Icon.Share} alt="Avatar" className=" mr_10"></img>
