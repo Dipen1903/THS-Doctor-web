@@ -7,6 +7,7 @@ import {
   ConsultDetailsAPI,
   CreatePrescAPI,
   DelayConsultAPI,
+  DetailAPI,
   NewConsultAPI,
   PastConsultAPI,
   PrescDetailsAPI,
@@ -76,19 +77,22 @@ export const GetPastConsults = createAsyncThunk(
   }
 );
 export const GetConsultDetails = createAsyncThunk(
-  "GetConsultDetails",
+  "consultDetails",
   async (values, { dispatch }) => {
     try {
-      const result = await ConsultDetailsAPI(values);
-      if (result?.success) {
-        dispatch(setLoading(false));
-        return result?.data;
-      } else {
 
-        console.log("e333333333333333=----", result);
+      const result = await DetailAPI(values);
+      return result?.data;
+      // console.log("result------", data);
+      // if (result?.success) {
+      //   dispatch(setLoading(false));
+      //   return result?.data;
+      // } else {
 
-        throw result;
-      }
+      //   console.log("e333333333333333=----", result);
+
+      //   throw result;
+      // }
     } catch (error) {
       console.log("e333333333333333", error);
       dispatch(setLoading(false));

@@ -79,12 +79,12 @@ export const NewConsultAPI = (data) =>
 export const PastConsultAPI = (data) =>
   POST(`${BASE_URL}/consultation-past`, data);
 export const ConsultDetailsAPI = (data) => {
-  console.log("data", data);
   POST(`${BASE_URL}/consultation-details`, data);
 }
-
 export const CompleteConsultAPI = (data) =>
   POST(`${BASE_URL}/complete-appointment`, data);
+export const DetailAPI = (data) =>
+  POST(`${BASE_URL}/consultation-details`, data);
 export const CancelConsultAPI = (data) =>
   POST(`${BASE_URL}/consultation-cancel`, data);
 export const CancelAllConsultAPI = (data) =>
@@ -114,6 +114,6 @@ export const NotifyAPI = (data) => POST(`https://thsindia.in/medical-web/api/web
 //ShareMyLink
 
 export const DoctorFee = (data) => POST(`${BASE_URL}/doctor-consultation-fee`, data);
-export const DoctorFeeUpdate = (data) => POST(`${BASE_URL}/doctor-consultation-fee-add`,data);
-export const DoctorLink = (data) => POST(`${BASE_URL}/doctor-consultation-link`,data);
-export const DoctorFetachNumber = (data) => POST(`${BASE_URL}/doctor-consultation-link-sms`,data);
+export const DoctorFeeUpdate = (data) => POST(`${BASE_URL}/doctor-consultation-fee-add`, data);
+export const DoctorLink = (data) => POST(`${BASE_URL}/doctor-consultation-link`, data);
+export const DoctorFetachNumber = (data) => POST(`${BASE_URL}/doctor-consultation-link-sms`, data);

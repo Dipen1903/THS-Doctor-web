@@ -15,11 +15,9 @@ const UploadModal = ({ isOpen, onClose }) => {
 
     const handleFileChange = (event) => {
         const selectedFile = event.target.files[0];
-
         if (!selectedFile) {
             return;
         }
-
         const reader = new FileReader();
 
         reader.onload = (e) => {

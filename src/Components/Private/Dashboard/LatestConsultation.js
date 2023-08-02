@@ -61,6 +61,7 @@ function LatestConsultation() {
       dispatch(clearChat());
     };
   }, [upcomingConsults?.length]);
+  console.log("latestlatest",latest);
 
   return (
     <>
@@ -78,7 +79,6 @@ function LatestConsultation() {
                 <div className="upcomming_consult_chat_list">
                   {latest?.map((item, index) => {
                     return (
-
                       <div
                         className={`chat_list_box ${isActive(item) &&
                           parseInt(room?.lastBookingId) !==
@@ -91,7 +91,7 @@ function LatestConsultation() {
                             console.log("item?.id", item, item?.id, room?.lastBookingId, room, isActive(item) && parseInt(room?.lastBookingId) !== parseInt(item?.id))
                             parseInt(room?.lastBookingId) !== parseInt(item?.id) &&
                               dispatch(
-                                GetConsultDetails({ appointment_id: item?.id })
+                                GetConsultDetails({ "appointment_id": item?.id })
                               ).then((res) => {
                                 console.log("essssss", res);
                                 dispatch(SetUpRoom(item));

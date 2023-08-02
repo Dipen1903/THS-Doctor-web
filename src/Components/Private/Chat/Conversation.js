@@ -117,27 +117,22 @@ function Conversation({ roomData }) {
               </h5>
             </div>
             <div className="col-md-6 chat-head-right">
-              {parseInt(consultDetails?.status) < 2 ? (
-                <Button
-                  variant="primary"
-                  className="mark_complete"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    dispatch(
-                      CompleteConsult({
-                        appointment_id: room?.lastBookingId || room?.id,
-                      })
-                    ).then((res) => {
-                      window.location.reload();
-                    });
-                  }}
-                >
-                  Mark Complete
-                </Button>
-              ) : (
-                <div></div>
-              )}
-
+              <Button
+                variant="primary"
+                className="mark_complete"
+                onClick={(e) => {
+                  e.preventDefault();
+                  dispatch(
+                    CompleteConsult({
+                      appointment_id: room?.lastBookingId || room?.id,
+                    })
+                  ).then((res) => {
+                    window.location.reload();
+                  });
+                }}
+              >
+                Mark Complete
+              </Button>
               <div className="d-flex">
                 <Button
                   className="call_btn"

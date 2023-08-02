@@ -75,6 +75,7 @@ function PastConsultation({ pastConsults = [] }) {
             style={{ cursor: "pointer" }}
             onClick={() => {
               if (parseInt(original?.status) > 1) {
+                console.log(">>>>>>>>>>>", original?.id);
                 dispatch(GetConsultDetails({ appointment_id: original?.id }));
                 hide(true);
               }
@@ -94,7 +95,7 @@ function PastConsultation({ pastConsults = [] }) {
       <ConsultDetails
         show={show}
         onHide={(e) => {
-          hide(true);
+          hide(false);
         }}
       />
       <PresciptionDetails />
@@ -109,9 +110,10 @@ export const ConsultDetails = (props) => {
   const { values, ...rest } = props;
   const dispatch = useDispatch();
   const { consultDetails } = useSelector(({ ConsultSlice }) => ConsultSlice);
+  console.log("consultDetails", consultDetails);
   return (
     <Modal {...rest} className="consultation-modal-body-two" centered>
-      <Modal.Header className="consultation-modal-header" closeButton>
+      <Modal.Header className="consultation-modal-header" closeButton onClick={() => props.onHide(true)}>
         <img alt="myImg" className="mr_15" src={Icon.Appointment}></img>
         <Modal.Title
           id="contained-modal-title-vcenter"
@@ -119,6 +121,7 @@ export const ConsultDetails = (props) => {
         >
           Appointment Details
           <div>
+
             <span className="appointment_id">
               Id #{consultDetails?.appointment_id}
             </span>
@@ -213,6 +216,7 @@ export const ConsultDetails = (props) => {
           </>
         )}
       </Modal.Body>
+      {console.log("props", props)}
       <Modal.Footer className="consultation-modal-footer">
         <div className="d-flex">
           <Button

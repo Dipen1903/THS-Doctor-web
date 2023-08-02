@@ -33,7 +33,7 @@ function NewConsultation({ upcomingConsults = [] }) {
         var minutes = duration.asMinutes();
         return parseInt(minutes) > 10 ? false : true;
       }
-    } catch (error) {}
+    } catch (error) { }
   };
   const columns = [
     {
@@ -121,9 +121,11 @@ function NewConsultation({ upcomingConsults = [] }) {
         },
       }) => {
         return (
-          <Link to={isActive(original) && `/chat/${original?.id}`}>
-            <img src={Icon.Chat} alt="Avatar" className="chat-icon" />
-          </Link>
+          <>
+            <Link to={`/chat/${original?.id}`}>
+              <img src={Icon.Chat} alt="Avatar" className="chat-icon" onClick={console.log("gxhuytu")}/>
+            </Link>
+            </>
         );
       },
     },
@@ -148,7 +150,7 @@ function NewConsultation({ upcomingConsults = [] }) {
     },
   ];
   useEffect(() => {
-    return () => {};
+    return () => { };
   }, []);
 
   return (
