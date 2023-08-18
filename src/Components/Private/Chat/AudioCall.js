@@ -49,6 +49,7 @@ const AudioCall = forwardRef(({ endCall }, ref) => {
     });
 
     agoraEngine.on("user-joined", (user) => {
+      console.log("user",user);
       setRemoteUser(user);
     });
   }
@@ -119,9 +120,9 @@ const AudioCall = forwardRef(({ endCall }, ref) => {
         channel_name: rtcProps?.channel,
         uuid: userProfile?.id,
         agora_user_id: rtcProps?.uid,
-        incomming_call_type: 1,
+        incomming_call_type: 0,
         title: userProfile?.name,
-        message: "Outcoming Call",
+        message: "incoming Call",
         user_name: userProfile?.name,
         caller_user_id: userProfile?.id,
         chat_id: chatDoc?.id,
@@ -129,6 +130,10 @@ const AudioCall = forwardRef(({ endCall }, ref) => {
         gender: room?.gender,
       })
     );
+    console.log("NotifyEnum",userProfile);
+    console.log("room",room);
+    console.log("rtcProps",rtcProps);
+    console.log("chatDoc",chatDoc);
     return () => { };
   }, []);
 console.log("remoteUserremoteUserremoteUserremoteUserremoteUserremoteUserremoteUserremoteUserremoteUserremoteUserremoteUser",remoteUser)

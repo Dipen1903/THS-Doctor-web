@@ -2,7 +2,6 @@
   "name": "total-health-solution",
   "version": "0.1.0",
   "private": true,
-  "homepage": "doctor",
   "dependencies": {
     "@firebase/messaging": "^0.12.4",
     "@pathofdev/react-tag-input": "^1.0.7",

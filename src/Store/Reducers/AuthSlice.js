@@ -43,14 +43,16 @@ const initialState = {
 export const SignIn = createAsyncThunk(
   "SignIn",
   async (values, { dispatch }) => {
-    // const fcmToken = await GetFirbaseToken();
-    // console.log("fcmToken1111111111111111111111111111111111111111111111111111111111111",fcmToken);
-    // if (fcmToken) {
-    //   values["device_token"] = fcmToken;
-    // }
+    const fcmToken = await GetFirbaseToken();
+    console.log("fcmToken1111111111111111111111111111111111111111111111111111111111111",fcmToken);
+  
     try {
       dispatch(setLoading(true));
+      if (fcmToken) {
+        values["device_token"] = fcmToken;
+      }
       const result = await SignInAPI(values);
+      console.log("result",result);
       if (result?.success) {
         dispatch(setLoading(false));
         dispatch(setSession(result?.data));
@@ -108,13 +110,14 @@ export const MobileSignIn = createAsyncThunk(
 export const OTPSignIn = createAsyncThunk(
   "SignIn",
   async (values, { dispatch }) => {
-    // const fcmToken = await GetFirbaseToken();
-    // console.log("fcmToke222222222222222222222222222",fcmToken);
-    // if (fcmToken) {
-    //   values["device_token"] = fcmToken;
-    // }
+    const fcmToken = await GetFirbaseToken();
+    console.log("fcmToke222222222222222222222222222",fcmToken);
+    if (fcmToken) {
+      values["device_token"] = fcmToken;
+    }
     try {
       const result = await OTPSignInAPI(values);
+      console.log("resultresult>>>>>>",result);
       if (result?.success) {
         dispatch(
           setMessage({
@@ -172,8 +175,14 @@ export const OTPResendSignIn = createAsyncThunk(
 export const OTPVerifySignIn = createAsyncThunk(
   "OTPVerifySignIn",
   async (values, { dispatch }) => {
+    const fcmToken = await GetFirbaseToken();
+    console.log("fcmToke222222222222222222222222222",fcmToken);
+    if (fcmToken) {
+      values["device_token"] = fcmToken;
+    }
     try {
       const result = await OTPVerifySignInAPI(values);
+      console.log("result111",result);
       if (result?.success) {
         dispatch(
           setMessage({

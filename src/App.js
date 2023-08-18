@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import RootRoute from "./Routes/RootRoute";
 import LayoutProvider from "./Components/Common/Layouts/LayoutProvider";
 import ErrorBoundary from "./Components/Common/Layouts/ErrorBoundry";
@@ -14,7 +14,7 @@ import { setMessage } from "./Store/Reducers/LayoutSlice";
 import { AlertEnum } from "./Utilities/Enums";
 import { LocalServiceWorkerRegister } from "./Utilities/Functions";
 import { useDispatch } from "react-redux";
-LocalServiceWorkerRegister();
+
 function App() {
   const dispatch = useDispatch();
   onMessageListener()
@@ -54,6 +54,10 @@ function App() {
       dispatch(setMessage(messageBody));
     })
     .catch((err) => console.log("failed: ", err));
+    // useEffect(() => {
+    //   console.log("jj");
+    //   LocalServiceWorkerRegister();
+    // },[])
   return (
     <ErrorBoundary>
       <LayoutProvider>

@@ -117,13 +117,14 @@ export function Base64toFile(dataurl, filename) {
   return new File([u8arr], filename, { type: mime });
 }
 
-export function LocalServiceWorkerRegister() {
-  const swPath = `${process.env.PUBLIC_URL}/firebase-messaging-sw.js`;
-  if ("serviceWorker" in navigator && process.env.NODE_ENV !== "production") {
-    window.addEventListener("load", function () {
-      navigator.serviceWorker.register(swPath).then((registration) => {
-        console.log("Service worker registered");
-      });
-    });
-  }
-}
+// export function LocalServiceWorkerRegister() {
+
+//   const swPath = `/doctor/firebase-messaging-sw.js`;
+//   if ("serviceWorker" in navigator && process.env.NODE_ENV !== "production") {
+//     window.addEventListener("load", function () {
+//       navigator.serviceWorker.register(swPath).then((registration) => {
+//         console.log("Service worker registered");
+//       });
+//     });
+//   }
+// }

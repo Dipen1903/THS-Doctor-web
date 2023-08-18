@@ -1,19 +1,19 @@
-import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
-import { getMessaging, getToken, onMessage } from "firebase/messaging";
+// import { initializeApp } from "firebase/app";
+// import { getFirestore } from "firebase/firestore";
+// import { getMessaging, getToken, onMessage } from "firebase/messaging";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyAJh9bSIe-gZ74qFYxfWzsOmkr_z1FviyA",
-  authDomain: "thsmedical-3333e.firebaseapp.com",
-  projectId: "thsmedical-3333e",
-  storageBucket: "thsmedical-3333e.appspot.com",
-  messagingSenderId: "850749344600",
-  appId: "1:850749344600:web:64d72f1207caea2af3332d",
-  measurementId: "G-41PQEPW141",
-};
-const FirebaseApp = initializeApp(firebaseConfig);
-export const FirebaseDB = getFirestore(FirebaseApp);
-const messaging = getMessaging(FirebaseApp);
+// const firebaseConfig = {
+//   apiKey: "AIzaSyAJh9bSIe-gZ74qFYxfWzsOmkr_z1FviyA",
+//   authDomain: "thsmedical-3333e.firebaseapp.com",
+//   projectId: "thsmedical-3333e",
+//   storageBucket: "thsmedical-3333e.appspot.com",
+//   messagingSenderId: "850749344600",
+//   appId: "1:850749344600:web:64d72f1207caea2af3332d",
+//   measurementId: "G-41PQEPW141",
+// };
+// const FirebaseApp = initializeApp(firebaseConfig);
+// export const FirebaseDB = getFirestore(FirebaseApp);
+// const messaging = getMessaging(FirebaseApp);
 
 
 
@@ -28,41 +28,97 @@ const messaging = getMessaging(FirebaseApp);
 //       }
 //     })
 //     .catch((err) => {
+//       console.log("ggggggggg");
 //       return { error: err };
 //     });
 // };
 
+// // export const GetFirbaseToken = async () => {
+// //   try {
+
+// //     navigator.serviceWorker.register('./firebase-messaging-sw')
+// //       .then((registration) => {
+// //         messaging.useServiceWorker(registration);
+// //         // Request permission and get token.....
+// //       });
+
+// //     console.log("gggggggggggggggggggggggg");
+// //     const currentToken = await getToken(messaging, {
+// //       vapidKey: `BJbEZL3uHsKTBM6_d-3hR3bepIKfIjLWpFQ1IIs-U33ouIRe0sn4qryjPtzAWQHuLX29M7mLMVF6qwqTVHCuIls`,
+// //     });
+// //     console.log("currrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr", messaging);
+// //   } catch (error) {
+// //     console.error("Error getting FCM token:", error);
+// //     return { error: error.message };
+// //   }
+// // };
+
+// export const onMessageListener = () =>
+//   new Promise((resolve) => {
+//     onMessage(messaging, (payload) => {
+//       console.log("payloda",payload);
+//       resolve(payload);
+//     });
+//   });
+import { initializeApp } from "firebase/app";
+import { getMessaging, getToken, onMessage } from "firebase/messaging";
+import { getFirestore } from "firebase/firestore";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAJh9bSIe-gZ74qFYxfWzsOmkr_z1FviyA",
+  authDomain: "thsmedical-3333e.firebaseapp.com",
+  projectId: "thsmedical-3333e",
+  storageBucket: "thsmedical-3333e.appspot.com",
+  messagingSenderId: "850749344600",
+  appId: "1:850749344600:web:64d72f1207caea2af3332d",
+  measurementId: "G-41PQEPW141",
+};
+const FirebaseApp = initializeApp(firebaseConfig);
+export const messaging = getMessaging(FirebaseApp);
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker
+    .register("/doctor/firebase-messaging-sw.js") // Adjust the path as needed
+    .then((registration) => {
+      console.log("Service worker registered for messaging.");
+    }) 
+    .catch((error) => {
+      console.error("Service worker registration failed:", error);
+    });
+}
+export const FirebaseDB = getFirestore(FirebaseApp);
+
+
 export const GetFirbaseToken = async () => {
   try {
+    if (Notification.permission === 'default') {
+      const permission = await Notification.requestPermission();
+      if (permission !== 'granted') {
+        console.log("Notification permission denied.");
+        return null;
+      }
+    }
 
-    navigator.serviceWorker.register('/firebase-messaging-sw')
-      .then((registration) => {
-        messaging.useServiceWorker(registration);
-
-        // Request permission and get token.....
-      });
-
-    console.log("gggggggggggggggggggggggg");
+    console.log("messaging", messaging);
     const currentToken = await getToken(messaging, {
-      vapidKey: `BJbEZL3uHsKTBM6_d-3hR3bepIKfIjLWpFQ1IIs-U33ouIRe0sn4qryjPtzAWQHuLX29M7mLMVF6qwqTVHCuIls`,
+      vapidKey: "BJbEZL3uHsKTBM6_d-3hR3bepIKfIjLWpFQ1IIs-U33ouIRe0sn4qryjPtzAWQHuLX29M7mLMVF6qwqTVHCuIls",
     });
-    console.log("currrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr", messaging);
+    console.log(" ", currentToken);
 
     if (currentToken) {
-      console.log("Current FCM Token:", currentToken);
       return currentToken;
     } else {
-      throw new Error("No FCM token available.");
+      console.log("Failed to generate the app registration token.");
+      return null;
     }
   } catch (error) {
-    console.error("Error getting FCM token:", error);
-    return { error: error.message };
+    console.error("Error getting token:", error);
+    return null;
   }
 };
-
 export const onMessageListener = () =>
   new Promise((resolve) => {
     onMessage(messaging, (payload) => {
+      console.log("payloda", payload);
       resolve(payload);
     });
   });
