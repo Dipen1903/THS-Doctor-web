@@ -29,7 +29,7 @@ function Medicine() {
       setShow(false);
       dispatch(clearMedicines());
     }
-    return () => {};
+    return () => { };
   }, [searchParams]);
 
   const onChangeText = (e) => {
@@ -40,6 +40,50 @@ function Medicine() {
       setSearchParams((state) => ({ ...state, q }));
     }, 500);
     setTimer(newTimer);
+  };
+
+  const [counters, setCounters] = useState([]);
+  useEffect(() => {
+    setCounters(new Array(values?.medicines?.length).fill(1));
+  }, [values?.medicines]);
+  const handleMinusClick = (index) => {
+    const updatedCounters = [...counters];
+    updatedCounters[index] = Math.max(updatedCounters[index] - 1, 0);
+    setCounters(updatedCounters);
+  };
+  const handlePlusClick = (index) => {
+    const updatedCounters = [...counters];
+    updatedCounters[index] = updatedCounters[index] + 1;
+    setCounters(updatedCounters);
+  };
+  const [counters1, setCounters1] = useState([]);
+  useEffect(() => {
+    setCounters1(new Array(values?.medicines?.length).fill(1));
+  }, [values?.medicines]);
+  const handleMinusClick1 = (index) => {
+    const updatedCounterss = [...counters1];
+    updatedCounterss[index] = Math.max(updatedCounterss[index] - 1, 0);
+    setCounters1(updatedCounterss);
+  };
+  const handlePlusClick1 = (index) => {
+    const updatedCounterss = [...counters1];
+    updatedCounterss[index] = updatedCounterss[index] + 1;
+    setCounters1(updatedCounterss);
+  };  
+
+  const [counters2, setCounters2] = useState([]);
+  useEffect(() => {
+    setCounters2(new Array(values?.medicines?.length).fill(1));
+  }, [values?.medicines]);
+  const handleMinusClick2 = (index) => {
+    const updatedCounterse = [...counters2];
+    updatedCounterse[index] = Math.max(updatedCounterse[index] - 1, 0);
+    setCounters2(updatedCounterse);
+  };
+  const handlePlusClick2 = (index) => {
+    const updatedCounterse = [...counters2];
+    updatedCounterse[index] = updatedCounterse[index] + 1;
+    setCounters2(updatedCounterse);
   };
   return (
     <>
@@ -140,7 +184,7 @@ function Medicine() {
                   </thead>
                   <tbody>
                     {values?.medicines?.map((item, index) => (
-                      <tr className="prescription_table_body_row">
+                      <tr className="prescription_table_body_row" key={index}>
                         <td className="prescription_table_body_text">
                           <FormControl
                             control="input"
@@ -149,46 +193,44 @@ function Medicine() {
                             name={`medicines[${index}].medicine_name`}
                             id={`medicines[${index}].medicine_name`}
                             value={values?.medicines[index].medicine_name}
-                            onChange={handleChange}
-                            onBlur={handleBlur}
                           />
                         </td>
                         <td className="prescription_table_body_text">
-                          <FormControl
-                            control="input"
-                            type="number"
-                            min={0}
-                            name={`medicines[${index}].morning`}
-                            id={`medicines[${index}].morning`}
-                            value={values?.medicines[index].morning}
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                          />
+                          <div style={{ display: "flex", border: "1px solid #ccc", borderRadius: "8px" }}>
+                            <button   type="button" onClick={() => handleMinusClick(index)} style={{ background: "transparent", border: "none" ,color:"#199A8E" }}>-</button>
+                            <input type="text" value={counters[index]} readOnly  onChange={handleChange}
+                              onBlur={handleBlur}
+                              name={`medicines[${index}].morning`}
+                              id={`medicines[${index}].morning`} style={{ border: "none" ,width:"50px"}} />
+                            <button   type="button" onClick={() => handlePlusClick(index)} style={{ background: "transparent", border: "none" ,color:"#199A8E" }}>+</button>
+                          </div>
                         </td>
                         <td className="prescription_table_body_text">
-                          <FormControl
-                            control="input"
-                            type="number"
-                            min={0}
-                            name={`medicines[${index}].afternoon`}
-                            id={`medicines[${index}].afternoon`}
-                            value={values?.medicines[index].afternoon}
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                          />
+                          <div style={{ display: "flex", border: "1px solid #ccc", borderRadius: "8px" }}>
+                            <button   type="button" onClick={() => handleMinusClick1(index)} style={{ background: "transparent", border: "none",color:"#199A8E"  }}>-</button>
+                            <input type="text" value={counters1[index]} readOnly style={{ border: "none" ,width:"50px" }}
+                              onChange={handleChange}
+                              onBlur={handleBlur}
+                              name={`medicines[${index}].afternoon`}
+                              id={`medicines[${index}].afternoon`}
+                            />
+                            <button   type="button" onClick={() => handlePlusClick1(index)} style={{ background: "transparent", border: "none",color:"#199A8E"  }}>+</button>
+                          </div>
                         </td>
+                      
                         <td className="prescription_table_body_text">
-                          <FormControl
-                            control="input"
-                            type="number"
-                            min={0}
-                            name={`medicines[${index}].night`}
-                            id={`medicines[${index}].night`}
-                            value={values?.medicines[index].night}
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                          />
+                          <div style={{ display: "flex", border: "1px solid #ccc", borderRadius: "8px" }}>
+                            <button   type="button" onClick={() => handleMinusClick2(index)} style={{ background: "transparent", border: "none",color:"#199A8E"  }}>-</button>
+                            <input type="text" value={counters2[index]} readOnly style={{ border: "none" ,width:"50px" }}
+                              onChange={handleChange}
+                              onBlur={handleBlur}
+                              name={`medicines[${index}].night`}
+                              id={`medicines[${index}].night`}
+                            />
+                            <button   type="button" onClick={() => handlePlusClick2(index)} style={{ background: "transparent", border: "none" ,color:"#199A8E" }}>+</button>
+                          </div>
                         </td>
+                    
                         <td className="prescription_table_body_text">
                           <select
                             className="custom-select"
@@ -212,12 +254,8 @@ function Medicine() {
                             min={1}
                             name={`medicines[${index}].days`}
                             id={`medicines[${index}].days`}
-                            value={values?.medicines[index].days}
-                            onChange={handleChange}
-                            onBlur={handleBlur}
                           />
                         </td>
-
                         <td>
                           <center>
                             <img

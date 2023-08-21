@@ -1,6 +1,7 @@
 import React from "react";
 import {
   Input,
+  Inputs,
   TextArea,
   Select,
   RadioButtons,
@@ -13,6 +14,8 @@ function FormControl(props) {
   switch (control) {
     case "input":
       return <Input {...rest} />;
+    case "inputs":
+      return <Inputs {...rest} />;
     case "textArea":
       return <TextArea {...rest} />;
     case "select":

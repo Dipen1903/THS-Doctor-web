@@ -59,9 +59,8 @@ function Input(props) {
         {type === "password" && !iconHide ? (
           <i
             onClick={() => setVisible(visible ? undefined : "text")}
-            className={`toggle-password fa fa-fw ${
-              visible ? "fa-eye" : "fa-eye-slash"
-            }`}
+            className={`toggle-password fa fa-fw ${visible ? "fa-eye" : "fa-eye-slash"
+              }`}
           ></i>
         ) : (
           <></>
@@ -73,6 +72,75 @@ function Input(props) {
     </>
   );
 }
+
+
+function Inputs(props) {
+  const {
+    name,
+    label,
+    iconHide,
+    outerClass,
+    labelclass,
+    icon,
+    type,
+    id,
+    value,
+    onChange,
+    ...rest
+  } = props;
+
+  const handleIncrement = () => {
+    if (type === 'number') {
+      onChange((value || 0) + 1);
+    }
+  };
+
+  const handleDecrement = () => {
+    if (type === 'number') {
+      onChange((value || 0) - 1);
+    }
+  };
+
+  const [visible, setVisible] = useState(false);
+
+  return (
+    <div className={`input_box form_group ${outerClass || ''}`}>
+      {label ? (
+        <>
+          <button onClick={handleDecrement}>-</button>
+          <label className={`sign_title ${labelclass}`} htmlFor={id || ''}>
+            {label}
+          </label>
+          <button onClick={handleIncrement}>+</button>
+        </>
+      ) : null}
+
+      {type === 'password' && !iconHide ? (
+        <div className="password_input">
+          <Field name={name} type={visible ? 'text' : 'password'} id={id || ''} {...rest} />
+          <i
+            onClick={() => setVisible(!visible)}
+            className={`toggle-password fa fa-fw ${visible ? 'fa-eye' : 'fa-eye-slash'}`}
+          ></i>
+        </div>
+      ) : (
+        <Field name={name} type={type} id={id || ''} {...rest} />
+      )}
+
+      {icon && <img src={icon} alt="icon" className="input_icon" />}
+
+      <div className="error">
+        <ErrorMessage name={name} />
+      </div>
+    </div>
+  );
+}
+
+export default Inputs;
+
+
+
+
 
 function TextArea(props) {
   const { name, label, id, ...rest } = props;
@@ -379,7 +447,7 @@ function SearchBox(rest) {
       })
     );
     setSelectedUser(tempArr);
-    return () => {};
+    return () => { };
   }, [value]);
   return (
     <div className="form-group speakers-search-wrapper">
@@ -549,4 +617,4 @@ function SearchBox(rest) {
     </div>
   );
 }
-export { Input, TextArea, Select, RadioButtons, CheckBoxes, SearchBox };
+export { Input, Inputs, TextArea, Select, RadioButtons, CheckBoxes, SearchBox };

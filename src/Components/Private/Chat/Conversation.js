@@ -2,7 +2,7 @@ import { Timestamp } from "firebase/firestore";
 import moment from "moment";
 import React, { useEffect, useImperativeHandle, useRef, useState } from "react";
 import { Button, Dropdown } from "react-bootstrap";
-
+import Modal from "react-bootstrap/Modal";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import {
@@ -31,6 +31,7 @@ function Conversation({ roomData }) {
   const { ChatSlice, ProfileSlice, ConsultSlice } = useSelector(
     (state) => state
   );
+  const navigate = useNavigate();
   const { isDetails, snapShot, chat, room } = ChatSlice;
   const { userProfile } = ProfileSlice;
   const { consultDetails } = ConsultSlice;
@@ -86,211 +87,257 @@ function Conversation({ roomData }) {
 
 
   console.log("consultDetailsconsultDetails", consultDetails);
+  const [show, setShow] = useState(false);
+  console.log("show",show)
   return room ? (
-
-    <div className={`${isDetails ? "col-md-6" : "col-md-9"} padding_left_0`}>
-      <PresciptionDetails />
-      <div className="upcomming_consult_chat_message_box">
-        <div className="profile_name_box">
-          {console.log("room", room)}
-          <div className="row">
-            <div className="col-md-6">
-              <div className="profile_namesubtitle_box">
-                <h3 className="profile_card_name">
-                  {room?.userName || room?.name}
-                </h3>
-                <h5 className="profile_name_subtitle">
-                  {room?.age} |{" "}
-                  {room?.gender && room?.gender?.toLowerCase() === "male"
-                    ? "M"
-                    : "F"}
+    <>
+    <MarkModal
+        show={show}
+        onHide={() => {
+          navigate("/dashboard");
+        }}
+      />
+      <div className={`${isDetails ? "col-md-6" : "col-md-9"} padding_left_0`}>
+        <PresciptionDetails />
+        <div className="upcomming_consult_chat_message_box">
+          <div className="profile_name_box">
+            {console.log("room", room)}
+            <div className="row">
+              <div className="col-md-6">
+                <div className="profile_namesubtitle_box">
+                  <h3 className="profile_card_name">
+                    {room?.userName || room?.name}
+                  </h3>
+                  <h5 className="profile_name_subtitle">
+                    {room?.age} |{" "}
+                    {room?.gender && room?.gender?.toLowerCase() === "male"
+                      ? "M"
+                      : "F"}
+                  </h5>
+                </div>
+                <h5
+                  className={
+                    !parseInt(room?.userOnlineStatus)
+                      ? "online_text"
+                      : "offline_text"
+                  }
+                >
+                  {!parseInt(room?.userOnlineStatus) ? "Online" : "Offline"}
                 </h5>
               </div>
-              <h5
-                className={
-                  !parseInt(room?.userOnlineStatus)
-                    ? "online_text"
-                    : "offline_text"
-                }
-              >
-                {!parseInt(room?.userOnlineStatus) ? "Online" : "Offline"}
-              </h5>
-            </div>
-            <div className="col-md-6 chat-head-right">
-              <Button
-                variant="primary"
-                className="mark_complete"
-                onClick={(e) => {
-                  e.preventDefault();
-                  dispatch(
-                    CompleteConsult({
-                      appointment_id: room?.lastBookingId || room?.id,
-                    })
-                  ).then((res) => {
-                    window.location.reload();
-                  });
-                }}
-              >
-                Mark Complete
-              </Button>
-              <div className="d-flex">
+              <div className="col-md-6 chat-head-right">
                 <Button
-                  className="call_btn"
-                  disabled={audiocall || videocall}
-                  onClick={() => {
-                    dispatch(UpdateRoom({ isCallingStatus: 1 })).then((res) => {
-                      setAudiocall(true);
-                      audioRef?.current?.join();
-                    });
-                  }}
+                  variant="primary"
+                  className="mark_complete"
+                  // onClick={(e) => {
+                  //   e.preventDefault();
+                  //   dispatch(
+                  //     CompleteConsult({
+                  //       appointment_id: room?.lastBookingId || room?.id,
+                  //     })
+                  //   ).then((res) => {
+                  //     window.location.reload();
+                  //   });
+                  // }}
+                  onClick={() => { setShow(true); console.log("jfgydft")}}
                 >
-                  <img alt="myImg" src={Icon.Phone} />
+                  Mark Complete
                 </Button>
-                <Button
-                  className="call_btn"
-                  disabled={audiocall || videocall}
-                  onClick={() => {
-                    dispatch(UpdateRoom({ isCallingStatus: 1 })).then((res) => {
-                      setVideocall(true);
-                    });
-                  }}
-                >
-                  <img alt="myImg" src={Icon.Video} />
-                </Button>
-
-                <Dropdown>
-                  <Dropdown.Toggle
-                    id="dropdown-basic"
-                    className="attach-dropdown more_info_btn"
+                <div className="d-flex">
+                  <Button
+                    className="call_btn"
+                    disabled={audiocall || videocall}
+                    onClick={() => {
+                      dispatch(UpdateRoom({ isCallingStatus: 1 })).then((res) => {
+                        setAudiocall(true);
+                        audioRef?.current?.join();
+                      });
+                    }}
                   >
-                    <img alt="myImg" src={Icon.Dots}></img>
-                  </Dropdown.Toggle>
-                  <Dropdown.Menu>
-                    <Dropdown.Item
-                      onClick={() => {
-                        dispatch(toggleDetails(true));
-                      }}
+                    <img alt="myImg" src={Icon.Phone} />
+                  </Button>
+                  <Button
+                    className="call_btn"
+                    disabled={audiocall || videocall}
+                    onClick={() => {
+                      dispatch(UpdateRoom({ isCallingStatus: 1 })).then((res) => {
+                        setVideocall(true);
+                      });
+                    }}
+                  >
+                    <img alt="myImg" src={Icon.Video} />
+                  </Button>
+
+                  <Dropdown>
+                    <Dropdown.Toggle
+                      id="dropdown-basic"
+                      className="attach-dropdown more_info_btn"
                     >
-                      Patient info
-                    </Dropdown.Item>
-                  </Dropdown.Menu>
-                </Dropdown>
+                      <img alt="myImg" src={Icon.Dots}></img>
+                    </Dropdown.Toggle>
+                    <Dropdown.Menu>
+                      <Dropdown.Item
+                        onClick={() => {
+                          dispatch(toggleDetails(true));
+                        }}
+                      >
+                        Patient info
+                      </Dropdown.Item>
+                    </Dropdown.Menu>
+                  </Dropdown>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 
-        {videocall ? (
-          <VideoCall
-            endCall={() => {
-              setVideocall(false);
-            }}
-          />
-        ) : audiocall ? (
-          <AudioCall
-            ref={audioRef}
-            endCall={() => {
-              setAudiocall(false);
-            }}
-          />
-        ) : (
-          <div id="chat-message-list">
-            {/* <div className="created-date">08.24 Today</div> */}
-            {localFile ? (
-              <div className="attach_items_box">
-                <div className="row">
-                  <div className="col-md-12">
-                    <img
-                      alt="myImg"
-                      src={Icon.Cross}
-                      onClick={(e) => {
-                        e.preventDefault();
-                        setLocalFile("");
-                        scrollToBottom();
-                        inputRef.current.clearMessage("");
-                      }}
-                      className="attach_cross"
-                    />
-                  </div>
-                  <div className="col-md-12">
-                    <div className="attach_img_box">
-                      <center>
-                        {localFile?.type?.includes("image") ? (
-                          <img
-                            src={URL.createObjectURL(localFile)}
-                            alt="file"
-                          />
-                        ) : (
-                          <div className="attach_doc_img_box">
+          {videocall ? (
+            <VideoCall
+              endCall={() => {
+                setVideocall(false);
+              }}
+            />
+          ) : audiocall ? (
+            <AudioCall
+              ref={audioRef}
+              endCall={() => {
+                setAudiocall(false);
+              }}
+            />
+          ) : (
+            <div id="chat-message-list">
+              {/* <div className="created-date">08.24 Today</div> */}
+              {localFile ? (
+                <div className="attach_items_box">
+                  <div className="row">
+                    <div className="col-md-12">
+                      <img
+                        alt="myImg"
+                        src={Icon.Cross}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          setLocalFile("");
+                          scrollToBottom();
+                          inputRef.current.clearMessage("");
+                        }}
+                        className="attach_cross"
+                      />
+                    </div>
+                    <div className="col-md-12">
+                      <div className="attach_img_box">
+                        <center>
+                          {localFile?.type?.includes("image") ? (
                             <img
-                              src={Icon.Doc}
-                              className="attch_doc_img"
-                              alt="doc"
+                              src={URL.createObjectURL(localFile)}
+                              alt="file"
                             />
-                            <h5 className="attch_doc_title">
-                              {localFile?.name}
-                            </h5>
-                            <h6 className="attach_doc_size">
-                              {localFile?.type?.split("/")[1].toUpperCase()} -{" "}
-                              {localFile?.size} mb
-                            </h6>
-                          </div>
-                        )}
-                      </center>
+                          ) : (
+                            <div className="attach_doc_img_box">
+                              <img
+                                src={Icon.Doc}
+                                className="attch_doc_img"
+                                alt="doc"
+                              />
+                              <h5 className="attch_doc_title">
+                                {localFile?.name}
+                              </h5>
+                              <h6 className="attach_doc_size">
+                                {localFile?.type?.split("/")[1].toUpperCase()} -{" "}
+                                {localFile?.size} mb
+                              </h6>
+                            </div>
+                          )}
+                        </center>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            ) : (
-              <div className="chat-message-list-inner">
-                {chatBot?.length &&
-                  chatBot?.map(
-                    ({ chatBoatQuestionsWithOptions }, index) =>
-                      chatBoatQuestionsWithOptions && (
-                        <>
-                          <ChatItem
-                            key={
-                              chatBoatQuestionsWithOptions?.finalAnswer + index
-                            }
-                            index={index}
-                            type={0}
-                            rest={{
-                              userType: 1,
-                              question:
-                                chatBoatQuestionsWithOptions?.messageList
-                                  ?.length &&
-                                chatBoatQuestionsWithOptions?.messageList[0],
-                              answer: chatBoatQuestionsWithOptions?.finalAnswer,
-                            }}
-                          />
-                        </>
-                      )
-                  )}
-                {console.log("chatvc", chat)}
-                {chat?.map((item, index) => (
-                  <ChatItem
-                    key={(item?.sizeOfDocument || 0) + index}
-                    type={item?.documentType}
-                    index={index}
-                    rest={item}
-                  />
-                ))}
-                <div ref={messagesEndRef} />
-              </div>
-            )}
-            <ChatInput
-              ref={inputRef}
-              localFile={localFile}
-              setLocalFile={setLocalFile}
-            />
-          </div>
-        )}
+              ) : (
+                <div className="chat-message-list-inner">
+                  {chatBot?.length &&
+                    chatBot?.map(
+                      ({ chatBoatQuestionsWithOptions }, index) =>
+                        chatBoatQuestionsWithOptions && (
+                          <>
+                            <ChatItem
+                              key={
+                                chatBoatQuestionsWithOptions?.finalAnswer + index
+                              }
+                              index={index}
+                              type={0}
+                              rest={{
+                                userType: 1,
+                                question:
+                                  chatBoatQuestionsWithOptions?.messageList
+                                    ?.length &&
+                                  chatBoatQuestionsWithOptions?.messageList[0],
+                                answer: chatBoatQuestionsWithOptions?.finalAnswer,
+                              }}
+                            />
+                          </>
+                        )
+                    )}
+                  {console.log("chatvc", chat)}
+                  {chat?.map((item, index) => (
+                    <ChatItem
+                      key={(item?.sizeOfDocument || 0) + index}
+                      type={item?.documentType}
+                      index={index}
+                      rest={item}
+                    />
+                  ))}
+                  <div ref={messagesEndRef} />
+                </div>
+              )}
+              <ChatInput
+                ref={inputRef}
+                localFile={localFile}
+                setLocalFile={setLocalFile}
+              />
+            </div>
+          )}
+        </div>
       </div>
-    </div>
+    </>
   ) : (
     <></>
   );
 }
+const MarkModal = (props) => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  return (
+    <Modal
+      {...props}
+      size="sm"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+    >
+      <Modal.Header closeButton></Modal.Header>
+      <Modal.Body>
+        <center>
+          <img alt="myImg" src={BackGround.Succcess}></img>
+          <h3 className="welcome_ths">Welcome to THS</h3>
+          <p className="please_fill_out_profile">
+            Please fill out your personal-work profile and verify your identity
+            before starting. Thanks!
+          </p>
+        </center>
+      </Modal.Body>
+      <Modal.Footer>
+        <div>
+          <Button
+            className="my_work_profile_btn"
+            onClick={() => {
+              navigate("/details/personal-work");
+            }}
+          >
+            Fill Out My Work Profile
+          </Button>
+        </div>
+      </Modal.Footer>
+    </Modal>
+  );
+};
 
 const ChatItem = ({ type, index, rest }) => {
   const dispatch = useDispatch();

@@ -136,7 +136,6 @@ const AudioCall = forwardRef(({ endCall }, ref) => {
     console.log("chatDoc",chatDoc);
     return () => { };
   }, []);
-console.log("remoteUserremoteUserremoteUserremoteUserremoteUserremoteUserremoteUserremoteUserremoteUserremoteUserremoteUser",remoteUser)
   return (
     <div className="audio-call-container">
       <div className="user-container">

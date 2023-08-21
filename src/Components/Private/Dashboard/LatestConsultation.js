@@ -17,13 +17,15 @@ function LatestConsultation() {
   const { room, snapShot } = ChatSlice;
   const { upcomingConsults } = ConsultSlice;
   const [latest, setLatest] = useState([]);
+  console.log("upcomingConsults",upcomingConsults);
   const intialLoad = () => {
     try {
-      let tempList = upcomingConsults.filter(
+      let tempList = upcomingConsults?.filter(
         (item) =>
           moment(item?.appointment_date).format("DD/MM/YYYY") ==
           moment().format("DD/MM/YYYY")
       );
+      console.log("tempList",tempList);
       if (tempList) {
         setLatest(tempList);
         dispatch(SetUpRoom(tempList[0]));

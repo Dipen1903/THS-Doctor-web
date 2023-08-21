@@ -7624,3 +7624,15 @@ input[type="text"] {
   line-height: 24px;
   margin-bottom: 0px;
 }
+.dosage-controls{
+  display: flex;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  height: 50px;
+}
+.dosage-input{
+  border: none!important;
+}
+.modal_455 {
+  --bs-modal-width: 230px!important;
+}

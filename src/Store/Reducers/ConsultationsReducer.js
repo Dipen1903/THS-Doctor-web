@@ -33,6 +33,7 @@ export const GetNewConsults = createAsyncThunk(
     try {
       dispatch(setLoading(true));
       const result = await NewConsultAPI(values);
+      console.log("result",result?.data);
       if (result?.success) {
         dispatch(setLoading(false));
         return result?.data;
