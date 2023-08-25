@@ -14,7 +14,7 @@ import {
 import { UploadFile } from "../../../Store/Reducers/CommonReducer";
 import { MessageEnum } from "../../../Utilities/Enums";
 import { BackGround, Icon } from "../../../Utilities/Icons";
-
+import { useNavigate } from "react-router-dom";
 import VideoCall from "./VideoCall";
 
 import AudioCall from "./AudioCall";
@@ -88,13 +88,14 @@ function Conversation({ roomData }) {
 
   console.log("consultDetailsconsultDetails", consultDetails);
   const [show, setShow] = useState(false);
-  console.log("show",show)
+  console.log("show", show)
   return room ? (
     <>
-    <MarkModal
+      <MarkModal
         show={show}
         onHide={() => {
           navigate("/dashboard");
+          setShow(false);
         }}
       />
       <div className={`${isDetails ? "col-md-6" : "col-md-9"} padding_left_0`}>
@@ -139,7 +140,7 @@ function Conversation({ roomData }) {
                   //     window.location.reload();
                   //   });
                   // }}
-                  onClick={() => { setShow(true); console.log("jfgydft")}}
+                  onClick={() => { setShow(true); console.log("jfgydft") }}
                 >
                   Mark Complete
                 </Button>
@@ -302,9 +303,14 @@ function Conversation({ roomData }) {
     <></>
   );
 }
+
 const MarkModal = (props) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { ChatSlice, ProfileSlice, ConsultSlice } = useSelector(
+    (state) => state
+  );
+  const { isDetails, snapShot, chat, room } = ChatSlice;
   return (
     <Modal
       {...props}
@@ -315,23 +321,37 @@ const MarkModal = (props) => {
       <Modal.Header closeButton></Modal.Header>
       <Modal.Body>
         <center>
-          <img alt="myImg" src={BackGround.Succcess}></img>
-          <h3 className="welcome_ths">Welcome to THS</h3>
+          {/* <img alt="myImg" src={BackGround.Succcess}></img>
+          <h3 className="welcome_ths">Welcome to THS</h3> */}
           <p className="please_fill_out_profile">
-            Please fill out your personal-work profile and verify your identity
-            before starting. Thanks!
+            Are you sure you want to Complete ?
           </p>
         </center>
       </Modal.Body>
       <Modal.Footer>
-        <div>
+        <div className="d-flex" style={{ gap: "10px" }}>
+          <Button
+            className="my_work_profile_btn"
+            onClick={(e) => {
+              e.preventDefault();
+              dispatch(
+                CompleteConsult({
+                  appointment_id: room?.lastBookingId || room?.id,
+                })
+              ).then((res) => {
+                window.location.reload();
+              });
+            }}
+          >
+            yes
+          </Button>
           <Button
             className="my_work_profile_btn"
             onClick={() => {
-              navigate("/details/personal-work");
+              props.onHide();
             }}
           >
-            Fill Out My Work Profile
+            No
           </Button>
         </div>
       </Modal.Footer>
