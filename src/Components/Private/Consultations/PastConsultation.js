@@ -75,7 +75,7 @@ function PastConsultation({ pastConsults = [] }) {
             style={{ cursor: "pointer" }}
             onClick={() => {
               if (parseInt(original?.status) > 1) {
-                console.log(">>>>>>>>>>>", original?.id);
+                // console.log(">>>>>>>>>>>", original?.id);
                 dispatch(GetConsultDetails({ appointment_id: original?.id }));
                 hide(true);
               }
@@ -110,7 +110,7 @@ export const ConsultDetails = (props) => {
   const { values, ...rest } = props;
   const dispatch = useDispatch();
   const { consultDetails } = useSelector(({ ConsultSlice }) => ConsultSlice);
-  console.log("consultDetails", consultDetails);
+  // console.log("consultDetails", consultDetails);
   return (
     <Modal {...rest} className="consultation-modal-body-two" centered>
       <Modal.Header className="consultation-modal-header" closeButton onClick={() => props.onHide(true)}>
@@ -216,7 +216,7 @@ export const ConsultDetails = (props) => {
           </>
         )}
       </Modal.Body>
-      {console.log("props", props)}
+      {/* {console.log("props", props)} */}
       <Modal.Footer className="consultation-modal-footer">
         <div className="d-flex">
           <Button

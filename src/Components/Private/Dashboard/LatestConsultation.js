@@ -17,7 +17,7 @@ function LatestConsultation() {
   const { room, snapShot } = ChatSlice;
   const { upcomingConsults } = ConsultSlice;
   const [latest, setLatest] = useState([]);
-  console.log("upcomingConsults",upcomingConsults);
+  // console.log("upcomingConsults",upcomingConsults);
   const intialLoad = () => {
     try {
       let tempList = upcomingConsults?.filter(
@@ -25,7 +25,7 @@ function LatestConsultation() {
           moment(item?.appointment_date).format("DD/MM/YYYY") ==
           moment().format("DD/MM/YYYY")
       );
-      console.log("tempList",tempList);
+      // console.log("tempList",tempList);
       if (tempList) {
         setLatest(tempList);
         dispatch(SetUpRoom(tempList[0]));
@@ -39,7 +39,7 @@ function LatestConsultation() {
 
   const isActive = (item) => {
     try {
-      console.log(" isActive(item) && parseInt(room?.lastBookingId) !== parseInt(item?.id)", item);
+      // console.log(" isActive(item) && parseInt(room?.lastBookingId) !== parseInt(item?.id)", item);
       if (item?.status === 1) {
         return true;
       } else if (item?.status === 0) {
@@ -63,7 +63,7 @@ function LatestConsultation() {
       dispatch(clearChat());
     };
   }, [upcomingConsults?.length]);
-  console.log("latestlatest",latest);
+  // console.log("latestlatest",latest);
 
   return (
     <>
@@ -90,12 +90,12 @@ function LatestConsultation() {
                         onClick={(e) => {
                           {
                             // e.preventDefault();
-                            console.log("item?.id", item, item?.id, room?.lastBookingId, room, isActive(item) && parseInt(room?.lastBookingId) !== parseInt(item?.id))
+                            // console.log("item?.id", item, item?.id, room?.lastBookingId, room, isActive(item) && parseInt(room?.lastBookingId) !== parseInt(item?.id))
                             parseInt(room?.lastBookingId) !== parseInt(item?.id) &&
                               dispatch(
                                 GetConsultDetails({ "appointment_id": item?.id })
                               ).then((res) => {
-                                console.log("essssss", res);
+                                // console.log("essssss", res);
                                 dispatch(SetUpRoom(item));
                               })
                           };
@@ -105,7 +105,7 @@ function LatestConsultation() {
                           <div className="col-md-6">
                             <h6 className="chat_list_id">
                               ID #{item?.appointment_id}
-                              {console.log("latestlatestlatestlatest", latest)}
+                              {/* {console.log("latestlatestlatestlatest", latest)} */}
                             </h6>
                             <div className="chat_title_box">
                               <h4 className="chat_list_title">{item?.name}</h4>

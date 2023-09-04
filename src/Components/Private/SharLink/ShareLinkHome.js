@@ -20,10 +20,10 @@ const ShareLinkHome = () => {
               follow_up_fee: updatedFollowupFee,
             })
           );
-          console.log('API call result', result);
+        //   console.log('API call result', result);
           window.location.href = '/doctor/sharelinkhome';
         } catch (error) {
-          console.error('API call error', error);
+        //   console.error('API call error', error);
         }
       };
 

@@ -24,6 +24,7 @@ import {
   toggleReview,
 } from "../../../Store/Reducers/ConsultationsReducer";
 import PresciptionDetails from "../Prescription/PresciptionDetails";
+import { GetToken } from "../../../Store/Reducers/CallingReducer";
 
 function Conversation({ roomData }) {
   const location = useLocation();
@@ -51,6 +52,7 @@ function Conversation({ roomData }) {
   }, [chat]);
 
   useEffect(() => {
+    // {console.log("location",location)}
     if (location.state) {
       if (location.state?.incomming_call_type == 0) {
         setAudiocall(true);
@@ -80,15 +82,15 @@ function Conversation({ roomData }) {
   }, [roomData]);
   useEffect(() => {
     let tempData = JSON.parse(consultDetails?.json_data || "{}");
-    console.log("tempDatatempData", tempData);
+    // console.log("tempDatatempData", tempData);
     setChatBot(tempData?.data);
     return () => { };
   }, [consultDetails]);
 
 
-  console.log("consultDetailsconsultDetails", consultDetails);
+  // console.log("consultDetailsconsultDetails", consultDetails);
   const [show, setShow] = useState(false);
-  console.log("show", show)
+  // console.log("show", show)
   return room ? (
     <>
       <MarkModal
@@ -102,7 +104,7 @@ function Conversation({ roomData }) {
         <PresciptionDetails />
         <div className="upcomming_consult_chat_message_box">
           <div className="profile_name_box">
-            {console.log("room", room)}
+            {/* {console.log("room", room)} */}
             <div className="row">
               <div className="col-md-6">
                 <div className="profile_namesubtitle_box">
@@ -145,6 +147,7 @@ function Conversation({ roomData }) {
                   Mark Complete
                 </Button>
                 <div className="d-flex">
+                  {/* {console.log("userProfile",userProfile)} */}
                   <Button
                     className="call_btn"
                     disabled={audiocall || videocall}
@@ -152,8 +155,15 @@ function Conversation({ roomData }) {
                       dispatch(UpdateRoom({ isCallingStatus: 1 })).then((res) => {
                         setAudiocall(true);
                         audioRef?.current?.join();
+                        dispatch(
+                          GetToken({
+                            user_id: userProfile?.id,
+                            channel_name: `Channel_${userProfile?.id}_${room?.userId}`,
+                          })
+                        );
                       });
                     }}
+                    
                   >
                     <img alt="myImg" src={Icon.Phone} />
                   </Button>
@@ -163,6 +173,7 @@ function Conversation({ roomData }) {
                     onClick={() => {
                       dispatch(UpdateRoom({ isCallingStatus: 1 })).then((res) => {
                         setVideocall(true);
+
                       });
                     }}
                   >
@@ -277,7 +288,7 @@ function Conversation({ roomData }) {
                           </>
                         )
                     )}
-                  {console.log("chatvc", chat)}
+                  {/* {console.log("chatvc", chat)} */}
                   {chat?.map((item, index) => (
                     <ChatItem
                       key={(item?.sizeOfDocument || 0) + index}
@@ -612,7 +623,7 @@ const ChatInput = React.forwardRef(({ localFile, setLocalFile }, ref) => {
       }
       setMessage(tempMessage);
     } catch (error) {
-      console.error(error);
+      // console.error(error);
     }
   };
 

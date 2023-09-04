@@ -105,10 +105,10 @@ const SecondSharLink = () => {
     const callApi = async (consultationType) => {
         try {
             const result = await dispatch(DoctorLinks(consultationType));
-            console.log('API call result', result);
+            // console.log('API call result', result);
             setApiResponse(result?.payload?.url || '');
         } catch (error) {
-            console.error('API call error', error);
+            // console.error('API call error', error);
         }
     };
     const handleCopyLinkClick = () => {

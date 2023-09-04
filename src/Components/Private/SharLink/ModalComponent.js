@@ -32,26 +32,26 @@ const ModalComponent = ({ isOpen, onClose }) => {
             setError("Maximum input length is 10 characters.");
         }
     };
-    console.log("errorerror", error);
+    // console.log("errorerror", error);
 
     const handleOkButtonClick = () => {
         // Do something with the numbersList, e.g., save it to a database, etc.
         // For demonstration purposes, we are just logging the numbersList.
-        console.log("Numbers List:", numbersList);
+        // console.log("Numbers List:", numbersList);
         onClose();
     };
-    console.log("numbersListnumbersListnumbersList", numbersList);
+    // console.log("numbersListnumbersListnumbersList", numbersList);
     const dispatch = useDispatch();
     const callApi = async () => {
         try {
             const arr = numbersList;
             const resultString = arr.join(",");
-            console.log("resultString", resultString);
+            // console.log("resultString", resultString);
             const result = await dispatch(DoctorFetachNumbers({ phone_numbers: resultString }));
-            console.log('API call result', result);
+            // console.log('API call result', result);
 
         } catch (error) {
-            console.error('API call error', error);
+            // console.error('API call error', error);
         }
     };
     return (

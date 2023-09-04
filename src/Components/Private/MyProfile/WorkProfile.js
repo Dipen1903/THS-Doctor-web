@@ -87,7 +87,7 @@ function WorkProfile() {
       }
       tempProfile.signature = userProfile?.signature;
       setProfileData(tempProfile);
-      console.log("tempProfiletempProfiletempProfiletempProfiletempProfiletempProfiletempProfiletempProfile", tempProfile);
+      // console.log("tempProfiletempProfiletempProfiletempProfiletempProfiletempProfiletempProfiletempProfile", tempProfile);
     } catch (error) { }
   };
   const handleSignature = (e, setFieldValue) => {
@@ -498,7 +498,7 @@ function WorkProfile() {
                         <>
                           {values?.qualification?.map((item, index) => (
                             <div key={index} className="col-md-4">
-                              {console.log("values?.qualificationvalues?.qualification",values)}
+                              {/* {console.log("values?.qualificationvalues?.qualification",values)} */}
                               <h3 className="qualification_title">
                                 {item?.type}
                               </h3>
@@ -734,7 +734,7 @@ function WorkProfile() {
                     {values?.signature ? (
                       <div className="row col-md-12">
                         <div className="col-md-6">
-                          {console.log("values.signature", values.signature)}
+                          {/* {console.log("values.signature", values.signature)} */}
                           <img
                             alt="myImg"
                             src={

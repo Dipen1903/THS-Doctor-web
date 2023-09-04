@@ -31,12 +31,12 @@ function ChatIndex() {
         (item) =>
           item?.userName?.toLowerCase()?.includes(text?.toLowerCase()) == 1
       );
-      console.log("tempPayoutstempPayouts", tempPayouts);
+      // console.log("tempPayoutstempPayouts", tempPayouts);
       if (tempPayouts?.length) {
         setFilterData(tempPayouts);
       }
 
-      console.log("filterDatafilterDatafilterData", tempPayouts, "----," , filterData);
+      // console.log("filterDatafilterDatafilterData", tempPayouts, "----," , filterData);
       if (!tempPayouts?.length) {
         dispatch(
           setMessage({

@@ -31,6 +31,7 @@ const AudioCall = forwardRef(({ endCall }, ref) => {
   const { room, chatDoc } = ChatSlice;
   const { userProfile } = ProfileSlice;
   async function startBasicCall() {
+    // {console.log("hhhhhhhh")}
     agoraEngine.on("user-published", async (user, mediaType) => {
       // Subscribe to the remote user when the SDK triggers the "user-published" event.
       await agoraEngine.subscribe(user, mediaType);
@@ -49,7 +50,7 @@ const AudioCall = forwardRef(({ endCall }, ref) => {
     });
 
     agoraEngine.on("user-joined", (user) => {
-      console.log("user",user);
+      // console.log("user",user);
       setRemoteUser(user);
     });
   }
@@ -108,7 +109,7 @@ const AudioCall = forwardRef(({ endCall }, ref) => {
     }),
     [room]
   );
-  console.log("roooooooooooooooooo", room);
+  // console.log("roooooooooooooooooo", room);
 
   useEffect(() => {
     startBasicCall();
@@ -130,10 +131,10 @@ const AudioCall = forwardRef(({ endCall }, ref) => {
         gender: room?.gender,
       })
     );
-    console.log("NotifyEnum",userProfile);
-    console.log("room",room);
-    console.log("rtcProps",rtcProps);
-    console.log("chatDoc",chatDoc);
+    // console.log("NotifyEnum",userProfile);
+    // console.log("room",room);
+    // console.log("rtcProps",rtcProps);
+    // console.log("chatDoc",chatDoc);
     return () => { };
   }, []);
   return (

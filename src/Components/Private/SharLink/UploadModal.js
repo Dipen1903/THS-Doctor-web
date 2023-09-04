@@ -32,9 +32,9 @@ const UploadModal = ({ isOpen, onClose }) => {
             const jsonData = XLSX.utils.sheet_to_json(sheet);
 
             // Do something with the jsonData, like displaying it or processing it further
-            console.log('JSON data from Excel:', jsonData);
+            // console.log('JSON data from Excel:', jsonData);
             const contactNumbers = jsonData.map((data) => data['Contact Number']);
-            console.log("contactNumbers", contactNumbers);
+            // console.log("contactNumbers", contactNumbers);
             SetMobilenumber(contactNumbers);
 
             // Set the image source to the otherImg once the file is chosen
@@ -45,7 +45,7 @@ const UploadModal = ({ isOpen, onClose }) => {
         };
         reader.readAsBinaryString(selectedFile);
     };
-    console.log("mobilenumbermobilenumbermobilenumber",);
+    // console.log("mobilenumbermobilenumbermobilenumber",);
     const callApi = async () => {
         try {
             const arr = mobilenumber;

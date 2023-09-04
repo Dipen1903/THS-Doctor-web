@@ -95,9 +95,10 @@ export const GetFirbaseToken = async () => {
       if (permission !== 'granted') {
         console.log("Notification permission denied.");
         return null;
+      }else{
+        console.log("hjhjhjh");
       }
     }
-
     console.log("messaging", messaging);
     const currentToken = await getToken(messaging, {
       vapidKey: "BJbEZL3uHsKTBM6_d-3hR3bepIKfIjLWpFQ1IIs-U33ouIRe0sn4qryjPtzAWQHuLX29M7mLMVF6qwqTVHCuIls",

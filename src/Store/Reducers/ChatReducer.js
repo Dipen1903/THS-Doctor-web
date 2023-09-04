@@ -30,7 +30,7 @@ export const GetSnapShot = createAsyncThunk(
   async (values, { dispatch }) => {
     try {
       const path = `Chat_${values?.doctor_id}_${values?.user_id}_${values?.booking_id}`;
-      console.log("vcxvxv", `Chat_${values?.doctor_id}_${values?.user_id}_${values?.booking_id}`);
+      // console.log("vcxvxv", `Chat_${values?.doctor_id}_${values?.user_id}_${values?.booking_id}`);
       const q = query(collection(FirebaseDB, path), orderBy("dateTime", "asc"));
       let unsubscribe;
       unsubscribe = onSnapshot(q, (querySnapshot) => {
@@ -50,7 +50,7 @@ export const createRoom = createAsyncThunk(
   "createRoom",
   async (values, { getState, dispatch }) => {
     try {
-      console.log("valuesvaluesvalues", values);
+      // console.log("valuesvaluesvalues", values);
       const { ProfileSlice } = getState();
       const { userProfile } = ProfileSlice;
 
@@ -158,7 +158,7 @@ export const SetUpRoom = createAsyncThunk(
       }
     } catch (error) {
       dispatch(setLoading(false));
-      console.log("errrrrr", error);
+      // console.log("errrrrr", error);
       return error;
     }
   }
@@ -199,7 +199,7 @@ export const GetConversations = createAsyncThunk(
     try {
       const { conversations } = getState().ChatSlice;
       if (values?.doctor_id) {
-        console.log("values?.doctor_id", values?.doctor_id);
+        // console.log("values?.doctor_id", values?.doctor_id);
         const path = `Doctors_${values?.doctor_id}`;
         const ref = collection(FirebaseDB, path);
         const q = query(ref, orderBy("lastMessageTime", "desc"));
@@ -208,7 +208,7 @@ export const GetConversations = createAsyncThunk(
         result.forEach((doc) => tempArr.push(doc?.data()));
         onSnapshot(q, (querySnapshot) => {
           querySnapshot.docChanges().forEach((change) => {
-            console.log("change", change);
+            // console.log("change", change);
             if (change.type === "modified") {
               // let tempConversation = [];
 
