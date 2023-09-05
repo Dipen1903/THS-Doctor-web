@@ -41,50 +41,26 @@ function Medicine() {
     }, 500);
     setTimer(newTimer);
   };
+  // Increment the value
+  const handleIncrement = (index, field) => {
+    const updatedMedicines = [...values.medicines];
+    const currentValue = parseInt(updatedMedicines[index][field], 10); // Parse as integer
+    updatedMedicines[index][field] = currentValue + 1;
+    setFieldValue("medicines", updatedMedicines);
+  };
 
-  const [counters, setCounters] = useState([]);
-  useEffect(() => {
-    setCounters(new Array(values?.medicines?.length).fill(1));
-  }, [values?.medicines]);
-  const handleMinusClick = (index) => {
-    const updatedCounters = [...counters];
-    updatedCounters[index] = Math.max(updatedCounters[index] - 1, 0);
-    setCounters(updatedCounters);
+  // Decrement the value
+  const handleDecrement = (index, field) => {
+    const updatedMedicines = [...values.medicines];
+    const currentValue = parseInt(updatedMedicines[index][field], 10); // Parse as integer
+    if (currentValue > 0) {
+      updatedMedicines[index][field] = currentValue - 1;
+      setFieldValue("medicines", updatedMedicines);
+    }
   };
-  const handlePlusClick = (index) => {
-    const updatedCounters = [...counters];
-    updatedCounters[index] = updatedCounters[index] + 1;
-    setCounters(updatedCounters);
-  };
-  const [counters1, setCounters1] = useState([]);
-  useEffect(() => {
-    setCounters1(new Array(values?.medicines?.length).fill(1));
-  }, [values?.medicines]);
-  const handleMinusClick1 = (index) => {
-    const updatedCounterss = [...counters1];
-    updatedCounterss[index] = Math.max(updatedCounterss[index] - 1, 0);
-    setCounters1(updatedCounterss);
-  };
-  const handlePlusClick1 = (index) => {
-    const updatedCounterss = [...counters1];
-    updatedCounterss[index] = updatedCounterss[index] + 1;
-    setCounters1(updatedCounterss);
-  };  
 
-  const [counters2, setCounters2] = useState([]);
-  useEffect(() => {
-    setCounters2(new Array(values?.medicines?.length).fill(1));
-  }, [values?.medicines]);
-  const handleMinusClick2 = (index) => {
-    const updatedCounterse = [...counters2];
-    updatedCounterse[index] = Math.max(updatedCounterse[index] - 1, 0);
-    setCounters2(updatedCounterse);
-  };
-  const handlePlusClick2 = (index) => {
-    const updatedCounterse = [...counters2];
-    updatedCounterse[index] = updatedCounterse[index] + 1;
-    setCounters2(updatedCounterse);
-  };
+
+
   return (
     <>
       <FieldArray
@@ -130,10 +106,10 @@ function Medicine() {
                                   arrayHelpers.push({
                                     medicine_name: data?.name,
                                     medicine_id: data?.id,
-                                    morning: "",
-                                    afternoon: "",
-                                    evening: "",
-                                    night: "",
+                                    morning: 1,
+                                    afternoon: 1,
+                                    evening: 1,
+                                    night: 1,
                                     conditions: "before_food",
                                     days: 1,
                                   });
@@ -184,7 +160,7 @@ function Medicine() {
                   </thead>
                   <tbody>
                     {values?.medicines?.map((item, index) => (
-                      <tr className="prescription_table_body_row" key={index}>
+                      <tr className="prescription_table_body_row">
                         <td className="prescription_table_body_text">
                           <FormControl
                             control="input"
@@ -193,44 +169,98 @@ function Medicine() {
                             name={`medicines[${index}].medicine_name`}
                             id={`medicines[${index}].medicine_name`}
                             value={values?.medicines[index].medicine_name}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
                           />
                         </td>
                         <td className="prescription_table_body_text">
-                          <div style={{ display: "flex", border: "1px solid #ccc", borderRadius: "8px" }}>
-                            <button   type="button" onClick={() => handleMinusClick(index)} style={{ background: "transparent", border: "none" ,color:"#199A8E" }}>-</button>
-                            <input type="text" value={counters[index]} readOnly  onChange={handleChange}
-                              onBlur={handleBlur}
-                              name={`medicines[${index}].morning`}
-                              id={`medicines[${index}].morning`} style={{ border: "none" ,width:"50px"}} />
-                            <button   type="button" onClick={() => handlePlusClick(index)} style={{ background: "transparent", border: "none" ,color:"#199A8E" }}>+</button>
-                          </div>
+                          <td className="prescription_table_body_text">
+                            <div style={{ display: "flex", border: "1px solid #ccc", borderRadius: "8px" }}>
+                              <button
+                                type="button"
+                                onClick={() => handleDecrement(index, "morning")}
+                                style={{ background: "transparent", border: "none", color: "#199A8E" }}
+                              >
+                                -
+                              </button>
+                              <input
+                                type="text"
+                                value={values?.medicines[index].morning}
+                                readOnly
+                                onBlur={handleBlur}
+                                name={`medicines[${index}].morning`}
+                                id={`medicines[${index}].morning`}
+                                style={{ border: "none", width: "50px" }}
+                              />
+                              <button
+                                type="button"
+                                onClick={() => handleIncrement(index, "morning")}
+                                style={{ background: "transparent", border: "none", color: "#199A8E" }}
+                              >
+                                +
+                              </button>
+                            </div>
+                          </td>
+
                         </td>
                         <td className="prescription_table_body_text">
-                          <div style={{ display: "flex", border: "1px solid #ccc", borderRadius: "8px" }}>
-                            <button   type="button" onClick={() => handleMinusClick1(index)} style={{ background: "transparent", border: "none",color:"#199A8E"  }}>-</button>
-                            <input type="text" value={counters1[index]} readOnly style={{ border: "none" ,width:"50px" }}
-                              onChange={handleChange}
-                              onBlur={handleBlur}
-                              name={`medicines[${index}].afternoon`}
-                              id={`medicines[${index}].afternoon`}
-                            />
-                            <button   type="button" onClick={() => handlePlusClick1(index)} style={{ background: "transparent", border: "none",color:"#199A8E"  }}>+</button>
-                          </div>
+                          <td className="prescription_table_body_text">
+                            <div style={{ display: "flex", border: "1px solid #ccc", borderRadius: "8px" }}>
+                              <button
+                                type="button"
+                                onClick={() => handleDecrement(index, "afternoon")}
+                                style={{ background: "transparent", border: "none", color: "#199A8E" }}
+                              >
+                                -
+                              </button>
+                              <input
+                                type="text"
+                                value={values?.medicines[index].afternoon}
+                                readOnly
+                                onBlur={handleBlur}
+                                name={`medicines[${index}].afternoon`}
+                                id={`medicines[${index}].afternoon`}
+                                style={{ border: "none", width: "50px" }}
+                              />
+                              <button
+                                type="button"
+                                onClick={() => handleIncrement(index, "afternoon")}
+                                style={{ background: "transparent", border: "none", color: "#199A8E" }}
+                              >
+                                +
+                              </button>
+                            </div>
+                          </td>
                         </td>
-                      
                         <td className="prescription_table_body_text">
-                          <div style={{ display: "flex", border: "1px solid #ccc", borderRadius: "8px" }}>
-                            <button   type="button" onClick={() => handleMinusClick2(index)} style={{ background: "transparent", border: "none",color:"#199A8E"  }}>-</button>
-                            <input type="text" value={counters2[index]} readOnly style={{ border: "none" ,width:"50px" }}
-                              onChange={handleChange}
-                              onBlur={handleBlur}
-                              name={`medicines[${index}].night`}
-                              id={`medicines[${index}].night`}
-                            />
-                            <button   type="button" onClick={() => handlePlusClick2(index)} style={{ background: "transparent", border: "none" ,color:"#199A8E" }}>+</button>
-                          </div>
+                          <td className="prescription_table_body_text">
+                            <div style={{ display: "flex", border: "1px solid #ccc", borderRadius: "8px" }}>
+                              <button
+                                type="button"
+                                onClick={() => handleDecrement(index, "night")}
+                                style={{ background: "transparent", border: "none", color: "#199A8E" }}
+                              >
+                                -
+                              </button>
+                              <input
+                                type="text"
+                                name={`medicines[${index}].night`}
+                                id={`medicines[${index}].night`}
+                                value={values?.medicines[index].night}
+                                readOnly
+                                onBlur={handleBlur}
+                                style={{ border: "none", width: "50px" }}
+                              />
+                              <button
+                                type="button"
+                                onClick={() => handleIncrement(index, "night")}
+                                style={{ background: "transparent", border: "none", color: "#199A8E" }}
+                              >
+                                +
+                              </button>
+                            </div>
+                          </td>
                         </td>
-                    
                         <td className="prescription_table_body_text">
                           <select
                             className="custom-select"
@@ -254,8 +284,12 @@ function Medicine() {
                             min={1}
                             name={`medicines[${index}].days`}
                             id={`medicines[${index}].days`}
+                            value={values?.medicines[index].days}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
                           />
                         </td>
+
                         <td>
                           <center>
                             <img

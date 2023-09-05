@@ -32,6 +32,9 @@ function Conversation({ roomData }) {
   const { ChatSlice, ProfileSlice, ConsultSlice } = useSelector(
     (state) => state
   );
+  const { isReview, prescDetails, constDetails } = useSelector(
+    ({ ConsultSlice }) => ConsultSlice
+  );
   const navigate = useNavigate();
   const { isDetails, snapShot, chat, room } = ChatSlice;
   const { userProfile } = ProfileSlice;
@@ -50,7 +53,8 @@ function Conversation({ roomData }) {
   useEffect(() => {
     scrollToBottom();
   }, [chat]);
-
+  console.log("chat", chat?.documentType);
+  console.log("prescDetails", prescDetails);
   useEffect(() => {
     // {console.log("location",location)}
     if (location.state) {
@@ -90,6 +94,7 @@ function Conversation({ roomData }) {
 
   // console.log("consultDetailsconsultDetails", consultDetails);
   const [show, setShow] = useState(false);
+  const [markCompleteButtonShown, setMarkCompleteButtonShown] = useState(false);
   // console.log("show", show)
   return room ? (
     <>
@@ -128,26 +133,24 @@ function Conversation({ roomData }) {
                   {!parseInt(room?.userOnlineStatus) ? "Online" : "Offline"}
                 </h5>
               </div>
+
               <div className="col-md-6 chat-head-right">
-                <Button
-                  variant="primary"
-                  className="mark_complete"
-                  // onClick={(e) => {
-                  //   e.preventDefault();
-                  //   dispatch(
-                  //     CompleteConsult({
-                  //       appointment_id: room?.lastBookingId || room?.id,
-                  //     })
-                  //   ).then((res) => {
-                  //     window.location.reload();
-                  //   });
-                  // }}
-                  onClick={() => { setShow(true); console.log("jfgydft") }}
-                >
-                  Mark Complete
-                </Button>
+                {chat.some((val) => val?.documentType === 4) && (
+                  <Button
+                    key="markCompleteButton"
+                    variant="primary"
+                    className="mark_complete"
+                    onClick={() => {
+                      setShow(true);
+                      console.log("jfgydft");
+                    }}
+                  >
+                    Mark Complete
+                  </Button>
+                )}
+
+
                 <div className="d-flex">
-                  {/* {console.log("userProfile",userProfile)} */}
                   <Button
                     className="call_btn"
                     disabled={audiocall || videocall}
@@ -163,7 +166,7 @@ function Conversation({ roomData }) {
                         );
                       });
                     }}
-                    
+
                   >
                     <img alt="myImg" src={Icon.Phone} />
                   </Button>
@@ -179,7 +182,6 @@ function Conversation({ roomData }) {
                   >
                     <img alt="myImg" src={Icon.Video} />
                   </Button>
-
                   <Dropdown>
                     <Dropdown.Toggle
                       id="dropdown-basic"
@@ -288,7 +290,7 @@ function Conversation({ roomData }) {
                           </>
                         )
                     )}
-                  {/* {console.log("chatvc", chat)} */}
+                  {console.log("chatvc", chat)}
                   {chat?.map((item, index) => (
                     <ChatItem
                       key={(item?.sizeOfDocument || 0) + index}
@@ -522,7 +524,7 @@ const ChatItem = ({ type, index, rest }) => {
             >
               <div className="msg_view_box">
                 <div>
-                  <h3 className="sender_name_title">Prescription</h3>
+                  <h3 className="sender_name_subtitle">Prescription</h3>
                   <h5 className="sender_name_subtitle">
                     Appointment : {rest?.imageName}
                   </h5>
