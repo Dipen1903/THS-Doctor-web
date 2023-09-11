@@ -53,7 +53,7 @@ function Conversation({ roomData }) {
   useEffect(() => {
     scrollToBottom();
   }, [chat]);
-  console.log("chat", chat?.documentType);
+  console.log("chat", chat);
   console.log("prescDetails", prescDetails);
   useEffect(() => {
     // {console.log("location",location)}
@@ -135,7 +135,7 @@ function Conversation({ roomData }) {
               </div>
 
               <div className="col-md-6 chat-head-right">
-                {chat.some((val) => val?.documentType === 4) && (
+                {chat.some((val) => val?.documentType == 4) && (
                   <Button
                     key="markCompleteButton"
                     variant="primary"
@@ -374,9 +374,11 @@ const MarkModal = (props) => {
 
 const ChatItem = ({ type, index, rest }) => {
   const dispatch = useDispatch();
+  console.log("restrestrestrest",rest);
   switch (parseInt(type)) {
     case 1: //Image
       return (
+
         <div
           className={`message-row ${rest?.userType === 1 ? "other-message" : "you-message"
             }`}
@@ -388,6 +390,7 @@ const ChatItem = ({ type, index, rest }) => {
                 }`}
             >
               <img alt="myImg" className="msg-image" src={rest?.imageUrl} />
+              {console.log("rest",rest)}
               {rest?.message && (
                 <h3
                   className={`${rest?.userType === 1
@@ -517,6 +520,7 @@ const ChatItem = ({ type, index, rest }) => {
           className={`message-row ${rest?.userType === 1 ? "other-message" : "you-message"
             }`}
         >
+             {console.log("rest",rest)}
           <div className="message-content">
             <div
               className={`${rest?.userType === 1 ? "sender_msg_box" : "client_msg_box"

@@ -110,7 +110,7 @@ console.log("prescriptionData",);
         prescDetails?.doctor_notes?.chef_complaints ||
         consultDetails?.health_problem;
       setPrescriptionData({ ...tempValues });
-    } catch (error) {}
+    } catch (error) {} 
   };
 
   useEffect(() => {

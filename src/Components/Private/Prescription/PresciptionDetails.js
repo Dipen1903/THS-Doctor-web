@@ -17,13 +17,16 @@ const Review = ({ values }) => {
   );
   const send = (e) => {
     try {
+      {console.log("sendddddddddd")}
       e.preventDefault();
       let tempMessage = { ...MessageEnum };
+      {console.log("MessageEnum",MessageEnum)}
       tempMessage.dateTime = Timestamp.now();
       tempMessage.documentType = 4;
       tempMessage.extension = "pdf";
       tempMessage.imageName = prescDetails?.prescription_id;
       tempMessage.imageUrl = prescDetails?.prescription_url;
+      console.log("tempMessage",tempMessage);
       dispatch(SendMessage(tempMessage)).then((res) => {
         dispatch(toggleReview(false));
         navigate(`/chat/${prescDetails?.prescription_id}`);
@@ -240,7 +243,7 @@ const Review = ({ values }) => {
               ) : (
                 <div></div>
               )}
-              {prescDetails?.refer_doctors?.length ? (
+              {/* {prescDetails?.refer_doctors?.length ? (
                 <div>
                   {" "}
                   <span className="text-uppercase">Recommended Doctor</span>
@@ -252,7 +255,7 @@ const Review = ({ values }) => {
                 </div>
               ) : (
                 <></>
-              )}
+              )} */}
             </div>
             <hr />
           </>

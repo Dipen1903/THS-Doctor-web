@@ -19,6 +19,8 @@ import { Link } from "react-router-dom";
 function PastConsultation({ pastConsults = [] }) {
   const dispatch = useDispatch();
   const [show, hide] = useState(false);
+  console.log("pastConsults",pastConsults);
+
   const columns = [
     {
       Header: "Appointment ID",

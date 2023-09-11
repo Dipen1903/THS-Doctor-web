@@ -264,6 +264,7 @@ export const SendMessage = createAsyncThunk(
           unreadMessageOfUser: parseInt(room?.unreadMessageOfUser || 0) + 1,
         })
       );
+      console.log("docRef",docRef);
       return docRef;
     } catch (error) {
       dispatch(setLoading(false));

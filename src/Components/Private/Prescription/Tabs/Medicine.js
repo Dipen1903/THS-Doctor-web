@@ -106,10 +106,10 @@ function Medicine() {
                                   arrayHelpers.push({
                                     medicine_name: data?.name,
                                     medicine_id: data?.id,
-                                    morning: 1,
-                                    afternoon: 1,
-                                    evening: 1,
-                                    night: 1,
+                                    morning: 0,
+                                    afternoon: 0,
+                                    evening: 0,
+                                    night: 0,
                                     conditions: "before_food",
                                     days: 1,
                                   });
@@ -287,8 +287,10 @@ function Medicine() {
                             value={values?.medicines[index].days}
                             onChange={handleChange}
                             onBlur={handleBlur}
+                            style={{ width: '80px' }} // Set the width to 200 pixels
                           />
                         </td>
+
 
                         <td>
                           <center>

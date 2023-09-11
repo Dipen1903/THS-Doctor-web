@@ -1715,7 +1715,7 @@ form {
 }
 
 .input_box {
-  border: 1px solid #ede8e9;
+  /* border: 1px solid #ede8e9; */
   height: 48px;
   padding: 0px 0 0 0px;
   border-radius: 10px;
@@ -5272,15 +5272,15 @@ privacypolicy-paragraph::-webkit-scrollbar {
   font-size: 15px;
   line-height: 40px;
   color: #1e1f20;
-  padding-left: 20px !important;
+  /* padding-left: 20px !important; */
 }
 
 .prescription_table_body_text input {
   height: 38px;
   background: #ffffff;
   border: 1px solid #eceff4;
-  border-radius: 8px;
-  padding: 5px !important;
+  border-radius: 10px;
+  /* padding: 5px !important; */
 }
 
 .prescription_table_bottom_card {
