@@ -377,8 +377,8 @@ const ChatItem = ({ type, index, rest }) => {
   console.log("restrestrestrest",rest);
   switch (parseInt(type)) {
     case 1: //Image
+    {console.log("1111111111111");}
       return (
-
         <div
           className={`message-row ${rest?.userType === 1 ? "other-message" : "you-message"
             }`}
@@ -415,6 +415,7 @@ const ChatItem = ({ type, index, rest }) => {
         </div>
       );
     case 2: //Video
+    {console.log("2222222222222");}
       return (
         <div
           className={`message-row ${rest?.userType === 1 ? "other-message" : "you-message"
@@ -459,6 +460,7 @@ const ChatItem = ({ type, index, rest }) => {
         </div>
       );
     case 3: //Document
+    console.log("333333333");
       return (
         <div
           className={`message-row ${rest?.userType === 1 ? "other-message" : "you-message"
@@ -515,6 +517,7 @@ const ChatItem = ({ type, index, rest }) => {
         </div>
       );
     case 4: //Prescription
+    {console.log("hhhhh")}
       return (
         <div
           className={`message-row ${rest?.userType === 1 ? "other-message" : "you-message"
