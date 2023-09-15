@@ -8,6 +8,7 @@ import { SendMessage } from "../../../Store/Reducers/ChatReducer";
 import { toggleReview } from "../../../Store/Reducers/ConsultationsReducer";
 import { MessageEnum } from "../../../Utilities/Enums";
 import { Logo } from "../../../Utilities/Icons";
+import { addDoc, collection } from 'firebase/firestore';
 const Review = ({ values }) => {
   const dispatch = useDispatch();
   const location = useLocation();
@@ -15,24 +16,34 @@ const Review = ({ values }) => {
   const { isReview, prescDetails, consultDetails } = useSelector(
     ({ ConsultSlice }) => ConsultSlice
   );
-  const send = (e) => {
+  const send = async (e) => {
+    e.preventDefault();
+  
     try {
-      {console.log("sendddddddddd")}
-      e.preventDefault();
       let tempMessage = { ...MessageEnum };
-      {console.log("MessageEnum",MessageEnum)}
+      console.log("MessageEnum", MessageEnum);
       tempMessage.dateTime = Timestamp.now();
       tempMessage.documentType = 4;
       tempMessage.extension = "pdf";
       tempMessage.imageName = prescDetails?.prescription_id;
-      tempMessage.imageUrl = prescDetails?.prescription_url;
-      console.log("tempMessage",tempMessage);
-      dispatch(SendMessage(tempMessage)).then((res) => {
-        dispatch(toggleReview(false));
-        navigate(`/chat/${prescDetails?.prescription_id}`);
-      });
-    } catch (error) {}
+      tempMessage.imageUrl = prescDetails?.prescription_url || ""; // Use an empty string if it's undefined
+  
+      console.log("tempMessage", tempMessage);
+  
+      // Dispatch the SendMessage action and wait for it to complete
+      const docRef = await dispatch(SendMessage(tempMessage));
+  
+      // Handle the result after the message is sent
+      console.log("docRefdocRefdocRefdocRef", docRef);
+  
+      // Dispatch other actions as needed
+      dispatch(toggleReview(false));
+      navigate(`/chat/${prescDetails?.prescription_id}`);
+    } catch (error) {
+      console.error("Error sending message:", error);
+    }
   };
+  
   useEffect(() => {}, [prescDetails]);
   return (
     <Modal

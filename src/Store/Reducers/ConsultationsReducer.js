@@ -308,7 +308,6 @@ export const ConsultSlice = createSlice({
       state.isCancel = action.payload;
     },
     toggleReview: (state, action) => {
-      console.log("action.payload",action.payload);
       state.isReview = action.payload;
     },
     toggleCancelAll: (state, action) => {

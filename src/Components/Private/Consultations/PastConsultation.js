@@ -180,6 +180,7 @@ export const ConsultDetails = (props) => {
         {consultDetails?.status !== 3 && (
           <>
             <div className="appoinment_input">
+              {console.log("consultDetails",consultDetails)}
               <p className="left_text">Prescription</p>{" "}
               <p className="right-text">
                 <button

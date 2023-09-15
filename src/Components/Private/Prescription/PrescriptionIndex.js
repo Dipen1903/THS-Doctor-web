@@ -271,7 +271,7 @@ const Footer = ({ values, mapProps, setActiveKey }) => {
         </div>
         <div className="col-md-4 mr_10">
           <h5 className="prescription_result_text">
-            {values?.medicines?.length}{" "}
+            {values?.lab_test?.length}{" "}
             <span className="result_declared_text">Lab Tests</span>
           </h5>
         </div>

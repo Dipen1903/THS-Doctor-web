@@ -460,7 +460,7 @@ const ChatItem = ({ type, index, rest }) => {
         </div>
       );
     case 3: //Document
-    console.log("333333333");
+    console.log("333333333" , rest);
       return (
         <div
           className={`message-row ${rest?.userType === 1 ? "other-message" : "you-message"
@@ -517,7 +517,7 @@ const ChatItem = ({ type, index, rest }) => {
         </div>
       );
     case 4: //Prescription
-    {console.log("hhhhh")}
+    {console.log("hhhhh" , rest)}
       return (
         <div
           className={`message-row ${rest?.userType === 1 ? "other-message" : "you-message"
