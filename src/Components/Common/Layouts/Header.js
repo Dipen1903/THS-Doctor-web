@@ -42,7 +42,7 @@ function Header() {
         <img alt="myImg" src={Logo.THS_SHORT} className="logo ml_10"></img>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse
-          className="d-flex justify-content-between"
+          className="justify-content-between"
           style={{ margin: "0px 100px" }}
           id="navbarScroll"
         >
@@ -72,7 +72,7 @@ function Header() {
               &nbsp;&nbsp;&nbsp;Chats
             </NavLink>
           </Nav>
-          <div className="d-flex justify-content-between align-items-center">
+          <div className="d-flex  align-items-center">
             <label className="switch">
               <input
                 type="checkbox"

@@ -21,6 +21,9 @@ import {
 import { useTimer } from "../../../Utilities/Hooks";
 import { padLeadingZeros } from "../../../Utilities/Functions";
 import { useField } from "formik";
+import { Logo } from "../../../Utilities/Icons";
+import image from '../../../Assets/json/THS Banner 2_1170 x 2532_23 Dec.png'
+import { useState } from "react";
 export default function SignUpComponent() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -29,7 +32,24 @@ export default function SignUpComponent() {
   );
 
   useEffect(() => {
-    return () => {};
+    return () => { };
+  }, []);
+  const [showCarousel, setShowCarousel] = useState(true);
+
+  // Function to check screen width and update showCarousel state
+  const checkScreenWidth = () => {
+    setShowCarousel(window.innerWidth <= 600); // Adjust the threshold as needed
+  };
+
+  // Use an effect to run the initial check and add a resize event listener
+  useEffect(() => {
+    checkScreenWidth();
+    window.addEventListener("resize", checkScreenWidth);
+
+    // Clean up the event listener when the component unmounts
+    return () => {
+      window.removeEventListener("resize", checkScreenWidth);
+    };
   }, []);
   return (
     <>
@@ -47,6 +67,17 @@ export default function SignUpComponent() {
               <div className="row">
                 <div className="col-md-12">
                   <div className="login_box">
+                    {
+                      showCarousel &&
+                      <>
+                        <center>
+                          <img alt="myImg" src={Logo.THS_Title} className="logo_box" />
+                        </center>
+                        <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                          <img src={image} style={{ height: "35vh", width: "80%", borderRadius: "10px" ,marginBottom:"15px"}} alt="Your Image" />
+                        </div>
+                      </>
+                    }
                     <h3 className="logo_title">THS Doctor’s Sign Up</h3>
                     <h5 className="welcome_title">Welcome back to THS!</h5>
                     <div className="signin_box">
@@ -75,7 +106,7 @@ export default function SignUpComponent() {
                                   value={values.first_name}
                                   maxLength="32"
                                 />
-                          
+
                               </div>
                               <div className="col-md-6 mt_20">
                                 <FormControl
@@ -104,7 +135,7 @@ export default function SignUpComponent() {
                                   onChange={handleChange}
                                   onBlur={handleBlur}
                                   value={values.mobile_number}
-                                  
+
                                 />
                               </div>
                               <div className="col-md-12 mt_20">
@@ -174,7 +205,7 @@ export default function SignUpComponent() {
                           </h3>
                         </div>
                       </div>
-                      <div className="row mt_50">
+                      <div className="row">
                         <div className="col-md-12">
                           <center>
                             <h3 className="dont_have_account">

@@ -135,22 +135,20 @@ function Conversation({ roomData }) {
               </div>
 
               <div className="col-md-6 chat-head-right">
-                {chat.some((val) => val?.documentType == 4) && (
-                  <Button
-                    key="markCompleteButton"
-                    variant="primary"
-                    className="mark_complete"
-                    onClick={() => {
-                      setShow(true);
-                      console.log("jfgydft");
-                    }}
-                  >
-                    Mark Complete
-                  </Button>
-                )}
-
-
                 <div className="d-flex">
+                  {chat.some((val) => val?.documentType == 4) && (
+                    <Button
+                      key="markCompleteButton"
+                      variant="primary"
+                      className="mark_complete"
+                      onClick={() => {
+                        setShow(true);
+                        console.log("jfgydft");
+                      }}
+                    >
+                      Mark Complete
+                    </Button>
+                  )}
                   <Button
                     className="call_btn"
                     disabled={audiocall || videocall}
@@ -374,10 +372,10 @@ const MarkModal = (props) => {
 
 const ChatItem = ({ type, index, rest }) => {
   const dispatch = useDispatch();
-  console.log("restrestrestrest",rest);
+  console.log("restrestrestrest", rest);
   switch (parseInt(type)) {
     case 1: //Image
-    {console.log("1111111111111");}
+      { console.log("1111111111111"); }
       return (
         <div
           className={`message-row ${rest?.userType === 1 ? "other-message" : "you-message"
@@ -390,7 +388,7 @@ const ChatItem = ({ type, index, rest }) => {
                 }`}
             >
               <img alt="myImg" className="msg-image" src={rest?.imageUrl} />
-              {console.log("rest",rest)}
+              {console.log("rest", rest)}
               {rest?.message && (
                 <h3
                   className={`${rest?.userType === 1
@@ -415,7 +413,7 @@ const ChatItem = ({ type, index, rest }) => {
         </div>
       );
     case 2: //Video
-    {console.log("2222222222222");}
+      { console.log("2222222222222"); }
       return (
         <div
           className={`message-row ${rest?.userType === 1 ? "other-message" : "you-message"
@@ -460,7 +458,7 @@ const ChatItem = ({ type, index, rest }) => {
         </div>
       );
     case 3: //Document
-    console.log("333333333" , rest);
+      console.log("333333333", rest);
       return (
         <div
           className={`message-row ${rest?.userType === 1 ? "other-message" : "you-message"
@@ -517,13 +515,13 @@ const ChatItem = ({ type, index, rest }) => {
         </div>
       );
     case 4: //Prescription
-    {console.log("hhhhh" , rest)}
+      { console.log("hhhhh", rest) }
       return (
         <div
           className={`message-row ${rest?.userType === 1 ? "other-message" : "you-message"
             }`}
         >
-             {console.log("rest",rest)}
+          {console.log("rest", rest)}
           <div className="message-content">
             <div
               className={`${rest?.userType === 1 ? "sender_msg_box" : "client_msg_box"

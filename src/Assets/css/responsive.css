@@ -1,7 +1,10 @@
 /*-------------------------------------------Mobile Media Query Start-----------------------------------------------------------------*/
-@media only screen and (min-width: 320px) and (max-width: 374px) {
+@media only screen and (min-width: 250px) and (max-width: 374px) {
   .privacy_policy_content h6 {
     margin-left: 10px;
+  }
+  .content__footer{
+    flex-direction: column;
   }
   .sub_section_1 {
     background: #fff;
@@ -450,8 +453,10 @@
     margin-left: -2px;
   }
   .cards-layout {
-    display: grid;
-    flex-direction: row;
+    /* display: grid;
+    flex-direction: row; */
+    display: flex;
+    flex-wrap: wrap;
     gap: 35px;
     border: none;
     font-family: "Mulish", sans-serif;
@@ -664,8 +669,11 @@
   }
   .content__footer {
     padding-top: 10px;
-    padding-left: 10px;
+    /* padding-left: 10px; */
   }
+  /* .dashboard{
+    padding: 0px 10px!important;
+  } */
   .work_profile_certificate {
     background: #f0f0f0;
     border-radius: 8px;
@@ -1166,8 +1174,10 @@
     margin-left: -2px;
   }
   .cards-layout {
-    display: grid;
-    flex-direction: row;
+    /* display: grid;
+    flex-direction: row; */
+    display: flex;
+    flex-wrap: wrap;
     gap: 35px;
     border: none;
     font-family: "Mulish", sans-serif;
@@ -1859,8 +1869,9 @@
     margin-left: -2px;
   }
   .cards-layout {
-    display: grid;
-    flex-direction: row;
+    display: flex;
+    flex-wrap: wrap;
+    /* flex-direction: row; */
     gap: 35px;
     border: none;
     font-family: "Mulish", sans-serif;
@@ -2546,8 +2557,10 @@
     margin-left: -2px;
   }
   .cards-layout {
-    display: grid;
-    flex-direction: row;
+    /* display: grid;
+    flex-direction: row; */
+    display: flex;
+    flex-wrap: wrap;
     gap: 35px;
     border: none;
     font-family: "Mulish", sans-serif;
@@ -3245,8 +3258,10 @@
     margin-left: -2px;
   }
   .cards-layout {
-    display: grid;
-    flex-direction: row;
+    /* display: grid;
+    flex-direction: row; */
+    display: flex;
+    flex-wrap: wrap;
     gap: 35px;
     border: none;
     font-family: "Mulish", sans-serif;
@@ -3527,7 +3542,7 @@
 
 @media (max-width: 767px) {
   .dashboard {
-    padding: 0px 30px !important;
+    padding: 0px 20px !important;
   }
 
   .admin-bottom-content img {
@@ -3971,8 +3986,10 @@
     margin-left: -2px;
   }
   .cards-layout {
-    display: grid;
-    flex-direction: row;
+    /* display: grid;
+    flex-direction: row; */
+    display: flex;
+    flex-wrap: wrap;
     gap: 35px;
     border: none;
     font-family: "Mulish", sans-serif;
@@ -4804,8 +4821,10 @@
     margin-left: -2px;
   }
   .cards-layout {
-    display: grid;
-    flex-direction: row;
+    /* display: grid;
+    flex-direction: row; */
+    display: flex;
+    flex-wrap: wrap;
     gap: 35px;
     border: none;
     font-family: "Mulish", sans-serif;
@@ -5855,10 +5874,10 @@
   }
   .slider_text {
     font-family: Mulish;
-    font-weight: 800;
-    font-size: 22px;
+    /* font-weight: 800; */
+    font-size: 20px;
     color: #1e1f20;
-    line-height: 36px;
+    /* line-height: 36px; */
   }
   .attach_certificate {
     font-family: "Mulish";
@@ -6612,7 +6631,7 @@
 }
 @media only screen and (min-width: 1601px) and (max-width: 1919px) {
   .login_box {
-    padding: 113px 70px;
+    padding: 100px 70px;
   }
   .basic_info_box {
     padding: 75px 70px !important;
@@ -6748,6 +6767,8 @@
     padding: 75px 115px !important;
   }
 }
+
+
 @media only screen and (max-width: 606px) {
   .firstpayment {
    flex-direction: column;

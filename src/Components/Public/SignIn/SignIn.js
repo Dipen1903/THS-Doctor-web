@@ -36,7 +36,8 @@ import OTPInput from "../../Common/Layouts/OTPInput/OTPInput";
 import { padLeadingZeros } from "../../../Utilities/Functions";
 import { useTimer } from "../../../Utilities/Hooks";
 import { BackGround } from "../../../Utilities/Icons";
-
+import {  Logo } from "../../../Utilities/Icons";
+import image from '../../../Assets/json/THS Banner 2_1170 x 2532_23 Dec.png'
 function SignInComponent() {
   const { otpModal, forgotModal, successModal } = useSelector(
     ({ AuthSlice }) => AuthSlice
@@ -44,6 +45,23 @@ function SignInComponent() {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [showCarousel, setShowCarousel] = useState(true);
+
+  // Function to check screen width and update showCarousel state
+  const checkScreenWidth = () => {
+    setShowCarousel(window.innerWidth <= 600); // Adjust the threshold as needed
+  };
+
+  // Use an effect to run the initial check and add a resize event listener
+  useEffect(() => {
+    checkScreenWidth();
+    window.addEventListener("resize", checkScreenWidth);
+
+    // Clean up the event listener when the component unmounts
+    return () => {
+      window.removeEventListener("resize", checkScreenWidth);
+    };
+  }, []);
 
   return (
     <>
@@ -55,8 +73,19 @@ function SignInComponent() {
                 <div className="col-md-12">
                   <div className="login_box">
                     <div className="login-card">
-                    <h3 className="logo_title">THS Doctor’s Sign In</h3>
-                    <h5 className="welcome_title">Welcome back to THS!</h5>
+                    {
+                      showCarousel &&
+                      <>
+                        <center>
+                          <img alt="myImg" src={Logo.THS_Title} className="logo_box" />
+                        </center>
+                        <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                          <img src={image} style={{ height: "35vh", width: "80%", borderRadius: "10px" ,marginBottom:"15px"}} alt="Your Image" />
+                        </div>
+                      </>
+                    }
+                      <h3 className="logo_title" style={{paddingTop:"20%"}}>THS Doctor’s Sign In</h3>
+                      <h5 className="welcome_title">Welcome back to THS!</h5>
                     </div>
                     <div className="signin_box">
                       <Formik
@@ -137,7 +166,7 @@ function SignInComponent() {
 
                               <a
                                 href="#!"
-                                className="forgot_password"
+                                className="login_with_otp"
                                 onClick={(e) => {
                                   e.preventDefault();
                                   dispatch(toggleForgotModal(true));
@@ -192,7 +221,7 @@ const OTPLogin = (props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   useEffect(() => {
-    return () => {};
+    return () => { };
   }, []);
 
   return (
@@ -448,7 +477,7 @@ const OTPForgot = (props) => {
   };
 
   useEffect(() => {
-    return () => {};
+    return () => { };
   }, []);
 
   return (

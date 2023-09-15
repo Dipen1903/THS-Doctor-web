@@ -39,7 +39,7 @@ function RootRoute() {
         path=""
         index
         element={
-          <PublicRoutes>
+          <PublicRoutes >
             <SignIn />
           </PublicRoutes>
         }

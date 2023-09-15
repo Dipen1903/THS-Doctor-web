@@ -18,14 +18,21 @@ function PublicRoutes({ children }) {
       });
     }
 
-    return () => {};
+    return () => { };
   }, []);
+
+  
 
   return (
     <div className="section_1_bg">
-      <div className="section_1_container section_1_container2">
-        <SideBanner />
-        {children}
+      <div className="section_1_container" >
+        <div>
+          <SideBanner />
+        </div>
+        <div>
+          {children}
+        </div>
+
       </div>
     </div>
   );
