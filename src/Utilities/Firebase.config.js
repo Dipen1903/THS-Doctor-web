@@ -79,7 +79,7 @@ if ("serviceWorker" in navigator) {
   navigator.serviceWorker
     .register("/doctor/firebase-messaging-sw.js") // Adjust the path as needed
     .then((registration) => {
-      console.log("Service worker registered for messaging.");
+
     }) 
     .catch((error) => {
       console.error("Service worker registration failed:", error);
@@ -93,22 +93,22 @@ export const GetFirbaseToken = async () => {
     if (Notification.permission === 'default') {
       const permission = await Notification.requestPermission();
       if (permission !== 'granted') {
-        console.log("Notification permission denied.");
+     
         return null;
       }else{
-        console.log("hjhjhjh");
+   
       }
     }
-    console.log("messaging", messaging);
+  
     const currentToken = await getToken(messaging, {
       vapidKey: "BJbEZL3uHsKTBM6_d-3hR3bepIKfIjLWpFQ1IIs-U33ouIRe0sn4qryjPtzAWQHuLX29M7mLMVF6qwqTVHCuIls",
     });
-    console.log(" ", currentToken);
+   
 
     if (currentToken) {
       return currentToken;
     } else {
-      console.log("Failed to generate the app registration token.");
+     
       return null;
     }
   } catch (error) {
@@ -119,7 +119,7 @@ export const GetFirbaseToken = async () => {
 export const onMessageListener = () =>
   new Promise((resolve) => {
     onMessage(messaging, (payload) => {
-      console.log("payloda", payload);
+     
       resolve(payload);
     });
   });

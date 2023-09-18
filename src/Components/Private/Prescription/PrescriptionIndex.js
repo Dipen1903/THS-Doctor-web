@@ -67,7 +67,7 @@ function PrescriptionIndex() {
   const [prescriptionData, setPrescriptionData] = useState({
     ...PrescriptionEnum,
   });
-console.log("prescriptionData",);
+
   const PrescriptionSchema = Yup.object({
     doctor_notes: Yup.object().shape({
       chef_complaints: Yup.string().required("Please Enter Chef complaints"),

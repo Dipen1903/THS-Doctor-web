@@ -21,20 +21,19 @@ const Review = ({ values }) => {
   
     try {
       let tempMessage = { ...MessageEnum };
-      console.log("MessageEnum", MessageEnum);
+  
       tempMessage.dateTime = Timestamp.now();
       tempMessage.documentType = 4;
       tempMessage.extension = "pdf";
       tempMessage.imageName = prescDetails?.prescription_id;
       tempMessage.imageUrl = prescDetails?.prescription_url || ""; // Use an empty string if it's undefined
   
-      console.log("tempMessage", tempMessage);
+      
   
       // Dispatch the SendMessage action and wait for it to complete
       const docRef = await dispatch(SendMessage(tempMessage));
   
       // Handle the result after the message is sent
-      console.log("docRefdocRefdocRefdocRef", docRef);
   
       // Dispatch other actions as needed
       dispatch(toggleReview(false));

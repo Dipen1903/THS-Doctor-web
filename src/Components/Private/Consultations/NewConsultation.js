@@ -123,7 +123,7 @@ function NewConsultation({ upcomingConsults = [] }) {
         return (
           <>
             <Link to={`/chat/${original?.id}`}>
-              <img src={Icon.Chat} alt="Avatar" className="chat-icon" onClick={console.log("gxhuytu")}/>
+              <img src={Icon.Chat} alt="Avatar" className="chat-icon" />
             </Link>
             </>
         );

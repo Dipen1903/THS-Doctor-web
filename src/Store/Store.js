@@ -11,6 +11,7 @@ import ChatSlice from "./Reducers/ChatReducer";
 import CallingSlice from "./Reducers/CallingReducer";
 import LabtestSlice from "./Reducers/LabtestSlice";
 import RadiologySlice from "./Reducers/RadiologySlice";
+import callReducer from './Reducers/callReducer';
 export const store = configureStore({
   reducer: {
     AuthSlice: AuthSlice,
@@ -24,6 +25,7 @@ export const store = configureStore({
     CallingSlice: CallingSlice,
     LabtestSlice: LabtestSlice,
     RadiologySlice: RadiologySlice,
+    call: callReducer, 
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

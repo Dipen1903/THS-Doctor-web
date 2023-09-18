@@ -371,7 +371,7 @@ export const DoctorFees = createAsyncThunk(
     try {
       // dispatch(setLoading(true));
       const result = await DoctorFee(values);
-      console.log("result", result);
+    
       return result?.data;
 
     } catch (error) {
@@ -386,7 +386,7 @@ export const DoctorFeesUpdate = createAsyncThunk(
     try {
       // dispatch(setLoading(true));
       const result = await DoctorFeeUpdate(values);
-      console.log("result", result);
+   
       return result?.data;
 
     } catch (error) {
@@ -401,7 +401,7 @@ export const DoctorLinks = createAsyncThunk(
     try {
       // dispatch(setLoading(true));
       const result = await DoctorLink({ consultation_type: values });
-      console.log("result", result);
+    
       return result?.data;
 
     } catch (error) {
@@ -416,7 +416,7 @@ export const DoctorFetachNumbers = createAsyncThunk(
     try {
       // dispatch(setLoading(true));
       const result = await DoctorFetachNumber(values);
-      console.log("result", result);
+      
       return result?.data;
 
     } catch (error) {

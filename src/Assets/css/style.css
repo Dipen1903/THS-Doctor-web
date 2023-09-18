@@ -1657,7 +1657,7 @@ form {
 }
 
 .logo_box {
-  padding: 50px 80px;
+  padding: 50px 20px;
 }
 
 .slider_1 {
@@ -3024,7 +3024,7 @@ input:checked+.slider:before {
   line-height: 20px;
   color: #1e1f20;
   margin-right: 4px;
-  max-width: 10px!important;
+  max-width: 10px !important;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -7673,21 +7673,30 @@ input[type="password"] {
   object-fit: cover;
   /* This ensures the image covers the entire height */
 }
+
 @media only screen and (min-width: 600px) and (max-width:900px) {
-  .login_box{
-    padding: 80px 8px!important;
+  .login_box {
+    padding: 80px 8px !important;
+
   }
-  .slider_1{
+
+  .slider_1 {
     padding: 10px 0px 10px 0px;
   }
-  .signin_box{
+
+  .signin_box {
     padding: 0px;
   }
-  .display_t{
+
+  .display_t {
     margin: 0px 20px 0px 20px;
   }
-  .logo_title{
+
+  .logo_title {
     padding-top: 50px;
+  }
+  .logo_box{
+    width: 300px!important;
   }
 }
 
@@ -7699,39 +7708,51 @@ input[type="password"] {
   .slider_1 {
     padding: 10px 50px 10px 10px !important;
   }
-.logo_title{
-  text-align: center;
-}
-.welcome_title{
-  text-align: center;
-}
-  .owl-carousel{
-    display: flex!important;
-    flex-direction: column!important;
-    justify-content: center!important;
+
+  .logo_title {
+    text-align: center;
   }
-  .carousel-image{
-    width: 958px!important;
+
+  .welcome_title {
+    text-align: center;
   }
+
+  .owl-carousel {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+  }
+
+  .carousel-image {
+    width: 958px !important;
+  }
+
   .owl_banner_img_box {
-    width: 100%!important;
- 
+    width: 100% !important;
+
   }
-  .logo_title{
+
+  .logo_title {
     padding-top: 10px;
   }
-  .login_box{
-    padding: 40px 8px!important;
+
+  .login_box {
+    padding: 40px 8px !important;
+   
   }
-  .logo_box{
-padding: 50px 10px !important;
+
+  .logo_box {
+    padding: 50px 10px !important;
+    width: 250px!important;
+  
   }
-  .carousel-image{
+
+  .carousel-image {
     display: flex;
     align-items: center;
     justify-content: center;
   }
-  
+
 }
 
 /* @media only screen and (min-width:300px) and (max-width:830px) {

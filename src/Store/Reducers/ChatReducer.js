@@ -180,7 +180,7 @@ export const UpdateRoom = createAsyncThunk(
         where("lastBookingId", "==", `${room?.lastBookingId || room?.id}`)
       );
       const result = await getDocs(q);
-      console.log("result", result);
+
       if (!result?.empty) {
         roomRef = result?.docs[0].ref;
         return await setDoc(roomRef, values, { merge: true });
@@ -219,7 +219,7 @@ export const GetConversations = createAsyncThunk(
               //   tempConversation = [...conversations];
               // }
               let temp = change.doc.data();
-              console.log("temp", temp);
+            
               dispatch(updateConversation(temp));
               // let index = tempConversation?.findIndex(
               //   (item) =>
@@ -253,11 +253,11 @@ export const SendMessage = createAsyncThunk(
       let user_id = room?.user_id || room?.userId;
       let booking_id = room?.lastBookingId || room?.id;
       const path = `Chat_${userProfile?.id}_${user_id}_${booking_id}`;
-      console.log("path", path);
+  
       const collectionRef = collection(FirebaseDB, path);
       { console.log(collectionRef, values, "collectionRef") }
       const docRef = await addDoc(collectionRef, values);
-      console.log("docRefdocRefdocRefdocRef",docRef);
+      
       dispatch(
         UpdateRoom({
           lastMessage:

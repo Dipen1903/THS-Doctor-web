@@ -53,8 +53,6 @@ function Conversation({ roomData }) {
   useEffect(() => {
     scrollToBottom();
   }, [chat]);
-  console.log("chat", chat);
-  console.log("prescDetails", prescDetails);
   useEffect(() => {
     // {console.log("location",location)}
     if (location.state) {
@@ -143,7 +141,7 @@ function Conversation({ roomData }) {
                       className="mark_complete"
                       onClick={() => {
                         setShow(true);
-                        console.log("jfgydft");
+                    
                       }}
                     >
                       Mark Complete
@@ -156,12 +154,12 @@ function Conversation({ roomData }) {
                       dispatch(UpdateRoom({ isCallingStatus: 1 })).then((res) => {
                         setAudiocall(true);
                         audioRef?.current?.join();
-                        dispatch(
-                          GetToken({
-                            user_id: userProfile?.id,
-                            channel_name: `Channel_${userProfile?.id}_${room?.userId}`,
-                          })
-                        );
+                        // dispatch(
+                        //   GetToken({
+                        //     user_id: userProfile?.id,
+                        //     channel_name: `Channel_${userProfile?.id}_${room?.userId}`,
+                        //   })
+                        // );
                       });
                     }}
 
@@ -174,7 +172,6 @@ function Conversation({ roomData }) {
                     onClick={() => {
                       dispatch(UpdateRoom({ isCallingStatus: 1 })).then((res) => {
                         setVideocall(true);
-
                       });
                     }}
                   >
@@ -288,7 +285,7 @@ function Conversation({ roomData }) {
                           </>
                         )
                     )}
-                  {console.log("chatvc", chat)}
+               
                   {chat?.map((item, index) => (
                     <ChatItem
                       key={(item?.sizeOfDocument || 0) + index}
@@ -372,10 +369,10 @@ const MarkModal = (props) => {
 
 const ChatItem = ({ type, index, rest }) => {
   const dispatch = useDispatch();
-  console.log("restrestrestrest", rest);
+
   switch (parseInt(type)) {
     case 1: //Image
-      { console.log("1111111111111"); }
+
       return (
         <div
           className={`message-row ${rest?.userType === 1 ? "other-message" : "you-message"
@@ -388,7 +385,7 @@ const ChatItem = ({ type, index, rest }) => {
                 }`}
             >
               <img alt="myImg" className="msg-image" src={rest?.imageUrl} />
-              {console.log("rest", rest)}
+       
               {rest?.message && (
                 <h3
                   className={`${rest?.userType === 1
@@ -413,7 +410,7 @@ const ChatItem = ({ type, index, rest }) => {
         </div>
       );
     case 2: //Video
-      { console.log("2222222222222"); }
+  
       return (
         <div
           className={`message-row ${rest?.userType === 1 ? "other-message" : "you-message"
@@ -458,7 +455,6 @@ const ChatItem = ({ type, index, rest }) => {
         </div>
       );
     case 3: //Document
-      console.log("333333333", rest);
       return (
         <div
           className={`message-row ${rest?.userType === 1 ? "other-message" : "you-message"
@@ -515,13 +511,13 @@ const ChatItem = ({ type, index, rest }) => {
         </div>
       );
     case 4: //Prescription
-      { console.log("hhhhh", rest) }
+
       return (
         <div
           className={`message-row ${rest?.userType === 1 ? "other-message" : "you-message"
             }`}
         >
-          {console.log("rest", rest)}
+     
           <div className="message-content">
             <div
               className={`${rest?.userType === 1 ? "sender_msg_box" : "client_msg_box"

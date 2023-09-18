@@ -26,7 +26,6 @@ function UserDetails() {
 
     return () => {};
   }, [chat]);
-  // console.log("room>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>",room);
 
   return isDetails ? (
     <div className="col-md-3 padding_left_0">

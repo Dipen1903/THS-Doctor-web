@@ -53,9 +53,8 @@ function App() {
 
       dispatch(setMessage(messageBody));
     })
-    .catch((err) => console.log("failed: ", err));
+    .catch((err) => console.log("", err));
     // useEffect(() => {
-    //   console.log("jj");
     //   LocalServiceWorkerRegister();
     // },[])
   return (

@@ -33,7 +33,7 @@ export const GetNewConsults = createAsyncThunk(
     try {
       dispatch(setLoading(true));
       const result = await NewConsultAPI(values);
-      console.log("result",result?.data);
+
       if (result?.success) {
         dispatch(setLoading(false));
         return result?.data;
@@ -95,7 +95,7 @@ export const GetConsultDetails = createAsyncThunk(
       //   throw result;
       // }
     } catch (error) {
-      console.log("e333333333333333", error);
+
       dispatch(setLoading(false));
       // dispatch(
       //   setMessage({
