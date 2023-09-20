@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@firebase/messaging": "^0.12.4",
+    "@mui/core": "^5.0.0-alpha.54",
     "@pathofdev/react-tag-input": "^1.0.7",
     "@reduxjs/toolkit": "^1.8.3",
     "@testing-library/jest-dom": "^5.16.4",

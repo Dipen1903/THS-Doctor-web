@@ -1,0 +1,58 @@
+/* Toggle.css */
+
+.main_toggle_div {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+  }
+  
+  .toggle-switch {
+    position: relative;
+    width: 40px;
+    height: 20px;
+    margin-right: 10px;
+    margin-top: -2rem!important;
+  }
+  
+  .checkbox {
+    display: none;
+  }
+  
+  .label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 40px;
+    height: 20px;
+    background-color: #ccc;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out; /* Added transition */
+  }
+  
+  .inner {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    background-color: #fff;
+    border-radius: 50%;
+    transform: translate(2px, 2px);
+    transition: transform 0.2s ease-in-out;
+  }
+
+  .checkbox:checked + .label .inner {
+    transform: translate(20px, 2px);
+  }
+  
+  .checkbox:checked + .label .switch {
+    transform: translate(20px, 2px);
+    
+  }
+  .checkbox:checked + .label {
+    background-color: green; /* Change to the desired green color */
+  }
+  
+  .toggle_label {
+    margin: 0;
+  }
+  

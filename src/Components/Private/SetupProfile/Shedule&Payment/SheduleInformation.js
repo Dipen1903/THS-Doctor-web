@@ -15,6 +15,7 @@ import {
 } from "../../../../Store/Reducers/CommonReducer.js";
 import FormControl from "../../../Common/Forms/FormControl.js";
 import { compareTime } from "../../../../Utilities/Functions.js";
+import WeekSlot from "./WeekSlot.js";
 
 function SheduleInformation() {
   const { values, setFieldValue, handleBlur } = useFormikContext();
@@ -78,7 +79,7 @@ function SheduleInformation() {
         </div>
         <div className="row mt_20">
           <div className="col-md-12">
-            <Tabs defaultActiveKey="first">
+            {/* <Tabs defaultActiveKey="first">
               <Tab eventKey="first" title="Weekdays" className="tab_inner_box">
                 <div className="weekdays_box">
                   <div className="row">
@@ -267,9 +268,9 @@ function SheduleInformation() {
                   </div>
                 </div>
               </Tab>
-            </Tabs>
+            </Tabs> */}
 
-            <div className="row mt_20">
+            <div className="row mt_10">
               <div className="col-md-12">
                 <FormControl
                   control="checkbox"
@@ -282,6 +283,7 @@ function SheduleInformation() {
                 />
               </div>
             </div>
+            <WeekSlot />
           </div>
         </div>
       </div>
