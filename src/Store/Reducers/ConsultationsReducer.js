@@ -25,6 +25,7 @@ const initialState = {
   upcomingConsults: [],
   pastConsults: [],
   isReview: false,
+  complete:"",
 };
 
 export const GetNewConsults = createAsyncThunk(
@@ -333,6 +334,10 @@ export const ConsultSlice = createSlice({
     builder.addCase(CancelReasons.fulfilled, (state, action) => {
       state.cancelReasons = action.payload;
     });
+    builder.addCase(CompleteConsult.fulfilled, (state, action) => {
+      state.complete = action.payload;
+    });
+    
   },
 });
 

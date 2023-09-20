@@ -32,7 +32,7 @@ function Conversation({ roomData }) {
   const { ChatSlice, ProfileSlice, ConsultSlice } = useSelector(
     (state) => state
   );
-  const { isReview, prescDetails, constDetails } = useSelector(
+  const { isReview, prescDetails, constDetails  , complete} = useSelector(
     ({ ConsultSlice }) => ConsultSlice
   );
   const navigate = useNavigate();
@@ -50,6 +50,7 @@ function Conversation({ roomData }) {
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
+  console.log("complete",complete);
   useEffect(() => {
     scrollToBottom();
   }, [chat]);
@@ -134,7 +135,8 @@ function Conversation({ roomData }) {
 
               <div className="col-md-6 chat-head-right">
                 <div className="d-flex">
-                  {chat.some((val) => val?.documentType == 4) && (
+                  {console.log(" val?.documentType",chat?.documentType)}
+                  {chat.some((val) => val?.documentType === 4) && (
                     <Button
                       key="markCompleteButton"
                       variant="primary"
@@ -347,7 +349,7 @@ const MarkModal = (props) => {
                   appointment_id: room?.lastBookingId || room?.id,
                 })
               ).then((res) => {
-                window.location.reload();
+                window.location='/doctor/dashboard';
               });
             }}
           >
