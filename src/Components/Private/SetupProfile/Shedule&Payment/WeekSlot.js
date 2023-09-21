@@ -9,44 +9,30 @@ const weekDays = [
   {
     id: 1,
     day: "Sun",
-    available: true,
-    text: "",
   },
   {
     id: 2,
     day: "Mon",
-    available: true,
-    text: "",
   },
   {
     id: 3,
     day: "Tue",
-    available: true,
-    text: "",
   },
   {
     id: 4,
     day: "Wed",
-    available: false,
-    text: "unavailable",
   },
   {
     id: 5,
-    day: "Thur",
-    available: false,
-    text: "unavailable",
+    day: "Thur"
   },
   {
     id: 6,
-    day: "Fri",
-    available: false,
-    text: "unavailable",
+    day: "Fri"
   },
   {
     id: 7,
     day: "Sat",
-    available: false,
-    text: "unavailable",
   },
 ];
 
@@ -79,6 +65,16 @@ const WeekSlot = () => {
       [day]: (addedDivs[day] || 0) + 1,
     });
   };
+  const [checked, SetChecked] = useState({});
+  const handleToggleChange = (day, isChecked) => {
+
+    SetChecked((prevToggleData) => ({
+      ...prevToggleData,
+      [day]: isChecked,
+    }));
+    console.log(`Day: ${day}, isChecked: ${isChecked}`);
+  };
+  console.log("checked", checked);
 
   return (
     <div className="week-days-container">
@@ -86,7 +82,7 @@ const WeekSlot = () => {
         const dayDivCount = addedDivs[val.day] || 0;
 
         return (
-          <div className="edit_time_slot_mainss" key={val.id} style={{marginLeft:"1rem"}}>
+          <div className="edit_time_slot_mainss" key={val.id} style={{ marginLeft: "1rem" }}>
             <div className="map_main_divss">
               {Array.from(Array(dayDivCount + 1), (_, index) => index).map(
                 (divIndex) => {
@@ -95,11 +91,11 @@ const WeekSlot = () => {
                     <div className="time-pickerss" key={pickerId}>
                       {divIndex === 0 && (
                         <div className="toggle-label">
-                          <Toggle label={val.day} />
+                          <Toggle label={val.day} onToggleChange={(isChecked) => handleToggleChange(val.day, isChecked)} />
                         </div>
                       )}
 
-                      {divIndex !== 0 && (
+                      { checked[val.day] === true && divIndex !== 0 && (
                         <>
                           <div style={{ paddingLeft: "20%" }}>
                             <img
@@ -110,21 +106,22 @@ const WeekSlot = () => {
                           </div>
                         </>
                       )}
+                      {
+                        checked[val.day] === true ? (
+                          <>
+                            <div className="clock">
+                              <input type="time" className="time-day" />
+                            </div>
+                            <p>-</p>
+                            <div className="clock">
+                              <input type="time" className="time-day" />
+                            </div>
+                          </>
+                        ) : ( <> unavailable</>)
+                      }
 
-                      {val.available === true ? (
-                        <>
-                          <div className="clock">
-                            <input type="time" className="time-day" />
-                          </div>
-                          <p>-</p>
-                          <div className="clock">
-                            <input type="time" className="time-day" />
-                          </div>
-                        </>
-                      ) : (
-                        ""
-                      )}
-                      {val.available === true && divIndex === dayDivCount && (
+
+                      {checked[val.day] === true && divIndex === dayDivCount && (
                         <div className="">
                           <img
                             src={plus}

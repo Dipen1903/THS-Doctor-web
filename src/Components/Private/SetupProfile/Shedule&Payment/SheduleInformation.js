@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-
+import { useState } from "react";
 // import Form from "react-bootstrap/Form";
 import { ErrorMessage, useFormikContext } from "formik";
 import Tabs from "react-bootstrap/Tabs";
@@ -9,6 +9,11 @@ import Accordion from "react-bootstrap/Accordion";
 import { useDispatch, useSelector } from "react-redux";
 import Modal from "react-bootstrap/Modal";
 import { toggleFee } from "../../../../Store/Reducers/ProfileReducer.js";
+import "./SlotTime.css";
+import Toggle from "./Toggle";
+import light from "../../../../Assets/img/svg/light.svg";
+import plus from "../../../../Assets/img/svg/plus.svg";
+import arrow from "../../../../Assets/img/png/light.svg";
 import {
   SpecialityList,
   // SubSpecialityList,
@@ -16,6 +21,36 @@ import {
 import FormControl from "../../../Common/Forms/FormControl.js";
 import { compareTime } from "../../../../Utilities/Functions.js";
 import WeekSlot from "./WeekSlot.js";
+const weekDays = [
+  {
+    id: 1,
+    day: "Sun",
+  },
+  {
+    id: 2,
+    day: "Mon",
+  },
+  {
+    id: 3,
+    day: "Tue",
+  },
+  {
+    id: 4,
+    day: "Wed",
+  },
+  {
+    id: 5,
+    day: "Thur"
+  },
+  {
+    id: 6,
+    day: "Fri"
+  },
+  {
+    id: 7,
+    day: "Sat",
+  },
+];
 
 function SheduleInformation() {
   const { values, setFieldValue, handleBlur } = useFormikContext();
@@ -33,6 +68,48 @@ function SheduleInformation() {
   //     )?.consulting_fee
   //   );
   // };
+  const [timePickers, setTimePickers] = useState([{ id: 1 }]);
+  const [newDivCount, setNewDivCount] = useState(0);
+  const [addedDivs, setAddedDivs] = useState({});
+
+  const addTimePicker = () => {
+    setTimePickers([...timePickers, { id: timePickers.length + 1 }]);
+  };
+
+  const removeTimePicker = (day, id) => {
+    const dayDivCount = addedDivs[day] || 0;
+    setAddedDivs({
+      ...addedDivs,
+      [day]: dayDivCount - 1,
+    });
+    setTimePickers(timePickers.filter((picker) => picker.id !== id));
+  };
+
+  const addNewDiv = () => {
+    setNewDivCount(newDivCount + 1);
+  };
+
+  const handleAddNewDiv = (day) => {
+    addNewDiv();
+    setAddedDivs({
+      ...addedDivs,
+      [day]: (addedDivs[day] || 0) + 1,
+    });
+  };
+  const [checked, SetChecked] = useState({
+    Sun: true,
+    Mon: true,
+    Tue: true,
+  });
+  const handleToggleChange = (day, isChecked) => {
+
+    SetChecked((prevToggleData) => ({
+      ...prevToggleData,
+      [day]: isChecked,
+    }));
+    console.log(`Day: ${day}, isChecked: ${isChecked}`);
+  };
+  console.log("checked", checked);
 
   return (
     <>
@@ -123,7 +200,7 @@ function SheduleInformation() {
                                       isSearchable={false}
                                       iconHide={true}
                                       setFieldValue={setFieldValue}
-                                      onChange={() => {}}
+                                      onChange={() => { }}
                                       onBlur={handleBlur}
                                     />
                                   </div>
@@ -155,7 +232,7 @@ function SheduleInformation() {
                                       isSearchable={false}
                                       iconHide={true}
                                       setFieldValue={setFieldValue}
-                                      onChange={() => {}}
+                                      onChange={() => { }}
                                       onBlur={handleBlur}
                                     />
                                     <div className="error">
@@ -217,7 +294,7 @@ function SheduleInformation() {
                                           .start_time
                                       }
                                       setFieldValue={setFieldValue}
-                                      onChange={() => {}}
+                                      onChange={() => { }}
                                       onBlur={handleBlur}
                                     />
                                   </div>
@@ -249,7 +326,7 @@ function SheduleInformation() {
                                       isSearchable={false}
                                       iconHide={true}
                                       setFieldValue={setFieldValue}
-                                      onChange={() => {}}
+                                      onChange={() => { }}
                                       onBlur={handleBlur}
                                     />
                                     <div className="error">
@@ -283,7 +360,69 @@ function SheduleInformation() {
                 />
               </div>
             </div>
-            <WeekSlot />
+            <div className="week-days-container">
+              {weekDays.map((val) => {
+                const dayDivCount = addedDivs[val.day] || 0;
+
+                return (
+                  <div className="edit_time_slot_mainss" key={val.id} style={{ marginLeft: "1rem" }}>
+                    <div className="map_main_divss">
+                      {Array.from(Array(dayDivCount + 1), (_, index) => index).map(
+                        (divIndex) => {
+                          const pickerId = divIndex + 1;
+                          return (
+                            <div className="time-pickerss" key={pickerId}>
+                              {divIndex === 0 && (
+                                <div className="toggle-label">
+                                  {/* Pass initialChecked prop */}
+                                  <Toggle label={val.day} onToggleChange={(isChecked) => handleToggleChange(val.day, isChecked)} initialChecked={val.day === "Sun" || val.day === "Mon" || val.day === "Tue"} />
+                                </div>
+                              )}
+
+                              {checked[val.day] === true && divIndex !== 0 && (
+                                <>
+                                  <div style={{ paddingLeft: "20%" }}>
+                                    <img
+                                      src={light}
+                                      className="fa-regular fa-circle-xmark"
+                                      onClick={() => removeTimePicker(val.day, pickerId)}
+                                    ></img>
+                                  </div>
+                                </>
+                              )}
+                              {
+                                checked[val.day] === true ? (
+                                  <>
+                                    <div className="clock">
+                                      <input type="time" className="time-day" />
+                                    </div>
+                                    <p>-</p>
+                                    <div className="clock">
+                                      <input type="time" className="time-day" />
+                                    </div>
+                                  </>
+                                ) : (<> unavailable</>)
+                              }
+
+                              {checked[val.day] === true && divIndex === dayDivCount && (
+                                <div className="">
+                                  <img
+                                    src={plus}
+                                    className="fa-solid fa-plus"
+                                    style={{ color: "#3093BB", fontSize: "22px" }}
+                                    onClick={() => handleAddNewDiv(val.day)}
+                                  ></img>
+                                </div>
+                              )}
+                            </div>
+                          );
+                        }
+                      )}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>
@@ -298,7 +437,7 @@ const FeeCardModal = (props) => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(SpecialityList({ isFeeCard: true }));
-    return () => {};
+    return () => { };
   }, []);
 
   return (

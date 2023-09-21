@@ -16,32 +16,40 @@ const Review = ({ values }) => {
   const { isReview, prescDetails, consultDetails } = useSelector(
     ({ ConsultSlice }) => ConsultSlice
   );
-  const send = async (e) => {
-    e.preventDefault();
+  // const send = async (e) => {
+  //   e.preventDefault();
   
+  //   try {
+  //     let tempMessage = { ...MessageEnum };
+  
+  //     tempMessage.dateTime = Timestamp.now();
+  //     tempMessage.documentType = 4;
+  //     tempMessage.extension = "pdf";
+  //     tempMessage.imageName = prescDetails?.prescription_id;
+  //     tempMessage.imageUrl = prescDetails?.prescription_url || "";
+  //     const docRef = await dispatch(SendMessage(tempMessage));
+  //     dispatch(toggleReview(false));
+  //     navigate(`/chat/${prescDetails?.prescription_id}`);
+  //   } catch (error) {
+  //     console.error("Error sending message:", error);
+  //   }
+  // };
+  const send = (e) => {
     try {
+      e.preventDefault();
       let tempMessage = { ...MessageEnum };
-  
       tempMessage.dateTime = Timestamp.now();
       tempMessage.documentType = 4;
       tempMessage.extension = "pdf";
       tempMessage.imageName = prescDetails?.prescription_id;
-      tempMessage.imageUrl = prescDetails?.prescription_url || ""; // Use an empty string if it's undefined
-  
-      
-  
-      // Dispatch the SendMessage action and wait for it to complete
-      const docRef = await dispatch(SendMessage(tempMessage));
-  
-      // Handle the result after the message is sent
-  
-      // Dispatch other actions as needed
-      dispatch(toggleReview(false));
-      navigate(`/chat/${prescDetails?.prescription_id}`);
-    } catch (error) {
-      console.error("Error sending message:", error);
-    }
+      tempMessage.imageUrl = prescDetails?.prescription_url || "";
+      dispatch(SendMessage(tempMessage)).then((res) => {
+        dispatch(toggleReview(false));
+        navigate(`/chat/${prescDetails?.prescription_id}`);
+      });
+    } catch (error) {}
   };
+  useEffect(() => {}, [prescDetails]);
   
   useEffect(() => {}, [prescDetails]);
   return (
