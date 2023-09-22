@@ -360,36 +360,18 @@ export function SetUpSetting() {
     ...BankEnum,
   });
 
-  const { profileStep, skipModal, submittedModal, userProfile } = useSelector(
+  const { profileStep, skipModal, submittedModal, userProfile ,slotlistdata } = useSelector(
     ({ ProfileSlice }) => ProfileSlice
   );
-
-  // const calculate = (values) => {
-  //   let tempProfile = { ...ProfileEnum };
-  //   tempProfile.dob = userProfile?.birthdate;
-  //   tempProfile.gender = userProfile?.gender;
-  //   tempProfile.image = userProfile?.image;
-  //   tempProfile.city_id = userProfile?.city_id;
-  //   tempProfile.state_id = userProfile?.state_id;
-  //   tempProfile.speciality = userProfile?.speciality;
-  //   tempProfile.sub_speciality = userProfile?.sub_speciality;
-  //   tempProfile.experience = userProfile?.experience;
-  //   tempProfile.registration_number = userProfile?.registration_number;
-  //   tempProfile.languages = userProfile?.languages?.split(",");
-  //   tempProfile.qualification = userProfile?.qualifications;
-  //   tempProfile.proof = userProfile?.id_proofs;
-  //   tempProfile.signature = userProfile?.signature;
-  //   return calculatePercentage({ ...tempProfile, ...values });
-  // };
-
   const submit = (values) => {
     if (profileStep == 1) {
-      let tempValues = { ...values };
-      tempValues.weekdays = JSON.stringify(values.weekdays);
-      tempValues.weekends = JSON.stringify(values.weekends);
-      tempValues.emergency_call = values?.emergency_call ? 1 : 0;
-      tempValues["doctor_availablity_done"] = 1;
-      dispatch(EditSchedule(tempValues)).then((res) => {
+      // let tempValues = { ...values };
+      // tempValues.weekdays = JSON.stringify(values.weekdays);
+      // tempValues.weekends = JSON.stringify(values.weekends);
+      // tempValues.emergency_call = values?.emergency_call ? 1 : 0;
+      // tempValues.slotlistdata = slotlistdata;
+      // tempValues["doctor_availablity_done"] = 1;
+      dispatch(EditSchedule(slotlistdata)).then((res) => {
         if (res?.payload?.success) {
           dispatch(nextStep());
         }
@@ -622,7 +604,7 @@ function ScheduleWizardForm({ Form_1, Form_2 }) {
     case 1:
       return (
         <FormikProvider value={Form_1}>
-          <SheduleInformation />
+          <SheduleInformation   />
         </FormikProvider>
       );
 

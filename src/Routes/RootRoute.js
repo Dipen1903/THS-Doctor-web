@@ -22,6 +22,7 @@ import ResetProfile from "../Components/Private/SetupProfile/ResetProfile";
 import ChatIndex from "../Components/Private/Chat/ChatIndex";
 import ShareLinkHome from "../Components/Private/SharLink/ShareLinkHome";
 import SecondSharLink from "../Components/Private/SharLink/SecondSharLink";
+import SheduleInformation from "../Components/Private/SetupProfile/Shedule&Payment/SheduleInformation";
 
 // import UserProfile from "../Components/Public/Userprofile/userprofile";
 // import UserProfile2 from "../Components/Public/Userprofile/userprofile2";

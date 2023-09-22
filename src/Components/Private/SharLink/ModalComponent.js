@@ -10,6 +10,7 @@ const ModalComponent = ({ isOpen, onClose }) => {
     // const handleInputChange = (event) => {
     //     setMobileNumber(event.target.value);
     // };
+    console.log("setNumbersList",mobileNumber);
 
     const handleAddNumber = () => {
         if (mobileNumber.trim() !== "") {
@@ -24,6 +25,7 @@ const ModalComponent = ({ isOpen, onClose }) => {
     };
     const [error, setError] = useState(""); // State to store the error message
 
+
     const handleInputChange = (event) => {
         const input = event.target.value;
         if (input.length <= 10) {
@@ -32,7 +34,7 @@ const ModalComponent = ({ isOpen, onClose }) => {
             setError("Maximum input length is 10 characters.");
         }
     };
-    // console.log("errorerror", error);
+    
 
     const handleOkButtonClick = () => {
         // Do something with the numbersList, e.g., save it to a database, etc.
@@ -46,8 +48,13 @@ const ModalComponent = ({ isOpen, onClose }) => {
         try {
             const arr = numbersList;
             const resultString = arr.join(",");
-            // console.log("resultString", resultString);
-            const result = await dispatch(DoctorFetachNumbers({ phone_numbers: resultString }));
+            console.log("resultString", resultString);
+            if(mobileNumber == [] ){
+                const result = await dispatch(DoctorFetachNumbers({ phone_numbers: resultString }));
+            }else{
+                const result = await dispatch(DoctorFetachNumbers({ phone_numbers: mobileNumber }));
+            }
+         
             // console.log('API call result', result);
 
         } catch (error) {
@@ -81,6 +88,7 @@ const ModalComponent = ({ isOpen, onClose }) => {
                                     </span>
                                 </div>
                                 {error && <div style={{ color: "red" }}>{error}</div>}
+
                                 <div className="numberdiv">
                                     {numbersList.map((number, index) => (
                                         <div className="textnumber" key={index}>

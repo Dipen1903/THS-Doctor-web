@@ -5,10 +5,10 @@ import { ErrorMessage, useFormikContext } from "formik";
 import Tabs from "react-bootstrap/Tabs";
 import Tab from "react-bootstrap/Tab";
 import Accordion from "react-bootstrap/Accordion";
-// import { Icon } from "../../../../Utilities/Icons.js";
+
 import { useDispatch, useSelector } from "react-redux";
 import Modal from "react-bootstrap/Modal";
-import { toggleFee } from "../../../../Store/Reducers/ProfileReducer.js";
+import { SlotListDoctor, slotdata, toggleFee } from "../../../../Store/Reducers/ProfileReducer.js";
 import "./SlotTime.css";
 import Toggle from "./Toggle";
 import light from "../../../../Assets/img/svg/light.svg";
@@ -21,56 +21,59 @@ import {
 import FormControl from "../../../Common/Forms/FormControl.js";
 import { compareTime } from "../../../../Utilities/Functions.js";
 import WeekSlot from "./WeekSlot.js";
-const weekDays = [
-  {
-    id: 1,
-    day: "Sun",
-  },
-  {
-    id: 2,
-    day: "Mon",
-  },
-  {
-    id: 3,
-    day: "Tue",
-  },
-  {
-    id: 4,
-    day: "Wed",
-  },
-  {
-    id: 5,
-    day: "Thur"
-  },
-  {
-    id: 6,
-    day: "Fri"
-  },
-  {
-    id: 7,
-    day: "Sat",
-  },
-];
+
 
 function SheduleInformation() {
   const { values, setFieldValue, handleBlur } = useFormikContext();
   const dispatch = useDispatch();
-  const { feeModal, userProfile } = useSelector(
+  const { feeModal, userProfile, slotlistdoctor } = useSelector(
     ({ ProfileSlice }) => ProfileSlice
   );
-  // const { subSpecialityList } = useSelector(({ CommonSlice }) => CommonSlice);
+  const [selectedTimeSlots, setSelectedTimeSlots] = useState({});
 
-  // const getFee = () => {
-  //   return (
-  //     subSpecialityList?.length &&
-  //     subSpecialityList?.find(
-  //       (item) => item?.id === userProfile?.sub_speciality_id
-  //     )?.consulting_fee
-  //   );
-  // };
+
   const [timePickers, setTimePickers] = useState([{ id: 1 }]);
   const [newDivCount, setNewDivCount] = useState(0);
   const [addedDivs, setAddedDivs] = useState({});
+  const [weekDays, setWeekDays] = useState([
+    {
+      id: 1,
+      day: "sunday",
+      checked: true
+    },
+    {
+      id: 2,
+      day: "monday",
+      checked: true
+    },
+    {
+      id: 3,
+      day: "tuesday",
+      checked: true
+    },
+    {
+      id: 4,
+      day: "wednesday",
+      checked: true
+    },
+    {
+      id: 5,
+      day: "thursday",
+      checked: true
+    },
+    {
+      id: 6,
+      day: "friday",
+      checked: true
+    },
+    {
+      id: 7,
+      day: "saturday",
+      checked: true
+    },
+  ]
+  )
+
 
   const addTimePicker = () => {
     setTimePickers([...timePickers, { id: timePickers.length + 1 }]);
@@ -97,19 +100,164 @@ function SheduleInformation() {
     });
   };
   const [checked, SetChecked] = useState({
-    Sun: true,
-    Mon: true,
-    Tue: true,
+    sunday: slotlistdoctor?.sunday?.length >= 0 ? false : true,
+    monday: slotlistdoctor?.monday?.length >= 0 ? false : true,
+    tuesday: slotlistdoctor?.tuesday?.length >= 0 ? false : true,
+    wednesday: slotlistdoctor?.wednesday?.length >= 0 ? false : true,
+    thursday: slotlistdoctor?.thursday?.length >= 0 ? false : true,
+    friday: slotlistdoctor?.friday?.length >= 0 ? false : true,
+    saturday: slotlistdoctor?.saturday?.length >= 0 ? false : true,
   });
-  const handleToggleChange = (day, isChecked) => {
+  useEffect(() => {
+    SetChecked({
+      sunday: slotlistdoctor?.sunday?.length >= 0 ? false : true,
+      monday: slotlistdoctor?.monday?.length >= 0 ? false : true,
+      tuesday: slotlistdoctor?.tuesday?.length >= 0 ? false : true,
+      wednesday: slotlistdoctor?.wednesday?.length >= 0 ? false : true,
+      thursday: slotlistdoctor?.thursday?.length >= 0 ? false : true,
+      friday: slotlistdoctor?.friday?.length >= 0 ? false : true,
+      saturday: slotlistdoctor?.saturday?.length >= 0 ? false : true,
+    })
+    setWeekDays([
+      {
+        id: 1,
+        day: "sunday",
+        checked: slotlistdoctor?.sunday?.length >= 0 ? false : true
+      },
+      {
+        id: 2,
+        day: "monday",
+        checked: slotlistdoctor?.monday?.length >= 0 ? false : true,
+      },
+      {
+        id: 3,
+        day: "tuesday",
+        checked: slotlistdoctor?.tuesday?.length >= 0 ? false : true,
+      },
+      {
+        id: 4,
+        day: "wednesday",
+        checked: slotlistdoctor?.wednesday?.length >= 0 ? false : true
+      },
+      {
+        id: 5,
+        day: "thursday",
+        checked: slotlistdoctor?.thursday?.length >= 0 ? false : true
+      },
+      {
+        id: 6,
+        day: "friday",
+        checked: slotlistdoctor?.friday?.length >= 0 ? false : true,
+      },
+      {
+        id: 7,
+        day: "saturday",
+        checked: slotlistdoctor?.saturday?.length >= 0 ? false : true
+      },
+    ])
+  }, [slotlistdoctor])
 
+  const [data, SetData] = useState([])
+  const handleToggleChange = (day, isChecked) => {
     SetChecked((prevToggleData) => ({
       ...prevToggleData,
       [day]: isChecked,
     }));
-    console.log(`Day: ${day}, isChecked: ${isChecked}`);
+
   };
-  console.log("checked", checked);
+
+  useEffect(() => {
+    dispatch(SlotListDoctor())
+  }, [dispatch])
+  console.log("slotlistdoctor", selectedTimeSlots);
+
+
+
+  const [soltsFirst, SetSlotsFirst] = useState()
+  const handleSlotChange = (day, index, timeSlotType, slotValue) => {
+    // Clone the selectedTimeSlots object for the specific day
+    const updatedDaySlots = { ...(selectedTimeSlots[day] || {}) };
+  
+    // Create a new slot object if it doesn't exist
+    if (!updatedDaySlots[index]) {
+      updatedDaySlots[index] = { start: '', end: '' };
+    }
+  
+    // Update the start or end time based on timeSlotType
+    updatedDaySlots[index][timeSlotType] = slotValue;
+  
+    // Update the selectedTimeSlots object for the specific day
+    setSelectedTimeSlots({
+      ...selectedTimeSlots,
+      [day]: updatedDaySlots,
+    });
+  };
+  // const handleSlotChange = (day, index, slot) => {
+  //   console.log("index====", index);
+
+  //   // Check if the selected index is even (start time) or odd (end time)
+  //   if (!index) {
+  //     // If the index is odd, it's an end time; store it in the previous (even) index
+  //     const previousIndex = index;
+  //     setSelectedTimeSlots({
+  //       ...selectedTimeSlots,
+  //       [day]: {
+  //         ...selectedTimeSlots[day],
+  //         [previousIndex]: {
+  //           ...selectedTimeSlots[day]?.[previousIndex],
+  //           end: slot,
+  //         },
+  //       },
+  //     });
+  //   } else {
+  //     // If the index is even, it's a start time; store it in the current index
+  //     setSelectedTimeSlots({
+  //       ...selectedTimeSlots,
+  //       [day]: {
+  //         ...selectedTimeSlots[day],
+  //         [index]: {
+  //           ...selectedTimeSlots[day]?.[index],
+  //           start: slot,
+  //         },
+  //       },
+  //     });
+  //   }
+  // };
+  useEffect(() => {
+    handleSaveSchedule();
+  }, [selectedTimeSlots]);
+  const generateScheduleData = () => {
+    const scheduleData = Object.keys(selectedTimeSlots).map((day) => {
+      if (checked[day]) {
+        return {
+          days: [day],
+          time_period: {
+            start_time: selectedTimeSlots[day].start || '',
+            end_time: selectedTimeSlots[day].end || '',
+          },
+        };
+      }
+      return null;
+    }).filter(Boolean);
+
+    const scheduleDataObject = scheduleData.reduce((acc, entry) => {
+      const day = entry.days[0];
+      acc[day] = entry;
+      return acc;
+    }, {});
+    console.log("scheduleDataObject", scheduleDataObject);
+    return scheduleDataObject;
+  };
+
+  const handleSaveSchedule = () => {
+    const scheduleData = generateScheduleData();
+    dispatch(slotdata(scheduleData))
+    console.log("Schedule Data:", scheduleData);
+  };
+
+
+
+
 
   return (
     <>
@@ -156,197 +304,6 @@ function SheduleInformation() {
         </div>
         <div className="row mt_20">
           <div className="col-md-12">
-            {/* <Tabs defaultActiveKey="first">
-              <Tab eventKey="first" title="Weekdays" className="tab_inner_box">
-                <div className="weekdays_box">
-                  <div className="row">
-                    <div className="col-md-12">
-                      <div className="day_box">
-                        <FormControl
-                          control="checkbox"
-                          name="weekdays.days"
-                          options={[
-                            { value: "sudisable", key: "S", disabled: true },
-                            { value: "monday", key: "M" },
-                            { value: "tuesday", key: "T" },
-                            { value: "wednesday", key: "W" },
-                            { value: "thursday", key: "T" },
-                            { value: "friday", key: "F" },
-                            { value: "sadisable", key: "S", disabled: true },
-                          ]}
-                          values={values.weekdays.days}
-                        />
-                      </div>
-                      <Accordion defaultActiveKey={["1"]} alwaysOpen>
-                        {Object.keys(values.weekdays.time_period).map(
-                          (item, index) => (
-                            <Accordion.Item eventKey={index}>
-                              <Accordion.Header>{item}</Accordion.Header>
-                              <Accordion.Body>
-                                <div className="row">
-                                  <div className=" col-md-6">
-                                    <h5 className="start_at">Start at</h5>
-                                    <FormControl
-                                      control="select"
-                                      options={
-                                        values.weekdays.time_period[item].slots
-                                      }
-                                      name={`weekdays.time_period.${item}.start_time`}
-                                      id={`weekdays.time_period.${item}.start_time`}
-                                      value={
-                                        values.weekdays.time_period[item]
-                                          .start_time
-                                      }
-                                      isSearchable={false}
-                                      iconHide={true}
-                                      setFieldValue={setFieldValue}
-                                      onChange={() => { }}
-                                      onBlur={handleBlur}
-                                    />
-                                  </div>
-                                  <div className=" col-md-6">
-                                    <h5 className="end_at">End at</h5>
-                                    <FormControl
-                                      control="select"
-                                      options={[
-                                        {
-                                          label: "None",
-                                          value: "",
-                                        },
-                                        ...values.weekdays.time_period[
-                                          item
-                                        ].slots?.filter((s) =>
-                                          compareTime(
-                                            s.value,
-                                            values.weekdays.time_period[item]
-                                              .start_time
-                                          )
-                                        ),
-                                      ]}
-                                      name={`weekdays.time_period.${item}.end_time`}
-                                      id={`weekdays.time_period.${item}.end_time`}
-                                      value={
-                                        values.weekdays.time_period[item]
-                                          .end_time
-                                      }
-                                      isSearchable={false}
-                                      iconHide={true}
-                                      setFieldValue={setFieldValue}
-                                      onChange={() => { }}
-                                      onBlur={handleBlur}
-                                    />
-                                    <div className="error">
-                                      <ErrorMessage
-                                        name={`weekdays.time_period.${item}.end_time`}
-                                      />
-                                    </div>
-                                  </div>
-                                </div>
-                              </Accordion.Body>
-                            </Accordion.Item>
-                          )
-                        )}
-                      </Accordion>
-                    </div>
-                  </div>
-                </div>
-              </Tab>
-              <Tab eventKey="second" title="Weekends" className="tab_inner_box">
-                <div className="weekends_box">
-                  <div className="row">
-                    <div className="col-md-12">
-                      <div className="day_box">
-                        <FormControl
-                          control="checkbox"
-                          name="weekends.days"
-                          options={[
-                            { value: "sunday", key: "S" },
-                            { value: "mondisable", key: "M", disabled: true },
-                            { value: "tuesdisable", key: "T", disabled: true },
-                            { value: "wednsdisable", key: "W", disabled: true },
-                            { value: "thursdisable", key: "T", disabled: true },
-                            { value: "fridisable", key: "F", disabled: true },
-                            { value: "saturday", key: "S" },
-                          ]}
-                          values={values.weekends.days}
-                        />
-                      </div>
-                      <Accordion defaultActiveKey={["1"]} alwaysOpen>
-                        {Object.keys(values.weekends.time_period).map(
-                          (item, index) => (
-                            <Accordion.Item eventKey={index}>
-                              <Accordion.Header>{item}</Accordion.Header>
-                              <Accordion.Body>
-                                <div className="row">
-                                  <div className="col-md-6">
-                                    <h5 className="start_at">Start at</h5>
-                                    <FormControl
-                                      control="select"
-                                      options={
-                                        values.weekends.time_period[item].slots
-                                      }
-                                      isSearchable={false}
-                                      iconHide={true}
-                                      name={`weekends.time_period.${item}.start_time`}
-                                      id={`weekends.time_period.${item}.start_time`}
-                                      value={
-                                        values.weekends.time_period[item]
-                                          .start_time
-                                      }
-                                      setFieldValue={setFieldValue}
-                                      onChange={() => { }}
-                                      onBlur={handleBlur}
-                                    />
-                                  </div>
-                                  <div className="col-md-6">
-                                    <h5 className="end_at">End at</h5>
-                                    <FormControl
-                                      control="select"
-                                      options={[
-                                        {
-                                          label: "None",
-                                          value: "",
-                                        },
-                                        ...values.weekends.time_period[
-                                          item
-                                        ].slots?.filter((s) =>
-                                          compareTime(
-                                            s.value,
-                                            values.weekends.time_period[item]
-                                              .start_time
-                                          )
-                                        ),
-                                      ]}
-                                      name={`weekends.time_period.${item}.end_time`}
-                                      id={`weekends.time_period.${item}.end_time`}
-                                      value={
-                                        values.weekends.time_period[item]
-                                          .end_time
-                                      }
-                                      isSearchable={false}
-                                      iconHide={true}
-                                      setFieldValue={setFieldValue}
-                                      onChange={() => { }}
-                                      onBlur={handleBlur}
-                                    />
-                                    <div className="error">
-                                      <ErrorMessage
-                                        name={`weekends.time_period.${item}.end_time`}
-                                      />
-                                    </div>
-                                  </div>
-                                </div>
-                              </Accordion.Body>
-                            </Accordion.Item>
-                          )
-                        )}
-                      </Accordion>
-                    </div>
-                  </div>
-                </div>
-              </Tab>
-            </Tabs> */}
-
             <div className="row mt_10">
               <div className="col-md-12">
                 <FormControl
@@ -363,22 +320,24 @@ function SheduleInformation() {
             <div className="week-days-container">
               {weekDays.map((val) => {
                 const dayDivCount = addedDivs[val.day] || 0;
-
                 return (
                   <div className="edit_time_slot_mainss" key={val.id} style={{ marginLeft: "1rem" }}>
                     <div className="map_main_divss">
                       {Array.from(Array(dayDivCount + 1), (_, index) => index).map(
                         (divIndex) => {
                           const pickerId = divIndex + 1;
+                          const selectedSlot = selectedTimeSlots[val.day] || "";
                           return (
                             <div className="time-pickerss" key={pickerId}>
                               {divIndex === 0 && (
-                                <div className="toggle-label">
-                                  {/* Pass initialChecked prop */}
-                                  <Toggle label={val.day} onToggleChange={(isChecked) => handleToggleChange(val.day, isChecked)} initialChecked={val.day === "Sun" || val.day === "Mon" || val.day === "Tue"} />
+                                <div className="toggle-label" style={{ width: "115px" }}>
+                                  <Toggle
+                                    label={val.day}
+                                    onToggleChange={(isChecked) => handleToggleChange(val.day, isChecked)}
+                                    initialChecked={val.checked}
+                                  />
                                 </div>
                               )}
-
                               {checked[val.day] === true && divIndex !== 0 && (
                                 <>
                                   <div style={{ paddingLeft: "20%" }}>
@@ -390,20 +349,62 @@ function SheduleInformation() {
                                   </div>
                                 </>
                               )}
-                              {
-                                checked[val.day] === true ? (
-                                  <>
-                                    <div className="clock">
-                                      <input type="time" className="time-day" />
-                                    </div>
-                                    <p>-</p>
-                                    <div className="clock">
-                                      <input type="time" className="time-day" />
-                                    </div>
-                                  </>
-                                ) : (<> unavailable</>)
-                              }
+                              {checked[val.day] === true ? (
+                                <>
+                                  <div className="clock">
+                                    <select
+                                       onChange={(e) =>
+                                        handleSlotChange(val.day, divIndex + 1, "start", e.target.value)
+                                      }
+                                      className="time-day"
+                                      placeholder="-- -- --"
+                                      style={{
+                                        background: "none",
+                                        border: "none",
+                                        backgroundColor: "#ecf2ff",
+                                        fontSize: "15px",
+                                        padding: "10px 30px",
+                                        borderRadius: "8px",
+                                      }}
+                                    >
+                                      <option value=""> -- -- -- </option>
+                                      {slotlistdoctor[val.day]?.slots?.map((slot) => (
+                                        <option key={slot} value={slot}>
+                                          {slot}
+                                        </option>
+                                      ))}
+                                    </select>
+                                  </div>
+                                  <p>-</p>
+                                  <div className="clock">
+                                    <select
+                                       onChange={(e) =>
+                                        handleSlotChange(val.day, divIndex + 1, "end", e.target.value)
+                                      }
 
+                                      className="time-day"
+                                      style={{
+                                        background: "none",
+                                        border: "none",
+                                        backgroundColor: "#ecf2ff",
+                                        fontSize: "15px",
+                                        padding: "10px 30px",
+                                        borderRadius: "8px",
+                                      }}
+                                    >
+                                      <option value=""> -- -- --</option>
+                                      {slotlistdoctor[val.day]?.slots?.map((slot) => (
+                                        <option key={slot} value={slot}>
+                                          {slot}
+                                        </option>
+
+                                      ))}
+                                    </select>
+                                  </div>
+                                </>
+                              ) : (
+                                <div>Unavailable</div>
+                              )}
                               {checked[val.day] === true && divIndex === dayDivCount && (
                                 <div className="">
                                   <img

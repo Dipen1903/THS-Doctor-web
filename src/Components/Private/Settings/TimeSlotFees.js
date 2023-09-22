@@ -67,7 +67,7 @@ function Timeslotfees() {
   useEffect(() => {
     !userProfile && dispatch(GetUserProfile());
     initialLoad();
-    return () => {};
+    return () => { };
   }, [userProfile]);
 
   return (
@@ -259,7 +259,7 @@ function Timeslotfees() {
                                                       setFieldValue={
                                                         setFieldValue
                                                       }
-                                                      onChange={() => {}}
+                                                      onChange={() => { }}
                                                       onBlur={handleBlur}
                                                       isDisabled={!edit}
                                                     />
@@ -303,7 +303,7 @@ function Timeslotfees() {
                                                       setFieldValue={
                                                         setFieldValue
                                                       }
-                                                      onChange={() => {}}
+                                                      onChange={() => { }}
                                                       onBlur={handleBlur}
                                                       isDisabled={!edit}
                                                     />
@@ -413,7 +413,7 @@ function Timeslotfees() {
                                                       setFieldValue={
                                                         setFieldValue
                                                       }
-                                                      onChange={() => {}}
+                                                      onChange={() => { }}
                                                       onBlur={handleBlur}
                                                       isDisabled={!edit}
                                                     />
@@ -449,7 +449,7 @@ function Timeslotfees() {
                                                       setFieldValue={
                                                         setFieldValue
                                                       }
-                                                      onChange={() => {}}
+                                                      onChange={() => { }}
                                                       onBlur={handleBlur}
                                                       isDisabled={!edit}
                                                     />

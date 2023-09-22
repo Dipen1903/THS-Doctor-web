@@ -12,6 +12,7 @@ const UploadModal = ({ isOpen, onClose }) => {
     const [mobilenumber, SetMobilenumber] = useState()
     const [imageSrc, setImageSrc] = useState(uploadimg);
     const [isFileSelected, setIsFileSelected] = useState(false);
+    const [fileExtension, setFileExtension] = useState('');
 
     const handleFileChange = (event) => {
         const selectedFile = event.target.files[0];
@@ -45,6 +46,7 @@ const UploadModal = ({ isOpen, onClose }) => {
         };
         reader.readAsBinaryString(selectedFile);
     };
+    const isXLSXFile = fileExtension === 'xlsx';
     // console.log("mobilenumbermobilenumbermobilenumber",);
     const callApi = async () => {
         try {
@@ -84,7 +86,7 @@ const UploadModal = ({ isOpen, onClose }) => {
                             </div>
                             <div className='uploadbtndiv pt_40'>
                                 <button className='closebtn' onClick={onClose}>Close</button>
-                                <button className={`sendbtn ${isFileSelected ? 'sendbtns' : ''}`} onClick={() => {callApi();onClose()}}> Send Link</button>
+                                <button className={`sendbtn ${isFileSelected ? 'sendbtns' : ''}`} onClick={() => { callApi(); onClose() }}> Send Link</button>
                             </div>
                         </div>
 

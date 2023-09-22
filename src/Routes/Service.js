@@ -59,9 +59,11 @@ export const DeleteAccountAPI = (data) =>
 export const EditBankAPI = (data) =>
   POST(`${BASE_URL}/bank-account-create`, data);
 export const EditScheduleAPI = (data) =>
-  POST(`${BASE_URL}/availibility-create`, data);
+  POST(`${BASE_URL}/availibility-create-days`, data);
 export const ValidateBankAccountAPI = (data) =>
   POST(`${BASE_URL}/validate-bank-account`, data);
+  export const SlotList = (data) =>
+  POST(`${BASE_URL}/slot-by-days`, data);
 
 //* MOBILE NUMBER API REQUEST
 export const OTPCurrentAPI = (data) =>

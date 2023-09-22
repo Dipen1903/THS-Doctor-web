@@ -14,6 +14,7 @@ import {
   ReverifyUserProfileAPI,
   CreateRPContactAPI,
   ValidateBankAccountAPI,
+  SlotList,
 } from "../../Routes/Service";
 
 import { AlertEnum } from "../../Utilities/Enums";
@@ -27,6 +28,8 @@ const initialState = {
   feeModal: false,
   userProfile: "",
   rejectionDetails: "",
+  slotlistdoctor:{},
+  slotlistdata:""
 };
 
 export const GetUserProfile = createAsyncThunk(
@@ -381,6 +384,36 @@ export const EditSchedule = createAsyncThunk(
     }
   }
 );
+export const SlotListDoctor = createAsyncThunk(
+  "SlotListDoctor",
+  async (values, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const result = await SlotList(values);
+      if (result?.success) {
+        dispatch(setLoading(false));
+        // dispatch(
+        //   setMessage({
+        //     text: result?.message,
+        //     type: AlertEnum.Success,
+        //   })
+        // );
+        return result;
+      } else {
+        throw result;
+      }
+    } catch (error) {
+      dispatch(setLoading(false));
+      dispatch(
+        setMessage({
+          text: error?.message,
+          type: AlertEnum.Error,
+        })
+      );
+      return error;
+    }
+  }
+);
 export const ToggleLiveStatus = createAsyncThunk(
   "ToggleLiveStatus",
   async (values, { dispatch }) => {
@@ -437,10 +470,17 @@ export const ProfileSlice = createSlice({
     toggleFee: (state, action) => {
       state.feeModal = action.payload;
     },
+    slotdata: (state, action) => {
+      console.log("action???????????? ",action.payload);
+      state.slotlistdata = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(EditUserProfile.fulfilled, (state, action) => {
       state.userProfile = action.payload?.data;
+    });
+    builder.addCase(SlotListDoctor.fulfilled, (state, action) => {
+      state.slotlistdoctor = action.payload?.data;
     });
     builder.addCase(GetUserProfile.fulfilled, (state, action) => {
       state.userProfile = action.payload;
@@ -459,6 +499,7 @@ export const {
   toggleProfileSuccess,
   toggleSkip,
   toggleFee,
+  slotdata
 } = ProfileSlice.actions;
 
 export default ProfileSlice.reducer;

@@ -420,7 +420,12 @@ export const DoctorFetachNumbers = createAsyncThunk(
       return result?.data;
 
     } catch (error) {
-      // dispatch(setLoading(false));
+      dispatch(
+        setMessage({
+          text: error?.message,
+          type: AlertEnum.Error,
+        })
+      );
       return error;
     }
   }
