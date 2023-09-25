@@ -30,7 +30,7 @@ function SheduleInformation() {
     ({ ProfileSlice }) => ProfileSlice
   );
   const [selectedTimeSlots, setSelectedTimeSlots] = useState({});
-
+  const [selectedStartTimes, setSelectedStartTimes] = useState({});
 
   const [timePickers, setTimePickers] = useState([{ id: 1 }]);
   const [newDivCount, setNewDivCount] = useState(0);
@@ -157,7 +157,7 @@ function SheduleInformation() {
     ])
   }, [slotlistdoctor])
 
-  const [data, SetData] = useState([])
+
   const handleToggleChange = (day, isChecked) => {
     SetChecked((prevToggleData) => ({
       ...prevToggleData,
@@ -170,89 +170,62 @@ function SheduleInformation() {
     dispatch(SlotListDoctor())
   }, [dispatch])
   console.log("slotlistdoctor", selectedTimeSlots);
-
-
-
-  const [soltsFirst, SetSlotsFirst] = useState()
   const handleSlotChange = (day, index, timeSlotType, slotValue) => {
     // Clone the selectedTimeSlots object for the specific day
     const updatedDaySlots = { ...(selectedTimeSlots[day] || {}) };
-  
+
     // Create a new slot object if it doesn't exist
     if (!updatedDaySlots[index]) {
       updatedDaySlots[index] = { start: '', end: '' };
     }
-  
+
     // Update the start or end time based on timeSlotType
     updatedDaySlots[index][timeSlotType] = slotValue;
-  
+
     // Update the selectedTimeSlots object for the specific day
     setSelectedTimeSlots({
       ...selectedTimeSlots,
       [day]: updatedDaySlots,
     });
-  };
-  // const handleSlotChange = (day, index, slot) => {
-  //   console.log("index====", index);
+    console.log("selectedTimeSlots", selectedTimeSlots);
+    // Update the selected start time for this slot
+    if (timeSlotType === "start") {
+      setSelectedStartTimes({
+        ...selectedStartTimes,
+        [`${day}_${index}`]: slotValue,
+      });
+    }
 
-  //   // Check if the selected index is even (start time) or odd (end time)
-  //   if (!index) {
-  //     // If the index is odd, it's an end time; store it in the previous (even) index
-  //     const previousIndex = index;
-  //     setSelectedTimeSlots({
-  //       ...selectedTimeSlots,
-  //       [day]: {
-  //         ...selectedTimeSlots[day],
-  //         [previousIndex]: {
-  //           ...selectedTimeSlots[day]?.[previousIndex],
-  //           end: slot,
-  //         },
-  //       },
-  //     });
-  //   } else {
-  //     // If the index is even, it's a start time; store it in the current index
-  //     setSelectedTimeSlots({
-  //       ...selectedTimeSlots,
-  //       [day]: {
-  //         ...selectedTimeSlots[day],
-  //         [index]: {
-  //           ...selectedTimeSlots[day]?.[index],
-  //           start: slot,
-  //         },
-  //       },
-  //     });
-  //   }
-  // };
+  };
+  console.log("selectedTimeSlots", selectedTimeSlots);
+  const transformedData = [];
+  Object.keys(selectedTimeSlots).forEach((day) => {
+    const dayData = selectedTimeSlots[day];
+    console.log("dayData", dayData);
+    const dayObj = {
+      days: [day],
+      time_period: {},
+    };
+    Object.keys(dayData).forEach((slotIndex) => {
+      const slot = dayData[slotIndex];
+      dayObj.time_period[slotIndex] = {
+        start_time: slot.start,
+        end_time: slot.end,
+      };
+    });
+
+    transformedData[day] = dayObj;
+  });
+
+  console.log("Transformed Data:", transformedData);
+
+
   useEffect(() => {
     handleSaveSchedule();
   }, [selectedTimeSlots]);
-  const generateScheduleData = () => {
-    const scheduleData = Object.keys(selectedTimeSlots).map((day) => {
-      if (checked[day]) {
-        return {
-          days: [day],
-          time_period: {
-            start_time: selectedTimeSlots[day].start || '',
-            end_time: selectedTimeSlots[day].end || '',
-          },
-        };
-      }
-      return null;
-    }).filter(Boolean);
-
-    const scheduleDataObject = scheduleData.reduce((acc, entry) => {
-      const day = entry.days[0];
-      acc[day] = entry;
-      return acc;
-    }, {});
-    console.log("scheduleDataObject", scheduleDataObject);
-    return scheduleDataObject;
-  };
 
   const handleSaveSchedule = () => {
-    const scheduleData = generateScheduleData();
-    dispatch(slotdata(scheduleData))
-    console.log("Schedule Data:", scheduleData);
+    dispatch(slotdata(transformedData));
   };
 
 
@@ -353,7 +326,7 @@ function SheduleInformation() {
                                 <>
                                   <div className="clock">
                                     <select
-                                       onChange={(e) =>
+                                      onChange={(e) =>
                                         handleSlotChange(val.day, divIndex + 1, "start", e.target.value)
                                       }
                                       className="time-day"
@@ -378,10 +351,9 @@ function SheduleInformation() {
                                   <p>-</p>
                                   <div className="clock">
                                     <select
-                                       onChange={(e) =>
+                                      onChange={(e) =>
                                         handleSlotChange(val.day, divIndex + 1, "end", e.target.value)
                                       }
-
                                       className="time-day"
                                       style={{
                                         background: "none",
@@ -393,13 +365,19 @@ function SheduleInformation() {
                                       }}
                                     >
                                       <option value=""> -- -- --</option>
-                                      {slotlistdoctor[val.day]?.slots?.map((slot) => (
-                                        <option key={slot} value={slot}>
-                                          {slot}
-                                        </option>
-
-                                      ))}
+                                      {slotlistdoctor[val.day]?.slots
+                                        ?.filter(
+                                          (slot) =>
+                                            !selectedStartTimes[`${val.day}_${divIndex + 1}`] ||
+                                            slot !== selectedStartTimes[`${val.day}_${divIndex + 1}`]
+                                        )
+                                        .map((slot) => (
+                                          <option key={slot} value={slot}>
+                                            {slot}
+                                          </option>
+                                        ))}
                                     </select>
+
                                   </div>
                                 </>
                               ) : (

@@ -359,6 +359,7 @@ export const EditSchedule = createAsyncThunk(
   async (values, { dispatch }) => {
     try {
       dispatch(setLoading(true));
+      console.log("values" , values);
       const result = await EditScheduleAPI(values);
       if (result?.success) {
         dispatch(setLoading(false));

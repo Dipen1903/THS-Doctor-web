@@ -27,38 +27,38 @@ function Timeslotfees() {
 
   const initialLoad = () => {
     let tempData = { ...scheduleData };
-    if (userProfile?.availibility) {
-      if (userProfile?.availibility?.weekdays) {
-        tempData.weekdays.days = userProfile?.availibility?.weekdays?.days;
-        if (userProfile?.availibility?.weekdays?.slot) {
-          Object.keys(userProfile?.availibility?.weekdays?.slot)?.map(
-            (item) => {
-              let tempSlot = userProfile?.availibility?.weekdays?.slot[item];
-              tempData.weekdays.time_period[item] = {
-                start_time: tempSlot?.start_time,
-                end_time: tempSlot?.end_time,
-                slots: ScheduleEnum.weekdays.time_period[item].slots,
-              };
-            }
-          );
-        }
-      }
-      if (userProfile?.availibility?.weekends) {
-        tempData.weekends.days = userProfile?.availibility?.weekends?.days;
-        if (userProfile?.availibility?.weekends?.slot) {
-          Object.keys(userProfile?.availibility?.weekends?.slot)?.map(
-            (item) => {
-              let tempSlot = userProfile?.availibility?.weekends?.slot[item];
-              tempData.weekends.time_period[item] = {
-                start_time: tempSlot?.start_time,
-                end_time: tempSlot?.end_time,
-                slots: ScheduleEnum.weekdays.time_period[item].slots,
-              };
-            }
-          );
-        }
-      }
-    }
+    // if (userProfile?.availibility) {
+    //   if (userProfile?.availibility?.weekdays) {
+    //     tempData.weekdays.days = userProfile?.availibility?.weekdays?.days;
+    //     if (userProfile?.availibility?.weekdays?.slot) {
+    //       Object.keys(userProfile?.availibility?.weekdays?.slot)?.map(
+    //         (item) => {
+    //           let tempSlot = userProfile?.availibility?.weekdays?.slot[item];
+    //           tempData.weekdays.time_period[item] = {
+    //             start_time: tempSlot?.start_time,
+    //             end_time: tempSlot?.end_time,
+    //             slots: ScheduleEnum.weekdays.time_period[item].slots,
+    //           };
+    //         }
+    //       );
+    //     }
+    //   }
+    //   if (userProfile?.availibility?.weekends) {
+    //     tempData.weekends.days = userProfile?.availibility?.weekends?.days;
+    //     if (userProfile?.availibility?.weekends?.slot) {
+    //       Object.keys(userProfile?.availibility?.weekends?.slot)?.map(
+    //         (item) => {
+    //           let tempSlot = userProfile?.availibility?.weekends?.slot[item];
+    //           tempData.weekends.time_period[item] = {
+    //             start_time: tempSlot?.start_time,
+    //             end_time: tempSlot?.end_time,
+    //             slots: ScheduleEnum.weekdays.time_period[item].slots,
+    //           };
+    //         }
+    //       );
+    //     }
+    //   }
+    // }
     tempData.emergency_call = userProfile?.is_emergency_call ? true : false;
 
     setScheduleData(tempData);
@@ -69,6 +69,9 @@ function Timeslotfees() {
     initialLoad();
     return () => { };
   }, [userProfile]);
+  const { slotlistdata } = useSelector(
+    ({ ProfileSlice }) => ProfileSlice
+  );
 
   return (
     <>
@@ -102,11 +105,11 @@ function Timeslotfees() {
                   enableReinitialize
                   validationSchema={ScheduleSchema}
                   onSubmit={(values) => {
-                    let tempValues = { ...values };
-                    tempValues.weekdays = JSON.stringify(values.weekdays);
-                    tempValues.weekends = JSON.stringify(values.weekends);
-                    tempValues.emergency_call = values.emergency_call ? 1 : 0;
-                    dispatch(EditSchedule(tempValues)).then((res) => {
+                    // let tempValues = { ...values };
+                    // tempValues.weekdays = JSON.stringify(values.weekdays);
+                    // tempValues.weekends = JSON.stringify(values.weekends);
+                    // tempValues.emergency_call = values.emergency_call ? 1 : 0;
+                    dispatch(EditSchedule(slotlistdata)).then((res) => {
                       if (res?.payload?.success) {
                         setEdit(false);
                         dispatch(GetUserProfile());

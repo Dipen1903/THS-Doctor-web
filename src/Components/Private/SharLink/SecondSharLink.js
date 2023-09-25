@@ -84,11 +84,19 @@ const SecondSharLink = () => {
 
     const handleNewCheckboxChange = (event) => {
         setIsNewChecked(event.target.checked);
+        // If "New" is checked, make sure "Follow up" is unchecked
+        if (event.target.checked) {
+            setIsFollowUpChecked(false);
+        }
     };
 
     const handleFollowUpCheckboxChange = (event) => {
         setIsFollowUpChecked(event.target.checked);
-    };
+        // If "Follow up" is checked, make sure "New" is unchecked
+        if (event.target.checked) {
+            setIsNewChecked(false);
+        }
+    };;
 
     const getConsultationType = () => {
         if (isNewChecked && isFollowUpChecked) {

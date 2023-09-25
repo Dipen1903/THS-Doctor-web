@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, json } from "react-router-dom";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import { FormikProvider, useFormik } from "formik";
@@ -12,6 +12,7 @@ import BankInformation from "./Shedule&Payment/BankInformation";
 import { BankEnum, ProfileEnum, ScheduleEnum } from "../../../Utilities/Enums";
 import ProgressBar from "../../Common/Layouts/Progress_bar";
 import { BackGround } from "../../../Utilities/Icons";
+import { SESSION } from "../../../Utilities/Enums";
 
 import {
   EditBankDetails,
@@ -43,6 +44,8 @@ import {
   WorkProfileSchema,
 } from "../../../Utilities/Schema";
 import moment from "moment";
+import axios from "axios";
+import { BASE_URL } from "../../../Utilities/HTTP";
 
 // const calculatePercentage = (values) => {
 //   let percent = 0;
@@ -194,7 +197,7 @@ export function SetUpProfile() {
       }
     };
     intialSetup();
-    return () => {};
+    return () => { };
   }, [dispatch, userProfile]);
 
   useEffect(() => {
@@ -204,7 +207,7 @@ export function SetUpProfile() {
     dispatch(LanguageList());
     dispatch(QualificationList());
     dispatch(DocumentList());
-    return () => {};
+    return () => { };
   }, []);
 
   return (
@@ -247,10 +250,10 @@ export function SetUpProfile() {
                     {profileStep === 1
                       ? "Basic Information"
                       : profileStep === 2
-                      ? "Your Work Profile"
-                      : profileStep === 3
-                      ? "Your qualification and ID Proof"
-                      : ""}
+                        ? "Your Work Profile"
+                        : profileStep === 3
+                          ? "Your qualification and ID Proof"
+                          : ""}
                   </h3>
 
                   {/* <Formik
@@ -360,10 +363,12 @@ export function SetUpSetting() {
     ...BankEnum,
   });
 
-  const { profileStep, skipModal, submittedModal, userProfile ,slotlistdata } = useSelector(
+  const { profileStep, skipModal, submittedModal, userProfile, slotlistdata } = useSelector(
     ({ ProfileSlice }) => ProfileSlice
   );
-  const submit = (values) => {
+const SessionData = JSON.parse(localStorage.getItem(SESSION));
+
+  const submit = async (values) => {
     if (profileStep == 1) {
       // let tempValues = { ...values };
       // tempValues.weekdays = JSON.stringify(values.weekdays);
@@ -371,11 +376,22 @@ export function SetUpSetting() {
       // tempValues.emergency_call = values?.emergency_call ? 1 : 0;
       // tempValues.slotlistdata = slotlistdata;
       // tempValues["doctor_availablity_done"] = 1;
-      dispatch(EditSchedule(slotlistdata)).then((res) => {
-        if (res?.payload?.success) {
-          dispatch(nextStep());
-        }
+
+      // const jsonData = JSON.stringify(slotlistdata);
+      
+      const data = await axios.post(`${BASE_URL}/availibility-create-days`, slotlistdata, {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${SessionData?.token}`,
+        },
       });
+      console.log("datadatadatadata",data);
+      
+      // dispatch(EditSchedule(slotlistdata)).then((res) => {
+      //   if (res?.payload?.success) {
+      //     dispatch(nextStep());
+      //   }
+      // });
     } else if (profileStep === 2) {
       values["bank_details_done"] = 1;
       dispatch(EditBankDetails(values)).then((res) => {
@@ -387,7 +403,7 @@ export function SetUpSetting() {
   };
   const ScheduleForm = useFormik({
     initialValues: ScheduleEnum,
-    enableReinitialize: true,
+    // enableReinitialize: true,
     validationSchema: ScheduleSchema,
     onSubmit: submit,
   });
@@ -407,38 +423,38 @@ export function SetUpSetting() {
     tempData.ifsc_code = userProfile?.bank_details?.ifsc_code;
     tempData.upi_id = userProfile?.bank_details?.upi_id;
 
-    if (userProfile?.availibility) {
-      if (userProfile?.availibility?.weekdays) {
-        tempData.weekdays.days = userProfile?.availibility?.weekdays?.days;
-        if (userProfile?.availibility?.weekdays?.slot) {
-          Object.keys(userProfile?.availibility?.weekdays?.slot)?.map(
-            (item) => {
-              let tempSlot = userProfile?.availibility?.weekdays?.slot[item];
-              tempData.weekdays.time_period[item] = {
-                start_time: tempSlot?.start_time,
-                end_time: tempSlot?.end_time,
-                slots: ScheduleEnum.weekdays.time_period[item].slots,
-              };
-            }
-          );
-        }
-      }
-      if (userProfile?.availibility?.weekends) {
-        tempData.weekends.days = userProfile?.availibility?.weekends?.days;
-        if (userProfile?.availibility?.weekends?.slot) {
-          Object.keys(userProfile?.availibility?.weekends?.slot)?.map(
-            (item) => {
-              let tempSlot = userProfile?.availibility?.weekends?.slot[item];
-              tempData.weekends.time_period[item] = {
-                start_time: tempSlot?.start_time,
-                end_time: tempSlot?.end_time,
-                slots: ScheduleEnum.weekdays.time_period[item].slots,
-              };
-            }
-          );
-        }
-      }
-    }
+    // if (userProfile?.availibility) {
+    //   if (userProfile?.availibility?.weekdays) {
+    //     tempData.weekdays.days = userProfile?.availibility?.weekdays?.days;
+    //     if (userProfile?.availibility?.weekdays?.slot) {
+    //       Object.keys(userProfile?.availibility?.weekdays?.slot)?.map(
+    //         (item) => {
+    //           let tempSlot = userProfile?.availibility?.weekdays?.slot[item];
+    //           tempData.weekdays.time_period[item] = {
+    //             start_time: tempSlot?.start_time,
+    //             end_time: tempSlot?.end_time,
+    //             slots: ScheduleEnum.weekdays.time_period[item].slots,
+    //           };
+    //         }
+    //       );
+    //     }
+    //   }
+    //   if (userProfile?.availibility?.weekends) {
+    //     tempData.weekends.days = userProfile?.availibility?.weekends?.days;
+    //     if (userProfile?.availibility?.weekends?.slot) {
+    //       Object.keys(userProfile?.availibility?.weekends?.slot)?.map(
+    //         (item) => {
+    //           let tempSlot = userProfile?.availibility?.weekends?.slot[item];
+    //           tempData.weekends.time_period[item] = {
+    //             start_time: tempSlot?.start_time,
+    //             end_time: tempSlot?.end_time,
+    //             slots: ScheduleEnum.weekdays.time_period[item].slots,
+    //           };
+    //         }
+    //       );
+    //     }
+    //   }
+    // }
 
     setScheduleData(tempData);
   };
@@ -446,7 +462,7 @@ export function SetUpSetting() {
   useEffect(() => {
     dispatch(GetUserProfile());
     initialLoad();
-    return () => {};
+    return () => { };
   }, []);
 
   return (
@@ -604,7 +620,7 @@ function ScheduleWizardForm({ Form_1, Form_2 }) {
     case 1:
       return (
         <FormikProvider value={Form_1}>
-          <SheduleInformation   />
+          <SheduleInformation />
         </FormikProvider>
       );
 
