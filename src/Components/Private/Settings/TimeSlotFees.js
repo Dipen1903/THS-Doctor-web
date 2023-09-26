@@ -17,14 +17,16 @@ import FormControl from "../../Common/Forms/FormControl";
 import { compareTime } from "../../../Utilities/Functions";
 import { ScheduleEnum } from "../../../Utilities/Enums";
 import { ScheduleSchema } from "../../../Utilities/Schema";
-
+import { BASE_URL } from "../../../Utilities/HTTP";
+import axios from "axios";
+import { SESSION } from "../../../Utilities/Enums";
 function Timeslotfees() {
   const [scheduleData, setScheduleData] = useState({ ...ScheduleEnum });
   const dispatch = useDispatch();
   const { userProfile } = useSelector(({ ProfileSlice }) => ProfileSlice);
   const [chkValue, setChkValue] = useState(false);
   const [edit, setEdit] = useState(false);
-
+  const SessionData = JSON.parse(localStorage.getItem(SESSION));
   const initialLoad = () => {
     let tempData = { ...scheduleData };
     // if (userProfile?.availibility) {
@@ -109,12 +111,31 @@ function Timeslotfees() {
                     // tempValues.weekdays = JSON.stringify(values.weekdays);
                     // tempValues.weekends = JSON.stringify(values.weekends);
                     // tempValues.emergency_call = values.emergency_call ? 1 : 0;
-                    dispatch(EditSchedule(slotlistdata)).then((res) => {
-                      if (res?.payload?.success) {
-                        setEdit(false);
-                        dispatch(GetUserProfile());
-                      }
-                    });
+                    // dispatch(EditSchedule(slotlistdata)).then((res) => {
+                    //   if (res?.payload?.success) {
+                    //     setEdit(false);
+                    //     dispatch(GetUserProfile());
+                    //   }
+                    // });
+                    axios.post(`${BASE_URL}/availibility-create-days`, slotlistdata, {
+                      headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${SessionData?.token}`,
+                      },
+                    })
+                      .then((response) => {
+                        if (response.data.message === 'Availibility updated successfully') {
+                          setEdit(false);
+                          dispatch(GetUserProfile());
+                        } else {
+
+                          console.log('Unexpected API response:', response.data);
+                        }
+                      })
+                      .catch((error) => {
+
+                        console.error('Error:', error);
+                      });
                   }}
                 >
                   {({

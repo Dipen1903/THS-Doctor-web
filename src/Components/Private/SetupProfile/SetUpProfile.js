@@ -366,7 +366,7 @@ export function SetUpSetting() {
   const { profileStep, skipModal, submittedModal, userProfile, slotlistdata } = useSelector(
     ({ ProfileSlice }) => ProfileSlice
   );
-const SessionData = JSON.parse(localStorage.getItem(SESSION));
+  const SessionData = JSON.parse(localStorage.getItem(SESSION));
 
   const submit = async (values) => {
     if (profileStep == 1) {
@@ -378,15 +378,35 @@ const SessionData = JSON.parse(localStorage.getItem(SESSION));
       // tempValues["doctor_availablity_done"] = 1;
 
       // const jsonData = JSON.stringify(slotlistdata);
-      
-      const data = await axios.post(`${BASE_URL}/availibility-create-days`, slotlistdata, {
+
+   
+      // axios.post(`${BASE_URL}/availibility-create-days`, slotlistdata, {
+      //   headers: {
+      //     'Content-Type': 'application/json', // Use 'application/json' for JSON data
+      //     Authorization: `Bearer ${SessionData?.token}`,
+      //   },
+      // })
+      axios.post(`${BASE_URL}/availibility-create-days`,slotlistdata, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${SessionData?.token}`,
         },
+      })
+      .then((response) => {
+        if (response.data.message === 'Availibility updated successfully') {
+
+          dispatch(nextStep());
+        } else {
+   
+          console.log('Unexpected API response:', response.data);
+        }
+      })
+      .catch((error) => {
+
+        console.error('Error:', error);
       });
-      console.log("datadatadatadata",data);
       
+
       // dispatch(EditSchedule(slotlistdata)).then((res) => {
       //   if (res?.payload?.success) {
       //     dispatch(nextStep());

@@ -35,6 +35,7 @@ function SheduleInformation() {
   const [timePickers, setTimePickers] = useState([{ id: 1 }]);
   const [newDivCount, setNewDivCount] = useState(0);
   const [addedDivs, setAddedDivs] = useState({});
+  {console.log("slotlistdoctorslotlistdoctor",slotlistdoctor);}
   const [weekDays, setWeekDays] = useState([
     {
       id: 1,
@@ -197,15 +198,16 @@ function SheduleInformation() {
     }
 
   };
-  console.log("selectedTimeSlots", selectedTimeSlots);
-  const transformedData = [];
+
+  const transformedData = {};
+
   Object.keys(selectedTimeSlots).forEach((day) => {
     const dayData = selectedTimeSlots[day];
-    console.log("dayData", dayData);
     const dayObj = {
       days: [day],
       time_period: {},
     };
+  
     Object.keys(dayData).forEach((slotIndex) => {
       const slot = dayData[slotIndex];
       dayObj.time_period[slotIndex] = {
@@ -213,9 +215,10 @@ function SheduleInformation() {
         end_time: slot.end,
       };
     });
-
-    transformedData[day] = dayObj;
+  
+    transformedData[day] = JSON.stringify(dayObj);
   });
+  
 
   console.log("Transformed Data:", transformedData);
 
@@ -343,6 +346,7 @@ function SheduleInformation() {
                                       <option value=""> -- -- -- </option>
                                       {slotlistdoctor[val.day]?.slots?.map((slot) => (
                                         <option key={slot} value={slot}>
+                                          {console.log("slotslotslotslotslot",slot)}
                                           {slot}
                                         </option>
                                       ))}
