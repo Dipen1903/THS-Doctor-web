@@ -9,7 +9,7 @@ import WorkProfile from "./Personal&Work/WorkProfile";
 import EducationalProfile from "./Personal&Work/EducationalProfile";
 import SheduleInformation from "./Shedule&Payment/SheduleInformation";
 import BankInformation from "./Shedule&Payment/BankInformation";
-import { BankEnum, ProfileEnum, ScheduleEnum } from "../../../Utilities/Enums";
+import { AlertEnum, BankEnum, ProfileEnum, ScheduleEnum } from "../../../Utilities/Enums";
 import ProgressBar from "../../Common/Layouts/Progress_bar";
 import { BackGround } from "../../../Utilities/Icons";
 import { SESSION } from "../../../Utilities/Enums";
@@ -46,6 +46,7 @@ import {
 import moment from "moment";
 import axios from "axios";
 import { BASE_URL } from "../../../Utilities/HTTP";
+import { setMessage } from "../../../Store/Reducers/LayoutSlice";
 
 // const calculatePercentage = (values) => {
 //   let percent = 0;
@@ -379,33 +380,38 @@ export function SetUpSetting() {
 
       // const jsonData = JSON.stringify(slotlistdata);
 
-   
+
       // axios.post(`${BASE_URL}/availibility-create-days`, slotlistdata, {
       //   headers: {
       //     'Content-Type': 'application/json', // Use 'application/json' for JSON data
       //     Authorization: `Bearer ${SessionData?.token}`,
       //   },
       // })
-      axios.post(`${BASE_URL}/availibility-create-days`,slotlistdata, {
+      axios.post(`${BASE_URL}/availibility-create-days`, slotlistdata, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${SessionData?.token}`,
         },
       })
-      .then((response) => {
-        if (response.data.message === 'Availibility updated successfully') {
+        .then((response) => {
+          if (response.data.message === 'Availibility updated successfully') {
+            dispatch(
+              setMessage({
+                text: response?.data?.message,
+                type: AlertEnum.Success,
+              })
+            );
+            dispatch(nextStep());
+          } else {
 
-          dispatch(nextStep());
-        } else {
-   
-          console.log('Unexpected API response:', response.data);
-        }
-      })
-      .catch((error) => {
+            console.log('Unexpected API response:', response.data);
+          }
+        })
+        .catch((error) => {
 
-        console.error('Error:', error);
-      });
-      
+          console.error('Error:', error);
+        });
+
 
       // dispatch(EditSchedule(slotlistdata)).then((res) => {
       //   if (res?.payload?.success) {

@@ -20,6 +20,8 @@ import { ScheduleSchema } from "../../../Utilities/Schema";
 import { BASE_URL } from "../../../Utilities/HTTP";
 import axios from "axios";
 import { SESSION } from "../../../Utilities/Enums";
+import { setMessage } from "../../../Store/Reducers/LayoutSlice";
+import { AlertEnum } from "../../../Utilities/Enums";
 function Timeslotfees() {
   const [scheduleData, setScheduleData] = useState({ ...ScheduleEnum });
   const dispatch = useDispatch();
@@ -107,16 +109,6 @@ function Timeslotfees() {
                   enableReinitialize
                   validationSchema={ScheduleSchema}
                   onSubmit={(values) => {
-                    // let tempValues = { ...values };
-                    // tempValues.weekdays = JSON.stringify(values.weekdays);
-                    // tempValues.weekends = JSON.stringify(values.weekends);
-                    // tempValues.emergency_call = values.emergency_call ? 1 : 0;
-                    // dispatch(EditSchedule(slotlistdata)).then((res) => {
-                    //   if (res?.payload?.success) {
-                    //     setEdit(false);
-                    //     dispatch(GetUserProfile());
-                    //   }
-                    // });
                     axios.post(`${BASE_URL}/availibility-create-days`, slotlistdata, {
                       headers: {
                         'Content-Type': 'application/json',
@@ -127,6 +119,12 @@ function Timeslotfees() {
                         if (response.data.message === 'Availibility updated successfully') {
                           setEdit(false);
                           dispatch(GetUserProfile());
+                          dispatch(
+                            setMessage({
+                              text: response?.dta?.message,
+                              type: AlertEnum.Success,
+                            })
+                          );
                         } else {
 
                           console.log('Unexpected API response:', response.data);

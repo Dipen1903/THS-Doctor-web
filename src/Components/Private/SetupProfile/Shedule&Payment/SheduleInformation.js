@@ -31,11 +31,14 @@ function SheduleInformation() {
   );
   const [selectedTimeSlots, setSelectedTimeSlots] = useState({});
   const [selectedStartTimes, setSelectedStartTimes] = useState({});
+  const [startTime, setStartTime] = useState("");
+  const [dayoftime , SetDay] = useState("");
+  const [endTime, setEndTime] = useState("");
 
   const [timePickers, setTimePickers] = useState([{ id: 1 }]);
   const [newDivCount, setNewDivCount] = useState(0);
   const [addedDivs, setAddedDivs] = useState({});
-  {console.log("slotlistdoctorslotlistdoctor",slotlistdoctor);}
+  { console.log("slotlistdoctorslotlistdoctor", slotlistdoctor); }
   const [weekDays, setWeekDays] = useState([
     {
       id: 1,
@@ -166,6 +169,20 @@ function SheduleInformation() {
     }));
 
   };
+  const handleStartTimeChange = (e) => {
+    const newStartTime = e.target.value;
+    setStartTime(newStartTime);
+
+    // If a start time is selected, filter end times to hide options before it
+    if (newStartTime) {
+      setEndTime("");
+    }
+  };
+
+  const handleEndTimeChange = (e) => {
+    setEndTime(e.target.value);
+  };
+
 
   useEffect(() => {
     dispatch(SlotListDoctor())
@@ -174,7 +191,7 @@ function SheduleInformation() {
   const handleSlotChange = (day, index, timeSlotType, slotValue) => {
     // Clone the selectedTimeSlots object for the specific day
     const updatedDaySlots = { ...(selectedTimeSlots[day] || {}) };
-
+    SetDay(day)
     // Create a new slot object if it doesn't exist
     if (!updatedDaySlots[index]) {
       updatedDaySlots[index] = { start: '', end: '' };
@@ -188,7 +205,6 @@ function SheduleInformation() {
       ...selectedTimeSlots,
       [day]: updatedDaySlots,
     });
-    console.log("selectedTimeSlots", selectedTimeSlots);
     // Update the selected start time for this slot
     if (timeSlotType === "start") {
       setSelectedStartTimes({
@@ -196,6 +212,7 @@ function SheduleInformation() {
         [`${day}_${index}`]: slotValue,
       });
     }
+    console.log("slotValue",slotValue);
 
   };
 
@@ -207,7 +224,7 @@ function SheduleInformation() {
       days: [day],
       time_period: {},
     };
-  
+
     Object.keys(dayData).forEach((slotIndex) => {
       const slot = dayData[slotIndex];
       dayObj.time_period[slotIndex] = {
@@ -215,12 +232,12 @@ function SheduleInformation() {
         end_time: slot.end,
       };
     });
-  
+
     transformedData[day] = JSON.stringify(dayObj);
   });
-  
 
-  console.log("Transformed Data:", transformedData);
+
+
 
 
   useEffect(() => {
@@ -231,10 +248,11 @@ function SheduleInformation() {
     dispatch(slotdata(transformedData));
   };
 
-
-
-
-
+  const filteredEndTimeOptions = slotlistdoctor?.[dayoftime]?.slots?.filter(
+    (time) => time > startTime && time !== endTime
+  );
+  {console.log("filteredEndTimeOptions",filteredEndTimeOptions)}
+ 
   return (
     <>
       <FeeCardModal show={feeModal} onHide={() => dispatch(toggleFee(false))} />
@@ -330,7 +348,7 @@ function SheduleInformation() {
                                   <div className="clock">
                                     <select
                                       onChange={(e) =>
-                                        handleSlotChange(val.day, divIndex + 1, "start", e.target.value)
+                                        {handleSlotChange(val.day, divIndex + 1, "start", e.target.value); setStartTime(e.target.value)}
                                       }
                                       className="time-day"
                                       placeholder="-- -- --"
@@ -346,7 +364,6 @@ function SheduleInformation() {
                                       <option value=""> -- -- -- </option>
                                       {slotlistdoctor[val.day]?.slots?.map((slot) => (
                                         <option key={slot} value={slot}>
-                                          {console.log("slotslotslotslotslot",slot)}
                                           {slot}
                                         </option>
                                       ))}
@@ -356,7 +373,7 @@ function SheduleInformation() {
                                   <div className="clock">
                                     <select
                                       onChange={(e) =>
-                                        handleSlotChange(val.day, divIndex + 1, "end", e.target.value)
+                                        {handleSlotChange(val.day, divIndex + 1, "end", e.target.value);setEndTime( e.target.value)}
                                       }
                                       className="time-day"
                                       style={{
@@ -372,8 +389,8 @@ function SheduleInformation() {
                                       {slotlistdoctor[val.day]?.slots
                                         ?.filter(
                                           (slot) =>
-                                            !selectedStartTimes[`${val.day}_${divIndex + 1}`] ||
-                                            slot !== selectedStartTimes[`${val.day}_${divIndex + 1}`]
+                                            !selectedStartTimes[`${val.day}_${divIndex + 1}`] || 
+                                            slot > selectedStartTimes[`${val.day}_${divIndex + 1}`] 
                                         )
                                         .map((slot) => (
                                           <option key={slot} value={slot}>
@@ -381,6 +398,9 @@ function SheduleInformation() {
                                           </option>
                                         ))}
                                     </select>
+
+
+
 
                                   </div>
                                 </>
