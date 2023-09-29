@@ -5,7 +5,7 @@ import { ErrorMessage, useFormikContext } from "formik";
 import Tabs from "react-bootstrap/Tabs";
 import Tab from "react-bootstrap/Tab";
 import Accordion from "react-bootstrap/Accordion";
-
+import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
 import Modal from "react-bootstrap/Modal";
 import { SlotListDoctor, slotdata, toggleFee } from "../../../../Store/Reducers/ProfileReducer.js";
@@ -32,13 +32,13 @@ function SheduleInformation() {
   const [selectedTimeSlots, setSelectedTimeSlots] = useState({});
   const [selectedStartTimes, setSelectedStartTimes] = useState({});
   const [startTime, setStartTime] = useState("");
-  const [dayoftime , SetDay] = useState("");
+  const [dayoftime, SetDay] = useState("");
   const [endTime, setEndTime] = useState("");
 
   const [timePickers, setTimePickers] = useState([{ id: 1 }]);
   const [newDivCount, setNewDivCount] = useState(0);
   const [addedDivs, setAddedDivs] = useState({});
-  { console.log("slotlistdoctorslotlistdoctor", slotlistdoctor); }
+
   const [weekDays, setWeekDays] = useState([
     {
       id: 1,
@@ -168,56 +168,97 @@ function SheduleInformation() {
       [day]: isChecked,
     }));
 
-  };
-  const handleStartTimeChange = (e) => {
-    const newStartTime = e.target.value;
-    setStartTime(newStartTime);
-
-    // If a start time is selected, filter end times to hide options before it
-    if (newStartTime) {
-      setEndTime("");
+    // If the day is unchecked, clear its selected slots
+    if (!isChecked) {
+      setSelectedTimeSlots((prevSelectedTimeSlots) => ({
+        ...prevSelectedTimeSlots,
+        [day]: {},
+      }));
     }
   };
-
-  const handleEndTimeChange = (e) => {
-    setEndTime(e.target.value);
-  };
-
 
   useEffect(() => {
     dispatch(SlotListDoctor())
   }, [dispatch])
-  console.log("slotlistdoctor", selectedTimeSlots);
+  const [selectedTimeSlotsBetween, setSelectedTimeSlotsBetween] = useState([]);
   const handleSlotChange = (day, index, timeSlotType, slotValue) => {
-    // Clone the selectedTimeSlots object for the specific day
     const updatedDaySlots = { ...(selectedTimeSlots[day] || {}) };
-    SetDay(day)
-    // Create a new slot object if it doesn't exist
+    SetDay(day);
     if (!updatedDaySlots[index]) {
       updatedDaySlots[index] = { start: '', end: '' };
     }
-
-    // Update the start or end time based on timeSlotType
     updatedDaySlots[index][timeSlotType] = slotValue;
-
-    // Update the selectedTimeSlots object for the specific day
     setSelectedTimeSlots({
       ...selectedTimeSlots,
       [day]: updatedDaySlots,
     });
-    // Update the selected start time for this slot
+
+    // Update selectedDayForHidetime and calculate timeSlotsBetween regardless of the condition
+    setSelectedDayForHidetime(day);
+
     if (timeSlotType === "start") {
       setSelectedStartTimes({
         ...selectedStartTimes,
         [`${day}_${index}`]: slotValue,
       });
     }
-    console.log("slotValue",slotValue);
 
+    // Calculate timeSlotsBetween using the updated values.
+    const startTime = selectedStartTimes[`${day}_${index}`];
+    const endTime = updatedDaySlots[index].end;
+    if (startTime && endTime) {
+      const timeSlotsBetween = generateTimeSlotsBetween(startTime, endTime, day);
+      setSelectedTimeSlotsBetween(timeSlotsBetween);
+    } else {
+      setSelectedTimeSlotsBetween([]);
+    }
   };
 
-  const transformedData = {};
+  const [hidetime, setHidetime] = useState([]);
+  const [selectedDayForHidetime, setSelectedDayForHidetime] = useState("");
+  const [firstClickForDay, setFirstClickForDay] = useState({});
+  const [selectedDay, setSelectedDay] = useState("");
 
+  const generateTimeSlotsBetween = (startTime, endTime, day) => {
+    const data = slotlistdoctor[dayoftime]?.slots;
+    const startTimeMoment = moment(startTime, 'hh:mm a');
+    const endTimeMoment = moment(endTime, 'hh:mm a');
+
+    // const startDate = new Date(`01/01/2000 ${startTime}`);
+    // const endDate = new Date(`01/01/2000 ${endTime}`);
+    // const timeSlots = [];
+    // timeSlots.push(
+    //   startDate.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })
+    // );
+    // while (startDate < endDate) {
+    //   startDate.setMinutes(startDate.getMinutes() + 15);
+    //   timeSlots.push(
+    //     startDate.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })
+    //   );
+    // }
+    if (!data || !startTimeMoment.isValid() || !endTimeMoment.isValid()) {
+      // Handle invalid data or time
+      return [];
+    }
+
+    const timeSlots = [];
+    const startDate = moment(startTimeMoment);
+
+    while (startDate.isBefore(endTimeMoment)) {
+      timeSlots.push(startDate.format('hh:mm A')); // Format as desired
+      startDate.add(15, 'minutes'); // Add 15 minutes
+    }
+
+    if (day === selectedDayForHidetime) {
+      setHidetime((prevHidetime) => [...prevHidetime, ...timeSlots]);
+    } else {
+      setHidetime([]);
+    }
+    return timeSlots;
+  };
+  console.log("hidetime", hidetime);
+
+  const transformedData = {};
   Object.keys(selectedTimeSlots).forEach((day) => {
     const dayData = selectedTimeSlots[day];
     const dayObj = {
@@ -232,14 +273,8 @@ function SheduleInformation() {
         end_time: slot.end,
       };
     });
-
     transformedData[day] = JSON.stringify(dayObj);
   });
-
-
-
-
-
   useEffect(() => {
     handleSaveSchedule();
   }, [selectedTimeSlots]);
@@ -248,11 +283,8 @@ function SheduleInformation() {
     dispatch(slotdata(transformedData));
   };
 
-  const filteredEndTimeOptions = slotlistdoctor?.[dayoftime]?.slots?.filter(
-    (time) => time > startTime && time !== endTime
-  );
-  {console.log("filteredEndTimeOptions",filteredEndTimeOptions)}
- 
+
+
   return (
     <>
       <FeeCardModal show={feeModal} onHide={() => dispatch(toggleFee(false))} />
@@ -347,8 +379,7 @@ function SheduleInformation() {
                                 <>
                                   <div className="clock">
                                     <select
-                                      onChange={(e) =>
-                                        {handleSlotChange(val.day, divIndex + 1, "start", e.target.value); setStartTime(e.target.value)}
+                                      onChange={(e) => { handleSlotChange(val.day, divIndex + 1, "start", e.target.value); setStartTime(e.target.value); SetDay(val.day); }
                                       }
                                       className="time-day"
                                       placeholder="-- -- --"
@@ -360,20 +391,32 @@ function SheduleInformation() {
                                         padding: "10px 30px",
                                         borderRadius: "8px",
                                       }}
+
                                     >
                                       <option value=""> -- -- -- </option>
-                                      {slotlistdoctor[val.day]?.slots?.map((slot) => (
-                                        <option key={slot} value={slot}>
-                                          {slot}
-                                        </option>
-                                      ))}
+                                      {
+                                        divIndex == 0 ?
+                                          slotlistdoctor[val.day]?.slots
+                                            .map((slot) => (
+                                              <option key={slot} value={slot}>
+                                                {slot}
+                                              </option>
+                                            )) : slotlistdoctor[val.day]?.slots
+                                              ?.filter(slot => !hidetime.includes(slot))
+                                              .map((slot) => (
+                                                <option key={slot} value={slot}>
+                                                  {slot}
+                                                </option>
+                                              ))
+                                      }
+
+
                                     </select>
                                   </div>
                                   <p>-</p>
                                   <div className="clock">
                                     <select
-                                      onChange={(e) =>
-                                        {handleSlotChange(val.day, divIndex + 1, "end", e.target.value);setEndTime( e.target.value)}
+                                      onChange={(e) => { handleSlotChange(val.day, divIndex + 1, "end", e.target.value); setEndTime(e.target.value) }
                                       }
                                       className="time-day"
                                       style={{
@@ -385,12 +428,12 @@ function SheduleInformation() {
                                         borderRadius: "8px",
                                       }}
                                     >
-                                      <option value=""> -- -- --</option>
+                                      <option> -- -- --</option>
                                       {slotlistdoctor[val.day]?.slots
                                         ?.filter(
                                           (slot) =>
-                                            !selectedStartTimes[`${val.day}_${divIndex + 1}`] || 
-                                            slot > selectedStartTimes[`${val.day}_${divIndex + 1}`] 
+                                            !selectedStartTimes[`${val.day}_${divIndex + 1}`] ||
+                                            slot > selectedStartTimes[`${val.day}_${divIndex + 1}`]
                                         )
                                         .map((slot) => (
                                           <option key={slot} value={slot}>
@@ -398,10 +441,6 @@ function SheduleInformation() {
                                           </option>
                                         ))}
                                     </select>
-
-
-
-
                                   </div>
                                 </>
                               ) : (

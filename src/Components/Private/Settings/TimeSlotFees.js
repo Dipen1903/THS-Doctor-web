@@ -109,12 +109,12 @@ function Timeslotfees() {
                   enableReinitialize
                   validationSchema={ScheduleSchema}
                   onSubmit={(values) => {
-                    axios.post(`${BASE_URL}/availibility-create-days`, slotlistdata, {
-                      headers: {
-                        'Content-Type': 'application/json',
-                        Authorization: `Bearer ${SessionData?.token}`,
-                      },
-                    })
+                      axios.post(`${BASE_URL}/availibility-create-days`, slotlistdata, {
+                        headers: {
+                          'Content-Type': 'application/json',
+                          Authorization: `Bearer ${SessionData?.token}`,
+                        },
+                      })
                       .then((response) => {
                         if (response.data.message === 'Availibility updated successfully') {
                           setEdit(false);
