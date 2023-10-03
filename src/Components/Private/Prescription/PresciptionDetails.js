@@ -45,7 +45,8 @@ const Review = ({ values }) => {
       tempMessage.imageUrl = prescDetails?.prescription_url || "";
       dispatch(SendMessage(tempMessage)).then((res) => {
         dispatch(toggleReview(false));
-        navigate(`/chat/${prescDetails?.prescription_id}`);
+        // navigate(`/chat/${prescDetails?.prescription_id}`);
+        navigate(`/dashboard`);
       });
     } catch (error) {}
   };

@@ -72,7 +72,7 @@ function LatestConsultation() {
           <h3 className="upcomming_consult_title">Upcoming Consultations</h3>
         </div>
       </div>
-
+      {console.log("latest", latest)}
       <div className="chat_box_bg">
         <div className="row">
           {latest?.length ? (
