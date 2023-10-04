@@ -171,95 +171,91 @@ function Medicine() {
                             value={values?.medicines[index].medicine_name}
                             onChange={handleChange}
                             onBlur={handleBlur}
+                            style={{ border: "none", color: "black" }}
                           />
                         </td>
                         <td className="prescription_table_body_text">
-                          <td className="prescription_table_body_text">
-                            <div style={{ display: "flex", border: "1px solid #ccc", borderRadius: "8px" }}>
-                              <button
-                                type="button"
-                                onClick={() => handleDecrement(index, "morning")}
-                                style={{ background: "transparent", border: "none", color: "#199A8E" }}
-                              >
-                                -
-                              </button>
-                              <input
-                                type="text"
-                                value={values?.medicines[index].morning}
-                                readOnly
-                                onBlur={handleBlur}
-                                name={`medicines[${index}].morning`}
-                                id={`medicines[${index}].morning`}
-                                style={{ border: "none", width: "50px" }}
-                              />
-                              <button
-                                type="button"
-                                onClick={() => handleIncrement(index, "morning")}
-                                style={{ background: "transparent", border: "none", color: "#199A8E" }}
-                              >
-                                +
-                              </button>
-                            </div>
-                          </td>
+                          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", border: "1px solid #ccc", borderRadius: "8px" }}>
+                            <button
+                              type="button"
+                              onClick={() => handleDecrement(index, "morning")}
+                              style={{ background: "transparent", border: "none", color: "#199A8E", marginLeft:"5%" }}
+                            >
+                              -
+                            </button>
+                            <input
+                              type="text"
+                              value={values?.medicines[index].morning}
+                              readOnly
+                              onBlur={handleBlur}
+                              name={`medicines[${index}].morning`}
+                              id={`medicines[${index}].morning`}
+                              style={{ border: "none", width: "50px" }}
+                            />
+                            <button
+                              type="button"
+                              onClick={() => handleIncrement(index, "morning")}
+                              style={{ background: "transparent", border: "none", color: "#199A8E" , marginRight:"5%"  }}
+                            >
+                              +
+                            </button>
+                          </div>
+                        </td>
+                        <td className="prescription_table_body_text">
+
+                          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", border: "1px solid #ccc", borderRadius: "8px" }}>
+                            <button
+                              type="button"
+                              onClick={() => handleDecrement(index, "afternoon")}
+                              style={{ background: "transparent", border: "none", color: "#199A8E" , marginLeft:"5%"  }}
+                            >
+                              -
+                            </button>
+                            <input
+                              type="text"
+                              value={values?.medicines[index].afternoon}
+                              readOnly
+                              onBlur={handleBlur}
+                              name={`medicines[${index}].afternoon`}
+                              id={`medicines[${index}].afternoon`}
+                              style={{ border: "none", width: "50px" }}
+                            />
+                            <button
+                              type="button"
+                              onClick={() => handleIncrement(index, "afternoon")}
+                              style={{ background: "transparent", border: "none", color: "#199A8E"  , marginRight:"5%" }}
+                            >
+                              +
+                            </button>
+                          </div>
 
                         </td>
                         <td className="prescription_table_body_text">
-                          <td className="prescription_table_body_text">
-                            <div style={{ display: "flex", border: "1px solid #ccc", borderRadius: "8px" }}>
-                              <button
-                                type="button"
-                                onClick={() => handleDecrement(index, "afternoon")}
-                                style={{ background: "transparent", border: "none", color: "#199A8E" }}
-                              >
-                                -
-                              </button>
-                              <input
-                                type="text"
-                                value={values?.medicines[index].afternoon}
-                                readOnly
-                                onBlur={handleBlur}
-                                name={`medicines[${index}].afternoon`}
-                                id={`medicines[${index}].afternoon`}
-                                style={{ border: "none", width: "50px" }}
-                              />
-                              <button
-                                type="button"
-                                onClick={() => handleIncrement(index, "afternoon")}
-                                style={{ background: "transparent", border: "none", color: "#199A8E" }}
-                              >
-                                +
-                              </button>
-                            </div>
-                          </td>
-                        </td>
-                        <td className="prescription_table_body_text">
-                          <td className="prescription_table_body_text">
-                            <div style={{ display: "flex", border: "1px solid #ccc", borderRadius: "8px" }}>
-                              <button
-                                type="button"
-                                onClick={() => handleDecrement(index, "night")}
-                                style={{ background: "transparent", border: "none", color: "#199A8E" }}
-                              >
-                                -
-                              </button>
-                              <input
-                                type="text"
-                                name={`medicines[${index}].night`}
-                                id={`medicines[${index}].night`}
-                                value={values?.medicines[index].night}
-                                readOnly
-                                onBlur={handleBlur}
-                                style={{ border: "none", width: "50px" }}
-                              />
-                              <button
-                                type="button"
-                                onClick={() => handleIncrement(index, "night")}
-                                style={{ background: "transparent", border: "none", color: "#199A8E" }}
-                              >
-                                +
-                              </button>
-                            </div>
-                          </td>
+                          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", border: "1px solid #ccc", borderRadius: "8px" }}>
+                            <button
+                              type="button"
+                              onClick={() => handleDecrement(index, "night")}
+                              style={{ background: "transparent", border: "none", color: "#199A8E" , marginLeft:"5%"  }}
+                            >
+                              -
+                            </button>
+                            <input
+                              type="text"
+                              name={`medicines[${index}].night`}
+                              id={`medicines[${index}].night`}
+                              value={values?.medicines[index].night}
+                              readOnly
+                              onBlur={handleBlur}
+                              style={{ border: "none", width: "50px" }}
+                            />
+                            <button
+                              type="button"
+                              onClick={() => handleIncrement(index, "night")}
+                              style={{ background: "transparent", border: "none", color: "#199A8E" , marginRight:"5%"  }}
+                            >
+                              +
+                            </button>
+                          </div>
                         </td>
                         <td className="prescription_table_body_text">
                           <select
@@ -272,6 +268,7 @@ function Medicine() {
                                 e.target.value
                               );
                             }}
+                            style={{ width: "100%" }}
                           >
                             <option value="before_food">Before Food</option>
                             <option value="after_food">After Food</option>
@@ -280,7 +277,7 @@ function Medicine() {
                         <td className="prescription_table_body_text">
                           <FormControl
                             control="input"
-                            type="number"
+                            type="text"
                             min={1}
                             name={`medicines[${index}].days`}
                             id={`medicines[${index}].days`}
@@ -290,9 +287,7 @@ function Medicine() {
                             style={{ width: '80px' }} // Set the width to 200 pixels
                           />
                         </td>
-
-
-                        <td>
+                        <td className="prescription_table_body_text">
                           <center>
                             <img
                               onClick={(e) => {
@@ -301,7 +296,7 @@ function Medicine() {
                               }}
                               src={Icon.CrossRed}
                               alt="Avatar"
-                              className="ml_15 mt_15 mb_5"
+                            // className="ml_15 mt_15 mb_5"
                             />
                           </center>
                         </td>

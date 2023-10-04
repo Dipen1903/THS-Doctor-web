@@ -121,7 +121,7 @@ function Timeslotfees() {
                           dispatch(GetUserProfile());
                           dispatch(
                             setMessage({
-                              text: response?.dta?.message,
+                              text: response?.data?.message,
                               type: AlertEnum.Success,
                             })
                           );

@@ -161,7 +161,6 @@ function SheduleInformation() {
     ])
   }, [slotlistdoctor])
 
-
   const handleToggleChange = (day, isChecked) => {
     SetChecked((prevToggleData) => ({
       ...prevToggleData,
@@ -202,8 +201,6 @@ function SheduleInformation() {
         [`${day}_${index}`]: slotValue,
       });
     }
-
-    // Calculate timeSlotsBetween using the updated values.
     const startTime = selectedStartTimes[`${day}_${index}`];
     const endTime = updatedDaySlots[index].end;
     if (startTime && endTime) {
@@ -224,23 +221,9 @@ function SheduleInformation() {
     const startTimeMoment = moment(startTime, 'hh:mm a');
     const endTimeMoment = moment(endTime, 'hh:mm a');
 
-    // const startDate = new Date(`01/01/2000 ${startTime}`);
-    // const endDate = new Date(`01/01/2000 ${endTime}`);
-    // const timeSlots = [];
-    // timeSlots.push(
-    //   startDate.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })
-    // );
-    // while (startDate < endDate) {
-    //   startDate.setMinutes(startDate.getMinutes() + 15);
-    //   timeSlots.push(
-    //     startDate.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })
-    //   );
-    // }
     if (!data || !startTimeMoment.isValid() || !endTimeMoment.isValid()) {
-      // Handle invalid data or time
       return [];
     }
-
     const timeSlots = [];
     const startDate = moment(startTimeMoment);
 
@@ -256,7 +239,6 @@ function SheduleInformation() {
     }
     return timeSlots;
   };
-  console.log("hidetime", hidetime);
 
   const transformedData = {};
   Object.keys(selectedTimeSlots).forEach((day) => {
@@ -268,23 +250,19 @@ function SheduleInformation() {
 
     Object.keys(dayData).forEach((slotIndex) => {
       const slot = dayData[slotIndex];
-      dayObj.time_period[slotIndex] = {
+      dayObj.time_period = [{
         start_time: slot.start,
-        end_time: slot.end,
-      };
+        end_time: slot.end
+      }];
     });
     transformedData[day] = JSON.stringify(dayObj);
   });
   useEffect(() => {
     handleSaveSchedule();
   }, [selectedTimeSlots]);
-
   const handleSaveSchedule = () => {
     dispatch(slotdata(transformedData));
   };
-
-
-
   return (
     <>
       <FeeCardModal show={feeModal} onHide={() => dispatch(toggleFee(false))} />
@@ -395,22 +373,21 @@ function SheduleInformation() {
                                     >
                                       <option value=""> -- -- -- </option>
                                       {
-                                        divIndex == 0 ?
+                                        divIndex === 0 ?
                                           slotlistdoctor[val.day]?.slots
                                             .map((slot) => (
                                               <option key={slot} value={slot}>
                                                 {slot}
                                               </option>
-                                            )) : slotlistdoctor[val.day]?.slots
-                                              ?.filter(slot => !hidetime.includes(slot))
-                                              .map((slot) => (
-                                                <option key={slot} value={slot}>
-                                                  {slot}
-                                                </option>
-                                              ))
+                                            )) :
+                                          slotlistdoctor[val.day]?.slots
+                                            ?.filter(slot => !hidetime.includes(slot))
+                                            .map((slot) => (
+                                              <option key={slot} value={slot}>
+                                                {slot}
+                                              </option>
+                                            ))
                                       }
-
-
                                     </select>
                                   </div>
                                   <p>-</p>
