@@ -24,7 +24,7 @@ function UserDetails() {
       setImages(tempImg);
     });
 
-    return () => {};
+    return () => { };
   }, [chat]);
 
   return isDetails ? (
@@ -59,7 +59,7 @@ function UserDetails() {
                 className="chatuserimg"
               />
               <h3 className="userprofile_name_title">{room?.userName}</h3>
-              { console.log("room",room)}
+
               <h5 className="userprofile_name_subtitle">
                 {room?.age} |{" "}
                 {room?.gender?.toLowerCase() === "male" ? "M" : "F"}

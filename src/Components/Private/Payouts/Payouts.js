@@ -72,7 +72,7 @@ function Payouts() {
         }) => {
           return (
             <center>
-              {console.log("original",original)}
+     
               <Link to={original?.status == 1 && `/payouts/${original?.id}`}>
                 <img src={Icon.Eye} alt="view" />
               </Link>

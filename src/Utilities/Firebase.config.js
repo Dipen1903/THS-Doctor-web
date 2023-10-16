@@ -82,7 +82,7 @@ if ("serviceWorker" in navigator) {
 
     }) 
     .catch((error) => {
-      console.error("Service worker registration failed:", error);
+
     });
 }
 export const FirebaseDB = getFirestore(FirebaseApp);
@@ -112,7 +112,7 @@ export const GetFirbaseToken = async () => {
       return null;
     }
   } catch (error) {
-    console.error("Error getting token:", error);
+
     return null;
   }
 };

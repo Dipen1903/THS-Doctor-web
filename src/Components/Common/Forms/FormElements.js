@@ -187,7 +187,7 @@ function Select(props) {
         onChange(values.value);
       }
     } catch (error) {
-      console.error(error);
+
     }
   };
   const selectedValue = () => {
@@ -399,7 +399,7 @@ function SearchBox(rest) {
       );
       setResult(tempResult);
     } catch (error) {
-      console.error(error);
+  
     }
   };
 
@@ -421,7 +421,7 @@ function SearchBox(rest) {
       setResult([]);
       setText("");
     } catch (error) {
-      console.error(error);
+
     }
   };
   const removeItem = (user) => {
@@ -433,7 +433,7 @@ function SearchBox(rest) {
       onValueChange([...tempValue]);
       setText("");
     } catch (error) {
-      console.error(error);
+
     }
   };
   useEffect(() => {

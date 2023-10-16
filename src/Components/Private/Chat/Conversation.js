@@ -135,7 +135,7 @@ function Conversation({ roomData }) {
 
               <div className="col-md-6 chat-head-right">
                 <div className="d-flex">
-                  {console.log(" val?.documentType",chat)}
+
                   {chat.some((val) => val?.documentType === 4) && (
                     <Button
                       key="markCompleteButton"

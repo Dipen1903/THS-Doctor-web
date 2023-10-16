@@ -8,7 +8,7 @@ function FileUpload({ label, icon, isPdf, className, ...rest }) {
       <button
         className={className}
         onClick={(e) => {
-          {console.log("ggggggggggggggggggggg")}
+  
           e.preventDefault();
           fileRef?.current?.click();
         }}

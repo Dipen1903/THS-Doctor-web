@@ -59,7 +59,7 @@ const SecondSharLink = () => {
     //         console.error('Error generating dynamic link:', error);
     //     }
     // };
-
+    console.log("apiResponse",apiResponse);
 
     useEffect(() => {
         dispatch(DoctorFees());
@@ -123,10 +123,12 @@ const SecondSharLink = () => {
         if (linkInputRef.current) {
             // Set the input value to the full link (apiResponse)
             linkInputRef.current.value = apiResponse;
+            console.log("apiResponse-----", apiResponse);
             linkInputRef.current.select();
             document.execCommand('copy');
         }
     };
+
     const truncateLink = (text) => {
         if (text.length > 20) {
             return text.slice(0, 20) + '...';

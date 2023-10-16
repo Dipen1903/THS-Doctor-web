@@ -52,12 +52,9 @@ const UploadModal = ({ isOpen, onClose }) => {
         try {
             const arr = mobilenumber;
             const resultString = arr.join(",");
-            console.log("resultString", resultString);
             const result = await dispatch(DoctorFetachNumbers({ phone_numbers: resultString }));
-            console.log('API call result', result);
-
         } catch (error) {
-            console.error('API call error', error);
+     
         }
     };
 

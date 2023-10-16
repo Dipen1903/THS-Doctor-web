@@ -9,8 +9,12 @@ import Accordion from "react-bootstrap/Accordion";
 import { Button } from "react-bootstrap";
 import { Icon } from "../../../Utilities/Icons";
 import { useDispatch, useSelector } from "react-redux";
+import { SlotListDoctor, slotdata, toggleFee } from "../../../Store/Reducers/ProfileReducer.js";
+import light from "../../../Assets/img/svg/light.svg";
+import plus from "../../../Assets/img/svg/plus.svg";
+import Toggle from "../SetupProfile/Shedule&Payment/Toggle";
+import moment from "moment";
 import {
-  EditSchedule,
   GetUserProfile,
 } from "../../../Store/Reducers/ProfileReducer";
 import FormControl from "../../Common/Forms/FormControl";
@@ -25,7 +29,7 @@ import { AlertEnum } from "../../../Utilities/Enums";
 function Timeslotfees() {
   const [scheduleData, setScheduleData] = useState({ ...ScheduleEnum });
   const dispatch = useDispatch();
-  const { userProfile } = useSelector(({ ProfileSlice }) => ProfileSlice);
+  const { userProfile , slotlistdoctor } = useSelector(({ ProfileSlice }) => ProfileSlice);
   const [chkValue, setChkValue] = useState(false);
   const [edit, setEdit] = useState(false);
   const SessionData = JSON.parse(localStorage.getItem(SESSION));
@@ -77,6 +81,246 @@ function Timeslotfees() {
     ({ ProfileSlice }) => ProfileSlice
   );
 
+  ///Time slots
+  const [selectedTimeSlots, setSelectedTimeSlots] = useState({});
+  const [selectedStartTimes, setSelectedStartTimes] = useState({});
+  const [startTime, setStartTime] = useState("");
+  const [endTime, setEndTime] = useState("");
+  const [dayoftime, SetDay] = useState("");
+
+  const [timePickers, setTimePickers] = useState([{ id: 1 }]);
+  const [newDivCount, setNewDivCount] = useState(0);
+  const [addedDivs, setAddedDivs] = useState({});
+
+  const [weekDays, setWeekDays] = useState([
+    {
+      id: 1,
+      day: "sunday",
+      checked: true
+    },
+    {
+      id: 2,
+      day: "monday",
+      checked: true
+    },
+    {
+      id: 3,
+      day: "tuesday",
+      checked: true
+    },
+    {
+      id: 4,
+      day: "wednesday",
+      checked: true
+    },
+    {
+      id: 5,
+      day: "thursday",
+      checked: true
+    },
+    {
+      id: 6,
+      day: "friday",
+      checked: true
+    },
+    {
+      id: 7,
+      day: "saturday",
+      checked: true
+    },
+  ]
+  )
+
+
+  const addTimePicker = () => {
+    setTimePickers([...timePickers, { id: timePickers.length + 1 }]);
+  };
+
+  const removeTimePicker = (day, id) => {
+    const dayDivCount = addedDivs[day] || 0;
+    setAddedDivs({
+      ...addedDivs,
+      [day]: dayDivCount - 1,
+    });
+    setTimePickers(timePickers.filter((picker) => picker.id !== id));
+  };
+
+  const addNewDiv = () => {
+    setNewDivCount(newDivCount + 1);
+  };
+
+  const handleAddNewDiv = (day) => {
+    addNewDiv();
+    setAddedDivs({
+      ...addedDivs,
+      [day]: (addedDivs[day] || 0) + 1,
+    });
+  };
+  const [checked, SetChecked] = useState({
+    sunday: slotlistdoctor?.sunday?.length >= 0 ? false : true,
+    monday: slotlistdoctor?.monday?.length >= 0 ? false : true,
+    tuesday: slotlistdoctor?.tuesday?.length >= 0 ? false : true,
+    wednesday: slotlistdoctor?.wednesday?.length >= 0 ? false : true,
+    thursday: slotlistdoctor?.thursday?.length >= 0 ? false : true,
+    friday: slotlistdoctor?.friday?.length >= 0 ? false : true,
+    saturday: slotlistdoctor?.saturday?.length >= 0 ? false : true,
+  });
+  useEffect(() => {
+    SetChecked({
+      sunday: slotlistdoctor?.sunday?.length >= 0 ? false : true,
+      monday: slotlistdoctor?.monday?.length >= 0 ? false : true,
+      tuesday: slotlistdoctor?.tuesday?.length >= 0 ? false : true,
+      wednesday: slotlistdoctor?.wednesday?.length >= 0 ? false : true,
+      thursday: slotlistdoctor?.thursday?.length >= 0 ? false : true,
+      friday: slotlistdoctor?.friday?.length >= 0 ? false : true,
+      saturday: slotlistdoctor?.saturday?.length >= 0 ? false : true,
+    })
+    setWeekDays([
+      {
+        id: 1,
+        day: "sunday",
+        checked: slotlistdoctor?.sunday?.length >= 0 ? false : true
+      },
+      {
+        id: 2,
+        day: "monday",
+        checked: slotlistdoctor?.monday?.length >= 0 ? false : true,
+      },
+      {
+        id: 3,
+        day: "tuesday",
+        checked: slotlistdoctor?.tuesday?.length >= 0 ? false : true,
+      },
+      {
+        id: 4,
+        day: "wednesday",
+        checked: slotlistdoctor?.wednesday?.length >= 0 ? false : true
+      },
+      {
+        id: 5,
+        day: "thursday",
+        checked: slotlistdoctor?.thursday?.length >= 0 ? false : true
+      },
+      {
+        id: 6,
+        day: "friday",
+        checked: slotlistdoctor?.friday?.length >= 0 ? false : true,
+      },
+      {
+        id: 7,
+        day: "saturday",
+        checked: slotlistdoctor?.saturday?.length >= 0 ? false : true
+      },
+    ])
+  }, [slotlistdoctor])
+
+  const handleToggleChange = (day, isChecked) => {
+    SetChecked((prevToggleData) => ({
+      ...prevToggleData,
+      [day]: isChecked,
+    }));
+
+    // If the day is unchecked, clear its selected slots
+    if (!isChecked) {
+      setSelectedTimeSlots((prevSelectedTimeSlots) => ({
+        ...prevSelectedTimeSlots,
+        [day]: {},
+      }));
+    }
+  };
+
+  useEffect(() => {
+    dispatch(SlotListDoctor())
+  }, [dispatch])
+  const [selectedTimeSlotsBetween, setSelectedTimeSlotsBetween] = useState([]);
+
+  const handleSlotChange = (day, index, timeSlotType, slotValue) => {
+    const updatedDaySlots = { ...(selectedTimeSlots[day] || {}) };
+    SetDay(day);
+    if (!updatedDaySlots[index]) {
+      updatedDaySlots[index] = { start: '', end: '' };
+      console.log("updatedDaySlotsupdatedDaySlotsupdatedDaySlots", updatedDaySlots);
+    }
+    updatedDaySlots[index][timeSlotType] = slotValue;
+    setSelectedTimeSlots({
+      ...selectedTimeSlots,
+      [day]: updatedDaySlots,
+    });
+
+    // Update selectedDayForHidetime and calculate timeSlotsBetween regardless of the condition
+    setSelectedDayForHidetime(day);
+
+    if (timeSlotType === "start") {
+      setSelectedStartTimes({
+        ...selectedStartTimes,
+        [`${day}_${index}`]: slotValue,
+      });
+    }
+    const startTime = selectedStartTimes[`${day}_${index}`];
+    const endTime = updatedDaySlots[index].end;
+    if (startTime && endTime) {
+      const timeSlotsBetween = generateTimeSlotsBetween(startTime, endTime, day);
+      setSelectedTimeSlotsBetween(timeSlotsBetween);
+    } else {
+      setSelectedTimeSlotsBetween([]);
+    }
+  };
+
+  const [hidetime, setHidetime] = useState([]);
+  const [selectedDayForHidetime, setSelectedDayForHidetime] = useState("");
+  const [firstClickForDay, setFirstClickForDay] = useState({});
+  const [selectedDay, setSelectedDay] = useState("");
+
+  const generateTimeSlotsBetween = (startTime, endTime, day) => {
+    const data = slotlistdoctor[dayoftime]?.slots;
+    const startTimeMoment = moment(startTime, 'hh:mm a');
+    const endTimeMoment = moment(endTime, 'hh:mm a');
+
+    if (!data || !startTimeMoment.isValid() || !endTimeMoment.isValid()) {
+      return [];
+    }
+    const timeSlots = [];
+    const startDate = moment(startTimeMoment);
+
+    while (startDate.isBefore(endTimeMoment)) {
+      timeSlots.push(startDate.format('hh:mm A')); // Format as desired
+      startDate.add(15, 'minutes'); // Add 15 minutes
+    }
+    console.log('startTime', startTime);
+
+    if (day === selectedDayForHidetime) {
+      setHidetime((prevHidetime) => [...prevHidetime, ...timeSlots]);
+    } else {
+      setHidetime([]);
+    }
+    return timeSlots;
+  };
+  console.log("startTime....", startTime);
+
+  const transformedData = {};
+  Object.keys(selectedTimeSlots).forEach((day) => {
+    const dayData = selectedTimeSlots[day];
+    const dayObj = {
+      days: [day],
+      time_period: {},
+    };
+
+    Object.keys(dayData).forEach((slotIndex) => {
+      const slot = dayData[slotIndex];
+      dayObj.time_period = [{
+        start_time: slot.start,
+        end_time: slot.end
+      }];
+    });
+    transformedData[day] = JSON.stringify(dayObj);
+  });
+  useEffect(() => {
+    handleSaveSchedule();
+  }, [selectedTimeSlots]);
+  const handleSaveSchedule = () => {
+    dispatch(slotdata(transformedData));
+  };
+
   return (
     <>
       <Container fluid>
@@ -109,12 +353,12 @@ function Timeslotfees() {
                   enableReinitialize
                   validationSchema={ScheduleSchema}
                   onSubmit={(values) => {
-                      axios.post(`${BASE_URL}/availibility-create-days`, slotlistdata, {
-                        headers: {
-                          'Content-Type': 'application/json',
-                          Authorization: `Bearer ${SessionData?.token}`,
-                        },
-                      })
+                    axios.post(`${BASE_URL}/availibility-create-days`, slotlistdata, {
+                      headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${SessionData?.token}`,
+                      },
+                    })
                       .then((response) => {
                         if (response.data.message === 'Availibility updated successfully') {
                           setEdit(false);
@@ -127,12 +371,10 @@ function Timeslotfees() {
                           );
                         } else {
 
-                          console.log('Unexpected API response:', response.data);
                         }
                       })
                       .catch((error) => {
 
-                        console.error('Error:', error);
                       });
                   }}
                 >
@@ -179,318 +421,144 @@ function Timeslotfees() {
                           <hr className="bottom_border mt_30 mb_30" />
                           <div className="row">
                             <div className="col-md-12">
-                              <h3 className="setting_time_slot_title">
-                                Online Time Slot Managment
-                              </h3>
+                              <h3 className="time_slot">Online Time Slot Managment</h3>
                             </div>
                           </div>
                           <div className="row mt_20">
                             <div className="col-md-12">
-                              <Tabs defaultActiveKey="first">
-                                <Tab
-                                  eventKey="first"
-                                  title="Weekdays"
-                                  className="tab_inner_box"
-                                >
-                                  <div className="weekdays_box">
-                                    <div className="row">
-                                      <div className="col-md-12">
-                                        <div className="day_box">
-                                          <FormControl
-                                            control="checkbox"
-                                            name="weekdays.days"
-                                            options={[
-                                              {
-                                                value: "sudisable",
-                                                key: "S",
-                                                disabled: true,
-                                              },
-                                              {
-                                                value: "monday",
-                                                key: "M",
-                                                disabled: !edit,
-                                              },
-                                              {
-                                                value: "tuesday",
-                                                key: "T",
-                                                disabled: !edit,
-                                              },
-                                              {
-                                                value: "wednesday",
-                                                key: "W",
-                                                disabled: !edit,
-                                              },
-                                              {
-                                                value: "thursday",
-                                                key: "T",
-                                                disabled: !edit,
-                                              },
-                                              {
-                                                value: "friday",
-                                                key: "F",
-                                                disabled: !edit,
-                                              },
-                                              {
-                                                value: "sadisable",
-                                                key: "S",
-                                                disabled: true,
-                                              },
-                                            ]}
-                                            values={values.weekdays.days}
-                                          />
-                                        </div>
-                                        <Accordion
-                                          defaultActiveKey={["1"]}
-                                          alwaysOpen
-                                        >
-                                          {Object.keys(
-                                            values.weekdays.time_period
-                                          ).map((item, index) => (
-                                            <Accordion.Item
-                                              key={item + index}
-                                              eventKey={index}
-                                            >
-                                              <Accordion.Header>
-                                                {item}
-                                              </Accordion.Header>
-                                              <Accordion.Body>
-                                                <div className="row">
-                                                  <div className=" col-md-6">
-                                                    <h5 className="start_at">
-                                                      Start at
-                                                    </h5>
-                                                    <FormControl
-                                                      control="select"
-                                                      customIcon={
-                                                        Icon.ClockBlue
-                                                      }
-                                                      options={
-                                                        values.weekdays
-                                                          .time_period[item]
-                                                          .slots
-                                                      }
-                                                      name={`weekdays.time_period.${item}.start_time`}
-                                                      id={`weekdays.time_period.${item}.start_time`}
-                                                      value={
-                                                        values.weekdays
-                                                          .time_period[item]
-                                                          .start_time
-                                                      }
-                                                      isSearchable={false}
-                                                      iconHide={false}
-                                                      setFieldValue={
-                                                        setFieldValue
-                                                      }
-                                                      onChange={() => { }}
-                                                      onBlur={handleBlur}
-                                                      isDisabled={!edit}
+                              <div className="row mt_10">
+                                <div className="col-md-12">
+                                  <FormControl
+                                    control="checkbox"
+                                    name="emergency_call"
+                                    options={[
+                                      { value: "emergency_call", key: "Emergency calls" },
+                                    ]}
+                                    value={values.emergency_call}
+                                    className="checkbox_icon"
+                                  />
+                                </div>
+                              </div>
+                              <div className="week-days-container">
+                                {weekDays.map((val) => {
+                                  const dayDivCount = addedDivs[val.day] || 0;
+                                  return (
+                                    <div className="edit_time_slot_mainss" key={val.id} style={{ marginLeft: "1rem" }}>
+                                      <div className="map_main_divss">
+                                        {Array.from(Array(dayDivCount + 1), (_, index) => index).map(
+                                          (divIndex) => {
+                                            const pickerId = divIndex + 1;
+                                            const selectedSlot = selectedTimeSlots[val.day] || "";
+                                            return (
+                                              <div className="time-pickerss" key={pickerId}>
+                                                {divIndex === 0 && (
+                                                  <div className="toggle-label" style={{ width: "115px" }}>
+                                                    <Toggle
+                                                      label={val.day}
+                                                      onToggleChange={(isChecked) => handleToggleChange(val.day, isChecked)}
+                                                      initialChecked={val.checked}
                                                     />
                                                   </div>
-
-                                                  <div className=" col-md-6">
-                                                    <h5 className="end_at">
-                                                      End at
-                                                    </h5>
-
-                                                    <FormControl
-                                                      control="select"
-                                                      options={[
+                                                )}
+                                                {checked[val.day] === true && divIndex !== 0 && (
+                                                  <>
+                                                    <div style={{ paddingLeft: "20%" }}>
+                                                      <img
+                                                        src={light}
+                                                        className="fa-regular fa-circle-xmark"
+                                                        onClick={() => removeTimePicker(val.day, pickerId)}
+                                                      ></img>
+                                                    </div>
+                                                  </>
+                                                )}
+                                                {checked[val.day] === true ? (
+                                                  <>
+                                                    <div className="clock">
+                                                      <select
+                                                        onChange={(e) => { handleSlotChange(val.day, divIndex + 1, 'start', e.target.value); setStartTime(e.target.value); SetDay(val.day); }
+                                                        }
+                                                        className="time-day"
+                                                        placeholder="-- -- --"
+                                                        style={{
+                                                          background: "none",
+                                                          border: "none",
+                                                          backgroundColor: "#ecf2ff",
+                                                          fontSize: "15px",
+                                                          padding: "10px 30px",
+                                                          borderRadius: "8px",
+                                                        }}
+                                                      >
+                                                        <option value=""> -- -- -- </option>
                                                         {
-                                                          label: "None",
-                                                          value: "",
-                                                        },
-                                                        ...values.weekdays.time_period[
-                                                          item
-                                                        ].slots?.filter((s) =>
-                                                          compareTime(
-                                                            s.value,
-                                                            values.weekdays
-                                                              .time_period[item]
-                                                              .start_time
+                                                          divIndex === 0 ?
+                                                            slotlistdoctor[val.day]?.slots
+                                                              .map((slot) => (
+                                                                <option key={slot} value={slot}>
+                                                                  {slot}
+                                                                </option>
+                                                              )) :
+                                                            slotlistdoctor[val.day]?.slots
+                                                              ?.filter(slot => !hidetime.includes(slot))
+                                                              .map((slot) => (
+                                                                <option key={slot} value={slot}>
+                                                                  {slot}
+                                                                </option>
+                                                              ))
+                                                        }
+                                                      </select>
+                                                    </div>
+                                                    <p>-</p>
+                                                    <div className="clock">
+                                                      <select
+                                                        onChange={(e) => { handleSlotChange(val.day, divIndex + 1, 'end', e.target.value); setEndTime(e.target.value); SetDay(val.day) }
+                                                        }
+                                                        className="time-day"
+                                                        style={{
+                                                          background: "none",
+                                                          border: "none",
+                                                          backgroundColor: "#ecf2ff",
+                                                          fontSize: "15px",
+                                                          padding: "10px 30px",
+                                                          borderRadius: "8px",
+                                                        }}
+                                                      >
+                                                        <option> -- -- --</option>
+                                                        {slotlistdoctor[val.day]?.slots
+                                                          ?.filter(
+                                                            (slot) =>
+                                                              !selectedStartTimes[`${val.day}_${divIndex + 1}`] ||
+                                                              slot > selectedStartTimes[`${val.day}_${divIndex + 1}`]
                                                           )
-                                                        ),
-                                                      ]}
-                                                      customIcon={
-                                                        Icon.ClockBlue
-                                                      }
-                                                      name={`weekdays.time_period.${item}.end_time`}
-                                                      id={`weekdays.time_period.${item}.end_time`}
-                                                      value={
-                                                        values.weekdays
-                                                          .time_period[item]
-                                                          .end_time
-                                                      }
-                                                      isSearchable={false}
-                                                      iconHide={false}
-                                                      setFieldValue={
-                                                        setFieldValue
-                                                      }
-                                                      onChange={() => { }}
-                                                      onBlur={handleBlur}
-                                                      isDisabled={!edit}
-                                                    />
-                                                    <div className="error">
-                                                      <ErrorMessage
-                                                        name={`weekdays.time_period.${item}.end_time`}
-                                                      />
+                                                          .map((slot) => (
+                                                            <option key={slot} value={slot}>
+                                                              {slot}
+                                                            </option>
+                                                          ))}
+                                                      </select>
                                                     </div>
+                                                  </>
+                                                ) : (
+                                                  <div>Unavailable</div>
+                                                )}
+                                                {checked[val.day] === true && divIndex === dayDivCount && (
+                                                  <div className="">
+                                                    <img
+                                                      src={plus}
+                                                      className="fa-solid fa-plus"
+                                                      style={{ color: "#3093BB", fontSize: "22px" }}
+                                                      onClick={() => handleAddNewDiv(val.day)}
+                                                    ></img>
                                                   </div>
-                                                </div>
-                                              </Accordion.Body>
-                                            </Accordion.Item>
-                                          ))}
-                                        </Accordion>
+                                                )}
+                                              </div>
+                                            );
+                                          }
+                                        )}
                                       </div>
                                     </div>
-                                  </div>
-                                </Tab>
-                                <Tab
-                                  eventKey="second"
-                                  title="Weekends"
-                                  className="tab_inner_box"
-                                >
-                                  <div className="weekends_box">
-                                    <div className="row">
-                                      <div className="col-md-12">
-                                        <div className="day_box">
-                                          <FormControl
-                                            control="checkbox"
-                                            name="weekends.days"
-                                            options={[
-                                              {
-                                                value: "sunday",
-                                                key: "S",
-                                                disabled: !edit,
-                                              },
-                                              {
-                                                value: "mondisable",
-                                                key: "M",
-                                                disabled: true,
-                                              },
-                                              {
-                                                value: "tuesdisable",
-                                                key: "T",
-                                                disabled: true,
-                                              },
-                                              {
-                                                value: "wednsdisable",
-                                                key: "W",
-                                                disabled: true,
-                                              },
-                                              {
-                                                value: "thursdisable",
-                                                key: "T",
-                                                disabled: true,
-                                              },
-                                              {
-                                                value: "fridisable",
-                                                key: "F",
-                                                disabled: true,
-                                              },
-                                              {
-                                                value: "saturday",
-                                                key: "S",
-                                                disabled: !edit,
-                                              },
-                                            ]}
-                                            values={values.weekends.days}
-                                          />
-                                        </div>
-                                        <Accordion
-                                          defaultActiveKey={["1"]}
-                                          alwaysOpen
-                                        >
-                                          {Object.keys(
-                                            values.weekends.time_period
-                                          ).map((item, index) => (
-                                            <Accordion.Item eventKey={index}>
-                                              <Accordion.Header>
-                                                {item}
-                                              </Accordion.Header>
-                                              <Accordion.Body>
-                                                <div className="row">
-                                                  <div className="col-md-6">
-                                                    <h5 className="start_at">
-                                                      Start at
-                                                    </h5>
-                                                    <FormControl
-                                                      control="select"
-                                                      options={
-                                                        values.weekends
-                                                          .time_period[item]
-                                                          .slots
-                                                      }
-                                                      customIcon={
-                                                        Icon.ClockBlue
-                                                      }
-                                                      isSearchable={false}
-                                                      iconHide={false}
-                                                      name={`weekends.time_period.${item}.start_time`}
-                                                      id={`weekends.time_period.${item}.start_time`}
-                                                      value={
-                                                        values.weekends
-                                                          .time_period[item]
-                                                          .start_time
-                                                      }
-                                                      setFieldValue={
-                                                        setFieldValue
-                                                      }
-                                                      onChange={() => { }}
-                                                      onBlur={handleBlur}
-                                                      isDisabled={!edit}
-                                                    />
-                                                  </div>
-                                                  <div className="col-md-6">
-                                                    <h5 className="end_at">
-                                                      End at
-                                                    </h5>
-                                                    <FormControl
-                                                      control="select"
-                                                      options={values.weekends.time_period[
-                                                        item
-                                                      ].slots?.filter((s) =>
-                                                        compareTime(
-                                                          s.value,
-                                                          values.weekends
-                                                            .time_period[item]
-                                                            .start_time
-                                                        )
-                                                      )}
-                                                      customIcon={
-                                                        Icon.ClockBlue
-                                                      }
-                                                      name={`weekends.time_perio.${item}.end_time`}
-                                                      id={`weekends.time_period.${item}.end_time`}
-                                                      value={
-                                                        values.weekends
-                                                          .time_period[item]
-                                                          .end_time
-                                                      }
-                                                      isSearchable={false}
-                                                      iconHide={false}
-                                                      setFieldValue={
-                                                        setFieldValue
-                                                      }
-                                                      onChange={() => { }}
-                                                      onBlur={handleBlur}
-                                                      isDisabled={!edit}
-                                                    />
-                                                    <div className="error">
-                                                      <ErrorMessage
-                                                        name={`weekends.time_period.${item}.end_time`}
-                                                      />
-                                                    </div>
-                                                  </div>
-                                                </div>
-                                              </Accordion.Body>
-                                            </Accordion.Item>
-                                          ))}
-                                        </Accordion>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </Tab>
-                              </Tabs>
+                                  );
+                                })}
+                              </div>
                             </div>
                           </div>
                           <div className="row mt_20">

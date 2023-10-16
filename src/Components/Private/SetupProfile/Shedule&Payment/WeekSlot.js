@@ -72,9 +72,7 @@ const WeekSlot = () => {
       ...prevToggleData,
       [day]: isChecked,
     }));
-    console.log(`Day: ${day}, isChecked: ${isChecked}`);
   };
-  console.log("checked", checked);
 
   return (
     <div className="week-days-container">

@@ -163,7 +163,7 @@ function ResetProfile() {
                   </div>
                 )}
                 {item === "bank details" && (
-                  <div className="col-md-12">
+                  <div className="col-md-12">            
                     <h5 className="reupload_detals_pretitle mt-5">
                       Bank Details
                     </h5>

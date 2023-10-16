@@ -15,6 +15,7 @@ import {
   CreateRPContactAPI,
   ValidateBankAccountAPI,
   SlotList,
+  SlotListFirst,
 } from "../../Routes/Service";
 
 import { AlertEnum } from "../../Utilities/Enums";
@@ -29,7 +30,8 @@ const initialState = {
   userProfile: "",
   rejectionDetails: "",
   slotlistdoctor:{},
-  slotlistdata:""
+  slotlistdata:"",
+  firstlistinslot:[]
 };
 
 export const GetUserProfile = createAsyncThunk(
@@ -359,7 +361,7 @@ export const EditSchedule = createAsyncThunk(
   async (values, { dispatch }) => {
     try {
       dispatch(setLoading(true));
-      console.log("values" , values);
+    
       const result = await EditScheduleAPI(values);
       if (result?.success) {
         dispatch(setLoading(false));
@@ -393,12 +395,30 @@ export const SlotListDoctor = createAsyncThunk(
       const result = await SlotList(values);
       if (result?.success) {
         dispatch(setLoading(false));
-        // dispatch(
-        //   setMessage({
-        //     text: result?.message,
-        //     type: AlertEnum.Success,
-        //   })
-        // );
+        return result;
+      } else {
+        throw result;
+      }
+    } catch (error) {
+      dispatch(setLoading(false));
+      dispatch(
+        setMessage({
+          text: error?.message,
+          type: AlertEnum.Error,
+        })
+      );
+      return error;
+    }
+  }
+);
+export const SlotFirstList = createAsyncThunk(
+  "SlotFirstList",
+  async (values, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const result = await SlotListFirst(values);
+      if (result?.success) {
+        dispatch(setLoading(false));
         return result;
       } else {
         throw result;
@@ -472,7 +492,6 @@ export const ProfileSlice = createSlice({
       state.feeModal = action.payload;
     },
     slotdata: (state, action) => {
-      console.log("action???????????? ",action.payload);
       state.slotlistdata = action.payload;
     },
   },
@@ -480,6 +499,10 @@ export const ProfileSlice = createSlice({
     builder.addCase(EditUserProfile.fulfilled, (state, action) => {
       state.userProfile = action.payload?.data;
     });
+    builder.addCase(SlotFirstList.fulfilled, (state, action) => {
+      state.firstlistinslot = action.payload?.data;
+    });
+    
     builder.addCase(SlotListDoctor.fulfilled, (state, action) => {
       state.slotlistdoctor = action.payload?.data;
     });

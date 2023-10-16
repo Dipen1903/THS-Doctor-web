@@ -403,13 +403,10 @@ export function SetUpSetting() {
             );
             dispatch(nextStep());
           } else {
-
-            console.log('Unexpected API response:', response.data);
           }
         })
         .catch((error) => {
 
-          console.error('Error:', error);
         });
 
 

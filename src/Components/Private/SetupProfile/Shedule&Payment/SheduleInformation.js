@@ -32,8 +32,8 @@ function SheduleInformation() {
   const [selectedTimeSlots, setSelectedTimeSlots] = useState({});
   const [selectedStartTimes, setSelectedStartTimes] = useState({});
   const [startTime, setStartTime] = useState("");
-  const [dayoftime, SetDay] = useState("");
   const [endTime, setEndTime] = useState("");
+  const [dayoftime, SetDay] = useState("");
 
   const [timePickers, setTimePickers] = useState([{ id: 1 }]);
   const [newDivCount, setNewDivCount] = useState(0);
@@ -180,11 +180,13 @@ function SheduleInformation() {
     dispatch(SlotListDoctor())
   }, [dispatch])
   const [selectedTimeSlotsBetween, setSelectedTimeSlotsBetween] = useState([]);
+
   const handleSlotChange = (day, index, timeSlotType, slotValue) => {
     const updatedDaySlots = { ...(selectedTimeSlots[day] || {}) };
     SetDay(day);
     if (!updatedDaySlots[index]) {
       updatedDaySlots[index] = { start: '', end: '' };
+      console.log("updatedDaySlotsupdatedDaySlotsupdatedDaySlots", updatedDaySlots);
     }
     updatedDaySlots[index][timeSlotType] = slotValue;
     setSelectedTimeSlots({
@@ -231,6 +233,7 @@ function SheduleInformation() {
       timeSlots.push(startDate.format('hh:mm A')); // Format as desired
       startDate.add(15, 'minutes'); // Add 15 minutes
     }
+    console.log('startTime', startTime);
 
     if (day === selectedDayForHidetime) {
       setHidetime((prevHidetime) => [...prevHidetime, ...timeSlots]);
@@ -239,6 +242,7 @@ function SheduleInformation() {
     }
     return timeSlots;
   };
+  console.log("startTime....", startTime);
 
   const transformedData = {};
   Object.keys(selectedTimeSlots).forEach((day) => {
@@ -357,7 +361,7 @@ function SheduleInformation() {
                                 <>
                                   <div className="clock">
                                     <select
-                                      onChange={(e) => { handleSlotChange(val.day, divIndex + 1, "start", e.target.value); setStartTime(e.target.value); SetDay(val.day); }
+                                      onChange={(e) => { handleSlotChange(val.day, divIndex + 1, 'start', e.target.value); setStartTime(e.target.value); SetDay(val.day); }
                                       }
                                       className="time-day"
                                       placeholder="-- -- --"
@@ -369,7 +373,6 @@ function SheduleInformation() {
                                         padding: "10px 30px",
                                         borderRadius: "8px",
                                       }}
-
                                     >
                                       <option value=""> -- -- -- </option>
                                       {
@@ -393,7 +396,7 @@ function SheduleInformation() {
                                   <p>-</p>
                                   <div className="clock">
                                     <select
-                                      onChange={(e) => { handleSlotChange(val.day, divIndex + 1, "end", e.target.value); setEndTime(e.target.value) }
+                                      onChange={(e) => { handleSlotChange(val.day, divIndex + 1, 'end', e.target.value); setEndTime(e.target.value); SetDay(val.day) }
                                       }
                                       className="time-day"
                                       style={{
@@ -485,10 +488,12 @@ const FeeCardModal = (props) => {
               </tr>
             ))
           ) : (
-            <></>
+            <>
+            </>
           )}
         </table>
       </Modal.Body>
     </Modal>
   );
 };
+

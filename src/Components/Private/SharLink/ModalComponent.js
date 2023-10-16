@@ -10,7 +10,7 @@ const ModalComponent = ({ isOpen, onClose }) => {
     // const handleInputChange = (event) => {
     //     setMobileNumber(event.target.value);
     // };
-    console.log("setNumbersList",mobileNumber);
+
 
     const handleAddNumber = () => {
         if (mobileNumber.trim() !== "") {

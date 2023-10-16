@@ -64,6 +64,8 @@ export const ValidateBankAccountAPI = (data) =>
   POST(`${BASE_URL}/validate-bank-account`, data);
   export const SlotList = (data) =>
   POST(`${BASE_URL}/slot-by-days`, data);
+  export const SlotListFirst = (data) =>
+  POST(`${BASE_URL}/slotmaster`, data);
 
 //* MOBILE NUMBER API REQUEST
 export const OTPCurrentAPI = (data) =>
