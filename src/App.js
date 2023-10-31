@@ -14,9 +14,16 @@ import { setMessage } from "./Store/Reducers/LayoutSlice";
 import { AlertEnum } from "./Utilities/Enums";
 import { LocalServiceWorkerRegister } from "./Utilities/Functions";
 import { useDispatch } from "react-redux";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { params } from "./Store/Reducers/RadiologySlice";
 
 function App() {
   const dispatch = useDispatch();
+  const location = useLocation();
+  console.log("location", location.pathname);
+  useEffect(() => {
+    dispatch(params(location.pathname))
+  }, [])
   onMessageListener()
     .then((payload) => {
       let messageBody;

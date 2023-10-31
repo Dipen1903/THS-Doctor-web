@@ -9,7 +9,7 @@ import Accordion from "react-bootstrap/Accordion";
 import { Button } from "react-bootstrap";
 import { Icon } from "../../../Utilities/Icons";
 import { useDispatch, useSelector } from "react-redux";
-import { SlotListDoctor, slotdata, toggleFee } from "../../../Store/Reducers/ProfileReducer.js";
+import { SlotFirstList, SlotListDoctor, slotdata, toggleFee } from "../../../Store/Reducers/ProfileReducer.js";
 import light from "../../../Assets/img/svg/light.svg";
 import plus from "../../../Assets/img/svg/plus.svg";
 import Toggle from "../SetupProfile/Shedule&Payment/Toggle";
@@ -29,7 +29,7 @@ import { AlertEnum } from "../../../Utilities/Enums";
 function Timeslotfees() {
   const [scheduleData, setScheduleData] = useState({ ...ScheduleEnum });
   const dispatch = useDispatch();
-  const { userProfile , slotlistdoctor } = useSelector(({ ProfileSlice }) => ProfileSlice);
+  const { userProfile, slotlistdoctor } = useSelector(({ ProfileSlice }) => ProfileSlice);
   const [chkValue, setChkValue] = useState(false);
   const [edit, setEdit] = useState(false);
   const SessionData = JSON.parse(localStorage.getItem(SESSION));
@@ -77,10 +77,11 @@ function Timeslotfees() {
     initialLoad();
     return () => { };
   }, [userProfile]);
-  const { slotlistdata } = useSelector(
+  const { slotlistdata, firstlistinslot } = useSelector(
     ({ ProfileSlice }) => ProfileSlice
   );
-
+  console.log("firstlistinslot", firstlistinslot);
+  console.log("slotlistdata", slotlistdata);
   ///Time slots
   const [selectedTimeSlots, setSelectedTimeSlots] = useState({});
   const [selectedStartTimes, setSelectedStartTimes] = useState({});
@@ -155,64 +156,69 @@ function Timeslotfees() {
       ...addedDivs,
       [day]: (addedDivs[day] || 0) + 1,
     });
+
+
+
   };
+  console.log("slotlistdoctor", slotlistdoctor);
   const [checked, SetChecked] = useState({
-    sunday: slotlistdoctor?.sunday?.length >= 0 ? false : true,
-    monday: slotlistdoctor?.monday?.length >= 0 ? false : true,
-    tuesday: slotlistdoctor?.tuesday?.length >= 0 ? false : true,
-    wednesday: slotlistdoctor?.wednesday?.length >= 0 ? false : true,
-    thursday: slotlistdoctor?.thursday?.length >= 0 ? false : true,
-    friday: slotlistdoctor?.friday?.length >= 0 ? false : true,
-    saturday: slotlistdoctor?.saturday?.length >= 0 ? false : true,
+    sunday: slotlistdoctor?.saved_time_slot?.sunday === null ? false : true,
+    monday: slotlistdoctor?.saved_time_slot?.monday === null ? false : true,
+    tuesday: slotlistdoctor?.saved_time_slot?.tuesday === null ? false : true,
+    wednesday: slotlistdoctor?.saved_time_slot?.wednesday === null ? false : true,
+    thursday: slotlistdoctor?.saved_time_slot?.thursday === null ? false : true,
+    friday: slotlistdoctor?.saved_time_slot?.friday === null ? false : true,
+    saturday: slotlistdoctor?.saved_time_slot?.saturday === null ? false : true,
   });
   useEffect(() => {
     SetChecked({
-      sunday: slotlistdoctor?.sunday?.length >= 0 ? false : true,
-      monday: slotlistdoctor?.monday?.length >= 0 ? false : true,
-      tuesday: slotlistdoctor?.tuesday?.length >= 0 ? false : true,
-      wednesday: slotlistdoctor?.wednesday?.length >= 0 ? false : true,
-      thursday: slotlistdoctor?.thursday?.length >= 0 ? false : true,
-      friday: slotlistdoctor?.friday?.length >= 0 ? false : true,
-      saturday: slotlistdoctor?.saturday?.length >= 0 ? false : true,
+      sunday: slotlistdoctor?.saved_time_slot?.sunday === null ? false : true,
+      monday: slotlistdoctor?.saved_time_slot?.monday === null ? false : true,
+      tuesday: slotlistdoctor?.saved_time_slot?.tuesday === null ? false : true,
+      wednesday: slotlistdoctor?.saved_time_slot?.wednesday === null ? false : true,
+      thursday: slotlistdoctor?.saved_time_slot?.thursday === null ? false : true,
+      friday: slotlistdoctor?.saved_time_slot?.friday === null ? false : true,
+      saturday: slotlistdoctor?.saved_time_slot?.saturday === null ? false : true,
     })
     setWeekDays([
       {
         id: 1,
         day: "sunday",
-        checked: slotlistdoctor?.sunday?.length >= 0 ? false : true
+        checked: slotlistdoctor?.saved_time_slot?.sunday === null ? false : true
       },
       {
         id: 2,
         day: "monday",
-        checked: slotlistdoctor?.monday?.length >= 0 ? false : true,
+        checked: slotlistdoctor?.saved_time_slot?.monday === null ? false : true,
       },
       {
         id: 3,
         day: "tuesday",
-        checked: slotlistdoctor?.tuesday?.length >= 0 ? false : true,
+        checked: slotlistdoctor?.saved_time_slot?.tuesday === null ? false : true,
       },
       {
         id: 4,
         day: "wednesday",
-        checked: slotlistdoctor?.wednesday?.length >= 0 ? false : true
+        checked: slotlistdoctor?.saved_time_slot?.wednesday === null ? false : true
       },
       {
         id: 5,
         day: "thursday",
-        checked: slotlistdoctor?.thursday?.length >= 0 ? false : true
+        checked: slotlistdoctor?.saved_time_slot?.thursday === null ? false : true
       },
       {
         id: 6,
         day: "friday",
-        checked: slotlistdoctor?.friday?.length >= 0 ? false : true,
+        checked: slotlistdoctor?.saved_time_slot?.friday === null ? false : true,
       },
       {
         id: 7,
         day: "saturday",
-        checked: slotlistdoctor?.saturday?.length >= 0 ? false : true
+        checked: slotlistdoctor?.saved_time_slot?.saturday === null ? false : true
       },
     ])
   }, [slotlistdoctor])
+  console.log("checked", firstlistinslot);
 
   const handleToggleChange = (day, isChecked) => {
     SetChecked((prevToggleData) => ({
@@ -231,15 +237,23 @@ function Timeslotfees() {
 
   useEffect(() => {
     dispatch(SlotListDoctor())
+    dispatch(SlotFirstList())
   }, [dispatch])
+
   const [selectedTimeSlotsBetween, setSelectedTimeSlotsBetween] = useState([]);
 
   const handleSlotChange = (day, index, timeSlotType, slotValue) => {
+    console.log("timeSlotType", timeSlotType);
+    console.log("slotValue", slotValue);
+    console.log("day", day);
+
     const updatedDaySlots = { ...(selectedTimeSlots[day] || {}) };
+    console.log("updatedDaySlots", updatedDaySlots);
     SetDay(day);
     if (!updatedDaySlots[index]) {
-      updatedDaySlots[index] = { start: '', end: '' };
-      console.log("updatedDaySlotsupdatedDaySlotsupdatedDaySlots", updatedDaySlots);
+      updatedDaySlots[index] = {
+        start: '', end: ''
+      };
     }
     updatedDaySlots[index][timeSlotType] = slotValue;
     setSelectedTimeSlots({
@@ -258,6 +272,7 @@ function Timeslotfees() {
     }
     const startTime = selectedStartTimes[`${day}_${index}`];
     const endTime = updatedDaySlots[index].end;
+
     if (startTime && endTime) {
       const timeSlotsBetween = generateTimeSlotsBetween(startTime, endTime, day);
       setSelectedTimeSlotsBetween(timeSlotsBetween);
@@ -270,23 +285,30 @@ function Timeslotfees() {
   const [selectedDayForHidetime, setSelectedDayForHidetime] = useState("");
   const [firstClickForDay, setFirstClickForDay] = useState({});
   const [selectedDay, setSelectedDay] = useState("");
+  console.log("hidetime", hidetime);
+
+
 
   const generateTimeSlotsBetween = (startTime, endTime, day) => {
-    const data = slotlistdoctor[dayoftime]?.slots;
+    const data = firstlistinslot[dayoftime];
+    console.log("data++++++", data);
     const startTimeMoment = moment(startTime, 'hh:mm a');
     const endTimeMoment = moment(endTime, 'hh:mm a');
 
     if (!data || !startTimeMoment.isValid() || !endTimeMoment.isValid()) {
       return [];
     }
+    
     const timeSlots = [];
+    console.log("timeSlots+++", timeSlots);
+
     const startDate = moment(startTimeMoment);
 
     while (startDate.isBefore(endTimeMoment)) {
       timeSlots.push(startDate.format('hh:mm A')); // Format as desired
+      console.log("timeSlots============", timeSlots);
       startDate.add(15, 'minutes'); // Add 15 minutes
     }
-    console.log('startTime', startTime);
 
     if (day === selectedDayForHidetime) {
       setHidetime((prevHidetime) => [...prevHidetime, ...timeSlots]);
@@ -295,7 +317,6 @@ function Timeslotfees() {
     }
     return timeSlots;
   };
-  console.log("startTime....", startTime);
 
   const transformedData = {};
   Object.keys(selectedTimeSlots).forEach((day) => {
@@ -320,7 +341,6 @@ function Timeslotfees() {
   const handleSaveSchedule = () => {
     dispatch(slotdata(transformedData));
   };
-
   return (
     <>
       <Container fluid>
@@ -370,11 +390,9 @@ function Timeslotfees() {
                             })
                           );
                         } else {
-
                         }
                       })
                       .catch((error) => {
-
                       });
                   }}
                 >
@@ -448,7 +466,8 @@ function Timeslotfees() {
                                         {Array.from(Array(dayDivCount + 1), (_, index) => index).map(
                                           (divIndex) => {
                                             const pickerId = divIndex + 1;
-                                            const selectedSlot = selectedTimeSlots[val.day] || "";
+                                            // console.log("pickerId", pickerId);
+                                            // const selectedSlot = selectedTimeSlots[val.day] || "";
                                             return (
                                               <div className="time-pickerss" key={pickerId}>
                                                 {divIndex === 0 && (
@@ -491,17 +510,19 @@ function Timeslotfees() {
                                                         <option value=""> -- -- -- </option>
                                                         {
                                                           divIndex === 0 ?
-                                                            slotlistdoctor[val.day]?.slots
+                                                            firstlistinslot[val.day] &&
+                                                            firstlistinslot[val.day]
                                                               .map((slot) => (
                                                                 <option key={slot} value={slot}>
                                                                   {slot}
                                                                 </option>
                                                               )) :
-                                                            slotlistdoctor[val.day]?.slots
-                                                              ?.filter(slot => !hidetime.includes(slot))
+                                                            firstlistinslot[val.day]
+                                                              ?.filter((slot) => !hidetime.includes(slot))
                                                               .map((slot) => (
                                                                 <option key={slot} value={slot}>
                                                                   {slot}
+                                                                  {console.log(slot)}
                                                                 </option>
                                                               ))
                                                         }
@@ -523,7 +544,7 @@ function Timeslotfees() {
                                                         }}
                                                       >
                                                         <option> -- -- --</option>
-                                                        {slotlistdoctor[val.day]?.slots
+                                                        {firstlistinslot[val.day]
                                                           ?.filter(
                                                             (slot) =>
                                                               !selectedStartTimes[`${val.day}_${divIndex + 1}`] ||
@@ -605,3 +626,4 @@ function Timeslotfees() {
 }
 
 export default Timeslotfees;
+

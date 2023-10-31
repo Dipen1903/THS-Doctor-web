@@ -33,17 +33,22 @@ export const GetRadioLogyData = createAsyncThunk(
 export const RadiologySlice = createSlice({
   name: "RadiologySlice",
   initialState,
-  reducers: {},
+  reducers: {
+    params:(state, action) => {
+      state.paramas = action.payload
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(GetRadioLogyData.fulfilled, (state, action) => {
       state.radiologyData = action.payload;
     });
+    
   },
 });
 export const {
   addToCart,
   removeItem,
-
+  params,
   clearRadiologyCartItem,
 } = RadiologySlice.actions;
 export default RadiologySlice.reducer;

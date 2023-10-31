@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import { Formik, ErrorMessage } from "formik";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import * as Yup from "yup";
 import OTPInput from "../../Common/Layouts/OTPInput/OTPInput";
 import { BackGround } from "../../../Utilities/Icons";
@@ -24,10 +24,11 @@ import { useField } from "formik";
 import { Logo } from "../../../Utilities/Icons";
 import image from '../../../Assets/json/THS Banner 2_1170 x 2532_23 Dec.png'
 import { useState } from "react";
+import { params } from "../../../Store/Reducers/RadiologySlice";
 export default function SignUpComponent() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { otpVerify, success } = useSelector(
+  const { otpVerify, success  } = useSelector(
     ({ RegisterSlice }) => RegisterSlice
   );
 
@@ -229,9 +230,12 @@ export default function SignUpComponent() {
   );
 }
 
-
+const { id } = useParams;
 const OTPVerify = (props) => {
   const { values, ...rest } = props;
+  const { paramas } = useSelector(
+    ({ RadiologySlice }) => RadiologySlice
+  );
   const dispatch = useDispatch();
   const { timer, resetTimer } = useTimer();
   const resendOtp = (e) => {
@@ -244,6 +248,19 @@ const OTPVerify = (props) => {
       if (res?.payload?.success) resetTimer(60);
     });
   };
+  const parseURLParams = (paramas) => {
+    const searchParams = new URLSearchParams(paramas);
+    const utmParams = {};
+
+    // Extract the UTM parameters
+    utmParams.utm_source = searchParams.get('utm_source');
+    utmParams.utm_medium = searchParams.get('utm_medium');
+    utmParams.utm_campaign = searchParams.get('utm_campaign');
+
+    return utmParams;
+  };
+
+  const utmParameters = parseURLParams(paramas);
   return (
     <Modal
       {...rest}
@@ -261,11 +278,13 @@ const OTPVerify = (props) => {
         </Modal.Title>
       </Modal.Header>
       <Formik
-        initialValues={{ mobile_number: values?.mobile_number, otp: "" }}
+        initialValues={{ mobile_number: values?.mobile_number, otp: ""  }}
         enableReinitialize
         validationSchema={OTPSchema}
         onSubmit={(values) => {
-          dispatch(OTPVerifySignUp(values)).then((res) => {
+          dispatch(OTPVerifySignUp({values ,    utm_source: utmParameters.utm_source,
+            utm_campaign: utmParameters.utm_medium,
+            utm_medium: utmParameters.utm_campaign})).then((res) => {
             if (res.payload.success) {
               dispatch(toggleOTPverify(false));
               dispatch(toggleSuccess(true));

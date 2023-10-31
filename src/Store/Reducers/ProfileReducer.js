@@ -29,9 +29,9 @@ const initialState = {
   feeModal: false,
   userProfile: "",
   rejectionDetails: "",
-  slotlistdoctor:{},
-  slotlistdata:"",
-  firstlistinslot:[]
+  slotlistdoctor: {},
+  slotlistdata: {},
+  firstlistinslot: []
 };
 
 export const GetUserProfile = createAsyncThunk(
@@ -361,7 +361,7 @@ export const EditSchedule = createAsyncThunk(
   async (values, { dispatch }) => {
     try {
       dispatch(setLoading(true));
-    
+
       const result = await EditScheduleAPI(values);
       if (result?.success) {
         dispatch(setLoading(false));
@@ -492,6 +492,8 @@ export const ProfileSlice = createSlice({
       state.feeModal = action.payload;
     },
     slotdata: (state, action) => {
+      console.log("stateeeeeeeeee", state);
+      console.log("action.payloassssssssssssssssssssss", action.payload);
       state.slotlistdata = action.payload;
     },
   },
@@ -502,7 +504,7 @@ export const ProfileSlice = createSlice({
     builder.addCase(SlotFirstList.fulfilled, (state, action) => {
       state.firstlistinslot = action.payload?.data;
     });
-    
+
     builder.addCase(SlotListDoctor.fulfilled, (state, action) => {
       state.slotlistdoctor = action.payload?.data;
     });

@@ -14,6 +14,8 @@ import Toggle from "./Toggle";
 import light from "../../../../Assets/img/svg/light.svg";
 import plus from "../../../../Assets/img/svg/plus.svg";
 import arrow from "../../../../Assets/img/png/light.svg";
+import close from "../../../../Assets/img/svg/circle-xmark-regular.svg"
+
 import {
   SpecialityList,
   // SubSpecialityList,
@@ -31,14 +33,14 @@ function SheduleInformation() {
   );
   const [selectedTimeSlots, setSelectedTimeSlots] = useState({});
   const [selectedStartTimes, setSelectedStartTimes] = useState({});
-  const [startTime, setStartTime] = useState("");
-  const [endTime, setEndTime] = useState("");
   const [dayoftime, SetDay] = useState("");
 
   const [timePickers, setTimePickers] = useState([{ id: 1 }]);
   const [newDivCount, setNewDivCount] = useState(0);
   const [addedDivs, setAddedDivs] = useState({});
 
+
+  
   const [weekDays, setWeekDays] = useState([
     {
       id: 1,
@@ -78,6 +80,85 @@ function SheduleInformation() {
   ]
   )
 
+  const initialSchedule = {
+    sunday: [{ start: '', end: '' }],
+    monday: [{ start: '', end: '' }],
+    tuesday: [{ start: '', end: '' }],
+    wednesday: [{ start: '', end: '' }],
+    thursday: [{ start: '', end: '' }],
+    friday: [{ start: '', end: '' }],
+    saturday: [{ start: '', end: '' }],
+  };
+
+  const [schedule, setSchedule] = useState(initialSchedule);
+  const [selectedTimes, setSelectedTimes] = useState({});
+
+
+
+  const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+  const handleAddTime = (day) => {
+    const updatedSchedule = { ...schedule };
+    updatedSchedule[day].push({ start: '', end: '' });
+    setSchedule(updatedSchedule);
+  };
+
+
+
+  const handleAddNewDiv = (day) => {
+    handleAddTime(day);
+    addNewDiv();
+
+    setAddedDivs({
+      ...addedDivs,
+      [day]: (addedDivs[day]),
+    });
+
+  };
+
+  // Define the handleRemoveInput function
+  function handleRemoveInput(day, index) {
+    // Implement the logic to remove the input for the specified 'day' and 'index'
+    // For example, if you're using React, you can update your component's state to remove the input.
+    // Here's a simplified example using React's useState:
+
+    // Assuming you have state like this:
+    // const [schedule, setSchedule] = useState({});
+
+    // You can remove the input like this:
+    const updatedSchedule = { ...schedule };
+    if (updatedSchedule[day]) {
+      updatedSchedule[day].splice(index, 1);
+      // Update the state to trigger a re-render
+      setSchedule({ ...updatedSchedule });
+    }
+
+    const selectedTimesCopy = { ...selectedTimes };
+   var b = selectedTimesCopy[day] = updatedSchedule[day].map((slot) => ({
+      start: slot.start,
+      end: slot.end,
+    }));
+
+    console.log("hsidflsfsjlfjsjfsjkfkjdbfjksdfjkdkjadjkfdjksfjkfjksd", b);
+    setSelectedTimes(selectedTimesCopy);
+  }
+
+
+  const handleInputChange = (day, index, field, value) => {
+    const updatedSchedule = { ...schedule };
+    updatedSchedule[day][index][field] = value;
+    setSchedule(updatedSchedule);
+
+    const selectedTimesCopy = { ...selectedTimes};
+    selectedTimesCopy[day] = updatedSchedule[day].map((slot) => ({
+      start: slot.start,
+      end: slot.end,
+    }));
+    setSelectedTimes(selectedTimesCopy);
+  };
+
+
+
 
   const addTimePicker = () => {
     setTimePickers([...timePickers, { id: timePickers.length + 1 }]);
@@ -93,16 +174,10 @@ function SheduleInformation() {
   };
 
   const addNewDiv = () => {
-    setNewDivCount(newDivCount + 1);
+    setNewDivCount(newDivCount);
   };
 
-  const handleAddNewDiv = (day) => {
-    addNewDiv();
-    setAddedDivs({
-      ...addedDivs,
-      [day]: (addedDivs[day] || 0) + 1,
-    });
-  };
+
   const [checked, SetChecked] = useState({
     sunday: slotlistdoctor?.sunday?.length >= 0 ? false : true,
     monday: slotlistdoctor?.monday?.length >= 0 ? false : true,
@@ -242,25 +317,19 @@ function SheduleInformation() {
     }
     return timeSlots;
   };
-  console.log("startTime....", startTime);
-
+  
+  // {JSON.stringify(selectedTimes, null, 2)}
   const transformedData = {};
-  Object.keys(selectedTimeSlots).forEach((day) => {
-    const dayData = selectedTimeSlots[day];
-    const dayObj = {
-      days: [day],
-      time_period: {},
-    };
-
-    Object.keys(dayData).forEach((slotIndex) => {
-      const slot = dayData[slotIndex];
-      dayObj.time_period = [{
-        start_time: slot.start,
-        end_time: slot.end
-      }];
-    });
-    transformedData[day] = JSON.stringify(dayObj);
+  Object.keys(initialSchedule).forEach((day) => {
+    transformedData[day] = JSON.stringify(initialSchedule[day]);
   });
+  
+  // Update the specific day's data if it exists in selectedTimes
+  Object.keys(selectedTimes).forEach((day) => {
+    transformedData[day] = JSON.stringify(selectedTimes[day]);
+  });
+  
+
   useEffect(() => {
     handleSaveSchedule();
   }, [selectedTimeSlots]);
@@ -328,118 +397,132 @@ function SheduleInformation() {
             <div className="week-days-container">
               {weekDays.map((val) => {
                 const dayDivCount = addedDivs[val.day] || 0;
+                const selectedSchedule = schedule[val.day] || [];
                 return (
                   <div className="edit_time_slot_mainss" key={val.id} style={{ marginLeft: "1rem" }}>
                     <div className="map_main_divss">
-                      {Array.from(Array(dayDivCount + 1), (_, index) => index).map(
-                        (divIndex) => {
-                          const pickerId = divIndex + 1;
-                          const selectedSlot = selectedTimeSlots[val.day] || "";
-                          return (
-                            <div className="time-pickerss" key={pickerId}>
-                              {divIndex === 0 && (
-                                <div className="toggle-label" style={{ width: "115px" }}>
-                                  <Toggle
-                                    label={val.day}
-                                    onToggleChange={(isChecked) => handleToggleChange(val.day, isChecked)}
-                                    initialChecked={val.checked}
-                                  />
+                      {Array.from(Array(dayDivCount + 1), (_, index) => index).map((divIndex) => {
+                        const pickerId = divIndex + 1;
+                        const selectedSlot = selectedTimeSlots[val.day] || "";
+                        return (
+                          <div className="time-pickerss" key={pickerId} style={{ display: "flex", alignItems: "start" }}>
+                            {divIndex === 0 && (
+                              <div className="toggle-label" style={{ width: "115px" }}>
+                                <Toggle
+                                  label={val.day}
+                                  onToggleChange={(isChecked) => handleToggleChange(val.day, isChecked)}
+                                  initialChecked={val.checked}
+                                />
+                              </div>
+                            )}
+                            {checked[val.day] === true ? (
+                              <div style={{ display: "flex", alignItems: "end" }}>
+                                <div className="row">
+                                  {schedule[val.day] &&
+                                    selectedSchedule.map((timeSlot, index) => (
+                                      <div key={index} style={{ display: "flex", gap:"20px", marginBottom:"8px", alignItems: "cenetr"}}>
+                                        {/* Add a close button here */}
+                                        {index > 0 && (
+                                           <img
+                                           src={light}
+                                           style={{width:"20px"}}
+                                           onClick={() => handleRemoveInput(val.day, index)}
+                                         ></img>
+                                        )}
+
+                                          <select
+                                            value={timeSlot.start}
+                                            onChange={(e) => handleInputChange(val.day, index, 'start', e.target.value)}
+                                            className="time-day"
+                                            placeholder="-- -- --"
+                                            style={{
+                                              background: "none",
+                                              border: "none",
+                                              backgroundColor: "#ecf2ff",
+                                              fontSize: "15px",
+                                              padding: "10px 30px",
+                                              borderRadius: "8px",
+                                              marginLeft: index === 0 ? "38px" : "0", 
+                                            }}
+                                          >
+                                            <option> -- -- -- </option>
+                                            {slotlistdoctor[val.day]?.slots.map((time, idx) => {
+                                              if (
+                                                schedule[val.day].every(
+                                                  (slot, i) =>
+                                                    i === index ||
+                                                    time < slot.start ||
+                                                    time >= slot.end ||
+                                                    time === timeSlot.start
+                                                )
+                                              ) {
+                                                return (
+                                                  <option key={idx} value={time}>
+                                                    {time}
+                                                  </option>
+                                                );
+                                              }
+                                              return null;
+                                            })}
+                                          </select>
+                                      
+                                      
+                                          <select
+                                            value={timeSlot.end}
+                                            onChange={(e) => handleInputChange(val.day, index, 'end', e.target.value)}
+                                            className="time-day"
+                                            style={{
+                                              background: "none",
+                                              border: "none",
+                                              backgroundColor: "#ecf2ff",
+                                              fontSize: "15px",
+                                              padding: "10px 30px",
+                                              borderRadius: "8px",
+                                            }}
+                                          >
+                                            <option> -- -- --</option>
+                                            {slotlistdoctor[val.day]?.slots.map((time, idx) => {
+                                              if (
+                                                schedule[val.day].every(
+                                                  (slot, i) =>
+                                                    i === index ||
+                                                    time < slot.start ||
+                                                    time >= slot.end ||
+                                                    time === timeSlot.end
+                                                )
+                                              ) {
+                                                return (
+                                                  <option key={idx} value={time}>
+                                                    {time}
+                                                  </option>
+                                                );
+                                              }
+                                              return null;
+                                            })}
+                                          </select>
+                                      
+
+                                      </div>
+                                    ))}
                                 </div>
-                              )}
-                              {checked[val.day] === true && divIndex !== 0 && (
-                                <>
-                                  <div style={{ paddingLeft: "20%" }}>
+                                {checked[val.day] === true && divIndex === dayDivCount && (
+                                  <div style={{padding: "19px"}}>
                                     <img
-                                      src={light}
-                                      className="fa-regular fa-circle-xmark"
-                                      onClick={() => removeTimePicker(val.day, pickerId)}
+                                      src={plus}
+                                      className="fa-solid fa-plus"
+                                      style={{ color: "#3093BB", fontSize: "22px" }}
+                                      onClick={() => handleAddNewDiv(val.day)}
                                     ></img>
                                   </div>
-                                </>
-                              )}
-                              {checked[val.day] === true ? (
-                                <>
-                                  <div className="clock">
-                                    <select
-                                      onChange={(e) => { handleSlotChange(val.day, divIndex + 1, 'start', e.target.value); setStartTime(e.target.value); SetDay(val.day); }
-                                      }
-                                      className="time-day"
-                                      placeholder="-- -- --"
-                                      style={{
-                                        background: "none",
-                                        border: "none",
-                                        backgroundColor: "#ecf2ff",
-                                        fontSize: "15px",
-                                        padding: "10px 30px",
-                                        borderRadius: "8px",
-                                      }}
-                                    >
-                                      <option value=""> -- -- -- </option>
-                                      {
-                                        divIndex === 0 ?
-                                          slotlistdoctor[val.day]?.slots
-                                            .map((slot) => (
-                                              <option key={slot} value={slot}>
-                                                {slot}
-                                              </option>
-                                            )) :
-                                          slotlistdoctor[val.day]?.slots
-                                            ?.filter(slot => !hidetime.includes(slot))
-                                            .map((slot) => (
-                                              <option key={slot} value={slot}>
-                                                {slot}
-                                              </option>
-                                            ))
-                                      }
-                                    </select>
-                                  </div>
-                                  <p>-</p>
-                                  <div className="clock">
-                                    <select
-                                      onChange={(e) => { handleSlotChange(val.day, divIndex + 1, 'end', e.target.value); setEndTime(e.target.value); SetDay(val.day) }
-                                      }
-                                      className="time-day"
-                                      style={{
-                                        background: "none",
-                                        border: "none",
-                                        backgroundColor: "#ecf2ff",
-                                        fontSize: "15px",
-                                        padding: "10px 30px",
-                                        borderRadius: "8px",
-                                      }}
-                                    >
-                                      <option> -- -- --</option>
-                                      {slotlistdoctor[val.day]?.slots
-                                        ?.filter(
-                                          (slot) =>
-                                            !selectedStartTimes[`${val.day}_${divIndex + 1}`] ||
-                                            slot > selectedStartTimes[`${val.day}_${divIndex + 1}`]
-                                        )
-                                        .map((slot) => (
-                                          <option key={slot} value={slot}>
-                                            {slot}
-                                          </option>
-                                        ))}
-                                    </select>
-                                  </div>
-                                </>
-                              ) : (
-                                <div>Unavailable</div>
-                              )}
-                              {checked[val.day] === true && divIndex === dayDivCount && (
-                                <div className="">
-                                  <img
-                                    src={plus}
-                                    className="fa-solid fa-plus"
-                                    style={{ color: "#3093BB", fontSize: "22px" }}
-                                    onClick={() => handleAddNewDiv(val.day)}
-                                  ></img>
-                                </div>
-                              )}
-                            </div>
-                          );
-                        }
-                      )}
+                                )}
+                           
+                              </div>
+                            ) : (
+                              <div>Unavailable</div>
+                            )}
+                          </div>
+                        );
+                      })}
                     </div>
                   </div>
                 );
@@ -496,4 +579,3 @@ const FeeCardModal = (props) => {
     </Modal>
   );
 };
-
