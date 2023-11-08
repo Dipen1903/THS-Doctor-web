@@ -14,6 +14,9 @@ import light from "../../../Assets/img/svg/light.svg";
 import plus from "../../../Assets/img/svg/plus.svg";
 import Toggle from "../SetupProfile/Shedule&Payment/Toggle";
 import moment from "moment";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import {
   GetUserProfile,
 } from "../../../Store/Reducers/ProfileReducer";
@@ -26,12 +29,15 @@ import axios from "axios";
 import { SESSION } from "../../../Utilities/Enums";
 import { setMessage } from "../../../Store/Reducers/LayoutSlice";
 import { AlertEnum } from "../../../Utilities/Enums";
+import { EditScheduleAPI } from "../../../Routes/Service.js";
 function Timeslotfees() {
   const [scheduleData, setScheduleData] = useState({ ...ScheduleEnum });
   const dispatch = useDispatch();
   const { userProfile, slotlistdoctor } = useSelector(({ ProfileSlice }) => ProfileSlice);
   const [chkValue, setChkValue] = useState(false);
   const [edit, setEdit] = useState(false);
+  const [start, setStart] = useState("");
+  const [newDatasec, setNewDatasec] = useState();
   const SessionData = JSON.parse(localStorage.getItem(SESSION));
   const initialLoad = () => {
     let tempData = { ...scheduleData };
@@ -150,16 +156,29 @@ function Timeslotfees() {
     setNewDivCount(newDivCount + 1);
   };
 
+  // const [text, setText] = useState(false);
   const handleAddNewDiv = (day) => {
-    addNewDiv();
-    setAddedDivs({
-      ...addedDivs,
-      [day]: (addedDivs[day] || 0) + 1,
-    });
-
-
+    // setText(day, "If you need add more time then you need to go mobile App");
+    // addNewDiv();
+    // setText({
+    //   ...text,
+    //   [day]: "If you need add more time then you need to go mobile App",
+    // });
+    toast.error("If you need add more time then you need to go mobile App")
 
   };
+
+  const addNewDivEdit = (day, startTime) => {
+    console.log("startTimestartTime", startTime);
+    if (startTime) {
+      console.log("dsxfdsse");
+      addNewDiv();
+      setAddedDivs({
+        ...addedDivs,
+        [day]: (addedDivs[day] || 0) + 1,
+      });
+    }
+  }
   console.log("slotlistdoctor", slotlistdoctor);
   const [checked, SetChecked] = useState({
     sunday: slotlistdoctor?.saved_time_slot?.sunday === null ? false : true,
@@ -235,49 +254,283 @@ function Timeslotfees() {
     }
   };
 
+  const [listOfData, setListOfData] = useState();
   useEffect(() => {
-    dispatch(SlotListDoctor())
+    callApis()
+  }, [dispatch, edit])
+
+  const callApis = async () => {
+    const result = await dispatch(SlotListDoctor())
+    setListOfData(result?.payload?.data?.saved_time_slot)
     dispatch(SlotFirstList())
-  }, [dispatch])
+  }
+
 
   const [selectedTimeSlotsBetween, setSelectedTimeSlotsBetween] = useState([]);
-
+  const [selectedTimeSlotsEdit, setSelectedTimeSlotsEdit] = useState();
+  const [dataddd, setDtaaaa] = useState()
   const handleSlotChange = (day, index, timeSlotType, slotValue) => {
-    console.log("timeSlotType", timeSlotType);
-    console.log("slotValue", slotValue);
-    console.log("day", day);
+    if (edit) {
 
-    const updatedDaySlots = { ...(selectedTimeSlots[day] || {}) };
-    console.log("updatedDaySlots", updatedDaySlots);
-    SetDay(day);
-    if (!updatedDaySlots[index]) {
-      updatedDaySlots[index] = {
-        start: '', end: ''
-      };
-    }
-    updatedDaySlots[index][timeSlotType] = slotValue;
-    setSelectedTimeSlots({
-      ...selectedTimeSlots,
-      [day]: updatedDaySlots,
-    });
-
-    // Update selectedDayForHidetime and calculate timeSlotsBetween regardless of the condition
-    setSelectedDayForHidetime(day);
-
-    if (timeSlotType === "start") {
-      setSelectedStartTimes({
-        ...selectedStartTimes,
-        [`${day}_${index}`]: slotValue,
+      const newData = {};
+      console.log("timeSlotType", timeSlotType);
+      daysOfWeek.forEach((day) => {
+        const dayData = listOfData[day];
+        if (dayData) {
+          newData[day] = {
+            days: [day],
+            time_period: JSON.parse(dayData).time_period,
+          };
+        }
       });
-    }
-    const startTime = selectedStartTimes[`${day}_${index}`];
-    const endTime = updatedDaySlots[index].end;
+      setDtaaaa(newData)
+      console.log("newData[day]newData[day]newData[day]", newData[day], newData[day].time_period[index - 1], index, slotValue, timeSlotType === "start_time");
+      // if (newData[day]) {
+      //   if (newData[day].time_period[index - 1]) {
+      //     let existingStartTime;
+      //     if (timeSlotType === "start_time") {
+      //       // Update the start_time for the selected day and index
+      //       let sta = newData[day].time_period[index - 1].start_time = slotValue;
+      //       setStart(sta)
+      //     } else if (timeSlotType === "end_time") {
+      //       // Preserve the existing start_time and update the end_time for the selected day and index
+      //       // const existingStartTime = newData[day].time_period[index - 1].start_time;
+      //       console.log("ex", existingStartTime );
+      //       newData[day].time_period[index - 1].end_time = slotValue; // Update only end_time
+      //       newData[day].time_period[index - 1].start_time = start; // Preserve the existing start_time
+      //     }
+      //   } else {
+      //     // Handle the case where the index does not exist
+      //     console.error("Selected index does not exist in newData.");
+      //   }
+      // } else {
+      //   // Handle the case where the day does not exist
+      //   console.error("Selected day does not exist in newData.");
+      //   // Create a new time slot for the day with the selected time
+      //   newData[day] = {
+      //     days: [day],
+      //     time_period: [
+      //       {
+      //         start_time: timeSlotType === "start_time" ? slotValue : "",
+      //         end_time: timeSlotType === "end_time" ? slotValue : "",
+      //       },
+      //     ],
+      //   };
+      // }
+      console.log("dataddd[day]", dataddd);
+      if (dataddd != undefined) {
+        const updatedDaysData = { ...dataddd }; // Create a copy of the object
 
-    if (startTime && endTime) {
-      const timeSlotsBetween = generateTimeSlotsBetween(startTime, endTime, day);
-      setSelectedTimeSlotsBetween(timeSlotsBetween);
+        if (updatedDaysData[day]) {
+          const dayData = { ...updatedDaysData[day] };
+          const timePeriod = [...dayData.time_period];
+
+          if (timePeriod[index - 1]) {
+            if (timeSlotType === "start_time") {
+              timePeriod[index - 1].start_time = slotValue;
+            } else if (timeSlotType === "end_time") {
+              timePeriod[index - 1].end_time = slotValue;
+            }
+          } else {
+            // Handle the case where the index does not exist
+            console.error("Selected index does not exist in timePeriod.");
+          }
+
+          dayData.time_period = timePeriod;
+          updatedDaysData[day] = dayData;
+        }
+
+        // Set the updated object as the new state
+        setDtaaaa(updatedDaysData);
+
+
+        // const updatedState = { ...newData };
+        // const []
+        // if (updatedState[day]) {
+        //   const dayData = { ...updatedState[day] };
+        //   const timePeriod = [...dayData.time_period];
+
+        //   if (timePeriod[index - 1]) {
+        //     if (timeSlotType === "start_time") {
+        //       timePeriod[index - 1].start_time = slotValue;
+        //     } else if (timeSlotType === "end_time") {
+        //       timePeriod[index - 1].start_time = originalStartValue;
+        //       timePeriod[index - 1].end_time = slotValue;
+        //     }
+        //   } else {
+        //     // Handle the case where the index does not exist
+        //     console.error("Selected index does not exist in timePeriod.");
+        //   }
+
+        //   dayData.time_period = timePeriod;
+        //   updatedState[day] = dayData;
+        //   newData(updatedState);
+        // }
+        // const updatedState = { ...newData };
+        // console.log("updatedStateupdatedStateupdatedState", updatedState);
+        // const dayData = { ...updatedState[day] };
+        // const timePeriod = [...dayData.time_period];
+        // console.log("slotValueslotValue", slotValue);
+        // if (timePeriod[index - 1]) {
+        //   if (timeSlotType === "start_time") {
+        //     console.log("sttttttttt");
+        //     timePeriod[index - 1].start_time = slotValue;
+        //   } else if (timeSlotType === "end_time") {
+        //     console.log("endddddddd");
+        //     timePeriod[index - 1].end_time = slotValue;
+        //   }
+        // } else {
+        //   // Handle the case where the index does not exist
+        //   console.error("Selected index does not exist in timePeriod.");
+        // }
+
+        // dayData.time_period = timePeriod;
+        // updatedState[day] = dayData;
+        // console.log("updatedState", updatedState);
+        // setState(updatedState); // Update the state directly
+      } else {
+        const updatedDaysData = { ...newData }; // Create a copy of the object
+
+        if (updatedDaysData[day]) {
+          const dayData = { ...updatedDaysData[day] };
+          const timePeriod = [...dayData.time_period];
+
+          if (timePeriod[index - 1]) {
+            if (timeSlotType === "start_time") {
+              timePeriod[index - 1].start_time = slotValue;
+            } else if (timeSlotType === "end_time") {
+              timePeriod[index - 1].end_time = slotValue;
+            }
+          } else {
+            // Handle the case where the index does not exist
+            console.error("Selected index does not exist in timePeriod.");
+          }
+
+          dayData.time_period = timePeriod;
+          updatedDaysData[day] = dayData;
+        }
+
+        // Set the updated object as the new state
+        setDtaaaa(updatedDaysData);
+      }
+
+
+      // setNewDatasec(newData)
+      console.log("newDat----", dataddd);
+
+      // const daysOfWeek = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
+
+      // // Create a new object with the desired format
+      // const newData = {};
+
+      // daysOfWeek.forEach((day) => {
+      //   const dayData = listOfData[day];
+      //   if (dayData) {
+      //     newData[day] = {
+      //       days: [day],
+      //       time_period: JSON.parse(dayData).time_period,
+      //     };
+      //   }
+      // });
+
+
+      // // Object.keys(newData).forEach((day) => {
+      // //   formattedData[day] = JSON.stringify(newData[day]);
+      // // });
+
+      // const dayToUpdate = day;
+
+      // if (newData[dayToUpdate]) {
+      //   // Update the time slots for the existing day
+      //   newData[dayToUpdate].time_period = timeSlots; // Replace timeSlots with the updated time slots
+      // } else {
+      //   // Add a new day with time slots
+      //   newData[dayToUpdate] = {
+      //     days: [dayToUpdate],
+      //     time_period: timeSlots, // Replace timeSlots with the time slots for the new day
+      //   };
+      // }
+
+
+      // const updatedFormattedData = {};
+      // for (const day of Object.keys(newData)) {
+      //   updatedFormattedData[day] = JSON.stringify(newData[day]);
+      // }
+
+
+      // console.log("timeSlotType", timeSlotType);
+      // console.log("slotValue", slotValue);
+      // console.log("day", day);
+
+      // const updatedDaySlots = { ...(selectedTimeSlotsEdit[day] || {}) };
+      // console.log("updatedDaySlots", updatedDaySlots);
+      // SetDay(day);
+      // if (!updatedDaySlots[index]) {
+      //   updatedDaySlots[index] = {
+      //     start_time: '', end_time: ''
+      //   };
+      // }
+      // updatedDaySlots[index][timeSlotType] = slotValue;
+      // setSelectedTimeSlotsEdit({
+      //   ...selectedTimeSlotsEdit,
+      //   [day]: updatedDaySlots,
+      // });
+
+      // // Update selectedDayForHidetime and calculate timeSlotsBetween regardless of the condition
+      // setSelectedDayForHidetime(day);
+
+      // if (timeSlotType === "start_time") {
+      //   setSelectedStartTimes({
+      //     ...selectedStartTimes,
+      //     [`${day}_${index}`]: slotValue,
+      //   });
+      // }
+      // const startTime = selectedStartTimes[`${day}_${index}`];
+      // const endTime = updatedDaySlots[index].end_time;
+
+      // if (startTime && endTime) {
+      //   const timeSlotsBetween = generateTimeSlotsBetween(startTime, endTime, day);
+      //   setSelectedTimeSlotsBetween(timeSlotsBetween);
+      // } else {
+      //   setSelectedTimeSlotsBetween([]);
+      // }
     } else {
-      setSelectedTimeSlotsBetween([]);
+      console.log("timeSlotType", timeSlotType);
+      console.log("slotValue", slotValue);
+      console.log("day", day);
+
+      const updatedDaySlots = { ...(selectedTimeSlots[day] || {}) };
+      console.log("updatedDaySlots", updatedDaySlots);
+      SetDay(day);
+      if (!updatedDaySlots[index]) {
+        updatedDaySlots[index] = {
+          start_time: '', end_time: ''
+        };
+      }
+      updatedDaySlots[index][timeSlotType] = slotValue;
+      setSelectedTimeSlots({
+        ...selectedTimeSlots,
+        [day]: updatedDaySlots,
+      });
+
+      // Update selectedDayForHidetime and calculate timeSlotsBetween regardless of the condition
+      setSelectedDayForHidetime(day);
+
+      if (timeSlotType === "start_time") {
+        setSelectedStartTimes({
+          ...selectedStartTimes,
+          [`${day}_${index}`]: slotValue,
+        });
+      }
+      const startTime = selectedStartTimes[`${day}_${index}`];
+      const endTime = updatedDaySlots[index].end_time;
+
+      if (startTime && endTime) {
+        const timeSlotsBetween = generateTimeSlotsBetween(startTime, endTime, day);
+        setSelectedTimeSlotsBetween(timeSlotsBetween);
+      } else {
+        setSelectedTimeSlotsBetween([]);
+      }
     }
   };
 
@@ -298,7 +551,7 @@ function Timeslotfees() {
     if (!data || !startTimeMoment.isValid() || !endTimeMoment.isValid()) {
       return [];
     }
-    
+
     const timeSlots = [];
     console.log("timeSlots+++", timeSlots);
 
@@ -318,31 +571,188 @@ function Timeslotfees() {
     return timeSlots;
   };
 
-  const transformedData = {};
-  Object.keys(selectedTimeSlots).forEach((day) => {
-    const dayData = selectedTimeSlots[day];
-    const dayObj = {
-      days: [day],
-      time_period: {},
-    };
+  // const transformedData = {};
+  // const [transformedData, setTransformedData] = useState({});
+  // Object.keys(selectedTimeSlots).forEach((day) => {
+  //   const dayData = selectedTimeSlots[day];
+  //   const dayObj = {
+  //     days: [day],
+  //     time_period: {},
+  //   };
 
-    Object.keys(dayData).forEach((slotIndex) => {
-      const slot = dayData[slotIndex];
-      dayObj.time_period = [{
-        start_time: slot.start,
-        end_time: slot.end
-      }];
+  //   Object.keys(dayData).forEach((slotIndex) => {
+  //     const slot = dayData[slotIndex];
+  //     dayObj.time_period = [{
+  //       start_time: slot.start,
+  //       end_time: slot.end
+  //     }];
+  //   });
+  //   transformedData[day] = JSON.stringify(dayObj);
+  // });
+
+  // const [transformedData, setTransformedData] = useState({});
+
+  // // Create a new object for each day in selectedTimeSlots
+  // const transformedDataCopy = {};
+
+  // Object.keys(selectedTimeSlots).forEach((day) => {
+  //   const dayData = selectedTimeSlots[day];
+  //   const dayObj = {
+  //     days: [day],
+  //     time_period: {},
+  //   };
+
+  //   Object.keys(dayData).forEach((slotIndex) => {
+  //     const slot = dayData[slotIndex];
+  //     dayObj.time_period = [{
+  //       start_time: slot.start,
+  //       end_time: slot.end,
+  //     }];
+  //   });
+
+  //   // Store the new object in the transformedDataCopy
+  //   transformedDataCopy[day] = JSON.stringify(dayObj);
+  // });
+
+  // // Update the state with the new transformedDataCopy
+  // setTransformedData(transformedDataCopy);
+  // console.log("transformedData", transformedData);
+
+
+  // useEffect(() => {
+  //   handleSaveSchedule();
+  // }, [transformedData]);
+  // const handleSaveSchedule = () => {
+  //   dispatch(slotdata(transformedData));
+  // };
+  const formattedData = {};
+  // const [transformedData, setTransformedData] = useState(selectedTimeSlots);
+
+  // useEffect(() => {
+  //   // Create a new object for each day in selectedTimeSlots
+  //   const transformedDataCopy = {};
+
+  //   Object.keys(selectedTimeSlots).forEach((day) => {
+  //     const dayData = selectedTimeSlots[day];
+  //     const dayObj = {
+  //       days: [day],
+  //       time_period: {},
+  //     };
+
+  //     Object.keys(dayData).forEach((slotIndex) => {
+  //       const slot = dayData[slotIndex];
+  //       dayObj.time_period = [{
+  //         start_time: slot.start_time,
+  //         end_time: slot.end_time,
+  //       }];
+  //     });
+
+  //     transformedDataCopy[day] = JSON.stringify(dayObj);
+  //   });
+
+  //   // Update the state with the new transformedDataCopy
+  //   setTransformedData(transformedDataCopy);
+  // }, [selectedTimeSlots]);
+
+  // useEffect(() => {
+  //   handleSaveSchedule();
+  // }, [transformedData]);
+
+  // const handleSaveSchedule = () => {
+  //   dispatch(slotdata(transformedData));
+  // };
+
+
+
+  function getSelectedStartTime(day, pickerId) {
+    if (listOfData && listOfData[day]) {
+      const timePeriod = JSON.parse(listOfData[day]).time_period;
+      if (timePeriod && timePeriod[pickerId - 1]) {
+        const startTime = timePeriod[pickerId - 1].start_time;
+        if (startTime && startTime !== "") {
+          return startTime;
+        }
+      }
+    }
+    return ""; // Return a default value if the data is not found
+  }
+
+
+
+
+  const daysOfWeek = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
+  const timePeriods = {};
+  if (listOfData) {
+    daysOfWeek.forEach((day) => {
+      const dayData = listOfData[day];
+      const parsedData = JSON.parse(dayData);
+      timePeriods[day] = parsedData.time_period;
     });
-    transformedData[day] = JSON.stringify(dayObj);
-  });
-  useEffect(() => {
-    handleSaveSchedule();
-  }, [selectedTimeSlots]);
-  const handleSaveSchedule = () => {
-    dispatch(slotdata(transformedData));
-  };
+  }
+
+  console.log("timePeriods", listOfData);
+  function getSelectedEndTime(day, pickerId) {
+    if (listOfData && listOfData[day]) {
+      const timePeriod = JSON.parse(listOfData[day]).time_period;
+      if (timePeriod && timePeriod[pickerId - 1]) {
+        const endTime = timePeriod[pickerId - 1].end_time;
+        if (endTime && endTime !== "") {
+          return endTime;
+        }
+      }
+    }
+    return ""; // Return a default value if the data is not found
+  }
+
+  const callEditData = async () => {
+    // console.log("transformedData---", transformedData);
+    if (dataddd?.sunday) {
+      const formattedData = {};
+
+      for (const day in dataddd) {
+        if (dataddd.hasOwnProperty(day)) {
+          formattedData[day] = JSON.stringify(dataddd[day]);
+        }
+      }
+      console.log("fdfdfdf", formattedData);
+      setEdit(false)
+      const data = await dispatch(EditScheduleAPI(formattedData));
+    } else {
+      console.log("dfdfdfdfdf",);
+
+      const daysOfWeek = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
+
+      // Create a new object with the desired format
+      const newData = {};
+
+      daysOfWeek.forEach((day) => {
+        const dayData = listOfData[day];
+        if (dayData) {
+          newData[day] = {
+            days: [day],
+            time_period: JSON.parse(dayData).time_period,
+          };
+        }
+      });
+
+
+      Object.keys(newData).forEach((day) => {
+        formattedData[day] = JSON.stringify(newData[day]);
+      });
+
+
+      // const newDataJSON = JSON.stringify(newData);
+      // console.log("newData", newDataJSON);
+      const data = await dispatch(EditScheduleAPI(formattedData));
+    }
+
+  }
+
+
+  console.log("seee", selectedTimeSlots);
   return (
     <>
+      <ToastContainer />
       <Container fluid>
         <div className="row timeslots_box">
           <div className="col-md-12">
@@ -373,27 +783,7 @@ function Timeslotfees() {
                   enableReinitialize
                   validationSchema={ScheduleSchema}
                   onSubmit={(values) => {
-                    axios.post(`${BASE_URL}/availibility-create-days`, slotlistdata, {
-                      headers: {
-                        'Content-Type': 'application/json',
-                        Authorization: `Bearer ${SessionData?.token}`,
-                      },
-                    })
-                      .then((response) => {
-                        if (response.data.message === 'Availibility updated successfully') {
-                          setEdit(false);
-                          dispatch(GetUserProfile());
-                          dispatch(
-                            setMessage({
-                              text: response?.data?.message,
-                              type: AlertEnum.Success,
-                            })
-                          );
-                        } else {
-                        }
-                      })
-                      .catch((error) => {
-                      });
+                    callEditData()
                   }}
                 >
                   {({
@@ -460,121 +850,124 @@ function Timeslotfees() {
                               <div className="week-days-container">
                                 {weekDays.map((val) => {
                                   const dayDivCount = addedDivs[val.day] || 0;
+                                  const dayData = timePeriods[val.day];
+                                  const editDayData = selectedTimeSlots[val.day];
+                                  // const showText = text[val.day]
                                   return (
                                     <div className="edit_time_slot_mainss" key={val.id} style={{ marginLeft: "1rem" }}>
                                       <div className="map_main_divss">
                                         {Array.from(Array(dayDivCount + 1), (_, index) => index).map(
                                           (divIndex) => {
                                             const pickerId = divIndex + 1;
+                                            const selectedData = dayData && dayData[pickerId - 1] || {};
+                                            const editSelectedData = editDayData && editDayData[pickerId] || {};
+                                            // { console.log("333333", showText && showText, showText && showText[pickerId - 1]); }
+                                            // const showTextData = showText && showText || "";
+
                                             // console.log("pickerId", pickerId);
-                                            // const selectedSlot = selectedTimeSlots[val.day] || "";
+                                            // const selectedSlot = selectedTimeSlots[val.day] || ""
                                             return (
-                                              <div className="time-pickerss" key={pickerId}>
-                                                {divIndex === 0 && (
-                                                  <div className="toggle-label" style={{ width: "115px" }}>
-                                                    <Toggle
-                                                      label={val.day}
-                                                      onToggleChange={(isChecked) => handleToggleChange(val.day, isChecked)}
-                                                      initialChecked={val.checked}
-                                                    />
-                                                  </div>
-                                                )}
-                                                {checked[val.day] === true && divIndex !== 0 && (
-                                                  <>
-                                                    <div style={{ paddingLeft: "20%" }}>
-                                                      <img
-                                                        src={light}
-                                                        className="fa-regular fa-circle-xmark"
-                                                        onClick={() => removeTimePicker(val.day, pickerId)}
-                                                      ></img>
+                                              <>
+                                                <div className="time-pickerss" key={pickerId}>
+                                                  {divIndex === 0 && (
+                                                    <div className="toggle-label" style={{ width: "115px" }}>
+                                                      <Toggle
+                                                        label={val.day}
+                                                        onToggleChange={(isChecked) => handleToggleChange(val.day, isChecked)}
+                                                        initialChecked={val.checked}
+                                                      />
                                                     </div>
-                                                  </>
-                                                )}
-                                                {checked[val.day] === true ? (
-                                                  <>
-                                                    <div className="clock">
-                                                      <select
-                                                        onChange={(e) => { handleSlotChange(val.day, divIndex + 1, 'start', e.target.value); setStartTime(e.target.value); SetDay(val.day); }
-                                                        }
-                                                        className="time-day"
-                                                        placeholder="-- -- --"
-                                                        style={{
-                                                          background: "none",
-                                                          border: "none",
-                                                          backgroundColor: "#ecf2ff",
-                                                          fontSize: "15px",
-                                                          padding: "10px 30px",
-                                                          borderRadius: "8px",
-                                                        }}
-                                                      >
-                                                        <option value=""> -- -- -- </option>
-                                                        {
-                                                          divIndex === 0 ?
+                                                  )}
+                                                  {checked[val.day] === true && divIndex !== 0 && (
+                                                    <>
+                                                      <div style={{ paddingLeft: "20%" }}>
+                                                        <img
+                                                          src={light}
+                                                          className="fa-regular fa-circle-xmark"
+                                                          onClick={() => removeTimePicker(val.day, pickerId)}
+                                                        ></img>
+                                                      </div>
+                                                    </>
+                                                  )}
+                                                  {checked[val.day] === true ? (
+                                                    <>
+                                                      <div className="clock">
+                                                        <select
+                                                          onChange={(e) => { handleSlotChange(val.day, divIndex + 1, 'start_time', e.target.value); setStartTime(e.target.value); SetDay(val.day); }
+                                                          }
+                                                          className="time-day"
+                                                          placeholder="-- -- --"
+                                                          value={!edit ? selectedData?.start_time : editSelectedData?.start_time}
+                                                          disabled={!edit ? true : false}
+                                                          style={{
+                                                            background: "none",
+                                                            border: "none",
+                                                            backgroundColor: "#ecf2ff",
+                                                            fontSize: "15px",
+                                                            padding: "10px 30px",
+                                                            borderRadius: "8px",
+                                                          }}
+                                                        >
+                                                          <option value=""> -- -- -- </option>
+                                                          {
                                                             firstlistinslot[val.day] &&
                                                             firstlistinslot[val.day]
                                                               .map((slot) => (
                                                                 <option key={slot} value={slot}>
                                                                   {slot}
                                                                 </option>
-                                                              )) :
-                                                            firstlistinslot[val.day]
-                                                              ?.filter((slot) => !hidetime.includes(slot))
-                                                              .map((slot) => (
-                                                                <option key={slot} value={slot}>
-                                                                  {slot}
-                                                                  {console.log(slot)}
-                                                                </option>
                                                               ))
-                                                        }
-                                                      </select>
+                                                          }
+                                                        </select>
+                                                      </div>
+                                                      <p>-</p>
+                                                      <div className="clock">
+                                                        <select
+                                                          onChange={(e) => { handleSlotChange(val.day, divIndex + 1, 'end_time', e.target.value); setEndTime(e.target.value); SetDay(val.day) }
+                                                          }
+                                                          value={!edit ? selectedData?.end_time : editSelectedData?.end_time}
+                                                          className="time-day"
+                                                          style={{
+                                                            background: "none",
+                                                            border: "none",
+                                                            backgroundColor: "#ecf2ff",
+                                                            fontSize: "15px",
+                                                            padding: "10px 30px",
+                                                            borderRadius: "8px",
+                                                          }}
+                                                          disabled={!edit ? true : false}
+                                                        >
+                                                          <option> -- -- --</option>
+                                                          {firstlistinslot[val.day]
+                                                            ?.map((slot) => (
+                                                              <option key={slot} value={slot}>
+                                                                {slot}
+                                                              </option>
+                                                            ))}
+                                                        </select>
+                                                      </div>
+                                                    </>
+                                                  ) : (
+                                                    <div>Unavailable</div>
+                                                  )}
+                                                  {checked[val.day] === true && divIndex === dayDivCount && (
+                                                    <div className="">
+                                                      <img
+                                                        src={plus}
+                                                        className="fa-solid fa-plus"
+                                                        style={{ color: "#3093BB", fontSize: "22px" }}
+                                                        onClick={() => !edit ? addNewDivEdit(val.day, selectedData?.start_time) : handleAddNewDiv(val.day)}
+                                                      ></img>
                                                     </div>
-                                                    <p>-</p>
-                                                    <div className="clock">
-                                                      <select
-                                                        onChange={(e) => { handleSlotChange(val.day, divIndex + 1, 'end', e.target.value); setEndTime(e.target.value); SetDay(val.day) }
-                                                        }
-                                                        className="time-day"
-                                                        style={{
-                                                          background: "none",
-                                                          border: "none",
-                                                          backgroundColor: "#ecf2ff",
-                                                          fontSize: "15px",
-                                                          padding: "10px 30px",
-                                                          borderRadius: "8px",
-                                                        }}
-                                                      >
-                                                        <option> -- -- --</option>
-                                                        {firstlistinslot[val.day]
-                                                          ?.filter(
-                                                            (slot) =>
-                                                              !selectedStartTimes[`${val.day}_${divIndex + 1}`] ||
-                                                              slot > selectedStartTimes[`${val.day}_${divIndex + 1}`]
-                                                          )
-                                                          .map((slot) => (
-                                                            <option key={slot} value={slot}>
-                                                              {slot}
-                                                            </option>
-                                                          ))}
-                                                      </select>
-                                                    </div>
-                                                  </>
-                                                ) : (
-                                                  <div>Unavailable</div>
-                                                )}
-                                                {checked[val.day] === true && divIndex === dayDivCount && (
-                                                  <div className="">
-                                                    <img
-                                                      src={plus}
-                                                      className="fa-solid fa-plus"
-                                                      style={{ color: "#3093BB", fontSize: "22px" }}
-                                                      onClick={() => handleAddNewDiv(val.day)}
-                                                    ></img>
-                                                  </div>
-                                                )}
-                                              </div>
+                                                  )}
+                                                </div>
+                                                {/* {console.log("showTextData", showTextData)}
+                                                <p>{showTextData}</p> */}
+                                              </>
                                             );
                                           }
                                         )}
+
                                       </div>
                                     </div>
                                   );

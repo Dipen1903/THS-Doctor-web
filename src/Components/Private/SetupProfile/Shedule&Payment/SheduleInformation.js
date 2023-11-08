@@ -23,6 +23,7 @@ import {
 import FormControl from "../../../Common/Forms/FormControl.js";
 import { compareTime } from "../../../../Utilities/Functions.js";
 import WeekSlot from "./WeekSlot.js";
+import { EditScheduleAPI } from "../../../../Routes/Service.js";
 
 
 function SheduleInformation() {
@@ -40,7 +41,7 @@ function SheduleInformation() {
   const [addedDivs, setAddedDivs] = useState({});
 
 
-  
+
   const [weekDays, setWeekDays] = useState([
     {
       id: 1,
@@ -134,7 +135,7 @@ function SheduleInformation() {
     }
 
     const selectedTimesCopy = { ...selectedTimes };
-   var b = selectedTimesCopy[day] = updatedSchedule[day].map((slot) => ({
+    var b = selectedTimesCopy[day] = updatedSchedule[day].map((slot) => ({
       start: slot.start,
       end: slot.end,
     }));
@@ -149,7 +150,7 @@ function SheduleInformation() {
     updatedSchedule[day][index][field] = value;
     setSchedule(updatedSchedule);
 
-    const selectedTimesCopy = { ...selectedTimes};
+    const selectedTimesCopy = { ...selectedTimes };
     selectedTimesCopy[day] = updatedSchedule[day].map((slot) => ({
       start: slot.start,
       end: slot.end,
@@ -317,25 +318,28 @@ function SheduleInformation() {
     }
     return timeSlots;
   };
-  
+
   // {JSON.stringify(selectedTimes, null, 2)}
   const transformedData = {};
   Object.keys(initialSchedule).forEach((day) => {
     transformedData[day] = JSON.stringify(initialSchedule[day]);
   });
-  
+
   // Update the specific day's data if it exists in selectedTimes
   Object.keys(selectedTimes).forEach((day) => {
     transformedData[day] = JSON.stringify(selectedTimes[day]);
   });
-  
 
-  useEffect(() => {
-    handleSaveSchedule();
-  }, [selectedTimeSlots]);
-  const handleSaveSchedule = () => {
-    dispatch(slotdata(transformedData));
-  };
+
+  console.log("transformedDatatransformedDatatransformedData", transformedData);
+
+  // useEffect(() => {
+  //   handleSaveSchedule();
+  // }, [selectedTimeSlots]);
+  // const handleSaveSchedule = async () => {
+  //   const data = await dispatch(EditScheduleAPI(transformedData));
+  //   console.log("dataaaa", data);
+  // };
   return (
     <>
       <FeeCardModal show={feeModal} onHide={() => dispatch(toggleFee(false))} />
@@ -420,93 +424,93 @@ function SheduleInformation() {
                                 <div className="row">
                                   {schedule[val.day] &&
                                     selectedSchedule.map((timeSlot, index) => (
-                                      <div key={index} style={{ display: "flex", gap:"20px", marginBottom:"8px", alignItems: "cenetr"}}>
+                                      <div key={index} style={{ display: "flex", gap: "20px", marginBottom: "8px", alignItems: "cenetr" }}>
                                         {/* Add a close button here */}
                                         {index > 0 && (
-                                           <img
-                                           src={light}
-                                           style={{width:"20px"}}
-                                           onClick={() => handleRemoveInput(val.day, index)}
-                                         ></img>
+                                          <img
+                                            src={light}
+                                            style={{ width: "20px" }}
+                                            onClick={() => handleRemoveInput(val.day, index)}
+                                          ></img>
                                         )}
 
-                                          <select
-                                            value={timeSlot.start}
-                                            onChange={(e) => handleInputChange(val.day, index, 'start', e.target.value)}
-                                            className="time-day"
-                                            placeholder="-- -- --"
-                                            style={{
-                                              background: "none",
-                                              border: "none",
-                                              backgroundColor: "#ecf2ff",
-                                              fontSize: "15px",
-                                              padding: "10px 30px",
-                                              borderRadius: "8px",
-                                              marginLeft: index === 0 ? "38px" : "0", 
-                                            }}
-                                          >
-                                            <option> -- -- -- </option>
-                                            {slotlistdoctor[val.day]?.slots.map((time, idx) => {
-                                              if (
-                                                schedule[val.day].every(
-                                                  (slot, i) =>
-                                                    i === index ||
-                                                    time < slot.start ||
-                                                    time >= slot.end ||
-                                                    time === timeSlot.start
-                                                )
-                                              ) {
-                                                return (
-                                                  <option key={idx} value={time}>
-                                                    {time}
-                                                  </option>
-                                                );
-                                              }
-                                              return null;
-                                            })}
-                                          </select>
-                                      
-                                      
-                                          <select
-                                            value={timeSlot.end}
-                                            onChange={(e) => handleInputChange(val.day, index, 'end', e.target.value)}
-                                            className="time-day"
-                                            style={{
-                                              background: "none",
-                                              border: "none",
-                                              backgroundColor: "#ecf2ff",
-                                              fontSize: "15px",
-                                              padding: "10px 30px",
-                                              borderRadius: "8px",
-                                            }}
-                                          >
-                                            <option> -- -- --</option>
-                                            {slotlistdoctor[val.day]?.slots.map((time, idx) => {
-                                              if (
-                                                schedule[val.day].every(
-                                                  (slot, i) =>
-                                                    i === index ||
-                                                    time < slot.start ||
-                                                    time >= slot.end ||
-                                                    time === timeSlot.end
-                                                )
-                                              ) {
-                                                return (
-                                                  <option key={idx} value={time}>
-                                                    {time}
-                                                  </option>
-                                                );
-                                              }
-                                              return null;
-                                            })}
-                                          </select>
-                                      
+                                        <select
+                                          value={timeSlot.start}
+                                          onChange={(e) => handleInputChange(val.day, index, 'start', e.target.value)}
+                                          className="time-day"
+                                          placeholder="-- -- --"
+                                          style={{
+                                            background: "none",
+                                            border: "none",
+                                            backgroundColor: "#ecf2ff",
+                                            fontSize: "15px",
+                                            padding: "10px 30px",
+                                            borderRadius: "8px",
+                                            marginLeft: index === 0 ? "38px" : "0",
+                                          }}
+                                        >
+                                          <option> -- -- -- </option>
+                                          {slotlistdoctor[val.day]?.slots.map((time, idx) => {
 
+                                            if (
+                                              schedule[val.day].every(
+                                                (slot, i) =>
+                                                  i === index ||
+                                                  time < slot.start ||
+                                                  time >= slot.end ||
+                                                  time === timeSlot.start
+                                              )
+                                            ) {
+                                              return (
+                                                <option key={idx} value={time}>
+                                                  {time}
+                                                  {console.log(time)}
+                                                </option>
+                                              );
+                                            }
+                                            return null;
+                                          })}
+                                        </select>
+
+
+                                        <select
+                                          value={timeSlot.end}
+                                          onChange={(e) => handleInputChange(val.day, index, 'end', e.target.value)}
+                                          className="time-day"
+                                          style={{
+                                            background: "none",
+                                            border: "none",
+                                            backgroundColor: "#ecf2ff",
+                                            fontSize: "15px",
+                                            padding: "10px 30px",
+                                            borderRadius: "8px",
+                                          }}
+                                        >
+                                          <option> -- -- --</option>
+                                          {slotlistdoctor[val.day]?.slots.map((time, idx) => {
+                                            if (
+                                              schedule[val.day].every(
+                                                (slot, i) =>
+                                                  i === index ||
+                                                  time < slot.start ||
+                                                  time >= slot.end ||
+                                                  time === timeSlot.end
+                                              )
+                                            ) {
+                                              return (
+                                                <option key={idx} value={time}>
+                                                  {time}
+                                                </option>
+                                              );
+                                            }
+                                            return null;
+                                          })}
+                                        </select>
                                       </div>
                                     ))}
                                 </div>
                                 {checked[val.day] === true && divIndex === dayDivCount && (
-                                  <div style={{padding: "19px"}}>
+                                  <div style={{ padding: "19px" }}>
                                     <img
                                       src={plus}
                                       className="fa-solid fa-plus"
@@ -515,7 +519,7 @@ function SheduleInformation() {
                                     ></img>
                                   </div>
                                 )}
-                           
+
                               </div>
                             ) : (
                               <div>Unavailable</div>
