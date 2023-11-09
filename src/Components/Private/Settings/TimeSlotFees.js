@@ -284,39 +284,7 @@ function Timeslotfees() {
         }
       });
       setDtaaaa(newData)
-      console.log("newData[day]newData[day]newData[day]", newData[day], newData[day].time_period[index - 1], index, slotValue, timeSlotType === "start_time");
-      // if (newData[day]) {
-      //   if (newData[day].time_period[index - 1]) {
-      //     let existingStartTime;
-      //     if (timeSlotType === "start_time") {
-      //       // Update the start_time for the selected day and index
-      //       let sta = newData[day].time_period[index - 1].start_time = slotValue;
-      //       setStart(sta)
-      //     } else if (timeSlotType === "end_time") {
-      //       // Preserve the existing start_time and update the end_time for the selected day and index
-      //       // const existingStartTime = newData[day].time_period[index - 1].start_time;
-      //       console.log("ex", existingStartTime );
-      //       newData[day].time_period[index - 1].end_time = slotValue; // Update only end_time
-      //       newData[day].time_period[index - 1].start_time = start; // Preserve the existing start_time
-      //     }
-      //   } else {
-      //     // Handle the case where the index does not exist
-      //     console.error("Selected index does not exist in newData.");
-      //   }
-      // } else {
-      //   // Handle the case where the day does not exist
-      //   console.error("Selected day does not exist in newData.");
-      //   // Create a new time slot for the day with the selected time
-      //   newData[day] = {
-      //     days: [day],
-      //     time_period: [
-      //       {
-      //         start_time: timeSlotType === "start_time" ? slotValue : "",
-      //         end_time: timeSlotType === "end_time" ? slotValue : "",
-      //       },
-      //     ],
-      //   };
-      // }
+
       console.log("dataddd[day]", dataddd);
       if (dataddd != undefined) {
         const updatedDaysData = { ...dataddd }; // Create a copy of the object
@@ -324,16 +292,19 @@ function Timeslotfees() {
         if (updatedDaysData[day]) {
           const dayData = { ...updatedDaysData[day] };
           const timePeriod = [...dayData.time_period];
-
-          if (timePeriod[index - 1]) {
-            if (timeSlotType === "start_time") {
-              timePeriod[index - 1].start_time = slotValue;
-            } else if (timeSlotType === "end_time") {
-              timePeriod[index - 1].end_time = slotValue;
-            }
-          } else {
+          if (!timePeriod[index - 1]) {
             // Handle the case where the index does not exist
             console.error("Selected index does not exist in timePeriod.");
+
+            // Push a new entry to timePeriod array with empty values
+            const newEntry = { start_time: "", end_time: "" };
+            timePeriod.push(newEntry);
+          }
+
+          if (timeSlotType === "start_time") {
+            timePeriod[index - 1].start_time = slotValue;
+          } else if (timeSlotType === "end_time") {
+            timePeriod[index - 1].end_time = slotValue;
           }
 
           dayData.time_period = timePeriod;
@@ -715,8 +686,11 @@ function Timeslotfees() {
         }
       }
       console.log("fdfdfdf", formattedData);
-      setEdit(false)
-      const data = await dispatch(EditScheduleAPI(formattedData));
+      // setEdit(false)
+      const data = await EditScheduleAPI(formattedData);
+      if (data.status_code == 200) {
+        setEdit(false)
+      }
     } else {
       console.log("dfdfdfdfdf",);
 
@@ -735,12 +709,9 @@ function Timeslotfees() {
         }
       });
 
-
       Object.keys(newData).forEach((day) => {
         formattedData[day] = JSON.stringify(newData[day]);
       });
-
-
       // const newDataJSON = JSON.stringify(newData);
       // console.log("newData", newDataJSON);
       const data = await dispatch(EditScheduleAPI(formattedData));

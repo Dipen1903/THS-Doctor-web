@@ -12,20 +12,20 @@ const ShareLinkHome = () => {
 
     const navigates = async () => {
         try {
-          const updatedConsultationFee = parseFloat(consultationFee);
-          const updatedFollowupFee = parseFloat(followupFee);
-          const result = await dispatch(
-            DoctorFeesUpdate({
-              consulting_fee: updatedConsultationFee,
-              follow_up_fee: updatedFollowupFee,
-            })
-          );
-        //   console.log('API call result', result);
-          window.location.href = '/doctor/sharelinkhome';
+            const updatedConsultationFee = parseFloat(consultationFee);
+            const updatedFollowupFee = parseFloat(followupFee);
+            const result = await dispatch(
+                DoctorFeesUpdate({
+                    consulting_fee: updatedConsultationFee,
+                    follow_up_fee: updatedFollowupFee,
+                })
+            );
+            //   console.log('API call result', result);
+            window.location.href = '/doctor/sharelinkhome';
         } catch (error) {
-        //   console.error('API call error', error);
+            //   console.error('API call error', error);
         }
-      };
+    };
 
     useEffect(() => {
         dispatch(DoctorFees());
@@ -65,14 +65,16 @@ const ShareLinkHome = () => {
                         <input type='text' placeholder='' className='inputclass' value={consultationFee}
                             onChange={(e) => setConsultationFee(e.target.value)}></input>
                         <h4 className='cons'>You Earn</h4>
-                        <h4 className='consultionfee'>Rs.{doctorFees && doctorFees?.consulting_fee * doctorFees?.admin_commission}</h4>
+                        <h4 className='consultionfee'>Rs.{parseFloat(doctorFees?.consulting_fee) - parseFloat(doctorFees && doctorFees?.consulting_fee * doctorFees?.admin_commission / 100)}</h4>
                     </div>
                     <h4 className='paycontent pt_30'>Followup Fee (Rs)</h4>
                     <div className='firstpayment pt_5'>
                         <input type='text' placeholder='' className='inputclass' value={followupFee}
                             onChange={(e) => setFollowupFee(e.target.value)}></input>
                         <h4 className='cons'>You Earn</h4>
-                        <h4 className='consultionfee'>Rs. {doctorFees && doctorFees?.follow_up_fee * doctorFees?.admin_commission}</h4>
+                        <h4 className='consultionfee'>Rs.{parseFloat(doctorFees?.follow_up_fee
+                        ) - parseFloat(doctorFees && doctorFees?.follow_up_fee
+                            * doctorFees?.admin_commission / 100)}</h4>
                     </div>
                     <button className='buttonsave mt_40' onClick={() => { navigates() }} >
                         Save & Continue

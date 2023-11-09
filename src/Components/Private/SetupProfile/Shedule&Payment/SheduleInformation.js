@@ -8,7 +8,7 @@ import Accordion from "react-bootstrap/Accordion";
 import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
 import Modal from "react-bootstrap/Modal";
-import { SlotListDoctor, slotdata, toggleFee } from "../../../../Store/Reducers/ProfileReducer.js";
+import { SlotFirstList, SlotListDoctor, slotdata, toggleFee } from "../../../../Store/Reducers/ProfileReducer.js";
 import "./SlotTime.css";
 import Toggle from "./Toggle";
 import light from "../../../../Assets/img/svg/light.svg";
@@ -29,7 +29,7 @@ import { EditScheduleAPI } from "../../../../Routes/Service.js";
 function SheduleInformation() {
   const { values, setFieldValue, handleBlur } = useFormikContext();
   const dispatch = useDispatch();
-  const { feeModal, userProfile, slotlistdoctor } = useSelector(
+  const { feeModal, userProfile, slotlistdoctor, firstlistinslot } = useSelector(
     ({ ProfileSlice }) => ProfileSlice
   );
   const [selectedTimeSlots, setSelectedTimeSlots] = useState({});
@@ -40,7 +40,14 @@ function SheduleInformation() {
   const [newDivCount, setNewDivCount] = useState(0);
   const [addedDivs, setAddedDivs] = useState({});
 
+  useEffect(() => {
+    callApis()
+  }, [dispatch])
 
+  const callApis = async () => {
+    const result = await dispatch(SlotListDoctor())
+    dispatch(SlotFirstList())
+  }
 
   const [weekDays, setWeekDays] = useState([
     {
@@ -82,13 +89,13 @@ function SheduleInformation() {
   )
 
   const initialSchedule = {
-    sunday: [{ start: '', end: '' }],
-    monday: [{ start: '', end: '' }],
-    tuesday: [{ start: '', end: '' }],
-    wednesday: [{ start: '', end: '' }],
-    thursday: [{ start: '', end: '' }],
-    friday: [{ start: '', end: '' }],
-    saturday: [{ start: '', end: '' }],
+    sunday: [{ start_time: '', end: '' }],
+    monday: [{ start_time: '', end: '' }],
+    tuesday: [{ start_time: '', end: '' }],
+    wednesday: [{ start_time: '', end: '' }],
+    thursday: [{ start_time: '', end: '' }],
+    friday: [{ start_time: '', end: '' }],
+    saturday: [{ start_time: '', end: '' }],
   };
 
   const [schedule, setSchedule] = useState(initialSchedule);
@@ -100,7 +107,7 @@ function SheduleInformation() {
 
   const handleAddTime = (day) => {
     const updatedSchedule = { ...schedule };
-    updatedSchedule[day].push({ start: '', end: '' });
+    updatedSchedule[day].push({ start_time: '', end: '' });
     setSchedule(updatedSchedule);
   };
 
@@ -136,7 +143,7 @@ function SheduleInformation() {
 
     const selectedTimesCopy = { ...selectedTimes };
     var b = selectedTimesCopy[day] = updatedSchedule[day].map((slot) => ({
-      start: slot.start,
+      start_time: slot.start_time,
       end: slot.end,
     }));
 
@@ -152,7 +159,7 @@ function SheduleInformation() {
 
     const selectedTimesCopy = { ...selectedTimes };
     selectedTimesCopy[day] = updatedSchedule[day].map((slot) => ({
-      start: slot.start,
+      start_time: slot.start_time,
       end: slot.end,
     }));
     setSelectedTimes(selectedTimesCopy);
@@ -261,10 +268,12 @@ function SheduleInformation() {
     const updatedDaySlots = { ...(selectedTimeSlots[day] || {}) };
     SetDay(day);
     if (!updatedDaySlots[index]) {
-      updatedDaySlots[index] = { start: '', end: '' };
+      updatedDaySlots[index] = { start_time: '', end_time: '' };
       console.log("updatedDaySlotsupdatedDaySlotsupdatedDaySlots", updatedDaySlots);
     }
+    updatedDaySlots[index] = { ...updatedDaySlots[index] };
     updatedDaySlots[index][timeSlotType] = slotValue;
+
     setSelectedTimeSlots({
       ...selectedTimeSlots,
       [day]: updatedDaySlots,
@@ -273,7 +282,7 @@ function SheduleInformation() {
     // Update selectedDayForHidetime and calculate timeSlotsBetween regardless of the condition
     setSelectedDayForHidetime(day);
 
-    if (timeSlotType === "start") {
+    if (timeSlotType === "start_time") {
       setSelectedStartTimes({
         ...selectedStartTimes,
         [`${day}_${index}`]: slotValue,
@@ -289,6 +298,11 @@ function SheduleInformation() {
     }
   };
 
+  useEffect(() => {
+    dispatch(slotdata(selectedTimeSlots))
+  }, [selectedTimeSlots])
+
+  console.log("v888", selectedTimeSlots);
   const [hidetime, setHidetime] = useState([]);
   const [selectedDayForHidetime, setSelectedDayForHidetime] = useState("");
   const [firstClickForDay, setFirstClickForDay] = useState({});
@@ -401,116 +415,101 @@ function SheduleInformation() {
             <div className="week-days-container">
               {weekDays.map((val) => {
                 const dayDivCount = addedDivs[val.day] || 0;
-                const selectedSchedule = schedule[val.day] || [];
+                const editDayData = selectedTimeSlots[val.day];
+                // const showText = text[val.day]
                 return (
                   <div className="edit_time_slot_mainss" key={val.id} style={{ marginLeft: "1rem" }}>
                     <div className="map_main_divss">
-                      {Array.from(Array(dayDivCount + 1), (_, index) => index).map((divIndex) => {
-                        const pickerId = divIndex + 1;
-                        const selectedSlot = selectedTimeSlots[val.day] || "";
-                        return (
-                          <div className="time-pickerss" key={pickerId} style={{ display: "flex", alignItems: "start" }}>
-                            {divIndex === 0 && (
-                              <div className="toggle-label" style={{ width: "115px" }}>
-                                <Toggle
-                                  label={val.day}
-                                  onToggleChange={(isChecked) => handleToggleChange(val.day, isChecked)}
-                                  initialChecked={val.checked}
-                                />
-                              </div>
-                            )}
-                            {checked[val.day] === true ? (
-                              <div style={{ display: "flex", alignItems: "end" }}>
-                                <div className="row">
-                                  {schedule[val.day] &&
-                                    selectedSchedule.map((timeSlot, index) => (
-                                      <div key={index} style={{ display: "flex", gap: "20px", marginBottom: "8px", alignItems: "cenetr" }}>
-                                        {/* Add a close button here */}
-                                        {index > 0 && (
-                                          <img
-                                            src={light}
-                                            style={{ width: "20px" }}
-                                            onClick={() => handleRemoveInput(val.day, index)}
-                                          ></img>
-                                        )}
+                      {Array.from(Array(dayDivCount + 1), (_, index) => index).map(
+                        (divIndex) => {
+                          const pickerId = divIndex + 1;
+                          // { console.log("333333", showText && showText, showText && showText[pickerId - 1]); }
+                          // const showTextData = showText && showText || "";
 
-                                        <select
-                                          value={timeSlot.start}
-                                          onChange={(e) => handleInputChange(val.day, index, 'start', e.target.value)}
-                                          className="time-day"
-                                          placeholder="-- -- --"
-                                          style={{
-                                            background: "none",
-                                            border: "none",
-                                            backgroundColor: "#ecf2ff",
-                                            fontSize: "15px",
-                                            padding: "10px 30px",
-                                            borderRadius: "8px",
-                                            marginLeft: index === 0 ? "38px" : "0",
-                                          }}
-                                        >
-                                          <option> -- -- -- </option>
-                                          {slotlistdoctor[val.day]?.slots.map((time, idx) => {
-
-                                            if (
-                                              schedule[val.day].every(
-                                                (slot, i) =>
-                                                  i === index ||
-                                                  time < slot.start ||
-                                                  time >= slot.end ||
-                                                  time === timeSlot.start
-                                              )
-                                            ) {
-                                              return (
-                                                <option key={idx} value={time}>
-                                                  {time}
-                                                  {console.log(time)}
-                                                </option>
-                                              );
-                                            }
-                                            return null;
-                                          })}
-                                        </select>
-
-
-                                        <select
-                                          value={timeSlot.end}
-                                          onChange={(e) => handleInputChange(val.day, index, 'end', e.target.value)}
-                                          className="time-day"
-                                          style={{
-                                            background: "none",
-                                            border: "none",
-                                            backgroundColor: "#ecf2ff",
-                                            fontSize: "15px",
-                                            padding: "10px 30px",
-                                            borderRadius: "8px",
-                                          }}
-                                        >
-                                          <option> -- -- --</option>
-                                          {slotlistdoctor[val.day]?.slots.map((time, idx) => {
-                                            if (
-                                              schedule[val.day].every(
-                                                (slot, i) =>
-                                                  i === index ||
-                                                  time < slot.start ||
-                                                  time >= slot.end ||
-                                                  time === timeSlot.end
-                                              )
-                                            ) {
-                                              return (
-                                                <option key={idx} value={time}>
-                                                  {time}
-                                                </option>
-                                              );
-                                            }
-                                            return null;
-                                          })}
-                                        </select>
-                                      </div>
-                                    ))}
-                                </div>
+                          // console.log("pickerId", pickerId);
+                          // const selectedSlot = selectedTimeSlots[val.day] || ""
+                          return (
+                            <>
+                              <div className="time-pickerss" key={pickerId}>
+                                {divIndex === 0 && (
+                                  <div className="toggle-label" style={{ width: "115px" }}>
+                                    <Toggle
+                                      label={val.day}
+                                      onToggleChange={(isChecked) => handleToggleChange(val.day, isChecked)}
+                                      initialChecked={val.checked}
+                                    />
+                                  </div>
+                                )}
+                                {checked[val.day] === true && divIndex !== 0 && (
+                                  <>
+                                    <div style={{ paddingLeft: "20%" }}>
+                                      <img
+                                        src={light}
+                                        className="fa-regular fa-circle-xmark"
+                                        onClick={() => removeTimePicker(val.day, pickerId)}
+                                      ></img>
+                                    </div>
+                                  </>
+                                )}
+                                {checked[val.day] === true ? (
+                                  <>
+                                    <div className="clock">
+                                      <select
+                                        onChange={(e) => { handleSlotChange(val.day, divIndex + 1, 'start_time', e.target.value); SetDay(val.day); }
+                                        }
+                                        className="time-day"
+                                        placeholder="-- -- --"
+                                        style={{
+                                          background: "none",
+                                          border: "none",
+                                          backgroundColor: "#ecf2ff",
+                                          fontSize: "15px",
+                                          padding: "10px 30px",
+                                          borderRadius: "8px",
+                                        }}
+                                      >
+                                        <option value=""> -- -- -- </option>
+                                        {
+                                          firstlistinslot[val.day] &&
+                                          firstlistinslot[val.day]
+                                            .map((slot) => (
+                                              <option key={slot} value={slot}>
+                                                {slot}
+                                              </option>
+                                            ))
+                                        }
+                                      </select>
+                                    </div>
+                                    <p>-</p>
+                                    <div className="clock">
+                                      <select
+                                        onChange={(e) => { handleSlotChange(val.day, divIndex + 1, 'end_time', e.target.value); SetDay(val.day) }
+                                        }
+                                        className="time-day"
+                                        style={{
+                                          background: "none",
+                                          border: "none",
+                                          backgroundColor: "#ecf2ff",
+                                          fontSize: "15px",
+                                          padding: "10px 30px",
+                                          borderRadius: "8px",
+                                        }}
+                                      >
+                                        <option> -- -- --</option>
+                                        {firstlistinslot[val.day]
+                                          ?.map((slot) => (
+                                            <option key={slot} value={slot}>
+                                              {slot}
+                                            </option>
+                                          ))}
+                                      </select>
+                                    </div>
+                                  </>
+                                ) : (
+                                  <div>Unavailable</div>
+                                )}
                                 {checked[val.day] === true && divIndex === dayDivCount && (
-                                  <div style={{ padding: "19px" }}>
+                                  <div className="">
                                     <img
                                       src={plus}
                                       className="fa-solid fa-plus"
@@ -519,14 +518,14 @@ function SheduleInformation() {
                                     ></img>
                                   </div>
                                 )}
-
                               </div>
-                            ) : (
-                              <div>Unavailable</div>
-                            )}
-                          </div>
-                        );
-                      })}
+                              {/* {console.log("showTextData", showTextData)}
+                                                <p>{showTextData}</p> */}
+                            </>
+                          );
+                        }
+                      )}
+
                     </div>
                   </div>
                 );

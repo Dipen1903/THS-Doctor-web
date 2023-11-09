@@ -24,6 +24,7 @@ import {
   toggleSkip,
   toggleSubmitted,
   toggleProfileSuccess,
+  slotdata,
 } from "../../../Store/Reducers/ProfileReducer";
 
 import {
@@ -387,6 +388,7 @@ export function SetUpSetting() {
       //     Authorization: `Bearer ${SessionData?.token}`,
       //   },
       // })
+      
       axios.post(`${BASE_URL}/availibility-create-days`, slotlistdata, {
         headers: {
           'Content-Type': 'application/json',
@@ -643,7 +645,7 @@ function ScheduleWizardForm({ Form_1, Form_2 }) {
     case 1:
       return (
         <FormikProvider value={Form_1}>
-          <SheduleInformation />
+          <SheduleInformation  />
         </FormikProvider>
       );
 
