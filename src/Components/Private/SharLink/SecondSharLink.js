@@ -59,7 +59,7 @@ const SecondSharLink = () => {
     //         console.error('Error generating dynamic link:', error);
     //     }
     // };
-    console.log("apiResponse",apiResponse);
+    console.log("apiResponse", apiResponse);
 
     useEffect(() => {
         dispatch(DoctorFees());
@@ -154,11 +154,13 @@ const SecondSharLink = () => {
                             <div>
                                 <div className='textdiv'>
                                     <h3 className='secondsharelink'>Share Consultation Link</h3>
-                                    <h2 className='secondh2'>Rs.{doctorFees?.consulting_fee}</h2>
+                                    <h2 className='secondh2'>Rs.{parseFloat(doctorFees?.consulting_fee) - parseFloat(doctorFees && doctorFees?.consulting_fee * doctorFees?.admin_commission / 100)}</h2>
                                 </div>
                                 <div className='textdiv'>
                                     <h3 className='secondsharelink'>Followup Fee:</h3>
-                                    <h2 className='secondh2'>Rs.{doctorFees?.follow_up_fee}</h2>
+                                    <h2 className='secondh2'>Rs.{parseFloat(doctorFees?.follow_up_fee
+                                    ) - parseFloat(doctorFees && doctorFees?.follow_up_fee
+                                        * doctorFees?.admin_commission / 100)}</h2>
                                 </div>
                             </div>
                             <div>
