@@ -33,6 +33,7 @@ const ShareLinkHome = () => {
 
     const { doctorFees } = CommonSlice;
 
+
     useEffect(() => {
         if (doctorFees && doctorFees?.consulting_fee) {
             setConsultationFee(doctorFees.consulting_fee.toString());
@@ -57,7 +58,7 @@ const ShareLinkHome = () => {
                 </div>
                 <div className='sharelinksecond'>
                     <h4 className='sharelinkp'>SET YOUR FEES</h4>
-                    <h4 className='sharelinkparagraph pt_5'>THS charges 10% (plus GST) as platform services.</h4>
+                    <h4 className='sharelinkparagraph pt_5'>THS charges {doctorFees?.admin_commission}% (plus GST) as platform services.</h4>
                     <h4 className='paycontent pt_10'>How much fees do you want take from your <br />
                         patient?</h4>
                     <h4 className='paycontent pt_20'>Consultation Fee (Rs)</h4>
