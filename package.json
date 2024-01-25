@@ -2,6 +2,7 @@
   "name": "total-health-solution",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://doctors.thsindia.in/",
   "dependencies": {
     "@firebase/messaging": "^0.12.4",
     "@mui/core": "^5.0.0-alpha.54",
